@@ -15,6 +15,8 @@ RUN pnpm install --frozen-lockfile
 
 # ── Backend target ────────────────────────────────────────────────────────────
 FROM base AS backend
+COPY shared/ ./shared/
+COPY backend/ ./backend/
 EXPOSE 3111
 CMD ["pnpm", "--filter", "backend", "dev"]
 

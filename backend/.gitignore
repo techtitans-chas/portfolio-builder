@@ -1,6 +1,7 @@
 # dev
 .yarn/
 !.yarn/releases
+.pnpm-store
 .vscode/*
 !.vscode/launch.json
 !.vscode/*.code-snippets
