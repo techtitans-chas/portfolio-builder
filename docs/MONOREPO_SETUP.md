@@ -70,7 +70,7 @@ Rebuild images after code changes:
 
 ```bash
 docker compose up --build
-pnpm --filter backend db:migrate // Migrate the database
+pnpm db:migrate
 
 ```
 
@@ -163,7 +163,7 @@ Key variables:
 Run migrations after first setup or after `docker compose down -v` (which wipes the database volume):
 
 ```bash
-pnpm --filter backend db:migrate
+pnpm db:migrate
 ```
 
 ### Seeding
@@ -171,7 +171,7 @@ pnpm --filter backend db:migrate
 Seed the database with two pre-verified user accounts for development:
 
 ```bash
-pnpm --filter backend db:seed
+pnpm db:seed
 ```
 
 | Name | Email | Password | Portfolio slug |
