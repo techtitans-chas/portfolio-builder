@@ -2,13 +2,25 @@
   "name": "portfolio-builder",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
-    "build": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter bBackend build\" \"pnpm --filter frontend build\"",
+    "build": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend build\" \"pnpm --filter frontend build\"",
     "dev:backend": "pnpm --filter backend dev",
-    "dev:frontend": "pnpm --filter frontend dev"
+    "dev:frontend": "pnpm --filter frontend dev",
+    "typecheck": "pnpm --filter backend typecheck && pnpm --filter @portfolio-builder/shared typecheck && pnpm --filter frontend typecheck",
+    "lint": "eslint . && pnpm --filter frontend lint",
+    "lint:fix": "eslint . --fix && pnpm --filter frontend lint:fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "concurrently": "^9.0.0"
+    "@typescript-eslint/eslint-plugin": "^8.59.4",
+    "@typescript-eslint/parser": "^8.59.4",
+    "concurrently": "^9.0.0",
+    "eslint": "^10.4.0",
+    "eslint-plugin-vue": "^10.9.1",
+    "prettier": "^3.8.3",
+    "typescript-eslint": "^8.59.4"
   }
 }
