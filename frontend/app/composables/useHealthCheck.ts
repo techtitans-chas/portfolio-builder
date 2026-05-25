@@ -1,4 +1,4 @@
-import type { HealthResponse } from "../../Shared/types";
+import type { HealthResponse } from '@portfolio-builder/shared/types';
 
 export const useHealthCheck = () => {
   const { fetcher } = useApi();
@@ -10,10 +10,9 @@ export const useHealthCheck = () => {
     try {
       isLoading.value = true;
       error.value = null;
-      health.value = await fetcher("/health");
+      health.value = await fetcher('/health');
     } catch (err) {
-      error.value =
-        err instanceof Error ? err.message : "Failed to check health";
+      error.value = err instanceof Error ? err.message : 'Failed to check health';
       health.value = null;
     } finally {
       isLoading.value = false;
