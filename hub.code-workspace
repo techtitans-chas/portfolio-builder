@@ -2,11 +2,11 @@
   "folders": [
     {
       "name": "root",
-      "path": "."
+      "path": ".",
     },
     { "path": "frontend" },
     { "path": "backend" },
-    { "path": "shared" }
+    { "path": "shared" },
   ],
   "settings": {
     "css.lint.unknownAtRules": "ignore",
@@ -14,13 +14,13 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "[vue]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[markdown]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
-  }
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+  },
 }

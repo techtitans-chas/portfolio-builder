@@ -26,25 +26,17 @@ const { health, isLoading, error, checkHealth } = useHealthCheck();
       <div v-else-if="health" class="space-y-2">
         <div class="flex items-center gap-2">
           <UIcon
-            :name="
-              health.status === 'healthy'
-                ? 'i-lucide-check-circle-2'
-                : 'i-lucide-x-circle'
-            "
-            :class="
-              health.status === 'healthy' ? 'text-green-500' : 'text-red-500'
-            "
+            :name="health.status === 'healthy' ? 'i-lucide-check-circle-2' : 'i-lucide-x-circle'"
+            :class="health.status === 'healthy' ? 'text-green-500' : 'text-red-500'"
           />
           <span class="text-sm font-medium">
-            {{ health.status === "healthy" ? "Healthy" : "Unhealthy" }}
+            {{ health.status === 'healthy' ? 'Healthy' : 'Unhealthy' }}
           </span>
         </div>
         <div class="text-xs text-gray-500 space-y-1">
           <div>Service: {{ health.service }}</div>
           <div v-if="health.version">Version: {{ health.version }}</div>
-          <div>
-            Last checked: {{ new Date(health.timestamp).toLocaleTimeString() }}
-          </div>
+          <div>Last checked: {{ new Date(health.timestamp).toLocaleTimeString() }}</div>
         </div>
       </div>
 
