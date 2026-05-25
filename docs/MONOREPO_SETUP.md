@@ -44,7 +44,7 @@ docker compose up
 
 This will:
 
-- Start **PostgreSQL** on port `5432`
+- Start **PostgreSQL** on port `5433` (mapped to avoid conflicts with a local Postgres on `5432`)
 - Start the **Backend** on `http://localhost:3111` (waits for Postgres to be healthy)
 - Start the **Frontend** on `http://localhost:3000` (waits for backend to be healthy)
 
@@ -174,6 +174,8 @@ Response:
 ## Troubleshooting
 
 ### Port already in use
+
+The Docker Postgres is exposed on host port `5433` (not `5432`) to avoid conflicts with a locally installed Postgres. The backend container always connects on `5432` internally, so no config change is needed there.
 
 If port `3111` or `3000` is already in use, override via `.env`:
 
