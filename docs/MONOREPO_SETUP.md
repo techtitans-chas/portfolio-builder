@@ -6,11 +6,13 @@ A full-stack monorepo with Hono backend and Nuxt frontend, configured for concur
 
 - **Backend**: [Hono](https://hono.dev) with TypeScript
 - **Frontend**: [Nuxt 4](https://nuxt.com) with [Nuxt UI](https://ui.nuxt.com)
+- **Database**: PostgreSQL 17
 - **Shared**: Zod schemas and TypeScript types
 - **Styling**: Tailwind CSS
 - **State Management**: Pinia
 - **Validation**: Zod
 - **Workspace Manager**: pnpm workspaces
+- **Containerization**: Docker + Docker Compose
 
 ## Project Structure
 
@@ -27,10 +29,54 @@ A full-stack monorepo with Hono backend and Nuxt frontend, configured for concur
 
 ### Prerequisites
 
-- Node.js 18+ (LTS recommended)
-- pnpm 9+
+- [Docker](https://docs.docker.com/get-docker/) and Docker Compose (recommended)
+- **Or** Node.js 18+ and pnpm 9+ for local development
 
-### Installation
+---
+
+### Docker (recommended)
+
+Start all services — backend, frontend, and PostgreSQL — with a single command:
+
+```bash
+docker compose up
+```
+
+This will:
+
+- Start **PostgreSQL** on port `5432`
+- Start the **Backend** on `http://localhost:3111` (waits for Postgres to be healthy)
+- Start the **Frontend** on `http://localhost:3000` (waits for backend to be healthy)
+
+Run in the background (detached):
+
+```bash
+docker compose up -d
+```
+
+Stop and remove containers:
+
+```bash
+docker compose down
+```
+
+Stop and remove containers **including the Postgres volume** (wipes data):
+
+```bash
+docker compose down -v
+```
+
+Rebuild images after code changes:
+
+```bash
+docker compose up --build
+```
+
+---
+
+### Local Development (without Docker)
+
+#### Installation
 
 Install all dependencies from the root directory:
 
@@ -38,9 +84,7 @@ Install all dependencies from the root directory:
 pnpm install
 ```
 
-This will install dependencies for all workspaces (backend, frontend, shared).
-
-### Development
+#### Development
 
 Start both backend and frontend servers concurrently:
 
@@ -50,18 +94,10 @@ pnpm dev
 
 This command will:
 
-- Start the **Backend** on `http://localhost:3001`
+- Start the **Backend** on `http://localhost:3111`
 - Start the **Frontend** on `http://localhost:3000`
 
-The frontend will automatically fetch the health status from the backend every 30 seconds.
-
-### Building
-
-Build all packages:
-
-```bash
-pnpm build
-```
+> **Note:** You will need a running PostgreSQL instance and a valid `DATABASE_URL` in your `.env` file.
 
 ### Frontend Only
 
@@ -102,11 +138,21 @@ pnpm dev:backend
 
 ## Environment Variables
 
-Create a `.env.local` file in the `frontend` directory (or set `NUXT_PUBLIC_API_URL`):
+Copy `.env.example` to `.env` and adjust as needed:
 
-```env
-NUXT_PUBLIC_API_URL=http://localhost:3001
+```bash
+cp .env.example .env
 ```
+
+Key variables:
+
+| Variable              | Default                 | Description            |
+| --------------------- | ----------------------- | ---------------------- |
+| `POSTGRES_USER`       | `postgres`              | Postgres username      |
+| `POSTGRES_PASSWORD`   | `postgres`              | Postgres password      |
+| `POSTGRES_DB`         | `portfolio_builder`     | Database name          |
+| `PORT`                | `3111`                  | Backend port           |
+| `NUXT_PUBLIC_API_URL` | `http://localhost:3111` | Frontend → backend URL |
 
 ## API Endpoints
 
@@ -129,23 +175,17 @@ Response:
 
 ### Port already in use
 
-If port 3001 or 3000 is already in use:
+If port `3111` or `3000` is already in use, override via `.env`:
 
-**Backend** (change port in `backend/src/index.ts`):
-
-```typescript
-const port = 3002; // Change to different port
+```env
+PORT=3112
 ```
 
-**Frontend** (pass port when running):
-
-```bash
-pnpm --filter frontend dev -- -p 3001
-```
+Or stop the conflicting process and retry.
 
 ### CORS errors
 
-Ensure the frontend's `NUXT_PUBLIC_API_URL` environment variable matches your backend URL.
+Ensure `NUXT_PUBLIC_API_URL` matches your backend URL (host and port).
 
 ### Type issues with Shared package
 

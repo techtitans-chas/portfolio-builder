@@ -11,7 +11,7 @@ app.use(
     origin: "http://localhost:3000",
     allowMethods: ["GET", "POST", "PUT", "DELETE"],
     allowHeaders: ["Content-Type"],
-  })
+  }),
 );
 
 // Root endpoint
@@ -30,7 +30,7 @@ app.get("/health", (c) => {
   return c.json(healthResponse);
 });
 
-const port = 3001;
+const port = parseInt(process.env.PORT ?? "3111", 10);
 serve(
   {
     fetch: app.fetch,
@@ -38,5 +38,5 @@ serve(
   },
   (info) => {
     console.log(`Backend server is running on http://localhost:${info.port}`);
-  }
+  },
 );
