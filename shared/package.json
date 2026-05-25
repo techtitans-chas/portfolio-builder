@@ -1,0 +1,24 @@
+{
+  "name": "@portfolio-builder/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared types and schemas for portfolio-builder",
+  "exports": {
+    "./types": {
+      "import": "./types/index.ts",
+      "types": "./types/index.ts"
+    },
+    "./schemas": {
+      "import": "./schemas/index.ts",
+      "types": "./schemas/index.ts"
+    }
+  },
+  "files": [
+    "types",
+    "schemas"
+  ],
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-builder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "build": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter bBackend build\" \"pnpm --filter frontend build\"",
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:frontend": "pnpm --filter frontend dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
