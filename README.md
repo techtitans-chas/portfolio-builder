@@ -1,5 +1,7 @@
 # portfolio-builder
 
+[![CI](https://github.com/techtitans-chas/portfolio-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/techtitans-chas/portfolio-builder/actions/workflows/ci.yml)
+
 A fullstack TypeScript monorepo with a Nuxt frontend, Hono backend, and shared types/schemas.
 
 ## Workspaces
