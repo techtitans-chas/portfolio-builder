@@ -20,7 +20,9 @@ export default defineConfig([
     extends: [tseslint.configs.recommended],
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ['backend/drizzle.config.ts'],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
