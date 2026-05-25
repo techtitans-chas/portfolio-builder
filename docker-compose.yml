@@ -28,17 +28,22 @@ services:
       target: backend
     stdin_open: true
     tty: true
+    # Override dev command — env vars come from Docker, no --env-file needed
+    command: pnpm --filter backend exec tsx watch src/server.ts
     environment:
       CI: 'true'
       PORT: ${PORT:-3111}
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-portfolio_builder}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3111}
+      RESEND_API_KEY: ${RESEND_API_KEY}
     ports:
       - '3111:3111'
     volumes:
       - .:/app
-      - /app/node_modules
-      - /app/backend/node_modules
-      - /app/shared/node_modules
+      - nm_root:/app/node_modules
+      - nm_backend:/app/backend/node_modules
+      - nm_shared:/app/shared/node_modules
     depends_on:
       postgres:
         condition: service_healthy
@@ -64,13 +69,18 @@ services:
       - '3000:3000'
     volumes:
       - .:/app
-      - /app/node_modules
-      - /app/frontend/node_modules
-      - /app/shared/node_modules
-      - /app/frontend/.nuxt
+      - nm_root:/app/node_modules
+      - nm_frontend:/app/frontend/node_modules
+      - nm_shared:/app/shared/node_modules
+      - nuxt_build:/app/frontend/.nuxt
     depends_on:
       backend:
         condition: service_healthy
 
 volumes:
   postgres_data:
+  nm_root:
+  nm_backend:
+  nm_shared:
+  nm_frontend:
+  nuxt_build:

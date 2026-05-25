@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "dev": "dotenv -e .env -- concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
     "build": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend build\" \"pnpm --filter frontend build\"",
     "dev:backend": "pnpm --filter backend dev",
     "dev:frontend": "pnpm --filter frontend dev",
@@ -18,6 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "concurrently": "^9.0.0",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^10.4.0",
     "eslint-plugin-vue": "^10.9.1",
     "prettier": "^3.8.3",

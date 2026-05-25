@@ -1,2 +1,2 @@
-// All table definitions are exported from here.
-// Add new schema files and re-export them in this file.
+export * from './users.js';
+export * from './portfolios.js';

@@ -16,7 +16,13 @@ export default defineNuxtConfig({
   // Environment configuration
   runtimeConfig: {
     public: {
-      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3001',
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3111',
+    },
+  },
+
+  vite: {
+    optimizeDeps: {
+      include: ['zod'],
     },
   },
 
@@ -28,12 +34,7 @@ export default defineNuxtConfig({
 
   eslint: {
     config: {
-      stylistic: {
-        commaDangle: 'always-multiline',
-        semi: true,
-        braceStyle: '1tbs',
-        arrowParens: false,
-      },
+      stylistic: false,
     },
   },
 });

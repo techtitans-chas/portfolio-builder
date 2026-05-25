@@ -70,6 +70,8 @@ Rebuild images after code changes:
 
 ```bash
 docker compose up --build
+pnpm --filter backend db:migrate // Migrate the database
+
 ```
 
 ---
