@@ -1,0 +1,74 @@
+services:
+  # ── Postgres ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-portfolio_builder}
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-portfolio_builder}',
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ── Backend (Hono) ─────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      target: backend
+    stdin_open: true
+    tty: true
+    environment:
+      PORT: ${PORT:-3111}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-portfolio_builder}
+    ports:
+      - '3111:3111'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/backend/node_modules
+      - /app/shared/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://localhost:${PORT:-3111}/health || exit 1']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Frontend (Nuxt) ────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      target: frontend
+    stdin_open: true
+    tty: true
+    environment:
+      NUXT_HOST: 0.0.0.0
+      NUXT_PUBLIC_API_URL: ${NUXT_PUBLIC_API_URL:-http://localhost:3111}
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/frontend/node_modules
+      - /app/shared/node_modules
+      - /app/frontend/.nuxt
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

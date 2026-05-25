@@ -29,7 +29,7 @@ app.get('/health', c => {
   return c.json(healthResponse);
 });
 
-const port = 3001;
+const port = parseInt(process.env.PORT ?? '3111', 10);
 serve(
   {
     fetch: app.fetch,
