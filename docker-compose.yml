@@ -29,6 +29,7 @@ services:
     stdin_open: true
     tty: true
     environment:
+      CI: 'true'
       PORT: ${PORT:-3111}
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-portfolio_builder}
     ports:
@@ -46,7 +47,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-      start_period: 15s
+      start_period: 120s
 
   # ── Frontend (Nuxt) ────────────────────────────────────────────────────────
   frontend:
@@ -56,6 +57,7 @@ services:
     stdin_open: true
     tty: true
     environment:
+      CI: 'true'
       NUXT_HOST: 0.0.0.0
       NUXT_PUBLIC_API_URL: ${NUXT_PUBLIC_API_URL:-http://localhost:3111}
     ports:
