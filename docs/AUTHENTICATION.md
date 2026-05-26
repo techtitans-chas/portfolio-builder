@@ -51,35 +51,35 @@ If the email didn't arrive, the `/verify-email` page has a resend form that call
 
 A global Nuxt middleware (`app/middleware/auth.global.ts`) runs on every navigation. For any route under `/admin/*` it calls `GET /api/auth/get-session` to check the current session:
 
-| Session state | Redirect |
-|---|---|
-| No session / request fails | `/login` |
+| Session state                         | Redirect        |
+| ------------------------------------- | --------------- |
+| No session / request fails            | `/login`        |
 | Session exists but email not verified | `/verify-email` |
-| Session valid and email verified | Allowed through |
+| Session valid and email verified      | Allowed through |
 
 ## Database tables
 
 better-auth manages four tables. Do not modify their columns — better-auth owns the schema for these:
 
-| Table | Purpose |
-|---|---|
-| `users` | User accounts (`id` is a text string, not UUID — better-auth generates its own IDs) |
-| `sessions` | Active sessions |
-| `accounts` | OAuth provider accounts (unused for now, required by better-auth) |
-| `verifications` | Email verification tokens |
+| Table           | Purpose                                                                             |
+| --------------- | ----------------------------------------------------------------------------------- |
+| `users`         | User accounts (`id` is a text string, not UUID — better-auth generates its own IDs) |
+| `sessions`      | Active sessions                                                                     |
+| `accounts`      | OAuth provider accounts (unused for now, required by better-auth)                   |
+| `verifications` | Email verification tokens                                                           |
 
 The `portfolios` table is ours and has a `user_id` text foreign key referencing `users.id`.
 
 ## API routes
 
-| Method | Path | Handler | Purpose |
-|---|---|---|---|
-| `POST` | `/api/auth/register` | Custom (`register.post.ts`) | Validates, creates user + portfolio |
-| `POST` | `/api/auth/sign-in/email` | better-auth | Credential login, sets session cookie |
-| `POST` | `/api/auth/sign-out` | better-auth | Destroys session, clears cookie |
-| `GET` | `/api/auth/verify-email` | better-auth | Validates token, marks email verified |
-| `POST` | `/api/auth/send-verification-email` | better-auth | Resends verification email |
-| `GET` | `/api/auth/get-session` | better-auth | Returns current session or 401 |
+| Method | Path                                | Handler                     | Purpose                               |
+| ------ | ----------------------------------- | --------------------------- | ------------------------------------- |
+| `POST` | `/api/auth/register`                | Custom (`register.post.ts`) | Validates, creates user + portfolio   |
+| `POST` | `/api/auth/sign-in/email`           | better-auth                 | Credential login, sets session cookie |
+| `POST` | `/api/auth/sign-out`                | better-auth                 | Destroys session, clears cookie       |
+| `GET`  | `/api/auth/verify-email`            | better-auth                 | Validates token, marks email verified |
+| `POST` | `/api/auth/send-verification-email` | better-auth                 | Resends verification email            |
+| `GET`  | `/api/auth/get-session`             | better-auth                 | Returns current session or 401        |
 
 Custom routes are registered before the better-auth catch-all in `server.ts`, so Hono matches them first.
 

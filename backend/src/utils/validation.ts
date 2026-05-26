@@ -1,4 +1,5 @@
-import { badRequest } from "./errorHandling.js";
+import type { ZodError, ZodType } from 'zod';
+import { badRequest } from './errorHandling.js';
 
 export type ValidationIssue = {
   path: string;
@@ -6,32 +7,18 @@ export type ValidationIssue = {
   code: string;
 };
 
-type ValidatorIssue = {
-  path?: Array<string | number>;
-  message?: string;
-  code?: string;
-};
-
-type ValidatorError = {
-  issues?: ValidatorIssue[];
-};
-
-export function formatZodIssues(error: ValidatorError): ValidationIssue[] {
-  const issues = error.issues ?? [];
-  return issues.map((issue) => ({
-    path: issue.path && issue.path.length > 0 ? issue.path.join(".") : "body",
-    message: issue.message ?? "Invalid value",
-    code: issue.code ?? "invalid",
+export function formatZodIssues(error: ZodError): ValidationIssue[] {
+  return error.issues.map(issue => ({
+    path: issue.path.length > 0 ? issue.path.join('.') : 'body',
+    message: issue.message,
+    code: issue.code,
   }));
 }
 
-export function zodValidationHook(result: any) {
-  const isFailure = Boolean(result && result.success === false);
-  const error = (result?.error ?? undefined) as ValidatorError | undefined;
-
-  if (isFailure && error) {
-    throw badRequest("Validation failed", {
-      issues: formatZodIssues(error),
+export function zodValidationHook(result: ReturnType<ZodType['safeParse']>) {
+  if (!result.success) {
+    throw badRequest('Validation failed', {
+      issues: formatZodIssues(result.error),
     });
   }
 }

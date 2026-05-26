@@ -54,7 +54,12 @@ export async function parseBody<T = Record<string, unknown>>(c: Context): Promis
 // ---------------------------------------------------------------------------
 
 function isPostgresError(err: unknown): err is { code: string } {
-  return typeof err === 'object' && err !== null && 'code' in err && typeof (err as { code: unknown }).code === 'string';
+  return (
+    typeof err === 'object' &&
+    err !== null &&
+    'code' in err &&
+    typeof (err as { code: unknown }).code === 'string'
+  );
 }
 
 export function onError(err: unknown, c: Context) {

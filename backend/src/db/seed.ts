@@ -45,10 +45,7 @@ async function seed() {
     }
 
     // Mark email as verified so they can log in immediately
-    await db
-      .update(users)
-      .set({ emailVerified: true })
-      .where(eq(users.id, result.user.id));
+    await db.update(users).set({ emailVerified: true }).where(eq(users.id, result.user.id));
 
     const slugExists = await db
       .select({ id: portfolios.id })

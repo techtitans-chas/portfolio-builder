@@ -23,7 +23,11 @@ export const useApi = () => {
     const body = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      throw new ApiError(response.status, body?.errors?.[0]?.detail ?? body?.message ?? response.statusText, body);
+      throw new ApiError(
+        response.status,
+        body?.errors?.[0]?.detail ?? body?.message ?? response.statusText,
+        body,
+      );
     }
 
     return body;
