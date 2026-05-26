@@ -15,7 +15,7 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    requireEmailVerification: true,
+    requireEmailVerification: Boolean(process.env.RESEND_API_KEY),
     revokeSessionsOnPasswordReset: true,
     sendResetPassword: async ({ user, url }) => {
       const { resend } = await import('./resend.js');
@@ -31,6 +31,7 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
       const { resend } = await import('./resend.js');
+      if (!resend) return;
       await resend.emails.send({
         from: 'Portfolio Builder <onboarding@resend.dev>',
         to: user.email,
