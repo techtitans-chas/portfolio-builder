@@ -4,9 +4,14 @@ import { factory } from '../../lib/factory.js';
 import { auth } from '../../lib/auth.js';
 import { db } from '../../db/client.js';
 import { users, portfolios } from '../../db/schema/index.js';
-import { conflict, badRequest, parseBody } from '../../utils/errorHandling.js';
+import { conflict, badRequest, parseBody, AppError } from '../../utils/errorHandling.js';
+import { resendEnabled } from '../../lib/resend.js';
 
 export const registerPost = factory.createHandlers(async c => {
+  if (!resendEnabled) {
+    throw new AppError(503, 'Registration is disabled: email service is not configured');
+  }
+
   const body = await parseBody(c);
   const result = registerSchema.safeParse(body);
 

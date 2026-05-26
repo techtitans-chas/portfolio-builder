@@ -5,7 +5,12 @@ import { ApiError } from '~/composables/useApi';
 const schema = registerSchema;
 type RegisterForm = RegisterInput;
 
-const { fetcher } = useApi();
+const { fetcher, apiBase } = useApi();
+
+const { data: registrationClosed } = await useAsyncData('registration-status', async () => {
+  const res = await fetch(`${apiBase}/api/auth/register`, { method: 'POST' });
+  return res.status === 503;
+});
 
 const state = reactive<RegisterForm>({
   name: '',
@@ -72,8 +77,16 @@ async function onSubmit() {
         <p class="text-muted mt-1 text-sm">Start building your portfolio today</p>
       </div>
 
+      <!-- Registration closed -->
+      <UCard v-if="registrationClosed" class="text-center">
+        <div class="py-4">
+          <UIcon name="i-lucide-lock" class="text-muted mx-auto mb-3 h-10 w-10" />
+          <p class="font-medium">Registration is currently closed.</p>
+        </div>
+      </UCard>
+
       <!-- Success state -->
-      <AuthVerificationSuccessful v-if="success" :email="state.email" />
+      <AuthVerificationSuccessful v-else-if="success" :email="state.email" />
 
       <!-- Registration form -->
       <UCard v-else>
