@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <UCard v-if="success" class="text-center">
+  <UCard class="text-center">
     <div class="py-4">
       <UIcon name="i-lucide-mail-check" class="text-primary mx-auto mb-3 h-10 w-10" />
       <h2 class="mb-1 text-lg font-semibold">Check your email</h2>

@@ -104,13 +104,13 @@ export function paginationLinks(
   pagination: PaginationParams,
   total: number,
 ): Record<string, string> {
-  const totalPages = Math.max(1, Math.ceil(total / pagination.take));
+  const totalPages = Math.max(1, Math.ceil(total / pagination.limit));
   const url = new URL(c.req.url);
 
   const setPage = (pageNumber: number) => {
     const params = new URLSearchParams(url.search);
     params.set('page[number]', String(pageNumber));
-    params.set('page[size]', String(pagination.take));
+    params.set('page[size]', String(pagination.limit));
     return `${url.pathname}?${params.toString()}`;
   };
 
@@ -127,8 +127,8 @@ export function paginationMeta(total: number, pagination: PaginationParams) {
   return {
     total,
     page: pagination.page,
-    pageSize: pagination.take,
-    pageCount: Math.ceil(total / pagination.take),
+    pageSize: pagination.limit,
+    pageCount: Math.ceil(total / pagination.limit),
   };
 }
 
