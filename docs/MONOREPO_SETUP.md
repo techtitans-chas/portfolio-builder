@@ -174,10 +174,10 @@ Seed the database with two pre-verified user accounts for development:
 pnpm db:seed
 ```
 
-| Name | Email | Password | Portfolio slug |
-|---|---|---|---|
-| Martin Södersten | martin.sodersten@chasacademy.se | Martin1234! | martin |
-| Ida Öhlén | ida-alexandra.ohlen@chasacademy.se | Ida1234! | ida |
+| Name             | Email                              | Password    | Portfolio slug |
+| ---------------- | ---------------------------------- | ----------- | -------------- |
+| Martin Södersten | martin.sodersten@chasacademy.se    | Martin1234! | martin         |
+| Ida Öhlén        | ida-alexandra.ohlen@chasacademy.se | Ida1234!    | ida            |
 
 Both accounts are created with email already verified, so you can log in immediately without going through the email flow. Re-running the seed is safe — existing users are skipped.
 

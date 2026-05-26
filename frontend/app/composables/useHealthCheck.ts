@@ -10,7 +10,7 @@ export const useHealthCheck = () => {
     try {
       isLoading.value = true;
       error.value = null;
-      health.value = await fetcher('/health');
+      health.value = await fetcher('/api/health');
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to check health';
       health.value = null;

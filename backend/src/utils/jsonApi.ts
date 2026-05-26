@@ -1,11 +1,8 @@
-import type { Context } from "hono";
-import type { PaginationParams } from "./query.js";
+import type { Context } from 'hono';
+import type { PaginationParams } from './query.js';
 
 export type JsonApiRelationship = {
-  data?:
-    | { type: string; id: string }
-    | Array<{ type: string; id: string }>
-    | null;
+  data?: { type: string; id: string } | Array<{ type: string; id: string }> | null;
   links?: Record<string, string>;
   meta?: Record<string, unknown>;
 };
@@ -35,7 +32,7 @@ export type JsonApiDocument = {
 };
 
 export function sendJsonApi(c: Context, doc: JsonApiDocument, status = 200) {
-  c.header("Content-Type", "application/vnd.api+json");
+  c.header('Content-Type', 'application/vnd.api+json');
   return c.json(doc, status as 200);
 }
 
@@ -51,7 +48,7 @@ export function resourceFromRecord(
     meta?: Record<string, unknown>;
   },
 ): JsonApiResourceObject {
-  const idKey = options?.idKey ?? "id";
+  const idKey = options?.idKey ?? 'id';
   const idValue = record[idKey];
 
   if (idValue === undefined || idValue === null) {
@@ -65,13 +62,11 @@ export function resourceFromRecord(
   const flatFields = fields
     ? Object.fromEntries(
         fields
-          .filter((field) => field !== idKey)
-          .filter((field) => field in record)
-          .map((field) => [field, record[field]]),
+          .filter(field => field !== idKey)
+          .filter(field => field in record)
+          .map(field => [field, record[field]]),
       )
-    : Object.fromEntries(
-        Object.entries(record).filter(([key]) => key !== idKey),
-      );
+    : Object.fromEntries(Object.entries(record).filter(([key]) => key !== idKey));
 
   return {
     id,
@@ -109,13 +104,13 @@ export function paginationLinks(
   pagination: PaginationParams,
   total: number,
 ): Record<string, string> {
-  const totalPages = Math.max(1, Math.ceil(total / pagination.take));
+  const totalPages = Math.max(1, Math.ceil(total / pagination.limit));
   const url = new URL(c.req.url);
 
   const setPage = (pageNumber: number) => {
     const params = new URLSearchParams(url.search);
-    params.set("page[number]", String(pageNumber));
-    params.set("page[size]", String(pagination.take));
+    params.set('page[number]', String(pageNumber));
+    params.set('page[size]', String(pagination.limit));
     return `${url.pathname}?${params.toString()}`;
   };
 
@@ -124,9 +119,7 @@ export function paginationLinks(
     first: setPage(1),
     last: setPage(totalPages),
     ...(pagination.page > 1 ? { prev: setPage(pagination.page - 1) } : {}),
-    ...(pagination.page < totalPages
-      ? { next: setPage(pagination.page + 1) }
-      : {}),
+    ...(pagination.page < totalPages ? { next: setPage(pagination.page + 1) } : {}),
   };
 }
 
@@ -134,8 +127,8 @@ export function paginationMeta(total: number, pagination: PaginationParams) {
   return {
     total,
     page: pagination.page,
-    pageSize: pagination.take,
-    pageCount: Math.ceil(total / pagination.take),
+    pageSize: pagination.limit,
+    pageCount: Math.ceil(total / pagination.limit),
   };
 }
 

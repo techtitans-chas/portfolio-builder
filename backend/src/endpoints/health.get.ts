@@ -1,8 +1,8 @@
-import type { Context } from 'hono';
 import { sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
+import { factory } from '../lib/factory.js';
 
-export default async function healthGet(c: Context): Promise<Response> {
+export const healthGet = factory.createHandlers(async c => {
   let dbStatus: 'connected' | 'unreachable' = 'unreachable';
   try {
     await db.execute(sql`SELECT 1`);
@@ -22,4 +22,4 @@ export default async function healthGet(c: Context): Promise<Response> {
     },
     healthy ? 200 : 503,
   );
-}
+});

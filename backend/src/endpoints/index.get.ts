@@ -1,5 +1,5 @@
-import type { Context } from 'hono';
+import { factory } from '../lib/factory.js';
 
-export default async function indexGet(c: Context): Promise<Response> {
+export const indexGet = factory.createHandlers(async c => {
   return c.json({ message: 'Backend API is running' });
-}
+});
