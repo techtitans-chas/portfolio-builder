@@ -16,6 +16,16 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, url }) => {
+      const { resend } = await import('./resend.js');
+      await resend.emails.send({
+        from: 'Portfolio Builder <onboarding@resend.dev>',
+        to: user.email,
+        subject: 'Reset your password',
+        html: `<p>Click the link below to reset your password. This link expires in 1 hour.</p><p><a href="${url}">${url}</a></p>`,
+      });
+    },
   },
   emailVerification: {
     autoSignInAfterVerification: true,

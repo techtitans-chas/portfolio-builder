@@ -80,12 +80,17 @@ async function onSubmit() {
             Sign in
           </UButton>
 
-          <p class="text-muted text-center text-sm">
-            Don't have an account?
-            <NuxtLink to="/register" class="text-primary font-medium hover:underline">
-              Create one
+          <div class="flex flex-col items-center gap-1 text-center text-sm">
+            <NuxtLink to="/reset-password" class="text-muted hover:text-primary hover:underline">
+              Forgot your password?
             </NuxtLink>
-          </p>
+            <p class="text-muted">
+              Don't have an account?
+              <NuxtLink to="/register" class="text-primary font-medium hover:underline">
+                Create one
+              </NuxtLink>
+            </p>
+          </div>
         </UForm>
       </UCard>
     </div>

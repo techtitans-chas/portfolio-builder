@@ -73,6 +73,12 @@ async function save() {
             Save changes
           </UButton>
         </UForm>
+
+        <div class="max-w-md pt-6 border-t mt-6">
+          <h2 class="font-medium mb-1">Password</h2>
+          <p class="text-muted text-sm mb-3">Send a password reset link to your email address.</p>
+          <UButton to="/reset-password" variant="outline">Reset password</UButton>
+        </div>
       </UPageBody>
     </UPage>
   </UContainer>
