@@ -6,8 +6,6 @@ import { corsOptions } from './lib/cors.js';
 import { onError } from './utils/errorHandling.js';
 import { auth } from './lib/auth.js';
 import router from './router.js';
-import indexGet from './endpoints/index.get.js';
-import healthGet from './endpoints/health.get.js';
 
 const PORT = parseInt(process.env.PORT ?? '3111', 10);
 
@@ -18,8 +16,6 @@ async function startServer(): Promise<void> {
   app.use(prettyJSON());
   app.onError(onError);
 
-  app.get('/', indexGet);
-  app.get('/health', healthGet);
   app.route('/', router);
   app.on(['GET', 'POST', 'OPTIONS'], '/api/auth/*', c => auth.handler(c.req.raw));
 
