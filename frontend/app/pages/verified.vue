@@ -10,7 +10,7 @@
       <p class="text-muted mb-8 text-sm">
         Your account is now active. Sign in to start building your portfolio.
       </p>
-      <UButton to="/login" class="w-full"> Sign in </UButton>
+      <UButton to="/login" class="w-full justify-center"> Sign in </UButton>
     </div>
   </div>
 </template>

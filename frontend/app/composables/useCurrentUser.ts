@@ -30,12 +30,11 @@ export function useCurrentUser() {
     if (user.value || pending.value) return;
     pending.value = true;
     try {
-      const data = await fetcher('/api/auth/me', { credentials: 'include' });
+      const data = await fetcher('/api/users/me', { credentials: 'include' });
       user.value = data.user;
       portfolio.value = data.portfolio;
     } catch {
-      user.value = null;
-      portfolio.value = null;
+      // leave existing state intact on error
     } finally {
       pending.value = false;
     }

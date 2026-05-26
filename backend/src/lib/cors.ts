@@ -7,7 +7,7 @@ const allowed = [
 export const corsOptions = {
   origin: (origin: string) => (allowed.includes(origin) ? origin : null),
   credentials: true,
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 };

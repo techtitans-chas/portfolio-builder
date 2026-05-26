@@ -185,7 +185,7 @@ To fully reset and reseed:
 
 ```bash
 docker exec portfolio-builder-postgres-1 psql -U postgres -d portfolio_builder -c "DELETE FROM users;"
-pnpm --filter backend db:seed
+pnpm db:seed
 ```
 
 ## API Endpoints

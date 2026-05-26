@@ -31,11 +31,13 @@ async function seed() {
       continue;
     }
 
+    const frontendUrl = process.env.FRONTEND_URL ?? 'http://localhost:3000';
     const result = await auth.api.signUpEmail({
       body: {
         name: user.name,
         email: user.email,
         password: user.password,
+        callbackURL: `${frontendUrl}/verified`,
       },
     });
 

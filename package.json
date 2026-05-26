@@ -13,9 +13,9 @@
     "lint:fix": "eslint . --fix && pnpm --filter frontend lint:fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:generate": "dotenv -e .env -- pnpm --filter backend drizzle-kit generate",
-    "db:migrate": "dotenv -e .env -- pnpm --filter backend drizzle-kit migrate",
-    "db:studio": "dotenv -e .env -- pnpm --filter backend drizzle-kit studio",
+    "db:generate": "dotenv -e .env -- pnpm --filter backend db:generate",
+    "db:migrate": "dotenv -e .env -- pnpm --filter backend db:migrate",
+    "db:studio": "dotenv -e .env -- pnpm --filter backend db:studio",
     "db:seed": "dotenv -e .env -- pnpm --filter backend db:seed"
   },
   "devDependencies": {
