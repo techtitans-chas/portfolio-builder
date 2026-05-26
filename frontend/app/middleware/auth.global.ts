@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware(async to => {
+  if (import.meta.server) return;
   if (!to.path.startsWith('/admin')) return;
 
   const config = useRuntimeConfig();
