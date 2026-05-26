@@ -9,6 +9,7 @@ const schema = z.object({
 type LoginForm = z.infer<typeof schema>;
 
 const { fetcher } = useApi();
+const route = useRoute();
 
 const state = reactive<LoginForm>({ email: '', password: '' });
 const showPassword = ref(false);
@@ -24,7 +25,8 @@ async function onSubmit() {
       credentials: 'include',
       body: JSON.stringify({ email: state.email, password: state.password }),
     });
-    await navigateTo('/admin');
+    const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : '/admin';
+    await navigateTo(redirect);
   } catch {
     error.value = 'Invalid email or password.';
   } finally {
