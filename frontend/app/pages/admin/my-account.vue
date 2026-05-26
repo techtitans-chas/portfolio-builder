@@ -62,16 +62,9 @@ async function save() {
             :description="successMessage"
           />
 
-          <UAlert
-            v-if="errorMessage"
-            color="error"
-            variant="soft"
-            :description="errorMessage"
-          />
+          <UAlert v-if="errorMessage" color="error" variant="soft" :description="errorMessage" />
 
-          <UButton type="submit" :loading="saving">
-            Save changes
-          </UButton>
+          <UButton type="submit" :loading="saving"> Save changes </UButton>
         </UForm>
 
         <div class="max-w-md pt-6 border-t mt-6">

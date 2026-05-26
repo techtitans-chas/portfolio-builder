@@ -31,9 +31,7 @@ async function onSubmit() {
       <div class="mb-8 text-center">
         <AppLogo class="mx-auto mb-4 h-10 w-auto" />
         <h1 class="text-2xl font-bold">Reset your password</h1>
-        <p class="text-muted mt-1 text-sm">
-          Enter your email and we'll send you a reset link.
-        </p>
+        <p class="text-muted mt-1 text-sm">Enter your email and we'll send you a reset link.</p>
       </div>
 
       <UCard v-if="!submitted">
