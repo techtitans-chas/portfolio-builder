@@ -34,8 +34,7 @@ export function useCurrentUser() {
       user.value = data.user;
       portfolio.value = data.portfolio;
     } catch {
-      user.value = null;
-      portfolio.value = null;
+      // leave existing state intact on error
     } finally {
       pending.value = false;
     }
