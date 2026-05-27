@@ -1,4 +1,5 @@
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import sharp from 'sharp';
 
 // ---------------------------------------------------------------------------
 // Cloudflare R2 client (S3-compatible)
@@ -35,11 +36,27 @@ export const USER_STORAGE_LIMIT = 25 * 1024 * 1024;
 /** Maximum bytes the entire application may store in R2 (500 MB). */
 export const APP_STORAGE_LIMIT = 500 * 1024 * 1024;
 
-/** Maximum size for a single uploaded file (5 MB). */
-export const MAX_FILE_SIZE = 5 * 1024 * 1024;
+/** Maximum size for a single uploaded file (10 MB — server resizes before storing). */
+export const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
 /** Accepted MIME types for avatar uploads. */
 export const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'] as const;
+
+/** Avatar output size in pixels (applied to both width and height). */
+export const AVATAR_SIZE_PX = 200;
+
+/**
+ * Resize and convert an image buffer to a 200×200 WebP avatar.
+ * The image is fit inside the box with `cover` (cropped to fill), then
+ * converted to WebP at quality 85. The output is always much smaller than
+ * the original, so storage cost is minimal regardless of what was uploaded.
+ */
+export async function processAvatar(input: Buffer): Promise<Buffer> {
+  return sharp(input)
+    .resize(AVATAR_SIZE_PX, AVATAR_SIZE_PX, { fit: 'cover', position: 'centre' })
+    .webp({ quality: 85 })
+    .toBuffer();
+}
 
 // ---------------------------------------------------------------------------
 // Upload helper

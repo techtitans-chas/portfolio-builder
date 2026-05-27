@@ -13,6 +13,7 @@ import {
   ALLOWED_MIME_TYPES,
   USER_STORAGE_LIMIT,
   APP_STORAGE_LIMIT,
+  processAvatar,
 } from '../../lib/r2.js';
 
 export const meAvatarPost = factory.createHandlers(async c => {
@@ -45,12 +46,17 @@ export const meAvatarPost = factory.createHandlers(async c => {
   // -------------------------------------------------------------------------
   // Read into buffer & validate size
   // -------------------------------------------------------------------------
-  const buffer = Buffer.from(await file.arrayBuffer());
-  if (buffer.byteLength > MAX_FILE_SIZE) {
+  const rawBuffer = Buffer.from(await file.arrayBuffer());
+  if (rawBuffer.byteLength > MAX_FILE_SIZE) {
     throw badRequest(
-      `File too large (${(buffer.byteLength / 1024 / 1024).toFixed(1)} MB). Maximum size is 5 MB.`,
+      `File too large (${(rawBuffer.byteLength / 1024 / 1024).toFixed(1)} MB). Maximum size is 10 MB.`,
     );
   }
+
+  // -------------------------------------------------------------------------
+  // Resize & convert to WebP (200×200, cover crop)
+  // -------------------------------------------------------------------------
+  const buffer = await processAvatar(rawBuffer);
 
   // -------------------------------------------------------------------------
   // Load current user (need existing image URL + current storage usage)
@@ -94,11 +100,10 @@ export const meAvatarPost = factory.createHandlers(async c => {
   }
 
   // -------------------------------------------------------------------------
-  // Upload new file to R2
+  // Upload new file to R2 (always WebP after processing)
   // -------------------------------------------------------------------------
-  const extension = (mimeType.split('/')[1] ?? 'jpg').replace('jpeg', 'jpg');
-  const key = `avatars/${user.id}/${randomUUID()}.${extension}`;
-  const { url } = await uploadToR2(key, buffer, mimeType);
+  const key = `avatars/${user.id}/${randomUUID()}.webp`;
+  const { url } = await uploadToR2(key, buffer, 'image/webp');
 
   // -------------------------------------------------------------------------
   // Delete old R2 file (if it was an R2 upload, not a default avatar)
