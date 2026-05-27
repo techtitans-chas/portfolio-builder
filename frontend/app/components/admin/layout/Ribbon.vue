@@ -6,8 +6,7 @@ const { fetch, clear } = useCurrentUser();
 
 if (import.meta.client) await fetch();
 
-const { isSidebarOpen, isSidebarCollapsed } = useDashboard();
-isSidebarCollapsed.value = true;
+const { isSidebarOpen } = useDashboard();
 
 defineShortcuts({
   o: () => (isSidebarOpen.value = !isSidebarOpen.value),
@@ -71,7 +70,7 @@ const links = [
 </script>
 
 <template>
-  <UDashboardSidebar v-model:open="isSidebarOpen" v-model:collapsed="isSidebarCollapsed">
+  <UDashboardSidebar v-model:open="isSidebarOpen" collapsible>
     <template #default="{ collapsed }">
       <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
 
