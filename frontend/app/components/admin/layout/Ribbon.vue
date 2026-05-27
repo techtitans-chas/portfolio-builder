@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui';
+import { useDashboard } from '~/composables/useDashboard';
 const { fetcher } = useApi();
-const { user, fetch, clear } = useCurrentUser();
+const { fetch, clear } = useCurrentUser();
 
 if (import.meta.client) await fetch();
-const open = ref(false);
-const collapsed = ref(true);
+
+const { isSidebarOpen, isSidebarCollapsed } = useDashboard();
+isSidebarCollapsed.value = true;
+
 defineShortcuts({
-  o: () => (open.value = !open.value),
+  o: () => (isSidebarOpen.value = !isSidebarOpen.value),
 });
 
 async function logout() {
@@ -59,7 +62,7 @@ const links = [
     {
       label: 'Logout',
       icon: 'i-lucide-log-out',
-      onSelect: (e: Event) => {
+      onSelect: () => {
         logout();
       },
     },
@@ -68,7 +71,7 @@ const links = [
 </script>
 
 <template>
-  <UDashboardSidebar v-model:open="open" v-model:collapsed="collapsed">
+  <UDashboardSidebar v-model:open="isSidebarOpen" v-model:collapsed="isSidebarCollapsed">
     <template #default="{ collapsed }">
       <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
 
