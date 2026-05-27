@@ -52,6 +52,9 @@ const displayedImage = computed(() => user.value?.image ?? null);
 function onAvatarSuccess(imageUrl: string) {
   if (user.value) user.value.image = imageUrl;
 }
+
+const { features, fetchFeatures } = useServerFeatures();
+await fetchFeatures();
 </script>
 
 <template>
@@ -93,6 +96,7 @@ function onAvatarSuccess(imageUrl: string) {
       <AdminAvatarModal
         v-model:open="avatarModalOpen"
         :current-image="displayedImage"
+        :storage-enabled="features.storage"
         @success="onAvatarSuccess"
       />
 
