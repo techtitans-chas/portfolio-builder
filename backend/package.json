@@ -14,6 +14,7 @@
     "db:seed": "tsx src/db/seed.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1054.0",
     "@hono/node-server": "^1.19.14",
     "@portfolio-builder/shared": "workspace:*",
     "better-auth": "^1.6.11",

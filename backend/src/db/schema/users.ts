@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, boolean, integer } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
   id: text('id').primaryKey(),
@@ -6,7 +6,15 @@ export const users = pgTable('users', {
   email: text('email').notNull().unique(),
   emailVerified: boolean('email_verified').notNull().default(false),
   image: text('image'),
+  storageBytesUsed: integer('storage_bytes_used').notNull().default(0),
   createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+/** Singleton row (id = 1) tracking total R2 usage across all users. */
+export const appStorage = pgTable('app_storage', {
+  id: integer('id').primaryKey().default(1),
+  totalBytesUsed: integer('total_bytes_used').notNull().default(0),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
