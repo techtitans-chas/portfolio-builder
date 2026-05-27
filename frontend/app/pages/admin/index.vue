@@ -29,7 +29,7 @@ const viewModes: TabsItem[] = [
       <UButton color="neutral" variant="solid" aria-label="Save" label="Save" />
     </template>
 
-    <div class="flex h-full w-full">
+    <div class="flex h-full w-full min-h-0">
       <!-- Left sidebar -->
       <PagebuilderLeftSidebar />
 

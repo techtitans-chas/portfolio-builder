@@ -8,6 +8,14 @@ if (import.meta.client) await fetch();
 
 const { isSidebarOpen } = useDashboard();
 
+const colorMode = useColorMode();
+const isDark = computed({
+  get: () => colorMode.value === 'dark',
+  set: val => {
+    colorMode.preference = val ? 'dark' : 'light';
+  },
+});
+
 defineShortcuts({
   o: () => (isSidebarOpen.value = !isSidebarOpen.value),
 });
@@ -21,6 +29,10 @@ async function logout() {
 const links = [
   [
     {
+      label: 'General',
+      type: 'label',
+    },
+    {
       label: 'Page builder',
       icon: 'i-lucide-layout-dashboard',
       to: '/admin',
@@ -31,6 +43,10 @@ const links = [
       to: '/admin/media-gallery',
     },
     {
+      label: 'Collections',
+      type: 'label',
+    },
+    {
       label: 'Projects',
       icon: 'i-lucide-clipboard-check',
       to: '/admin/projects',
@@ -39,6 +55,10 @@ const links = [
       label: 'Experiences',
       icon: 'i-lucide-briefcase-business',
       to: '/admin/experiences',
+    },
+    {
+      label: 'Site',
+      type: 'label',
     },
     {
       label: 'Site settings',
@@ -82,13 +102,12 @@ const links = [
         popover
       />
 
-      <UNavigationMenu
-        :collapsed="collapsed"
-        :items="links[1]"
-        orientation="vertical"
-        tooltip
-        class="mt-auto"
-      />
+      <div class="mt-auto flex flex-col gap-1">
+        <!-- Color mode toggle -->
+        <UColorModeButton :label="collapsed ? undefined : 'Toggle theme'" />
+
+        <UNavigationMenu :collapsed="collapsed" :items="links[1]" orientation="vertical" tooltip />
+      </div>
     </template>
   </UDashboardSidebar>
 </template>
