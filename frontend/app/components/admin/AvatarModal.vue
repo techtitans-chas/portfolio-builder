@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   currentImage: string | null
+  storageEnabled: boolean
 }>()
 
 const emit = defineEmits<{
@@ -31,34 +32,48 @@ const {
   <UModal v-model:open="open" title="Change Avatar" description="Upload your own image or pick a default avatar.">
     <template #body>
       <div class="space-y-5">
-        <!-- Hidden file input -->
-        <input
-          ref="fileInput"
-          type="file"
-          :accept="allowedTypes"
-          class="hidden"
-          @change="onFileInputChange"
-        />
+        <!-- Upload section -->
+        <template v-if="props.storageEnabled">
+          <!-- Hidden file input -->
+          <input
+            ref="fileInput"
+            type="file"
+            :accept="allowedTypes"
+            class="hidden"
+            @change="onFileInputChange"
+          />
 
-        <!-- Upload button -->
-        <UButton
-          variant="outline"
-          class="w-full justify-center"
-          :loading="uploading"
-          :disabled="uploading"
-          icon="i-lucide-upload"
-          @click="openFilePicker"
-        >
-          Upload image
-        </UButton>
+          <UButton
+            variant="outline"
+            class="w-full justify-center"
+            :loading="uploading"
+            :disabled="uploading"
+            icon="i-lucide-upload"
+            @click="openFilePicker"
+          >
+            Upload image
+          </UButton>
 
-        <p class="text-xs text-muted text-center">
-          JPG, PNG, GIF or WebP · max 10 MB
-        </p>
+          <p class="text-xs text-muted text-center">
+            JPG, PNG, GIF or WebP · max 10 MB
+          </p>
 
-        <USeparator label="or choose a default" />
+          <USeparator label="or choose a default" />
+        </template>
 
-        <!-- Default avatar grid -->
+        <!-- Storage unavailable notice -->
+        <template v-else>
+          <UAlert
+            color="warning"
+            variant="soft"
+            icon="i-lucide-cloud-off"
+            title="Custom uploads unavailable"
+            description="File storage is not configured on this server. You can still pick a default avatar below."
+          />
+          <USeparator label="choose a default" />
+        </template>
+
+        <!-- Default avatar grid (always available) -->
         <div class="grid grid-cols-6 gap-2">
           <button
             v-for="path in defaultAvatars"

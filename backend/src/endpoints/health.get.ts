@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { factory } from '../lib/factory.js';
+import { r2 } from '../lib/r2.js';
 
 export const healthGet = factory.createHandlers(async c => {
   let dbStatus: 'connected' | 'unreachable' = 'unreachable';
@@ -19,6 +20,9 @@ export const healthGet = factory.createHandlers(async c => {
       service: 'portfolio-builder-backend',
       version: '0.1.0',
       db: dbStatus,
+      features: {
+        storage: r2 !== null,
+      },
     },
     healthy ? 200 : 503,
   );
