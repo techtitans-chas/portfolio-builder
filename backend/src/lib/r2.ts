@@ -79,7 +79,9 @@ export async function uploadToR2(
   contentType: string,
 ): Promise<UploadResult> {
   if (!r2) {
-    throw new Error('R2 is not configured — set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, and R2_SECRET_ACCESS_KEY');
+    throw new Error(
+      'R2 is not configured — set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, and R2_SECRET_ACCESS_KEY',
+    );
   }
 
   await r2.send(

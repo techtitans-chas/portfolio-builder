@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const props = defineProps<{
-  currentImage: string | null
-  storageEnabled: boolean
-}>()
+  currentImage: string | null;
+  storageEnabled: boolean;
+}>();
 
 const emit = defineEmits<{
-  success: [imageUrl: string]
-}>()
+  success: [imageUrl: string];
+}>();
 
-const open = defineModel<boolean>('open', { default: false })
+const open = defineModel<boolean>('open', { default: false });
 
 const {
   uploading,
@@ -22,14 +22,18 @@ const {
   selectDefault,
 } = useAvatarUpload({
   onSuccess: (imageUrl: string) => {
-    emit('success', imageUrl)
-    open.value = false
+    emit('success', imageUrl);
+    open.value = false;
   },
-})
+});
 </script>
 
 <template>
-  <UModal v-model:open="open" title="Change Avatar" description="Upload your own image or pick a default avatar.">
+  <UModal
+    v-model:open="open"
+    title="Change Avatar"
+    description="Upload your own image or pick a default avatar."
+  >
     <template #body>
       <div class="space-y-5">
         <!-- Upload section -->
@@ -54,9 +58,7 @@ const {
             Upload image
           </UButton>
 
-          <p class="text-xs text-muted text-center">
-            JPG, PNG, GIF or WebP · max 10 MB
-          </p>
+          <p class="text-xs text-muted text-center">JPG, PNG, GIF or WebP · max 10 MB</p>
 
           <USeparator label="or choose a default" />
         </template>

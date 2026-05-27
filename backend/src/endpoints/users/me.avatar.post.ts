@@ -38,9 +38,7 @@ export const meAvatarPost = factory.createHandlers(async c => {
   // -------------------------------------------------------------------------
   const mimeType = file.type;
   if (!(ALLOWED_MIME_TYPES as readonly string[]).includes(mimeType)) {
-    throw badRequest(
-      `Unsupported file type "${mimeType}". Allowed types: jpg, png, gif, webp.`,
-    );
+    throw badRequest(`Unsupported file type "${mimeType}". Allowed types: jpg, png, gif, webp.`);
   }
 
   // -------------------------------------------------------------------------
@@ -143,4 +141,3 @@ export const meAvatarPost = factory.createHandlers(async c => {
 
   return c.json({ image: url });
 });
-
