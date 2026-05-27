@@ -1,5 +1,4 @@
 export default defineNuxtRouteMiddleware(async to => {
-  if (import.meta.server) return;
   if (!to.path.startsWith('/admin')) return;
 
   const config = useRuntimeConfig();
@@ -9,6 +8,8 @@ export default defineNuxtRouteMiddleware(async to => {
   try {
     const response = await fetch(`${apiBase}/api/auth/get-session`, {
       credentials: 'include',
+      cache: 'no-store',
+      headers: import.meta.server ? useRequestHeaders(['cookie']) : undefined,
     });
 
     if (!response.ok) {
