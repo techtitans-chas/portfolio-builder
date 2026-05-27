@@ -8,14 +8,6 @@ if (import.meta.client) await fetch();
 
 const { isSidebarOpen } = useDashboard();
 
-const colorMode = useColorMode();
-const isDark = computed({
-  get: () => colorMode.value === 'dark',
-  set: val => {
-    colorMode.preference = val ? 'dark' : 'light';
-  },
-});
-
 defineShortcuts({
   o: () => (isSidebarOpen.value = !isSidebarOpen.value),
 });
