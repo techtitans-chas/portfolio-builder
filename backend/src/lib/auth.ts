@@ -19,6 +19,7 @@ export const auth = betterAuth({
     revokeSessionsOnPasswordReset: true,
     sendResetPassword: async ({ user, url }) => {
       const { resend } = await import('./resend.js');
+      if (!resend) return;
       await resend.emails.send({
         from: 'Portfolio Builder <onboarding@resend.dev>',
         to: user.email,
