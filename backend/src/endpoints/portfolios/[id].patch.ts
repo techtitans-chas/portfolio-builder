@@ -13,7 +13,12 @@ const seoMetaSchema = z.object({
 
 const settingsSchema = z.object({
   title: z.string().max(100).optional(),
-  slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/, 'Slug may only contain lowercase letters, numbers, and hyphens').optional(),
+  slug: z
+    .string()
+    .min(1)
+    .max(100)
+    .regex(/^[a-z0-9-]+$/, 'Slug may only contain lowercase letters, numbers, and hyphens')
+    .optional(),
   description: z.string().max(300).nullable().optional(),
   ogImageUrl: z.url().nullable().optional(),
   seoMeta: seoMetaSchema.nullable().optional(),

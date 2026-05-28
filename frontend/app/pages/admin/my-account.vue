@@ -13,7 +13,13 @@ await fetchUser();
 // ---------------------------------------------------------------------------
 const form = reactive({ name: '' });
 
-watch(user, u => { if (u) form.name = u.name ?? ''; }, { immediate: true });
+watch(
+  user,
+  u => {
+    if (u) form.name = u.name ?? '';
+  },
+  { immediate: true },
+);
 
 const { markSaved } = useUnsavedChanges(form);
 

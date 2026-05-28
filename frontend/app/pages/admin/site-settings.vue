@@ -76,7 +76,11 @@ async function save() {
 <template>
   <AdminLayoutPageStructure title="Site settings" description="Configure your portfolio.">
     <UForm class="max-w-md space-y-4" @submit.prevent="save">
-      <USwitch v-model="form.isPublished" label="Publish site" description="Your portfolio will be publicly available." />
+      <USwitch
+        v-model="form.isPublished"
+        label="Publish site"
+        description="Your portfolio will be publicly available."
+      />
       <UFormField label="Portfolio title" name="title">
         <UInput v-model="form.title" placeholder="My Portfolio" class="w-full" />
       </UFormField>
