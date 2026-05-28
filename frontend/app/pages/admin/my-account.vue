@@ -15,6 +15,8 @@ const form = reactive({ name: '' });
 
 watch(user, u => { if (u) form.name = u.name ?? ''; }, { immediate: true });
 
+const { markSaved } = useUnsavedChanges(form);
+
 const successMessage = ref('');
 const errorMessage = ref('');
 const saving = ref(false);
@@ -35,6 +37,7 @@ async function save() {
       user.value.name = data.user.name;
     }
 
+    markSaved();
     successMessage.value = 'Account updated successfully.';
   } catch {
     errorMessage.value = 'Something went wrong. Please try again.';

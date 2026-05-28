@@ -34,6 +34,8 @@ watch(
   { immediate: true },
 );
 
+const { markSaved } = useUnsavedChanges(form);
+
 const successMessage = ref('');
 const errorMessage = ref('');
 const saving = ref(false);
@@ -61,6 +63,7 @@ async function save() {
         },
       }),
     });
+    markSaved();
     successMessage.value = 'Settings saved.';
   } catch (e: unknown) {
     errorMessage.value = e instanceof Error ? e.message : 'Failed to save settings.';
