@@ -3,15 +3,20 @@ definePageMeta({
   layout: 'admin',
 });
 
-const languageOptions = useLanguageOptions();
+const { portfolio, fetch: fetchUser } = useCurrentUser();
+const { fetcher } = useApi();
+
+await fetchUser();
+
+const seoMeta = portfolio.value?.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
 
 const form = reactive({
-  title: 'My Portfolio',
-  url: 'awesome-portfolio',
-  seoTitle: 'The Best Portfolio page on the internet',
-  seoDescription:
-    'Iusto et fugit voluptas error doloribus quo incidunt itaque. Fuga voluptas et qui soluta esse consequatur voluptas.',
-  language: 'en',
+  title: portfolio.value?.title ?? '',
+  slug: portfolio.value?.slug ?? '',
+  description: portfolio.value?.description ?? '',
+  ogImageUrl: portfolio.value?.ogImageUrl ?? '',
+  seoTitle: seoMeta?.seoTitle ?? '',
+  seoDescription: seoMeta?.seoDescription ?? '',
 });
 
 const successMessage = ref('');
@@ -19,61 +24,82 @@ const errorMessage = ref('');
 const saving = ref(false);
 
 async function save() {
-  console.log('Saving page');
+  if (!portfolio.value?.id) return;
+
+  saving.value = true;
+  successMessage.value = '';
+  errorMessage.value = '';
+
+  try {
+    await fetcher(`/api/portfolios/${portfolio.value.id}/settings`, {
+      method: 'PATCH',
+      credentials: 'include',
+      body: JSON.stringify({
+        title: form.title || null,
+        slug: form.slug || null,
+        description: form.description || null,
+        ogImageUrl: form.ogImageUrl || null,
+        seoMeta: {
+          seoTitle: form.seoTitle || null,
+          seoDescription: form.seoDescription || null,
+        },
+      }),
+    });
+    successMessage.value = 'Settings saved.';
+  } catch (e: unknown) {
+    errorMessage.value = e instanceof Error ? e.message : 'Failed to save settings.';
+  } finally {
+    saving.value = false;
+  }
 }
 </script>
 
 <template>
   <AdminLayoutPageStructure title="Site settings" description="Configure your portfolio.">
     <UForm class="max-w-md space-y-4" @submit.prevent="save">
-      <UFormField label="Site title" name="title">
-        <UInput v-model="form.title" placeholder="Site title" class="w-full" />
+      <UFormField label="Portfolio title" name="title">
+        <UInput v-model="form.title" placeholder="My Portfolio" class="w-full" />
       </UFormField>
 
-      <UFormField label="URL" name="url">
+      <UFormField label="URL" name="slug">
         <UInput
-          v-model="form.url"
+          v-model="form.slug"
           placeholder="my-portfolio"
           class="w-full"
-          :ui="{
-            base: 'pl-21',
-            leading: 'pointer-events-none',
-          }"
+          :ui="{ base: 'pl-21', leading: 'pointer-events-none' }"
         >
           <template #leading>
-            <span class="text-muted text-sm">folio.app/u/</span>
+            <span class="text-muted text-sm">folio.app/p/</span>
           </template>
         </UInput>
       </UFormField>
 
-      <UFormField
-        label="Language"
-        name="language"
-        description="Sets the lang attribute on your portfolio page. Type a BCP 47 tag if your language isn't listed."
-      >
-        <UInputMenu
-          v-model="form.language"
-          :items="languageOptions"
-          value-key="value"
-          placeholder="Search or type a language tag…"
-          class="w-full"
-        />
+      <UFormField label="Description" name="description">
+        <UTextarea v-model="form.description" placeholder="A short description of your portfolio." class="w-full" />
       </UFormField>
 
       <USeparator class="mt-8 mb-6" />
 
-      <UFormField label="SEO title" name="seo-title">
+      <UFormField label="SEO title" name="seoTitle">
         <UInput v-model="form.seoTitle" placeholder="SEO title" class="w-full" />
       </UFormField>
 
-      <UFormField label="SEO description" name="seo-description">
+      <UFormField label="SEO description" name="seoDescription">
         <UTextarea v-model="form.seoDescription" placeholder="SEO description" class="w-full" />
+      </UFormField>
+
+      <UFormField
+        label="OG image URL"
+        name="ogImageUrl"
+        description="Image shown when your portfolio is shared on social media."
+      >
+        <UInput v-model="form.ogImageUrl" placeholder="https://..." class="w-full" />
       </UFormField>
 
       <UAlert v-if="successMessage" color="success" variant="soft" :description="successMessage" />
       <UAlert v-if="errorMessage" color="error" variant="soft" :description="errorMessage" />
 
-      <UButton type="submit" :loading="saving"> Save changes </UButton>
+      <UButton type="submit" :loading="saving">Save changes</UButton>
     </UForm>
   </AdminLayoutPageStructure>
 </template>

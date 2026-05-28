@@ -11,6 +11,7 @@ export const portfolios = pgTable('portfolios', {
   description: text('description'),
   ogImageUrl: text('og_image_url'),
   themeSettings: jsonb('theme_settings'),
+  seoMeta: jsonb('seo_meta'),
   isPublished: boolean('is_published').notNull().default(false),
   publishedAt: timestamp('published_at'),
   createdAt: timestamp('created_at').notNull().defaultNow(),

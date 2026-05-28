@@ -18,21 +18,20 @@ if (error.value || !data.value) {
 }
 
 const portfolio = (data.value as { portfolio: Record<string, unknown> }).portfolio;
-
-console.log('[p/slug] portfolio data:', JSON.stringify(portfolio));
+const seoMeta = portfolio.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
 
 useSeoMeta({
-  title: (portfolio.title as string) || 'Portfolio',
-  description: (portfolio.description as string) ?? undefined,
+  title: seoMeta?.seoTitle || (portfolio.title as string) || 'Portfolio',
+  ogTitle: seoMeta?.seoTitle || (portfolio.title as string) || 'Portfolio',
+  description: seoMeta?.seoDescription ?? (portfolio.description as string) ?? undefined,
+  ogDescription: seoMeta?.seoDescription ?? (portfolio.description as string) ?? undefined,
   ogImage: (portfolio.ogImageUrl as string) ?? undefined,
 });
 </script>
 
 <template>
   <div class="min-h-screen p-8">
-    <h1>{{ portfolio.title || '(no title set)' }}</h1>
-    <p>slug: {{ portfolio.slug }}</p>
-    <p>published: {{ portfolio.isPublished }}</p>
+    <h1>{{ portfolio.title || portfolio.slug }}</h1>
     <p v-if="portfolio.description">{{ portfolio.description }}</p>
   </div>
 </template>

@@ -14,6 +14,7 @@ interface CurrentPortfolio {
   description: string | null;
   ogImageUrl: string | null;
   themeSettings: unknown;
+  seoMeta: { seoTitle?: string; seoDescription?: string } | null;
   isPublished: boolean;
   publishedAt: string | null;
   createdAt: string;
