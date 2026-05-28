@@ -11,9 +11,17 @@ await fetchUser();
 // ---------------------------------------------------------------------------
 // Profile name form
 // ---------------------------------------------------------------------------
-const form = reactive({
-  name: user.value?.name ?? '',
-});
+const form = reactive({ name: '' });
+
+watch(
+  user,
+  u => {
+    if (u) form.name = u.name ?? '';
+  },
+  { immediate: true },
+);
+
+const { markSaved } = useUnsavedChanges(form);
 
 const successMessage = ref('');
 const errorMessage = ref('');
@@ -35,6 +43,7 @@ async function save() {
       user.value.name = data.user.name;
     }
 
+    markSaved();
     successMessage.value = 'Account updated successfully.';
   } catch {
     errorMessage.value = 'Something went wrong. Please try again.';

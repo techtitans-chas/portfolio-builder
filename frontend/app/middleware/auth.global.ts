@@ -2,7 +2,9 @@ export default defineNuxtRouteMiddleware(async to => {
   if (!to.path.startsWith('/admin')) return;
 
   const config = useRuntimeConfig();
-  const apiBase = config.public.apiUrl || 'http://localhost:3111';
+  const apiBase = import.meta.server
+    ? (config.apiUrl as string) || config.public.apiUrl || 'http://localhost:3111'
+    : config.public.apiUrl || 'http://localhost:3111';
   const redirectParam = { redirect: to.fullPath };
 
   try {

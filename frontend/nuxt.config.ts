@@ -15,6 +15,8 @@ export default defineNuxtConfig({
 
   // Environment configuration
   runtimeConfig: {
+    // Server-side only — used for SSR fetches inside Docker where backend is reachable by service name
+    apiUrl: process.env.NUXT_API_URL || process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3111',
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3111',
       frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000',
