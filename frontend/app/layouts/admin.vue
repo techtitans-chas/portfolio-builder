@@ -3,7 +3,9 @@
 <template>
   <UMain>
     <UDashboardGroup>
-      <AdminLayoutRibbon />
+      <ClientOnly>
+        <AdminLayoutRibbon />
+      </ClientOnly>
       <slot />
     </UDashboardGroup>
   </UMain>

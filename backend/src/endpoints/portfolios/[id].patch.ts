@@ -17,6 +17,7 @@ const settingsSchema = z.object({
   description: z.string().max(300).nullable().optional(),
   ogImageUrl: z.url().nullable().optional(),
   seoMeta: seoMetaSchema.nullable().optional(),
+  isPublished: z.boolean().optional(),
 });
 
 export const portfolioPatch = factory.createHandlers(async c => {

@@ -6,9 +6,10 @@ definePageMeta({
 const { portfolio, fetch: fetchUser } = useCurrentUser();
 const { fetcher } = useApi();
 
-await useAsyncData('current-user', fetchUser);
+await fetchUser();
 
 const form = reactive({
+  isPublished: false,
   title: '',
   slug: '',
   description: '',
@@ -22,6 +23,7 @@ watch(
   p => {
     if (!p) return;
     const seoMeta = p.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
+    form.isPublished = p.isPublished ?? false;
     form.title = p.title ?? '';
     form.slug = p.slug ?? '';
     form.description = p.description ?? '';
@@ -48,6 +50,7 @@ async function save() {
       method: 'PATCH',
       credentials: 'include',
       body: JSON.stringify({
+        isPublished: form.isPublished,
         title: form.title || null,
         slug: form.slug || null,
         description: form.description || null,
@@ -70,6 +73,7 @@ async function save() {
 <template>
   <AdminLayoutPageStructure title="Site settings" description="Configure your portfolio.">
     <UForm class="max-w-md space-y-4" @submit.prevent="save">
+      <USwitch v-model="form.isPublished" label="Publish site" description="Your portfolio will be publicly available." />
       <UFormField label="Portfolio title" name="title">
         <UInput v-model="form.title" placeholder="My Portfolio" class="w-full" />
       </UFormField>
@@ -88,7 +92,11 @@ async function save() {
       </UFormField>
 
       <UFormField label="Description" name="description">
-        <UTextarea v-model="form.description" placeholder="A short description of your portfolio." class="w-full" />
+        <UTextarea
+          v-model="form.description"
+          placeholder="A short description of your portfolio."
+          class="w-full"
+        />
       </UFormField>
 
       <USeparator class="mt-8 mb-6" />

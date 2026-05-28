@@ -6,7 +6,7 @@ definePageMeta({
 const { user, fetch: fetchUser } = useCurrentUser();
 const { fetcher } = useApi();
 
-await useAsyncData('current-user', fetchUser);
+await fetchUser();
 
 // ---------------------------------------------------------------------------
 // Profile name form

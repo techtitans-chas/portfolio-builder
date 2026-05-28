@@ -20,18 +20,17 @@ interface CurrentPortfolio {
   createdAt: string;
 }
 
-const user = ref<CurrentUser | null>(null);
-const portfolio = ref<CurrentPortfolio | null>(null);
-const pending = ref(false);
-
 export function useCurrentUser() {
+  const user = useState<CurrentUser | null>('current-user', () => null);
+  const portfolio = useState<CurrentPortfolio | null>('current-portfolio', () => null);
+  const pending = useState<boolean>('current-user-pending', () => false);
+
   const { fetcher } = useApi();
 
   async function fetch() {
     if (user.value || pending.value) return;
     pending.value = true;
     try {
-      // Forward cookies on SSR so the session is readable server-side
       const cookieHeader = import.meta.server ? useRequestHeaders(['cookie']) : undefined;
       const data = await fetcher('/api/users/me', {
         credentials: 'include',
