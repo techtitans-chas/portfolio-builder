@@ -1,16 +1,48 @@
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui';
+import { VueDraggable } from 'vue-draggable-plus';
+import { ref, computed } from 'vue';
+
+interface Page {
+  label: string;
+  published: boolean;
+  showInMenu: boolean;
+  active?: boolean;
+}
 
 const panelViews = ref<TabsItem[]>([{ label: 'Blocks' }, { label: 'Layers' }, { label: 'Theme' }]);
 const currentView = ref('0');
-
-const pages = ref(['Homepage', 'About', 'Projects', 'Contact']);
-const currentPage = ref('Homepage');
 
 const themeMode = ref(['Only light mode', 'Only dark mode', 'Enable both']);
 const currentThemeMode = ref('Only light mode');
 
 const selectedTheme = ref<string | null>(null);
+
+const pages = ref<Page[]>([
+  { label: 'Homepage', published: true, showInMenu: true, active: true },
+  { label: 'About', published: true, showInMenu: true },
+  { label: 'Projects', published: false, showInMenu: false },
+]);
+
+const activePage = computed(() => pages.value.find(p => p.active) ?? pages.value[0]);
+
+function selectPage(page: Page) {
+  pages.value.forEach(p => (p.active = false));
+  page.active = true;
+}
+
+function togglePublished(page: Page) {
+  page.published = !page.published;
+}
+
+function toggleShowInMenu(page: Page) {
+  page.showInMenu = !page.showInMenu;
+}
+
+function deletePage(page: Page) {
+  const idx = pages.value.indexOf(page);
+  if (idx > -1) pages.value.splice(idx, 1);
+}
 </script>
 
 <template>
@@ -18,14 +50,61 @@ const selectedTheme = ref<string | null>(null);
     <!-- Header -->
     <div class="p-3 border-b border-default shrink-0 text-center">
       <div class="flex mb-2">
-        <USelect v-model="currentPage" :items="pages" class="flex-1" />
-        <UButton
-          color="neutral"
-          variant="outline"
-          aria-label="Settings"
-          icon="i-lucide-settings"
-          class="ml-2"
-        />
+        <UPopover class="grow">
+          <UButton :label="activePage?.label ?? 'Select page'" color="neutral" variant="subtle" />
+
+          <template #content>
+            <div class="p-1 min-w-60">
+              <VueDraggable v-model="pages" handle=".drag-handle">
+                <div
+                  v-for="page in pages"
+                  :key="page.label"
+                  class="group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer"
+                  :class="{ 'bg-elevated': page.active }"
+                  @click="selectPage(page)"
+                >
+                  <UIcon name="i-lucide-grip-vertical" class="drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing" />
+                  <span class="flex-1 truncate">{{ page.label }}</span>
+                  <div class="flex -my-0.5 transition-transform">
+                    <UButton
+                      :icon="page.showInMenu ? 'i-lucide-equal' : 'i-lucide-equal-not'"
+                      color="neutral"
+                      variant="ghost"
+                      size="xs"
+                      :class="page.showInMenu ? 'text-highlighted' : 'text-muted'"
+                      class="hover:text-highlighted hover:bg-accented/50"
+                      @click.stop="toggleShowInMenu(page)"
+                    />
+                    <UButton
+                      :icon="page.published ? 'i-lucide-globe' : 'i-lucide-globe-off'"
+                      color="neutral"
+                      variant="ghost"
+                      size="xs"
+                      :class="page.published ? 'text-highlighted' : 'text-muted'"
+                      class="hover:text-highlighted hover:bg-accented/50"
+                      @click.stop="togglePublished(page)"
+                    />
+                    <UButton
+                      icon="i-lucide-trash"
+                      color="neutral"
+                      variant="ghost"
+                      size="xs"
+                      class="text-muted hover:text-highlighted hover:bg-accented/50"
+                      @click.stop="deletePage(page)"
+                    />
+                  </div>
+                </div>
+              </VueDraggable>
+            </div>
+          </template>
+          <UButton
+            color="neutral"
+            variant="ghost"
+            aria-label="Edit page"
+            icon="i-lucide-edit-3"
+            class="ml-2"
+          />
+        </UPopover>
       </div>
       <UTabs
         v-model="currentView"
