@@ -37,6 +37,11 @@ services:
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3111}
       RESEND_API_KEY: ${RESEND_API_KEY}
+      R2_ACCOUNT_ID: ${R2_ACCOUNT_ID}
+      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID}
+      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY}
+      R2_BUCKET_NAME: ${R2_BUCKET_NAME:-portfolio-builder}
+      R2_PUBLIC_URL: ${R2_PUBLIC_URL}
     ports:
       - '3111:3111'
     volumes:

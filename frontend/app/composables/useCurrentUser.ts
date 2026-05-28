@@ -22,15 +22,16 @@ interface CurrentPortfolio {
 const user = ref<CurrentUser | null>(null);
 const portfolio = ref<CurrentPortfolio | null>(null);
 const pending = ref(false);
+const signedOut = ref(false); // set to true after explicit logout so fetch() won't re-run
 
 export function useCurrentUser() {
   const { fetcher } = useApi();
 
   async function fetch() {
-    if (user.value || pending.value) return;
+    if (user.value || pending.value || signedOut.value) return;
     pending.value = true;
     try {
-      const data = await fetcher('/api/users/me', { credentials: 'include' });
+      const data = await fetcher('/api/users/me', { credentials: 'include', cache: 'no-store' });
       user.value = data.user;
       portfolio.value = data.portfolio;
     } catch {
@@ -43,6 +44,7 @@ export function useCurrentUser() {
   function clear() {
     user.value = null;
     portfolio.value = null;
+    signedOut.value = true;
   }
 
   return { user, portfolio, pending, fetch, clear };

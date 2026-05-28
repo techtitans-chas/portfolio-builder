@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui';
 import { useDashboard } from '~/composables/useDashboard';
-const { fetcher } = useApi();
-const { fetch, clear } = useCurrentUser();
+const { apiBase } = useApi();
+const { fetch: fetchUser, clear } = useCurrentUser();
 
-if (import.meta.client) await fetch();
+if (import.meta.client) await fetchUser();
 
 const { isSidebarOpen } = useDashboard();
 
@@ -13,7 +13,20 @@ defineShortcuts({
 });
 
 async function logout() {
-  await fetcher('/api/auth/sign-out', { method: 'POST', credentials: 'include' }).catch(() => {});
+  try {
+    const response = await fetch(`${apiBase}/api/auth/sign-out`, {
+      method: 'POST',
+      credentials: 'include',
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => '');
+      console.error('Sign-out failed', response.status, errorText);
+    }
+  } catch (error) {
+    console.error('Sign-out failed', error);
+  }
   clear();
   await navigateTo('/');
 }
