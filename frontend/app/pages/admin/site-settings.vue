@@ -6,18 +6,31 @@ definePageMeta({
 const { portfolio, fetch: fetchUser } = useCurrentUser();
 const { fetcher } = useApi();
 
-await fetchUser();
-
-const seoMeta = portfolio.value?.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
+await useAsyncData('current-user', fetchUser);
 
 const form = reactive({
-  title: portfolio.value?.title ?? '',
-  slug: portfolio.value?.slug ?? '',
-  description: portfolio.value?.description ?? '',
-  ogImageUrl: portfolio.value?.ogImageUrl ?? '',
-  seoTitle: seoMeta?.seoTitle ?? '',
-  seoDescription: seoMeta?.seoDescription ?? '',
+  title: '',
+  slug: '',
+  description: '',
+  ogImageUrl: '',
+  seoTitle: '',
+  seoDescription: '',
 });
+
+watch(
+  portfolio,
+  p => {
+    if (!p) return;
+    const seoMeta = p.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
+    form.title = p.title ?? '';
+    form.slug = p.slug ?? '';
+    form.description = p.description ?? '';
+    form.ogImageUrl = p.ogImageUrl ?? '';
+    form.seoTitle = seoMeta?.seoTitle ?? '';
+    form.seoDescription = seoMeta?.seoDescription ?? '';
+  },
+  { immediate: true },
+);
 
 const successMessage = ref('');
 const errorMessage = ref('');

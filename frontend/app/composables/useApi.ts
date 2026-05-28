@@ -12,7 +12,9 @@ export class ApiError extends Error {
 
 export const useApi = () => {
   const config = useRuntimeConfig();
-  const apiBase = config.public.apiUrl || 'http://localhost:3111';
+  const apiBase = import.meta.server
+    ? (config.apiUrl as string) || config.public.apiUrl || 'http://localhost:3111'
+    : config.public.apiUrl || 'http://localhost:3111';
 
   const fetcher = async (endpoint: string, options?: RequestInit) => {
     const response = await fetch(`${apiBase}${endpoint}`, {

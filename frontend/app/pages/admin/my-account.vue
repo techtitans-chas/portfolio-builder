@@ -6,14 +6,14 @@ definePageMeta({
 const { user, fetch: fetchUser } = useCurrentUser();
 const { fetcher } = useApi();
 
-await fetchUser();
+await useAsyncData('current-user', fetchUser);
 
 // ---------------------------------------------------------------------------
 // Profile name form
 // ---------------------------------------------------------------------------
-const form = reactive({
-  name: user.value?.name ?? '',
-});
+const form = reactive({ name: '' });
+
+watch(user, u => { if (u) form.name = u.name ?? ''; }, { immediate: true });
 
 const successMessage = ref('');
 const errorMessage = ref('');
