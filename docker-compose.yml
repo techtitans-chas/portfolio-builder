@@ -70,6 +70,7 @@ services:
       CI: 'true'
       NUXT_HOST: 0.0.0.0
       NUXT_PUBLIC_API_URL: ${NUXT_PUBLIC_API_URL:-http://localhost:3111}
+      NUXT_API_URL: ${NUXT_API_URL:-http://backend:3111}
     ports:
       - '3000:3000'
     volumes:

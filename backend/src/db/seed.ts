@@ -10,12 +10,16 @@ const seeds = [
     email: 'martin.sodersten@chasacademy.se',
     password: 'Martin1234!',
     slug: 'martin',
+    title: 'Martin Södersten',
+    description: "Martin's Portfolio",
   },
   {
     name: 'Ida Öhlén',
     email: 'ida-alexandra.ohlen@chasacademy.se',
     password: 'Ida1234!',
     slug: 'ida',
+    title: 'Ida Öhlén',
+    description: "Ida's Portfolio",
   },
 ];
 
@@ -55,7 +59,13 @@ async function seed() {
       .where(eq(portfolios.slug, user.slug));
 
     if (slugExists.length === 0) {
-      await db.insert(portfolios).values({ userId: result.user.id, slug: user.slug });
+      await db.insert(portfolios).values({
+        userId: result.user.id,
+        slug: user.slug,
+        isPublished: true,
+        title: user.title,
+        description: user.description,
+      });
     }
 
     console.log(`Created ${user.email} with portfolio slug "${user.slug}"`);
