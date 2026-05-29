@@ -11,23 +11,20 @@ definePageMeta({
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 const slug = route.params.slug as string;
 
-const { data: portfolioData, error: portfolioError } = await useAsyncData(
-  `portfolio-${slug}`,
-  () => $fetch<{ portfolio: Record<string, unknown> }>(`/api/portfolios/${slug}`, { baseURL }),
+const { data: portfolioData, error: portfolioError } = await useAsyncData(`portfolio-${slug}`, () =>
+  $fetch<{ portfolio: Record<string, unknown> }>(`/api/portfolios/${slug}`, { baseURL }),
 );
 
 if (portfolioError.value || !portfolioData.value) {
   throw createError({ statusCode: 404, statusMessage: 'Portfolio not found' });
 }
 
-const { data: projectsData } = await useAsyncData(
-  `portfolio-${slug}-projects`,
-  () => $fetch<{ projects: Project[] }>(`/api/portfolios/${slug}/projects`, { baseURL }),
+const { data: projectsData } = await useAsyncData(`portfolio-${slug}-projects`, () =>
+  $fetch<{ projects: Project[] }>(`/api/portfolios/${slug}/projects`, { baseURL }),
 );
 
-const { data: experiencesData } = await useAsyncData(
-  `portfolio-${slug}-experiences`,
-  () => $fetch<{ experiences: Experience[] }>(`/api/portfolios/${slug}/experiences`, { baseURL }),
+const { data: experiencesData } = await useAsyncData(`portfolio-${slug}-experiences`, () =>
+  $fetch<{ experiences: Experience[] }>(`/api/portfolios/${slug}/experiences`, { baseURL }),
 );
 
 const portfolio = portfolioData.value.portfolio;
@@ -67,7 +64,8 @@ useSeoMeta({
               v-for="tag in project.tags"
               :key="tag"
               class="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
-            >{{ tag }}</span>
+              >{{ tag }}</span
+            >
           </div>
         </li>
       </ul>
@@ -94,7 +92,8 @@ useSeoMeta({
               v-for="tag in experience.tags"
               :key="tag"
               class="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
-            >{{ tag }}</span>
+              >{{ tag }}</span
+            >
           </div>
         </li>
       </ul>

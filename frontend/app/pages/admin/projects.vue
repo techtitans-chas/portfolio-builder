@@ -112,11 +112,7 @@ await fetchItems();
   </AdminLayoutPageStructure>
 
   <!-- Create / Edit modal -->
-  <AdminProjectsProjectModal
-    v-model:open="modalOpen"
-    :project="selectedProject"
-    @saved="onSaved"
-  />
+  <AdminProjectsProjectModal v-model:open="modalOpen" :project="selectedProject" @saved="onSaved" />
 
   <!-- Delete confirmation -->
   <AdminConfirmModal

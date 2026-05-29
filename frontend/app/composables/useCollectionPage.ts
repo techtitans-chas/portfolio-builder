@@ -13,9 +13,7 @@ interface UseCollectionPageOptions<T extends CollectionItem> {
   searchFields: (keyof T)[];
 }
 
-export function useCollectionPage<T extends CollectionItem>(
-  options: UseCollectionPageOptions<T>,
-) {
+export function useCollectionPage<T extends CollectionItem>(options: UseCollectionPageOptions<T>) {
   const { endpoint, responseKey, searchFields } = options;
   const { fetcher } = useApi();
 
@@ -47,7 +45,9 @@ export function useCollectionPage<T extends CollectionItem>(
       searchFields.some(field => {
         const val = item[field];
         if (Array.isArray(val)) return val.some(v => String(v).toLowerCase().includes(q));
-        return String(val ?? '').toLowerCase().includes(q);
+        return String(val ?? '')
+          .toLowerCase()
+          .includes(q);
       }),
     );
   });
