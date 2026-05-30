@@ -102,7 +102,7 @@ export const mediaPost = factory.createHandlers(async c => {
       .values({
         userId: session.user.id,
         url,
-        filename: file.name,
+        filename: file.name.replace(/\.[^.]+$/, ''),
         fileType: storedMimeType,
         sizeBytes: buffer.byteLength,
         purpose: typeof purpose === 'string' ? purpose : null,

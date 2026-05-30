@@ -104,6 +104,22 @@ export function useMedia() {
     }
   }
 
+  async function renameMedia(id: string, name: string): Promise<boolean> {
+    try {
+      const data = await fetcher(`/api/media/${id}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        body: JSON.stringify({ name }),
+      });
+      const idx = files.value.findIndex(f => f.id === id);
+      if (idx !== -1) files.value[idx] = data.media;
+      return true;
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'Failed to rename file.';
+      return false;
+    }
+  }
+
   // ---------------------------------------------------------------------------
   // Upload with progress tracking
   // ---------------------------------------------------------------------------
@@ -127,7 +143,9 @@ export function useMedia() {
         let body: { media?: MediaFile; errors?: { detail: string }[]; message?: string } = {};
         try {
           body = JSON.parse(xhr.responseText);
-        } catch {}
+        } catch {
+          //
+        }
 
         if (xhr.status >= 200 && xhr.status < 300 && body.media) {
           files.value = [body.media, ...files.value];
@@ -205,6 +223,7 @@ export function useMedia() {
     // actions
     fetchMedia,
     deleteMedia,
+    renameMedia,
     handleFiles,
     clearUploadQueue,
   };
