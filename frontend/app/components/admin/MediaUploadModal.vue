@@ -48,7 +48,9 @@ const hasErrors = computed(() => uploadQueue.value.some(e => e.status === 'error
         <div
           v-if="uploadQueue.length === 0"
           class="border-2 border-dashed rounded-lg p-10 flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors"
-          :class="isDragging ? 'border-primary bg-primary/5' : 'border-default hover:border-primary/50'"
+          :class="
+            isDragging ? 'border-primary bg-primary/5' : 'border-default hover:border-primary/50'
+          "
           @click="fileInput?.click()"
           @dragover.prevent="isDragging = true"
           @dragleave="isDragging = false"
@@ -58,7 +60,8 @@ const hasErrors = computed(() => uploadQueue.value.some(e => e.status === 'error
           <div class="text-center">
             <p class="font-medium">Drop files here or click to browse</p>
             <p class="text-sm text-muted mt-1">
-              Images (JPG, PNG, GIF, WebP, SVG) and PDFs · JPG/PNG converted to WebP · max 2 MB for images
+              Images (JPG, PNG, GIF, WebP, SVG) and PDFs · JPG/PNG converted to WebP · max 2 MB for
+              images
             </p>
           </div>
         </div>

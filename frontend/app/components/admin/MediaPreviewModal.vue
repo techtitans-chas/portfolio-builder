@@ -96,7 +96,11 @@ function isImage(fileType: string): boolean {
           v-if="isImage(liveFile.fileType)"
           class="rounded-lg overflow-hidden bg-muted flex items-center justify-center max-h-96"
         >
-          <img :src="liveFile.url" :alt="liveFile.filename" class="max-w-full max-h-96 object-contain" />
+          <img
+            :src="liveFile.url"
+            :alt="liveFile.filename"
+            class="max-w-full max-h-96 object-contain"
+          />
         </div>
         <!-- Non-image icon -->
         <div v-else class="flex justify-center py-8">
@@ -170,7 +174,10 @@ function isImage(fileType: string): boolean {
             icon="i-lucide-trash-2"
             size="sm"
             class="ml-auto"
-            @click="emit('delete', liveFile); close()"
+            @click="
+              emit('delete', liveFile);
+              close();
+            "
           >
             Delete
           </UButton>
