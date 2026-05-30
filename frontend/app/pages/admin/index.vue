@@ -18,7 +18,10 @@ await fetchUser();
 const leftSidebar = useTemplateRef('leftSidebar');
 
 const initialThemeSettings = computed(() => {
-  const s = portfolio.value?.themeSettings as { themeId?: string | null; mode?: 'light' | 'dark' | 'both' } | null;
+  const s = portfolio.value?.themeSettings as {
+    themeId?: string | null;
+    mode?: 'light' | 'dark' | 'both';
+  } | null;
   return s ?? null;
 });
 
@@ -71,10 +74,7 @@ async function save() {
 
     <div class="flex h-full w-full min-h-0">
       <!-- Left sidebar -->
-      <PagebuilderLeftSidebar
-        ref="leftSidebar"
-        :initial-theme-settings="initialThemeSettings"
-      />
+      <PagebuilderLeftSidebar ref="leftSidebar" :initial-theme-settings="initialThemeSettings" />
 
       <!-- Main content -->
       <div class="flex-1 overflow-y-auto">
