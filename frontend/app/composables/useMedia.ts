@@ -10,6 +10,13 @@ export interface MediaFile {
   updatedAt: string;
 }
 
+export interface UploadEntry {
+  file: File;
+  progress: number; // 0–100
+  status: 'pending' | 'uploading' | 'done' | 'error';
+  error?: string;
+}
+
 export const MEDIA_ALLOWED_TYPES = [
   'image/jpeg',
   'image/png',
@@ -33,20 +40,22 @@ export const MEDIA_SORT_OPTIONS = [
   { label: 'Largest first', value: 'size' as const },
 ];
 
+// Shared state — lives at module level so all useMedia() callers read the same refs.
+const files = ref<MediaFile[]>([]);
+const loading = ref(true);
+const error = ref('');
+const search = ref('');
+const filterType = ref<'all' | 'image' | 'pdf'>('all');
+const sortBy = ref<'date' | 'name' | 'size'>('date');
+const uploadQueue = ref<UploadEntry[]>([]);
+const uploadError = ref('');
+
 export function useMedia() {
   const { fetcher, apiBase } = useApi();
-
-  const files = ref<MediaFile[]>([]);
-  const loading = ref(true);
-  const error = ref('');
 
   // ---------------------------------------------------------------------------
   // Search / filter / sort
   // ---------------------------------------------------------------------------
-  const search = ref('');
-  const filterType = ref<'all' | 'image' | 'pdf'>('all');
-  const sortBy = ref<'date' | 'name' | 'size'>('date');
-
   const filteredFiles = computed(() => {
     let list = files.value;
 
@@ -95,41 +104,60 @@ export function useMedia() {
     }
   }
 
-  async function uploadFile(file: File, purpose?: string): Promise<MediaFile | null> {
-    const formData = new FormData();
-    formData.append('file', file);
-    if (purpose) formData.append('purpose', purpose);
+  // ---------------------------------------------------------------------------
+  // Upload with progress tracking
+  // ---------------------------------------------------------------------------
+  const uploading = computed(() =>
+    uploadQueue.value.some(e => e.status === 'uploading' || e.status === 'pending'),
+  );
 
-    try {
-      const response = await fetch(`${apiBase}/api/media`, {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
+  function uploadFileWithProgress(entry: UploadEntry, purpose?: string): Promise<MediaFile | null> {
+    return new Promise(resolve => {
+      const formData = new FormData();
+      formData.append('file', entry.file);
+      if (purpose) formData.append('purpose', purpose);
+
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener('progress', e => {
+        if (e.lengthComputable) entry.progress = Math.round((e.loaded / e.total) * 100);
       });
 
-      const body = await response.json().catch(() => ({}));
+      xhr.addEventListener('load', () => {
+        let body: { media?: MediaFile; errors?: { detail: string }[]; message?: string } = {};
+        try {
+          body = JSON.parse(xhr.responseText);
+        } catch {}
 
-      if (!response.ok) {
-        throw new Error(body?.errors?.[0]?.detail ?? body?.message ?? response.statusText);
-      }
+        if (xhr.status >= 200 && xhr.status < 300 && body.media) {
+          files.value = [body.media, ...files.value];
+          entry.progress = 100;
+          entry.status = 'done';
+          resolve(body.media);
+        } else {
+          entry.error = body.errors?.[0]?.detail ?? body.message ?? xhr.statusText;
+          entry.status = 'error';
+          resolve(null);
+        }
+      });
 
-      const uploaded: MediaFile = body.media;
-      files.value = [uploaded, ...files.value];
-      return uploaded;
-    } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : 'Upload failed.';
-      return null;
-    }
+      xhr.addEventListener('error', () => {
+        entry.error = 'Network error — upload failed.';
+        entry.status = 'error';
+        resolve(null);
+      });
+
+      xhr.open('POST', `${apiBase}/api/media`);
+      xhr.withCredentials = true;
+      entry.status = 'uploading';
+      xhr.send(formData);
+    });
   }
 
-  // ---------------------------------------------------------------------------
-  // Upload with client-side validation
-  // ---------------------------------------------------------------------------
-  const uploading = ref(false);
-  const uploadError = ref('');
-
   async function handleFiles(fileList: FileList | File[]): Promise<boolean> {
-    const filesToUpload = Array.from(fileList).filter(f => {
+    uploadError.value = '';
+
+    const validated = Array.from(fileList).filter(f => {
       if (!MEDIA_ALLOWED_TYPES.includes(f.type)) {
         uploadError.value = `"${f.name}" has an unsupported file type.`;
         return false;
@@ -141,15 +169,20 @@ export function useMedia() {
       return true;
     });
 
-    if (filesToUpload.length === 0) return false;
+    if (validated.length === 0) return false;
 
-    uploading.value = true;
-    uploadError.value = '';
-    for (const file of filesToUpload) {
-      await uploadFile(file);
+    uploadQueue.value = validated.map(f => ({ file: f, progress: 0, status: 'pending' }));
+
+    for (const entry of uploadQueue.value) {
+      await uploadFileWithProgress(entry);
     }
-    uploading.value = false;
-    return true;
+
+    return uploadQueue.value.every(e => e.status === 'done');
+  }
+
+  function clearUploadQueue() {
+    uploadQueue.value = [];
+    uploadError.value = '';
   }
 
   return {
@@ -158,6 +191,7 @@ export function useMedia() {
     loading,
     error,
     uploading,
+    uploadQueue,
     uploadError,
     // search / filter / sort
     search,
@@ -171,7 +205,7 @@ export function useMedia() {
     // actions
     fetchMedia,
     deleteMedia,
-    uploadFile,
     handleFiles,
+    clearUploadQueue,
   };
 }

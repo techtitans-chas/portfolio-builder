@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   open: boolean;
 }>();
 
@@ -7,7 +7,8 @@ const emit = defineEmits<{
   'update:open': [value: boolean];
 }>();
 
-const { uploading, uploadError, allowedTypes, handleFiles } = useMedia();
+const { uploading, uploadQueue, uploadError, allowedTypes, handleFiles, clearUploadQueue } =
+  useMedia();
 
 const isDragging = ref(false);
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -17,22 +18,35 @@ async function onFileInput(e: Event) {
   if (!input.files?.length) return;
   const done = await handleFiles(input.files);
   input.value = '';
-  if (done) emit('update:open', false);
+  if (done) closeModal();
 }
 
 async function onDrop(e: DragEvent) {
   isDragging.value = false;
   if (!e.dataTransfer?.files?.length) return;
   const done = await handleFiles(e.dataTransfer.files);
-  if (done) emit('update:open', false);
+  if (done) closeModal();
 }
+
+function closeModal() {
+  clearUploadQueue();
+  emit('update:open', false);
+}
+
+function onModalUpdateOpen(val: boolean) {
+  if (!val && !uploading.value) closeModal();
+}
+
+const hasErrors = computed(() => uploadQueue.value.some(e => e.status === 'error'));
 </script>
 
 <template>
-  <UModal :open="open" title="Upload files" @update:open="emit('update:open', $event)">
+  <UModal :open="open" title="Upload files" @update:open="onModalUpdateOpen">
     <template #body>
       <div class="space-y-4">
+        <!-- Dropzone — hidden while uploading -->
         <div
+          v-if="uploadQueue.length === 0"
           class="border-2 border-dashed rounded-lg p-10 flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors"
           :class="isDragging ? 'border-primary bg-primary/5' : 'border-default hover:border-primary/50'"
           @click="fileInput?.click()"
@@ -60,10 +74,43 @@ async function onDrop(e: DragEvent) {
 
         <UAlert v-if="uploadError" color="error" variant="soft" :description="uploadError" />
 
-        <div v-if="uploading" class="flex items-center gap-2 text-sm text-muted">
-          <UIcon name="i-lucide-loader-2" class="w-4 h-4 animate-spin" />
-          Uploading...
-        </div>
+        <!-- Per-file progress list -->
+        <ul v-if="uploadQueue.length > 0" class="space-y-3">
+          <li v-for="entry in uploadQueue" :key="entry.file.name" class="space-y-1">
+            <div class="flex items-center justify-between text-sm">
+              <span class="truncate max-w-[80%]">{{ entry.file.name }}</span>
+              <span class="text-muted shrink-0 ml-2">
+                <UIcon
+                  v-if="entry.status === 'done'"
+                  name="i-lucide-check"
+                  class="w-4 h-4 text-success"
+                />
+                <UIcon
+                  v-else-if="entry.status === 'error'"
+                  name="i-lucide-x"
+                  class="w-4 h-4 text-error"
+                />
+                <span v-else>{{ entry.progress }}%</span>
+              </span>
+            </div>
+            <div class="h-1.5 rounded-full bg-muted overflow-hidden">
+              <div
+                class="h-full rounded-full transition-all duration-200"
+                :class="entry.status === 'error' ? 'bg-error' : 'bg-primary'"
+                :style="{ width: `${entry.progress}%` }"
+              />
+            </div>
+            <p v-if="entry.error" class="text-xs text-error">{{ entry.error }}</p>
+          </li>
+        </ul>
+      </div>
+    </template>
+
+    <template v-if="uploadQueue.length > 0" #footer>
+      <div class="flex justify-end">
+        <UButton :disabled="uploading" @click="closeModal">
+          {{ hasErrors ? 'Close' : 'Done' }}
+        </UButton>
       </div>
     </template>
   </UModal>
