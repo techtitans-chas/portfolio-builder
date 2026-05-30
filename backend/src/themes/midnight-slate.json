@@ -1,0 +1,22 @@
+{
+  "id": "midnight-slate",
+  "label": "Midnight Slate",
+  "light": {
+    "bgPage": "#f4f5f7",
+    "bgSurface": "#ffffff",
+    "bgNav": "#ffffff",
+    "primary": "#6c8fff",
+    "secondary": "#a78bfa",
+    "textPrimary": "#111827",
+    "textSecondary": "#6b7280"
+  },
+  "dark": {
+    "bgPage": "#0f1117",
+    "bgSurface": "#1c1f2e",
+    "bgNav": "#161929",
+    "primary": "#6c8fff",
+    "secondary": "#a78bfa",
+    "textPrimary": "#edf0ff",
+    "textSecondary": "#9ca3af"
+  }
+}

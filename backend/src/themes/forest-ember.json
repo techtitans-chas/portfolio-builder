@@ -1,0 +1,22 @@
+{
+  "id": "forest-ember",
+  "label": "Forest Ember",
+  "light": {
+    "bgPage": "#f5f3ee",
+    "bgSurface": "#ffffff",
+    "bgNav": "#ffffff",
+    "primary": "#16a34a",
+    "secondary": "#f97316",
+    "textPrimary": "#1c1917",
+    "textSecondary": "#78716c"
+  },
+  "dark": {
+    "bgPage": "#0f110d",
+    "bgSurface": "#1a1f17",
+    "bgNav": "#141710",
+    "primary": "#4ade80",
+    "secondary": "#fb923c",
+    "textPrimary": "#f0fdf4",
+    "textSecondary": "#a3a89e"
+  }
+}
