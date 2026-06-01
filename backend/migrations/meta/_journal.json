@@ -15,6 +15,13 @@
       "when": 1779865455323,
       "tag": "0001_add_storage_tracking",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1779959976524,
+      "tag": "0002_soft_mongu",
+      "breakpoints": true
     }
   ]
 }

@@ -18,6 +18,8 @@ async function logout() {
       method: 'POST',
       credentials: 'include',
       cache: 'no-store',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
     });
 
     if (!response.ok) {

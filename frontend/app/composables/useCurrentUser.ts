@@ -14,24 +14,29 @@ interface CurrentPortfolio {
   description: string | null;
   ogImageUrl: string | null;
   themeSettings: unknown;
+  seoMeta: { seoTitle?: string; seoDescription?: string } | null;
   isPublished: boolean;
   publishedAt: string | null;
   createdAt: string;
 }
 
-const user = ref<CurrentUser | null>(null);
-const portfolio = ref<CurrentPortfolio | null>(null);
-const pending = ref(false);
-const signedOut = ref(false); // set to true after explicit logout so fetch() won't re-run
-
 export function useCurrentUser() {
+  const user = useState<CurrentUser | null>('current-user', () => null);
+  const portfolio = useState<CurrentPortfolio | null>('current-portfolio', () => null);
+  const pending = useState<boolean>('current-user-pending', () => false);
+
   const { fetcher } = useApi();
 
   async function fetch() {
-    if (user.value || pending.value || signedOut.value) return;
+    if (user.value || pending.value) return;
     pending.value = true;
     try {
-      const data = await fetcher('/api/users/me', { credentials: 'include', cache: 'no-store' });
+      const cookieHeader = import.meta.server ? useRequestHeaders(['cookie']) : undefined;
+      const data = await fetcher('/api/users/me', {
+        credentials: 'include',
+        cache: 'no-store',
+        headers: cookieHeader as HeadersInit | undefined,
+      });
       user.value = data.user;
       portfolio.value = data.portfolio;
     } catch {
@@ -44,7 +49,6 @@ export function useCurrentUser() {
   function clear() {
     user.value = null;
     portfolio.value = null;
-    signedOut.value = true;
   }
 
   return { user, portfolio, pending, fetch, clear };
