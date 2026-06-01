@@ -9,8 +9,8 @@ import { unauthorized, notFound, badRequest, parseBody } from '../../utils/error
 const blockPostSchema = z.object({
   type: z.string().max(100),
   sortOrder: z.number().optional(),
-  content: z.record(z.unknown()).default({}),
-  styles: z.record(z.unknown()).default({}),
+  content: z.record(z.string(), z.unknown()).default({}),
+  styles: z.record(z.string(), z.unknown()).default({}),
   isMandatory: z.boolean().default(false),
 });
 

@@ -9,8 +9,8 @@ import { unauthorized, notFound, badRequest, parseBody } from '../../utils/error
 const blockPatchSchema = z.object({
   type: z.string().max(100).optional(),
   sortOrder: z.number().optional(),
-  content: z.record(z.unknown()).optional(),
-  styles: z.record(z.unknown()).optional(),
+  content: z.record(z.string(), z.unknown()).optional(),
+  styles: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const blockPatch = factory.createHandlers(async c => {
