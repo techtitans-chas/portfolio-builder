@@ -38,6 +38,18 @@ const themeSettings = computed(() => ({
   mode: currentThemeMode.value,
 }));
 
+watch(() => props.initialThemeSettings, settings => {
+  if (!settings) return;
+  selectedThemeId.value = settings.themeId ?? null;
+  currentThemeMode.value = settings.mode ?? 'light';
+});
+
+const isThemeDirty = computed(
+  () =>
+    selectedThemeId.value !== (props.initialThemeSettings?.themeId ?? null) ||
+    currentThemeMode.value !== (props.initialThemeSettings?.mode ?? 'light'),
+);
+
 const pages = ref<Page[]>([
   { label: 'Homepage', published: true, showInMenu: true, active: true },
   { label: 'About', published: true, showInMenu: true },
@@ -71,7 +83,7 @@ function onBlockAdded() {
   layersView.value?.refresh();
 }
 
-defineExpose({ themeSettings, layersView });
+defineExpose({ themeSettings, isThemeDirty, layersView });
 </script>
 
 <template>

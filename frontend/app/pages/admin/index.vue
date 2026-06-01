@@ -12,7 +12,7 @@ const viewModes: TabsItem[] = [
   { label: 'Mobile', value: 'mobile' },
 ];
 
-const { portfolio, fetch: fetchUser } = useCurrentUser();
+const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
 const {
   pendingNewBlocks,
@@ -49,6 +49,7 @@ const isDirty = computed<boolean>(() => {
   const layersChanges = layers?.layersChanges;
   return (
     hasPendingChanges.value ||
+    !!leftSidebar.value?.isThemeDirty ||
     !!layersChanges?.reorderedIds ||
     Object.keys(layersChanges?.visibilityChanges ?? {}).length > 0
   );
@@ -141,6 +142,9 @@ async function save() {
     }
 
     resetPending();
+    // Re-fetch user so initialThemeSettings reflects the saved state
+    clearUser();
+    await fetchUser();
     // Refresh layers so pending blocks are replaced with real DB records
     leftSidebar.value?.layersView?.refresh();
     saved.value = true;
