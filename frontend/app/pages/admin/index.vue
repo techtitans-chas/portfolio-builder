@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui';
+import type PagebuilderLeftSidebar from '~/components/pagebuilder/LeftSidebar.vue';
+import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
 
 definePageMeta({
   layout: 'admin',
@@ -23,7 +25,10 @@ const {
 
 await fetchUser();
 
-const leftSidebar = useTemplateRef('leftSidebar');
+type LeftSidebarInstance = InstanceType<typeof PagebuilderLeftSidebar>;
+type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
+
+const leftSidebar = useTemplateRef<LeftSidebarInstance>('leftSidebar');
 
 const initialThemeSettings = computed(() => {
   const s = portfolio.value?.themeSettings as {
@@ -39,8 +44,8 @@ const saveError = ref('');
 const iframeKey = ref(0);
 const portfolioUrl = computed(() => (portfolio.value?.slug ? `/p/${portfolio.value.slug}` : null));
 
-const isDirty = computed(() => {
-  const layers = leftSidebar.value?.layersView;
+const isDirty = computed<boolean>(() => {
+  const layers: LayersViewInstance | null | undefined = leftSidebar.value?.layersView;
   const layersChanges = layers?.layersChanges;
   return (
     hasPendingChanges.value ||
