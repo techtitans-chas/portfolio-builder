@@ -28,6 +28,8 @@ const initialThemeSettings = computed(() => {
 const saving = ref(false);
 const saved = ref(false);
 const saveError = ref('');
+const iframeKey = ref(0);
+const portfolioUrl = computed(() => (portfolio.value?.slug ? `/p/${portfolio.value.slug}` : null));
 
 async function save() {
   if (!portfolio.value?.id) return;
@@ -72,6 +74,7 @@ async function save() {
       }
     }
     saved.value = true;
+    iframeKey.value++;
     setTimeout(() => (saved.value = false), 2000);
   } catch (e: unknown) {
     saveError.value = e instanceof Error ? e.message : 'Failed to save.';
@@ -113,8 +116,16 @@ async function save() {
       />
 
       <!-- Main content -->
-      <div class="flex-1 overflow-y-auto">
-        <p class="text-sm text-muted">Main content</p>
+      <div class="flex-1 overflow-hidden">
+        <iframe
+          v-if="portfolioUrl"
+          :key="iframeKey"
+          :src="portfolioUrl"
+          class="w-full h-full border-0"
+        />
+        <div v-else class="flex items-center justify-center h-full text-sm text-muted">
+          No portfolio found
+        </div>
       </div>
 
       <!-- Right sidebar -->
