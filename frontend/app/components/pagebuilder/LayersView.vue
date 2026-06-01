@@ -131,9 +131,7 @@ function toggleFooterVisibility() {
 
 function onReorder() {
   // Only include real DB block IDs in the reorder payload
-  reorderedIds.value = contentBlocks.value
-    .filter(b => !b.id.startsWith('pending-'))
-    .map(b => b.id);
+  reorderedIds.value = contentBlocks.value.filter(b => !b.id.startsWith('pending-')).map(b => b.id);
 }
 
 // Exposed so index.vue save() can read and flush pending changes
@@ -152,132 +150,150 @@ defineExpose({
 
 <template>
   <div>
-  <div class="flex flex-col gap-1">
-    <div v-if="loading" class="text-sm text-muted py-4 text-center">Loading…</div>
-    <div v-else-if="error" class="text-sm text-error py-2">{{ error }}</div>
-    <template v-else>
-      <!-- Pinned header block -->
-      <div
-        v-if="headerBlock"
-        class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
-        :class="selectedBlock?.id === headerBlock.id ? 'bg-elevated' : 'bg-elevated/30 hover:bg-elevated/60'"
-        @click="selectBlock(headerBlock)"
-      >
-        <UIcon name="i-lucide-panel-top" class="size-4 text-muted shrink-0" />
-        <span class="flex-1 truncate min-w-0">
-          <span class="block truncate">{{ headerBlock.name || headerBlock.type }}</span>
-          <span v-if="headerBlock.name" class="block text-xs text-muted capitalize">{{ headerBlock.type }}</span>
-        </span>
-        <div class="flex -my-0.5">
-          <UButton
-            :icon="headerBlock.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            :class="headerBlock.isVisible ? 'text-highlighted' : 'text-muted'"
-            class="hover:text-highlighted hover:bg-accented/50"
-            @click="toggleHeaderVisibility"
-          />
-          <UButton
-            icon="i-lucide-lock"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            class="text-muted cursor-default"
-            disabled
-          />
-        </div>
-      </div>
-
-      <!-- Draggable content blocks -->
-      <VueDraggable
-        v-model="contentBlocks"
-        handle=".drag-handle"
-        class="flex flex-col gap-1"
-        @end="onReorder"
-      >
+    <div class="flex flex-col gap-1">
+      <div v-if="loading" class="text-sm text-muted py-4 text-center">Loading…</div>
+      <div v-else-if="error" class="text-sm text-error py-2">{{ error }}</div>
+      <template v-else>
+        <!-- Pinned header block -->
         <div
-          v-for="block in contentBlocks"
-          :key="block.id"
+          v-if="headerBlock"
           class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
-          :class="[
-            selectedBlock?.id === block.id ? 'bg-elevated' : 'hover:bg-elevated/50',
-            { 'opacity-50': !block.isVisible },
-          ]"
-          @click="selectBlock(block)"
+          :class="
+            selectedBlock?.id === headerBlock.id
+              ? 'bg-elevated'
+              : 'bg-elevated/30 hover:bg-elevated/60'
+          "
+          @click="selectBlock(headerBlock)"
         >
-          <UIcon
-            name="i-lucide-grip-vertical"
-            class="drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
-          />
+          <UIcon name="i-lucide-panel-top" class="size-4 text-muted shrink-0" />
           <span class="flex-1 truncate min-w-0">
-            <span class="block truncate">{{ block.name || block.type }}</span>
-            <span v-if="block.name" class="block text-xs text-muted capitalize">{{ block.type }}</span>
+            <span class="block truncate">{{ headerBlock.name || headerBlock.type }}</span>
+            <span v-if="headerBlock.name" class="block text-xs text-muted capitalize">{{
+              headerBlock.type
+            }}</span>
           </span>
           <div class="flex -my-0.5">
             <UButton
-              :icon="block.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
+              :icon="headerBlock.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
               color="neutral"
               variant="ghost"
               size="xs"
-              :class="block.isVisible ? 'text-highlighted' : 'text-muted'"
+              :class="headerBlock.isVisible ? 'text-highlighted' : 'text-muted'"
               class="hover:text-highlighted hover:bg-accented/50"
-              @click="toggleVisibility(block)"
+              @click="toggleHeaderVisibility"
             />
             <UButton
-              icon="i-lucide-trash"
+              icon="i-lucide-lock"
               color="neutral"
               variant="ghost"
               size="xs"
-              :class="pendingDeletions.has(block.id) ? 'text-error' : 'text-muted hover:text-highlighted hover:bg-accented/50'"
-              @click.stop="requestDelete(block)"
+              class="text-muted cursor-default"
+              disabled
             />
           </div>
         </div>
-      </VueDraggable>
 
-      <!-- Pinned footer block -->
-      <div
-        v-if="footerBlock"
-        class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
-        :class="selectedBlock?.id === footerBlock.id ? 'bg-elevated' : 'bg-elevated/30 hover:bg-elevated/60'"
-        @click="selectBlock(footerBlock)"
-      >
-        <UIcon name="i-lucide-panel-bottom" class="size-4 text-muted shrink-0" />
-        <span class="flex-1 truncate min-w-0">
-          <span class="block truncate">{{ footerBlock.name || footerBlock.type }}</span>
-          <span v-if="footerBlock.name" class="block text-xs text-muted capitalize">{{ footerBlock.type }}</span>
-        </span>
-        <div class="flex -my-0.5">
-          <UButton
-            :icon="footerBlock.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            :class="footerBlock.isVisible ? 'text-highlighted' : 'text-muted'"
-            class="hover:text-highlighted hover:bg-accented/50"
-            @click="toggleFooterVisibility"
-          />
-          <UButton
-            icon="i-lucide-lock"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            class="text-muted cursor-default"
-            disabled
-          />
+        <!-- Draggable content blocks -->
+        <VueDraggable
+          v-model="contentBlocks"
+          handle=".drag-handle"
+          class="flex flex-col gap-1"
+          @end="onReorder"
+        >
+          <div
+            v-for="block in contentBlocks"
+            :key="block.id"
+            class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+            :class="[
+              selectedBlock?.id === block.id ? 'bg-elevated' : 'hover:bg-elevated/50',
+              { 'opacity-50': !block.isVisible },
+            ]"
+            @click="selectBlock(block)"
+          >
+            <UIcon
+              name="i-lucide-grip-vertical"
+              class="drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
+            />
+            <span class="flex-1 truncate min-w-0">
+              <span class="block truncate">{{ block.name || block.type }}</span>
+              <span v-if="block.name" class="block text-xs text-muted capitalize">{{
+                block.type
+              }}</span>
+            </span>
+            <div class="flex -my-0.5">
+              <UButton
+                :icon="block.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                :class="block.isVisible ? 'text-highlighted' : 'text-muted'"
+                class="hover:text-highlighted hover:bg-accented/50"
+                @click="toggleVisibility(block)"
+              />
+              <UButton
+                icon="i-lucide-trash"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                :class="
+                  pendingDeletions.has(block.id)
+                    ? 'text-error'
+                    : 'text-muted hover:text-highlighted hover:bg-accented/50'
+                "
+                @click.stop="requestDelete(block)"
+              />
+            </div>
+          </div>
+        </VueDraggable>
+
+        <!-- Pinned footer block -->
+        <div
+          v-if="footerBlock"
+          class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+          :class="
+            selectedBlock?.id === footerBlock.id
+              ? 'bg-elevated'
+              : 'bg-elevated/30 hover:bg-elevated/60'
+          "
+          @click="selectBlock(footerBlock)"
+        >
+          <UIcon name="i-lucide-panel-bottom" class="size-4 text-muted shrink-0" />
+          <span class="flex-1 truncate min-w-0">
+            <span class="block truncate">{{ footerBlock.name || footerBlock.type }}</span>
+            <span v-if="footerBlock.name" class="block text-xs text-muted capitalize">{{
+              footerBlock.type
+            }}</span>
+          </span>
+          <div class="flex -my-0.5">
+            <UButton
+              :icon="footerBlock.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              :class="footerBlock.isVisible ? 'text-highlighted' : 'text-muted'"
+              class="hover:text-highlighted hover:bg-accented/50"
+              @click="toggleFooterVisibility"
+            />
+            <UButton
+              icon="i-lucide-lock"
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              class="text-muted cursor-default"
+              disabled
+            />
+          </div>
         </div>
-      </div>
-    </template>
-  </div>
+      </template>
+    </div>
 
-  <AdminConfirmModal
-    v-model:open="confirmDeleteOpen"
-    title="Delete block?"
-    :description="`'${blockToDelete?.name || blockToDelete?.type}' will be removed when you save.`"
-    confirm-label="Delete"
-    @confirm="confirmDelete"
-    @cancel="confirmDeleteOpen = false"
-  />
+    <AdminConfirmModal
+      v-model:open="confirmDeleteOpen"
+      title="Delete block?"
+      :description="`'${blockToDelete?.name || blockToDelete?.type}' will be removed when you save.`"
+      confirm-label="Delete"
+      @confirm="confirmDelete"
+      @cancel="confirmDeleteOpen = false"
+    />
   </div>
 </template>

@@ -14,9 +14,7 @@ export const footerDefinition: BlockDefinition = {
   sections: [
     {
       label: 'Branding',
-      fields: [
-        { key: 'siteName', label: 'Site name', type: 'text', placeholder: 'Your name' },
-      ],
+      fields: [{ key: 'siteName', label: 'Site name', type: 'text', placeholder: 'Your name' }],
     },
     {
       label: 'Copyright',

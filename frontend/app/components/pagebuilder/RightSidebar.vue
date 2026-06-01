@@ -37,19 +37,23 @@ const definition = computed(() =>
 
 const hasTabs = computed(() => !!definition.value?.tabs?.length);
 
-const tabItems = computed<TabsItem[]>(() =>
-  definition.value?.tabs?.map(t => ({ label: t.label, icon: t.icon })) ?? [],
+const tabItems = computed<TabsItem[]>(
+  () => definition.value?.tabs?.map(t => ({ label: t.label, icon: t.icon })) ?? [],
 );
 const currentTab = ref('0');
 
-watch(definition, () => { currentTab.value = '0'; });
+watch(definition, () => {
+  currentTab.value = '0';
+});
 
 // Local editable copy of content — reset when selected block changes
 const localContent = ref<Record<string, unknown>>({});
 
 watch(
   selectedBlock,
-  block => { localContent.value = block ? { ...block.content } : {}; },
+  block => {
+    localContent.value = block ? { ...block.content } : {};
+  },
   { immediate: true },
 );
 

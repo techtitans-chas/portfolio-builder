@@ -12,8 +12,14 @@ const viewModes: TabsItem[] = [
 
 const { portfolio, fetch: fetchUser } = useCurrentUser();
 const { fetcher } = useApi();
-const { pendingNewBlocks, pendingContentEdits, pendingNameEdits, pendingDeletions, hasPendingChanges, resetPending } = usePageEditor();
-
+const {
+  pendingNewBlocks,
+  pendingContentEdits,
+  pendingNameEdits,
+  pendingDeletions,
+  hasPendingChanges,
+  resetPending,
+} = usePageEditor();
 
 await fetchUser();
 
@@ -44,7 +50,9 @@ const isDirty = computed(() => {
 });
 
 if (import.meta.client) {
-  const handler = (e: BeforeUnloadEvent) => { if (isDirty.value) e.preventDefault(); };
+  const handler = (e: BeforeUnloadEvent) => {
+    if (isDirty.value) e.preventDefault();
+  };
   window.addEventListener('beforeunload', handler);
   onUnmounted(() => window.removeEventListener('beforeunload', handler));
 }

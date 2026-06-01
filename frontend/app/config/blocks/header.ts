@@ -15,9 +15,7 @@ export const headerDefinition: BlockDefinition = {
   sections: [
     {
       label: 'Branding',
-      fields: [
-        { key: 'siteName', label: 'Site name', type: 'text', placeholder: 'Your name' },
-      ],
+      fields: [{ key: 'siteName', label: 'Site name', type: 'text', placeholder: 'Your name' }],
     },
     {
       label: 'Call to action',
@@ -28,9 +26,7 @@ export const headerDefinition: BlockDefinition = {
     },
     {
       label: 'Options',
-      fields: [
-        { key: 'showColorModeToggle', label: 'Show color mode toggle', type: 'checkbox' },
-      ],
+      fields: [{ key: 'showColorModeToggle', label: 'Show color mode toggle', type: 'checkbox' }],
     },
   ],
 };
