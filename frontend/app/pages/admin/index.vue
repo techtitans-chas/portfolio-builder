@@ -26,6 +26,7 @@ const initialThemeSettings = computed(() => {
 });
 
 const saving = ref(false);
+const saved = ref(false);
 const saveError = ref('');
 
 async function save() {
@@ -42,6 +43,36 @@ async function save() {
         themeSettings: leftSidebar.value?.themeSettings ?? null,
       }),
     });
+
+    // Flush layers changes (reorder + visibility toggles)
+    const layers = leftSidebar.value?.layersView;
+    if (layers) {
+      const { visibilityChanges, reorderedIds } = layers.layersChanges;
+      const portfolioId = layers.portfolioId;
+      const pageId = layers.pageId;
+
+      if (portfolioId && pageId) {
+        const visEntries = Object.entries(visibilityChanges);
+        await Promise.all([
+          reorderedIds
+            ? fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/reorder`, {
+                method: 'PATCH',
+                credentials: 'include',
+                body: JSON.stringify({ blockIds: reorderedIds }),
+              })
+            : Promise.resolve(),
+          ...visEntries.map(([blockId, isVisible]) =>
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+              method: 'PATCH',
+              credentials: 'include',
+              body: JSON.stringify({ isVisible }),
+            }),
+          ),
+        ]);
+      }
+    }
+    saved.value = true;
+    setTimeout(() => (saved.value = false), 2000);
   } catch (e: unknown) {
     saveError.value = e instanceof Error ? e.message : 'Failed to save.';
   } finally {
@@ -63,10 +94,11 @@ async function save() {
       </UTooltip>
       <UButton color="neutral" variant="outline" aria-label="Activate" label="Activate" />
       <UButton
-        color="neutral"
+        :color="saved ? 'success' : 'neutral'"
         variant="solid"
         aria-label="Save"
-        label="Save"
+        :label="saved ? 'Saved!' : 'Save'"
+        :icon="saved ? 'i-lucide-check' : undefined"
         :loading="saving"
         @click="save"
       />
@@ -74,7 +106,11 @@ async function save() {
 
     <div class="flex h-full w-full min-h-0">
       <!-- Left sidebar -->
-      <PagebuilderLeftSidebar ref="leftSidebar" :initial-theme-settings="initialThemeSettings" />
+      <PagebuilderLeftSidebar
+        ref="leftSidebar"
+        :initial-theme-settings="initialThemeSettings"
+        :portfolio-id="portfolio?.id ?? null"
+      />
 
       <!-- Main content -->
       <div class="flex-1 overflow-y-auto">

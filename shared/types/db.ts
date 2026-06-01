@@ -21,6 +21,7 @@ export interface Block {
   sortOrder: number;
   content: Record<string, unknown>;
   styles: Record<string, unknown>;
+  isVisible: boolean;
   isMandatory: boolean;
   createdAt: Date;
   updatedAt: Date;

@@ -244,6 +244,7 @@ async function seed() {
             pageId: homePage.id,
             type: 'header',
             sortOrder: 0,
+            isVisible: true,
             isMandatory: true,
             content: { siteName: user.title, cta: { label: 'Hire me', url: '#contact' } },
             styles: {},
@@ -252,6 +253,7 @@ async function seed() {
             pageId: homePage.id,
             type: 'hero',
             sortOrder: 1,
+            isVisible: true,
             isMandatory: false,
             content: {
               heading: user.title,
@@ -265,6 +267,7 @@ async function seed() {
             pageId: homePage.id,
             type: 'footer',
             sortOrder: 9999,
+            isVisible: true,
             isMandatory: true,
             content: { siteName: user.title, copyrightText: '' },
             styles: {},

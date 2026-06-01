@@ -18,6 +18,8 @@ const component = computed(
 </script>
 
 <template>
-  <component :is="component" v-if="component" v-bind="block.content as Record<string, unknown>" />
-  <div v-else class="px-8 py-4 text-sm opacity-50">Unknown block type: {{ block.type }}</div>
+  <template v-if="block.isVisible !== false">
+    <component :is="component" v-if="component" v-bind="block.content as Record<string, unknown>" />
+    <div v-else class="px-8 py-4 text-sm opacity-50">Unknown block type: {{ block.type }}</div>
+  </template>
 </template>

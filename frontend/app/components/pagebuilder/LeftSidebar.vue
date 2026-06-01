@@ -15,7 +15,10 @@ interface ThemeSettings {
   mode?: 'light' | 'dark' | 'both';
 }
 
-const props = defineProps<{ initialThemeSettings?: ThemeSettings | null }>();
+const props = defineProps<{
+  initialThemeSettings?: ThemeSettings | null;
+  portfolioId?: string | null;
+}>();
 
 const panelViews = ref<TabsItem[]>([{ label: 'Blocks' }, { label: 'Layers' }, { label: 'Theme' }]);
 const currentView = ref('0');
@@ -34,8 +37,6 @@ const themeSettings = computed(() => ({
   themeId: selectedThemeId.value,
   mode: currentThemeMode.value,
 }));
-
-defineExpose({ themeSettings });
 
 const pages = ref<Page[]>([
   { label: 'Homepage', published: true, showInMenu: true, active: true },
@@ -62,6 +63,11 @@ function deletePage(page: Page) {
   const idx = pages.value.indexOf(page);
   if (idx > -1) pages.value.splice(idx, 1);
 }
+
+// LayersView ref — exposed so index.vue save() can read pending changes
+const layersView = useTemplateRef('layersView');
+
+defineExpose({ themeSettings, layersView });
 </script>
 
 <template>
@@ -143,7 +149,12 @@ function deletePage(page: Page) {
     <!-- Main content -->
     <div class="flex-1 overflow-y-auto p-4">
       <PagebuilderBlocksView v-if="currentView === '0'" />
-      <PagebuilderLayersView v-else-if="currentView === '1'" />
+      <PagebuilderLayersView
+        v-else-if="currentView === '1'"
+        ref="layersView"
+        :portfolio-id="portfolioId ?? null"
+        :page-id="null"
+      />
       <PagebuilderThemeView v-else v-model="selectedThemeId" />
     </div>
 
