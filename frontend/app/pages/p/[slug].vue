@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ThemeColors, Theme } from '~/components/pagebuilder/ThemeView.vue';
+import type { Project, Experience } from '@portfolio-builder/shared/types';
 
 const route = useRoute();
 const config = useRuntimeConfig();
@@ -9,18 +10,29 @@ definePageMeta({
 });
 
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
+const slug = route.params.slug as string;
 
-const { data, error } = await useAsyncData(`portfolio-${route.params.slug}`, () =>
-  $fetch(`/api/portfolios/${route.params.slug}`, { baseURL }),
+const { data: portfolioData, error: portfolioError } = await useAsyncData(`portfolio-${slug}`, () =>
+  $fetch<{ portfolio: Record<string, unknown> }>(`/api/portfolios/${slug}`, { baseURL }),
 );
 
-if (error.value || !data.value) {
+if (portfolioError.value || !portfolioData.value) {
   throw createError({ statusCode: 404, statusMessage: 'Portfolio not found' });
 }
 
-const portfolio = (data.value as { portfolio: Record<string, unknown> }).portfolio;
+const { data: projectsData } = await useAsyncData(`portfolio-${slug}-projects`, () =>
+  $fetch<{ projects: Project[] }>(`/api/portfolios/${slug}/projects`, { baseURL }),
+);
+
+const { data: experiencesData } = await useAsyncData(`portfolio-${slug}-experiences`, () =>
+  $fetch<{ experiences: Experience[] }>(`/api/portfolios/${slug}/experiences`, { baseURL }),
+);
+
+const portfolio = portfolioData.value.portfolio;
 const seoMeta = portfolio.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
 const themeSettings = portfolio.themeSettings as { themeId?: string | null; mode?: string } | null;
+const projects = projectsData.value?.projects ?? [];
+const experiences = experiencesData.value?.experiences ?? [];
 
 useSeoMeta({
   title: seoMeta?.seoTitle || (portfolio.title as string) || 'Portfolio',
@@ -99,10 +111,10 @@ const cssVars = computed(() => {
     <!-- Projects -->
     <section id="projects" class="px-8 py-16 max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold mb-8">Projects</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div v-if="projects.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
-          v-for="i in 3"
-          :key="i"
+          v-for="(project, i) in projects"
+          :key="project.id"
           class="rounded-xl p-6 flex flex-col gap-3"
           :style="{ backgroundColor: 'var(--bg-surface)' }"
         >
@@ -115,19 +127,61 @@ const cssVars = computed(() => {
                   : 'color-mix(in srgb, var(--primary) 20%, var(--bg-surface))',
             }"
           />
-          <h3 class="font-semibold text-lg">Project {{ i }}</h3>
-          <p class="text-sm" :style="{ color: 'var(--text-secondary)' }">
-            A short description of this project.
+          <h3 class="font-semibold text-lg">{{ project.title }}</h3>
+          <p v-if="project.time" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
+            {{ project.time }}
           </p>
-          <a
-            href="#"
-            class="text-sm font-medium mt-auto"
-            :style="{ color: i % 2 === 0 ? 'var(--secondary)' : 'var(--primary)' }"
-          >
-            View project →
-          </a>
+          <p v-if="project.description" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
+            {{ project.description }}
+          </p>
+          <div v-if="project.tags.length" class="flex flex-wrap gap-1 mt-auto">
+            <span
+              v-for="tag in project.tags"
+              :key="tag"
+              class="text-xs px-2 py-0.5 rounded-full"
+              :style="{
+                backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
+                color: 'var(--primary)',
+              }"
+            >{{ tag }}</span>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- Experiences -->
+    <section id="experiences" class="px-8 py-16 max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">Experience</h2>
+      <ul v-if="experiences.length" class="space-y-6">
+        <li
+          v-for="experience in experiences"
+          :key="experience.id"
+          class="rounded-xl p-6"
+          :style="{ backgroundColor: 'var(--bg-surface)' }"
+        >
+          <p class="font-semibold text-lg">{{ experience.title }}</p>
+          <p v-if="experience.place || experience.time" class="text-sm mt-1" :style="{ color: 'var(--text-secondary)' }">
+            <span v-if="experience.place">{{ experience.place }}</span>
+            <span v-if="experience.place && experience.time"> · </span>
+            <span v-if="experience.time">{{ experience.time }}</span>
+            <span v-if="experience.location"> · {{ experience.location }}</span>
+          </p>
+          <p v-if="experience.description" class="text-sm mt-2" :style="{ color: 'var(--text-secondary)' }">
+            {{ experience.description }}
+          </p>
+          <div v-if="experience.tags.length" class="flex flex-wrap gap-1 mt-3">
+            <span
+              v-for="tag in experience.tags"
+              :key="tag"
+              class="text-xs px-2 py-0.5 rounded-full"
+              :style="{
+                backgroundColor: 'color-mix(in srgb, var(--secondary) 15%, var(--bg-surface))',
+                color: 'var(--secondary)',
+              }"
+            >{{ tag }}</span>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- Contact -->
