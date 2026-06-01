@@ -143,7 +143,8 @@ const cssVars = computed(() => {
                 backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
                 color: 'var(--primary)',
               }"
-            >{{ tag }}</span>
+              >{{ tag }}</span
+            >
           </div>
         </div>
       </div>
@@ -160,13 +161,21 @@ const cssVars = computed(() => {
           :style="{ backgroundColor: 'var(--bg-surface)' }"
         >
           <p class="font-semibold text-lg">{{ experience.title }}</p>
-          <p v-if="experience.place || experience.time" class="text-sm mt-1" :style="{ color: 'var(--text-secondary)' }">
+          <p
+            v-if="experience.place || experience.time"
+            class="text-sm mt-1"
+            :style="{ color: 'var(--text-secondary)' }"
+          >
             <span v-if="experience.place">{{ experience.place }}</span>
             <span v-if="experience.place && experience.time"> · </span>
             <span v-if="experience.time">{{ experience.time }}</span>
             <span v-if="experience.location"> · {{ experience.location }}</span>
           </p>
-          <p v-if="experience.description" class="text-sm mt-2" :style="{ color: 'var(--text-secondary)' }">
+          <p
+            v-if="experience.description"
+            class="text-sm mt-2"
+            :style="{ color: 'var(--text-secondary)' }"
+          >
             {{ experience.description }}
           </p>
           <div v-if="experience.tags.length" class="flex flex-wrap gap-1 mt-3">
@@ -178,7 +187,8 @@ const cssVars = computed(() => {
                 backgroundColor: 'color-mix(in srgb, var(--secondary) 15%, var(--bg-surface))',
                 color: 'var(--secondary)',
               }"
-            >{{ tag }}</span>
+              >{{ tag }}</span
+            >
           </div>
         </li>
       </ul>
