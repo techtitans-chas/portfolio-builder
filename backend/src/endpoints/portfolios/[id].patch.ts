@@ -11,6 +11,11 @@ const seoMetaSchema = z.object({
   seoDescription: z.string().max(300).nullable().optional(),
 });
 
+const themeSettingsSchema = z.object({
+  themeId: z.string().nullable().optional(),
+  mode: z.enum(['light', 'dark', 'both']).optional(),
+});
+
 const settingsSchema = z.object({
   title: z.string().max(100).optional(),
   slug: z
@@ -22,6 +27,7 @@ const settingsSchema = z.object({
   description: z.string().max(300).nullable().optional(),
   ogImageUrl: z.url().nullable().optional(),
   seoMeta: seoMetaSchema.nullable().optional(),
+  themeSettings: themeSettingsSchema.nullable().optional(),
   isPublished: z.boolean().optional(),
 });
 

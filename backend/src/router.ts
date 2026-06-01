@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import auth from './endpoints/auth/_routes.js';
 import users from './endpoints/users/_routes.js';
 import portfolios from './endpoints/portfolios/_routes.js';
+import themes from './endpoints/themes/_routes.js';
 import mediaRouter from './endpoints/media/_routes.js';
 import projects from './endpoints/projects/_routes.js';
 import experiences from './endpoints/experiences/_routes.js';
@@ -13,6 +14,7 @@ const router = new Hono()
   .route('/auth', auth)
   .route('/users', users)
   .route('/portfolios', portfolios)
+  .route('/themes', themes)
   .route('/media', mediaRouter)
   .route('/projects', projects)
   .route('/experiences', experiences)
