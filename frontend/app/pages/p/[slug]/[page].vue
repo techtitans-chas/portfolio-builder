@@ -7,8 +7,25 @@ const pageSlug = route.params.page as string;
 
 definePageMeta({ layout: false });
 
-const { portfolio, portfolioError, portfolioMode, cssVars, navLinks, baseURL } =
-  usePortfolio(slug);
+const {
+  portfolio,
+  portfolioError,
+  portfolioMode,
+  cssVars,
+  navLinks,
+  headerBlock,
+  footerBlock,
+  baseURL,
+} = usePortfolio(slug);
+
+const { contentBlocks } = usePageBlocks(slug, pageSlug);
+
+const headerContent = computed(
+  () => headerBlock.value?.content as Record<string, unknown> | undefined,
+);
+const footerContent = computed(
+  () => footerBlock.value?.content as Record<string, unknown> | undefined,
+);
 
 const canonicalUrl = `${useRequestURL().origin}/p/${slug}/${pageSlug}`;
 
@@ -27,39 +44,49 @@ if (!currentPage) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' });
 }
 
-const portfolioSeoMeta =
-  portfolio.value?.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
+const portfolioSeoMeta = portfolio.value?.seoMeta as {
+  seoTitle?: string;
+  seoDescription?: string;
+} | null;
 
 useSeoMeta({
-  title: currentPage.seoTitle || currentPage.title || portfolioSeoMeta?.seoTitle || (portfolio.value?.title as string) || 'Portfolio',
-  ogTitle: currentPage.seoTitle || currentPage.title || portfolioSeoMeta?.seoTitle || (portfolio.value?.title as string) || 'Portfolio',
-  description: currentPage.seoDescription || portfolioSeoMeta?.seoDescription || (portfolio.value?.description as string) || undefined,
-  ogDescription: currentPage.seoDescription || portfolioSeoMeta?.seoDescription || (portfolio.value?.description as string) || undefined,
+  title:
+    currentPage.seoTitle ||
+    currentPage.title ||
+    portfolioSeoMeta?.seoTitle ||
+    (portfolio.value?.title as string) ||
+    'Portfolio',
+  ogTitle:
+    currentPage.seoTitle ||
+    currentPage.title ||
+    portfolioSeoMeta?.seoTitle ||
+    (portfolio.value?.title as string) ||
+    'Portfolio',
+  description:
+    currentPage.seoDescription ||
+    portfolioSeoMeta?.seoDescription ||
+    (portfolio.value?.description as string) ||
+    undefined,
+  ogDescription:
+    currentPage.seoDescription ||
+    portfolioSeoMeta?.seoDescription ||
+    (portfolio.value?.description as string) ||
+    undefined,
   ogImage: currentPage.seoOgImageUrl || (portfolio.value?.ogImageUrl as string) || undefined,
   ogUrl: canonicalUrl,
 });
 </script>
 
 <template>
-  <div
-    class="portfolio-root min-h-screen"
-    :style="{ ...cssVars, backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)' }"
+  <PortfolioLayout
+    :css-vars="cssVars"
+    :portfolio-mode="portfolioMode"
+    :site-name="(portfolio?.title as string) || (portfolio?.slug as string) || ''"
+    :home-url="`/p/${slug}`"
+    :nav-links="navLinks"
+    :header-content="headerContent"
+    :footer-content="footerContent"
   >
-    <BlocksHeader
-      :site-name="(portfolio?.title as string) || (portfolio?.slug as string)"
-      :nav-links="navLinks"
-      :cta="{ label: 'Hire me', url: '#contact' }"
-      :show-color-mode-toggle="portfolioMode === 'both'"
-    />
-
-    <main class="px-8 py-16 max-w-3xl mx-auto">
-      <h1 class="text-4xl font-bold mb-8">{{ currentPage.title }}</h1>
-      <!-- Blocks will be rendered here once the blocks system is ready -->
-    </main>
-
-    <BlocksFooter
-      :site-name="(portfolio?.title as string) || (portfolio?.slug as string)"
-      :links="navLinks"
-    />
-  </div>
+    <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />
+  </PortfolioLayout>
 </template>

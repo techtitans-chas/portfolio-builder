@@ -6,10 +6,25 @@ const slug = route.params.slug as string;
 
 definePageMeta({ layout: false });
 
-const { portfolio, portfolioError, portfolioMode, cssVars, navLinks, baseURL } =
-  usePortfolio(slug);
+const {
+  portfolio,
+  portfolioError,
+  portfolioMode,
+  cssVars,
+  navLinks,
+  headerBlock,
+  footerBlock,
+  baseURL,
+} = usePortfolio(slug);
 
-const canonicalUrl = `${useRequestURL().origin}/p/${slug}`;
+const { contentBlocks } = usePageBlocks(slug, 'home');
+
+const headerContent = computed(
+  () => headerBlock.value?.content as Record<string, unknown> | undefined,
+);
+const footerContent = computed(
+  () => footerBlock.value?.content as Record<string, unknown> | undefined,
+);
 
 const { data: projectsData } = await useAsyncData(`portfolio-${slug}-projects`, () =>
   $fetch<{ projects: Project[] }>(`/api/portfolios/${slug}/projects`, { baseURL }),
@@ -33,6 +48,8 @@ const pageTitle = computed(
   () => seoMeta.value?.seoTitle || (portfolio.value?.title as string) || 'Portfolio',
 );
 
+const canonicalUrl = `${useRequestURL().origin}/p/${slug}`;
+
 useSeoMeta({
   title: () => pageTitle.value,
   ogTitle: () => pageTitle.value,
@@ -46,25 +63,19 @@ useSeoMeta({
 </script>
 
 <template>
-  <div
-    class="portfolio-root min-h-screen"
-    :style="{ ...cssVars, backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)' }"
+  <PortfolioLayout
+    :css-vars="cssVars"
+    :portfolio-mode="portfolioMode"
+    :site-name="(portfolio?.title as string) || (portfolio?.slug as string) || ''"
+    :home-url="`/p/${slug}`"
+    :nav-links="navLinks"
+    :header-content="headerContent"
+    :footer-content="footerContent"
   >
-    <BlocksHeader
-      :site-name="(portfolio?.title as string) || (portfolio?.slug as string)"
-      :nav-links="navLinks"
-      :cta="{ label: 'Hire me', url: '#contact' }"
-      :show-color-mode-toggle="portfolioMode === 'both'"
-    />
+    <!-- Render any non-header/footer content blocks stored in DB -->
+    <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />
 
-    <BlocksHero
-      :heading="(portfolio?.title as string) || (portfolio?.slug as string)"
-      :subheading="(portfolio?.description as string) || 'Welcome to my portfolio.'"
-      :primary-cta="{ label: 'View my work', url: '#projects' }"
-      :secondary-cta="{ label: 'Get in touch', url: '#contact' }"
-    />
-
-    <!-- Projects -->
+    <!-- Projects — rendered directly until a dedicated block type exists -->
     <section v-if="projects.length" id="projects" class="px-8 py-16 max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold mb-8">Projects</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,11 +98,7 @@ useSeoMeta({
           <p v-if="project.time" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
             {{ project.time }}
           </p>
-          <p
-            v-if="project.description"
-            class="text-sm"
-            :style="{ color: 'var(--text-secondary)' }"
-          >
+          <p v-if="project.description" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
             {{ project.description }}
           </p>
           <div v-if="project.tags.length" class="flex flex-wrap gap-1 mt-auto">
@@ -153,26 +160,5 @@ useSeoMeta({
         </li>
       </ul>
     </section>
-
-    <!-- Contact -->
-    <section
-      id="contact"
-      class="px-8 py-16 max-w-3xl mx-auto flex flex-col items-center text-center gap-4"
-    >
-      <h2 class="text-3xl font-bold">Contact</h2>
-      <p :style="{ color: 'var(--text-secondary)' }">Let's work together.</p>
-      <a
-        href="mailto:hello@example.com"
-        class="px-6 py-3 rounded-lg font-medium border"
-        :style="{ color: 'var(--secondary)', borderColor: 'var(--secondary)' }"
-      >
-        Say hello
-      </a>
-    </section>
-
-    <BlocksFooter
-      :site-name="(portfolio?.title as string) || (portfolio?.slug as string)"
-      :links="navLinks"
-    />
-  </div>
+  </PortfolioLayout>
 </template>

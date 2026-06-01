@@ -1,22 +1,24 @@
 import type { ThemeColors, Theme } from '~/components/pagebuilder/ThemeView.vue';
-import type { Page } from '@portfolio-builder/shared/types';
+import type { Block, Page } from '@portfolio-builder/shared/types';
 
 export function usePortfolio(slug: string) {
   const config = useRuntimeConfig();
   const colorMode = useColorMode();
   const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
-  const { data: portfolioData, error: portfolioError } = useAsyncData(
-    `portfolio-${slug}`,
-    () => $fetch<{ portfolio: Record<string, unknown> }>(`/api/portfolios/${slug}`, { baseURL }),
+  const { data: portfolioData, error: portfolioError } = useAsyncData(`portfolio-${slug}`, () =>
+    $fetch<{ portfolio: Record<string, unknown> }>(`/api/portfolios/${slug}`, { baseURL }),
   );
 
   const { data: pagesData } = useAsyncData(`portfolio-${slug}-pages`, () =>
     $fetch<{ pages: Page[] }>(`/api/portfolios/${slug}/pages`, { baseURL }),
   );
 
-  const { data: themesData } = useAsyncData('themes', () =>
-    $fetch(`/api/themes`, { baseURL }),
+  const { data: themesData } = useAsyncData('themes', () => $fetch(`/api/themes`, { baseURL }));
+
+  // Header and footer are portfolio-level layout blocks stored once on the home page
+  const { data: layoutBlocksData } = useAsyncData(`portfolio-${slug}-layout-blocks`, () =>
+    $fetch<{ blocks: Block[] }>(`/api/portfolios/${slug}/pages/home/blocks`, { baseURL }),
   );
 
   const portfolio = computed(() => portfolioData.value?.portfolio ?? null);
@@ -25,9 +27,7 @@ export function usePortfolio(slug: string) {
     () => portfolio.value?.themeSettings as { themeId?: string | null; mode?: string } | null,
   );
 
-  const allThemes = computed(
-    () => (themesData.value as { themes: Theme[] } | null)?.themes ?? [],
-  );
+  const allThemes = computed(() => (themesData.value as { themes: Theme[] } | null)?.themes ?? []);
   const selectedTheme = computed(
     () =>
       allThemes.value.find(t => t.id === themeSettings.value?.themeId) ??
@@ -66,6 +66,10 @@ export function usePortfolio(slug: string) {
       .map(p => ({ label: p.title, url: `/p/${slug}/${p.slug}` })),
   );
 
+  const layoutBlocks = computed(() => layoutBlocksData.value?.blocks ?? []);
+  const headerBlock = computed(() => layoutBlocks.value.find(b => b.type === 'header') ?? null);
+  const footerBlock = computed(() => layoutBlocks.value.find(b => b.type === 'footer') ?? null);
+
   return {
     portfolioError,
     portfolio,
@@ -73,6 +77,8 @@ export function usePortfolio(slug: string) {
     portfolioMode,
     cssVars,
     navLinks,
+    headerBlock,
+    footerBlock,
     baseURL,
   };
 }

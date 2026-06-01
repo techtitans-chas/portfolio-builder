@@ -1,7 +1,7 @@
 import '../lib/auth.js'; // ensure better-auth is initialized before db client
 import { eq } from 'drizzle-orm';
 import { db } from './client.js';
-import { users, portfolios, pages } from './schema/index.js';
+import { users, portfolios, pages, blocks } from './schema/index.js';
 import { auth } from '../lib/auth.js';
 
 const defaultPages = [
@@ -106,7 +106,46 @@ async function seed() {
         .returning({ id: portfolios.id });
 
       if (portfolio) {
-        await db.insert(pages).values(defaultPages.map(p => ({ ...p, portfolioId: portfolio.id })));
+        const insertedPages = await db
+          .insert(pages)
+          .values(defaultPages.map(p => ({ ...p, portfolioId: portfolio.id })))
+          .returning({ id: pages.id, slug: pages.slug });
+
+        // Header and footer are portfolio-wide layout blocks — stored once on the home page only
+        const homePage = insertedPages.find(p => p.slug === 'home');
+        if (homePage) {
+          await db.insert(blocks).values([
+            {
+              pageId: homePage.id,
+              type: 'header',
+              sortOrder: 0,
+              isMandatory: true,
+              content: { siteName: user.title, cta: { label: 'Hire me', url: '#contact' } },
+              styles: {},
+            },
+            {
+              pageId: homePage.id,
+              type: 'hero',
+              sortOrder: 1,
+              isMandatory: false,
+              content: {
+                heading: user.title,
+                subheading: user.description,
+                primaryCta: { label: 'View my work', url: '#projects' },
+                secondaryCta: { label: 'Get in touch', url: '#contact' },
+              },
+              styles: {},
+            },
+            {
+              pageId: homePage.id,
+              type: 'footer',
+              sortOrder: 9999,
+              isMandatory: true,
+              content: { siteName: user.title, copyrightText: '' },
+              styles: {},
+            },
+          ]);
+        }
       }
     }
 
