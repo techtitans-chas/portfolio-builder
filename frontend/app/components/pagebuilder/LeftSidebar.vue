@@ -38,11 +38,14 @@ const themeSettings = computed(() => ({
   mode: currentThemeMode.value,
 }));
 
-watch(() => props.initialThemeSettings, settings => {
-  if (!settings) return;
-  selectedThemeId.value = settings.themeId ?? null;
-  currentThemeMode.value = settings.mode ?? 'light';
-});
+watch(
+  () => props.initialThemeSettings,
+  settings => {
+    if (!settings) return;
+    selectedThemeId.value = settings.themeId ?? null;
+    currentThemeMode.value = settings.mode ?? 'light';
+  },
+);
 
 const isThemeDirty = computed(
   () =>
