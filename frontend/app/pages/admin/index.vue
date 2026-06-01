@@ -157,9 +157,10 @@ async function save() {
         :color="saved ? 'success' : 'neutral'"
         variant="solid"
         aria-label="Save"
-        :label="saved ? 'Saved!' : 'Save'"
+        :label="saved ? 'Saved!' : isDirty ? 'Save' : 'No changes'"
         :icon="saved ? 'i-lucide-check' : undefined"
         :loading="saving"
+        :disabled="!isDirty && !saving"
         @click="save"
       />
     </template>
