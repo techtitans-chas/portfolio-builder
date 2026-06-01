@@ -2,7 +2,7 @@
 import type { NavigationMenuItem } from '@nuxt/ui';
 import { useDashboard } from '~/composables/useDashboard';
 const { apiBase } = useApi();
-const { fetch: fetchUser, clear } = useCurrentUser();
+const { fetch: fetchUser, clear, portfolio } = useCurrentUser();
 
 if (import.meta.client) await fetchUser();
 
@@ -99,7 +99,23 @@ const links = [
 <template>
   <UDashboardSidebar v-model:open="isSidebarOpen" collapsible>
     <template #default="{ collapsed }">
-      <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
+      <UTooltip
+        :text="portfolio?.isPublished ? `p/${portfolio.slug}` : 'Portfolio unpublished'"
+        :delay-duration="300"
+      >
+        <UButton
+          :to="portfolio?.isPublished ? `/p/${portfolio.slug}` : undefined"
+          :target="portfolio?.isPublished ? '_blank' : undefined"
+          :disabled="!portfolio?.isPublished"
+          :icon="collapsed ? 'i-lucide-external-link' : undefined"
+          :trailing-icon="!collapsed ? 'i-lucide-external-link' : undefined"
+          variant="solid"
+          color="primary"
+          :class="['w-full mt-2 -mb-2', collapsed ? 'justify-center' : 'justify-between']"
+        >
+          <span v-if="!collapsed" class="truncate text-sm"> My Portfolio </span>
+        </UButton>
+      </UTooltip>
 
       <UNavigationMenu
         :collapsed="collapsed"
