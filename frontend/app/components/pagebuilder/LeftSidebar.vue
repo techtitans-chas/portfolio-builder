@@ -49,10 +49,14 @@ function deletePage(page: Page) {
   <div class="flex flex-col w-64 shrink-0 border-r border-default">
     <!-- Header -->
     <div class="p-3 border-b border-default shrink-0 text-center">
-      <div class="flex mb-2">
-        <UPopover class="grow">
-          <UButton :label="activePage?.label ?? 'Select page'" color="neutral" variant="subtle" />
-
+      <div class="relative mb-2">
+        <UPopover>
+          <UButton
+            :label="activePage?.label ?? 'Select page'"
+            color="neutral"
+            variant="subtle"
+            class="w-full"
+          />
           <template #content>
             <div class="p-1 min-w-60">
               <VueDraggable v-model="pages" handle=".drag-handle">
@@ -63,11 +67,14 @@ function deletePage(page: Page) {
                   :class="{ 'bg-elevated': page.active }"
                   @click="selectPage(page)"
                 >
-                  <UIcon name="i-lucide-grip-vertical" class="drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing" />
+                  <UIcon
+                    name="i-lucide-grip-vertical"
+                    class="drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
+                  />
                   <span class="flex-1 truncate">{{ page.label }}</span>
                   <div class="flex -my-0.5 transition-transform">
                     <UButton
-                      :icon="page.showInMenu ? 'i-lucide-equal' : 'i-lucide-equal-not'"
+                      :icon="page.showInMenu ? 'pepicons-pop-list' : 'pepicons-pop-list-off'"
                       color="neutral"
                       variant="ghost"
                       size="xs"
@@ -97,14 +104,13 @@ function deletePage(page: Page) {
               </VueDraggable>
             </div>
           </template>
-          <UButton
-            color="neutral"
-            variant="ghost"
-            aria-label="Edit page"
-            icon="i-lucide-edit-3"
-            class="ml-2"
-          />
         </UPopover>
+        <button
+          aria-label="Edit page"
+          class="absolute right-0 top-0 h-full px-2 hover:bg-elevated/50 text-muted hover:text-highlighted rounded-md"
+        >
+          <UIcon name="i-lucide-edit-3" class="size-4" />
+        </button>
       </div>
       <UTabs
         v-model="currentView"
@@ -122,12 +128,25 @@ function deletePage(page: Page) {
       <PagebuilderThemeView v-else v-model="selectedTheme" />
     </div>
 
-    <!-- Footer: Theme view -->
+    <!-- Footer: Blocks and Theme view -->
     <div
-      v-if="currentView === '2'"
+      v-if="currentView === '0' || currentView === '2'"
       class="p-3 border-t border-default shrink-0 flex flex-col gap-2"
     >
-      <USelect v-model="currentThemeMode" :items="themeMode" class="w-full" />
+      <UButton
+        v-if="currentView === '0'"
+        label="Add page"
+        color="primary"
+        variant="solid"
+        class="w-full"
+        icon="i-lucide-plus"
+      />
+      <USelect
+        v-if="currentView === '2'"
+        v-model="currentThemeMode"
+        :items="themeMode"
+        class="w-full"
+      />
     </div>
   </div>
 </template>
