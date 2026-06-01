@@ -1,8 +1,43 @@
 import '../lib/auth.js'; // ensure better-auth is initialized before db client
 import { eq } from 'drizzle-orm';
 import { db } from './client.js';
-import { users, portfolios } from './schema/index.js';
+import { users, portfolios, pages } from './schema/index.js';
 import { auth } from '../lib/auth.js';
+
+const defaultPages = [
+  {
+    title: 'Home',
+    slug: 'home',
+    isPublished: true,
+    showInMenu: false,
+    sortOrder: 0,
+    isMandatory: true,
+  },
+  {
+    title: 'About',
+    slug: 'about',
+    isPublished: true,
+    showInMenu: true,
+    sortOrder: 1,
+    isMandatory: false,
+  },
+  {
+    title: 'Projects',
+    slug: 'projects',
+    isPublished: true,
+    showInMenu: true,
+    sortOrder: 2,
+    isMandatory: false,
+  },
+  {
+    title: 'Contact',
+    slug: 'contact',
+    isPublished: true,
+    showInMenu: true,
+    sortOrder: 3,
+    isMandatory: false,
+  },
+];
 
 const seeds = [
   {
@@ -59,13 +94,20 @@ async function seed() {
       .where(eq(portfolios.slug, user.slug));
 
     if (slugExists.length === 0) {
-      await db.insert(portfolios).values({
-        userId: result.user.id,
-        slug: user.slug,
-        isPublished: true,
-        title: user.title,
-        description: user.description,
-      });
+      const [portfolio] = await db
+        .insert(portfolios)
+        .values({
+          userId: result.user.id,
+          slug: user.slug,
+          isPublished: true,
+          title: user.title,
+          description: user.description,
+        })
+        .returning({ id: portfolios.id });
+
+      if (portfolio) {
+        await db.insert(pages).values(defaultPages.map(p => ({ ...p, portfolioId: portfolio.id })));
+      }
     }
 
     console.log(`Created ${user.email} with portfolio slug "${user.slug}"`);

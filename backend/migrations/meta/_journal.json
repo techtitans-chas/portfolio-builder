@@ -43,6 +43,13 @@
       "when": 1780062948651,
       "tag": "0005_cold_nitro",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1780316927627,
+      "tag": "0006_concerned_thor",
+      "breakpoints": true
     }
   ]
 }
