@@ -8,6 +8,7 @@ import { unauthorized, notFound, badRequest, parseBody } from '../../utils/error
 
 const blockPatchSchema = z.object({
   type: z.string().max(100).optional(),
+  name: z.string().max(200).nullable().optional(),
   sortOrder: z.number().optional(),
   isVisible: z.boolean().optional(),
   content: z.record(z.string(), z.unknown()).optional(),

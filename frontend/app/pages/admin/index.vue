@@ -12,6 +12,8 @@ const viewModes: TabsItem[] = [
 
 const { portfolio, fetch: fetchUser } = useCurrentUser();
 const { fetcher } = useApi();
+const { pendingNewBlocks, pendingContentEdits, pendingNameEdits, pendingDeletions, hasPendingChanges, resetPending } = usePageEditor();
+
 
 await fetchUser();
 
@@ -31,6 +33,26 @@ const saveError = ref('');
 const iframeKey = ref(0);
 const portfolioUrl = computed(() => (portfolio.value?.slug ? `/p/${portfolio.value.slug}` : null));
 
+const isDirty = computed(() => {
+  const layers = leftSidebar.value?.layersView;
+  const layersChanges = layers?.layersChanges;
+  return (
+    hasPendingChanges.value ||
+    !!layersChanges?.reorderedIds ||
+    Object.keys(layersChanges?.visibilityChanges ?? {}).length > 0
+  );
+});
+
+if (import.meta.client) {
+  const handler = (e: BeforeUnloadEvent) => { if (isDirty.value) e.preventDefault(); };
+  window.addEventListener('beforeunload', handler);
+  onUnmounted(() => window.removeEventListener('beforeunload', handler));
+}
+
+onBeforeRouteLeave(() => {
+  if (isDirty.value) return confirm('You have unsaved changes. Leave anyway?');
+});
+
 async function save() {
   if (!portfolio.value?.id) return;
 
@@ -38,7 +60,12 @@ async function save() {
   saveError.value = '';
 
   try {
-    await fetcher(`/api/portfolios/${portfolio.value.id}/settings`, {
+    const portfolioId = portfolio.value.id;
+    const layers = leftSidebar.value?.layersView;
+    const pageId = layers?.pageId ?? null;
+
+    // Theme settings
+    await fetcher(`/api/portfolios/${portfolioId}/settings`, {
       method: 'PATCH',
       credentials: 'include',
       body: JSON.stringify({
@@ -46,33 +73,63 @@ async function save() {
       }),
     });
 
-    // Flush layers changes (reorder + visibility toggles)
-    const layers = leftSidebar.value?.layersView;
-    if (layers) {
-      const { visibilityChanges, reorderedIds } = layers.layersChanges;
-      const portfolioId = layers.portfolioId;
-      const pageId = layers.pageId;
+    if (pageId) {
+      const { visibilityChanges, reorderedIds } = layers!.layersChanges;
 
-      if (portfolioId && pageId) {
-        const visEntries = Object.entries(visibilityChanges);
-        await Promise.all([
-          reorderedIds
-            ? fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/reorder`, {
-                method: 'PATCH',
-                credentials: 'include',
-                body: JSON.stringify({ blockIds: reorderedIds }),
-              })
-            : Promise.resolve(),
-          ...visEntries.map(([blockId, isVisible]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+      await Promise.all([
+        // Reorder
+        reorderedIds
+          ? fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/reorder`, {
               method: 'PATCH',
               credentials: 'include',
-              body: JSON.stringify({ isVisible }),
-            }),
-          ),
-        ]);
-      }
+              body: JSON.stringify({ blockIds: reorderedIds }),
+            })
+          : Promise.resolve(),
+        // Visibility toggles
+        ...Object.entries(visibilityChanges).map(([blockId, isVisible]) =>
+          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            method: 'PATCH',
+            credentials: 'include',
+            body: JSON.stringify({ isVisible }),
+          }),
+        ),
+        // New blocks (pending IDs are temporary — only type and content are sent)
+        ...pendingNewBlocks.value.map(b =>
+          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({ type: b.type, content: b.content }),
+          }),
+        ),
+        // Content edits
+        ...Object.entries(pendingContentEdits.value).map(([blockId, content]) =>
+          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            method: 'PATCH',
+            credentials: 'include',
+            body: JSON.stringify({ content }),
+          }),
+        ),
+        // Name edits
+        ...Object.entries(pendingNameEdits.value).map(([blockId, name]) =>
+          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            method: 'PATCH',
+            credentials: 'include',
+            body: JSON.stringify({ name }),
+          }),
+        ),
+        // Deletions
+        ...[...pendingDeletions.value].map(blockId =>
+          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+          }),
+        ),
+      ]);
     }
+
+    resetPending();
+    // Refresh layers so pending blocks are replaced with real DB records
+    leftSidebar.value?.layersView?.refresh();
     saved.value = true;
     iframeKey.value++;
     setTimeout(() => (saved.value = false), 2000);

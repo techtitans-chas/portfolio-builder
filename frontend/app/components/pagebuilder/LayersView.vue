@@ -8,9 +8,26 @@ const props = defineProps<{
 }>();
 
 const { fetcher } = useApi();
+const { pendingNewBlocks, pendingDeletions, queueDeletion } = usePageEditor();
 
-// Local working copy of blocks for this page (excludes header/footer — those are pinned)
-const contentBlocks = ref<Block[]>([]);
+const blockToDelete = ref<Block | null>(null);
+const confirmDeleteOpen = ref(false);
+
+function requestDelete(block: Block) {
+  blockToDelete.value = block;
+  confirmDeleteOpen.value = true;
+}
+
+function confirmDelete() {
+  if (!blockToDelete.value) return;
+  const id = blockToDelete.value.id;
+  queueDeletion(id);
+  blockToDelete.value = null;
+  confirmDeleteOpen.value = false;
+}
+
+// Blocks loaded from DB for this page (excludes header/footer)
+const dbContentBlocks = ref<Block[]>([]);
 const headerBlock = ref<Block | null>(null);
 const footerBlock = ref<Block | null>(null);
 const loading = ref(false);
@@ -62,7 +79,7 @@ async function fetchBlocks() {
     const all: Block[] = data.blocks ?? [];
     headerBlock.value = all.find(b => b.type === 'header') ?? null;
     footerBlock.value = all.find(b => b.type === 'footer') ?? null;
-    contentBlocks.value = all.filter(b => b.type !== 'header' && b.type !== 'footer');
+    dbContentBlocks.value = all.filter(b => b.type !== 'header' && b.type !== 'footer');
   } catch {
     error.value = 'Failed to load blocks';
   } finally {
@@ -77,6 +94,22 @@ watch(
     await fetchBlocks();
   },
   { immediate: true },
+);
+
+const { selectBlock, selectedBlock } = useSelectedBlock();
+
+// Merge DB blocks with pending new ones into a draggable ref
+const contentBlocks = ref<Block[]>([]);
+
+watch(
+  [dbContentBlocks, pendingNewBlocks, pendingDeletions],
+  () => {
+    contentBlocks.value = [
+      ...dbContentBlocks.value.filter(b => !pendingDeletions.value.has(b.id)),
+      ...pendingNewBlocks.value.filter(b => !pendingDeletions.value.has(b.id)),
+    ];
+  },
+  { immediate: true, deep: true },
 );
 
 function toggleVisibility(block: Block) {
@@ -97,7 +130,10 @@ function toggleFooterVisibility() {
 }
 
 function onReorder() {
-  reorderedIds.value = contentBlocks.value.map(b => b.id);
+  // Only include real DB block IDs in the reorder payload
+  reorderedIds.value = contentBlocks.value
+    .filter(b => !b.id.startsWith('pending-'))
+    .map(b => b.id);
 }
 
 // Exposed so index.vue save() can read and flush pending changes
@@ -110,10 +146,12 @@ defineExpose({
   layersChanges,
   portfolioId: computed(() => props.portfolioId),
   pageId: resolvedPageId,
+  refresh: fetchBlocks,
 });
 </script>
 
 <template>
+  <div>
   <div class="flex flex-col gap-1">
     <div v-if="loading" class="text-sm text-muted py-4 text-center">Loading…</div>
     <div v-else-if="error" class="text-sm text-error py-2">{{ error }}</div>
@@ -121,10 +159,15 @@ defineExpose({
       <!-- Pinned header block -->
       <div
         v-if="headerBlock"
-        class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md bg-elevated/30"
+        class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+        :class="selectedBlock?.id === headerBlock.id ? 'bg-elevated' : 'bg-elevated/30 hover:bg-elevated/60'"
+        @click="selectBlock(headerBlock)"
       >
         <UIcon name="i-lucide-panel-top" class="size-4 text-muted shrink-0" />
-        <span class="flex-1 truncate capitalize">{{ headerBlock.type }}</span>
+        <span class="flex-1 truncate min-w-0">
+          <span class="block truncate">{{ headerBlock.name || headerBlock.type }}</span>
+          <span v-if="headerBlock.name" class="block text-xs text-muted capitalize">{{ headerBlock.type }}</span>
+        </span>
         <div class="flex -my-0.5">
           <UButton
             :icon="headerBlock.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
@@ -156,14 +199,21 @@ defineExpose({
         <div
           v-for="block in contentBlocks"
           :key="block.id"
-          class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50"
-          :class="{ 'opacity-50': !block.isVisible }"
+          class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+          :class="[
+            selectedBlock?.id === block.id ? 'bg-elevated' : 'hover:bg-elevated/50',
+            { 'opacity-50': !block.isVisible },
+          ]"
+          @click="selectBlock(block)"
         >
           <UIcon
             name="i-lucide-grip-vertical"
             class="drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
           />
-          <span class="flex-1 truncate capitalize">{{ block.type }}</span>
+          <span class="flex-1 truncate min-w-0">
+            <span class="block truncate">{{ block.name || block.type }}</span>
+            <span v-if="block.name" class="block text-xs text-muted capitalize">{{ block.type }}</span>
+          </span>
           <div class="flex -my-0.5">
             <UButton
               :icon="block.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
@@ -179,7 +229,8 @@ defineExpose({
               color="neutral"
               variant="ghost"
               size="xs"
-              class="text-muted hover:text-highlighted hover:bg-accented/50"
+              :class="pendingDeletions.has(block.id) ? 'text-error' : 'text-muted hover:text-highlighted hover:bg-accented/50'"
+              @click.stop="requestDelete(block)"
             />
           </div>
         </div>
@@ -188,10 +239,15 @@ defineExpose({
       <!-- Pinned footer block -->
       <div
         v-if="footerBlock"
-        class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md bg-elevated/30"
+        class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+        :class="selectedBlock?.id === footerBlock.id ? 'bg-elevated' : 'bg-elevated/30 hover:bg-elevated/60'"
+        @click="selectBlock(footerBlock)"
       >
         <UIcon name="i-lucide-panel-bottom" class="size-4 text-muted shrink-0" />
-        <span class="flex-1 truncate capitalize">{{ footerBlock.type }}</span>
+        <span class="flex-1 truncate min-w-0">
+          <span class="block truncate">{{ footerBlock.name || footerBlock.type }}</span>
+          <span v-if="footerBlock.name" class="block text-xs text-muted capitalize">{{ footerBlock.type }}</span>
+        </span>
         <div class="flex -my-0.5">
           <UButton
             :icon="footerBlock.isVisible ? 'i-lucide-eye' : 'i-lucide-eye-off'"
@@ -213,5 +269,15 @@ defineExpose({
         </div>
       </div>
     </template>
+  </div>
+
+  <AdminConfirmModal
+    v-model:open="confirmDeleteOpen"
+    title="Delete block?"
+    :description="`'${blockToDelete?.name || blockToDelete?.type}' will be removed when you save.`"
+    confirm-label="Delete"
+    @confirm="confirmDelete"
+    @cancel="confirmDeleteOpen = false"
+  />
   </div>
 </template>

@@ -1,20 +1,13 @@
 <script setup lang="ts">
 import type { Block } from '@portfolio-builder/shared/types';
-import BlocksHeader from './Header.vue';
-import BlocksFooter from './Footer.vue';
-import BlocksHero from './Hero.vue';
+import { allBlockDefinitions } from '~/config/blocks';
 
 const props = defineProps<{ block: Block }>();
 
-const componentMap = {
-  header: BlocksHeader,
-  footer: BlocksFooter,
-  hero: BlocksHero,
-} as const;
-
-const component = computed(
-  () => componentMap[props.block.type as keyof typeof componentMap] ?? null,
-);
+const component = computed(() => {
+  const def = allBlockDefinitions.find(d => d.type === props.block.type);
+  return def?.component ?? null;
+});
 </script>
 
 <template>

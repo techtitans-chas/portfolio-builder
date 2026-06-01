@@ -18,6 +18,7 @@ export interface Block {
   id: string;
   pageId: string;
   type: string;
+  name: string | null;
   sortOrder: number;
   content: Record<string, unknown>;
   styles: Record<string, unknown>;

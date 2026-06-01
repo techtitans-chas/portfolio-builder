@@ -1,25 +1,23 @@
 <script setup lang="ts">
-const blocks = [
-  {
-    label: 'Text',
-    icon: 'i-lucide-type-outline',
-  },
-  {
-    label: 'Hero',
-    icon: 'i-lucide-monitor',
-  },
-  {
-    label: 'Card grid',
-    icon: 'i-lucide-grid-2x2',
-  },
-];
+import { blockDefinitions } from '~/config/blocks';
+
+const { addPendingBlock } = usePageEditor();
+const { selectBlock } = useSelectedBlock();
+const emit = defineEmits<{ blockAdded: [] }>();
+
+function addBlock(type: string) {
+  const definition = blockDefinitions.find(d => d.type === type);
+  const newBlock = addPendingBlock(type, definition?.defaultContent ?? {});
+  selectBlock(newBlock);
+  emit('blockAdded');
+}
 </script>
 
 <template>
   <div class="grid grid-cols-3 gap-2">
     <UButton
-      v-for="block in blocks"
-      :key="block.label"
+      v-for="block in blockDefinitions"
+      :key="block.type"
       color="neutral"
       variant="outline"
       :aria-label="block.label"
@@ -27,6 +25,7 @@ const blocks = [
       :icon="block.icon"
       class="flex-col text-xs justify-center aspect-square"
       :ui="{ leadingIcon: 'size-6' }"
+      @click="addBlock(block.type)"
     />
   </div>
 </template>

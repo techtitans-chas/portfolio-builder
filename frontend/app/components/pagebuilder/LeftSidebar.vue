@@ -67,6 +67,10 @@ function deletePage(page: Page) {
 // LayersView ref — exposed so index.vue save() can read pending changes
 const layersView = useTemplateRef('layersView');
 
+function onBlockAdded() {
+  layersView.value?.refresh();
+}
+
 defineExpose({ themeSettings, layersView });
 </script>
 
@@ -148,14 +152,14 @@ defineExpose({ themeSettings, layersView });
 
     <!-- Main content -->
     <div class="flex-1 overflow-y-auto p-4">
-      <PagebuilderBlocksView v-if="currentView === '0'" />
+      <PagebuilderBlocksView v-show="currentView === '0'" @block-added="onBlockAdded" />
       <PagebuilderLayersView
-        v-else-if="currentView === '1'"
+        v-show="currentView === '1'"
         ref="layersView"
         :portfolio-id="portfolioId ?? null"
         :page-id="null"
       />
-      <PagebuilderThemeView v-else v-model="selectedThemeId" />
+      <PagebuilderThemeView v-show="currentView === '2'" v-model="selectedThemeId" />
     </div>
 
     <!-- Footer: Blocks and Theme view -->
