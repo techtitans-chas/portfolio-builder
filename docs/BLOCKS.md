@@ -107,7 +107,7 @@ export const myBlockDefinition: BlockDefinition = {
     {
       label: 'Content',
       fields: [
-        { key: 'heading',     label: 'Heading',     type: 'inline-text' },
+        { key: 'heading', label: 'Heading', type: 'inline-text' },
         { key: 'description', label: 'Description', type: 'inline-rich' },
       ],
     },
@@ -128,7 +128,7 @@ import { myBlockDefinition } from './my-block';
 export const blockDefinitions = [
   heroDefinition,
   textDefinition,
-  myBlockDefinition,   // ← add here
+  myBlockDefinition, // ← add here
   // ...
 ];
 
@@ -138,7 +138,7 @@ export const allBlockDefinitions = [
   footerDefinition,
   heroDefinition,
   textDefinition,
-  myBlockDefinition,   // ← and here
+  myBlockDefinition, // ← and here
   // ...
 ];
 ```
@@ -149,13 +149,13 @@ export const allBlockDefinitions = [
 
 ```ts
 interface BlockDefinition {
-  type: string;           // Unique identifier stored in the database, e.g. 'hero'
-  label: string;          // Human-readable name shown in the Blocks picker
-  icon: string;           // Iconify icon name, e.g. 'i-lucide-layout'
-  component: Component;   // The Vue component that renders this block
-  defaultContent: Record<string, unknown>;  // Initial values when a new block is added
-  sections?: BlockSection[];  // Sidebar fields, flat layout
-  tabs?: BlockTab[];          // Sidebar fields grouped into tabs (use instead of sections for complex blocks)
+  type: string; // Unique identifier stored in the database, e.g. 'hero'
+  label: string; // Human-readable name shown in the Blocks picker
+  icon: string; // Iconify icon name, e.g. 'i-lucide-layout'
+  component: Component; // The Vue component that renders this block
+  defaultContent: Record<string, unknown>; // Initial values when a new block is added
+  sections?: BlockSection[]; // Sidebar fields, flat layout
+  tabs?: BlockTab[]; // Sidebar fields grouped into tabs (use instead of sections for complex blocks)
 }
 ```
 
@@ -167,31 +167,31 @@ Use `sections` for simple blocks. Use `tabs` when the block has many fields that
 
 Fields defined in `sections` or `tabs` appear in the right sidebar when the block is selected.
 
-| `type` | UI control | Notes |
-|---|---|---|
-| `text` | Single-line text input | |
-| `textarea` | Multi-line text input | |
-| `select` | Dropdown | Requires `options: [{ label, value }]` |
-| `checkbox` | Toggle switch | Label appears to the left, toggle to the right |
-| `url` | URL input | Validated as a URL |
-| `color` | Native color picker | Stores a raw hex string |
-| `theme-color` | Palette swatch picker | Stores a palette key (e.g. `'primary'`); resolves to `var(--palette-<key>)` in CSS |
-| `font` | Font select | Populated from the project's font list |
-| `image` | Media picker (images only) | Stores a URL string |
-| `file` | Media picker (any file) | Stores a URL string |
-| `list` | Reorderable list of sub-items | Requires `itemFields`, `itemLabel`, and `defaultItem` |
-| `inline-text` | Editable directly in preview | Hidden from sidebar; use `EditorInlineTextField` in the component |
-| `inline-rich` | Editable directly in preview | Hidden from sidebar; use `EditorInlineRichField` in the component |
+| `type`        | UI control                    | Notes                                                                              |
+| ------------- | ----------------------------- | ---------------------------------------------------------------------------------- |
+| `text`        | Single-line text input        |                                                                                    |
+| `textarea`    | Multi-line text input         |                                                                                    |
+| `select`      | Dropdown                      | Requires `options: [{ label, value }]`                                             |
+| `checkbox`    | Toggle switch                 | Label appears to the left, toggle to the right                                     |
+| `url`         | URL input                     | Validated as a URL                                                                 |
+| `color`       | Native color picker           | Stores a raw hex string                                                            |
+| `theme-color` | Palette swatch picker         | Stores a palette key (e.g. `'primary'`); resolves to `var(--palette-<key>)` in CSS |
+| `font`        | Font select                   | Populated from the project's font list                                             |
+| `image`       | Media picker (images only)    | Stores a URL string                                                                |
+| `file`        | Media picker (any file)       | Stores a URL string                                                                |
+| `list`        | Reorderable list of sub-items | Requires `itemFields`, `itemLabel`, and `defaultItem`                              |
+| `inline-text` | Editable directly in preview  | Hidden from sidebar; use `EditorInlineTextField` in the component                  |
+| `inline-rich` | Editable directly in preview  | Hidden from sidebar; use `EditorInlineRichField` in the component                  |
 
 ### Common field properties
 
 ```ts
 interface BlockField {
-  key: string;           // Must match the prop/content key exactly
-  label: string;         // Shown as a label in the sidebar
+  key: string; // Must match the prop/content key exactly
+  label: string; // Shown as a label in the sidebar
   type: FieldType;
-  placeholder?: string;  // Placeholder text for text inputs
-  options?: { label: string; value: string }[];  // Required for 'select'
+  placeholder?: string; // Placeholder text for text inputs
+  options?: { label: string; value: string }[]; // Required for 'select'
 }
 ```
 
