@@ -11,9 +11,15 @@ const seoMetaSchema = z.object({
   seoDescription: z.string().max(300).nullable().optional(),
 });
 
+const fontsSchema = z.object({
+  heading: z.string().max(100),
+  body: z.string().max(100),
+});
+
 const themeSettingsSchema = z.object({
   themeId: z.string().nullable().optional(),
   mode: z.enum(['light', 'dark', 'both']).optional(),
+  fonts: fontsSchema.nullable().optional(),
 });
 
 const settingsSchema = z.object({

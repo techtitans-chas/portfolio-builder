@@ -1,8 +1,12 @@
-import type { ThemeColors, Theme } from '~/components/pagebuilder/ThemeView.vue';
+import type { ThemeColors } from '~/components/pagebuilder/ThemeView.vue';
 import type { Block, Page } from '@portfolio-builder/shared/types';
 import type { Ref, ComputedRef } from 'vue';
 
-type ThemeSettingsOverride = { themeId?: string | null; mode?: string } | null;
+type ThemeSettingsOverride = {
+  themeId?: string | null;
+  mode?: string;
+  fonts?: { heading: string; body: string } | null;
+} | null;
 
 export function usePortfolio(
   slug: string,
@@ -30,7 +34,12 @@ export function usePortfolio(
   const portfolio = computed(() => portfolioData.value?.portfolio ?? null);
   const publishedPages = computed(() => pagesData.value?.pages ?? []);
   const dbThemeSettings = computed(
-    () => portfolio.value?.themeSettings as { themeId?: string | null; mode?: string } | null,
+    () =>
+      portfolio.value?.themeSettings as {
+        themeId?: string | null;
+        mode?: string;
+        fonts?: { heading: string; body: string } | null;
+      } | null,
   );
 
   const themeSettings = computed(() => themeOverride?.value ?? dbThemeSettings.value);
@@ -63,9 +72,28 @@ export function usePortfolio(
     };
   }
 
+  const selectedFonts = computed(() => themeSettings.value?.fonts ?? null);
+
+  const googleFontsUrl = computed(() => {
+    const fonts = selectedFonts.value;
+    if (!fonts) return null;
+    const families = [...new Set([fonts.heading, fonts.body])]
+      .map(f => `family=${encodeURIComponent(f)}:wght@400;500;600;700`)
+      .join('&');
+    return `https://fonts.googleapis.com/css2?${families}&display=swap`;
+  });
+
   const cssVars = computed(() => {
-    if (!selectedTheme.value) return {};
-    return buildCssVars(isDark.value ? selectedTheme.value.dark : selectedTheme.value.light);
+    const colorVars = selectedTheme.value
+      ? buildCssVars(isDark.value ? selectedTheme.value.dark : selectedTheme.value.light)
+      : {};
+    const fonts = selectedFonts.value;
+    if (!fonts) return colorVars;
+    return {
+      ...colorVars,
+      '--font-heading': `"${fonts.heading}", sans-serif`,
+      '--font-body': `"${fonts.body}", sans-serif`,
+    };
   });
 
   const navLinks = computed(() =>
@@ -84,6 +112,7 @@ export function usePortfolio(
     publishedPages,
     portfolioMode,
     cssVars,
+    googleFontsUrl,
     navLinks,
     headerBlock,
     footerBlock,

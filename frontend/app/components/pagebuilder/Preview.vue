@@ -11,11 +11,18 @@ const props = defineProps<{
   portfolioTitle: string;
   pageSlug: string;
   layersView: LayersViewInstance | null | undefined;
-  liveThemeSettings?: { themeId?: string | null; mode?: string } | null;
+  liveThemeSettings?: {
+    themeId?: string | null;
+    mode?: string;
+    fonts?: { heading: string; body: string } | null;
+  } | null;
 }>();
 
 const liveThemeOverride = computed(() => props.liveThemeSettings ?? null);
-const { cssVars, portfolioMode, navLinks } = usePortfolio(props.portfolioSlug, liveThemeOverride);
+const { cssVars, portfolioMode, navLinks, googleFontsUrl } = usePortfolio(
+  props.portfolioSlug,
+  liveThemeOverride,
+);
 
 // Local copy kept in sync with LayersView — VueDraggable mutates this directly
 const localBlocks = ref<Block[]>([]);
@@ -76,6 +83,7 @@ function onBlockDropped(event: { newIndex?: number }) {
     :nav-links="navLinks"
     :header-content="headerContent"
     :footer-content="footerContent"
+    :google-fonts-url="googleFontsUrl"
     @select-header="headerBlock && selectBlock(headerBlock)"
     @select-footer="footerBlock && selectBlock(footerBlock)"
     @click.capture="($event.target as HTMLElement).closest('a') && $event.preventDefault()"

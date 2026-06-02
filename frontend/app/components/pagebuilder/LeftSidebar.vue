@@ -4,9 +4,15 @@ import type { Page } from '@portfolio-builder/shared/types';
 import { VueDraggable } from 'vue-draggable-plus';
 import { ref, computed } from 'vue';
 
+interface FontSettings {
+  heading: string;
+  body: string;
+}
+
 interface ThemeSettings {
   themeId?: string | null;
   mode?: 'light' | 'dark' | 'both';
+  fonts?: FontSettings | null;
 }
 
 const props = defineProps<{
@@ -17,19 +23,18 @@ const props = defineProps<{
 const panelViews = ref<TabsItem[]>([{ label: 'Blocks' }, { label: 'Layers' }, { label: 'Theme' }]);
 const currentView = ref('0');
 
-const themeModeOptions = [
-  { label: 'Only light mode', value: 'light' },
-  { label: 'Only dark mode', value: 'dark' },
-  { label: 'Enable both', value: 'both' },
-];
 const currentThemeMode = ref<'light' | 'dark' | 'both'>(
   props.initialThemeSettings?.mode ?? 'light',
 );
 const selectedThemeId = ref<string | null>(props.initialThemeSettings?.themeId ?? null);
+const selectedFonts = ref<FontSettings>(
+  props.initialThemeSettings?.fonts ?? { heading: 'Inter', body: 'Inter' },
+);
 
 const themeSettings = computed(() => ({
   themeId: selectedThemeId.value,
   mode: currentThemeMode.value,
+  fonts: selectedFonts.value,
 }));
 
 watch(
@@ -38,13 +43,16 @@ watch(
     if (!settings) return;
     selectedThemeId.value = settings.themeId ?? null;
     currentThemeMode.value = settings.mode ?? 'light';
+    selectedFonts.value = settings.fonts ?? { heading: 'Inter', body: 'Inter' };
   },
 );
 
 const isThemeDirty = computed(
   () =>
     selectedThemeId.value !== (props.initialThemeSettings?.themeId ?? null) ||
-    currentThemeMode.value !== (props.initialThemeSettings?.mode ?? 'light'),
+    currentThemeMode.value !== (props.initialThemeSettings?.mode ?? 'light') ||
+    selectedFonts.value.heading !== (props.initialThemeSettings?.fonts?.heading ?? 'Inter') ||
+    selectedFonts.value.body !== (props.initialThemeSettings?.fonts?.body ?? 'Inter'),
 );
 
 const { fetcher } = useApi();
@@ -278,20 +286,11 @@ defineExpose({ themeSettings, isThemeDirty, layersView, activePage });
         :portfolio-id="portfolioId ?? null"
         :page-id="activePageId"
       />
-      <PagebuilderThemeView v-show="currentView === '2'" v-model="selectedThemeId" />
-    </div>
-
-    <!-- Footer: Blocks and Theme view -->
-    <div
-      v-if="currentView === '0' || currentView === '2'"
-      class="p-3 border-t border-default shrink-0 flex flex-col gap-2"
-    >
-      <USelect
-        v-if="currentView === '2'"
-        v-model="currentThemeMode"
-        :items="themeModeOptions"
-        value-key="value"
-        class="w-full"
+      <PagebuilderThemeView
+        v-show="currentView === '2'"
+        v-model:selected="selectedThemeId"
+        v-model:fonts="selectedFonts"
+        v-model:mode="currentThemeMode"
       />
     </div>
 

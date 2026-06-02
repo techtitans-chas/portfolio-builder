@@ -27,6 +27,7 @@ export const heroDefinition: BlockDefinition = {
           type: 'inline-rich',
           placeholder: 'Your tagline',
         },
+        { key: 'headingFont', label: 'Heading font', type: 'font' },
       ],
     },
     {

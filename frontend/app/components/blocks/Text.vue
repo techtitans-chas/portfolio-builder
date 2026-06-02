@@ -32,7 +32,6 @@ const isEmpty = computed(() => {
       <EditorInlineRichField field-key="content" placeholder="Start typing..." html class="w-full">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-if="content" v-html="content" />
-        <p v-else class="opacity-40">Start typing...</p>
       </EditorInlineRichField>
     </div>
   </section>

@@ -435,6 +435,15 @@ function runAndClose(fn: () => void) {
 <style scoped>
 @reference "~/assets/css/main.css";
 
+:deep(.ProseMirror p.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  color: currentColor;
+  opacity: 0.35;
+  pointer-events: none;
+  height: 0;
+}
+
 .toolbar-btn {
   @apply px-1.5 py-0.5 rounded transition-colors hover:bg-white/10 leading-none flex items-center justify-center min-w-[1.5rem];
 }

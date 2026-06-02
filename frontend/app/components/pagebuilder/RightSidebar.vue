@@ -2,6 +2,7 @@
 import type { TabsItem } from '@nuxt/ui';
 import { allBlockDefinitions } from '~/config/blocks';
 import { getPath, setPath } from '~/utils/dotPath';
+import { FONT_OPTIONS } from '~/config/fonts';
 
 const { selectedBlock } = useSelectedBlock();
 const { setBlockContent, setBlockName, pendingContentEdits } = usePageEditor();
@@ -266,6 +267,13 @@ function setValue(key: string, value: unknown) {
                 v-else-if="field.type === 'select'"
                 :model-value="(getValue(field.key) as string) ?? ''"
                 :items="field.options ?? []"
+                size="sm"
+                @update:model-value="setValue(field.key, $event)"
+              />
+              <USelect
+                v-else-if="field.type === 'font'"
+                :model-value="(getValue(field.key) as string) ?? ''"
+                :items="FONT_OPTIONS"
                 size="sm"
                 @update:model-value="setValue(field.key, $event)"
               />

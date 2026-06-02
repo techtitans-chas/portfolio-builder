@@ -10,13 +10,15 @@ export interface HeroBlockProps {
   subheading?: string;
   backgroundImage?: string | null;
   ctaButtons?: CtaButton[];
+  headingFont?: string | null;
 }
 
-withDefaults(defineProps<HeroBlockProps>(), {
+const props = withDefaults(defineProps<HeroBlockProps>(), {
   heading: '',
   subheading: '',
   backgroundImage: null,
   ctaButtons: () => [],
+  headingFont: null,
 });
 </script>
 
@@ -39,11 +41,17 @@ withDefaults(defineProps<HeroBlockProps>(), {
         field-key="heading"
         tag="h1"
         class="text-5xl font-bold leading-tight"
-        :style="{ color: backgroundImage ? 'white' : 'var(--text-primary)' }"
+        :style="{
+          color: backgroundImage ? 'white' : 'var(--text-primary)',
+          fontFamily: props.headingFont ?? undefined,
+        }"
       >
         <h1
           class="text-5xl font-bold leading-tight"
-          :style="{ color: backgroundImage ? 'white' : 'var(--text-primary)' }"
+          :style="{
+            color: backgroundImage ? 'white' : 'var(--text-primary)',
+            fontFamily: props.headingFont ?? undefined,
+          }"
         >
           {{ heading }}
         </h1>

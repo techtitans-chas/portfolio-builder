@@ -11,6 +11,7 @@ const {
   portfolioError,
   portfolioMode,
   cssVars,
+  googleFontsUrl,
   navLinks,
   headerBlock,
   footerBlock,
@@ -75,6 +76,7 @@ useHead({
     :nav-links="navLinks"
     :header-content="headerContent"
     :footer-content="footerContent"
+    :google-fonts-url="googleFontsUrl"
   >
     <!-- Render any non-header/footer content blocks stored in DB -->
     <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />

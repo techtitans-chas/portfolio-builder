@@ -33,6 +33,7 @@ const initialThemeSettings = computed(() => {
   const s = portfolio.value?.themeSettings as {
     themeId?: string | null;
     mode?: 'light' | 'dark' | 'both';
+    fonts?: { heading: string; body: string } | null;
   } | null;
   return s ?? null;
 });

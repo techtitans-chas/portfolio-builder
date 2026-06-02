@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   cssVars: Record<string, string>;
   portfolioMode: string;
   siteName: string;
@@ -8,7 +8,14 @@ defineProps<{
   headerContent?: Record<string, unknown>;
   footerContent?: Record<string, unknown>;
   isEditor?: boolean;
+  googleFontsUrl?: string | null;
 }>();
+
+useHead(
+  computed(() => ({
+    link: props.googleFontsUrl ? [{ rel: 'stylesheet', href: props.googleFontsUrl }] : [],
+  })),
+);
 
 defineEmits<{
   'select-header': [];
@@ -19,7 +26,12 @@ defineEmits<{
 <template>
   <div
     class="portfolio-root min-h-screen"
-    :style="{ ...cssVars, backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)' }"
+    :style="{
+      ...cssVars,
+      backgroundColor: 'var(--bg-page)',
+      color: 'var(--text-primary)',
+      fontFamily: cssVars['--font-body'] ?? undefined,
+    }"
   >
     <div
       v-if="isEditor"

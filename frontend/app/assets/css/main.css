@@ -27,6 +27,14 @@
 }
 
 /* Rich text content — used by InlineRichField editor and Text block v-html output */
+.rich-text h1,
+.rich-text h2,
+.rich-text h3,
+.rich-text h4,
+.rich-text h5,
+.rich-text h6 {
+  font-family: var(--font-heading);
+}
 .rich-text h1 {
   font-size: 2rem;
   font-weight: 700;

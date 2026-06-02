@@ -21,6 +21,7 @@ export interface BlockField {
     | 'image'
     | 'file'
     | 'list'
+    | 'font'
     | 'inline-text'
     | 'inline-rich';
   placeholder?: string;
