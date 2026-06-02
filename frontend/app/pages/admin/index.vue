@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui';
 import type PagebuilderLeftSidebar from '~/components/pagebuilder/LeftSidebar.vue';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
+import { VIEWPORT_MODES } from '~/composables/usePreviewScale';
 
 definePageMeta({
   layout: 'admin',
 });
 
-const viewModes: TabsItem[] = [
-  { label: 'Desktop', value: 'desktop' },
-  { label: 'Mobile', value: 'mobile' },
-];
+const { activeViewMode, wrapperStyle, scaleStyle } = usePreviewScale();
 
 const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
@@ -43,13 +40,6 @@ const initialThemeSettings = computed(() => {
 const saving = ref(false);
 const saved = ref(false);
 const saveError = ref('');
-const iframeKey = ref(0);
-const portfolioUrl = computed(() => {
-  const portfolioSlug = portfolio.value?.slug;
-  const pageSlug = leftSidebar.value?.activePage?.slug;
-  if (!portfolioSlug) return null;
-  return pageSlug ? `/p/${portfolioSlug}/${pageSlug}` : `/p/${portfolioSlug}`;
-});
 
 const isDirty = computed<boolean>(() => {
   const layers: LayersViewInstance | null | undefined = leftSidebar.value?.layersView;
@@ -155,7 +145,6 @@ async function save() {
     // Refresh layers so pending blocks are replaced with real DB records
     leftSidebar.value?.layersView?.refresh();
     saved.value = true;
-    iframeKey.value++;
     setTimeout(() => (saved.value = false), 2000);
   } catch (e: unknown) {
     saveError.value = e instanceof Error ? e.message : 'Failed to save.';
@@ -169,7 +158,14 @@ async function save() {
   <AdminLayoutPageWrapper title="Page Builder">
     <!-- Header middle -->
     <template #middle>
-      <UTabs :items="viewModes" default-value="desktop" size="sm" class="w-40" :content="false" />
+      <UTabs
+        v-model="activeViewMode"
+        :items="VIEWPORT_MODES"
+        default-value="desktop"
+        size="sm"
+        class="w-56"
+        :content="false"
+      />
     </template>
     <!-- Header right -->
     <template #right>
@@ -197,14 +193,17 @@ async function save() {
         :portfolio-id="portfolio?.id ?? null"
       />
 
-      <!-- Main content -->
-      <div class="flex-1 overflow-hidden">
-        <iframe
-          v-if="portfolioUrl"
-          :key="iframeKey"
-          :src="portfolioUrl"
-          class="w-full h-full border-0"
-        />
+      <!-- Main content / live preview -->
+      <div ref="previewCanvas" class="flex-1 overflow-auto bg-muted/30">
+        <div v-if="portfolio" :style="wrapperStyle">
+          <div ref="previewEl" class="@container" :style="scaleStyle">
+            <PagebuilderPreview
+              :portfolio-slug="portfolio.slug"
+              :portfolio-title="portfolio.title"
+              :layers-view="leftSidebar?.layersView"
+            />
+          </div>
+        </div>
         <div v-else class="flex items-center justify-center h-full text-sm text-muted">
           No portfolio found
         </div>

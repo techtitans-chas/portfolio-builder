@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { VueDraggable } from 'vue-draggable-plus';
 import { blockDefinitions } from '~/config/blocks';
+import type { BlockDefinition } from '~/config/blocks';
 
 const { addPendingBlock } = usePageEditor();
 const { selectBlock } = useSelectedBlock();
@@ -11,10 +13,21 @@ function addBlock(type: string) {
   selectBlock(newBlock);
   emit('blockAdded');
 }
+
+// Clone the definition object so the original grid item stays in place
+function cloneDefinition(def: BlockDefinition) {
+  return { ...def };
+}
 </script>
 
 <template>
-  <div class="grid grid-cols-3 gap-2">
+  <VueDraggable
+    :model-value="blockDefinitions"
+    :group="{ name: 'blocks', pull: 'clone', put: false }"
+    :clone="cloneDefinition"
+    :sort="false"
+    class="grid grid-cols-3 gap-2"
+  >
     <UButton
       v-for="block in blockDefinitions"
       :key="block.type"
@@ -27,5 +40,5 @@ function addBlock(type: string) {
       :ui="{ leadingIcon: 'size-6' }"
       @click="addBlock(block.type)"
     />
-  </div>
+  </VueDraggable>
 </template>
