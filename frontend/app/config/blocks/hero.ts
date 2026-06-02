@@ -10,8 +10,11 @@ export const heroDefinition: BlockDefinition = {
   defaultContent: {
     heading: 'Your name',
     subheading: 'Your tagline',
-    primaryCta: { label: 'View my work', url: '#projects' },
-    secondaryCta: { label: 'Get in touch', url: '#contact' },
+    backgroundImage: null,
+    ctaButtons: [
+      { id: crypto.randomUUID(), label: 'View my work', url: '#projects' },
+      { id: crypto.randomUUID(), label: 'Get in touch', url: '#contact' },
+    ],
   },
   sections: [
     {
@@ -22,17 +25,23 @@ export const heroDefinition: BlockDefinition = {
       ],
     },
     {
-      label: 'Primary button',
-      fields: [
-        { key: 'primaryCta.label', label: 'Label', type: 'text', placeholder: 'View my work' },
-        { key: 'primaryCta.url', label: 'URL', type: 'url', placeholder: '#projects' },
-      ],
+      label: 'Background',
+      fields: [{ key: 'backgroundImage', label: 'Background image', type: 'image' }],
     },
     {
-      label: 'Secondary button',
+      label: 'CTA Buttons',
       fields: [
-        { key: 'secondaryCta.label', label: 'Label', type: 'text', placeholder: 'Get in touch' },
-        { key: 'secondaryCta.url', label: 'URL', type: 'url', placeholder: '#contact' },
+        {
+          key: 'ctaButtons',
+          label: 'Buttons',
+          type: 'list',
+          itemLabel: 'Button',
+          defaultItem: () => ({ id: crypto.randomUUID(), label: 'Click here', url: '#' }),
+          itemFields: [
+            { key: 'label', label: 'Label', placeholder: 'Click here' },
+            { key: 'url', label: 'URL', placeholder: '#', type: 'url' },
+          ],
+        },
       ],
     },
   ],

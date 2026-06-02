@@ -3,7 +3,7 @@ definePageMeta({
   layout: 'admin',
 });
 
-const { portfolio, fetch: fetchUser } = useCurrentUser();
+const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
 
 await fetchUser();
@@ -40,6 +40,8 @@ const successMessage = ref('');
 const errorMessage = ref('');
 const saving = ref(false);
 
+const ogImagePickerOpen = ref(false);
+
 async function save() {
   if (!portfolio.value?.id) return;
 
@@ -63,6 +65,8 @@ async function save() {
         },
       }),
     });
+    clearUser();
+    await fetchUser();
     markSaved();
     successMessage.value = 'Settings saved.';
   } catch (e: unknown) {
@@ -117,11 +121,36 @@ async function save() {
       </UFormField>
 
       <UFormField
-        label="OG image URL"
+        label="OG image"
         name="ogImageUrl"
-        description="Image shown when your portfolio is shared on social media."
+        description="Image shown when your portfolio is shared on social media. Recommended size: 1200×630."
       >
-        <UInput v-model="form.ogImageUrl" placeholder="https://..." class="w-full" />
+        <div class="flex flex-col gap-2 w-full">
+          <div
+            v-if="form.ogImageUrl"
+            class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted w-full"
+          >
+            <img :src="form.ogImageUrl" alt="" class="w-full h-full object-cover" />
+            <UButton
+              icon="i-lucide-x"
+              color="neutral"
+              variant="solid"
+              size="xs"
+              class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+              aria-label="Remove OG image"
+              @click="form.ogImageUrl = ''"
+            />
+          </div>
+          <UButton
+            :icon="form.ogImageUrl ? 'i-lucide-image' : 'i-lucide-plus'"
+            color="neutral"
+            variant="outline"
+            class="w-full"
+            @click="ogImagePickerOpen = true"
+          >
+            {{ form.ogImageUrl ? 'Change image' : 'Choose image' }}
+          </UButton>
+        </div>
       </UFormField>
 
       <UAlert v-if="successMessage" color="success" variant="soft" :description="successMessage" />
@@ -130,4 +159,11 @@ async function save() {
       <UButton type="submit" :loading="saving">Save changes</UButton>
     </UForm>
   </AdminLayoutPageStructure>
+
+  <AdminMediaPickerModal
+    v-model:open="ogImagePickerOpen"
+    images-only
+    :selected-url="form.ogImageUrl || null"
+    @select="url => (form.ogImageUrl = url)"
+  />
 </template>

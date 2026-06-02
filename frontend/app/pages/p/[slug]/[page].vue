@@ -7,16 +7,19 @@ const pageSlug = route.params.page as string;
 
 definePageMeta({ layout: false });
 
-const {
-  portfolio,
-  portfolioError,
-  portfolioMode,
-  cssVars,
-  navLinks,
-  headerBlock,
-  footerBlock,
-  baseURL,
-} = usePortfolio(slug);
+const { portfolioMode, cssVars, navLinks, headerBlock, footerBlock, baseURL } = usePortfolio(slug);
+
+// Await these directly so portfolio and pages are settled before the 404 guards below.
+// useAsyncData deduplicates by key — usePortfolio's fetches are reused, not duplicated.
+const [{ data: portfolioAwaitedData, error: portfolioAwaitedError }, { data: pagesAwaitedData }] =
+  await Promise.all([
+    useAsyncData(`portfolio-${slug}`, () =>
+      $fetch<{ portfolio: Record<string, unknown> }>(`/api/portfolios/${slug}`, { baseURL }),
+    ),
+    useAsyncData(`portfolio-${slug}-pages`, () =>
+      $fetch<{ pages: Page[] }>(`/api/portfolios/${slug}/pages`, { baseURL }),
+    ),
+  ]);
 
 const { contentBlocks } = usePageBlocks(slug, pageSlug);
 
@@ -29,51 +32,48 @@ const footerContent = computed(
 
 const canonicalUrl = `${useRequestURL().origin}/p/${slug}/${pageSlug}`;
 
-// Same key as usePortfolio — deduplicated, no extra request
-const { data: pagesData } = await useAsyncData(`portfolio-${slug}-pages`, () =>
-  $fetch<{ pages: Page[] }>(`/api/portfolios/${slug}/pages`, { baseURL }),
-);
-
-if (portfolioError.value || !portfolio.value) {
+if (portfolioAwaitedError.value || !portfolioAwaitedData.value?.portfolio) {
   throw createError({ statusCode: 404, statusMessage: 'Portfolio not found' });
 }
 
-const currentPage = pagesData.value?.pages.find(p => p.slug === pageSlug) ?? null;
+const currentPage = (pagesAwaitedData.value?.pages ?? []).find(p => p.slug === pageSlug) ?? null;
 
 if (!currentPage) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' });
 }
 
-const portfolioSeoMeta = portfolio.value?.seoMeta as {
-  seoTitle?: string;
-  seoDescription?: string;
-} | null;
+const p = portfolioAwaitedData.value!.portfolio;
+const portfolioSeoMeta = p.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
 
 useSeoMeta({
   title:
     currentPage.seoTitle ||
     currentPage.title ||
     portfolioSeoMeta?.seoTitle ||
-    (portfolio.value?.title as string) ||
+    (p.title as string) ||
     'Portfolio',
   ogTitle:
     currentPage.seoTitle ||
     currentPage.title ||
     portfolioSeoMeta?.seoTitle ||
-    (portfolio.value?.title as string) ||
+    (p.title as string) ||
     'Portfolio',
   description:
     currentPage.seoDescription ||
     portfolioSeoMeta?.seoDescription ||
-    (portfolio.value?.description as string) ||
+    (p.description as string) ||
     undefined,
   ogDescription:
     currentPage.seoDescription ||
     portfolioSeoMeta?.seoDescription ||
-    (portfolio.value?.description as string) ||
+    (p.description as string) ||
     undefined,
-  ogImage: currentPage.seoOgImageUrl || (portfolio.value?.ogImageUrl as string) || undefined,
+  ogImage: currentPage.seoOgImageUrl || (p.ogImageUrl as string) || undefined,
   ogUrl: canonicalUrl,
+});
+
+useHead({
+  link: [{ rel: 'sitemap', type: 'application/xml', href: `/p/${slug}/sitemap.xml` }],
 });
 </script>
 
@@ -81,7 +81,7 @@ useSeoMeta({
   <PortfolioLayout
     :css-vars="cssVars"
     :portfolio-mode="portfolioMode"
-    :site-name="(portfolio?.title as string) || (portfolio?.slug as string) || ''"
+    :site-name="(p.title as string) || (p.slug as string) || ''"
     :home-url="`/p/${slug}`"
     :nav-links="navLinks"
     :header-content="headerContent"

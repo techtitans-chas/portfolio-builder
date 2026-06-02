@@ -1,46 +1,73 @@
 <script setup lang="ts">
+export interface CtaButton {
+  id?: string;
+  label: string;
+  url: string;
+}
+
 export interface HeroBlockProps {
   heading?: string;
   subheading?: string;
-  primaryCta?: { label: string; url: string } | null;
-  secondaryCta?: { label: string; url: string } | null;
+  backgroundImage?: string | null;
+  ctaButtons?: CtaButton[];
 }
 
 withDefaults(defineProps<HeroBlockProps>(), {
   heading: '',
   subheading: '',
-  primaryCta: null,
-  secondaryCta: null,
+  backgroundImage: null,
+  ctaButtons: () => [],
 });
 </script>
 
 <template>
-  <section class="flex flex-col items-center justify-center text-center px-8 py-24 gap-6">
-    <h1 class="text-5xl font-bold leading-tight" :style="{ color: 'var(--text-primary)' }">
-      {{ heading }}
-    </h1>
-
-    <p v-if="subheading" class="text-lg max-w-xl" :style="{ color: 'var(--text-secondary)' }">
-      {{ subheading }}
-    </p>
-
-    <div v-if="primaryCta || secondaryCta" class="flex gap-4 mt-2">
-      <a
-        v-if="primaryCta"
-        :href="primaryCta.url"
-        class="px-6 py-3 rounded-lg font-medium text-white transition-opacity hover:opacity-90"
-        :style="{ backgroundColor: 'var(--primary)' }"
+  <section
+    class="relative flex flex-col items-center justify-center text-center px-8 py-24 gap-6"
+    :style="
+      backgroundImage
+        ? {
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }
+        : {}
+    "
+  >
+    <div v-if="backgroundImage" class="absolute inset-0 bg-black/40" />
+    <div class="relative flex flex-col items-center gap-6">
+      <h1
+        class="text-5xl font-bold leading-tight"
+        :style="{ color: backgroundImage ? 'white' : 'var(--text-primary)' }"
       >
-        {{ primaryCta.label }}
-      </a>
-      <a
-        v-if="secondaryCta"
-        :href="secondaryCta.url"
-        class="px-6 py-3 rounded-lg font-medium border transition-opacity hover:opacity-80"
-        :style="{ color: 'var(--secondary)', borderColor: 'var(--secondary)' }"
+        {{ heading }}
+      </h1>
+
+      <p
+        v-if="subheading"
+        class="text-lg max-w-xl"
+        :style="{ color: backgroundImage ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
       >
-        {{ secondaryCta.label }}
-      </a>
+        {{ subheading }}
+      </p>
+
+      <div v-if="ctaButtons && ctaButtons.length" class="flex flex-wrap gap-4 mt-2 justify-center">
+        <a
+          v-for="(btn, index) in ctaButtons"
+          :key="btn.id ?? index"
+          :href="btn.url"
+          class="px-6 py-3 rounded-lg font-medium transition-opacity hover:opacity-90"
+          :class="index === 0 ? 'text-white' : 'border hover:opacity-80'"
+          :style="
+            index === 0
+              ? { backgroundColor: 'var(--primary)' }
+              : backgroundImage
+                ? { color: 'white', borderColor: 'rgba(255,255,255,0.6)' }
+                : { color: 'var(--secondary)', borderColor: 'var(--secondary)' }
+          "
+        >
+          {{ btn.label }}
+        </a>
+      </div>
     </div>
   </section>
 </template>
