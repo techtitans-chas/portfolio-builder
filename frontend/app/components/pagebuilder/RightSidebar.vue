@@ -148,7 +148,14 @@ function setValue(key: string, value: unknown) {
 
       <!-- Sections + fields -->
       <div class="flex-1 overflow-y-auto p-3 flex flex-col gap-4">
-        <div v-for="(section, si) in activeSections" :key="si" class="flex flex-col gap-2">
+        <div
+          v-for="(section, si) in activeSections"
+          :key="si"
+          class="flex flex-col gap-2"
+        >
+          <template
+            v-if="section.fields.filter(f => f.type !== 'inline-text' && f.type !== 'inline-rich').length"
+          >
           <p v-if="section.label" class="text-xs font-semibold text-muted uppercase tracking-wide">
             {{ section.label }}
           </p>
@@ -266,6 +273,7 @@ function setValue(key: string, value: unknown) {
               @update:model-value="setValue(field.key, $event)"
             />
           </div>
+          </template>
         </div>
       </div>
     </template>

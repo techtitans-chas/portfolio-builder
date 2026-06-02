@@ -20,7 +20,7 @@ export function usePortfolio(
     $fetch<{ pages: Page[] }>(`/api/portfolios/${slug}/pages`, { baseURL }),
   );
 
-  const { data: themesData } = useAsyncData('themes', () => $fetch(`/api/themes`, { baseURL }));
+  const allThemesRef = useThemes();
 
   // Header and footer are portfolio-level layout blocks stored once on the home page
   const { data: layoutBlocksData } = useAsyncData(`portfolio-${slug}-layout-blocks`, () =>
@@ -35,7 +35,7 @@ export function usePortfolio(
 
   const themeSettings = computed(() => themeOverride?.value ?? dbThemeSettings.value);
 
-  const allThemes = computed(() => (themesData.value as { themes: Theme[] } | null)?.themes ?? []);
+  const allThemes = computed(() => allThemesRef.value ?? []);
   const selectedTheme = computed(
     () =>
       allThemes.value.find(t => t.id === themeSettings.value?.themeId) ??

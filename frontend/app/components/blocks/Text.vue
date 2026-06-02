@@ -1,17 +1,26 @@
 <script setup lang="ts">
+import { inlineEditorKey } from '~/utils/inlineEditor';
+
 export interface TextBlockProps {
   content?: string;
   align?: 'left' | 'center' | 'right';
 }
 
-withDefaults(defineProps<TextBlockProps>(), {
+const props = withDefaults(defineProps<TextBlockProps>(), {
   content: '',
   align: 'left',
+});
+
+const inEditor = Boolean(inject(inlineEditorKey, null));
+
+const isEmpty = computed(() => {
+  const t = props.content?.trim() ?? '';
+  return !t || t === '<p></p>';
 });
 </script>
 
 <template>
-  <section class="px-8 py-12">
+  <section v-if="inEditor || !isEmpty" class="px-8 py-12">
     <div
       class="max-w-3xl mx-auto rich-text"
       :class="{

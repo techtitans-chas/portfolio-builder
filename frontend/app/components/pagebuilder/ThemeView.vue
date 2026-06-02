@@ -18,9 +18,7 @@ export interface Theme {
 
 const selected = defineModel<string | null>({ default: null });
 
-const { fetcher } = useApi();
-const { data: themesData } = await useAsyncData('themes', () => fetcher('/api/themes'));
-const themes = computed<Theme[]>(() => themesData.value?.themes ?? []);
+const themes = useThemes();
 </script>
 
 <template>
