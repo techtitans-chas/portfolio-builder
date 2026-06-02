@@ -12,7 +12,9 @@
   overflow: hidden !important;
 
   /* Hide the inner content of the ghost — only show the drop zone outline */
-  & > * { visibility: hidden !important; }
+  & > * {
+    visibility: hidden !important;
+  }
 }
 
 /* Block drag-into-preview: the floating clone that follows the cursor */
