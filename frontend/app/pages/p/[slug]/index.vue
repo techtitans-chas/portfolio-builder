@@ -60,6 +60,10 @@ useSeoMeta({
   ogImage: () => (portfolio.value?.ogImageUrl as string) ?? undefined,
   ogUrl: canonicalUrl,
 });
+
+useHead({
+  link: [{ rel: 'sitemap', type: 'application/xml', href: `/p/${slug}/sitemap.xml` }],
+});
 </script>
 
 <template>
