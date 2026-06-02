@@ -8,6 +8,7 @@ export interface CtaButton {
 export interface HeroBlockProps {
   heading?: string;
   subheading?: string;
+  background?: string | null;
   backgroundImage?: string | null;
   ctaButtons?: CtaButton[];
   headingFont?: string | null;
@@ -16,24 +17,37 @@ export interface HeroBlockProps {
 const props = withDefaults(defineProps<HeroBlockProps>(), {
   heading: '',
   subheading: '',
+  background: null,
   backgroundImage: null,
   ctaButtons: () => [],
   headingFont: null,
 });
+
+const sectionStyle = computed(() => {
+  if (props.backgroundImage) {
+    return {
+      backgroundImage: `url(${props.backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  }
+  if (props.background) {
+    return { backgroundColor: `var(--palette-${props.background})` };
+  }
+  return {};
+});
+
+// Force light text on dark palette colors (primary/dark) or when a background image is set
+const hasDarkBg = computed(() =>
+  !props.backgroundImage && (props.background === 'primary' || props.background === 'dark'),
+);
+const forceLight = computed(() => !!props.backgroundImage || hasDarkBg.value);
 </script>
 
 <template>
   <section
     class="relative flex flex-col items-center justify-center text-center px-8 py-24 gap-6"
-    :style="
-      backgroundImage
-        ? {
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }
-        : {}
-    "
+    :style="sectionStyle"
   >
     <div v-if="backgroundImage" class="absolute inset-0 bg-black/40" />
     <div class="relative flex flex-col items-center gap-6">
@@ -42,14 +56,14 @@ const props = withDefaults(defineProps<HeroBlockProps>(), {
         tag="h1"
         class="text-5xl font-bold leading-tight"
         :style="{
-          color: backgroundImage ? 'white' : 'var(--text-primary)',
+          color: forceLight ? 'white' : 'var(--text-primary)',
           fontFamily: props.headingFont ?? undefined,
         }"
       >
         <h1
           class="text-5xl font-bold leading-tight"
           :style="{
-            color: backgroundImage ? 'white' : 'var(--text-primary)',
+            color: forceLight ? 'white' : 'var(--text-primary)',
             fontFamily: props.headingFont ?? undefined,
           }"
         >
@@ -61,12 +75,12 @@ const props = withDefaults(defineProps<HeroBlockProps>(), {
         field-key="subheading"
         placeholder="Your tagline"
         class="text-lg max-w-xl"
-        :style="{ color: backgroundImage ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
+        :style="{ color: forceLight ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
       >
         <p
           v-if="subheading"
           class="text-lg max-w-xl"
-          :style="{ color: backgroundImage ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
+          :style="{ color: forceLight ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
         >
           {{ subheading }}
         </p>
@@ -82,7 +96,7 @@ const props = withDefaults(defineProps<HeroBlockProps>(), {
           :style="
             index === 0
               ? { backgroundColor: 'var(--primary)' }
-              : backgroundImage
+              : forceLight
                 ? { color: 'white', borderColor: 'rgba(255,255,255,0.6)' }
                 : { color: 'var(--secondary)', borderColor: 'var(--secondary)' }
           "

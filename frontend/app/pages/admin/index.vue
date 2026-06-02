@@ -88,6 +88,17 @@ async function save() {
     if (pageId) {
       const { visibilityChanges, reorderedIds } = layers!.layersChanges;
 
+      // Build a blockId → pageId map so header/footer edits go to the right page URL
+      const blockPageMap = new Map<string, string>();
+      for (const b of layers!.contentBlocks ?? []) {
+        if (b.pageId) blockPageMap.set(b.id, b.pageId);
+      }
+      const headerBlock = layers!.headerBlock;
+      const footerBlock = layers!.footerBlock;
+      if (headerBlock?.pageId) blockPageMap.set(headerBlock.id, headerBlock.pageId);
+      if (footerBlock?.pageId) blockPageMap.set(footerBlock.id, footerBlock.pageId);
+      const pageIdFor = (blockId: string) => blockPageMap.get(blockId) ?? pageId;
+
       await Promise.all([
         // Reorder
         reorderedIds
@@ -101,7 +112,7 @@ async function save() {
         ...Object.entries(visibilityChanges)
           .filter(([blockId]) => !pendingDeletions.value.has(blockId))
           .map(([blockId, isVisible]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
               method: 'PATCH',
               credentials: 'include',
               body: JSON.stringify({ isVisible }),
@@ -124,7 +135,7 @@ async function save() {
             ([blockId]) => !blockId.startsWith('pending-') && !pendingDeletions.value.has(blockId),
           )
           .map(([blockId, content]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
               method: 'PATCH',
               credentials: 'include',
               body: JSON.stringify({ content }),
@@ -136,7 +147,7 @@ async function save() {
             ([blockId]) => !blockId.startsWith('pending-') && !pendingDeletions.value.has(blockId),
           )
           .map(([blockId, name]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
               method: 'PATCH',
               credentials: 'include',
               body: JSON.stringify({ name }),
@@ -146,7 +157,7 @@ async function save() {
         ...[...pendingDeletions.value]
           .filter(id => !id.startsWith('pending-'))
           .map(blockId =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
               method: 'DELETE',
               credentials: 'include',
             }),

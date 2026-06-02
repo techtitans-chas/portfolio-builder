@@ -167,7 +167,8 @@ function setValue(key: string, value: unknown) {
                 f => f.type !== 'inline-text' && f.type !== 'inline-rich',
               )"
               :key="field.key"
-              class="flex flex-col gap-1"
+              class="flex gap-1"
+              :class="['theme-color', 'checkbox'].includes(field.type) ? 'items-center justify-between' : 'flex-col'"
             >
               <label class="text-xs text-muted">{{ field.label }}</label>
 
@@ -242,6 +243,12 @@ function setValue(key: string, value: unknown) {
                   }}
                 </UButton>
               </div>
+
+              <PagebuilderThemeColorPicker
+                v-else-if="field.type === 'theme-color'"
+                :model-value="(getValue(field.key) as string | null) ?? null"
+                @update:model-value="setValue(field.key, $event)"
+              />
 
               <PagebuilderListFieldEditor
                 v-else-if="field.type === 'list'"

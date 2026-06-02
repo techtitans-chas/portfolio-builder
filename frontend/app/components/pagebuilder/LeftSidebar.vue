@@ -2,7 +2,7 @@
 import type { TabsItem } from '@nuxt/ui';
 import type { Page } from '@portfolio-builder/shared/types';
 import { VueDraggable } from 'vue-draggable-plus';
-import { ref, computed } from 'vue';
+import { useActivePalette } from '~/composables/useActivePalette';
 
 interface FontSettings {
   heading: string;
@@ -170,6 +170,23 @@ function onPageSaved(page: Page) {
     activePageId.value = page.id;
   }
 }
+
+// Keep shared active-theme state in sync so palette is available to block components
+const { activeThemeId, activeThemeMode } = useActivePalette();
+watch(
+  selectedThemeId,
+  id => {
+    activeThemeId.value = id;
+  },
+  { immediate: true },
+);
+watch(
+  currentThemeMode,
+  mode => {
+    activeThemeMode.value = mode;
+  },
+  { immediate: true },
+);
 
 // LayersView ref — exposed so index.vue save() can read pending changes
 const layersView = useTemplateRef('layersView');

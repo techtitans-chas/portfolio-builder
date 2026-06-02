@@ -1,4 +1,4 @@
-import type { ThemeColors } from '~/components/pagebuilder/ThemeView.vue';
+import type { ThemeColors, Theme } from '~/components/pagebuilder/ThemeView.vue';
 import type { Block, Page } from '@portfolio-builder/shared/types';
 import type { Ref, ComputedRef } from 'vue';
 
@@ -60,8 +60,8 @@ export function usePortfolio(
     return colorMode.value === 'dark';
   });
 
-  function buildCssVars(colors: ThemeColors): Record<string, string> {
-    return {
+  function buildCssVars(colors: ThemeColors, theme: Theme, dark: boolean): Record<string, string> {
+    const vars: Record<string, string> = {
       '--bg-page': colors.bgPage,
       '--bg-surface': colors.bgSurface,
       '--bg-nav': colors.bgNav,
@@ -70,6 +70,11 @@ export function usePortfolio(
       '--text-primary': colors.textPrimary,
       '--text-secondary': colors.textSecondary,
     };
+    for (const entry of theme.palette ?? []) {
+      const color = dark ? entry.dark : entry.light;
+      if (color) vars[`--palette-${entry.key}`] = color;
+    }
+    return vars;
   }
 
   const selectedFonts = computed(() => themeSettings.value?.fonts ?? null);
@@ -85,7 +90,11 @@ export function usePortfolio(
 
   const cssVars = computed(() => {
     const colorVars = selectedTheme.value
-      ? buildCssVars(isDark.value ? selectedTheme.value.dark : selectedTheme.value.light)
+      ? buildCssVars(
+          isDark.value ? selectedTheme.value.dark : selectedTheme.value.light,
+          selectedTheme.value,
+          isDark.value,
+        )
       : {};
     const fonts = selectedFonts.value;
     if (!fonts) return colorVars;

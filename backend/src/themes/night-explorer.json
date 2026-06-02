@@ -1,0 +1,29 @@
+{
+  "id": "night-explorer",
+  "label": "Night Explorer",
+  "light": {
+    "bgPage": "#eeedf8",
+    "bgSurface": "#ffffff",
+    "bgNav": "#ffffff",
+    "primary": "#5c4bdb",
+    "secondary": "#f27224",
+    "textPrimary": "#12103a",
+    "textSecondary": "#4a4870"
+  },
+  "dark": {
+    "bgPage": "#12103a",
+    "bgSurface": "#1e1c4e",
+    "bgNav": "#0e0c2e",
+    "primary": "#7b6ef6",
+    "secondary": "#f5883a",
+    "textPrimary": "#eeedf8",
+    "textSecondary": "#9896c8"
+  },
+  "palette": [
+    { "key": "page",      "label": "Page",   "light": "#eeedf8", "dark": "#12103a" },
+    { "key": "surface",   "label": "Card",   "light": "#ffffff",  "dark": "#1e1c4e" },
+    { "key": "primary",   "label": "Indigo", "light": "#5c4bdb", "dark": "#7b6ef6" },
+    { "key": "secondary", "label": "Ember",  "light": "#f27224", "dark": "#f5883a" },
+    { "key": "dark",      "label": "Night",  "light": "#12103a", "dark": "#eeedf8" }
+  ]
+}

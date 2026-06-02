@@ -11,11 +11,19 @@ export interface ThemeColors {
   textSecondary: string;
 }
 
+export interface ThemePaletteColor {
+  key: string;
+  label: string;
+  light: string | null;
+  dark: string | null;
+}
+
 export interface Theme {
   id: string;
   label: string;
   light: ThemeColors;
   dark: ThemeColors;
+  palette?: ThemePaletteColor[];
 }
 
 export interface FontSettings {

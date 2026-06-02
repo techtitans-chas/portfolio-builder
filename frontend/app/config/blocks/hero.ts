@@ -10,6 +10,7 @@ export const heroDefinition: BlockDefinition = {
   defaultContent: {
     heading: 'Your name',
     subheading: 'Your tagline',
+    background: null,
     backgroundImage: null,
     ctaButtons: [
       { id: crypto.randomUUID(), label: 'View my work', url: '#projects' },
@@ -32,7 +33,10 @@ export const heroDefinition: BlockDefinition = {
     },
     {
       label: 'Background',
-      fields: [{ key: 'backgroundImage', label: 'Background image', type: 'image' }],
+      fields: [
+        { key: 'background', label: 'Background color', type: 'theme-color' },
+        { key: 'backgroundImage', label: 'Background image', type: 'image' },
+      ],
     },
     {
       label: 'CTA Buttons',

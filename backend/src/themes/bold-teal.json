@@ -1,0 +1,29 @@
+{
+  "id": "bold-teal",
+  "label": "Bold Teal",
+  "light": {
+    "bgPage": "#ffffff",
+    "bgSurface": "#f4f4f4",
+    "bgNav": "#ffffff",
+    "primary": "#00b4b4",
+    "secondary": "#ff6b00",
+    "textPrimary": "#111111",
+    "textSecondary": "#555555"
+  },
+  "dark": {
+    "bgPage": "#0a1a1a",
+    "bgSurface": "#122626",
+    "bgNav": "#0a1a1a",
+    "primary": "#00d4d4",
+    "secondary": "#ff8c2a",
+    "textPrimary": "#f0fafa",
+    "textSecondary": "#8abcbc"
+  },
+  "palette": [
+    { "key": "page",      "label": "Page",   "light": "#ffffff",  "dark": "#0a1a1a" },
+    { "key": "surface",   "label": "Card",   "light": "#f4f4f4", "dark": "#122626" },
+    { "key": "primary",   "label": "Teal",   "light": "#00b4b4", "dark": "#00d4d4" },
+    { "key": "secondary", "label": "Orange", "light": "#ff6b00", "dark": "#ff8c2a" },
+    { "key": "dark",      "label": "Dark",   "light": "#111111", "dark": "#f0fafa" }
+  ]
+}
