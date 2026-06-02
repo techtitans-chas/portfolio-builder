@@ -9,8 +9,17 @@ definePageMeta({
 
 const viewModes: TabsItem[] = [
   { label: 'Desktop', value: 'desktop' },
+  { label: 'Tablet', value: 'tablet' },
   { label: 'Mobile', value: 'mobile' },
 ];
+
+const activeViewMode = ref('desktop');
+
+const previewWidth = computed(() => {
+  if (activeViewMode.value === 'mobile') return '375px';
+  if (activeViewMode.value === 'tablet') return '768px';
+  return '100%';
+});
 
 const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
@@ -43,13 +52,6 @@ const initialThemeSettings = computed(() => {
 const saving = ref(false);
 const saved = ref(false);
 const saveError = ref('');
-const iframeKey = ref(0);
-const portfolioUrl = computed(() => {
-  const portfolioSlug = portfolio.value?.slug;
-  const pageSlug = leftSidebar.value?.activePage?.slug;
-  if (!portfolioSlug) return null;
-  return pageSlug ? `/p/${portfolioSlug}/${pageSlug}` : `/p/${portfolioSlug}`;
-});
 
 const isDirty = computed<boolean>(() => {
   const layers: LayersViewInstance | null | undefined = leftSidebar.value?.layersView;
@@ -155,7 +157,6 @@ async function save() {
     // Refresh layers so pending blocks are replaced with real DB records
     leftSidebar.value?.layersView?.refresh();
     saved.value = true;
-    iframeKey.value++;
     setTimeout(() => (saved.value = false), 2000);
   } catch (e: unknown) {
     saveError.value = e instanceof Error ? e.message : 'Failed to save.';
@@ -169,7 +170,14 @@ async function save() {
   <AdminLayoutPageWrapper title="Page Builder">
     <!-- Header middle -->
     <template #middle>
-      <UTabs :items="viewModes" default-value="desktop" size="sm" class="w-40" :content="false" />
+      <UTabs
+        v-model="activeViewMode"
+        :items="viewModes"
+        default-value="desktop"
+        size="sm"
+        class="w-56"
+        :content="false"
+      />
     </template>
     <!-- Header right -->
     <template #right>
@@ -197,14 +205,19 @@ async function save() {
         :portfolio-id="portfolio?.id ?? null"
       />
 
-      <!-- Main content -->
-      <div class="flex-1 overflow-hidden">
-        <iframe
-          v-if="portfolioUrl"
-          :key="iframeKey"
-          :src="portfolioUrl"
-          class="w-full h-full border-0"
-        />
+      <!-- Main content / live preview -->
+      <div class="flex-1 overflow-auto bg-muted/30">
+        <div
+          v-if="portfolio"
+          class="h-full overflow-auto mx-auto transition-all duration-300"
+          :style="{ width: previewWidth }"
+        >
+          <PagebuilderPreview
+            :portfolio-slug="portfolio.slug"
+            :portfolio-title="portfolio.title"
+            :layers-view="leftSidebar?.layersView"
+          />
+        </div>
         <div v-else class="flex items-center justify-center h-full text-sm text-muted">
           No portfolio found
         </div>

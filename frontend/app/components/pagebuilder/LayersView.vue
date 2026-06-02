@@ -8,7 +8,7 @@ const props = defineProps<{
 }>();
 
 const { fetcher } = useApi();
-const { pendingNewBlocks, pendingDeletions, queueDeletion } = usePageEditor();
+const { pendingNewBlocks, pendingDeletions, pendingContentEdits, queueDeletion } = usePageEditor();
 
 const blockToDelete = ref<Block | null>(null);
 const confirmDeleteOpen = ref(false);
@@ -101,12 +101,21 @@ const { selectBlock, selectedBlock } = useSelectedBlock();
 // Merge DB blocks with pending new ones into a draggable ref
 const contentBlocks = ref<Block[]>([]);
 
+function applyPendingContent(block: Block): Block {
+  const edits = pendingContentEdits.value[block.id];
+  return edits ? { ...block, content: { ...block.content, ...edits } } : block;
+}
+
 watch(
-  [dbContentBlocks, pendingNewBlocks, pendingDeletions],
+  [dbContentBlocks, pendingNewBlocks, pendingDeletions, pendingContentEdits],
   () => {
     contentBlocks.value = [
-      ...dbContentBlocks.value.filter(b => !pendingDeletions.value.has(b.id)),
-      ...pendingNewBlocks.value.filter(b => !pendingDeletions.value.has(b.id)),
+      ...dbContentBlocks.value
+        .filter(b => !pendingDeletions.value.has(b.id))
+        .map(applyPendingContent),
+      ...pendingNewBlocks.value
+        .filter(b => !pendingDeletions.value.has(b.id))
+        .map(applyPendingContent),
     ];
   },
   { immediate: true, deep: true },
@@ -140,11 +149,21 @@ const layersChanges = computed(() => ({
   reorderedIds: reorderedIds.value,
 }));
 
+const liveHeaderBlock = computed(() =>
+  headerBlock.value ? applyPendingContent(headerBlock.value) : null,
+);
+const liveFooterBlock = computed(() =>
+  footerBlock.value ? applyPendingContent(footerBlock.value) : null,
+);
+
 defineExpose({
   layersChanges,
   portfolioId: computed(() => props.portfolioId),
   pageId: resolvedPageId,
   refresh: fetchBlocks,
+  contentBlocks,
+  headerBlock: liveHeaderBlock,
+  footerBlock: liveFooterBlock,
 });
 </script>
 
