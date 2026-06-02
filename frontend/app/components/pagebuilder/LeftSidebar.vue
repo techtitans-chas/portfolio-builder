@@ -181,7 +181,6 @@ defineExpose({ themeSettings, isThemeDirty, layersView, activePage });
       <div class="flex items-center justify-between mb-3">
         <span class="text-lg font-medium">Pages</span>
         <UButton
-          v-if="currentView === '0'"
           label="Add page"
           color="primary"
           variant="solid"
@@ -230,13 +229,13 @@ defineExpose({ themeSettings, isThemeDirty, layersView, activePage });
                       @click.stop="toggleShowInMenu(page)"
                     />
                     <UButton
+                      v-if="!page.isMandatory"
                       :icon="page.isPublished ? 'i-lucide-globe' : 'i-lucide-globe-off'"
                       color="neutral"
                       variant="ghost"
                       size="xs"
                       :class="page.isPublished ? 'text-highlighted' : 'text-muted'"
                       class="hover:text-highlighted hover:bg-accented/50"
-                      :disabled="page.isMandatory"
                       @click.stop="toggleVisibility(page)"
                     />
                     <UButton
