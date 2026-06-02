@@ -9,6 +9,7 @@ type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
 const props = defineProps<{
   portfolioSlug: string;
   portfolioTitle: string;
+  pageSlug: string;
   layersView: LayersViewInstance | null | undefined;
 }>();
 
@@ -69,7 +70,7 @@ function onBlockDropped(event: { newIndex?: number }) {
     :css-vars="cssVars"
     :portfolio-mode="portfolioMode"
     :site-name="portfolioTitle"
-    :home-url="`/p/${portfolioSlug}`"
+    :home-url="pageSlug === 'home' ? `/p/${portfolioSlug}` : `/p/${portfolioSlug}/${pageSlug}`"
     :nav-links="navLinks"
     :header-content="headerContent"
     :footer-content="footerContent"

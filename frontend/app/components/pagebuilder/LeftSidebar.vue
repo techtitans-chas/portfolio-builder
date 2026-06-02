@@ -277,7 +277,7 @@ defineExpose({ themeSettings, isThemeDirty, layersView, activePage });
         v-show="currentView === '1'"
         ref="layersView"
         :portfolio-id="portfolioId ?? null"
-        :page-id="null"
+        :page-id="activePageId"
       />
       <PagebuilderThemeView v-show="currentView === '2'" v-model="selectedThemeId" />
     </div>
