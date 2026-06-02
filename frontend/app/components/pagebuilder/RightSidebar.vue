@@ -135,8 +135,14 @@ function setValue(key: string, value: unknown) {
           <div v-for="field in section.fields" :key="field.key" class="flex flex-col gap-1">
             <label class="text-xs text-muted">{{ field.label }}</label>
 
+            <PagebuilderListFieldEditor
+              v-if="field.type === 'list'"
+              :field="field"
+              :model-value="(getValue(field.key) as Record<string, unknown>[]) ?? []"
+              @update:model-value="setValue(field.key, $event)"
+            />
             <UTextarea
-              v-if="field.type === 'textarea'"
+              v-else-if="field.type === 'textarea'"
               :model-value="(getValue(field.key) as string) ?? ''"
               :placeholder="field.placeholder"
               size="sm"

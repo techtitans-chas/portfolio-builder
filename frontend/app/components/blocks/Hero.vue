@@ -1,16 +1,20 @@
 <script setup lang="ts">
+export interface CtaButton {
+  id?: string;
+  label: string;
+  url: string;
+}
+
 export interface HeroBlockProps {
   heading?: string;
   subheading?: string;
-  primaryCta?: { label: string; url: string } | null;
-  secondaryCta?: { label: string; url: string } | null;
+  ctaButtons?: CtaButton[];
 }
 
 withDefaults(defineProps<HeroBlockProps>(), {
   heading: '',
   subheading: '',
-  primaryCta: null,
-  secondaryCta: null,
+  ctaButtons: () => [],
 });
 </script>
 
@@ -24,22 +28,20 @@ withDefaults(defineProps<HeroBlockProps>(), {
       {{ subheading }}
     </p>
 
-    <div v-if="primaryCta || secondaryCta" class="flex gap-4 mt-2">
+    <div v-if="ctaButtons && ctaButtons.length" class="flex flex-wrap gap-4 mt-2 justify-center">
       <a
-        v-if="primaryCta"
-        :href="primaryCta.url"
-        class="px-6 py-3 rounded-lg font-medium text-white transition-opacity hover:opacity-90"
-        :style="{ backgroundColor: 'var(--primary)' }"
+        v-for="(btn, index) in ctaButtons"
+        :key="btn.id ?? index"
+        :href="btn.url"
+        class="px-6 py-3 rounded-lg font-medium transition-opacity hover:opacity-90"
+        :class="index === 0 ? 'text-white' : 'border hover:opacity-80'"
+        :style="
+          index === 0
+            ? { backgroundColor: 'var(--primary)' }
+            : { color: 'var(--secondary)', borderColor: 'var(--secondary)' }
+        "
       >
-        {{ primaryCta.label }}
-      </a>
-      <a
-        v-if="secondaryCta"
-        :href="secondaryCta.url"
-        class="px-6 py-3 rounded-lg font-medium border transition-opacity hover:opacity-80"
-        :style="{ color: 'var(--secondary)', borderColor: 'var(--secondary)' }"
-      >
-        {{ secondaryCta.label }}
+        {{ btn.label }}
       </a>
     </div>
   </section>

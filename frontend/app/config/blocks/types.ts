@@ -1,11 +1,22 @@
 import type { Component } from 'vue';
 
+export interface ListItemField {
+  key: string;
+  label: string;
+  placeholder?: string;
+  type?: 'text' | 'url' | 'textarea';
+}
+
 export interface BlockField {
   key: string;
   label: string;
-  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'color' | 'url';
+  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'color' | 'url' | 'list';
   placeholder?: string;
   options?: { label: string; value: string }[];
+  // Only used when type === 'list':
+  itemLabel?: string;
+  itemFields?: ListItemField[];
+  defaultItem?: () => Record<string, unknown>;
 }
 
 export interface BlockSection {
