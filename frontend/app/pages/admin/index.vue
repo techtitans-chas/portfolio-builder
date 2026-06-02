@@ -105,13 +105,15 @@ async function save() {
           }),
         ),
         // New blocks (pending IDs are temporary — only type and content are sent)
-        ...pendingNewBlocks.value.map(b =>
-          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify({ type: b.type, content: b.content }),
-          }),
-        ),
+        ...pendingNewBlocks.value
+          .filter(b => b.pageId === pageId)
+          .map(b =>
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
+              method: 'POST',
+              credentials: 'include',
+              body: JSON.stringify({ type: b.type, content: b.content }),
+            }),
+          ),
         // Content edits
         ...Object.entries(pendingContentEdits.value).map(([blockId, content]) =>
           fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
@@ -128,13 +130,15 @@ async function save() {
             body: JSON.stringify({ name }),
           }),
         ),
-        // Deletions
-        ...[...pendingDeletions.value].map(blockId =>
-          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-          }),
-        ),
+        // Deletions — skip any pending IDs that were never persisted to the DB
+        ...[...pendingDeletions.value]
+          .filter(id => !id.startsWith('pending-'))
+          .map(blockId =>
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+              method: 'DELETE',
+              credentials: 'include',
+            }),
+          ),
       ]);
     }
 
@@ -202,6 +206,7 @@ async function save() {
               :portfolio-title="portfolio.title"
               :page-slug="leftSidebar?.activePage?.slug ?? 'home'"
               :layers-view="leftSidebar?.layersView"
+              :live-theme-settings="leftSidebar?.themeSettings"
             />
           </div>
         </div>
