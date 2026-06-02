@@ -35,20 +35,34 @@ withDefaults(defineProps<HeroBlockProps>(), {
   >
     <div v-if="backgroundImage" class="absolute inset-0 bg-black/40" />
     <div class="relative flex flex-col items-center gap-6">
-      <h1
+      <EditorInlineTextField
+        field-key="heading"
+        tag="h1"
         class="text-5xl font-bold leading-tight"
         :style="{ color: backgroundImage ? 'white' : 'var(--text-primary)' }"
       >
-        {{ heading }}
-      </h1>
+        <h1
+          class="text-5xl font-bold leading-tight"
+          :style="{ color: backgroundImage ? 'white' : 'var(--text-primary)' }"
+        >
+          {{ heading }}
+        </h1>
+      </EditorInlineTextField>
 
-      <p
-        v-if="subheading"
+      <EditorInlineRichField
+        field-key="subheading"
+        placeholder="Your tagline"
         class="text-lg max-w-xl"
         :style="{ color: backgroundImage ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
       >
-        {{ subheading }}
-      </p>
+        <p
+          v-if="subheading"
+          class="text-lg max-w-xl"
+          :style="{ color: backgroundImage ? 'rgba(255,255,255,0.85)' : 'var(--text-secondary)' }"
+        >
+          {{ subheading }}
+        </p>
+      </EditorInlineRichField>
 
       <div v-if="ctaButtons && ctaButtons.length" class="flex flex-wrap gap-4 mt-2 justify-center">
         <a
@@ -65,7 +79,12 @@ withDefaults(defineProps<HeroBlockProps>(), {
                 : { color: 'var(--secondary)', borderColor: 'var(--secondary)' }
           "
         >
-          {{ btn.label }}
+          <EditorInlineTextField
+            :field-key="`ctaButtons.${index}.label`"
+            :data-placeholder="btn.label"
+          >
+            {{ btn.label }}
+          </EditorInlineTextField>
         </a>
       </div>
     </div>

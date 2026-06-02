@@ -1,4 +1,5 @@
 import type { Block } from '@portfolio-builder/shared/types';
+import { setPath } from '~/utils/dotPath';
 
 export function usePageEditor() {
   // New blocks queued to be created on save — full Block objects with temporary pending IDs
@@ -45,6 +46,17 @@ export function usePageEditor() {
     pendingContentEdits.value = { ...pendingContentEdits.value, [blockId]: content };
   }
 
+  function setBlockField(
+    blockId: string,
+    path: string,
+    value: unknown,
+    currentContent: Record<string, unknown>,
+  ) {
+    const existing = pendingContentEdits.value[blockId] ?? currentContent;
+    const merged = setPath({ ...currentContent, ...existing }, path, value);
+    pendingContentEdits.value = { ...pendingContentEdits.value, [blockId]: merged };
+  }
+
   function setBlockName(blockId: string, name: string | null, liveBlock?: { name: string | null }) {
     if (liveBlock) liveBlock.name = name;
     pendingNameEdits.value = { ...pendingNameEdits.value, [blockId]: name };
@@ -74,6 +86,7 @@ export function usePageEditor() {
     addPendingBlock,
     queueDeletion,
     setBlockContent,
+    setBlockField,
     setBlockName,
     resetPending,
   };

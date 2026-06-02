@@ -76,6 +76,7 @@ function onBlockDropped(event: { newIndex?: number }) {
     :footer-content="footerContent"
     @select-header="headerBlock && selectBlock(headerBlock)"
     @select-footer="footerBlock && selectBlock(footerBlock)"
+    @click.capture="($event.target as HTMLElement).closest('a') && $event.preventDefault()"
   >
     <VueDraggable
       v-model="localBlocks"
@@ -105,7 +106,9 @@ function onBlockDropped(event: { newIndex?: number }) {
         >
           <UIcon name="i-lucide-grip-horizontal" class="size-4 text-white" />
         </div>
-        <BlocksRenderer :block="block" />
+        <PagebuilderPreviewBlock :block="block">
+          <BlocksRenderer :block="block" />
+        </PagebuilderPreviewBlock>
       </div>
     </VueDraggable>
   </PortfolioLayout>

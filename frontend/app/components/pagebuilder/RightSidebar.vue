@@ -152,7 +152,13 @@ function setValue(key: string, value: unknown) {
           <p v-if="section.label" class="text-xs font-semibold text-muted uppercase tracking-wide">
             {{ section.label }}
           </p>
-          <div v-for="field in section.fields" :key="field.key" class="flex flex-col gap-1">
+          <div
+            v-for="field in section.fields.filter(
+              f => f.type !== 'inline-text' && f.type !== 'inline-rich',
+            )"
+            :key="field.key"
+            class="flex flex-col gap-1"
+          >
             <label class="text-xs text-muted">{{ field.label }}</label>
 
             <!-- Image / file picker -->
