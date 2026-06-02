@@ -1,6 +1,15 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
+/* Block reorder drag clone inside the preview — sized by SortableJS via getBoundingClientRect */
+.preview-drag-fallback {
+  overflow: hidden !important;
+  opacity: 0.85 !important;
+  pointer-events: none !important;
+  border-radius: 0.25rem !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18) !important;
+}
+
 /* Block drag-into-preview: full-width placeholder shown in the drop target */
 .preview-drop-ghost {
   width: 100% !important;
@@ -15,12 +24,6 @@
   & > * {
     visibility: hidden !important;
   }
-}
-
-/* Block drag-into-preview: the floating clone that follows the cursor */
-.preview-drag-clone {
-  width: 200px !important;
-  opacity: 0.85 !important;
 }
 
 /* Rich text content — used by InlineRichField editor and Text block v-html output */

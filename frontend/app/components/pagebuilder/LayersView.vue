@@ -8,7 +8,8 @@ const props = defineProps<{
 }>();
 
 const { fetcher } = useApi();
-const { pendingNewBlocks, pendingDeletions, pendingContentEdits, queueDeletion } = usePageEditor();
+const { pendingNewBlocks, pendingDeletions, pendingContentEdits, queueDeletion, setCurrentPage } =
+  usePageEditor();
 
 const blockToDelete = ref<Block | null>(null);
 const confirmDeleteOpen = ref(false);
@@ -21,7 +22,11 @@ function requestDelete(block: Block) {
 function confirmDelete() {
   if (!blockToDelete.value) return;
   const id = blockToDelete.value.id;
-  queueDeletion(id);
+  if (id.startsWith('pending-')) {
+    pendingNewBlocks.value = pendingNewBlocks.value.filter(b => b.id !== id);
+  } else {
+    queueDeletion(id);
+  }
   blockToDelete.value = null;
   confirmDeleteOpen.value = false;
 }
@@ -97,6 +102,8 @@ watch(
   { immediate: true },
 );
 
+watch(resolvedPageId, id => setCurrentPage(id), { immediate: true });
+
 const { selectBlock, selectedBlock } = useSelectedBlock();
 
 // Merge DB blocks with pending new ones into a draggable ref
@@ -111,13 +118,11 @@ function applyPendingContent(block: Block): Block {
 }
 
 watch(
-  [dbContentBlocks, pendingNewBlocks, pendingDeletions, pendingContentEdits],
+  [dbContentBlocks, pendingNewBlocks, pendingDeletions, pendingContentEdits, resolvedPageId],
   () => {
+    const pageNewBlocks = pendingNewBlocks.value.filter(b => b.pageId === resolvedPageId.value);
     const allBlocks = new Map<string, Block>(
-      [...dbContentBlocks.value, ...pendingNewBlocks.value].map(b => [
-        b.id,
-        applyPendingContent(b),
-      ]),
+      [...dbContentBlocks.value, ...pageNewBlocks].map(b => [b.id, applyPendingContent(b)]),
     );
 
     const order = explicitOrder.value;

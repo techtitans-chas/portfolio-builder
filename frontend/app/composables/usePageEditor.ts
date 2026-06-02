@@ -5,6 +5,9 @@ export function usePageEditor() {
   // New blocks queued to be created on save — full Block objects with temporary pending IDs
   const pendingNewBlocks = useState<Block[]>('editor-pending-new-blocks', () => []);
 
+  // Tracks which page is currently open in the editor
+  const currentPageId = useState<string | null>('editor-current-page-id', () => null);
+
   // Block IDs queued for deletion on save
   const pendingDeletions = useState<Set<string>>('editor-pending-deletions', () => new Set());
 
@@ -20,10 +23,14 @@ export function usePageEditor() {
     () => ({}),
   );
 
+  function setCurrentPage(pageId: string | null) {
+    currentPageId.value = pageId;
+  }
+
   function addPendingBlock(type: string, content: Record<string, unknown>): Block {
     const newBlock: Block = {
       id: `pending-${Date.now()}-${Math.random()}`,
-      pageId: '',
+      pageId: currentPageId.value ?? '',
       type,
       name: null,
       sortOrder: 0,
@@ -88,6 +95,7 @@ export function usePageEditor() {
     setBlockContent,
     setBlockField,
     setBlockName,
+    setCurrentPage,
     resetPending,
   };
 }
