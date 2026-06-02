@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
       borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)',
     }"
   >
-    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="max-w-5xl mx-auto flex flex-col @sm:flex-row items-center justify-between gap-4">
       <span class="font-semibold text-sm" :style="{ color: 'var(--text-primary)' }">
         {{ siteName }}
       </span>

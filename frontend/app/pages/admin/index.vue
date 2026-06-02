@@ -1,25 +1,13 @@
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui';
 import type PagebuilderLeftSidebar from '~/components/pagebuilder/LeftSidebar.vue';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
+import { VIEWPORT_MODES } from '~/composables/usePreviewScale';
 
 definePageMeta({
   layout: 'admin',
 });
 
-const viewModes: TabsItem[] = [
-  { label: 'Desktop', value: 'desktop' },
-  { label: 'Tablet', value: 'tablet' },
-  { label: 'Mobile', value: 'mobile' },
-];
-
-const activeViewMode = ref('desktop');
-
-const previewWidth = computed(() => {
-  if (activeViewMode.value === 'mobile') return '375px';
-  if (activeViewMode.value === 'tablet') return '768px';
-  return '100%';
-});
+const { activeViewMode, wrapperStyle, scaleStyle } = usePreviewScale();
 
 const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
@@ -172,7 +160,7 @@ async function save() {
     <template #middle>
       <UTabs
         v-model="activeViewMode"
-        :items="viewModes"
+        :items="VIEWPORT_MODES"
         default-value="desktop"
         size="sm"
         class="w-56"
@@ -206,17 +194,15 @@ async function save() {
       />
 
       <!-- Main content / live preview -->
-      <div class="flex-1 overflow-auto bg-muted/30">
-        <div
-          v-if="portfolio"
-          class="h-full overflow-auto mx-auto transition-all duration-300"
-          :style="{ width: previewWidth }"
-        >
-          <PagebuilderPreview
-            :portfolio-slug="portfolio.slug"
-            :portfolio-title="portfolio.title"
-            :layers-view="leftSidebar?.layersView"
-          />
+      <div ref="previewCanvas" class="flex-1 overflow-auto bg-muted/30">
+        <div v-if="portfolio" :style="wrapperStyle">
+          <div ref="previewEl" class="@container" :style="scaleStyle">
+            <PagebuilderPreview
+              :portfolio-slug="portfolio.slug"
+              :portfolio-title="portfolio.title"
+              :layers-view="leftSidebar?.layersView"
+            />
+          </div>
         </div>
         <div v-else class="flex items-center justify-center h-full text-sm text-muted">
           No portfolio found
