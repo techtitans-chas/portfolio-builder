@@ -15,10 +15,17 @@ export function setPath(
   let cursor: Record<string, unknown> = result;
   for (let i = 0; i < keys.length - 1; i++) {
     const key = keys[i]!;
-    cursor[key] =
-      cursor[key] && typeof cursor[key] === 'object'
-        ? { ...(cursor[key] as Record<string, unknown>) }
-        : {};
+    const nextKey = keys[i + 1]!;
+    const nextIsIndex = /^\d+$/.test(nextKey);
+    const existing = cursor[key];
+    if (nextIsIndex) {
+      cursor[key] = Array.isArray(existing) ? [...existing] : [];
+    } else {
+      cursor[key] =
+        existing && typeof existing === 'object' && !Array.isArray(existing)
+          ? { ...(existing as Record<string, unknown>) }
+          : {};
+    }
     cursor = cursor[key] as Record<string, unknown>;
   }
   cursor[keys[keys.length - 1]!] = value;

@@ -20,8 +20,13 @@ export const heroDefinition: BlockDefinition = {
     {
       label: 'Content',
       fields: [
-        { key: 'heading', label: 'Heading', type: 'text', placeholder: 'Your name' },
-        { key: 'subheading', label: 'Subheading', type: 'textarea', placeholder: 'Your tagline' },
+        { key: 'heading', label: 'Heading', type: 'inline-text', placeholder: 'Your name' },
+        {
+          key: 'subheading',
+          label: 'Subheading',
+          type: 'inline-rich',
+          placeholder: 'Your tagline',
+        },
       ],
     },
     {
@@ -38,7 +43,7 @@ export const heroDefinition: BlockDefinition = {
           itemLabel: 'Button',
           defaultItem: () => ({ id: crypto.randomUUID(), label: 'Click here', url: '#' }),
           itemFields: [
-            { key: 'label', label: 'Label', placeholder: 'Click here' },
+            { key: 'label', label: 'Label', placeholder: 'Click here', inline: true },
             { key: 'url', label: 'URL', placeholder: '#', type: 'url' },
           ],
         },

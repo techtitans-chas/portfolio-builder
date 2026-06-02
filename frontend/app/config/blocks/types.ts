@@ -5,18 +5,32 @@ export interface ListItemField {
   label: string;
   placeholder?: string;
   type?: 'text' | 'url' | 'textarea';
+  inline?: boolean;
 }
 
 export interface BlockField {
   key: string;
   label: string;
-  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'color' | 'url' | 'image' | 'file' | 'list';
+  type:
+    | 'text'
+    | 'textarea'
+    | 'select'
+    | 'checkbox'
+    | 'color'
+    | 'url'
+    | 'image'
+    | 'file'
+    | 'list'
+    | 'inline-text'
+    | 'inline-rich';
   placeholder?: string;
   options?: { label: string; value: string }[];
   // Only used when type === 'list':
   itemLabel?: string;
   itemFields?: ListItemField[];
   defaultItem?: () => Record<string, unknown>;
+  // For 'text'/'textarea': also render as editable inline in the preview
+  inline?: boolean;
 }
 
 export interface BlockSection {

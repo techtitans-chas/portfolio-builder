@@ -26,6 +26,57 @@
   }
 }
 
+/* Rich text content — used by InlineRichField editor and Text block v-html output */
+.rich-text h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+.rich-text h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+}
+.rich-text h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.4em;
+}
+.rich-text p {
+  margin-bottom: 0.75em;
+}
+.rich-text p:last-child {
+  margin-bottom: 0;
+}
+.rich-text strong {
+  font-weight: 700;
+}
+.rich-text em {
+  font-style: italic;
+}
+.rich-text ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 0.75em;
+}
+.rich-text ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-bottom: 0.75em;
+}
+.rich-text li {
+  margin-bottom: 0.25em;
+}
+.rich-text blockquote {
+  border-left: 3px solid currentColor;
+  padding-left: 1em;
+  opacity: 0.7;
+  margin: 0.75em 0;
+}
+
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
 
