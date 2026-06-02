@@ -82,6 +82,8 @@ function onBlockDropped(event: { newIndex?: number }) {
       :group="{ name: 'blocks', pull: true, put: true }"
       :animation="150"
       handle=".block-drag-handle"
+      ghost-class="preview-drop-ghost"
+      drag-class="preview-drag-clone"
       class="min-h-16"
       @end="onReorder"
       @add="onBlockDropped"

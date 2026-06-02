@@ -1,6 +1,26 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
+/* Block drag-into-preview: full-width placeholder shown in the drop target */
+.preview-drop-ghost {
+  width: 100% !important;
+  height: 4rem !important;
+  background: color-mix(in srgb, var(--ui-primary) 15%, transparent) !important;
+  border: 2px dashed var(--ui-primary) !important;
+  border-radius: 0.5rem !important;
+  opacity: 1 !important;
+  overflow: hidden !important;
+
+  /* Hide the inner content of the ghost — only show the drop zone outline */
+  & > * { visibility: hidden !important; }
+}
+
+/* Block drag-into-preview: the floating clone that follows the cursor */
+.preview-drag-clone {
+  width: 200px !important;
+  opacity: 0.85 !important;
+}
+
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
 
