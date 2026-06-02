@@ -70,6 +70,7 @@ async function fetchBlocks() {
   error.value = '';
   visibilityChanges.value = {};
   reorderedIds.value = null;
+  explicitOrder.value = null;
 
   try {
     const data = await fetcher(
@@ -101,6 +102,9 @@ const { selectBlock, selectedBlock } = useSelectedBlock();
 // Merge DB blocks with pending new ones into a draggable ref
 const contentBlocks = ref<Block[]>([]);
 
+// Explicit user-defined order as an array of IDs; null means use default (db then pending)
+const explicitOrder = ref<string[] | null>(null);
+
 function applyPendingContent(block: Block): Block {
   const edits = pendingContentEdits.value[block.id];
   return edits ? { ...block, content: { ...block.content, ...edits } } : block;
@@ -109,14 +113,28 @@ function applyPendingContent(block: Block): Block {
 watch(
   [dbContentBlocks, pendingNewBlocks, pendingDeletions, pendingContentEdits],
   () => {
-    contentBlocks.value = [
-      ...dbContentBlocks.value
-        .filter(b => !pendingDeletions.value.has(b.id))
-        .map(applyPendingContent),
-      ...pendingNewBlocks.value
-        .filter(b => !pendingDeletions.value.has(b.id))
-        .map(applyPendingContent),
-    ];
+    const allBlocks = new Map<string, Block>(
+      [...dbContentBlocks.value, ...pendingNewBlocks.value].map(b => [
+        b.id,
+        applyPendingContent(b),
+      ]),
+    );
+
+    const order = explicitOrder.value;
+    if (order) {
+      // Honour explicit order, then append any new blocks not yet in it
+      const ordered = order.flatMap(id => {
+        const b = allBlocks.get(id);
+        return b && !pendingDeletions.value.has(id) ? [b] : [];
+      });
+      const inOrder = new Set(order);
+      const appended = [...allBlocks.values()].filter(
+        b => !inOrder.has(b.id) && !pendingDeletions.value.has(b.id),
+      );
+      contentBlocks.value = [...ordered, ...appended];
+    } else {
+      contentBlocks.value = [...allBlocks.values()].filter(b => !pendingDeletions.value.has(b.id));
+    }
   },
   { immediate: true, deep: true },
 );
@@ -139,8 +157,13 @@ function toggleFooterVisibility() {
 }
 
 function onReorder() {
-  // Only include real DB block IDs in the reorder payload
+  explicitOrder.value = contentBlocks.value.map(b => b.id);
   reorderedIds.value = contentBlocks.value.filter(b => !b.id.startsWith('pending-')).map(b => b.id);
+}
+
+function reorder(newList: Block[]) {
+  explicitOrder.value = newList.map(b => b.id);
+  reorderedIds.value = newList.filter(b => !b.id.startsWith('pending-')).map(b => b.id);
 }
 
 // Exposed so index.vue save() can read and flush pending changes
@@ -164,6 +187,7 @@ defineExpose({
   contentBlocks,
   headerBlock: liveHeaderBlock,
   footerBlock: liveFooterBlock,
+  reorder,
 });
 </script>
 
