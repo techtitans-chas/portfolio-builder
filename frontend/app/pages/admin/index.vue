@@ -200,6 +200,7 @@ async function save() {
             <PagebuilderPreview
               :portfolio-slug="portfolio.slug"
               :portfolio-title="portfolio.title"
+              :page-slug="leftSidebar?.activePage?.slug ?? 'home'"
               :layers-view="leftSidebar?.layersView"
             />
           </div>
