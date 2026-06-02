@@ -56,7 +56,7 @@ watch(
   pages,
   newPages => {
     if (!activePageId.value && newPages.length > 0) {
-      activePageId.value = newPages[0].id;
+      activePageId.value = newPages[0]?.id ?? null;
     }
   },
   { immediate: true },
