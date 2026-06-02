@@ -230,18 +230,29 @@ async function seed() {
       console.log(`  Created ${allPages.length} pages`);
     }
 
-    // --- Ensure layout blocks exist on home page ---
-    const homePage = allPages.find(p => p.slug === 'home');
-    if (homePage) {
+    // --- Ensure layout blocks exist on all pages ---
+    const heroContentBySlug: Record<string, { heading: string; subheading: string }> = {
+      home: { heading: user.title, subheading: user.description },
+      about: { heading: 'About Me', subheading: 'Learn more about who I am and what I do.' },
+      projects: { heading: 'Projects', subheading: 'A selection of things I have built.' },
+      contact: { heading: 'Contact', subheading: "I'd love to hear from you. Let's talk." },
+    };
+
+    for (const page of allPages) {
       const existingBlocks = await db
         .select({ id: blocks.id })
         .from(blocks)
-        .where(eq(blocks.pageId, homePage.id));
+        .where(eq(blocks.pageId, page.id));
 
       if (existingBlocks.length === 0) {
+        const heroContent = heroContentBySlug[page.slug] ?? {
+          heading: page.slug,
+          subheading: '',
+        };
+
         await db.insert(blocks).values([
           {
-            pageId: homePage.id,
+            pageId: page.id,
             type: 'header',
             sortOrder: 0,
             isVisible: true,
@@ -250,21 +261,21 @@ async function seed() {
             styles: {},
           },
           {
-            pageId: homePage.id,
+            pageId: page.id,
             type: 'hero',
             sortOrder: 1,
             isVisible: true,
             isMandatory: false,
             content: {
-              heading: user.title,
-              subheading: user.description,
+              heading: heroContent.heading,
+              subheading: heroContent.subheading,
               primaryCta: { label: 'View my work', url: '#projects' },
               secondaryCta: { label: 'Get in touch', url: '#contact' },
             },
             styles: {},
           },
           {
-            pageId: homePage.id,
+            pageId: page.id,
             type: 'footer',
             sortOrder: 9999,
             isVisible: true,
@@ -273,7 +284,7 @@ async function seed() {
             styles: {},
           },
         ]);
-        console.log(`  Created layout blocks`);
+        console.log(`  Created layout blocks for "${page.slug}"`);
       }
     }
 

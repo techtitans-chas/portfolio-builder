@@ -14,6 +14,7 @@ const viewModes: TabsItem[] = [
 
 const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
+const { fetchPages } = usePages();
 const {
   pendingNewBlocks,
   pendingContentEdits,
@@ -24,6 +25,7 @@ const {
 } = usePageEditor();
 
 await fetchUser();
+await fetchPages();
 
 type LeftSidebarInstance = InstanceType<typeof PagebuilderLeftSidebar>;
 type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
@@ -42,7 +44,12 @@ const saving = ref(false);
 const saved = ref(false);
 const saveError = ref('');
 const iframeKey = ref(0);
-const portfolioUrl = computed(() => (portfolio.value?.slug ? `/p/${portfolio.value.slug}` : null));
+const portfolioUrl = computed(() => {
+  const portfolioSlug = portfolio.value?.slug;
+  const pageSlug = leftSidebar.value?.activePage?.slug;
+  if (!portfolioSlug) return null;
+  return pageSlug ? `/p/${portfolioSlug}/${pageSlug}` : `/p/${portfolioSlug}`;
+});
 
 const isDirty = computed<boolean>(() => {
   const layers: LayersViewInstance | null | undefined = leftSidebar.value?.layersView;
