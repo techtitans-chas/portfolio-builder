@@ -6,6 +6,20 @@ import { getPath, setPath } from '~/utils/dotPath';
 const { selectedBlock } = useSelectedBlock();
 const { setBlockContent, setBlockName } = usePageEditor();
 
+const pickerFieldKey = ref<string | null>(null);
+const pickerOpen = ref(false);
+
+function openPicker(key: string) {
+  pickerFieldKey.value = key;
+  pickerOpen.value = true;
+}
+
+function onImageSelected(url: string) {
+  if (pickerFieldKey.value) setValue(pickerFieldKey.value, url);
+  pickerOpen.value = false;
+  pickerFieldKey.value = null;
+}
+
 const editingName = ref(false);
 const nameInput = ref('');
 
@@ -135,8 +149,41 @@ function setValue(key: string, value: unknown) {
           <div v-for="field in section.fields" :key="field.key" class="flex flex-col gap-1">
             <label class="text-xs text-muted">{{ field.label }}</label>
 
+            <!-- Image picker -->
+            <div v-if="field.type === 'image'" class="flex flex-col gap-2">
+              <div
+                v-if="getValue(field.key)"
+                class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted"
+              >
+                <img
+                  :src="getValue(field.key) as string"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+                <UButton
+                  icon="i-lucide-x"
+                  color="neutral"
+                  variant="solid"
+                  size="xs"
+                  class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+                  aria-label="Remove image"
+                  @click="setValue(field.key, null)"
+                />
+              </div>
+              <UButton
+                :icon="getValue(field.key) ? 'i-lucide-image' : 'i-lucide-plus'"
+                color="neutral"
+                variant="subtle"
+                size="xs"
+                class="w-full flex justify-center"
+                @click="openPicker(field.key)"
+              >
+                {{ getValue(field.key) ? 'Change image' : 'Choose image' }}
+              </UButton>
+            </div>
+
             <PagebuilderListFieldEditor
-              v-if="field.type === 'list'"
+              v-else-if="field.type === 'list'"
               :field="field"
               :model-value="(getValue(field.key) as Record<string, unknown>[]) ?? []"
               @update:model-value="setValue(field.key, $event)"
@@ -180,4 +227,10 @@ function setValue(key: string, value: unknown) {
       <p class="text-sm text-muted text-center">Select a block in the Layers panel to edit it</p>
     </div>
   </div>
+
+  <AdminMediaPickerModal
+    v-model:open="pickerOpen"
+    :selected-url="pickerFieldKey ? (getValue(pickerFieldKey) as string | null) : null"
+    @select="onImageSelected"
+  />
 </template>

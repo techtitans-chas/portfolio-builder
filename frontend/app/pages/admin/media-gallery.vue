@@ -57,13 +57,6 @@ async function confirmDelete() {
   deleteOpen.value = false;
   deleteTarget.value = null;
 }
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-function isImage(fileType: string): boolean {
-  return fileType.startsWith('image/');
-}
 </script>
 
 <template>
@@ -154,7 +147,7 @@ function isImage(fileType: string): boolean {
       >
         <!-- Image thumbnail -->
         <img
-          v-if="isImage(file.fileType)"
+          v-if="file.fileType.startsWith('image/')"
           :src="file.url"
           :alt="file.filename"
           class="w-full h-full object-cover"
@@ -187,9 +180,7 @@ function isImage(fileType: string): boolean {
       @delete="requestDelete"
     />
 
-    <!-- ------------------------------------------------------------------ -->
-    <!-- Delete confirmation modal                                            -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Delete confirmation modal -->
     <UModal
       v-model:open="deleteOpen"
       title="Delete file"
