@@ -284,9 +284,7 @@ async function seed() {
 
     // --- Delete and recreate projects ---
     await db.delete(projects).where(eq(projects.portfolioId, portfolio.id));
-    await db
-      .insert(projects)
-      .values(user.projects.map(p => ({ ...p, portfolioId: portfolio.id })));
+    await db.insert(projects).values(user.projects.map(p => ({ ...p, portfolioId: portfolio.id })));
     console.log(`  Created ${user.projects.length} projects`);
 
     // --- Delete and recreate experiences ---

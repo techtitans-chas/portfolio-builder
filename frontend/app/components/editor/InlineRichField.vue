@@ -26,10 +26,23 @@ const openPanel = ref<'heading' | 'list' | 'align' | 'link' | null>(null);
 const linkUrl = ref('');
 
 const fmt = reactive({
-  bold: false, italic: false, strike: false, code: false, underline: false,
-  h1: false, h2: false, h3: false, h4: false, h5: false, h6: false,
-  bulletList: false, orderedList: false, blockquote: false,
-  alignLeft: false, alignCenter: false, alignRight: false,
+  bold: false,
+  italic: false,
+  strike: false,
+  code: false,
+  underline: false,
+  h1: false,
+  h2: false,
+  h3: false,
+  h4: false,
+  h5: false,
+  h6: false,
+  bulletList: false,
+  orderedList: false,
+  blockquote: false,
+  alignLeft: false,
+  alignCenter: false,
+  alignRight: false,
   link: false,
 });
 
@@ -113,7 +126,9 @@ const editor = ctx
         ctx.setField(props.fieldKey, props.html ? editor.getHTML() : editor.getText());
         updateToolbar();
       },
-      onSelectionUpdate() { updateToolbar(); },
+      onSelectionUpdate() {
+        updateToolbar();
+      },
       onBlur() {
         setTimeout(() => {
           if (!toolbarRef.value?.matches(':focus-within')) {
@@ -122,7 +137,9 @@ const editor = ctx
           }
         }, 150);
       },
-      onFocus() { updateToolbar(); },
+      onFocus() {
+        updateToolbar();
+      },
     })
   : null;
 
@@ -170,10 +187,23 @@ function runAndClose(fn: () => void) {
           v-if="openPanel === 'heading'"
           class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5"
         >
-          <button v-for="lvl in [1,2,3,4,5,6]" :key="lvl" class="toolbar-btn text-xs font-semibold w-7"
+          <button
+            v-for="lvl in [1, 2, 3, 4, 5, 6]"
+            :key="lvl"
+            class="toolbar-btn text-xs font-semibold w-7"
             :class="{ active: fmt[`h${lvl}` as keyof typeof fmt] }"
-            @click="runAndClose(() => editor!.chain().focus().toggleHeading({ level: lvl as 1|2|3|4|5|6 }).run())"
-          >H{{ lvl }}</button>
+            @click="
+              runAndClose(() =>
+                editor!
+                  .chain()
+                  .focus()
+                  .toggleHeading({ level: lvl as 1 | 2 | 3 | 4 | 5 | 6 })
+                  .run(),
+              )
+            "
+          >
+            H{{ lvl }}
+          </button>
         </div>
 
         <!-- List panel -->
@@ -181,16 +211,28 @@ function runAndClose(fn: () => void) {
           v-if="openPanel === 'list'"
           class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5"
         >
-          <button class="toolbar-btn text-xs" :class="{ active: fmt.bulletList }" title="Bullet list"
-            @click="runAndClose(() => editor!.chain().focus().toggleBulletList().run())">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: fmt.bulletList }"
+            title="Bullet list"
+            @click="runAndClose(() => editor!.chain().focus().toggleBulletList().run())"
+          >
             <UIcon name="i-lucide-list" class="size-3.5" />
           </button>
-          <button class="toolbar-btn text-xs" :class="{ active: fmt.orderedList }" title="Numbered list"
-            @click="runAndClose(() => editor!.chain().focus().toggleOrderedList().run())">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: fmt.orderedList }"
+            title="Numbered list"
+            @click="runAndClose(() => editor!.chain().focus().toggleOrderedList().run())"
+          >
             <UIcon name="i-lucide-list-ordered" class="size-3.5" />
           </button>
-          <button class="toolbar-btn text-xs" :class="{ active: fmt.blockquote }" title="Blockquote"
-            @click="runAndClose(() => editor!.chain().focus().toggleBlockquote().run())">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: fmt.blockquote }"
+            title="Blockquote"
+            @click="runAndClose(() => editor!.chain().focus().toggleBlockquote().run())"
+          >
             <UIcon name="i-lucide-quote" class="size-3.5" />
           </button>
         </div>
@@ -200,16 +242,28 @@ function runAndClose(fn: () => void) {
           v-if="openPanel === 'align'"
           class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5"
         >
-          <button class="toolbar-btn text-xs" :class="{ active: fmt.alignLeft }" title="Align left"
-            @click="runAndClose(() => editor!.chain().focus().setTextAlign('left').run())">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: fmt.alignLeft }"
+            title="Align left"
+            @click="runAndClose(() => editor!.chain().focus().setTextAlign('left').run())"
+          >
             <UIcon name="i-lucide-align-left" class="size-3.5" />
           </button>
-          <button class="toolbar-btn text-xs" :class="{ active: fmt.alignCenter }" title="Align center"
-            @click="runAndClose(() => editor!.chain().focus().setTextAlign('center').run())">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: fmt.alignCenter }"
+            title="Align center"
+            @click="runAndClose(() => editor!.chain().focus().setTextAlign('center').run())"
+          >
             <UIcon name="i-lucide-align-center" class="size-3.5" />
           </button>
-          <button class="toolbar-btn text-xs" :class="{ active: fmt.alignRight }" title="Align right"
-            @click="runAndClose(() => editor!.chain().focus().setTextAlign('right').run())">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: fmt.alignRight }"
+            title="Align right"
+            @click="runAndClose(() => editor!.chain().focus().setTextAlign('right').run())"
+          >
             <UIcon name="i-lucide-align-right" class="size-3.5" />
           </button>
         </div>
@@ -226,63 +280,147 @@ function runAndClose(fn: () => void) {
             @keydown.enter.prevent="applyLink"
             @keydown.escape.prevent="openPanel = null"
           />
-          <button class="toolbar-btn text-xs bg-white/20 hover:bg-white/30" @click="applyLink">Apply</button>
-          <button v-if="fmt.link" class="toolbar-btn text-xs text-red-400" @click="editor!.chain().focus().unsetLink().run(); openPanel = null">
+          <button class="toolbar-btn text-xs bg-white/20 hover:bg-white/30" @click="applyLink">
+            Apply
+          </button>
+          <button
+            v-if="fmt.link"
+            class="toolbar-btn text-xs text-red-400"
+            @click="
+              editor!.chain().focus().unsetLink().run();
+              openPanel = null;
+            "
+          >
             <UIcon name="i-lucide-unlink" class="size-3.5" />
           </button>
         </div>
 
         <!-- Main toolbar row -->
-        <div class="flex items-center gap-0.5 bg-neutral-900 text-white rounded-lg shadow-xl px-1.5 py-1 text-sm select-none">
+        <div
+          class="flex items-center gap-0.5 bg-neutral-900 text-white rounded-lg shadow-xl px-1.5 py-1 text-sm select-none"
+        >
           <!-- Bold / Italic / Underline / Strike / Code -->
-          <button class="toolbar-btn font-bold" :class="{ active: fmt.bold }" title="Bold" @click="editor!.chain().focus().toggleBold().run()">B</button>
-          <button class="toolbar-btn italic" :class="{ active: fmt.italic }" title="Italic" @click="editor!.chain().focus().toggleItalic().run()"><em>I</em></button>
-          <button class="toolbar-btn underline text-xs" :class="{ active: fmt.underline }" title="Underline" @click="editor!.chain().focus().toggleUnderline().run()">U</button>
-          <button class="toolbar-btn line-through text-xs" :class="{ active: fmt.strike }" title="Strikethrough" @click="editor!.chain().focus().toggleStrike().run()">S</button>
-          <button class="toolbar-btn font-mono text-xs" :class="{ active: fmt.code }" title="Inline code" @click="editor!.chain().focus().toggleCode().run()">&lt;/&gt;</button>
+          <button
+            class="toolbar-btn font-bold"
+            :class="{ active: fmt.bold }"
+            title="Bold"
+            @click="editor!.chain().focus().toggleBold().run()"
+          >
+            B
+          </button>
+          <button
+            class="toolbar-btn italic"
+            :class="{ active: fmt.italic }"
+            title="Italic"
+            @click="editor!.chain().focus().toggleItalic().run()"
+          >
+            <em>I</em>
+          </button>
+          <button
+            class="toolbar-btn underline text-xs"
+            :class="{ active: fmt.underline }"
+            title="Underline"
+            @click="editor!.chain().focus().toggleUnderline().run()"
+          >
+            U
+          </button>
+          <button
+            class="toolbar-btn line-through text-xs"
+            :class="{ active: fmt.strike }"
+            title="Strikethrough"
+            @click="editor!.chain().focus().toggleStrike().run()"
+          >
+            S
+          </button>
+          <button
+            class="toolbar-btn font-mono text-xs"
+            :class="{ active: fmt.code }"
+            title="Inline code"
+            @click="editor!.chain().focus().toggleCode().run()"
+          >
+            &lt;/&gt;
+          </button>
 
           <div class="toolbar-divider" />
 
           <!-- Heading dropdown trigger -->
-          <button class="toolbar-btn text-xs font-semibold w-7"
-            :class="{ active: openPanel === 'heading' || fmt.h1 || fmt.h2 || fmt.h3 || fmt.h4 || fmt.h5 || fmt.h6 }"
-            title="Headings" @click="togglePanel('heading')">
+          <button
+            class="toolbar-btn text-xs font-semibold w-7"
+            :class="{
+              active:
+                openPanel === 'heading' || fmt.h1 || fmt.h2 || fmt.h3 || fmt.h4 || fmt.h5 || fmt.h6,
+            }"
+            title="Headings"
+            @click="togglePanel('heading')"
+          >
             {{ activeHeading }}
           </button>
 
           <!-- List dropdown trigger -->
-          <button class="toolbar-btn text-xs"
-            :class="{ active: openPanel === 'list' || fmt.bulletList || fmt.orderedList || fmt.blockquote }"
-            title="Lists" @click="togglePanel('list')">
-            <UIcon :name="typeof activeList === 'string' && activeList.startsWith('i-') ? activeList : 'i-lucide-list'" class="size-3.5" />
+          <button
+            class="toolbar-btn text-xs"
+            :class="{
+              active: openPanel === 'list' || fmt.bulletList || fmt.orderedList || fmt.blockquote,
+            }"
+            title="Lists"
+            @click="togglePanel('list')"
+          >
+            <UIcon
+              :name="
+                typeof activeList === 'string' && activeList.startsWith('i-')
+                  ? activeList
+                  : 'i-lucide-list'
+              "
+              class="size-3.5"
+            />
           </button>
 
           <!-- Align dropdown trigger -->
-          <button class="toolbar-btn text-xs"
+          <button
+            class="toolbar-btn text-xs"
             :class="{ active: openPanel === 'align' || fmt.alignCenter || fmt.alignRight }"
-            title="Text alignment" @click="togglePanel('align')">
+            title="Text alignment"
+            @click="togglePanel('align')"
+          >
             <UIcon :name="activeAlign" class="size-3.5" />
           </button>
 
           <div class="toolbar-divider" />
 
           <!-- Link -->
-          <button class="toolbar-btn text-xs" :class="{ active: openPanel === 'link' || fmt.link }" title="Link" @click="togglePanel('link')">
+          <button
+            class="toolbar-btn text-xs"
+            :class="{ active: openPanel === 'link' || fmt.link }"
+            title="Link"
+            @click="togglePanel('link')"
+          >
             <UIcon name="i-lucide-link" class="size-3.5" />
           </button>
 
           <!-- HR -->
-          <button class="toolbar-btn text-xs" title="Horizontal rule" @click="editor!.chain().focus().setHorizontalRule().run()">
+          <button
+            class="toolbar-btn text-xs"
+            title="Horizontal rule"
+            @click="editor!.chain().focus().setHorizontalRule().run()"
+          >
             <UIcon name="i-lucide-minus" class="size-3.5" />
           </button>
 
           <div class="toolbar-divider" />
 
           <!-- Undo / Redo -->
-          <button class="toolbar-btn text-xs" title="Undo" @click="editor!.chain().focus().undo().run()">
+          <button
+            class="toolbar-btn text-xs"
+            title="Undo"
+            @click="editor!.chain().focus().undo().run()"
+          >
             <UIcon name="i-lucide-undo-2" class="size-3.5" />
           </button>
-          <button class="toolbar-btn text-xs" title="Redo" @click="editor!.chain().focus().redo().run()">
+          <button
+            class="toolbar-btn text-xs"
+            title="Redo"
+            @click="editor!.chain().focus().redo().run()"
+          >
             <UIcon name="i-lucide-redo-2" class="size-3.5" />
           </button>
         </div>
