@@ -49,7 +49,6 @@ const isThemeDirty = computed(
 
 const { fetcher } = useApi();
 const { pages, pagesLoading, pagesError } = usePages();
-
 const activePageId = ref<string | null>(null);
 
 watch(

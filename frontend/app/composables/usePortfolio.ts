@@ -1,7 +1,13 @@
 import type { ThemeColors, Theme } from '~/components/pagebuilder/ThemeView.vue';
 import type { Block, Page } from '@portfolio-builder/shared/types';
+import type { Ref, ComputedRef } from 'vue';
 
-export function usePortfolio(slug: string) {
+type ThemeSettingsOverride = { themeId?: string | null; mode?: string } | null;
+
+export function usePortfolio(
+  slug: string,
+  themeOverride?: Ref<ThemeSettingsOverride> | ComputedRef<ThemeSettingsOverride>,
+) {
   const config = useRuntimeConfig();
   const colorMode = useColorMode();
   const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
@@ -23,9 +29,11 @@ export function usePortfolio(slug: string) {
 
   const portfolio = computed(() => portfolioData.value?.portfolio ?? null);
   const publishedPages = computed(() => pagesData.value?.pages ?? []);
-  const themeSettings = computed(
+  const dbThemeSettings = computed(
     () => portfolio.value?.themeSettings as { themeId?: string | null; mode?: string } | null,
   );
+
+  const themeSettings = computed(() => themeOverride?.value ?? dbThemeSettings.value);
 
   const allThemes = computed(() => (themesData.value as { themes: Theme[] } | null)?.themes ?? []);
   const selectedTheme = computed(
