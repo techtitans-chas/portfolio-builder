@@ -97,14 +97,16 @@ async function save() {
               body: JSON.stringify({ blockIds: reorderedIds }),
             })
           : Promise.resolve(),
-        // Visibility toggles
-        ...Object.entries(visibilityChanges).map(([blockId, isVisible]) =>
-          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
-            method: 'PATCH',
-            credentials: 'include',
-            body: JSON.stringify({ isVisible }),
-          }),
-        ),
+        // Visibility toggles — skip blocks queued for deletion
+        ...Object.entries(visibilityChanges)
+          .filter(([blockId]) => !pendingDeletions.value.has(blockId))
+          .map(([blockId, isVisible]) =>
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+              method: 'PATCH',
+              credentials: 'include',
+              body: JSON.stringify({ isVisible }),
+            }),
+          ),
         // New blocks — merge any sidebar edits made before saving into the content
         ...pendingNewBlocks.value
           .filter(b => b.pageId === pageId)
@@ -116,9 +118,11 @@ async function save() {
               body: JSON.stringify({ type: b.type, content }),
             });
           }),
-        // Content edits — skip pending IDs, their content is already in pendingNewBlocks
+        // Content edits — skip pending IDs and blocks queued for deletion
         ...Object.entries(pendingContentEdits.value)
-          .filter(([blockId]) => !blockId.startsWith('pending-'))
+          .filter(
+            ([blockId]) => !blockId.startsWith('pending-') && !pendingDeletions.value.has(blockId),
+          )
           .map(([blockId, content]) =>
             fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
               method: 'PATCH',
@@ -126,9 +130,11 @@ async function save() {
               body: JSON.stringify({ content }),
             }),
           ),
-        // Name edits — skip pending IDs
+        // Name edits — skip pending IDs and blocks queued for deletion
         ...Object.entries(pendingNameEdits.value)
-          .filter(([blockId]) => !blockId.startsWith('pending-'))
+          .filter(
+            ([blockId]) => !blockId.startsWith('pending-') && !pendingDeletions.value.has(blockId),
+          )
           .map(([blockId, name]) =>
             fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
               method: 'PATCH',
