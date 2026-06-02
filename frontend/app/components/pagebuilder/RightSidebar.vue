@@ -4,13 +4,15 @@ import { allBlockDefinitions } from '~/config/blocks';
 import { getPath, setPath } from '~/utils/dotPath';
 
 const { selectedBlock } = useSelectedBlock();
-const { setBlockContent, setBlockName } = usePageEditor();
+const { setBlockContent, setBlockName, pendingContentEdits } = usePageEditor();
 
 const pickerFieldKey = ref<string | null>(null);
 const pickerOpen = ref(false);
+const pickerImagesOnly = ref(true);
 
-function openPicker(key: string) {
+function openPicker(key: string, imagesOnly = true) {
   pickerFieldKey.value = key;
+  pickerImagesOnly.value = imagesOnly;
   pickerOpen.value = true;
 }
 
@@ -60,15 +62,19 @@ watch(definition, () => {
   currentTab.value = '0';
 });
 
-// Local editable copy of content — reset when selected block changes
+// Local editable copy of content — reset when selected block changes or its
+// server-side content updates (e.g. after a media file is deleted).
 const localContent = ref<Record<string, unknown>>({});
 
 watch(
-  selectedBlock,
-  block => {
-    localContent.value = block ? { ...block.content } : {};
+  () => selectedBlock.value?.content,
+  content => {
+    // Only overwrite local edits if there are no pending changes for this block,
+    // so typing in a field isn't interrupted by a background content update.
+    if (selectedBlock.value && pendingContentEdits.value[selectedBlock.value.id]) return;
+    localContent.value = content ? { ...content } : {};
   },
-  { immediate: true },
+  { immediate: true, deep: true },
 );
 
 const activeSections = computed(() => {
@@ -149,36 +155,72 @@ function setValue(key: string, value: unknown) {
           <div v-for="field in section.fields" :key="field.key" class="flex flex-col gap-1">
             <label class="text-xs text-muted">{{ field.label }}</label>
 
-            <!-- Image picker -->
-            <div v-if="field.type === 'image'" class="flex flex-col gap-2">
-              <div
-                v-if="getValue(field.key)"
-                class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted"
-              >
-                <img
-                  :src="getValue(field.key) as string"
-                  alt=""
-                  class="w-full h-full object-cover"
-                />
-                <UButton
-                  icon="i-lucide-x"
-                  color="neutral"
-                  variant="solid"
-                  size="xs"
-                  class="absolute top-1 right-1 opacity-80 hover:opacity-100"
-                  aria-label="Remove image"
-                  @click="setValue(field.key, null)"
-                />
-              </div>
+            <!-- Image / file picker -->
+            <div v-if="field.type === 'image' || field.type === 'file'" class="flex flex-col gap-2">
+              <template v-if="getValue(field.key)">
+                <!-- Image preview -->
+                <div
+                  v-if="field.type === 'image'"
+                  class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted"
+                >
+                  <img
+                    :src="getValue(field.key) as string"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                  <UButton
+                    icon="i-lucide-x"
+                    color="neutral"
+                    variant="solid"
+                    size="xs"
+                    class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+                    aria-label="Remove image"
+                    @click="setValue(field.key, null)"
+                  />
+                </div>
+                <!-- File preview -->
+                <div
+                  v-else
+                  class="flex items-center gap-2 px-2 py-1.5 rounded-md border border-default bg-muted text-xs"
+                >
+                  <UIcon name="i-lucide-file" class="size-4 text-muted shrink-0" />
+                  <span class="flex-1 truncate min-w-0">
+                    {{ (getValue(field.key) as string).split('/').at(-1) }}
+                  </span>
+                  <UButton
+                    icon="i-lucide-x"
+                    color="neutral"
+                    variant="ghost"
+                    size="xs"
+                    class="shrink-0 text-muted hover:text-highlighted"
+                    aria-label="Remove file"
+                    @click="setValue(field.key, null)"
+                  />
+                </div>
+              </template>
               <UButton
-                :icon="getValue(field.key) ? 'i-lucide-image' : 'i-lucide-plus'"
+                :icon="
+                  getValue(field.key)
+                    ? field.type === 'image'
+                      ? 'i-lucide-image'
+                      : 'i-lucide-file'
+                    : 'i-lucide-plus'
+                "
                 color="neutral"
                 variant="subtle"
                 size="xs"
                 class="w-full flex justify-center"
-                @click="openPicker(field.key)"
+                @click="openPicker(field.key, field.type === 'image')"
               >
-                {{ getValue(field.key) ? 'Change image' : 'Choose image' }}
+                {{
+                  getValue(field.key)
+                    ? field.type === 'image'
+                      ? 'Change image'
+                      : 'Change file'
+                    : field.type === 'image'
+                      ? 'Choose image'
+                      : 'Choose file'
+                }}
               </UButton>
             </div>
 
@@ -230,6 +272,7 @@ function setValue(key: string, value: unknown) {
 
   <AdminMediaPickerModal
     v-model:open="pickerOpen"
+    :images-only="pickerImagesOnly"
     :selected-url="pickerFieldKey ? (getValue(pickerFieldKey) as string | null) : null"
     @select="onImageSelected"
   />

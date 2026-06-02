@@ -10,7 +10,7 @@ export interface ListItemField {
 export interface BlockField {
   key: string;
   label: string;
-  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'color' | 'url' | 'image' | 'list';
+  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'color' | 'url' | 'image' | 'file' | 'list';
   placeholder?: string;
   options?: { label: string; value: string }[];
   // Only used when type === 'list':
