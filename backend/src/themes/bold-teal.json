@@ -20,10 +20,10 @@
     "textSecondary": "#8abcbc"
   },
   "palette": [
-    { "key": "page",      "label": "Page",   "light": "#ffffff",  "dark": "#0a1a1a" },
-    { "key": "surface",   "label": "Card",   "light": "#f4f4f4", "dark": "#122626" },
-    { "key": "primary",   "label": "Teal",   "light": "#00b4b4", "dark": "#00d4d4" },
+    { "key": "page", "label": "Page", "light": "#ffffff", "dark": "#0a1a1a" },
+    { "key": "surface", "label": "Card", "light": "#f4f4f4", "dark": "#122626" },
+    { "key": "primary", "label": "Teal", "light": "#00b4b4", "dark": "#00d4d4" },
     { "key": "secondary", "label": "Orange", "light": "#ff6b00", "dark": "#ff8c2a" },
-    { "key": "dark",      "label": "Dark",   "light": "#111111", "dark": "#f0fafa" }
+    { "key": "dark", "label": "Dark", "light": "#111111", "dark": "#f0fafa" }
   ]
 }

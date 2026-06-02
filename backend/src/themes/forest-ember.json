@@ -20,10 +20,10 @@
     "textSecondary": "#a3a89e"
   },
   "palette": [
-    { "key": "page",      "label": "Page",    "light": "#f5f3ee", "dark": "#0f110d" },
-    { "key": "surface",   "label": "Card",    "light": "#ffffff",  "dark": "#1a1f17" },
-    { "key": "primary",   "label": "Primary", "light": "#16a34a", "dark": "#4ade80" },
-    { "key": "secondary", "label": "Accent",  "light": "#f97316", "dark": "#fb923c" },
-    { "key": "dark",      "label": "Dark",    "light": "#1c1917", "dark": "#f0fdf4" }
+    { "key": "page", "label": "Page", "light": "#f5f3ee", "dark": "#0f110d" },
+    { "key": "surface", "label": "Card", "light": "#ffffff", "dark": "#1a1f17" },
+    { "key": "primary", "label": "Primary", "light": "#16a34a", "dark": "#4ade80" },
+    { "key": "secondary", "label": "Accent", "light": "#f97316", "dark": "#fb923c" },
+    { "key": "dark", "label": "Dark", "light": "#1c1917", "dark": "#f0fdf4" }
   ]
 }

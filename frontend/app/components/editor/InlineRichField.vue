@@ -116,6 +116,7 @@ function updateToolbar() {
 const editor = ctx
   ? useEditor({
       content: value.value,
+      editable: ctx.isActive,
       extensions: [
         StarterKit,
         TextAlign.configure({ types: ['heading', 'paragraph'] }),
@@ -148,6 +149,20 @@ watch(value, v => {
   const current = props.html ? editor.value.getHTML() : editor.value.getText();
   if (current !== v) editor.value.commands.setContent(v);
 });
+
+// Sync editability with block selection state
+watch(
+  () => ctx?.isActive,
+  active => {
+    if (!editor?.value) return;
+    editor.value.setEditable(!!active);
+    if (!active) {
+      editor.value.commands.blur();
+      toolbarVisible.value = false;
+      openPanel.value = null;
+    }
+  },
+);
 
 onUnmounted(() => editor?.value?.destroy());
 

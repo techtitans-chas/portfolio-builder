@@ -97,7 +97,10 @@ async function save() {
       const footerBlock = layers!.footerBlock;
       if (headerBlock?.pageId) blockPageMap.set(headerBlock.id, headerBlock.pageId);
       if (footerBlock?.pageId) blockPageMap.set(footerBlock.id, footerBlock.pageId);
-      const pageIdFor = (blockId: string) => blockPageMap.get(blockId) ?? pageId;
+      // Any block not in the map (e.g. header/footer edited without being in contentBlocks)
+      // falls back to homePageId, then to pageId as last resort
+      const homePageId = layers!.homePageId ?? pageId;
+      const pageIdFor = (blockId: string) => blockPageMap.get(blockId) ?? homePageId;
 
       await Promise.all([
         // Reorder
@@ -112,11 +115,14 @@ async function save() {
         ...Object.entries(visibilityChanges)
           .filter(([blockId]) => !pendingDeletions.value.has(blockId))
           .map(([blockId, isVisible]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
-              method: 'PATCH',
-              credentials: 'include',
-              body: JSON.stringify({ isVisible }),
-            }),
+            fetcher(
+              `/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`,
+              {
+                method: 'PATCH',
+                credentials: 'include',
+                body: JSON.stringify({ isVisible }),
+              },
+            ),
           ),
         // New blocks — merge any sidebar edits made before saving into the content
         ...pendingNewBlocks.value
@@ -135,11 +141,14 @@ async function save() {
             ([blockId]) => !blockId.startsWith('pending-') && !pendingDeletions.value.has(blockId),
           )
           .map(([blockId, content]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
-              method: 'PATCH',
-              credentials: 'include',
-              body: JSON.stringify({ content }),
-            }),
+            fetcher(
+              `/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`,
+              {
+                method: 'PATCH',
+                credentials: 'include',
+                body: JSON.stringify({ content }),
+              },
+            ),
           ),
         // Name edits — skip pending IDs and blocks queued for deletion
         ...Object.entries(pendingNameEdits.value)
@@ -147,20 +156,26 @@ async function save() {
             ([blockId]) => !blockId.startsWith('pending-') && !pendingDeletions.value.has(blockId),
           )
           .map(([blockId, name]) =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
-              method: 'PATCH',
-              credentials: 'include',
-              body: JSON.stringify({ name }),
-            }),
+            fetcher(
+              `/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`,
+              {
+                method: 'PATCH',
+                credentials: 'include',
+                body: JSON.stringify({ name }),
+              },
+            ),
           ),
         // Deletions — skip any pending IDs that were never persisted to the DB
         ...[...pendingDeletions.value]
           .filter(id => !id.startsWith('pending-'))
           .map(blockId =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`, {
-              method: 'DELETE',
-              credentials: 'include',
-            }),
+            fetcher(
+              `/api/portfolios/${portfolioId}/pages/${pageIdFor(blockId)}/blocks/${blockId}`,
+              {
+                method: 'DELETE',
+                credentials: 'include',
+              },
+            ),
           ),
       ]);
     }

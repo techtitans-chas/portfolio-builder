@@ -66,16 +66,36 @@ watch(definition, () => {
 // Local editable copy of content — reset when selected block changes or its
 // server-side content updates (e.g. after a media file is deleted).
 const localContent = ref<Record<string, unknown>>({});
+const localContentBlockId = ref<string | null>(null);
+
+watch(
+  () => selectedBlock.value?.id,
+  id => {
+    // Block changed — always reset to the new block's content (merging pending edits)
+    const block = selectedBlock.value;
+    if (!block) {
+      localContent.value = {};
+      localContentBlockId.value = null;
+      return;
+    }
+    const pending = pendingContentEdits.value[block.id] ?? {};
+    localContent.value = { ...(block.content as Record<string, unknown>), ...pending };
+    localContentBlockId.value = id ?? null;
+  },
+  { immediate: true },
+);
 
 watch(
   () => selectedBlock.value?.content,
   content => {
-    // Only overwrite local edits if there are no pending changes for this block,
-    // so typing in a field isn't interrupted by a background content update.
-    if (selectedBlock.value && pendingContentEdits.value[selectedBlock.value.id]) return;
+    // Content updated externally (e.g. inline field edit, media delete) —
+    // only apply if no pending sidebar edits to avoid interrupting typing.
+    if (!selectedBlock.value) return;
+    if (selectedBlock.value.id !== localContentBlockId.value) return;
+    if (pendingContentEdits.value[selectedBlock.value.id]) return;
     localContent.value = content ? { ...content } : {};
   },
-  { immediate: true, deep: true },
+  { deep: true },
 );
 
 const activeSections = computed(() => {
@@ -168,7 +188,11 @@ function setValue(key: string, value: unknown) {
               )"
               :key="field.key"
               class="flex gap-1"
-              :class="['theme-color', 'checkbox'].includes(field.type) ? 'items-center justify-between' : 'flex-col'"
+              :class="
+                ['theme-color', 'checkbox'].includes(field.type)
+                  ? 'items-center justify-between'
+                  : 'flex-col'
+              "
             >
               <label class="text-xs text-muted">{{ field.label }}</label>
 

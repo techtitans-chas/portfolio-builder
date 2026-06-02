@@ -29,7 +29,10 @@ const activeColor = computed(() => resolveColor(props.modelValue));
             class="size-8 rounded border-2 flex items-center justify-center transition-colors hover:border-primary"
             :class="!modelValue ? 'border-primary' : 'border-default'"
             title="None"
-            @click="emit('update:modelValue', null); open = false"
+            @click="
+              emit('update:modelValue', null);
+              open = false;
+            "
           >
             <UIcon name="i-lucide-ban" class="size-4 text-muted" />
           </button>
@@ -43,7 +46,10 @@ const activeColor = computed(() => resolveColor(props.modelValue));
             :class="modelValue === entry.key ? 'border-primary' : 'border-default'"
             :style="{ backgroundColor: resolveColor(entry.key) ?? undefined }"
             :title="entry.label"
-            @click="emit('update:modelValue', entry.key); open = false"
+            @click="
+              emit('update:modelValue', entry.key);
+              open = false;
+            "
           />
         </div>
       </div>

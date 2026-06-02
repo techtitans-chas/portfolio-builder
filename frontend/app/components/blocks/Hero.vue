@@ -38,8 +38,8 @@ const sectionStyle = computed(() => {
 });
 
 // Force light text on dark palette colors (primary/dark) or when a background image is set
-const hasDarkBg = computed(() =>
-  !props.backgroundImage && (props.background === 'primary' || props.background === 'dark'),
+const hasDarkBg = computed(
+  () => !props.backgroundImage && (props.background === 'primary' || props.background === 'dark'),
 );
 const forceLight = computed(() => !!props.backgroundImage || hasDarkBg.value);
 </script>
