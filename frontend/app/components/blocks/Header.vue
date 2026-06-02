@@ -6,6 +6,7 @@ export interface NavLink {
 
 export interface HeaderBlockProps {
   siteName?: string;
+  homeUrl?: string;
   navLinks?: NavLink[];
   cta?: { label: string; url: string } | null;
   showColorModeToggle?: boolean;
@@ -13,6 +14,7 @@ export interface HeaderBlockProps {
 
 withDefaults(defineProps<HeaderBlockProps>(), {
   siteName: '',
+  homeUrl: '/',
   navLinks: () => [],
   cta: null,
   showColorModeToggle: false,
@@ -28,9 +30,15 @@ withDefaults(defineProps<HeaderBlockProps>(), {
     }"
   >
     <!-- Site name / logo -->
-    <span class="font-bold text-lg" :style="{ color: 'var(--text-primary)' }">
+    <UButton
+      variant="ghost"
+      color="neutral"
+      class="font-bold text-lg"
+      :style="{ color: 'var(--text-primary)' }"
+      :to="homeUrl"
+    >
       {{ siteName }}
-    </span>
+    </UButton>
 
     <div class="flex items-center gap-6">
       <!-- Nav links -->

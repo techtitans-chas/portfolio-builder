@@ -7,9 +7,11 @@ export const blocks = pgTable('blocks', {
     .notNull()
     .references(() => pages.id, { onDelete: 'cascade' }),
   type: text('type').notNull(),
+  name: text('name'),
   sortOrder: real('sort_order').notNull().default(0),
   content: jsonb('content').notNull().default({}),
   styles: jsonb('styles').notNull().default({}),
+  isVisible: boolean('is_visible').notNull().default(true),
   isMandatory: boolean('is_mandatory').notNull().default(false),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
