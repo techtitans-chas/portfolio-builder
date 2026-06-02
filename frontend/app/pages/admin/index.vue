@@ -105,32 +105,37 @@ async function save() {
             body: JSON.stringify({ isVisible }),
           }),
         ),
-        // New blocks (pending IDs are temporary — only type and content are sent)
+        // New blocks — merge any sidebar edits made before saving into the content
         ...pendingNewBlocks.value
           .filter(b => b.pageId === pageId)
-          .map(b =>
-            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
+          .map(b => {
+            const content = { ...b.content, ...(pendingContentEdits.value[b.id] ?? {}) };
+            return fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
               method: 'POST',
               credentials: 'include',
-              body: JSON.stringify({ type: b.type, content: b.content }),
+              body: JSON.stringify({ type: b.type, content }),
+            });
+          }),
+        // Content edits — skip pending IDs, their content is already in pendingNewBlocks
+        ...Object.entries(pendingContentEdits.value)
+          .filter(([blockId]) => !blockId.startsWith('pending-'))
+          .map(([blockId, content]) =>
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+              method: 'PATCH',
+              credentials: 'include',
+              body: JSON.stringify({ content }),
             }),
           ),
-        // Content edits
-        ...Object.entries(pendingContentEdits.value).map(([blockId, content]) =>
-          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
-            method: 'PATCH',
-            credentials: 'include',
-            body: JSON.stringify({ content }),
-          }),
-        ),
-        // Name edits
-        ...Object.entries(pendingNameEdits.value).map(([blockId, name]) =>
-          fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
-            method: 'PATCH',
-            credentials: 'include',
-            body: JSON.stringify({ name }),
-          }),
-        ),
+        // Name edits — skip pending IDs
+        ...Object.entries(pendingNameEdits.value)
+          .filter(([blockId]) => !blockId.startsWith('pending-'))
+          .map(([blockId, name]) =>
+            fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/${blockId}`, {
+              method: 'PATCH',
+              credentials: 'include',
+              body: JSON.stringify({ name }),
+            }),
+          ),
         // Deletions — skip any pending IDs that were never persisted to the DB
         ...[...pendingDeletions.value]
           .filter(id => !id.startsWith('pending-'))

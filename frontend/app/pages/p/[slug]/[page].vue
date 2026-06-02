@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { Page } from '@portfolio-builder/shared/types';
+import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 const route = useRoute();
 const slug = route.params.slug as string;
 const pageSlug = route.params.page as string;
+
+provide(portfolioSlugKey, slug);
 
 definePageMeta({ layout: false });
 

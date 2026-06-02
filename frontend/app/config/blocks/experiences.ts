@@ -1,0 +1,30 @@
+import type { Component } from 'vue';
+import BlocksExperiences from '~/components/blocks/Experiences.vue';
+import type { BlockDefinition } from './types';
+
+export const experiencesDefinition: BlockDefinition = {
+  type: 'experiences',
+  label: 'Experience',
+  icon: 'i-lucide-briefcase',
+  component: BlocksExperiences as Component,
+  defaultContent: {
+    heading: 'Experience',
+    showHeading: true,
+    filterTag: '',
+  },
+  sections: [
+    {
+      label: 'Settings',
+      fields: [
+        { key: 'heading', label: 'Heading', type: 'text', placeholder: 'Experience' },
+        { key: 'showHeading', label: 'Show heading', type: 'checkbox' },
+        {
+          key: 'filterTag',
+          label: 'Filter by tag',
+          type: 'text',
+          placeholder: 'Leave empty to show all',
+        },
+      ],
+    },
+  ],
+};

@@ -3,6 +3,7 @@ import { VueDraggable } from 'vue-draggable-plus';
 import type { Block } from '@portfolio-builder/shared/types';
 import type { BlockDefinition } from '~/config/blocks';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
+import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
 
@@ -23,6 +24,8 @@ const { cssVars, portfolioMode, navLinks, googleFontsUrl } = usePortfolio(
   props.portfolioSlug,
   liveThemeOverride,
 );
+
+provide(portfolioSlugKey, props.portfolioSlug);
 
 // Local copy kept in sync with LayersView — VueDraggable mutates this directly
 const localBlocks = ref<Block[]>([]);
