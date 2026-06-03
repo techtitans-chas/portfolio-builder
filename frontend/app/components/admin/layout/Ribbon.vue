@@ -4,7 +4,7 @@ import { useDashboard } from '~/composables/useDashboard';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 
 const { apiBase } = useApi();
-const { fetch: fetchUser, clear, portfolio } = useCurrentUser();
+const { fetch: fetchUser, clear } = useCurrentUser();
 const { collections, fetchCollections } = useCollections();
 
 if (import.meta.client) {
@@ -73,26 +73,17 @@ const bottomLinks = [
 </script>
 
 <template>
-  <UDashboardSidebar v-model:open="isSidebarOpen" collapsible>
-    <template #default="{ collapsed }">
-      <UTooltip
-        :text="portfolio?.isPublished ? `p/${portfolio.slug}` : 'Portfolio unpublished'"
-        :delay-duration="300"
-      >
-        <UButton
-          :to="portfolio?.isPublished ? `/p/${portfolio.slug}` : undefined"
-          :target="portfolio?.isPublished ? '_blank' : undefined"
-          :disabled="!portfolio?.isPublished"
-          :icon="collapsed ? 'i-lucide-external-link' : undefined"
-          :trailing-icon="!collapsed ? 'i-lucide-external-link' : undefined"
-          variant="solid"
-          color="primary"
-          :class="['w-full mt-2 -mb-2', collapsed ? 'justify-center' : 'justify-between']"
-        >
-          <span v-if="!collapsed" class="truncate text-sm"> My Portfolio </span>
-        </UButton>
-      </UTooltip>
+  <UDashboardSidebar
+    v-model:open="isSidebarOpen"
+    collapsible
+    :ui="{ header: 'border-b border-default' }"
+  >
+    <template #header="{ collapsed }">
+      <span v-if="!collapsed" class="truncate text-sm font-medium flex-1">My Portfolio</span>
+      <UDashboardSidebarCollapse :class="collapsed ? 'mx-auto' : 'ml-auto'" />
+    </template>
 
+    <template #default="{ collapsed }">
       <UNavigationMenu
         :collapsed="collapsed"
         :items="topLinks"

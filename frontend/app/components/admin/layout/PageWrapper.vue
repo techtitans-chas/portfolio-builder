@@ -9,7 +9,6 @@ defineProps<{
     <template #header>
       <UDashboardNavbar :title="title">
         <template #leading>
-          <UDashboardSidebarCollapse />
           <slot name="left" />
         </template>
 
