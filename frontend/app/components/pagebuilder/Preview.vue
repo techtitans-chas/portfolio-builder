@@ -4,6 +4,8 @@ import type { Block } from '@portfolio-builder/shared/types';
 import type { BlockDefinition } from '~/config/blocks';
 import { allBlockDefinitions } from '~/config/blocks';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
+import type PortfolioLayoutComp from '~/components/PortfolioLayout.vue';
+import type { WidgetType } from '~/components/blocks/Header.vue';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
@@ -51,7 +53,18 @@ const footerContent = computed(
 );
 
 const { selectedBlock, selectBlock, clearSelection } = useSelectedBlock();
-const { addPendingBlock, pendingNewBlocks, queueDeletion } = usePageEditor();
+const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent } = usePageEditor();
+
+type LayoutInstance = InstanceType<typeof PortfolioLayoutComp>;
+const portfolioLayout = useTemplateRef<LayoutInstance>('portfolioLayout');
+
+defineExpose({ portfolioLayout });
+
+function onHeaderSlotReorder(slots: { leftOrder: WidgetType[]; centerOrder: WidgetType[]; rightOrder: WidgetType[]; topOrder: WidgetType[] }) {
+  const block = headerBlock.value;
+  if (!block) return;
+  setBlockContent(block.id, { ...(block.content as Record<string, unknown>), ...slots });
+}
 
 const blockToDelete = ref<Block | null>(null);
 const confirmDeleteOpen = ref(false);
@@ -130,6 +143,7 @@ function onBlockDropped(event: { newIndex?: number }) {
 
 <template>
   <PortfolioLayout
+    ref="portfolioLayout"
     is-editor
     :css-vars="cssVars"
     :portfolio-mode="portfolioMode"
@@ -140,6 +154,7 @@ function onBlockDropped(event: { newIndex?: number }) {
     :footer-content="footerContent"
     :google-fonts-url="googleFontsUrl"
     :logo-url="activeLogo"
+    :on-slot-reorder="onHeaderSlotReorder"
     @select-header="headerBlock && selectBlock(headerBlock)"
     @select-footer="footerBlock && selectBlock(footerBlock)"
     @click.capture="($event.target as HTMLElement).closest('a') && $event.preventDefault()"

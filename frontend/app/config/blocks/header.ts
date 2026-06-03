@@ -20,12 +20,27 @@ export const headerDefinition: BlockDefinition = {
   icon: 'i-lucide-panel-top',
   component: BlocksHeader as Component,
   defaultContent: {
+    // Slot layout
+    layout: 'single',
+    leftOrder: ['logo', 'nav'],
+    centerOrder: [],
+    rightOrder: ['cta'],
+    topOrder: ['logo'],
+
+    // Visibility
+    showLogo: true,
+    showNav: true,
+    showCta: true,
+    showSocials: false,
+    showColorModeToggle: false,
+
+    // Content
     siteName: '',
     ctaButtons: [],
     socialLinks: [],
-    showColorModeToggle: false,
     brandingDisplay: 'logo-and-title',
-    layout: 'left-nav',
+
+    // Style
     background: null,
     textColor: null,
     logoTint: null,
@@ -35,9 +50,33 @@ export const headerDefinition: BlockDefinition = {
   },
   tabs: [
     {
-      label: 'Content',
-      icon: 'i-lucide-type',
+      label: 'Widgets',
+      icon: 'i-lucide-layout-panel-left',
       sections: [
+        {
+          label: 'Show / hide',
+          fields: [
+            { key: 'showLogo', label: 'Logo', type: 'checkbox' },
+            { key: 'showNav', label: 'Navigation links', type: 'checkbox' },
+            { key: 'showCta', label: 'CTA buttons', type: 'checkbox' },
+            { key: 'showSocials', label: 'Social links', type: 'checkbox' },
+            { key: 'showColorModeToggle', label: 'Color mode toggle', type: 'checkbox' },
+          ],
+        },
+        {
+          label: 'Layout',
+          fields: [
+            {
+              key: 'layout',
+              label: 'Header layout',
+              type: 'select',
+              options: [
+                { label: 'Single row', value: 'single' },
+                { label: 'Stacked', value: 'stacked' },
+              ],
+            },
+          ],
+        },
         {
           label: 'Branding',
           fields: [
@@ -55,7 +94,7 @@ export const headerDefinition: BlockDefinition = {
           ],
         },
         {
-          label: 'Call to action buttons',
+          label: 'CTA buttons',
           fields: [
             {
               key: 'ctaButtons',
@@ -107,12 +146,6 @@ export const headerDefinition: BlockDefinition = {
             },
           ],
         },
-        {
-          label: 'Options',
-          fields: [
-            { key: 'showColorModeToggle', label: 'Show color mode toggle', type: 'checkbox' },
-          ],
-        },
       ],
     },
     {
@@ -120,19 +153,8 @@ export const headerDefinition: BlockDefinition = {
       icon: 'i-lucide-palette',
       sections: [
         {
-          label: 'Layout',
+          label: 'Dimensions',
           fields: [
-            {
-              key: 'layout',
-              label: 'Layout',
-              type: 'select',
-              options: [
-                { label: 'Logo left, nav left', value: 'left-nav' },
-                { label: 'Logo center, nav split', value: 'centered-logo' },
-                { label: 'Logo left, nav center', value: 'centered-nav' },
-                { label: 'Logo top, nav below', value: 'stacked' },
-              ],
-            },
             {
               key: 'height',
               label: 'Height',
@@ -146,7 +168,7 @@ export const headerDefinition: BlockDefinition = {
           ],
         },
         {
-          label: 'Navigation',
+          label: 'Navigation links',
           fields: [
             {
               key: 'navStyle',

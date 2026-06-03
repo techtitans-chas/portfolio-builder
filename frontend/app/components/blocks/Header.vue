@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { hexToFilter } from '~/utils/hexToFilter';
+import { inlineEditorKey } from '~/utils/inlineEditor';
+import HeaderWidget from './HeaderWidget.vue';
 
 export interface NavLink {
   label: string;
@@ -19,67 +21,79 @@ export interface SocialLink {
   url: string;
 }
 
-const SOCIAL_ICONS: Record<string, string> = {
-  twitter: 'i-simple-icons-x',
-  instagram: 'i-simple-icons-instagram',
-  linkedin: 'i-simple-icons-linkedin',
-  github: 'i-simple-icons-github',
-  youtube: 'i-simple-icons-youtube',
-  tiktok: 'i-simple-icons-tiktok',
-  facebook: 'i-simple-icons-facebook',
-  dribbble: 'i-simple-icons-dribbble',
-  behance: 'i-simple-icons-behance',
-};
+export type WidgetType = 'logo' | 'nav' | 'cta' | 'socials' | 'toggle';
+
 
 export interface HeaderBlockProps {
   siteName?: string;
   homeUrl?: string;
   navLinks?: NavLink[];
-  // Legacy single CTA kept for backwards compat, new is ctaButtons list
-  cta?: { label: string; url: string; style?: string } | null;
   ctaButtons?: CtaButton[];
   socialLinks?: SocialLink[];
   showColorModeToggle?: boolean;
+
+  layout?: 'single' | 'stacked';
+  leftOrder?: WidgetType[];
+  centerOrder?: WidgetType[];
+  rightOrder?: WidgetType[];
+  topOrder?: WidgetType[];
+
   logoUrl?: string | null;
   logoTint?: string | null;
   logoDark?: boolean;
   brandingDisplay?: 'logo-only' | 'title-only' | 'logo-and-title';
-  layout?: 'left-nav' | 'centered-logo' | 'centered-nav' | 'stacked';
+
   background?: string | null;
   textColor?: string | null;
   navStyle?: 'plain' | 'underline' | 'pill' | 'pill-filled' | 'block' | 'block-filled';
   height?: 'compact' | 'normal' | 'tall';
+
+  showLogo?: boolean;
+  showNav?: boolean;
+  showCta?: boolean;
+  showSocials?: boolean;
+
+  isEditor?: boolean;
+  onSlotReorder?: (slots: { leftOrder: WidgetType[]; centerOrder: WidgetType[]; rightOrder: WidgetType[]; topOrder: WidgetType[] }) => void;
+
+  cta?: { label: string; url: string; style?: string } | null;
 }
 
 const props = withDefaults(defineProps<HeaderBlockProps>(), {
   siteName: '',
   homeUrl: '/',
   navLinks: () => [],
-  cta: null,
   ctaButtons: () => [],
   socialLinks: () => [],
   showColorModeToggle: false,
+  layout: 'single',
+  leftOrder: () => ['logo', 'nav'],
+  centerOrder: () => [],
+  rightOrder: () => ['cta'],
+  topOrder: () => ['logo'],
   logoUrl: null,
   logoTint: null,
   logoDark: false,
   brandingDisplay: 'logo-and-title',
-  layout: 'left-nav',
   background: null,
   textColor: null,
   navStyle: 'plain',
   height: 'normal',
+  showLogo: true,
+  showNav: true,
+  showCta: true,
+  showSocials: false,
+  isEditor: false,
+  onSlotReorder: undefined,
+  cta: null,
 });
+
+const inlineEditor = inject(inlineEditorKey, null);
+const inEditor = computed(() => props.isEditor || !!inlineEditor);
 
 const { resolveColor } = useActivePalette();
 
-const logoFilterStyle = computed(() => {
-  const invert = props.logoDark ? 'invert(1) ' : '';
-  if (!props.logoTint) return invert ? { filter: invert.trim() } : {};
-  const hex = resolveColor(props.logoTint);
-  if (!hex) return invert ? { filter: invert.trim() } : {};
-  const filter = hexToFilter(hex);
-  return filter ? { filter: invert + filter } : {};
-});
+// ── Styles ──────────────────────────────────────────────────────────────────
 
 const paddingClass = computed(() => {
   if (props.height === 'compact') return 'py-2';
@@ -88,13 +102,10 @@ const paddingClass = computed(() => {
 });
 
 const bgColor = computed(() => (props.background ? resolveColor(props.background) : null));
-
 const bgStyle = computed(() =>
   bgColor.value ? { backgroundColor: bgColor.value } : { backgroundColor: 'var(--bg-nav)' },
 );
 
-// Auto-detect readable text color from the resolved background hex,
-// falling back to the theme's text variables when no custom bg is set.
 function hexLuminance(hex: string): number {
   const h = hex.replace('#', '');
   const r = parseInt(h.slice(0, 2), 16) / 255;
@@ -111,56 +122,130 @@ const autoTextColor = computed(() => {
   return hexLuminance(bg) > 0.179 ? '#1a1a1a' : '#ffffff';
 });
 
-const textStyle = computed(() =>
+const textStyle = computed<Record<string, string>>(() =>
   autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
 );
-const mutedTextStyle = computed(() =>
+const mutedTextStyle = computed<Record<string, string>>(() =>
   autoTextColor.value
     ? { color: autoTextColor.value, opacity: '0.7' }
-    : { color: 'var(--text-secondary)' },
+    : { color: 'var(--text-secondary)', opacity: '1' },
 );
+
+const logoFilterStyle = computed<Record<string, string>>(() => {
+  const invert = props.logoDark ? 'invert(1) ' : '';
+  const base: Record<string, string> = invert ? { filter: invert.trim() } : {};
+  if (!props.logoTint) return base;
+  const hex = resolveColor(props.logoTint);
+  if (!hex) return base;
+  const filter = hexToFilter(hex);
+  return filter ? { filter: invert + filter } : base;
+});
 
 const navLinkClass = computed(() => {
   switch (props.navStyle) {
     case 'underline':    return 'hover:underline underline-offset-4 transition-all';
-    case 'pill':        return 'px-3 py-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
-    case 'pill-filled': return 'px-3 py-1 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors';
-    case 'block':       return 'px-3 py-1 hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
-    case 'block-filled':return 'px-3 py-1 bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors';
-    default:            return 'hover:opacity-70 transition-opacity';
+    case 'pill':         return 'px-3 py-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
+    case 'pill-filled':  return 'px-3 py-1 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors';
+    case 'block':        return 'px-3 py-1 hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
+    case 'block-filled': return 'px-3 py-1 bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors';
+    default:             return 'hover:opacity-70 transition-opacity';
   }
 });
 
-// Merge legacy single cta with ctaButtons list for backwards compat
+const showLogoImg = computed<boolean>(() => !!props.logoUrl && props.brandingDisplay !== 'title-only');
+const showTitle   = computed(() => props.brandingDisplay !== 'logo-only');
+
 const resolvedCtaButtons = computed<CtaButton[]>(() => {
-  if (props.ctaButtons && props.ctaButtons.length > 0) return props.ctaButtons;
+  if (props.ctaButtons.length > 0) return props.ctaButtons;
   if (props.cta)
-    return [
-      {
-        id: 'legacy',
-        label: props.cta.label,
-        url: props.cta.url,
-        style: (props.cta.style as CtaButton['style']) ?? 'filled',
-      },
-    ];
+    return [{ id: 'legacy', label: props.cta.label, url: props.cta.url, style: (props.cta.style as CtaButton['style']) ?? 'filled' }];
   return [];
 });
 
-function ctaButtonStyle(style?: string) {
-  if (style === 'outline')
-    return { border: '1.5px solid currentColor', backgroundColor: 'transparent' };
-  if (style === 'ghost') return { backgroundColor: 'transparent' };
-  return { backgroundColor: 'var(--primary)', color: '#fff' };
+function ctaButtonStyle(style?: string): Record<string, string> {
+  if (style === 'outline') return { border: '1.5px solid currentColor', backgroundColor: 'transparent', color: 'currentColor' };
+  if (style === 'ghost') return { backgroundColor: 'transparent', color: 'var(--primary)', border: 'none' };
+  return { backgroundColor: 'var(--primary)', color: '#fff', border: 'none' };
 }
-
 function ctaButtonClass(style?: string) {
-  return style === 'filled'
-    ? 'px-4 py-1.5 rounded-lg text-sm font-medium transition-opacity hover:opacity-90'
-    : 'px-4 py-1.5 rounded-lg text-sm font-medium transition-opacity hover:opacity-70';
+  return 'px-4 py-1.5 rounded-lg text-sm font-medium transition-opacity ' +
+    (style === 'filled' ? 'hover:opacity-90' : 'hover:opacity-70');
 }
 
-const showLogo = computed(() => props.logoUrl && props.brandingDisplay !== 'title-only');
-const showTitle = computed(() => props.brandingDisplay !== 'logo-only');
+// ── Slot ordering ───────────────────────────────────────────────────────────
+
+const slotOrders = computed(() => ({
+  leftOrder:   props.leftOrder,
+  centerOrder: props.centerOrder,
+  rightOrder:  props.rightOrder,
+  topOrder:    props.topOrder,
+  layout:      props.layout ?? 'single',
+}));
+
+const slotVisibility = computed(() => ({
+  showLogo:            props.showLogo ?? true,
+  showNav:             props.showNav ?? true,
+  showCta:             props.showCta ?? true,
+  showSocials:         props.showSocials ?? false,
+  showColorModeToggle: props.showColorModeToggle ?? false,
+}));
+
+const { zones, slotOrder, initSortable, destroySortables } =
+  useHeaderSlots(slotOrders, slotVisibility, props.onSlotReorder);
+
+defineExpose({ slotOrder });
+
+// Zone element refs — SortableJS is attached to these
+const zoneRefs = {
+  top:    useTemplateRef<HTMLElement>('zone-top'),
+  left:   useTemplateRef<HTMLElement>('zone-left'),
+  center: useTemplateRef<HTMLElement>('zone-center'),
+  right:  useTemplateRef<HTMLElement>('zone-right'),
+};
+
+// Init/destroy SortableJS when editor mode changes
+watch(inEditor, (active) => {
+  destroySortables();
+  if (!active) return;
+  nextTick(() => {
+    for (const [zone, ref] of Object.entries(zoneRefs) as [keyof typeof zoneRefs, ReturnType<typeof useTemplateRef<HTMLElement>>][]) {
+      if (ref.value) initSortable(ref.value, zone);
+    }
+  });
+}, { immediate: true });
+
+// Also reinit when layout changes (stacked ↔ single swaps the DOM)
+watch(() => props.layout, () => {
+  if (!inEditor.value) return;
+  destroySortables();
+  nextTick(() => {
+    for (const [zone, ref] of Object.entries(zoneRefs) as [keyof typeof zoneRefs, ReturnType<typeof useTemplateRef<HTMLElement>>][]) {
+      if (ref.value) initSortable(ref.value, zone);
+    }
+  });
+});
+
+onUnmounted(() => destroySortables());
+
+// Shared widget props to avoid repetition in template
+const widgetProps = computed(() => ({
+  inEditor:            inEditor.value,
+  showLogoImg:         showLogoImg.value,
+  logoUrl:             props.logoUrl,
+  siteName:            props.siteName,
+  showTitle:           showTitle.value,
+  homeUrl:             props.homeUrl,
+  logoFilterStyle:     logoFilterStyle.value,
+  textStyle:           textStyle.value,
+  mutedTextStyle:      mutedTextStyle.value,
+  navLinks:            props.navLinks,
+  navLinkClass:        navLinkClass.value,
+  resolvedCtaButtons:  resolvedCtaButtons.value,
+  ctaButtonClass:      ctaButtonClass,
+  ctaButtonStyle:      ctaButtonStyle,
+  socialLinks:         props.socialLinks,
+  showColorModeToggle: props.showColorModeToggle,
+}));
 </script>
 
 <template>
@@ -172,194 +257,90 @@ const showTitle = computed(() => props.brandingDisplay !== 'logo-only');
       borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)',
     }"
   >
-    <!-- Shared sub-components as named slots via reusable fragments -->
-
-    <!-- ① left-nav: [logo/name] [nav] ··· [cta + socials + toggle] -->
-    <div v-if="layout === 'left-nav'" class="flex items-center justify-between gap-6">
-      <div class="flex items-center gap-8 min-w-0">
-        <!-- Branding -->
-        <a :href="homeUrl" class="flex items-center gap-2.5 shrink-0">
-          <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" :style="logoFilterStyle" />
-          <span
-            v-if="showTitle && siteName"
-            class="font-bold text-lg leading-none"
-            :style="textStyle"
-            >{{ siteName }}</span
-          >
-        </a>
-        <!-- Nav -->
-        <nav v-if="navLinks.length" class="flex gap-1 text-sm" :style="mutedTextStyle">
-          <a v-for="link in navLinks" :key="link.url" :href="link.url" :class="navLinkClass">{{
-            link.label
-          }}</a>
-        </nav>
-      </div>
-      <!-- Right -->
-      <div class="flex items-center gap-3 shrink-0">
-        <div v-if="socialLinks.length" class="flex items-center gap-2">
-          <a
-            v-for="s in socialLinks"
-            :key="s.id"
-            :href="s.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:opacity-70 transition-opacity"
-            :style="mutedTextStyle"
-          >
-            <UIcon :name="SOCIAL_ICONS[s.platform] ?? 'i-lucide-link'" class="size-4" />
-          </a>
+    <!-- ── Stacked ── -->
+    <template v-if="layout === 'stacked'">
+      <div class="flex justify-center mb-2">
+        <div
+          ref="zone-top"
+          class="flex items-center gap-3 min-h-9"
+          :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2 min-w-16'"
+        >
+          <HeaderWidget
+            v-for="widget in zones.top" :key="widget" :widget="widget" v-bind="widgetProps"
+          />
         </div>
-        <a
-          v-for="btn in resolvedCtaButtons"
-          :key="btn.id"
-          :href="btn.url"
-          :class="ctaButtonClass(btn.style)"
-          :style="ctaButtonStyle(btn.style)"
-          >{{ btn.label }}</a
-        >
-        <UColorModeButton v-if="showColorModeToggle" />
       </div>
-    </div>
-
-    <!-- ② centered-logo: [nav left] ··· [logo/name] ··· [nav right + extras] -->
-    <div v-else-if="layout === 'centered-logo'" class="flex items-center justify-between gap-6">
-      <!-- Left nav half -->
-      <nav v-if="navLinks.length" class="flex gap-1 text-sm flex-1" :style="mutedTextStyle">
-        <a
-          v-for="link in navLinks.slice(0, Math.ceil(navLinks.length / 2))"
-          :key="link.url"
-          :href="link.url"
-          :class="navLinkClass"
-          >{{ link.label }}</a
+      <div class="grid items-center gap-4" style="grid-template-columns: 1fr auto 1fr">
+        <div
+          ref="zone-left"
+          class="flex items-center gap-3 min-h-9"
+          :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2'"
         >
-      </nav>
-      <div v-else class="flex-1" />
-
-      <!-- Center branding -->
-      <a :href="homeUrl" class="flex items-center gap-2.5 shrink-0 px-4">
-        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" :style="logoFilterStyle" />
-        <span
-          v-if="showTitle && siteName"
-          class="font-bold text-lg leading-none"
-          :style="textStyle"
-          >{{ siteName }}</span
-        >
-      </a>
-
-      <!-- Right nav half + extras -->
-      <div class="flex items-center gap-4 flex-1 justify-end">
-        <nav v-if="navLinks.length" class="flex gap-1 text-sm" :style="mutedTextStyle">
-          <a
-            v-for="link in navLinks.slice(Math.ceil(navLinks.length / 2))"
-            :key="link.url"
-            :href="link.url"
-            :class="navLinkClass"
-            >{{ link.label }}</a
-          >
-        </nav>
-        <div v-if="socialLinks.length" class="flex items-center gap-2">
-          <a
-            v-for="s in socialLinks"
-            :key="s.id"
-            :href="s.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:opacity-70 transition-opacity"
-            :style="mutedTextStyle"
-          >
-            <UIcon :name="SOCIAL_ICONS[s.platform] ?? 'i-lucide-link'" class="size-4" />
-          </a>
+          <HeaderWidget
+            v-for="widget in zones.left" :key="widget" :widget="widget" v-bind="widgetProps"
+          />
         </div>
-        <a
-          v-for="btn in resolvedCtaButtons"
-          :key="btn.id"
-          :href="btn.url"
-          :class="ctaButtonClass(btn.style)"
-          :style="ctaButtonStyle(btn.style)"
-          >{{ btn.label }}</a
+        <div
+          ref="zone-center"
+          class="flex items-center gap-3 justify-center min-h-9"
+          :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2 min-w-16'"
         >
-        <UColorModeButton v-if="showColorModeToggle" />
+          <HeaderWidget
+            v-for="widget in zones.center" :key="widget" :widget="widget" v-bind="widgetProps"
+          />
+        </div>
+        <div
+          ref="zone-right"
+          class="flex items-center gap-3 justify-end min-h-9"
+          :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2'"
+        >
+          <HeaderWidget
+            v-for="widget in zones.right" :key="widget" :widget="widget" v-bind="widgetProps"
+          />
+        </div>
       </div>
-    </div>
+    </template>
 
-    <!-- ③ centered-nav: [logo/name] ··· [nav centered] ··· [extras] -->
-    <div v-else-if="layout === 'centered-nav'" class="flex items-center justify-between gap-6">
-      <!-- Left branding -->
-      <a :href="homeUrl" class="flex items-center gap-2.5 shrink-0 flex-1">
-        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" :style="logoFilterStyle" />
-        <span
-          v-if="showTitle && siteName"
-          class="font-bold text-lg leading-none"
-          :style="textStyle"
-          >{{ siteName }}</span
-        >
-      </a>
-
-      <!-- Center nav -->
-      <nav v-if="navLinks.length" class="flex gap-1 text-sm" :style="mutedTextStyle">
-        <a v-for="link in navLinks" :key="link.url" :href="link.url" :class="navLinkClass">{{
-          link.label
-        }}</a>
-      </nav>
-      <div v-else class="flex-1" />
-
-      <!-- Right extras -->
-      <div class="flex items-center gap-3 flex-1 justify-end">
-        <div v-if="socialLinks.length" class="flex items-center gap-2">
-          <a
-            v-for="s in socialLinks"
-            :key="s.id"
-            :href="s.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:opacity-70 transition-opacity"
-            :style="mutedTextStyle"
-          >
-            <UIcon :name="SOCIAL_ICONS[s.platform] ?? 'i-lucide-link'" class="size-4" />
-          </a>
-        </div>
-        <a
-          v-for="btn in resolvedCtaButtons"
-          :key="btn.id"
-          :href="btn.url"
-          :class="ctaButtonClass(btn.style)"
-          :style="ctaButtonStyle(btn.style)"
-          >{{ btn.label }}</a
-        >
-        <UColorModeButton v-if="showColorModeToggle" />
+    <!-- ── Single row ── -->
+    <div v-else class="grid items-center gap-4" style="grid-template-columns: 1fr auto 1fr">
+      <div
+        ref="zone-left"
+        class="flex items-center gap-3 min-h-9"
+        :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2'"
+      >
+        <HeaderWidget
+          v-for="widget in zones.left" :key="widget" :widget="widget" v-bind="widgetProps"
+        />
       </div>
-    </div>
-
-    <!-- ④ stacked: logo/name centered on top, nav + extras centered below -->
-    <div v-else-if="layout === 'stacked'" class="flex flex-col items-center gap-2">
-      <!-- Top: branding -->
-      <a :href="homeUrl" class="flex items-center gap-2.5">
-        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-10 w-auto max-w-40" :style="logoFilterStyle" />
-        <span v-if="showTitle && siteName" class="font-bold text-xl leading-none" :style="textStyle">{{ siteName }}</span>
-      </a>
-
-      <!-- Bottom row: nav + socials + cta + toggle -->
-      <div class="flex items-center justify-center gap-4 flex-wrap text-sm">
-        <nav v-if="navLinks.length" class="flex gap-1" :style="mutedTextStyle">
-          <a v-for="link in navLinks" :key="link.url" :href="link.url" :class="navLinkClass">{{ link.label }}</a>
-        </nav>
-        <div v-if="socialLinks.length" class="flex items-center gap-2" :style="mutedTextStyle">
-          <a
-            v-for="s in socialLinks" :key="s.id" :href="s.url"
-            target="_blank" rel="noopener noreferrer"
-            class="hover:opacity-70 transition-opacity"
-          >
-            <UIcon :name="SOCIAL_ICONS[s.platform] ?? 'i-lucide-link'" class="size-4" />
-          </a>
-        </div>
-        <a
-          v-for="btn in resolvedCtaButtons" :key="btn.id"
-          :href="btn.url"
-          :class="ctaButtonClass(btn.style)"
-          :style="ctaButtonStyle(btn.style)"
-        >{{ btn.label }}</a>
-        <UColorModeButton v-if="showColorModeToggle" />
+      <div
+        ref="zone-center"
+        class="flex items-center gap-3 justify-center min-h-9"
+        :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2 min-w-16'"
+      >
+        <HeaderWidget
+          v-for="widget in zones.center" :key="widget" :widget="widget" v-bind="widgetProps"
+        />
+      </div>
+      <div
+        ref="zone-right"
+        class="flex items-center gap-3 justify-end min-h-9"
+        :class="inEditor && 'outline-dashed outline-1 outline-black/10 rounded px-2'"
+      >
+        <HeaderWidget
+          v-for="widget in zones.right" :key="widget" :widget="widget" v-bind="widgetProps"
+        />
       </div>
     </div>
   </header>
 </template>
+
+<style>
+/* SortableJS ghost — the placeholder shown at the drop target */
+.header-sortable-ghost {
+  opacity: 0.3;
+}
+/* The element being dragged */
+.header-sortable-drag {
+  opacity: 0;
+}
+</style>
