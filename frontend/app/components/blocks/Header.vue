@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { hexToFilter } from '~/utils/hexToFilter';
+
 export interface NavLink {
   label: string;
   url: string;
@@ -39,11 +41,13 @@ export interface HeaderBlockProps {
   socialLinks?: SocialLink[];
   showColorModeToggle?: boolean;
   logoUrl?: string | null;
+  logoTint?: string | null;
+  logoDark?: boolean;
   brandingDisplay?: 'logo-only' | 'title-only' | 'logo-and-title';
-  layout?: 'left-nav' | 'centered-logo' | 'centered-nav';
+  layout?: 'left-nav' | 'centered-logo' | 'centered-nav' | 'stacked';
   background?: string | null;
   textColor?: string | null;
-  navStyle?: 'plain' | 'underline' | 'pill' | 'block';
+  navStyle?: 'plain' | 'underline' | 'pill' | 'pill-filled' | 'block' | 'block-filled';
   height?: 'compact' | 'normal' | 'tall';
 }
 
@@ -56,6 +60,8 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
   socialLinks: () => [],
   showColorModeToggle: false,
   logoUrl: null,
+  logoTint: null,
+  logoDark: false,
   brandingDisplay: 'logo-and-title',
   layout: 'left-nav',
   background: null,
@@ -65,6 +71,15 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
 });
 
 const { resolveColor } = useActivePalette();
+
+const logoFilterStyle = computed(() => {
+  const invert = props.logoDark ? 'invert(1) ' : '';
+  if (!props.logoTint) return invert ? { filter: invert.trim() } : {};
+  const hex = resolveColor(props.logoTint);
+  if (!hex) return invert ? { filter: invert.trim() } : {};
+  const filter = hexToFilter(hex);
+  return filter ? { filter: invert + filter } : {};
+});
 
 const paddingClass = computed(() => {
   if (props.height === 'compact') return 'py-2';
@@ -106,12 +121,14 @@ const mutedTextStyle = computed(() =>
 );
 
 const navLinkClass = computed(() => {
-  if (props.navStyle === 'underline') return 'hover:underline underline-offset-4 transition-all';
-  if (props.navStyle === 'pill')
-    return 'px-3 py-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
-  if (props.navStyle === 'block')
-    return 'px-3 py-1 hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
-  return 'hover:opacity-70 transition-opacity';
+  switch (props.navStyle) {
+    case 'underline':    return 'hover:underline underline-offset-4 transition-all';
+    case 'pill':        return 'px-3 py-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
+    case 'pill-filled': return 'px-3 py-1 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors';
+    case 'block':       return 'px-3 py-1 hover:bg-black/10 dark:hover:bg-white/10 transition-colors';
+    case 'block-filled':return 'px-3 py-1 bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors';
+    default:            return 'hover:opacity-70 transition-opacity';
+  }
 });
 
 // Merge legacy single cta with ctaButtons list for backwards compat
@@ -162,7 +179,7 @@ const showTitle = computed(() => props.brandingDisplay !== 'logo-only');
       <div class="flex items-center gap-8 min-w-0">
         <!-- Branding -->
         <a :href="homeUrl" class="flex items-center gap-2.5 shrink-0">
-          <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" />
+          <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" :style="logoFilterStyle" />
           <span
             v-if="showTitle && siteName"
             class="font-bold text-lg leading-none"
@@ -220,7 +237,7 @@ const showTitle = computed(() => props.brandingDisplay !== 'logo-only');
 
       <!-- Center branding -->
       <a :href="homeUrl" class="flex items-center gap-2.5 shrink-0 px-4">
-        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" />
+        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" :style="logoFilterStyle" />
         <span
           v-if="showTitle && siteName"
           class="font-bold text-lg leading-none"
@@ -269,7 +286,7 @@ const showTitle = computed(() => props.brandingDisplay !== 'logo-only');
     <div v-else-if="layout === 'centered-nav'" class="flex items-center justify-between gap-6">
       <!-- Left branding -->
       <a :href="homeUrl" class="flex items-center gap-2.5 shrink-0 flex-1">
-        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" />
+        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-9 w-auto max-w-36" :style="logoFilterStyle" />
         <span
           v-if="showTitle && siteName"
           class="font-bold text-lg leading-none"
@@ -309,6 +326,38 @@ const showTitle = computed(() => props.brandingDisplay !== 'logo-only');
           :style="ctaButtonStyle(btn.style)"
           >{{ btn.label }}</a
         >
+        <UColorModeButton v-if="showColorModeToggle" />
+      </div>
+    </div>
+
+    <!-- ④ stacked: logo/name centered on top, nav + extras centered below -->
+    <div v-else-if="layout === 'stacked'" class="flex flex-col items-center gap-2">
+      <!-- Top: branding -->
+      <a :href="homeUrl" class="flex items-center gap-2.5">
+        <img v-if="showLogo" :src="logoUrl!" :alt="siteName" class="h-10 w-auto max-w-40" :style="logoFilterStyle" />
+        <span v-if="showTitle && siteName" class="font-bold text-xl leading-none" :style="textStyle">{{ siteName }}</span>
+      </a>
+
+      <!-- Bottom row: nav + socials + cta + toggle -->
+      <div class="flex items-center justify-center gap-4 flex-wrap text-sm">
+        <nav v-if="navLinks.length" class="flex gap-1" :style="mutedTextStyle">
+          <a v-for="link in navLinks" :key="link.url" :href="link.url" :class="navLinkClass">{{ link.label }}</a>
+        </nav>
+        <div v-if="socialLinks.length" class="flex items-center gap-2" :style="mutedTextStyle">
+          <a
+            v-for="s in socialLinks" :key="s.id" :href="s.url"
+            target="_blank" rel="noopener noreferrer"
+            class="hover:opacity-70 transition-opacity"
+          >
+            <UIcon :name="SOCIAL_ICONS[s.platform] ?? 'i-lucide-link'" class="size-4" />
+          </a>
+        </div>
+        <a
+          v-for="btn in resolvedCtaButtons" :key="btn.id"
+          :href="btn.url"
+          :class="ctaButtonClass(btn.style)"
+          :style="ctaButtonStyle(btn.style)"
+        >{{ btn.label }}</a>
         <UColorModeButton v-if="showColorModeToggle" />
       </div>
     </div>

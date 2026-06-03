@@ -52,6 +52,8 @@ defineEmits<{
         :layout="(headerContent?.layout as any) || 'left-nav'"
         :background="(headerContent?.background as string | null) ?? null"
         :text-color="(headerContent?.textColor as string | null) ?? null"
+        :logo-tint="(headerContent?.logoTint as string | null) ?? null"
+        :logo-dark="!!(headerContent?.logoDark)"
         :nav-style="(headerContent?.navStyle as any) || 'plain'"
         :height="(headerContent?.height as any) || 'normal'"
       />
