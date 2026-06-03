@@ -2,6 +2,7 @@
 import { VueDraggable } from 'vue-draggable-plus';
 import type { Block } from '@portfolio-builder/shared/types';
 import type { BlockDefinition } from '~/config/blocks';
+import { allBlockDefinitions } from '~/config/blocks';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
@@ -81,6 +82,36 @@ function onReorder() {
   props.layersView?.reorder([...localBlocks.value]);
 }
 
+function onBlockDragStart(event: DragEvent, block: Block) {
+  const dt = event.dataTransfer;
+  if (!dt) return;
+
+  const label =
+    allBlockDefinitions.find(d => d.type === block.type)?.label ??
+    block.name ??
+    block.type ??
+    'Block';
+
+  const pill = document.createElement('div');
+  pill.textContent = label;
+  Object.assign(pill.style, {
+    position: 'fixed',
+    top: '-1000px',
+    left: '-1000px',
+    padding: '6px 14px',
+    background: 'rgb(1, 193, 106)',
+    color: '#fff',
+    borderRadius: '6px',
+    fontSize: '13px',
+    fontWeight: '500',
+    pointerEvents: 'none',
+    whiteSpace: 'nowrap',
+  });
+  document.body.appendChild(pill);
+  dt.setDragImage(pill, pill.offsetWidth / 2, 20);
+  requestAnimationFrame(() => document.body.removeChild(pill));
+}
+
 // Called when a BlockDefinition is dropped in from the blocks tab
 function onBlockDropped(event: { newIndex?: number }) {
   const idx = event.newIndex ?? localBlocks.value.length - 1;
@@ -147,6 +178,7 @@ function onBlockDropped(event: { newIndex?: number }) {
               ? 'after:ring-primary'
               : 'after:ring-transparent hover:after:ring-primary/60'
           "
+          @dragstart="onBlockDragStart($event, block)"
           @click="selectBlock(block)"
         >
           <!-- Drag handle — visible on hover -->
