@@ -35,17 +35,17 @@ function cloneDefinition(def: BlockDefinition) {
     :group="{ name: 'blocks', pull: 'clone', put: false }"
     :clone="cloneDefinition"
     :sort="false"
-    class="grid grid-cols-3 gap-2"
+    class="grid grid-cols-2 gap-px bg-[var(--ui-border)] border border-[var(--ui-border)]"
   >
     <UButton
       v-for="block in availableBlocks"
       :key="block.type"
       color="neutral"
-      variant="outline"
+      variant="ghost"
       :aria-label="block.label"
       :label="block.label"
       :icon="block.icon"
-      class="flex-col text-xs justify-center aspect-square"
+      class="flex-col text-xs justify-center aspect-square rounded-none bg-[var(--ui-bg)]"
       :ui="{ leadingIcon: 'size-6' }"
       @click="addBlock(block.type)"
     />

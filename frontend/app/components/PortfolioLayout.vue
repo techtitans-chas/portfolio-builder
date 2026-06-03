@@ -46,6 +46,7 @@ defineEmits<{
         :show-color-mode-toggle="portfolioMode === 'both'"
       />
     </div>
+
     <BlocksHeader
       v-else
       :site-name="(headerContent?.siteName as string) || siteName"
