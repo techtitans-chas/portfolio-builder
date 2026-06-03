@@ -12,6 +12,8 @@ interface ThemeSettings {
   themeId?: string | null;
   mode?: 'light' | 'dark' | 'both';
   fonts?: FontSettings | null;
+  logoLight?: string | null;
+  logoDark?: string | null;
 }
 
 const props = defineProps<{
@@ -34,6 +36,8 @@ const themeSettings = computed(() => ({
   themeId: selectedThemeId.value,
   mode: currentThemeMode.value,
   fonts: selectedFonts.value,
+  logoLight: props.initialThemeSettings?.logoLight ?? null,
+  logoDark: props.initialThemeSettings?.logoDark ?? null,
 }));
 
 watch(

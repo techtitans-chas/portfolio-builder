@@ -18,6 +18,7 @@ const {
   headerBlock,
   footerBlock,
   baseURL,
+  activeLogo,
 } = usePortfolio(slug);
 
 // Await the portfolio fetch so the 404 guard below has settled data on SSR
@@ -73,6 +74,7 @@ useHead({
     :header-content="headerContent"
     :footer-content="footerContent"
     :google-fonts-url="googleFontsUrl"
+    :logo-url="activeLogo"
   >
     <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />
   </PortfolioLayout>

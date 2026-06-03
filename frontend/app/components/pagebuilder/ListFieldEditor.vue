@@ -107,6 +107,13 @@ function itemSummary(item: Record<string, unknown>): string {
               :rows="2"
               @update:model-value="updateItemField(index, subField.key, $event)"
             />
+            <USelect
+              v-else-if="subField.type === 'select'"
+              :model-value="(getItemField(item, subField.key) as string) ?? ''"
+              :items="subField.options ?? []"
+              size="sm"
+              @update:model-value="updateItemField(index, subField.key, $event)"
+            />
             <UInput
               v-else
               :model-value="(getItemField(item, subField.key) as string) ?? ''"

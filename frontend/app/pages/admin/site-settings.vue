@@ -16,6 +16,8 @@ const form = reactive({
   ogImageUrl: '',
   seoTitle: '',
   seoDescription: '',
+  logoLight: '',
+  logoDark: '',
 });
 
 watch(
@@ -23,6 +25,10 @@ watch(
   p => {
     if (!p) return;
     const seoMeta = p.seoMeta as { seoTitle?: string; seoDescription?: string } | null;
+    const themeSettings = p.themeSettings as {
+      logoLight?: string | null;
+      logoDark?: string | null;
+    } | null;
     form.isPublished = p.isPublished ?? false;
     form.title = p.title ?? '';
     form.slug = p.slug ?? '';
@@ -30,6 +36,8 @@ watch(
     form.ogImageUrl = p.ogImageUrl ?? '';
     form.seoTitle = seoMeta?.seoTitle ?? '';
     form.seoDescription = seoMeta?.seoDescription ?? '';
+    form.logoLight = themeSettings?.logoLight ?? '';
+    form.logoDark = themeSettings?.logoDark ?? '';
   },
   { immediate: true },
 );
@@ -41,6 +49,8 @@ const errorMessage = ref('');
 const saving = ref(false);
 
 const ogImagePickerOpen = ref(false);
+const logoLightPickerOpen = ref(false);
+const logoDarkPickerOpen = ref(false);
 
 async function save() {
   if (!portfolio.value?.id) return;
@@ -48,6 +58,9 @@ async function save() {
   saving.value = true;
   successMessage.value = '';
   errorMessage.value = '';
+
+  // Preserve existing themeSettings fields (theme, mode, fonts) and only update logo fields
+  const existingThemeSettings = portfolio.value.themeSettings as Record<string, unknown> | null;
 
   try {
     await fetcher(`/api/portfolios/${portfolio.value.id}/settings`, {
@@ -62,6 +75,11 @@ async function save() {
         seoMeta: {
           seoTitle: form.seoTitle || null,
           seoDescription: form.seoDescription || null,
+        },
+        themeSettings: {
+          ...existingThemeSettings,
+          logoLight: form.logoLight || null,
+          logoDark: form.logoDark || null,
         },
       }),
     });
@@ -108,6 +126,74 @@ async function save() {
           placeholder="A short description of your portfolio."
           class="w-full"
         />
+      </UFormField>
+
+      <USeparator class="mt-8 mb-6" />
+
+      <UFormField
+        label="Logo (light mode)"
+        name="logoLight"
+        description="Shown on light backgrounds. SVG or transparent PNG recommended."
+      >
+        <div class="flex flex-col gap-2 w-full">
+          <div
+            v-if="form.logoLight"
+            class="relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"
+          >
+            <img :src="form.logoLight" alt="" class="max-h-full max-w-full object-contain p-2" />
+            <UButton
+              icon="i-lucide-x"
+              color="neutral"
+              variant="solid"
+              size="xs"
+              class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+              aria-label="Remove light logo"
+              @click="form.logoLight = ''"
+            />
+          </div>
+          <UButton
+            :icon="form.logoLight ? 'i-lucide-image' : 'i-lucide-plus'"
+            color="neutral"
+            variant="outline"
+            class="w-full"
+            @click="logoLightPickerOpen = true"
+          >
+            {{ form.logoLight ? 'Change logo' : 'Choose logo' }}
+          </UButton>
+        </div>
+      </UFormField>
+
+      <UFormField
+        label="Logo (dark mode)"
+        name="logoDark"
+        description="Shown on dark backgrounds. Falls back to light logo if not set."
+      >
+        <div class="flex flex-col gap-2 w-full">
+          <div
+            v-if="form.logoDark"
+            class="relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"
+          >
+            <img :src="form.logoDark" alt="" class="max-h-full max-w-full object-contain p-2" />
+            <UButton
+              icon="i-lucide-x"
+              color="neutral"
+              variant="solid"
+              size="xs"
+              class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+              aria-label="Remove dark logo"
+              @click="form.logoDark = ''"
+            />
+          </div>
+          <UButton
+            :icon="form.logoDark ? 'i-lucide-image' : 'i-lucide-plus'"
+            color="neutral"
+            variant="outline"
+            class="w-full"
+            @click="logoDarkPickerOpen = true"
+          >
+            {{ form.logoDark ? 'Change logo' : 'Choose logo' }}
+          </UButton>
+        </div>
       </UFormField>
 
       <USeparator class="mt-8 mb-6" />
@@ -165,5 +251,19 @@ async function save() {
     images-only
     :selected-url="form.ogImageUrl || null"
     @select="url => (form.ogImageUrl = url)"
+  />
+
+  <AdminMediaPickerModal
+    v-model:open="logoLightPickerOpen"
+    images-only
+    :selected-url="form.logoLight || null"
+    @select="url => (form.logoLight = url)"
+  />
+
+  <AdminMediaPickerModal
+    v-model:open="logoDarkPickerOpen"
+    images-only
+    :selected-url="form.logoDark || null"
+    @select="url => (form.logoDark = url)"
   />
 </template>

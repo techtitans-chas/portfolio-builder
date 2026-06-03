@@ -36,6 +36,8 @@ const initialThemeSettings = computed(() => {
     themeId?: string | null;
     mode?: 'light' | 'dark' | 'both';
     fonts?: { heading: string; body: string } | null;
+    logoLight?: string | null;
+    logoDark?: string | null;
   } | null;
   return s ?? null;
 });
@@ -78,12 +80,24 @@ async function save() {
     const layers = leftSidebar.value?.layersView;
     const pageId = layers?.pageId ?? null;
 
-    // Theme settings
+    // Fetch fresh portfolio data so we don't overwrite logo fields saved in site-settings
+    // (useCurrentUser state may be stale if the user saved there without reloading this tab)
+    const freshPortfolio = await fetcher(`/api/users/me`, {
+      credentials: 'include',
+      cache: 'no-store',
+    }).then((d: { portfolio: Record<string, unknown> | null }) => d.portfolio);
+    const existingThemeSettings = (freshPortfolio?.themeSettings ?? null) as Record<
+      string,
+      unknown
+    > | null;
     await fetcher(`/api/portfolios/${portfolioId}/settings`, {
       method: 'PATCH',
       credentials: 'include',
       body: JSON.stringify({
-        themeSettings: leftSidebar.value?.themeSettings ?? null,
+        themeSettings: {
+          ...existingThemeSettings,
+          ...(leftSidebar.value?.themeSettings ?? {}),
+        },
       }),
     });
 

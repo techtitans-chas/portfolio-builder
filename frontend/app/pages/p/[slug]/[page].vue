@@ -10,8 +10,16 @@ provide(portfolioSlugKey, slug);
 
 definePageMeta({ layout: false });
 
-const { portfolioMode, cssVars, googleFontsUrl, navLinks, headerBlock, footerBlock, baseURL } =
-  usePortfolio(slug);
+const {
+  portfolioMode,
+  cssVars,
+  googleFontsUrl,
+  navLinks,
+  headerBlock,
+  footerBlock,
+  baseURL,
+  activeLogo,
+} = usePortfolio(slug);
 
 // Await these directly so portfolio and pages are settled before the 404 guards below.
 // useAsyncData deduplicates by key — usePortfolio's fetches are reused, not duplicated.
@@ -91,6 +99,7 @@ useHead({
     :header-content="headerContent"
     :footer-content="footerContent"
     :google-fonts-url="googleFontsUrl"
+    :logo-url="activeLogo"
   >
     <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />
   </PortfolioLayout>
