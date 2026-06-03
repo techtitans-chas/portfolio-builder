@@ -1,0 +1,29 @@
+{
+  "id": "soft-bloom",
+  "label": "Soft Bloom",
+  "light": {
+    "bgPage": "#fdf0e8",
+    "bgSurface": "#ffffff",
+    "bgNav": "#ffffff",
+    "primary": "#3a7d6e",
+    "secondary": "#e8703a",
+    "textPrimary": "#2c2218",
+    "textSecondary": "#6b5a4e"
+  },
+  "dark": {
+    "bgPage": "#1e1610",
+    "bgSurface": "#2c2218",
+    "bgNav": "#1e1610",
+    "primary": "#5aad9a",
+    "secondary": "#f0885a",
+    "textPrimary": "#fdf0e8",
+    "textSecondary": "#c0a898"
+  },
+  "palette": [
+    { "key": "page", "label": "Page", "light": "#fdf0e8", "dark": "#1e1610" },
+    { "key": "surface", "label": "Card", "light": "#ffffff", "dark": "#2c2218" },
+    { "key": "primary", "label": "Teal", "light": "#3a7d6e", "dark": "#5aad9a" },
+    { "key": "secondary", "label": "Coral", "light": "#e8703a", "dark": "#f0885a" },
+    { "key": "dark", "label": "Dark", "light": "#2c2218", "dark": "#fdf0e8" }
+  ]
+}

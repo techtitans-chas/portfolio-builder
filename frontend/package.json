@@ -19,6 +19,7 @@
     "@portfolio-builder/shared": "workspace:*",
     "@tiptap/extension-bubble-menu": "^3.24.0",
     "@tiptap/extension-placeholder": "^3.24.0",
+    "@tiptap/extension-text-align": "^3.24.0",
     "@tiptap/pm": "^3.24.0",
     "@tiptap/starter-kit": "^3.24.0",
     "@tiptap/vue-3": "^3.24.0",

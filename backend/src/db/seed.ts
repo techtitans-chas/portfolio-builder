@@ -215,22 +215,24 @@ async function seed() {
 
     if (!portfolio) continue;
 
-    // --- Ensure pages exist ---
+    // --- Delete and recreate pages + blocks ---
     const existingPages = await db
-      .select({ id: pages.id, slug: pages.slug })
+      .select({ id: pages.id })
       .from(pages)
       .where(eq(pages.portfolioId, portfolio.id));
 
-    let allPages = existingPages;
-    if (existingPages.length === 0) {
-      allPages = await db
-        .insert(pages)
-        .values(defaultPages.map(p => ({ ...p, portfolioId: portfolio.id })))
-        .returning({ id: pages.id, slug: pages.slug });
-      console.log(`  Created ${allPages.length} pages`);
+    for (const page of existingPages) {
+      await db.delete(blocks).where(eq(blocks.pageId, page.id));
     }
+    await db.delete(pages).where(eq(pages.portfolioId, portfolio.id));
 
-    // --- Ensure layout blocks exist on all pages ---
+    const allPages = await db
+      .insert(pages)
+      .values(defaultPages.map(p => ({ ...p, portfolioId: portfolio.id })))
+      .returning({ id: pages.id, slug: pages.slug });
+    console.log(`  Created ${allPages.length} pages`);
+
+    // --- Create blocks for each page ---
     const heroContentBySlug: Record<string, { heading: string; subheading: string }> = {
       home: { heading: user.title, subheading: user.description },
       about: { heading: 'About Me', subheading: 'Learn more about who I am and what I do.' },
@@ -239,80 +241,58 @@ async function seed() {
     };
 
     for (const page of allPages) {
-      const existingBlocks = await db
-        .select({ id: blocks.id })
-        .from(blocks)
-        .where(eq(blocks.pageId, page.id));
+      const heroContent = heroContentBySlug[page.slug] ?? { heading: page.slug, subheading: '' };
 
-      if (existingBlocks.length === 0) {
-        const heroContent = heroContentBySlug[page.slug] ?? {
-          heading: page.slug,
-          subheading: '',
-        };
-
-        await db.insert(blocks).values([
-          {
-            pageId: page.id,
-            type: 'header',
-            sortOrder: 0,
-            isVisible: true,
-            isMandatory: true,
-            content: { siteName: user.title, cta: { label: 'Hire me', url: '#contact' } },
-            styles: {},
+      await db.insert(blocks).values([
+        {
+          pageId: page.id,
+          type: 'header',
+          sortOrder: 0,
+          isVisible: true,
+          isMandatory: true,
+          content: { siteName: user.title, cta: { label: 'Hire me', url: '#contact' } },
+          styles: {},
+        },
+        {
+          pageId: page.id,
+          type: 'hero',
+          sortOrder: 1,
+          isVisible: true,
+          isMandatory: false,
+          content: {
+            heading: heroContent.heading,
+            subheading: heroContent.subheading,
+            ctaButtons: [
+              { id: crypto.randomUUID(), label: 'View my work', url: '#projects' },
+              { id: crypto.randomUUID(), label: 'Get in touch', url: '#contact' },
+            ],
           },
-          {
-            pageId: page.id,
-            type: 'hero',
-            sortOrder: 1,
-            isVisible: true,
-            isMandatory: false,
-            content: {
-              heading: heroContent.heading,
-              subheading: heroContent.subheading,
-              primaryCta: { label: 'View my work', url: '#projects' },
-              secondaryCta: { label: 'Get in touch', url: '#contact' },
-            },
-            styles: {},
-          },
-          {
-            pageId: page.id,
-            type: 'footer',
-            sortOrder: 9999,
-            isVisible: true,
-            isMandatory: true,
-            content: { siteName: user.title, copyrightText: '' },
-            styles: {},
-          },
-        ]);
-        console.log(`  Created layout blocks for "${page.slug}"`);
-      }
+          styles: {},
+        },
+        {
+          pageId: page.id,
+          type: 'footer',
+          sortOrder: 9999,
+          isVisible: true,
+          isMandatory: true,
+          content: { siteName: user.title, copyrightText: '' },
+          styles: {},
+        },
+      ]);
+      console.log(`  Created blocks for "${page.slug}"`);
     }
 
-    // --- Ensure projects exist ---
-    const [existingProject] = await db
-      .select({ id: projects.id })
-      .from(projects)
-      .where(eq(projects.portfolioId, portfolio.id));
+    // --- Delete and recreate projects ---
+    await db.delete(projects).where(eq(projects.portfolioId, portfolio.id));
+    await db.insert(projects).values(user.projects.map(p => ({ ...p, portfolioId: portfolio.id })));
+    console.log(`  Created ${user.projects.length} projects`);
 
-    if (!existingProject) {
-      await db
-        .insert(projects)
-        .values(user.projects.map(p => ({ ...p, portfolioId: portfolio.id })));
-      console.log(`  Created ${user.projects.length} projects`);
-    }
-
-    // --- Ensure experiences exist ---
-    const [existingExperience] = await db
-      .select({ id: experiences.id })
-      .from(experiences)
-      .where(eq(experiences.portfolioId, portfolio.id));
-
-    if (!existingExperience) {
-      await db
-        .insert(experiences)
-        .values(user.experiences.map(e => ({ ...e, portfolioId: portfolio.id })));
-      console.log(`  Created ${user.experiences.length} experiences`);
-    }
+    // --- Delete and recreate experiences ---
+    await db.delete(experiences).where(eq(experiences.portfolioId, portfolio.id));
+    await db
+      .insert(experiences)
+      .values(user.experiences.map(e => ({ ...e, portfolioId: portfolio.id })));
+    console.log(`  Created ${user.experiences.length} experiences`);
   }
 
   console.log('Seed complete');

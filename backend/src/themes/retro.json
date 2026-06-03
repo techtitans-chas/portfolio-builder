@@ -1,0 +1,29 @@
+{
+  "id": "retro",
+  "label": "Retro",
+  "light": {
+    "bgPage": "#f2ede4",
+    "bgSurface": "#ffffff",
+    "bgNav": "#ffffff",
+    "primary": "#d95f3b",
+    "secondary": "#c8b89a",
+    "textPrimary": "#1a1a1a",
+    "textSecondary": "#5a5a5a"
+  },
+  "dark": {
+    "bgPage": "#1a1a1a",
+    "bgSurface": "#2a2420",
+    "bgNav": "#1a1a1a",
+    "primary": "#e87050",
+    "secondary": "#c8b89a",
+    "textPrimary": "#f2ede4",
+    "textSecondary": "#a09888"
+  },
+  "palette": [
+    { "key": "page", "label": "Page", "light": "#f2ede4", "dark": "#1a1a1a" },
+    { "key": "surface", "label": "Card", "light": "#ffffff", "dark": "#2a2420" },
+    { "key": "primary", "label": "Coral", "light": "#d95f3b", "dark": "#e87050" },
+    { "key": "secondary", "label": "Sand", "light": "#c8b89a", "dark": "#c8b89a" },
+    { "key": "dark", "label": "Dark", "light": "#1a1a1a", "dark": "#f2ede4" }
+  ]
+}

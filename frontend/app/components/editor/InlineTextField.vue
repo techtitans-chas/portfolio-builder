@@ -36,9 +36,13 @@ function onBlur(e: FocusEvent) {
     :is="tag ?? 'span'"
     v-if="ctx"
     ref="el"
-    contenteditable="true"
+    :contenteditable="ctx.isActive"
     v-bind="$attrs"
-    class="outline-none cursor-text empty:before:content-[attr(data-placeholder)] empty:before:opacity-40"
+    :class="
+      ctx.isActive
+        ? 'outline-none cursor-text empty:before:content-[attr(data-placeholder)] empty:before:opacity-40'
+        : ''
+    "
     @blur="onBlur"
     @keydown.enter.prevent="(elRef as HTMLElement)?.blur()"
   />

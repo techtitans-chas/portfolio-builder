@@ -45,26 +45,25 @@ const reorderedIds = ref<string[] | null>(null);
 
 // Resolved page ID — uses prop if provided, otherwise falls back to home page
 const resolvedPageId = ref<string | null>(null);
+// Home page ID — always needed for header/footer blocks
+const homePageId = ref<string | null>(null);
 
 async function resolvePageId() {
   if (!props.portfolioId) {
     resolvedPageId.value = null;
     return;
   }
-  if (props.pageId) {
-    resolvedPageId.value = props.pageId;
-    return;
-  }
-  // No pageId provided — look up the home page
   try {
     const data = await fetcher(`/api/portfolios/${props.portfolioId}/pages`, {
       credentials: 'include',
     });
-    const pages: { id: string; slug: string }[] = data.pages ?? [];
-    const home = pages.find(p => p.slug === 'home') ?? pages[0] ?? null;
-    resolvedPageId.value = home?.id ?? null;
+    const allPages: { id: string; slug: string }[] = data.pages ?? [];
+    const home = allPages.find(p => p.slug === 'home') ?? allPages[0] ?? null;
+    homePageId.value = home?.id ?? null;
+    resolvedPageId.value = props.pageId ?? home?.id ?? null;
   } catch {
     resolvedPageId.value = null;
+    homePageId.value = null;
   }
 }
 
@@ -78,14 +77,28 @@ async function fetchBlocks() {
   explicitOrder.value = null;
 
   try {
-    const data = await fetcher(
+    // Fetch current page blocks and home page blocks in parallel.
+    // Header/footer live on the home page — we always need them regardless of active page.
+    const fetchPage = fetcher(
       `/api/portfolios/${props.portfolioId}/pages/${resolvedPageId.value}/blocks`,
       { credentials: 'include' },
     );
-    const all: Block[] = data.blocks ?? [];
-    headerBlock.value = all.find(b => b.type === 'header') ?? null;
-    footerBlock.value = all.find(b => b.type === 'footer') ?? null;
-    dbContentBlocks.value = all.filter(b => b.type !== 'header' && b.type !== 'footer');
+    const fetchHome =
+      homePageId.value && homePageId.value !== resolvedPageId.value
+        ? fetcher(`/api/portfolios/${props.portfolioId}/pages/${homePageId.value}/blocks`, {
+            credentials: 'include',
+          }).catch(() => ({ blocks: [] }))
+        : fetchPage;
+
+    const [pageData, homeData] = await Promise.all([fetchPage, fetchHome]);
+
+    const pageBlocks: Block[] = pageData.blocks ?? [];
+    const homeBlocks: Block[] = homeData.blocks ?? [];
+
+    // Header/footer come from the home page fetch
+    headerBlock.value = homeBlocks.find(b => b.type === 'header') ?? null;
+    footerBlock.value = homeBlocks.find(b => b.type === 'footer') ?? null;
+    dbContentBlocks.value = pageBlocks.filter(b => b.type !== 'header' && b.type !== 'footer');
   } catch {
     error.value = 'Failed to load blocks';
   } finally {
@@ -188,6 +201,7 @@ defineExpose({
   layersChanges,
   portfolioId: computed(() => props.portfolioId),
   pageId: resolvedPageId,
+  homePageId,
   refresh: fetchBlocks,
   contentBlocks,
   headerBlock: liveHeaderBlock,

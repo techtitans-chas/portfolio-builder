@@ -2,7 +2,11 @@ import type { ThemeColors, Theme } from '~/components/pagebuilder/ThemeView.vue'
 import type { Block, Page } from '@portfolio-builder/shared/types';
 import type { Ref, ComputedRef } from 'vue';
 
-type ThemeSettingsOverride = { themeId?: string | null; mode?: string } | null;
+type ThemeSettingsOverride = {
+  themeId?: string | null;
+  mode?: string;
+  fonts?: { heading: string; body: string } | null;
+} | null;
 
 export function usePortfolio(
   slug: string,
@@ -20,7 +24,7 @@ export function usePortfolio(
     $fetch<{ pages: Page[] }>(`/api/portfolios/${slug}/pages`, { baseURL }),
   );
 
-  const { data: themesData } = useAsyncData('themes', () => $fetch(`/api/themes`, { baseURL }));
+  const allThemesRef = useThemes();
 
   // Header and footer are portfolio-level layout blocks stored once on the home page
   const { data: layoutBlocksData } = useAsyncData(`portfolio-${slug}-layout-blocks`, () =>
@@ -30,12 +34,17 @@ export function usePortfolio(
   const portfolio = computed(() => portfolioData.value?.portfolio ?? null);
   const publishedPages = computed(() => pagesData.value?.pages ?? []);
   const dbThemeSettings = computed(
-    () => portfolio.value?.themeSettings as { themeId?: string | null; mode?: string } | null,
+    () =>
+      portfolio.value?.themeSettings as {
+        themeId?: string | null;
+        mode?: string;
+        fonts?: { heading: string; body: string } | null;
+      } | null,
   );
 
   const themeSettings = computed(() => themeOverride?.value ?? dbThemeSettings.value);
 
-  const allThemes = computed(() => (themesData.value as { themes: Theme[] } | null)?.themes ?? []);
+  const allThemes = computed(() => allThemesRef.value ?? []);
   const selectedTheme = computed(
     () =>
       allThemes.value.find(t => t.id === themeSettings.value?.themeId) ??
@@ -51,8 +60,8 @@ export function usePortfolio(
     return colorMode.value === 'dark';
   });
 
-  function buildCssVars(colors: ThemeColors): Record<string, string> {
-    return {
+  function buildCssVars(colors: ThemeColors, theme: Theme, dark: boolean): Record<string, string> {
+    const vars: Record<string, string> = {
       '--bg-page': colors.bgPage,
       '--bg-surface': colors.bgSurface,
       '--bg-nav': colors.bgNav,
@@ -61,11 +70,39 @@ export function usePortfolio(
       '--text-primary': colors.textPrimary,
       '--text-secondary': colors.textSecondary,
     };
+    for (const entry of theme.palette ?? []) {
+      const color = dark ? entry.dark : entry.light;
+      if (color) vars[`--palette-${entry.key}`] = color;
+    }
+    return vars;
   }
 
+  const selectedFonts = computed(() => themeSettings.value?.fonts ?? null);
+
+  const googleFontsUrl = computed(() => {
+    const fonts = selectedFonts.value;
+    if (!fonts) return null;
+    const families = [...new Set([fonts.heading, fonts.body])]
+      .map(f => `family=${encodeURIComponent(f)}:wght@400;500;600;700`)
+      .join('&');
+    return `https://fonts.googleapis.com/css2?${families}&display=swap`;
+  });
+
   const cssVars = computed(() => {
-    if (!selectedTheme.value) return {};
-    return buildCssVars(isDark.value ? selectedTheme.value.dark : selectedTheme.value.light);
+    const colorVars = selectedTheme.value
+      ? buildCssVars(
+          isDark.value ? selectedTheme.value.dark : selectedTheme.value.light,
+          selectedTheme.value,
+          isDark.value,
+        )
+      : {};
+    const fonts = selectedFonts.value;
+    if (!fonts) return colorVars;
+    return {
+      ...colorVars,
+      '--font-heading': `"${fonts.heading}", sans-serif`,
+      '--font-body': `"${fonts.body}", sans-serif`,
+    };
   });
 
   const navLinks = computed(() =>
@@ -84,6 +121,7 @@ export function usePortfolio(
     publishedPages,
     portfolioMode,
     cssVars,
+    googleFontsUrl,
     navLinks,
     headerBlock,
     footerBlock,

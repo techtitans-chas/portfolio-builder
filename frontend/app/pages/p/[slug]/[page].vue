@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import type { Page } from '@portfolio-builder/shared/types';
+import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 const route = useRoute();
 const slug = route.params.slug as string;
 const pageSlug = route.params.page as string;
 
+provide(portfolioSlugKey, slug);
+
 definePageMeta({ layout: false });
 
-const { portfolioMode, cssVars, navLinks, headerBlock, footerBlock, baseURL } = usePortfolio(slug);
+const { portfolioMode, cssVars, googleFontsUrl, navLinks, headerBlock, footerBlock, baseURL } =
+  usePortfolio(slug);
 
 // Await these directly so portfolio and pages are settled before the 404 guards below.
 // useAsyncData deduplicates by key — usePortfolio's fetches are reused, not duplicated.
@@ -86,6 +90,7 @@ useHead({
     :nav-links="navLinks"
     :header-content="headerContent"
     :footer-content="footerContent"
+    :google-fonts-url="googleFontsUrl"
   >
     <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />
   </PortfolioLayout>

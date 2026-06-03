@@ -1,0 +1,29 @@
+{
+  "id": "woodland-gold",
+  "label": "Woodland Gold",
+  "light": {
+    "bgPage": "#f7f3e8",
+    "bgSurface": "#ffffff",
+    "bgNav": "#ffffff",
+    "primary": "#1b4332",
+    "secondary": "#e9a719",
+    "textPrimary": "#1b2a1e",
+    "textSecondary": "#4a5c4e"
+  },
+  "dark": {
+    "bgPage": "#0d1f16",
+    "bgSurface": "#162b1e",
+    "bgNav": "#0d1f16",
+    "primary": "#52b788",
+    "secondary": "#f0b429",
+    "textPrimary": "#f0f7f2",
+    "textSecondary": "#8aab94"
+  },
+  "palette": [
+    { "key": "page", "label": "Page", "light": "#f7f3e8", "dark": "#0d1f16" },
+    { "key": "surface", "label": "Card", "light": "#ffffff", "dark": "#162b1e" },
+    { "key": "primary", "label": "Forest", "light": "#1b4332", "dark": "#52b788" },
+    { "key": "secondary", "label": "Gold", "light": "#e9a719", "dark": "#f0b429" },
+    { "key": "dark", "label": "Dark", "light": "#1b2a1e", "dark": "#f0f7f2" }
+  ]
+}

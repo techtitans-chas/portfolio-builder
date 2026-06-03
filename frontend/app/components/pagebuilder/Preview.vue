@@ -3,6 +3,7 @@ import { VueDraggable } from 'vue-draggable-plus';
 import type { Block } from '@portfolio-builder/shared/types';
 import type { BlockDefinition } from '~/config/blocks';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
+import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
 
@@ -11,11 +12,20 @@ const props = defineProps<{
   portfolioTitle: string;
   pageSlug: string;
   layersView: LayersViewInstance | null | undefined;
-  liveThemeSettings?: { themeId?: string | null; mode?: string } | null;
+  liveThemeSettings?: {
+    themeId?: string | null;
+    mode?: string;
+    fonts?: { heading: string; body: string } | null;
+  } | null;
 }>();
 
 const liveThemeOverride = computed(() => props.liveThemeSettings ?? null);
-const { cssVars, portfolioMode, navLinks } = usePortfolio(props.portfolioSlug, liveThemeOverride);
+const { cssVars, portfolioMode, navLinks, googleFontsUrl } = usePortfolio(
+  props.portfolioSlug,
+  liveThemeOverride,
+);
+
+provide(portfolioSlugKey, props.portfolioSlug);
 
 // Local copy kept in sync with LayersView — VueDraggable mutates this directly
 const localBlocks = ref<Block[]>([]);
@@ -39,8 +49,29 @@ const footerContent = computed(
   () => footerBlock.value?.content as Record<string, unknown> | undefined,
 );
 
-const { selectedBlock, selectBlock } = useSelectedBlock();
-const { addPendingBlock } = usePageEditor();
+const { selectedBlock, selectBlock, clearSelection } = useSelectedBlock();
+const { addPendingBlock, pendingNewBlocks, queueDeletion } = usePageEditor();
+
+const blockToDelete = ref<Block | null>(null);
+const confirmDeleteOpen = ref(false);
+
+function requestDelete(block: Block) {
+  blockToDelete.value = block;
+  confirmDeleteOpen.value = true;
+}
+
+function confirmDelete() {
+  const block = blockToDelete.value;
+  if (!block) return;
+  if (block.id.startsWith('pending-')) {
+    pendingNewBlocks.value = pendingNewBlocks.value.filter(b => b.id !== block.id);
+  } else {
+    queueDeletion(block.id);
+  }
+  if (selectedBlock.value?.id === block.id) clearSelection();
+  blockToDelete.value = null;
+  confirmDeleteOpen.value = false;
+}
 
 function isSelected(block: Block) {
   return selectedBlock.value?.id === block.id;
@@ -76,43 +107,87 @@ function onBlockDropped(event: { newIndex?: number }) {
     :nav-links="navLinks"
     :header-content="headerContent"
     :footer-content="footerContent"
+    :google-fonts-url="googleFontsUrl"
     @select-header="headerBlock && selectBlock(headerBlock)"
     @select-footer="footerBlock && selectBlock(footerBlock)"
     @click.capture="($event.target as HTMLElement).closest('a') && $event.preventDefault()"
   >
-    <VueDraggable
-      v-model="localBlocks"
-      :group="{ name: 'blocks', pull: true, put: ['blocks'] }"
-      :animation="150"
-      :force-fallback="true"
-      handle=".block-drag-handle"
-      ghost-class="preview-drop-ghost"
-      fallback-class="preview-drag-fallback"
-      class="min-h-16"
-      @end="onReorder"
-      @add="onBlockDropped"
-    >
-      <div
-        v-for="block in localBlocks"
-        :key="block.id"
-        class="group/block relative after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:transition-shadow after:duration-150"
-        :class="
-          isSelected(block)
-            ? 'after:ring-primary'
-            : 'after:ring-transparent hover:after:ring-primary/60'
-        "
-        @click="selectBlock(block)"
-      >
-        <!-- Drag handle — visible on hover -->
+    <div class="relative min-h-64">
+      <Transition name="fade">
         <div
-          class="block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1"
+          v-if="localBlocks.length === 0"
+          class="absolute inset-0 flex flex-col items-center justify-center gap-3 py-24 text-center pointer-events-none select-none z-10"
         >
-          <UIcon name="i-lucide-grip-horizontal" class="size-4 text-white" />
+          <UIcon name="i-lucide-layout-template" class="size-10 text-muted opacity-40" />
+          <p class="text-sm text-muted opacity-60">
+            Drag a block here<br />
+            to start building
+          </p>
         </div>
-        <PagebuilderPreviewBlock :block="block">
-          <BlocksRenderer :block="block" />
-        </PagebuilderPreviewBlock>
-      </div>
-    </VueDraggable>
+      </Transition>
+      <VueDraggable
+        v-model="localBlocks"
+        :group="{ name: 'blocks', pull: true, put: ['blocks'] }"
+        :animation="150"
+        handle=".block-drag-handle"
+        filter=".ProseMirror"
+        :prevent-on-filter="false"
+        ghost-class="preview-drop-ghost"
+        fallback-class="preview-drag-fallback"
+        class="min-h-64"
+        @end="onReorder"
+        @add="onBlockDropped"
+      >
+        <div
+          v-for="block in localBlocks"
+          :key="block.id"
+          class="group/block relative after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:transition-shadow after:duration-150"
+          :class="
+            isSelected(block)
+              ? 'after:ring-primary'
+              : 'after:ring-transparent hover:after:ring-primary/60'
+          "
+          @click="selectBlock(block)"
+        >
+          <!-- Drag handle — visible on hover -->
+          <div
+            class="block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1"
+          >
+            <UIcon name="i-lucide-grip-horizontal" class="size-4 text-white" />
+          </div>
+          <!-- Delete button — visible on hover, top-right corner -->
+          <button
+            class="absolute top-2 right-2 z-10 w-7 h-7 flex items-center justify-center opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 hover:bg-red-600 rounded"
+            title="Delete block"
+            @click.stop="requestDelete(block)"
+          >
+            <UIcon name="i-lucide-trash-2" class="size-3.5 text-white" />
+          </button>
+          <PagebuilderPreviewBlock :block="block">
+            <BlocksRenderer :block="block" />
+          </PagebuilderPreviewBlock>
+        </div>
+      </VueDraggable>
+    </div>
   </PortfolioLayout>
+
+  <AdminConfirmModal
+    v-model:open="confirmDeleteOpen"
+    title="Delete block?"
+    :description="`'${blockToDelete?.name || blockToDelete?.type}' will be removed when you save.`"
+    confirm-label="Delete"
+    @confirm="confirmDelete"
+    @cancel="confirmDeleteOpen = false"
+  />
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

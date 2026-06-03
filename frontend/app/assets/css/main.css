@@ -27,6 +27,14 @@
 }
 
 /* Rich text content — used by InlineRichField editor and Text block v-html output */
+.rich-text h1,
+.rich-text h2,
+.rich-text h3,
+.rich-text h4,
+.rich-text h5,
+.rich-text h6 {
+  font-family: var(--font-heading);
+}
 .rich-text h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -45,6 +53,26 @@
   line-height: 1.4;
   margin-bottom: 0.4em;
 }
+.rich-text h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.4em;
+}
+.rich-text h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.4em;
+}
+.rich-text h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 .rich-text p {
   margin-bottom: 0.75em;
 }
@@ -56,6 +84,23 @@
 }
 .rich-text em {
   font-style: italic;
+}
+.rich-text u {
+  text-decoration: underline;
+}
+.rich-text s {
+  text-decoration: line-through;
+}
+.rich-text code {
+  font-family: monospace;
+  font-size: 0.875em;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  padding: 0.1em 0.35em;
+  border-radius: 0.25em;
+}
+.rich-text a {
+  color: var(--ui-primary);
+  text-decoration: underline;
 }
 .rich-text ul {
   list-style-type: disc;
@@ -75,6 +120,12 @@
   padding-left: 1em;
   opacity: 0.7;
   margin: 0.75em 0;
+}
+.rich-text hr {
+  border: none;
+  border-top: 1px solid currentColor;
+  opacity: 0.2;
+  margin: 1.25em 0;
 }
 
 @theme static {
