@@ -2,12 +2,14 @@
 import type PagebuilderLeftSidebar from '~/components/pagebuilder/LeftSidebar.vue';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
 import { VIEWPORT_MODES } from '~/composables/usePreviewScale';
+import { useActivePage } from '~/composables/useActivePage';
 
 definePageMeta({
   layout: 'admin',
 });
 
 const { activeViewMode, wrapperStyle, scaleStyle } = usePreviewScale();
+const { activePage } = useActivePage();
 
 const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
 const { fetcher } = useApi();
@@ -198,6 +200,10 @@ async function save() {
 
 <template>
   <AdminLayoutPageWrapper title="Page Builder">
+    <!-- Header left: page selector -->
+    <template #left>
+      <PagebuilderPageControls :portfolio-id="portfolio?.id ?? null" />
+    </template>
     <!-- Header middle -->
     <template #middle>
       <UTabs
@@ -242,7 +248,7 @@ async function save() {
             <PagebuilderPreview
               :portfolio-slug="portfolio.slug"
               :portfolio-title="portfolio.title"
-              :page-slug="leftSidebar?.activePage?.slug ?? 'home'"
+              :page-slug="activePage?.slug ?? 'home'"
               :layers-view="leftSidebar?.layersView"
               :live-theme-settings="leftSidebar?.themeSettings"
             />

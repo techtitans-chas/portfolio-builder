@@ -12,8 +12,11 @@ defineProps<{
           <UDashboardSidebarCollapse />
         </template>
 
-        <!-- Middle content -->
-        <slot name="middle" />
+        <!-- Content after title -->
+        <div class="flex items-center gap-2">
+          <slot name="left" />
+          <slot name="middle" />
+        </div>
 
         <template #right>
           <!-- Right content -->
