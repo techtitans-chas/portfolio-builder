@@ -7,6 +7,7 @@ export const experiencesDefinition: BlockDefinition = {
   label: 'Experience',
   icon: 'i-lucide-briefcase',
   component: BlocksExperiences as Component,
+  allowedCollections: ['experiences'],
   defaultContent: {
     heading: 'Experience',
     showHeading: true,

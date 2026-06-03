@@ -2,10 +2,10 @@ import { eq } from 'drizzle-orm';
 import { factory } from '../../lib/factory.js';
 import { auth } from '../../lib/auth.js';
 import { db } from '../../db/client.js';
-import { experiences, portfolios } from '../../db/schema/index.js';
+import { collections, portfolios } from '../../db/schema/index.js';
 import { unauthorized } from '../../utils/errorHandling.js';
 
-export const experiencesGet = factory.createHandlers(async c => {
+export const collectionsGet = factory.createHandlers(async c => {
   const session = await auth.api.getSession({ headers: c.req.raw.headers });
 
   if (!session?.user) {
@@ -18,14 +18,14 @@ export const experiencesGet = factory.createHandlers(async c => {
     .where(eq(portfolios.userId, session.user.id));
 
   if (!portfolio) {
-    return c.json({ experiences: [] });
+    return c.json({ collections: [] });
   }
 
   const rows = await db
     .select()
-    .from(experiences)
-    .where(eq(experiences.portfolioId, portfolio.id))
-    .orderBy(experiences.sortOrder, experiences.createdAt);
+    .from(collections)
+    .where(eq(collections.portfolioId, portfolio.id))
+    .orderBy(collections.sortOrder, collections.createdAt);
 
-  return c.json({ experiences: rows });
+  return c.json({ collections: rows });
 });

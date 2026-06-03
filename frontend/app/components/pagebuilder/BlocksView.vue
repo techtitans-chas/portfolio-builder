@@ -5,7 +5,16 @@ import type { BlockDefinition } from '~/config/blocks';
 
 const { addPendingBlock } = usePageEditor();
 const { selectBlock } = useSelectedBlock();
+const { activeCollectionTypes } = useCollections();
 const emit = defineEmits<{ blockAdded: [] }>();
+
+const availableBlocks = computed(() =>
+  blockDefinitions.filter(
+    d =>
+      !d.allowedCollections ||
+      d.allowedCollections.some(type => activeCollectionTypes.value.has(type)),
+  ),
+);
 
 function addBlock(type: string) {
   const definition = blockDefinitions.find(d => d.type === type);
@@ -22,14 +31,14 @@ function cloneDefinition(def: BlockDefinition) {
 
 <template>
   <VueDraggable
-    :model-value="blockDefinitions"
+    :model-value="availableBlocks"
     :group="{ name: 'blocks', pull: 'clone', put: false }"
     :clone="cloneDefinition"
     :sort="false"
     class="grid grid-cols-3 gap-2"
   >
     <UButton
-      v-for="block in blockDefinitions"
+      v-for="block in availableBlocks"
       :key="block.type"
       color="neutral"
       variant="outline"

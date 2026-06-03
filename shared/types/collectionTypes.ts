@@ -1,0 +1,54 @@
+export interface CollectionFieldDef {
+  key: string;
+  label: string;
+  type: 'text' | 'textarea' | 'url' | 'number' | 'boolean' | 'tags';
+  required?: boolean;
+  placeholder?: string;
+}
+
+export interface CollectionTypeDef {
+  /** Stable identifier stored in the DB */
+  type: string;
+  /** Human-readable label shown in the UI */
+  label: string;
+  /** Lucide icon class */
+  icon: string;
+  /** Fields that each item in this collection has */
+  fields: CollectionFieldDef[];
+  /** Block types that are unlocked when this collection exists in the portfolio */
+  allowedBlocks: string[];
+}
+
+export const collectionTypes: CollectionTypeDef[] = [
+  {
+    type: 'projects',
+    label: 'Projects',
+    icon: 'i-lucide-folder-kanban',
+    fields: [
+      { key: 'title', label: 'Title', type: 'text', required: true },
+      { key: 'description', label: 'Description', type: 'textarea' },
+      { key: 'time', label: 'Time / Period', type: 'text', placeholder: 'e.g. 2023–2024' },
+      { key: 'previewImageUrl', label: 'Preview image URL', type: 'url' },
+      { key: 'tags', label: 'Tags', type: 'tags' },
+    ],
+    allowedBlocks: ['projects'],
+  },
+  {
+    type: 'experiences',
+    label: 'Experiences',
+    icon: 'i-lucide-briefcase',
+    fields: [
+      { key: 'title', label: 'Title', type: 'text', required: true },
+      { key: 'place', label: 'Place / Company', type: 'text' },
+      { key: 'location', label: 'Location', type: 'text' },
+      { key: 'time', label: 'Time / Period', type: 'text', placeholder: 'e.g. 2021–2023' },
+      { key: 'description', label: 'Description', type: 'textarea' },
+      { key: 'tags', label: 'Tags', type: 'tags' },
+    ],
+    allowedBlocks: ['experiences'],
+  },
+];
+
+export function getCollectionType(type: string): CollectionTypeDef | undefined {
+  return collectionTypes.find(ct => ct.type === type);
+}
