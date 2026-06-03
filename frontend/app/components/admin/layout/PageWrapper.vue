@@ -10,13 +10,8 @@ defineProps<{
       <UDashboardNavbar :title="title">
         <template #leading>
           <UDashboardSidebarCollapse />
-        </template>
-
-        <!-- Content after title -->
-        <div class="flex items-center gap-2">
           <slot name="left" />
-          <slot name="middle" />
-        </div>
+        </template>
 
         <template #right>
           <!-- Right content -->
