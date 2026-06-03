@@ -7,7 +7,9 @@ definePageMeta({ layout: 'admin', ssr: false });
 const { fetcher } = useApi();
 const { collections, fetchCollections } = useCollections();
 
-await fetchCollections();
+onMounted(() => {
+  fetchCollections();
+});
 
 const addModalOpen = ref(false);
 const deleteModalOpen = ref(false);

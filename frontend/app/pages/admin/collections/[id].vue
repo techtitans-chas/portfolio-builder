@@ -46,7 +46,10 @@ async function fetchItems() {
   }
 }
 
-await Promise.all([fetchCollection(), fetchItems()]);
+onMounted(() => {
+  fetchCollection();
+  fetchItems();
+});
 
 // Search
 const searchQuery = ref('');
