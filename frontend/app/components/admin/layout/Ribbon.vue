@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui';
 import { useDashboard } from '~/composables/useDashboard';
+import { getCollectionType } from '@portfolio-builder/shared/types';
+
 const { apiBase } = useApi();
 const { fetch: fetchUser, clear, portfolio } = useCurrentUser();
+const { collections, fetchCollections } = useCollections();
 
-if (import.meta.client) await fetchUser();
+if (import.meta.client) {
+  await fetchUser();
+  await fetchCollections();
+}
 
 const { isSidebarOpen } = useDashboard();
 
@@ -33,67 +39,37 @@ async function logout() {
   await navigateTo('/');
 }
 
-const links = [
-  [
-    {
-      label: 'General',
-      type: 'label',
-    },
-    {
-      label: 'Page builder',
-      icon: 'i-lucide-layout-dashboard',
-      to: '/admin',
-    },
-    {
-      label: 'Media',
-      icon: 'i-lucide-image',
-      to: '/admin/media-gallery',
-    },
-    {
-      label: 'Collections',
-      type: 'label',
-    },
-    {
-      label: 'Projects',
-      icon: 'i-lucide-clipboard-check',
-      to: '/admin/projects',
-    },
-    {
-      label: 'Experiences',
-      icon: 'i-lucide-briefcase-business',
-      to: '/admin/experiences',
-    },
-    {
-      label: 'Site',
-      type: 'label',
-    },
-    {
-      label: 'Site settings',
-      icon: 'i-lucide-info',
-      to: '/admin/site-settings',
-    },
-    {
-      label: 'Contact form',
-      icon: 'i-lucide-mail',
-      to: '/admin/contact-form',
-      badge: '4',
-    },
-  ],
-  [
-    {
-      label: 'Account',
-      icon: 'i-lucide-settings',
-      to: '/admin/my-account',
-    },
-    {
-      label: 'Logout',
-      icon: 'i-lucide-log-out',
-      onSelect: () => {
-        logout();
+const collectionLinks = computed(() =>
+  collections.value.map(c => ({
+    label: c.name,
+    icon: getCollectionType(c.type)?.icon ?? 'i-lucide-database',
+    to: `/admin/collections/${c.id}`,
+  })),
+);
+
+const topLinks = computed(
+  () =>
+    [
+      { label: 'General', type: 'label' },
+      { label: 'Page builder', icon: 'i-lucide-layout-dashboard', to: '/admin' },
+      { label: 'Media', icon: 'i-lucide-image', to: '/admin/media-gallery' },
+      { label: 'Collections', type: 'label' },
+      {
+        label: 'Manage collections',
+        icon: 'i-lucide-settings-2',
+        to: '/admin/collections',
       },
-    },
-  ],
-] satisfies NavigationMenuItem[][];
+      ...collectionLinks.value,
+      { label: 'Site', type: 'label' },
+      { label: 'Site settings', icon: 'i-lucide-info', to: '/admin/site-settings' },
+      { label: 'Contact form', icon: 'i-lucide-mail', to: '/admin/contact-form', badge: '4' },
+    ] satisfies NavigationMenuItem[],
+);
+
+const bottomLinks = [
+  { label: 'Account', icon: 'i-lucide-settings', to: '/admin/my-account' },
+  { label: 'Logout', icon: 'i-lucide-log-out', onSelect: () => logout() },
+] satisfies NavigationMenuItem[];
 </script>
 
 <template>
@@ -119,7 +95,7 @@ const links = [
 
       <UNavigationMenu
         :collapsed="collapsed"
-        :items="links[0]"
+        :items="topLinks"
         orientation="vertical"
         tooltip
         popover
@@ -129,7 +105,12 @@ const links = [
         <!-- Color mode toggle -->
         <UColorModeButton :label="collapsed ? undefined : 'Toggle theme'" />
 
-        <UNavigationMenu :collapsed="collapsed" :items="links[1]" orientation="vertical" tooltip />
+        <UNavigationMenu
+          :collapsed="collapsed"
+          :items="bottomLinks"
+          orientation="vertical"
+          tooltip
+        />
       </div>
     </template>
   </UDashboardSidebar>

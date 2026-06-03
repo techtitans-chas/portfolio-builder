@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Experience } from '@portfolio-builder/shared/types';
+import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 export interface ExperiencesBlockProps {
@@ -20,13 +20,18 @@ const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.
 
 const { data } = await useAsyncData(
   `portfolio-${slug}-experiences`,
-  () => $fetch<{ experiences: Experience[] }>(`/api/portfolios/${slug}/experiences`, { baseURL }),
+  () =>
+    $fetch<{ items: CollectionItem[] }>(`/api/portfolios/${slug}/collections/experiences`, {
+      baseURL,
+    }),
   { watch: [] },
 );
 
 const experiences = computed(() => {
-  const all = data.value?.experiences ?? [];
-  return props.filterTag ? all.filter(e => e.tags.includes(props.filterTag!)) : all;
+  const all = data.value?.items ?? [];
+  return props.filterTag
+    ? all.filter(e => (e.data.tags as string[] | undefined)?.includes(props.filterTag!))
+    : all;
 });
 </script>
 
@@ -46,27 +51,27 @@ const experiences = computed(() => {
         class="rounded-xl p-6"
         :style="{ backgroundColor: 'var(--bg-surface)' }"
       >
-        <p class="font-semibold text-lg">{{ experience.title }}</p>
+        <p class="font-semibold text-lg">{{ experience.data.title }}</p>
         <p
-          v-if="experience.place || experience.time"
+          v-if="experience.data.place || experience.data.time"
           class="text-sm mt-1"
           :style="{ color: 'var(--text-secondary)' }"
         >
-          <span v-if="experience.place">{{ experience.place }}</span>
-          <span v-if="experience.place && experience.time"> · </span>
-          <span v-if="experience.time">{{ experience.time }}</span>
-          <span v-if="experience.location"> · {{ experience.location }}</span>
+          <span v-if="experience.data.place">{{ experience.data.place }}</span>
+          <span v-if="experience.data.place && experience.data.time"> · </span>
+          <span v-if="experience.data.time">{{ experience.data.time }}</span>
+          <span v-if="experience.data.location"> · {{ experience.data.location }}</span>
         </p>
         <p
-          v-if="experience.description"
+          v-if="experience.data.description"
           class="text-sm mt-2"
           :style="{ color: 'var(--text-secondary)' }"
         >
-          {{ experience.description }}
+          {{ experience.data.description }}
         </p>
-        <div v-if="experience.tags.length" class="flex flex-wrap gap-1 mt-3">
+        <div v-if="(experience.data.tags as string[])?.length" class="flex flex-wrap gap-1 mt-3">
           <span
-            v-for="tag in experience.tags"
+            v-for="tag in experience.data.tags as string[]"
             :key="tag"
             class="text-xs px-2 py-0.5 rounded-full"
             :style="{

@@ -1,7 +1,7 @@
 import '../lib/auth.js'; // ensure better-auth is initialized before db client
 import { eq } from 'drizzle-orm';
 import { db } from './client.js';
-import { users, portfolios, pages, blocks, projects, experiences } from './schema/index.js';
+import { users, portfolios, pages, blocks, collections, collectionItems } from './schema/index.js';
 import { auth } from '../lib/auth.js';
 
 const defaultPages = [
@@ -47,55 +47,72 @@ const seeds = [
     slug: 'martin',
     title: 'Martin Södersten',
     description: "Martin's Portfolio",
-    projects: [
+    collections: [
       {
-        title: 'E-commerce Platform',
-        description: 'A full-stack online store built with Next.js and Stripe.',
-        time: '2024',
-        isPublished: true,
-        sortOrder: 0,
-        tags: ['Next.js', 'TypeScript', 'Stripe'],
-        links: [],
+        type: 'projects',
+        name: 'Projects',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'E-commerce Platform',
+              description: 'A full-stack online store built with Next.js and Stripe.',
+              time: '2024',
+              tags: ['Next.js', 'TypeScript', 'Stripe'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Real-time Chat App',
+              description: 'WebSocket-based chat with rooms and presence indicators.',
+              time: '2023',
+              tags: ['Node.js', 'Socket.io', 'React'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 2,
+            data: {
+              title: 'CLI Task Manager',
+              description: 'A terminal-based productivity tool written in Go.',
+              time: '2023',
+              tags: ['Go', 'CLI'],
+            },
+          },
+        ],
       },
       {
-        title: 'Real-time Chat App',
-        description: 'WebSocket-based chat with rooms and presence indicators.',
-        time: '2023',
-        isPublished: true,
-        sortOrder: 1,
-        tags: ['Node.js', 'Socket.io', 'React'],
-        links: [],
-      },
-      {
-        title: 'CLI Task Manager',
-        description: 'A terminal-based productivity tool written in Go.',
-        time: '2023',
-        isPublished: true,
-        sortOrder: 2,
-        tags: ['Go', 'CLI'],
-        links: [],
-      },
-    ],
-    experiences: [
-      {
-        title: 'Fullstack Developer',
-        place: 'Spotify',
-        location: 'Stockholm',
-        time: '2022 – present',
-        description: 'Building internal tooling and developer platform features.',
-        isPublished: true,
-        sortOrder: 0,
-        tags: ['React', 'Python', 'Kubernetes'],
-      },
-      {
-        title: 'Frontend Developer',
-        place: 'Klarna',
-        location: 'Stockholm',
-        time: '2020 – 2022',
-        description: 'Worked on the consumer checkout experience across multiple markets.',
-        isPublished: true,
-        sortOrder: 1,
-        tags: ['React', 'TypeScript', 'A/B Testing'],
+        type: 'experiences',
+        name: 'Experiences',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Fullstack Developer',
+              place: 'Spotify',
+              location: 'Stockholm',
+              time: '2022 – present',
+              description: 'Building internal tooling and developer platform features.',
+              tags: ['React', 'Python', 'Kubernetes'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Frontend Developer',
+              place: 'Klarna',
+              location: 'Stockholm',
+              time: '2020 – 2022',
+              description: 'Worked on the consumer checkout experience across multiple markets.',
+              tags: ['React', 'TypeScript', 'A/B Testing'],
+            },
+          },
+        ],
       },
     ],
   },
@@ -106,57 +123,76 @@ const seeds = [
     slug: 'ida',
     title: 'Ida Öhlén',
     description: "Ida's Portfolio",
-    projects: [
+    collections: [
       {
-        title: 'Portfolio Builder',
-        description: 'A drag-and-drop portfolio builder with live theming and block-based pages.',
-        time: '2025',
-        isPublished: true,
-        sortOrder: 0,
-        tags: ['Vue', 'Nuxt', 'Hono', 'Drizzle'],
-        links: [],
+        type: 'projects',
+        name: 'Projects',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Portfolio Builder',
+              description:
+                'A drag-and-drop portfolio builder with live theming and block-based pages.',
+              time: '2025',
+              tags: ['Vue', 'Nuxt', 'Hono', 'Drizzle'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Design System',
+              description: 'Component library and design token system for a fintech startup.',
+              time: '2024',
+              tags: ['Figma', 'Storybook', 'CSS'],
+            },
+          },
+        ],
       },
       {
-        title: 'Design System',
-        description: 'Component library and design token system for a fintech startup.',
-        time: '2024',
-        isPublished: true,
-        sortOrder: 1,
-        tags: ['Figma', 'Storybook', 'CSS'],
-        links: [],
-      },
-    ],
-    experiences: [
-      {
-        title: 'UX Engineer',
-        place: 'IKEA Digital',
-        location: 'Malmö',
-        time: '2023 – present',
-        description: 'Bridging design and engineering for the IKEA web platform.',
-        isPublished: true,
-        sortOrder: 0,
-        tags: ['Vue', 'Figma', 'Accessibility'],
-      },
-      {
-        title: 'Frontend Developer',
-        place: 'Tretton37',
-        location: 'Remote',
-        time: '2021 – 2023',
-        description:
-          'Consulting on frontend architecture and UI component design for various clients.',
-        isPublished: true,
-        sortOrder: 1,
-        tags: ['React', 'TypeScript', 'GraphQL'],
-      },
-      {
-        title: 'Web Developer Intern',
-        place: 'Chas Academy',
-        location: 'Stockholm',
-        time: '2020',
-        description: 'Developed internal tools and helped with the student portal.',
-        isPublished: true,
-        sortOrder: 2,
-        tags: ['HTML', 'CSS', 'JavaScript'],
+        type: 'experiences',
+        name: 'Experiences',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'UX Engineer',
+              place: 'IKEA Digital',
+              location: 'Malmö',
+              time: '2023 – present',
+              description: 'Bridging design and engineering for the IKEA web platform.',
+              tags: ['Vue', 'Figma', 'Accessibility'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Frontend Developer',
+              place: 'Tretton37',
+              location: 'Remote',
+              time: '2021 – 2023',
+              description:
+                'Consulting on frontend architecture and UI component design for various clients.',
+              tags: ['React', 'TypeScript', 'GraphQL'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 2,
+            data: {
+              title: 'Web Developer Intern',
+              place: 'Chas Academy',
+              location: 'Stockholm',
+              time: '2020',
+              description: 'Developed internal tools and helped with the student portal.',
+              tags: ['HTML', 'CSS', 'JavaScript'],
+            },
+          },
+        ],
       },
     ],
   },
@@ -282,17 +318,25 @@ async function seed() {
       console.log(`  Created blocks for "${page.slug}"`);
     }
 
-    // --- Delete and recreate projects ---
-    await db.delete(projects).where(eq(projects.portfolioId, portfolio.id));
-    await db.insert(projects).values(user.projects.map(p => ({ ...p, portfolioId: portfolio.id })));
-    console.log(`  Created ${user.projects.length} projects`);
+    // --- Delete and recreate collections + items ---
+    await db.delete(collections).where(eq(collections.portfolioId, portfolio.id));
 
-    // --- Delete and recreate experiences ---
-    await db.delete(experiences).where(eq(experiences.portfolioId, portfolio.id));
-    await db
-      .insert(experiences)
-      .values(user.experiences.map(e => ({ ...e, portfolioId: portfolio.id })));
-    console.log(`  Created ${user.experiences.length} experiences`);
+    for (const [i, col] of user.collections.entries()) {
+      const [inserted] = await db
+        .insert(collections)
+        .values({ portfolioId: portfolio.id, type: col.type, name: col.name, sortOrder: i })
+        .returning({ id: collections.id });
+
+      if (!inserted) continue;
+
+      if (col.items.length) {
+        await db
+          .insert(collectionItems)
+          .values(col.items.map(item => ({ collectionId: inserted.id, ...item })));
+      }
+
+      console.log(`  Created collection "${col.name}" with ${col.items.length} items`);
+    }
   }
 
   console.log('Seed complete');

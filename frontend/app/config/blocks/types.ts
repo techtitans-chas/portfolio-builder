@@ -55,4 +55,9 @@ export interface BlockDefinition {
   /** Use tabs when you need multiple panels; otherwise use sections directly */
   tabs?: BlockTab[];
   sections?: BlockSection[];
+  /**
+   * If set, this block only appears in the picker when the portfolio has a
+   * collection of one of the listed types. Maps to CollectionTypeDef.type.
+   */
+  allowedCollections?: string[];
 }
