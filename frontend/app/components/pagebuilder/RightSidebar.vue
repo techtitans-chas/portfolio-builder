@@ -157,14 +157,21 @@ function setValue(key: string, value: unknown) {
       </div>
 
       <!-- Tabs (if defined) -->
-      <div v-if="hasTabs" class="px-3 pt-3 shrink-0">
-        <UTabs
-          v-model="currentTab"
-          :items="tabItems"
-          color="neutral"
-          :content="false"
-          class="w-full"
-        />
+      <div v-if="hasTabs" class="px-3 pt-2 shrink-0 flex gap-0.5">
+        <UTooltip v-for="(tab, i) in tabItems" :key="i" :text="tab.label" :delay-duration="300">
+          <button
+            type="button"
+            class="flex items-center justify-center size-7 rounded transition-colors"
+            :class="
+              currentTab === String(i)
+                ? 'bg-elevated text-highlighted'
+                : 'text-muted hover:text-highlighted hover:bg-elevated/60'
+            "
+            @click="currentTab = String(i)"
+          >
+            <UIcon :name="tab.icon ?? 'i-lucide-layout'" class="size-3.5" />
+          </button>
+        </UTooltip>
       </div>
 
       <!-- Sections + fields -->
@@ -189,7 +196,7 @@ function setValue(key: string, value: unknown) {
               :key="field.key"
               class="flex gap-1"
               :class="
-                ['theme-color', 'checkbox'].includes(field.type)
+                ['theme-color', 'checkbox', 'color'].includes(field.type)
                   ? 'items-center justify-between'
                   : 'flex-col'
               "
@@ -285,8 +292,10 @@ function setValue(key: string, value: unknown) {
                 :model-value="(getValue(field.key) as string) ?? ''"
                 :placeholder="field.placeholder"
                 size="sm"
+                :rows="3"
+                :maxrows="5"
                 autoresize
-                :rows="2"
+                class="overflow-y-auto"
                 @update:model-value="setValue(field.key, $event)"
               />
               <UCheckbox
@@ -308,11 +317,23 @@ function setValue(key: string, value: unknown) {
                 size="sm"
                 @update:model-value="setValue(field.key, $event)"
               />
+              <label
+                v-else-if="field.type === 'color'"
+                class="size-6 rounded border-2 border-default hover:border-primary transition-colors shrink-0 cursor-pointer block"
+                :style="{ backgroundColor: (getValue(field.key) as string) || '#000000' }"
+              >
+                <input
+                  type="color"
+                  :value="(getValue(field.key) as string) ?? '#000000'"
+                  class="sr-only"
+                  @input="setValue(field.key, ($event.target as HTMLInputElement).value)"
+                />
+              </label>
               <UInput
                 v-else
                 :model-value="(getValue(field.key) as string) ?? ''"
                 :placeholder="field.placeholder"
-                :type="field.type === 'color' ? 'color' : field.type === 'url' ? 'url' : 'text'"
+                :type="field.type === 'url' ? 'url' : 'text'"
                 size="sm"
                 @update:model-value="setValue(field.key, $event)"
               />
