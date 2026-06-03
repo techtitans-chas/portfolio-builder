@@ -6,6 +6,8 @@ type ThemeSettingsOverride = {
   themeId?: string | null;
   mode?: string;
   fonts?: { heading: string; body: string } | null;
+  logoLight?: string | null;
+  logoDark?: string | null;
 } | null;
 
 export function usePortfolio(
@@ -39,10 +41,16 @@ export function usePortfolio(
         themeId?: string | null;
         mode?: string;
         fonts?: { heading: string; body: string } | null;
+        logoLight?: string | null;
+        logoDark?: string | null;
       } | null,
   );
 
-  const themeSettings = computed(() => themeOverride?.value ?? dbThemeSettings.value);
+  const themeSettings = computed(() =>
+    themeOverride?.value
+      ? { ...dbThemeSettings.value, ...themeOverride.value }
+      : dbThemeSettings.value,
+  );
 
   const allThemes = computed(() => allThemesRef.value ?? []);
   const selectedTheme = computed(
@@ -78,6 +86,13 @@ export function usePortfolio(
   }
 
   const selectedFonts = computed(() => themeSettings.value?.fonts ?? null);
+
+  const activeLogo = computed(() => {
+    const light = themeSettings.value?.logoLight ?? null;
+    const dark = themeSettings.value?.logoDark ?? null;
+    if (isDark.value) return dark ?? light;
+    return light ?? dark;
+  });
 
   const googleFontsUrl = computed(() => {
     const fonts = selectedFonts.value;
@@ -126,5 +141,6 @@ export function usePortfolio(
     headerBlock,
     footerBlock,
     baseURL,
+    activeLogo,
   };
 }

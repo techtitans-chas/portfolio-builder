@@ -4,7 +4,8 @@ export interface ListItemField {
   key: string;
   label: string;
   placeholder?: string;
-  type?: 'text' | 'url' | 'textarea';
+  type?: 'text' | 'url' | 'textarea' | 'select';
+  options?: { label: string; value: string }[];
   inline?: boolean;
 }
 

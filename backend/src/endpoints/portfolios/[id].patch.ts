@@ -20,6 +20,8 @@ const themeSettingsSchema = z.object({
   themeId: z.string().nullable().optional(),
   mode: z.enum(['light', 'dark', 'both']).optional(),
   fonts: fontsSchema.nullable().optional(),
+  logoLight: z.url().nullable().optional(),
+  logoDark: z.url().nullable().optional(),
 });
 
 const settingsSchema = z.object({

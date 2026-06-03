@@ -21,7 +21,7 @@ const props = defineProps<{
 }>();
 
 const liveThemeOverride = computed(() => props.liveThemeSettings ?? null);
-const { cssVars, portfolioMode, navLinks, googleFontsUrl } = usePortfolio(
+const { cssVars, portfolioMode, navLinks, googleFontsUrl, activeLogo } = usePortfolio(
   props.portfolioSlug,
   liveThemeOverride,
 );
@@ -139,6 +139,7 @@ function onBlockDropped(event: { newIndex?: number }) {
     :header-content="headerContent"
     :footer-content="footerContent"
     :google-fonts-url="googleFontsUrl"
+    :logo-url="activeLogo"
     @select-header="headerBlock && selectBlock(headerBlock)"
     @select-footer="footerBlock && selectBlock(footerBlock)"
     @click.capture="($event.target as HTMLElement).closest('a') && $event.preventDefault()"

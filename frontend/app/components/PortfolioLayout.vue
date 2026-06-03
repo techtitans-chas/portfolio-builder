@@ -9,6 +9,7 @@ const props = defineProps<{
   footerContent?: Record<string, unknown>;
   isEditor?: boolean;
   googleFontsUrl?: string | null;
+  logoUrl?: string | null;
 }>();
 
 useHead(
@@ -42,8 +43,17 @@ defineEmits<{
         :site-name="(headerContent?.siteName as string) || siteName"
         :home-url="homeUrl"
         :nav-links="navLinks"
-        :cta="(headerContent?.cta as { label: string; url: string } | null) ?? null"
-        :show-color-mode-toggle="portfolioMode === 'both'"
+        :cta="(headerContent?.cta as { label: string; url: string; style?: string } | null) ?? null"
+        :cta-buttons="(headerContent?.ctaButtons as any[]) ?? []"
+        :social-links="(headerContent?.socialLinks as any[]) ?? []"
+        :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
+        :logo-url="logoUrl"
+        :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
+        :layout="(headerContent?.layout as any) || 'left-nav'"
+        :background="(headerContent?.background as string | null) ?? null"
+        :text-color="(headerContent?.textColor as string | null) ?? null"
+        :nav-style="(headerContent?.navStyle as any) || 'plain'"
+        :height="(headerContent?.height as any) || 'normal'"
       />
     </div>
 
@@ -52,8 +62,17 @@ defineEmits<{
       :site-name="(headerContent?.siteName as string) || siteName"
       :home-url="homeUrl"
       :nav-links="navLinks"
-      :cta="(headerContent?.cta as { label: string; url: string } | null) ?? null"
-      :show-color-mode-toggle="portfolioMode === 'both'"
+      :cta="(headerContent?.cta as { label: string; url: string; style?: string } | null) ?? null"
+      :cta-buttons="(headerContent?.ctaButtons as any[]) ?? []"
+      :social-links="(headerContent?.socialLinks as any[]) ?? []"
+      :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
+      :logo-url="logoUrl"
+      :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
+      :layout="(headerContent?.layout as any) || 'left-nav'"
+      :background="(headerContent?.background as string | null) ?? null"
+      :text-color="(headerContent?.textColor as string | null) ?? null"
+      :nav-style="(headerContent?.navStyle as any) || 'plain'"
+      :height="(headerContent?.height as any) || 'normal'"
     />
 
     <UMain>
