@@ -223,3 +223,70 @@ The `list` type renders a reorderable list of items, each with their own sub-fie
 - **Layout blocks** (header, footer) are mandatory, exist on the home page only, and are not shown in the Blocks picker. Register them only in `allBlockDefinitions`.
 
 To make a block a layout block, set `isMandatory: true` in the database seed — this prevents users from deleting it.
+
+---
+
+## Collection-locked blocks
+
+Some blocks only make sense when a matching collection exists (e.g. a Projects block requires a Projects collection). These blocks are hidden from the Blocks picker until the user adds the relevant collection.
+
+### How it works
+
+1. **Collection types** are defined in `shared/types/collectionTypes.ts`. Each type declares its `type` slug, display label, icon, field schema, and which block types it unlocks via `allowedBlocks`.
+
+2. **Block definitions** opt into this by setting `allowedCollections` — an array of collection type slugs that must be present for the block to appear in the picker:
+
+```ts
+export const projectsDefinition: BlockDefinition = {
+  type: 'projects',
+  allowedCollections: ['projects'], // hidden until a Projects collection exists
+  // ...
+};
+```
+
+3. The **Blocks picker** (`BlocksView.vue`) filters the available blocks using `useCollections().activeCollectionTypes` — a reactive `Set` of the collection types the portfolio currently has.
+
+### Adding a new collection-locked block
+
+1. Add a new entry to `collectionTypes` in `shared/types/collectionTypes.ts`:
+
+```ts
+{
+  type: 'testimonials',
+  label: 'Testimonials',
+  icon: 'i-lucide-quote',
+  fields: [
+    { key: 'author', label: 'Author', type: 'text', required: true },
+    { key: 'quote',  label: 'Quote',  type: 'textarea' },
+  ],
+  allowedBlocks: ['testimonials'],
+}
+```
+
+2. Create the block component (`Testimonials.vue`) and definition file (`testimonials.ts`) following the normal block guide above. In the definition, set `allowedCollections: ['testimonials']`.
+
+3. Register the block in `config/blocks/index.ts` as normal.
+
+4. The block component fetches its data from the public collection endpoint:
+
+```ts
+const { data } = await useAsyncData(
+  `portfolio-${slug}-testimonials`,
+  () =>
+    $fetch<{ items: CollectionItem[] }>(`/api/portfolios/${slug}/collections/testimonials`, {
+      baseURL,
+    }),
+  { watch: [] },
+);
+```
+
+Each item's fields are accessed via `item.data.author`, `item.data.quote`, etc. — matching the keys defined in `collectionTypes`.
+
+### Data model
+
+Collections are stored in two tables:
+
+- **`collections`** — one row per collection (`id`, `portfolioId`, `type`, `name`, `sortOrder`)
+- **`collection_items`** — one row per item (`id`, `collectionId`, `data` JSONB, `isPublished`, `sortOrder`)
+
+Item fields live entirely in the `data` JSONB column. Validation against the field schema defined in `collectionTypes` happens at the API layer. Each portfolio can have at most one collection of each type.

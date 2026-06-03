@@ -7,6 +7,7 @@ export const projectsDefinition: BlockDefinition = {
   label: 'Projects',
   icon: 'i-lucide-folder-kanban',
   component: BlocksProjects as Component,
+  allowedCollections: ['projects'],
   defaultContent: {
     heading: 'Projects',
     showHeading: true,

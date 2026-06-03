@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Project } from '@portfolio-builder/shared/types';
+import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 
 export interface ProjectsBlockProps {
@@ -20,13 +20,18 @@ const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.
 
 const { data } = await useAsyncData(
   `portfolio-${slug}-projects`,
-  () => $fetch<{ projects: Project[] }>(`/api/portfolios/${slug}/projects`, { baseURL }),
+  () =>
+    $fetch<{ items: CollectionItem[] }>(`/api/portfolios/${slug}/collections/projects`, {
+      baseURL,
+    }),
   { watch: [] },
 );
 
 const projects = computed(() => {
-  const all = data.value?.projects ?? [];
-  return props.filterTag ? all.filter(p => p.tags.includes(props.filterTag!)) : all;
+  const all = data.value?.items ?? [];
+  return props.filterTag
+    ? all.filter(p => (p.data.tags as string[] | undefined)?.includes(props.filterTag!))
+    : all;
 });
 </script>
 
@@ -55,16 +60,20 @@ const projects = computed(() => {
                 : 'color-mix(in srgb, var(--primary) 20%, var(--bg-surface))',
           }"
         />
-        <h3 class="font-semibold text-lg">{{ project.title }}</h3>
-        <p v-if="project.time" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
-          {{ project.time }}
+        <h3 class="font-semibold text-lg">{{ project.data.title }}</h3>
+        <p v-if="project.data.time" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
+          {{ project.data.time }}
         </p>
-        <p v-if="project.description" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
-          {{ project.description }}
+        <p
+          v-if="project.data.description"
+          class="text-sm"
+          :style="{ color: 'var(--text-secondary)' }"
+        >
+          {{ project.data.description }}
         </p>
-        <div v-if="project.tags.length" class="flex flex-wrap gap-1 mt-auto">
+        <div v-if="(project.data.tags as string[])?.length" class="flex flex-wrap gap-1 mt-auto">
           <span
-            v-for="tag in project.tags"
+            v-for="tag in project.data.tags as string[]"
             :key="tag"
             class="text-xs px-2 py-0.5 rounded-full"
             :style="{
