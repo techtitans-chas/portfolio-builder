@@ -19,7 +19,7 @@ export interface DemoBlockProps {
   listField?: { id: string; label: string; url: string }[];
 }
 
-const props = withDefaults(defineProps<DemoBlockProps>(), {
+withDefaults(defineProps<DemoBlockProps>(), {
   textField: '',
   textareaField: '',
   urlField: '',
