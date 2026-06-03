@@ -212,14 +212,14 @@ defineExpose({
 
 <template>
   <div>
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col">
       <div v-if="loading" class="text-sm text-muted py-4 text-center">Loading…</div>
       <div v-else-if="error" class="text-sm text-error py-2">{{ error }}</div>
       <template v-else>
         <!-- Pinned header block -->
         <div
           v-if="headerBlock"
-          class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+          class="flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer"
           :class="
             selectedBlock?.id === headerBlock.id
               ? 'bg-elevated'
@@ -259,13 +259,13 @@ defineExpose({
         <VueDraggable
           v-model="contentBlocks"
           handle=".drag-handle"
-          class="flex flex-col gap-1"
+          class="flex flex-col"
           @end="onReorder"
         >
           <div
             v-for="block in contentBlocks"
             :key="block.id"
-            class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+            class="flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer"
             :class="[
               selectedBlock?.id === block.id ? 'bg-elevated' : 'hover:bg-elevated/50',
               { 'opacity-50': !block.isVisible },
@@ -311,7 +311,7 @@ defineExpose({
         <!-- Pinned footer block -->
         <div
           v-if="footerBlock"
-          class="flex items-center gap-1.5 px-2 py-1.5 text-sm rounded-md cursor-pointer"
+          class="flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer"
           :class="
             selectedBlock?.id === footerBlock.id
               ? 'bg-elevated'

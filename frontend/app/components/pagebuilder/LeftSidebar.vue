@@ -295,7 +295,7 @@ defineExpose({ themeSettings, isThemeDirty, layersView, activePage });
     </div>
 
     <!-- Main content -->
-    <div class="flex-1 overflow-y-auto p-4">
+    <div class="flex-1 overflow-y-auto">
       <PagebuilderBlocksView v-show="currentView === '0'" @block-added="onBlockAdded" />
       <PagebuilderLayersView
         v-show="currentView === '1'"
@@ -303,12 +303,13 @@ defineExpose({ themeSettings, isThemeDirty, layersView, activePage });
         :portfolio-id="portfolioId ?? null"
         :page-id="activePageId"
       />
-      <PagebuilderThemeView
-        v-show="currentView === '2'"
-        v-model:selected="selectedThemeId"
-        v-model:fonts="selectedFonts"
-        v-model:mode="currentThemeMode"
-      />
+      <div v-show="currentView === '2'" class="p-3">
+        <PagebuilderThemeView
+          v-model:selected="selectedThemeId"
+          v-model:fonts="selectedFonts"
+          v-model:mode="currentThemeMode"
+        />
+      </div>
     </div>
 
     <PagebuilderPageModal
