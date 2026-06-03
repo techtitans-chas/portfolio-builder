@@ -193,7 +193,6 @@ function onPageSaved(page: Page) {
       aria-label="Edit page"
       @click="openEditPage"
     />
-
   </div>
 
   <PagebuilderPageModal
