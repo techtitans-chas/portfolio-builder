@@ -122,6 +122,14 @@ function onPageSaved(page: Page) {
       />
       <template #content>
         <div class="p-1 min-w-52">
+          <button
+            class="flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 text-primary font-medium"
+            @click="openAddPage"
+          >
+            <UIcon name="i-lucide-plus" class="size-4 shrink-0" />
+            Add page
+          </button>
+          <div class="my-1 border-t border-default" />
           <div v-if="pagesLoading" class="flex items-center justify-center py-4">
             <UIcon name="i-lucide-loader-2" class="size-4 animate-spin text-muted" />
           </div>
@@ -184,15 +192,6 @@ function onPageSaved(page: Page) {
       size="sm"
       aria-label="Edit page"
       @click="openEditPage"
-    />
-
-    <UButton
-      icon="i-lucide-plus"
-      label="Add page"
-      color="primary"
-      variant="solid"
-      size="sm"
-      @click="openAddPage"
     />
   </div>
 

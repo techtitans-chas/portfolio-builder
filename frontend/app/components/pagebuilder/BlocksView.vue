@@ -35,7 +35,7 @@ function cloneDefinition(def: BlockDefinition) {
     :group="{ name: 'blocks', pull: 'clone', put: false }"
     :clone="cloneDefinition"
     :sort="false"
-    class="grid grid-cols-2 gap-px bg-[var(--ui-border)] border border-[var(--ui-border)]"
+    class="grid grid-cols-2 overflow-hidden"
   >
     <UButton
       v-for="block in availableBlocks"
@@ -45,7 +45,7 @@ function cloneDefinition(def: BlockDefinition) {
       :aria-label="block.label"
       :label="block.label"
       :icon="block.icon"
-      class="flex-col text-xs justify-center aspect-square rounded-none bg-[var(--ui-bg)]"
+      class="flex-col text-xs justify-center aspect-square rounded-none border-r border-b border-[var(--ui-border)] [&:nth-child(2n)]:border-r-0"
       :ui="{ leadingIcon: 'size-6' }"
       @click="addBlock(block.type)"
     />
