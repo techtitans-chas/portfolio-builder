@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus';
 import type { Page } from '@portfolio-builder/shared/types';
+import { useActivePage } from '~/composables/useActivePage';
 
 const props = defineProps<{
   portfolioId: string | null;
