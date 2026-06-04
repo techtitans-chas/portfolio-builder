@@ -60,7 +60,7 @@ const animated = ref(inEditor);
 onMounted(() => {
   if (animated.value || !sectionRef.value) return;
   const observer = new IntersectionObserver(
-    (entries) => {
+    entries => {
       if (entries[0]?.isIntersecting) {
         animated.value = true;
         observer.disconnect();
