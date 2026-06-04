@@ -5,6 +5,7 @@ import { textDefinition } from './text';
 import { projectsDefinition } from './projects';
 import { experiencesDefinition } from './experiences';
 import { demoDefinition } from './demo';
+import { accordionDefinition } from './accordion';
 export type { BlockField, BlockSection, BlockTab, BlockDefinition } from './types';
 
 export {
@@ -15,6 +16,7 @@ export {
   projectsDefinition,
   experiencesDefinition,
   demoDefinition,
+  accordionDefinition,
 };
 
 /** Content blocks shown in the BlocksView picker (excludes layout blocks) */
@@ -24,6 +26,7 @@ export const blockDefinitions = [
   projectsDefinition,
   experiencesDefinition,
   demoDefinition,
+  accordionDefinition,
 ];
 
 /** All blocks including layout — used by Renderer and RightSidebar */
@@ -35,4 +38,5 @@ export const allBlockDefinitions = [
   projectsDefinition,
   experiencesDefinition,
   demoDefinition,
+  accordionDefinition,
 ];

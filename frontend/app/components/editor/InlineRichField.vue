@@ -4,6 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from '@tiptap/extension-placeholder';
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import { getPath } from '~/utils/dotPath';
 
 defineOptions({ inheritAttrs: false });
 
@@ -15,7 +16,7 @@ const props = defineProps<{
 }>();
 
 const ctx = inject(inlineEditorKey, null);
-const value = computed(() => (ctx ? String(ctx.blockContent[props.fieldKey] ?? '') : ''));
+const value = computed(() => (ctx ? String(getPath(ctx.blockContent, props.fieldKey) ?? '') : ''));
 
 const toolbarVisible = ref(false);
 const isFocused = ref(false);
@@ -158,7 +159,7 @@ watch(
   () => ctx?.isActive,
   active => {
     if (!editor?.value) return;
-    editor.value.setEditable(!!active);
+    editor.value.setEditable(!!active, false);
     if (!active) {
       editor.value.commands.blur();
       toolbarVisible.value = false;
