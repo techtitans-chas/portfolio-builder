@@ -59,10 +59,20 @@ function cloneDefinition(def: BlockDefinition) {
 
 <style scoped>
 @keyframes block-pop {
-  0%   { transform: scale(1); }
-  25%  { transform: scale(0.88); background-color: var(--ui-bg-elevated); }
-  65%  { transform: scale(1.16); background-color: var(--ui-bg-elevated); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.88);
+    background-color: var(--ui-bg-elevated);
+  }
+  65% {
+    transform: scale(1.16);
+    background-color: var(--ui-bg-elevated);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .block-added {
