@@ -8,6 +8,8 @@ const { selectBlock } = useSelectedBlock();
 const { activeCollectionTypes } = useCollections();
 const emit = defineEmits<{ blockAdded: [] }>();
 
+const addingType = ref<string | null>(null);
+
 const availableBlocks = computed(() =>
   blockDefinitions.filter(
     d =>
@@ -21,6 +23,8 @@ function addBlock(type: string) {
   const newBlock = addPendingBlock(type, definition?.defaultContent ?? {});
   selectBlock(newBlock);
   emit('blockAdded');
+  addingType.value = type;
+  setTimeout(() => (addingType.value = null), 500);
 }
 
 // Clone the definition object so the original grid item stays in place
@@ -46,8 +50,22 @@ function cloneDefinition(def: BlockDefinition) {
       :label="block.label"
       :icon="block.icon"
       class="flex-col text-xs justify-center aspect-square rounded-none border-r border-b border-[var(--ui-border)] [&:nth-child(2n)]:border-r-0"
+      :class="{ 'block-added': addingType === block.type }"
       :ui="{ leadingIcon: 'size-6' }"
       @click="addBlock(block.type)"
     />
   </VueDraggable>
 </template>
+
+<style scoped>
+@keyframes block-pop {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(0.88); background-color: var(--ui-bg-elevated); }
+  65%  { transform: scale(1.16); background-color: var(--ui-bg-elevated); }
+  100% { transform: scale(1); }
+}
+
+.block-added {
+  animation: block-pop 0.45s ease-out forwards;
+}
+</style>
