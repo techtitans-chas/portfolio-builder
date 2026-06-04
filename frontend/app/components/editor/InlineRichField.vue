@@ -458,7 +458,7 @@ function runAndClose(fn: () => void) {
   <slot v-else />
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 @reference "~/assets/css/main.css";
 
 :deep(.ProseMirror p.is-editor-empty:first-child::before) {
