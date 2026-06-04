@@ -114,12 +114,17 @@ function onPageSaved(page: Page) {
   <div class="flex items-center gap-1">
     <UPopover>
       <UButton
-        :label="`Page: ${activePage?.title ?? 'Select page'}`"
         color="neutral"
-        variant="subtle"
-        size="sm"
+        variant="ghost"
+        size="md"
         trailing-icon="i-lucide-chevron-down"
-      />
+        class="min-w-40 justify-between"
+      >
+        <span class="flex items-center gap-2">
+          <span class="text-muted">Page:</span>
+          <span>{{ activePage?.title ?? 'Select page' }}</span>
+        </span>
+      </UButton>
       <template #content>
         <div class="p-1 min-w-52">
           <button
@@ -189,7 +194,7 @@ function onPageSaved(page: Page) {
       icon="i-lucide-edit-3"
       color="neutral"
       variant="ghost"
-      size="sm"
+      size="md"
       aria-label="Edit page"
       @click="openEditPage"
     />
