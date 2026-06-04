@@ -17,6 +17,7 @@ export interface BlockField {
     | 'textarea'
     | 'select'
     | 'checkbox'
+    | 'switch'
     | 'color'
     | 'url'
     | 'image'
@@ -24,6 +25,7 @@ export interface BlockField {
     | 'list'
     | 'font'
     | 'theme-color'
+    | 'slider'
     | 'inline-text'
     | 'inline-rich';
   placeholder?: string;
@@ -34,6 +36,12 @@ export interface BlockField {
   defaultItem?: () => Record<string, unknown>;
   // For 'text'/'textarea': also render as editable inline in the preview
   inline?: boolean;
+  // For 'slider':
+  min?: number;
+  max?: number;
+  step?: number;
+  // Only show this field when another field has a specific value
+  showIf?: { key: string; value: unknown };
 }
 
 export interface BlockSection {

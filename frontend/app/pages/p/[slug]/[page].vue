@@ -18,7 +18,8 @@ const {
   headerBlock,
   footerBlock,
   baseURL,
-  activeLogo,
+  logoLight,
+  logoDark,
 } = usePortfolio(slug);
 
 // Await these directly so portfolio and pages are settled before the 404 guards below.
@@ -99,7 +100,8 @@ useHead({
     :header-content="headerContent"
     :footer-content="footerContent"
     :google-fonts-url="googleFontsUrl"
-    :logo-url="activeLogo"
+    :logo-url="logoLight"
+    :logo-url-dark="logoDark"
   >
     <BlocksRenderer v-for="block in contentBlocks" :key="block.id" :block="block" />
   </PortfolioLayout>

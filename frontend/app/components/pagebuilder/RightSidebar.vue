@@ -67,6 +67,9 @@ watch(definition, () => {
 // server-side content updates (e.g. after a media file is deleted).
 const localContent = ref<Record<string, unknown>>({});
 const localContentBlockId = ref<string | null>(null);
+// Set to true while setValue is writing to pendingContentEdits so the watch
+// below doesn't re-apply our own write back on top of localContent.
+let isApplyingLocal = false;
 
 watch(
   () => selectedBlock.value?.id,
@@ -98,6 +101,20 @@ watch(
   { deep: true },
 );
 
+watch(
+  () => selectedBlock.value && pendingContentEdits.value[selectedBlock.value.id],
+  pending => {
+    // Pending content changed externally (e.g. drag-reorder of header widgets) —
+    // merge the new pending values into localContent so they aren't overwritten
+    // next time the sidebar calls setValue.
+    if (isApplyingLocal) return;
+    if (!selectedBlock.value) return;
+    if (!pending) return;
+    localContent.value = { ...localContent.value, ...(pending as Record<string, unknown>) };
+  },
+  { deep: true },
+);
+
 const activeSections = computed(() => {
   if (!definition.value) return [];
   if (hasTabs.value) {
@@ -114,7 +131,9 @@ function getValue(key: string): unknown {
 function setValue(key: string, value: unknown) {
   if (!selectedBlock.value) return;
   localContent.value = setPath(localContent.value, key, value);
+  isApplyingLocal = true;
   setBlockContent(selectedBlock.value.id, localContent.value);
+  isApplyingLocal = false;
 }
 </script>
 
@@ -179,8 +198,12 @@ function setValue(key: string, value: unknown) {
         <div v-for="(section, si) in activeSections" :key="si" class="flex flex-col gap-2">
           <template
             v-if="
-              section.fields.filter(f => f.type !== 'inline-text' && f.type !== 'inline-rich')
-                .length
+              section.fields.filter(
+                f =>
+                  f.type !== 'inline-text' &&
+                  f.type !== 'inline-rich' &&
+                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+              ).length
             "
           >
             <p
@@ -191,14 +214,19 @@ function setValue(key: string, value: unknown) {
             </p>
             <div
               v-for="field in section.fields.filter(
-                f => f.type !== 'inline-text' && f.type !== 'inline-rich',
+                f =>
+                  f.type !== 'inline-text' &&
+                  f.type !== 'inline-rich' &&
+                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
               )"
               :key="field.key"
               class="flex gap-1"
               :class="
-                ['theme-color', 'checkbox', 'color'].includes(field.type)
+                ['theme-color', 'checkbox', 'switch', 'color'].includes(field.type)
                   ? 'items-center justify-between'
-                  : 'flex-col'
+                  : field.type === 'slider'
+                    ? 'flex-col gap-1'
+                    : 'flex-col'
               "
             >
               <label class="text-xs text-muted">{{ field.label }}</label>
@@ -303,6 +331,25 @@ function setValue(key: string, value: unknown) {
                 :model-value="(getValue(field.key) as boolean) ?? false"
                 @update:model-value="setValue(field.key, $event)"
               />
+              <USwitch
+                v-else-if="field.type === 'switch'"
+                :model-value="(getValue(field.key) as boolean) ?? false"
+                size="sm"
+                @update:model-value="setValue(field.key, $event)"
+              />
+              <div v-else-if="field.type === 'slider'" class="flex items-center gap-2">
+                <USlider
+                  :model-value="(getValue(field.key) as number) ?? field.min ?? 0"
+                  :min="field.min ?? 0"
+                  :max="field.max ?? 100"
+                  :step="field.step ?? 1"
+                  class="flex-1"
+                  @update:model-value="setValue(field.key, $event)"
+                />
+                <span class="text-xs text-muted w-8 text-right tabular-nums">
+                  {{ (getValue(field.key) as number) ?? field.min ?? 0 }}px
+                </span>
+              </div>
               <USelect
                 v-else-if="field.type === 'select'"
                 :model-value="(getValue(field.key) as string) ?? ''"

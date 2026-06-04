@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import type BlocksHeader from './blocks/Header.vue';
+import type { WidgetType } from './blocks/Header.vue';
+
+type HeaderInstance = InstanceType<typeof BlocksHeader>;
+
 const props = defineProps<{
   cssVars: Record<string, string>;
   portfolioMode: string;
@@ -10,7 +15,17 @@ const props = defineProps<{
   isEditor?: boolean;
   googleFontsUrl?: string | null;
   logoUrl?: string | null;
+  logoUrlDark?: string | null;
+  onSlotReorder?: (slots: {
+    leftOrder: WidgetType[];
+    centerOrder: WidgetType[];
+    rightOrder: WidgetType[];
+    topOrder: WidgetType[];
+  }) => void;
 }>();
+
+const headerRef = useTemplateRef<HeaderInstance>('headerBlock');
+defineExpose({ headerRef });
 
 useHead(
   computed(() => ({
@@ -26,7 +41,7 @@ defineEmits<{
 
 <template>
   <div
-    class="portfolio-root min-h-screen"
+    class="portfolio-root @container min-h-screen"
     :style="{
       ...cssVars,
       backgroundColor: 'var(--bg-page)',
@@ -36,24 +51,53 @@ defineEmits<{
   >
     <div
       v-if="isEditor"
-      class="relative cursor-pointer after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:ring-transparent hover:after:ring-primary/60 after:transition-shadow after:duration-150"
-      @click.capture.prevent="$emit('select-header')"
+      class="relative after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:ring-transparent hover:after:ring-primary/60 after:transition-shadow after:duration-150"
+      @click.capture="
+        (e: MouseEvent) => {
+          if (!(e.target as HTMLElement).closest('[data-drag-zone]')) {
+            e.preventDefault();
+            $emit('select-header');
+          }
+        }
+      "
     >
       <BlocksHeader
+        ref="headerBlock"
         :site-name="(headerContent?.siteName as string) || siteName"
         :home-url="homeUrl"
         :nav-links="navLinks"
-        :cta="(headerContent?.cta as { label: string; url: string; style?: string } | null) ?? null"
+        :logo-url="logoUrl"
+        :is-editor="true"
+        :on-slot-reorder="onSlotReorder"
+        :layout="(headerContent?.layout as any) || 'single'"
+        :left-order="(headerContent?.leftOrder as any) || ['logo', 'nav']"
+        :center-order="(headerContent?.centerOrder as any) || []"
+        :right-order="(headerContent?.rightOrder as any) || ['cta']"
+        :top-order="(headerContent?.topOrder as any) || ['logo']"
         :cta-buttons="(headerContent?.ctaButtons as any[]) ?? []"
         :social-links="(headerContent?.socialLinks as any[]) ?? []"
+        :show-logo="headerContent?.showLogo !== false"
+        :show-nav="headerContent?.showNav !== false"
+        :show-cta="headerContent?.showCta !== false"
+        :show-socials="!!headerContent?.showSocials"
         :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
-        :logo-url="logoUrl"
+        :logo-size="(headerContent?.logoSize as any) || 'md'"
+        :logo-stacked="!!headerContent?.logoStacked"
         :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
-        :layout="(headerContent?.layout as any) || 'left-nav'"
         :background="(headerContent?.background as string | null) ?? null"
         :text-color="(headerContent?.textColor as string | null) ?? null"
-        :nav-style="(headerContent?.navStyle as any) || 'plain'"
-        :height="(headerContent?.height as any) || 'normal'"
+        :logo-url-dark="logoUrlDark"
+        :nav-variant="(headerContent?.navVariant as any) || 'ghost'"
+        :nav-color="(headerContent?.navColor as string | null) ?? null"
+        :nav-radius="(headerContent?.navRadius as any) || 'md'"
+        :nav-size="(headerContent?.navSize as any) || 'sm'"
+        :nav-spacing="(headerContent?.navSpacing as number) ?? 4"
+        :padding="(headerContent?.padding as number) ?? 16"
+        :border-width="(headerContent?.borderWidth as number) ?? 1"
+        :max-width="(headerContent?.maxWidth as any) || '7xl'"
+        :position="(headerContent?.position as any) || 'static'"
+        :mobile-menu-title="(headerContent?.mobileMenuTitle as string) || ''"
+        :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
       />
     </div>
 
@@ -62,17 +106,36 @@ defineEmits<{
       :site-name="(headerContent?.siteName as string) || siteName"
       :home-url="homeUrl"
       :nav-links="navLinks"
-      :cta="(headerContent?.cta as { label: string; url: string; style?: string } | null) ?? null"
+      :logo-url="logoUrl"
+      :layout="(headerContent?.layout as any) || 'single'"
+      :left-order="(headerContent?.leftOrder as any) || ['logo', 'nav']"
+      :center-order="(headerContent?.centerOrder as any) || []"
+      :right-order="(headerContent?.rightOrder as any) || ['cta']"
+      :top-order="(headerContent?.topOrder as any) || ['logo']"
       :cta-buttons="(headerContent?.ctaButtons as any[]) ?? []"
       :social-links="(headerContent?.socialLinks as any[]) ?? []"
+      :show-logo="headerContent?.showLogo !== false"
+      :show-nav="headerContent?.showNav !== false"
+      :show-cta="headerContent?.showCta !== false"
+      :show-socials="!!headerContent?.showSocials"
       :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
-      :logo-url="logoUrl"
+      :logo-size="(headerContent?.logoSize as any) || 'md'"
+      :logo-stacked="!!headerContent?.logoStacked"
       :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
-      :layout="(headerContent?.layout as any) || 'left-nav'"
       :background="(headerContent?.background as string | null) ?? null"
       :text-color="(headerContent?.textColor as string | null) ?? null"
-      :nav-style="(headerContent?.navStyle as any) || 'plain'"
-      :height="(headerContent?.height as any) || 'normal'"
+      :logo-url-dark="logoUrlDark"
+      :nav-variant="(headerContent?.navVariant as any) || 'ghost'"
+      :nav-color="(headerContent?.navColor as string | null) ?? null"
+      :nav-radius="(headerContent?.navRadius as any) || 'md'"
+      :nav-size="(headerContent?.navSize as any) || 'sm'"
+      :nav-spacing="(headerContent?.navSpacing as number) ?? 4"
+      :padding="(headerContent?.padding as number) ?? 16"
+      :border-width="(headerContent?.borderWidth as number) ?? 1"
+      :max-width="(headerContent?.maxWidth as any) || '7xl'"
+      :position="(headerContent?.position as any) || 'static'"
+      :mobile-menu-title="(headerContent?.mobileMenuTitle as string) || ''"
+      :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
     />
 
     <UMain>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type PagebuilderLeftSidebar from '~/components/pagebuilder/LeftSidebar.vue';
 import type PagebuilderLayersView from '~/components/pagebuilder/LayersView.vue';
+import type PagebuilderPreview from '~/components/pagebuilder/Preview.vue';
 import { VIEWPORT_MODES } from '~/composables/usePreviewScale';
 import { useActivePage } from '~/composables/useActivePage';
 
@@ -29,7 +30,10 @@ await fetchPages();
 type LeftSidebarInstance = InstanceType<typeof PagebuilderLeftSidebar>;
 type LayersViewInstance = InstanceType<typeof PagebuilderLayersView>;
 
+type PreviewInstance = InstanceType<typeof PagebuilderPreview>;
+
 const leftSidebar = useTemplateRef<LeftSidebarInstance>('leftSidebar');
+const preview = useTemplateRef<PreviewInstance>('preview');
 
 const initialThemeSettings = computed(() => {
   const s = portfolio.value?.themeSettings as {
@@ -113,6 +117,11 @@ async function save() {
       const footerBlock = layers!.footerBlock;
       if (headerBlock?.pageId) blockPageMap.set(headerBlock.id, headerBlock.pageId);
       if (footerBlock?.pageId) blockPageMap.set(footerBlock.id, footerBlock.pageId);
+
+      // Read slot order directly from the header component (not via pendingContentEdits)
+      // to avoid the reactive loop that caused post-drag duplication
+      const headerSlotOrder = preview.value?.portfolioLayout?.headerRef?.slotOrder;
+      console.log('[save] headerSlotOrder:', headerSlotOrder, 'headerBlock:', headerBlock?.id);
       // Any block not in the map (e.g. header/footer edited without being in contentBlocks)
       // falls back to homePageId, then to pageId as last resort
       const homePageId = layers!.homePageId ?? pageId;
@@ -151,6 +160,22 @@ async function save() {
               body: JSON.stringify({ type: b.type, content }),
             });
           }),
+        // Header slot order — read from component, not pendingContentEdits
+        headerBlock && headerSlotOrder
+          ? fetcher(
+              `/api/portfolios/${portfolioId}/pages/${pageIdFor(headerBlock.id)}/blocks/${headerBlock.id}`,
+              {
+                method: 'PATCH',
+                credentials: 'include',
+                body: JSON.stringify({
+                  content: {
+                    ...(headerBlock.content as Record<string, unknown>),
+                    ...headerSlotOrder,
+                  },
+                }),
+              },
+            )
+          : Promise.resolve(),
         // Content edits — skip pending IDs and blocks queued for deletion
         ...Object.entries(pendingContentEdits.value)
           .filter(
@@ -249,6 +274,7 @@ async function save() {
         <div v-if="portfolio" :style="wrapperStyle">
           <div ref="previewEl" class="@container" :style="scaleStyle">
             <PagebuilderPreview
+              ref="preview"
               :portfolio-slug="portfolio.slug"
               :portfolio-title="portfolio.title"
               :page-slug="activePage?.slug ?? 'home'"

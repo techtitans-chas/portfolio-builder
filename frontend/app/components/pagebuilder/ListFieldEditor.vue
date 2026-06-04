@@ -16,8 +16,8 @@ const items = computed({
   set: val => emit('update:modelValue', val),
 });
 
-// Which item index is expanded
-const expanded = ref<number | null>(items.value.length > 0 ? 0 : null);
+// Collapsed by default — only auto-expand when a new item is added
+const expanded = ref<number | null>(null);
 
 function addItem() {
   const newItem = props.field.defaultItem?.() ?? { id: crypto.randomUUID() };
