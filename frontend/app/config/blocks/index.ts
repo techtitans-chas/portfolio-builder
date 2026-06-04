@@ -7,6 +7,7 @@ import { experiencesDefinition } from './experiences';
 import { demoDefinition } from './demo';
 import { accordionDefinition } from './accordion';
 import { testimonialDefinition } from './testimonial';
+import { skillsDefinition } from './skills';
 export type { BlockField, BlockSection, BlockTab, BlockDefinition } from './types';
 
 export {
@@ -19,6 +20,7 @@ export {
   demoDefinition,
   accordionDefinition,
   testimonialDefinition,
+  skillsDefinition,
 };
 
 /** Content blocks shown in the BlocksView picker (excludes layout blocks) */
@@ -30,6 +32,7 @@ export const blockDefinitions = [
   demoDefinition,
   accordionDefinition,
   testimonialDefinition,
+  skillsDefinition,
 ];
 
 /** All blocks including layout — used by Renderer and RightSidebar */
@@ -43,4 +46,5 @@ export const allBlockDefinitions = [
   demoDefinition,
   accordionDefinition,
   testimonialDefinition,
+  skillsDefinition,
 ];

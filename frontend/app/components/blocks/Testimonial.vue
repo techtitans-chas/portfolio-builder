@@ -164,10 +164,7 @@ watch(
               :key="item.id ?? index"
               class="w-full shrink-0 px-1"
             >
-              <div
-                class="rounded-2xl p-8"
-                :style="{ backgroundColor: 'var(--bg-surface)' }"
-              >
+              <div class="rounded-2xl p-8" :style="{ backgroundColor: 'var(--bg-surface)' }">
                 <UIcon
                   name="i-lucide-quote"
                   class="w-8 h-8 mb-4 opacity-20"
@@ -239,7 +236,10 @@ watch(
             :key="i"
             class="w-2 h-2 rounded-full transition-all duration-300"
             :style="{
-              backgroundColor: i === current ? 'var(--primary)' : 'color-mix(in srgb, var(--text-primary) 20%, transparent)',
+              backgroundColor:
+                i === current
+                  ? 'var(--primary)'
+                  : 'color-mix(in srgb, var(--text-primary) 20%, transparent)',
               transform: i === current ? 'scale(1.25)' : 'scale(1)',
             }"
             :aria-label="`Go to slide ${i + 1}`"
