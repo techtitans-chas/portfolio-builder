@@ -72,7 +72,7 @@ export const testimonialDefinition: BlockDefinition = {
             },
             { key: 'author', label: 'Author', placeholder: 'Full Name', inline: true },
             { key: 'role', label: 'Role / Company', placeholder: 'CEO at Acme', inline: true },
-            { key: 'avatar', label: 'Avatar', type: 'image' },
+            { key: 'avatar', label: 'Avatar URL', type: 'url', placeholder: 'https://...' },
           ],
         },
       ],
