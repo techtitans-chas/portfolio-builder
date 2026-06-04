@@ -53,7 +53,7 @@ const footerContent = computed(
 );
 
 const { selectedBlock, selectBlock, clearSelection } = useSelectedBlock();
-const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent } = usePageEditor();
+const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent, pendingContentEdits } = usePageEditor();
 
 type LayoutInstance = InstanceType<typeof PortfolioLayoutComp>;
 const portfolioLayout = useTemplateRef<LayoutInstance>('portfolioLayout');
@@ -63,7 +63,8 @@ defineExpose({ portfolioLayout });
 function onHeaderSlotReorder(slots: { leftOrder: WidgetType[]; centerOrder: WidgetType[]; rightOrder: WidgetType[]; topOrder: WidgetType[] }) {
   const block = headerBlock.value;
   if (!block) return;
-  setBlockContent(block.id, { ...(block.content as Record<string, unknown>), ...slots });
+  const base = pendingContentEdits.value[block.id] ?? (block.content as Record<string, unknown>);
+  setBlockContent(block.id, { ...base, ...slots });
 }
 
 const blockToDelete = ref<Block | null>(null);

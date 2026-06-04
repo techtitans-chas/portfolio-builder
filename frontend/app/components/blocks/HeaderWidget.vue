@@ -19,6 +19,9 @@ defineProps<{
 
   showLogoImg: boolean | null;
   logoUrl: string | null;
+  logoSizeStyle: Record<string, string>;
+  logoStacked: boolean;
+  logoTitleSizeClass: string;
   siteName: string;
   showTitle: boolean;
   homeUrl: string;
@@ -27,6 +30,8 @@ defineProps<{
 
   navLinks: NavLink[];
   navLinkClass: string;
+  navLinkStyle: Record<string, string>;
+  navGapStyle: Record<string, string>;
   mutedTextStyle: Record<string, string>;
 
   resolvedCtaButtons: CtaButton[];
@@ -53,19 +58,23 @@ defineOptions({ inheritAttrs: false });
     <a
       v-if="widget === 'logo'"
       :href="inEditor ? undefined : homeUrl"
-      class="flex items-center gap-2.5 shrink-0"
-      :class="inEditor && 'pointer-events-none'"
+      class="flex shrink-0"
+      :class="[
+        logoStacked ? 'flex-col items-center gap-1.5' : 'flex-row items-center gap-2.5',
+        inEditor && 'pointer-events-none',
+      ]"
     >
       <img
         v-if="showLogoImg"
         :src="logoUrl!"
         :alt="siteName"
-        class="h-9 w-auto max-w-36"
-        :style="logoFilterStyle"
+        class="max-w-48 object-contain"
+        :style="{ ...logoSizeStyle, ...logoFilterStyle }"
       />
       <span
         v-if="showTitle && siteName"
-        class="font-bold text-lg leading-none"
+        class="font-bold leading-none"
+        :class="logoTitleSizeClass"
         :style="textStyle"
       >{{ siteName }}</span>
     </a>
@@ -73,15 +82,16 @@ defineOptions({ inheritAttrs: false });
     <!-- Nav widget -->
     <nav
       v-else-if="widget === 'nav' && navLinks.length"
-      class="flex gap-1 text-sm"
+      class="flex text-sm"
       :class="inEditor && 'pointer-events-none'"
-      :style="mutedTextStyle"
+      :style="{ ...mutedTextStyle, ...navGapStyle }"
     >
       <a
         v-for="link in navLinks"
         :key="link.url"
         :href="inEditor ? undefined : link.url"
         :class="navLinkClass"
+        :style="navLinkStyle"
       >{{ link.label }}</a>
     </nav>
 

@@ -20,49 +20,41 @@ export const headerDefinition: BlockDefinition = {
   icon: 'i-lucide-panel-top',
   component: BlocksHeader as Component,
   defaultContent: {
-    // Slot layout
     layout: 'single',
     leftOrder: ['logo', 'nav'],
     centerOrder: [],
     rightOrder: ['cta'],
     topOrder: ['logo'],
-
-    // Visibility
     showLogo: true,
     showNav: true,
     showCta: true,
     showSocials: false,
     showColorModeToggle: false,
-
-    // Content
     siteName: '',
     ctaButtons: [],
     socialLinks: [],
+    logoSize: 'md',
+    logoStacked: false,
     brandingDisplay: 'logo-and-title',
-
-    // Style
     background: null,
     textColor: null,
     logoTint: null,
     logoDark: false,
-    navStyle: 'plain',
-    height: 'normal',
+    navVariant: 'ghost',
+    navColor: null,
+    navRadius: 'md',
+    navSize: 'sm',
+    navSpacing: 4,
+    padding: 16,
+    borderWidth: 1,
+    maxWidth: '7xl',
+    position: 'static',
   },
   tabs: [
     {
-      label: 'Widgets',
+      label: 'Layout',
       icon: 'i-lucide-layout-panel-left',
       sections: [
-        {
-          label: 'Show / hide',
-          fields: [
-            { key: 'showLogo', label: 'Logo', type: 'checkbox' },
-            { key: 'showNav', label: 'Navigation links', type: 'checkbox' },
-            { key: 'showCta', label: 'CTA buttons', type: 'checkbox' },
-            { key: 'showSocials', label: 'Social links', type: 'checkbox' },
-            { key: 'showColorModeToggle', label: 'Color mode toggle', type: 'checkbox' },
-          ],
-        },
         {
           label: 'Layout',
           fields: [
@@ -75,31 +67,191 @@ export const headerDefinition: BlockDefinition = {
                 { label: 'Stacked', value: 'stacked' },
               ],
             },
+            {
+              key: 'position',
+              label: 'Position',
+              type: 'select',
+              options: [
+                { label: 'Static', value: 'static' },
+                { label: 'Sticky', value: 'sticky' },
+              ],
+            },
+            {
+              key: 'padding',
+              label: 'Padding',
+              type: 'slider',
+              min: 0,
+              max: 64,
+              step: 2,
+            },
+            {
+              key: 'borderWidth',
+              label: 'Border size',
+              type: 'slider',
+              min: 0,
+              max: 15,
+              step: 1,
+            },
+            {
+              key: 'maxWidth',
+              label: 'Inner max width',
+              type: 'select',
+              options: [
+                { label: 'Full', value: 'full' },
+                { label: 'SM (640px)', value: 'sm' },
+                { label: 'MD (768px)', value: 'md' },
+                { label: 'LG (1024px)', value: 'lg' },
+                { label: 'XL (1280px)', value: 'xl' },
+                { label: '2XL (1536px)', value: '2xl' },
+                { label: '3XL (1792px)', value: '3xl' },
+                { label: '4XL (2048px)', value: '4xl' },
+                { label: '5XL (2560px)', value: '5xl' },
+                { label: '6XL (3072px)', value: '6xl' },
+                { label: '7XL (3584px)', value: '7xl' },
+              ],
+            },
           ],
         },
         {
-          label: 'Branding',
+          label: 'Colors',
+          fields: [
+            { key: 'background', label: 'Background', type: 'theme-color' },
+            { key: 'textColor', label: 'Text color override', type: 'theme-color' },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Branding',
+      icon: 'i-lucide-building-2',
+      sections: [
+        {
           fields: [
             { key: 'siteName', label: 'Site name', type: 'text', placeholder: 'Your name' },
+            { key: 'showLogo', label: 'Show logo', type: 'checkbox' },
+            {
+              key: 'logoSize',
+              label: 'Logo size',
+              type: 'select',
+              showIf: { key: 'showLogo', value: true },
+              options: [
+                { label: 'XS', value: 'xs' },
+                { label: 'Small', value: 'sm' },
+                { label: 'Medium', value: 'md' },
+                { label: 'Large', value: 'lg' },
+                { label: 'XL', value: 'xl' },
+              ],
+            },
+            {
+              key: 'logoStacked',
+              label: 'Stack logo above title',
+              type: 'checkbox',
+              showIf: { key: 'showLogo', value: true },
+            },
             {
               key: 'brandingDisplay',
               label: 'Display',
               type: 'select',
+              showIf: { key: 'showLogo', value: true },
               options: [
                 { label: 'Logo & title', value: 'logo-and-title' },
                 { label: 'Logo only', value: 'logo-only' },
                 { label: 'Title only', value: 'title-only' },
               ],
             },
+            {
+              key: 'logoTint',
+              label: 'Logo tint',
+              type: 'theme-color',
+              showIf: { key: 'showLogo', value: true },
+            },
+            {
+              key: 'logoDark',
+              label: 'Invert logo color',
+              type: 'checkbox',
+              showIf: { key: 'showLogo', value: true },
+            },
           ],
         },
+      ],
+    },
+    {
+      label: 'Navigation',
+      icon: 'i-lucide-navigation',
+      sections: [
+        {
+          fields: [
+            { key: 'showNav', label: 'Show navigation', type: 'checkbox' },
+            {
+              key: 'navVariant',
+              label: 'Style',
+              type: 'select',
+              showIf: { key: 'showNav', value: true },
+              options: [
+                { label: 'Ghost', value: 'ghost' },
+                { label: 'Soft', value: 'soft' },
+                { label: 'Solid', value: 'solid' },
+                { label: 'Outline', value: 'outline' },
+                { label: 'Link', value: 'link' },
+              ],
+            },
+            {
+              key: 'navColor',
+              label: 'Color',
+              type: 'theme-color',
+              showIf: { key: 'showNav', value: true },
+            },
+            {
+              key: 'navRadius',
+              label: 'Corner radius',
+              type: 'select',
+              showIf: { key: 'showNav', value: true },
+              options: [
+                { label: 'None', value: 'none' },
+                { label: 'Small', value: 'sm' },
+                { label: 'Medium', value: 'md' },
+                { label: 'Large', value: 'lg' },
+                { label: 'Full', value: 'full' },
+              ],
+            },
+            {
+              key: 'navSize',
+              label: 'Size',
+              type: 'select',
+              showIf: { key: 'showNav', value: true },
+              options: [
+                { label: 'Extra small', value: 'xs' },
+                { label: 'Small', value: 'sm' },
+                { label: 'Medium', value: 'md' },
+                { label: 'Large', value: 'lg' },
+              ],
+            },
+            {
+              key: 'navSpacing',
+              label: 'Spacing',
+              type: 'slider',
+              showIf: { key: 'showNav', value: true },
+              min: 0,
+              max: 32,
+              step: 1,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Widgets',
+      icon: 'i-lucide-layout-template',
+      sections: [
         {
           label: 'CTA buttons',
           fields: [
+            { key: 'showCta', label: 'Show CTA buttons', type: 'checkbox' },
             {
               key: 'ctaButtons',
               label: 'Buttons',
               type: 'list',
+              showIf: { key: 'showCta', value: true },
               itemLabel: 'Button',
               defaultItem: () => ({
                 id: crypto.randomUUID(),
@@ -127,10 +279,12 @@ export const headerDefinition: BlockDefinition = {
         {
           label: 'Social links',
           fields: [
+            { key: 'showSocials', label: 'Show social links', type: 'checkbox' },
             {
               key: 'socialLinks',
               label: 'Accounts',
               type: 'list',
+              showIf: { key: 'showSocials', value: true },
               itemLabel: 'Account',
               defaultItem: () => ({ id: crypto.randomUUID(), platform: 'instagram', url: '' }),
               itemFields: [
@@ -146,53 +300,9 @@ export const headerDefinition: BlockDefinition = {
             },
           ],
         },
-      ],
-    },
-    {
-      label: 'Style',
-      icon: 'i-lucide-palette',
-      sections: [
         {
-          label: 'Dimensions',
-          fields: [
-            {
-              key: 'height',
-              label: 'Height',
-              type: 'select',
-              options: [
-                { label: 'Compact', value: 'compact' },
-                { label: 'Normal', value: 'normal' },
-                { label: 'Tall', value: 'tall' },
-              ],
-            },
-          ],
-        },
-        {
-          label: 'Navigation links',
-          fields: [
-            {
-              key: 'navStyle',
-              label: 'Link style',
-              type: 'select',
-              options: [
-                { label: 'Plain', value: 'plain' },
-                { label: 'Underline', value: 'underline' },
-                { label: 'Pill', value: 'pill' },
-                { label: 'Pill (filled)', value: 'pill-filled' },
-                { label: 'Block', value: 'block' },
-                { label: 'Block (filled)', value: 'block-filled' },
-              ],
-            },
-          ],
-        },
-        {
-          label: 'Colors',
-          fields: [
-            { key: 'background', label: 'Background', type: 'theme-color' },
-            { key: 'textColor', label: 'Text color override', type: 'theme-color' },
-            { key: 'logoTint', label: 'Logo tint', type: 'theme-color' },
-            { key: 'logoDark', label: 'Logo is dark (invert before tinting)', type: 'checkbox' },
-          ],
+          label: 'Color mode toggle',
+          fields: [{ key: 'showColorModeToggle', label: 'Show toggle', type: 'checkbox' }],
         },
       ],
     },
