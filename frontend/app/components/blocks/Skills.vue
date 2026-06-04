@@ -36,7 +36,9 @@ const grouped = computed(() => {
   return [...map.entries()];
 });
 
-const hasCategories = computed(() => grouped.value.length > 1 || (grouped.value[0]?.[0] !== 'General'));
+const hasCategories = computed(
+  () => grouped.value.length > 1 || grouped.value[0]?.[0] !== 'General',
+);
 
 // Build a global stagger delay map: flatIndex → delay in ms
 const delayMap = computed(() => {
@@ -89,7 +91,7 @@ onMounted(() => {
         class="gap-x-12 gap-y-10"
         :class="columns === '2' ? 'grid grid-cols-1 sm:grid-cols-2' : 'flex flex-col'"
       >
-        <div v-for="([category, entries]) in grouped" :key="category">
+        <div v-for="[category, entries] in grouped" :key="category">
           <!-- Category header — only shown when there are named groups -->
           <p
             v-if="hasCategories"

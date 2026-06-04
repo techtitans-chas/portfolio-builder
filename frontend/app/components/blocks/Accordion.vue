@@ -13,7 +13,7 @@ export interface AccordionBlockProps {
   items?: AccordionItem[];
 }
 
-const props = withDefaults(defineProps<AccordionBlockProps>(), {
+withDefaults(defineProps<AccordionBlockProps>(), {
   heading: 'FAQ',
   showHeading: true,
   items: () => [],
@@ -51,7 +51,10 @@ function isOpen(index: number) {
         </h2>
       </EditorInlineTextField>
 
-      <div class="divide-y" :style="{ borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)' }">
+      <div
+        class="divide-y"
+        :style="{ borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)' }"
+      >
         <div
           v-for="(item, index) in items"
           :key="item.id ?? index"

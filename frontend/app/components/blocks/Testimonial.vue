@@ -148,11 +148,7 @@ watch(
       </div>
 
       <!-- Live mode: carousel -->
-      <div
-        v-else-if="items && items.length"
-        @mouseenter="stopAutoplay"
-        @mouseleave="startAutoplay"
-      >
+      <div v-else-if="items && items.length" @mouseenter="stopAutoplay" @mouseleave="startAutoplay">
         <!-- Card track + arrows share the same relative container so top-1/2 centers on the card, not the dots -->
         <div class="relative">
           <div class="overflow-hidden">
@@ -171,14 +167,14 @@ watch(
                     class="w-8 h-8 mb-4 opacity-20"
                     :style="{ color: 'var(--primary)' }"
                   />
-                  <!-- eslint-disable-next-line vue/no-v-html -->
-                  <!-- eslint-disable-next-line vue/no-v-html -->
+                  <!-- eslint-disable vue/no-v-html -->
                   <div
                     v-if="item.quote"
                     class="rich-text text-lg leading-relaxed mb-6"
                     :style="{ color: 'var(--text-primary)' }"
                     v-html="item.quote"
                   />
+                  <!-- eslint-enable vue/no-v-html -->
 
                   <div class="flex items-center gap-3">
                     <img
@@ -191,7 +187,8 @@ watch(
                       v-else
                       class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
                       :style="{
-                        backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
+                        backgroundColor:
+                          'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
                         color: 'var(--primary)',
                       }"
                     >

@@ -14,21 +14,24 @@ export const testimonialDefinition: BlockDefinition = {
     items: [
       {
         id: crypto.randomUUID(),
-        quote: '<p>Working with them was an absolute pleasure. The attention to detail and speed of delivery exceeded every expectation we had.</p>',
+        quote:
+          '<p>Working with them was an absolute pleasure. The attention to detail and speed of delivery exceeded every expectation we had.</p>',
         author: 'Sarah Johnson',
         role: 'CEO at Acme',
         avatar: null,
       },
       {
         id: crypto.randomUUID(),
-        quote: '<p>Truly outstanding work. They took our rough idea and turned it into something we are genuinely proud to show off.</p>',
+        quote:
+          '<p>Truly outstanding work. They took our rough idea and turned it into something we are genuinely proud to show off.</p>',
         author: 'Marcus Lee',
         role: 'Founder at Spark',
         avatar: null,
       },
       {
         id: crypto.randomUUID(),
-        quote: '<p>Fast, communicative, and the quality speaks for itself. We will definitely be working together again.</p>',
+        quote:
+          '<p>Fast, communicative, and the quality speaks for itself. We will definitely be working together again.</p>',
         author: 'Priya Nair',
         role: 'Product Lead at Loop',
         avatar: null,
@@ -60,7 +63,13 @@ export const testimonialDefinition: BlockDefinition = {
             avatar: null,
           }),
           itemFields: [
-            { key: 'quote', label: 'Quote', type: 'textarea', placeholder: 'Their words...', inline: true },
+            {
+              key: 'quote',
+              label: 'Quote',
+              type: 'textarea',
+              placeholder: 'Their words...',
+              inline: true,
+            },
             { key: 'author', label: 'Author', placeholder: 'Full Name', inline: true },
             { key: 'role', label: 'Role / Company', placeholder: 'CEO at Acme', inline: true },
             { key: 'avatar', label: 'Avatar', type: 'image' },
@@ -70,9 +79,7 @@ export const testimonialDefinition: BlockDefinition = {
     },
     {
       label: 'Settings',
-      fields: [
-        { key: 'autoplay', label: 'Autoplay', type: 'switch' },
-      ],
+      fields: [{ key: 'autoplay', label: 'Autoplay', type: 'switch' }],
     },
   ],
 };

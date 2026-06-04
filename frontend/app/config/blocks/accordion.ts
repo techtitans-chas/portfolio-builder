@@ -14,17 +14,20 @@ export const accordionDefinition: BlockDefinition = {
       {
         id: crypto.randomUUID(),
         question: 'What services do you offer?',
-        answer: '<p>I offer web design, development, and consulting services tailored to your needs.</p>',
+        answer:
+          '<p>I offer web design, development, and consulting services tailored to your needs.</p>',
       },
       {
         id: crypto.randomUUID(),
         question: 'How long does a project take?',
-        answer: '<p>Timelines vary by scope, but most projects take between two and eight weeks from kickoff to delivery.</p>',
+        answer:
+          '<p>Timelines vary by scope, but most projects take between two and eight weeks from kickoff to delivery.</p>',
       },
       {
         id: crypto.randomUUID(),
         question: 'How do I get started?',
-        answer: '<p>Just reach out via the contact form and we\'ll schedule a call to discuss your project.</p>',
+        answer:
+          "<p>Just reach out via the contact form and we'll schedule a call to discuss your project.</p>",
       },
     ],
   },
