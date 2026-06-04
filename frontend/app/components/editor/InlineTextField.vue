@@ -14,6 +14,7 @@ const ctx = inject(inlineEditorKey, null);
 const value = computed(() => (ctx ? String(getPath(ctx.blockContent, props.fieldKey) ?? '') : ''));
 
 const elRef = useTemplateRef<HTMLElement>('el');
+const isFocused = ref(false);
 
 onMounted(() => {
   if (elRef.value) elRef.value.innerText = value.value;
@@ -27,6 +28,7 @@ watch(value, v => {
 });
 
 function onBlur(e: FocusEvent) {
+  isFocused.value = false;
   ctx?.setField(props.fieldKey, (e.target as HTMLElement).innerText);
 }
 </script>
@@ -43,6 +45,12 @@ function onBlur(e: FocusEvent) {
         ? 'outline-none cursor-text empty:before:content-[attr(data-placeholder)] empty:before:opacity-40'
         : ''
     "
+    :style="
+      isFocused
+        ? 'outline: 2px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;'
+        : ''
+    "
+    @focus="isFocused = true"
     @blur="onBlur"
     @keydown.enter.prevent="(elRef as HTMLElement)?.blur()"
   />

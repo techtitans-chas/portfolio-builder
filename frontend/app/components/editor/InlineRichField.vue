@@ -18,6 +18,7 @@ const ctx = inject(inlineEditorKey, null);
 const value = computed(() => (ctx ? String(ctx.blockContent[props.fieldKey] ?? '') : ''));
 
 const toolbarVisible = ref(false);
+const isFocused = ref(false);
 const toolbarStyle = ref<Record<string, string>>({});
 const toolbarRef = useTemplateRef<HTMLElement>('toolbar');
 
@@ -131,6 +132,7 @@ const editor = ctx
         updateToolbar();
       },
       onBlur() {
+        isFocused.value = false;
         setTimeout(() => {
           if (!toolbarRef.value?.matches(':focus-within')) {
             toolbarVisible.value = false;
@@ -139,6 +141,7 @@ const editor = ctx
         }, 150);
       },
       onFocus() {
+        isFocused.value = true;
         updateToolbar();
       },
     })
@@ -442,7 +445,15 @@ function runAndClose(fn: () => void) {
       </div>
     </Teleport>
 
-    <EditorContent :editor="editor" :class="$attrs.class" />
+    <div
+      :style="
+        isFocused
+          ? 'outline: 2px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;'
+          : ''
+      "
+    >
+      <EditorContent :editor="editor" :class="$attrs.class" />
+    </div>
   </template>
   <slot v-else />
 </template>

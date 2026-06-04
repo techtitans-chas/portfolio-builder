@@ -118,7 +118,7 @@ function onPageSaved(page: Page) {
         variant="ghost"
         size="md"
         trailing-icon="i-lucide-chevron-down"
-        class="min-w-40 justify-between"
+        class="min-w-45 justify-between"
       >
         <span class="flex items-center gap-2">
           <span class="text-muted">Page:</span>

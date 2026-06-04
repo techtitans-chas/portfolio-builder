@@ -37,13 +37,17 @@ const projects = computed(() => {
 
 <template>
   <section v-if="projects.length" class="px-8 py-16 max-w-3xl mx-auto">
-    <h2
+    <EditorInlineTextField
       v-if="showHeading"
+      field-key="heading"
+      tag="h2"
       class="text-3xl font-bold mb-8"
       :style="{ fontFamily: 'var(--font-heading)' }"
     >
-      {{ heading }}
-    </h2>
+      <h2 class="text-3xl font-bold mb-8" :style="{ fontFamily: 'var(--font-heading)' }">
+        {{ heading }}
+      </h2>
+    </EditorInlineTextField>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="(project, i) in projects"
