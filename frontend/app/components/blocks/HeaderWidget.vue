@@ -25,7 +25,6 @@ defineProps<{
   siteName: string;
   showTitle: boolean;
   homeUrl: string;
-  logoFilterStyle: Record<string, string>;
   textStyle: Record<string, string>;
 
   navLinks: NavLink[];
@@ -69,14 +68,15 @@ defineOptions({ inheritAttrs: false });
         :src="logoUrl!"
         :alt="siteName"
         class="max-w-48 object-contain"
-        :style="{ ...logoSizeStyle, ...logoFilterStyle }"
+        :style="logoSizeStyle"
       />
       <span
         v-if="showTitle && siteName"
         class="font-bold leading-none"
         :class="logoTitleSizeClass"
         :style="textStyle"
-      >{{ siteName }}</span>
+        >{{ siteName }}</span
+      >
     </a>
 
     <!-- Nav widget -->
@@ -84,7 +84,7 @@ defineOptions({ inheritAttrs: false });
       v-else-if="widget === 'nav' && navLinks.length"
       class="flex text-sm"
       :class="inEditor && 'pointer-events-none'"
-      :style="{ ...mutedTextStyle, ...navGapStyle }"
+      :style="navGapStyle"
     >
       <a
         v-for="link in navLinks"
@@ -92,7 +92,8 @@ defineOptions({ inheritAttrs: false });
         :href="inEditor ? undefined : link.url"
         :class="navLinkClass"
         :style="navLinkStyle"
-      >{{ link.label }}</a>
+        >{{ link.label }}</a
+      >
     </nav>
 
     <!-- CTA widget -->
@@ -107,7 +108,8 @@ defineOptions({ inheritAttrs: false });
         :href="inEditor ? undefined : btn.url"
         :class="ctaButtonClass(btn.style)"
         :style="ctaButtonStyle(btn.style)"
-      >{{ btn.label }}</a>
+        >{{ btn.label }}</a
+      >
     </div>
 
     <!-- Socials widget -->

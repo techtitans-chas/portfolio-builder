@@ -23,7 +23,7 @@ const props = defineProps<{
 }>();
 
 const liveThemeOverride = computed(() => props.liveThemeSettings ?? null);
-const { cssVars, portfolioMode, navLinks, googleFontsUrl, activeLogo } = usePortfolio(
+const { cssVars, portfolioMode, navLinks, googleFontsUrl, logoLight, logoDark } = usePortfolio(
   props.portfolioSlug,
   liveThemeOverride,
 );
@@ -45,22 +45,33 @@ watch(
 const headerBlock = computed(() => props.layersView?.headerBlock ?? null);
 const footerBlock = computed(() => props.layersView?.footerBlock ?? null);
 
-const headerContent = computed(
-  () => headerBlock.value?.content as Record<string, unknown> | undefined,
-);
+const headerContent = computed(() => {
+  const block = headerBlock.value;
+  if (!block) return undefined;
+  const pending = pendingContentEdits.value[block.id];
+  return pending
+    ? { ...(block.content as Record<string, unknown>), ...pending }
+    : (block.content as Record<string, unknown>);
+});
 const footerContent = computed(
   () => footerBlock.value?.content as Record<string, unknown> | undefined,
 );
 
 const { selectedBlock, selectBlock, clearSelection } = useSelectedBlock();
-const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent, pendingContentEdits } = usePageEditor();
+const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent, pendingContentEdits } =
+  usePageEditor();
 
 type LayoutInstance = InstanceType<typeof PortfolioLayoutComp>;
 const portfolioLayout = useTemplateRef<LayoutInstance>('portfolioLayout');
 
 defineExpose({ portfolioLayout });
 
-function onHeaderSlotReorder(slots: { leftOrder: WidgetType[]; centerOrder: WidgetType[]; rightOrder: WidgetType[]; topOrder: WidgetType[] }) {
+function onHeaderSlotReorder(slots: {
+  leftOrder: WidgetType[];
+  centerOrder: WidgetType[];
+  rightOrder: WidgetType[];
+  topOrder: WidgetType[];
+}) {
   const block = headerBlock.value;
   if (!block) return;
   const base = pendingContentEdits.value[block.id] ?? (block.content as Record<string, unknown>);
@@ -154,7 +165,8 @@ function onBlockDropped(event: { newIndex?: number }) {
     :header-content="headerContent"
     :footer-content="footerContent"
     :google-fonts-url="googleFontsUrl"
-    :logo-url="activeLogo"
+    :logo-url="logoLight"
+    :logo-url-dark="logoDark"
     :on-slot-reorder="onHeaderSlotReorder"
     @select-header="headerBlock && selectBlock(headerBlock)"
     @select-footer="footerBlock && selectBlock(footerBlock)"

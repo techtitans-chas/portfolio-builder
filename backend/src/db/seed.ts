@@ -293,7 +293,9 @@ async function seed() {
             centerOrder: [],
             rightOrder: ['cta'],
             topOrder: ['logo'],
-            ctaButtons: [{ id: crypto.randomUUID(), label: 'Hire me', url: '#contact', style: 'filled' }],
+            ctaButtons: [
+              { id: crypto.randomUUID(), label: 'Hire me', url: '#contact', style: 'filled' },
+            ],
             socialLinks: [],
             showLogo: true,
             showNav: true,

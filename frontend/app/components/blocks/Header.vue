@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { hexToFilter } from '~/utils/hexToFilter';
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import HeaderWidget from './HeaderWidget.vue';
 
@@ -39,8 +38,7 @@ export interface HeaderBlockProps {
   topOrder?: WidgetType[];
 
   logoUrl?: string | null;
-  logoTint?: string | null;
-  logoDark?: boolean;
+  logoUrlDark?: string | null;
   logoSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   logoStacked?: boolean;
   brandingDisplay?: 'logo-only' | 'title-only' | 'logo-and-title';
@@ -60,6 +58,9 @@ export interface HeaderBlockProps {
   showNav?: boolean;
   showCta?: boolean;
   showSocials?: boolean;
+
+  mobileMenuTitle?: string;
+  mobileMenuBg?: string | null;
 
   isEditor?: boolean;
   onSlotReorder?: (slots: {
@@ -86,8 +87,7 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
   rightOrder: () => ['cta'],
   topOrder: () => ['logo'],
   logoUrl: null,
-  logoTint: null,
-  logoDark: false,
+  logoUrlDark: null,
   logoSize: 'md',
   logoStacked: false,
   brandingDisplay: 'logo-and-title',
@@ -105,6 +105,8 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
   showNav: true,
   showCta: true,
   showSocials: false,
+  mobileMenuTitle: '',
+  mobileMenuBg: null,
   isEditor: false,
   onSlotReorder: undefined,
   cta: null,
@@ -117,7 +119,17 @@ const { resolveColor } = useActivePalette();
 
 // ── Styles ──────────────────────────────────────────────────────────────────
 
-const paddingStyle = computed(() => ({ padding: `${props.padding ?? 16}px` }));
+const MIN_X_PADDING = 16;
+const paddingStyle = computed(() => {
+  const p = props.padding ?? 16;
+  const x = Math.max(p, MIN_X_PADDING);
+  return {
+    paddingTop: `${p}px`,
+    paddingBottom: `${p}px`,
+    paddingLeft: `${x}px`,
+    paddingRight: `${x}px`,
+  };
+});
 
 const bgColor = computed(() => (props.background ? resolveColor(props.background) : null));
 const bgStyle = computed(() =>
@@ -157,6 +169,33 @@ const mutedTextStyle = computed<Record<string, string>>(() =>
     : { color: 'var(--text-secondary)', opacity: '1' },
 );
 
+// ── Mobile menu background + contrast text ──────────────────────────────────
+
+// mobileMenuBg is passed as a hex string from PortfolioLayout (resolved from --bg-mobile-menu)
+const mobileMenuAutoTextColor = computed(() => {
+  const hex = props.mobileMenuBg;
+  if (!hex || !hex.startsWith('#')) return null;
+  return hexLuminance(hex) > 0.179 ? '#1a1a1a' : '#ffffff';
+});
+
+const mobileMenuBgStyle = computed(() =>
+  props.mobileMenuBg
+    ? { backgroundColor: props.mobileMenuBg }
+    : { backgroundColor: 'var(--bg-mobile-menu)' },
+);
+
+const mobileMenuTextStyle = computed<Record<string, string>>(() =>
+  mobileMenuAutoTextColor.value
+    ? { color: mobileMenuAutoTextColor.value }
+    : { color: 'var(--text-primary)' },
+);
+
+const mobileMenuMutedStyle = computed<Record<string, string>>(() =>
+  mobileMenuAutoTextColor.value
+    ? { color: mobileMenuAutoTextColor.value, opacity: '0.7' }
+    : { color: 'var(--text-secondary)', opacity: '1' },
+);
+
 // Logo height in px: stacked layout gets a bigger base size so text underneath looks balanced
 const LOGO_HEIGHTS: Record<string, number> = { xs: 24, sm: 32, md: 40, lg: 52, xl: 68 };
 const LOGO_HEIGHTS_STACKED: Record<string, number> = { xs: 40, sm: 56, md: 72, lg: 96, xl: 128 };
@@ -174,14 +213,13 @@ const logoTitleSizeClass = computed(() => {
   return 'text-lg';
 });
 
-const logoFilterStyle = computed<Record<string, string>>(() => {
-  const invert = props.logoDark ? 'invert(1) ' : '';
-  const base: Record<string, string> = invert ? { filter: invert.trim() } : {};
-  if (!props.logoTint) return base;
-  const hex = resolveColor(props.logoTint);
-  if (!hex) return base;
-  const filter = hexToFilter(hex);
-  return filter ? { filter: invert + filter } : base;
+// Pick light or dark logo based on header background luminance
+const resolvedLogoUrl = computed(() => {
+  if (!props.logoUrlDark) return props.logoUrl ?? null;
+  // autoTextColor is '#ffffff' on dark bg, '#1a1a1a' on light bg
+  return autoTextColor.value === '#ffffff'
+    ? props.logoUrlDark
+    : (props.logoUrl ?? props.logoUrlDark);
 });
 
 const navColorResolved = computed(() => (props.navColor ? resolveColor(props.navColor) : null));
@@ -229,7 +267,12 @@ const navLinkStyle = computed((): Record<string, string> => {
 
   if (v === 'solid') {
     const bg = color ?? 'var(--primary)';
-    return { backgroundColor: bg, color: '#fff' };
+    const textColor = bg.startsWith('#')
+      ? hexLuminance(bg) > 0.179
+        ? '#1a1a1a'
+        : '#ffffff'
+      : '#fff';
+    return { backgroundColor: bg, color: textColor };
   }
   if (v === 'soft') {
     const bg = color ?? 'var(--primary)';
@@ -384,18 +427,44 @@ watch(
 
 onUnmounted(() => destroySortables());
 
+// ── Mobile menu ─────────────────────────────────────────────────────────────
+
+const mobileMenuOpen = ref(false);
+const isMounted = ref(false);
+onMounted(() => {
+  isMounted.value = true;
+});
+
+const hasMobileMenu = computed(
+  () =>
+    (props.showNav && props.navLinks.length > 0) ||
+    (props.showCta && resolvedCtaButtons.value.length > 0) ||
+    (props.showSocials && props.socialLinks.length > 0),
+);
+
+const SOCIAL_ICONS: Record<string, string> = {
+  twitter: 'i-simple-icons-x',
+  instagram: 'i-simple-icons-instagram',
+  linkedin: 'i-simple-icons-linkedin',
+  github: 'i-simple-icons-github',
+  youtube: 'i-simple-icons-youtube',
+  tiktok: 'i-simple-icons-tiktok',
+  facebook: 'i-simple-icons-facebook',
+  dribbble: 'i-simple-icons-dribbble',
+  behance: 'i-simple-icons-behance',
+};
+
 // Shared widget props to avoid repetition in template
 const widgetProps = computed(() => ({
   inEditor: inEditor.value,
   showLogoImg: showLogoImg.value,
-  logoUrl: props.logoUrl,
+  logoUrl: resolvedLogoUrl.value,
   logoSizeStyle: logoSizeStyle.value,
   logoStacked: props.logoStacked ?? false,
   logoTitleSizeClass: logoTitleSizeClass.value,
   siteName: props.siteName,
   showTitle: showTitle.value,
   homeUrl: props.homeUrl,
-  logoFilterStyle: logoFilterStyle.value,
   textStyle: textStyle.value,
   mutedTextStyle: mutedTextStyle.value,
   navLinks: props.navLinks,
@@ -413,32 +482,120 @@ const widgetProps = computed(() => ({
 
 <template>
   <header
-    :class="[position === 'sticky' ? 'sticky top-0 z-10 w-full' : 'relative', 'border-b']"
-    :style="{
-      ...bgStyle,
-      ...borderStyle,
-      ...paddingStyle,
-    }"
+    :class="[position === 'sticky' ? 'sticky top-0 z-10 w-full' : 'relative']"
+    :style="{ ...bgStyle, ...borderStyle, ...paddingStyle }"
   >
     <div :class="innerMaxWidthClass">
-      <!-- ── Stacked ── -->
-      <template v-if="layout === 'stacked'">
-        <div class="flex justify-center mb-2">
-          <div
-            ref="zone-top"
-            class="flex items-center gap-3 min-h-9"
-            :class="inEditor && 'rounded px-2 min-w-16'"
-            :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
+      <!-- ── Mobile layout (hidden on md+) ── -->
+      <div class="flex items-center justify-between min-h-9 @4xl:hidden">
+        <!-- Branding -->
+        <a
+          :href="inEditor ? undefined : homeUrl"
+          class="flex shrink-0"
+          :class="[
+            props.logoStacked ? 'flex-col items-center gap-1.5' : 'flex-row items-center gap-2.5',
+            inEditor && 'pointer-events-none',
+          ]"
+        >
+          <img
+            v-if="showLogoImg"
+            :src="resolvedLogoUrl!"
+            :alt="props.siteName"
+            class="max-w-48 object-contain"
+            style="height: 32px; width: auto"
+          />
+          <span
+            v-if="showTitle && props.siteName"
+            class="font-bold leading-none text-base"
+            :style="textStyle"
+            >{{ props.siteName }}</span
           >
-            <HeaderWidget
-              v-for="widget in zones.top"
-              :key="widget"
-              :widget="widget"
-              v-bind="widgetProps"
-            />
-          </div>
+        </a>
+
+        <!-- Hamburger — only if there's something to show -->
+        <button
+          v-if="hasMobileMenu && !inEditor"
+          class="flex items-center justify-center w-9 h-9 rounded-md transition-colors hover:bg-black/10"
+          :style="textStyle"
+          aria-label="Open menu"
+          @click="mobileMenuOpen = true"
+        >
+          <UIcon name="i-lucide-menu" class="size-5" />
+        </button>
+        <!-- Editor placeholder so hamburger position is visible -->
+        <div
+          v-else-if="hasMobileMenu && inEditor"
+          class="flex items-center justify-center w-9 h-9 rounded-md opacity-50"
+          :style="textStyle"
+        >
+          <UIcon name="i-lucide-menu" class="size-5" />
         </div>
-        <div class="grid items-center gap-4" style="grid-template-columns: 1fr auto 1fr">
+      </div>
+
+      <!-- ── Desktop layout (hidden below md) ── -->
+      <div class="hidden @4xl:block">
+        <!-- Stacked -->
+        <template v-if="layout === 'stacked'">
+          <div class="flex justify-center mb-2">
+            <div
+              ref="zone-top"
+              class="flex items-center gap-3 min-h-9"
+              :class="inEditor && 'rounded px-2 min-w-16'"
+              :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
+            >
+              <HeaderWidget
+                v-for="widget in zones.top"
+                :key="widget"
+                :widget="widget"
+                v-bind="widgetProps"
+              />
+            </div>
+          </div>
+          <div class="grid items-center gap-4" style="grid-template-columns: 1fr auto 1fr">
+            <div
+              ref="zone-left"
+              class="flex items-center gap-3 min-h-9"
+              :class="inEditor && 'rounded px-2'"
+              :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
+            >
+              <HeaderWidget
+                v-for="widget in zones.left"
+                :key="widget"
+                :widget="widget"
+                v-bind="widgetProps"
+              />
+            </div>
+            <div
+              ref="zone-center"
+              class="flex items-center gap-3 justify-center min-h-9"
+              :class="inEditor && 'rounded px-2 min-w-16'"
+              :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
+            >
+              <HeaderWidget
+                v-for="widget in zones.center"
+                :key="widget"
+                :widget="widget"
+                v-bind="widgetProps"
+              />
+            </div>
+            <div
+              ref="zone-right"
+              class="flex items-center gap-3 justify-end min-h-9"
+              :class="inEditor && 'rounded px-2'"
+              :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
+            >
+              <HeaderWidget
+                v-for="widget in zones.right"
+                :key="widget"
+                :widget="widget"
+                v-bind="widgetProps"
+              />
+            </div>
+          </div>
+        </template>
+
+        <!-- Single row -->
+        <div v-else class="grid items-center gap-4" style="grid-template-columns: 1fr auto 1fr">
           <div
             ref="zone-left"
             class="flex items-center gap-3 min-h-9"
@@ -479,52 +636,85 @@ const widgetProps = computed(() => ({
             />
           </div>
         </div>
-      </template>
-
-      <!-- ── Single row ── -->
-      <div v-else class="grid items-center gap-4" style="grid-template-columns: 1fr auto 1fr">
-        <div
-          ref="zone-left"
-          class="flex items-center gap-3 min-h-9"
-          :class="inEditor && 'rounded px-2'"
-            :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
-        >
-          <HeaderWidget
-            v-for="widget in zones.left"
-            :key="widget"
-            :widget="widget"
-            v-bind="widgetProps"
-          />
-        </div>
-        <div
-          ref="zone-center"
-          class="flex items-center gap-3 justify-center min-h-9"
-          :class="inEditor && 'rounded px-2 min-w-16'"
-            :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
-        >
-          <HeaderWidget
-            v-for="widget in zones.center"
-            :key="widget"
-            :widget="widget"
-            v-bind="widgetProps"
-          />
-        </div>
-        <div
-          ref="zone-right"
-          class="flex items-center gap-3 justify-end min-h-9"
-          :class="inEditor && 'rounded px-2'"
-            :style="inEditor ? { outline: `1px dashed ${zoneOutlineColor}` } : {}"
-        >
-          <HeaderWidget
-            v-for="widget in zones.right"
-            :key="widget"
-            :widget="widget"
-            v-bind="widgetProps"
-          />
-        </div>
       </div>
     </div>
   </header>
+
+  <!-- ── Mobile slideover menu ── -->
+  <USlideover v-if="isMounted" v-model:open="mobileMenuOpen" side="right" class="@4xl:hidden">
+    <template #content>
+      <div class="flex flex-col h-full overflow-y-auto" :style="mobileMenuBgStyle">
+        <!-- Header row -->
+        <div
+          class="flex items-center justify-between px-4 py-3 border-b shrink-0"
+          :style="{
+            borderColor: mobileMenuAutoTextColor
+              ? `color-mix(in srgb, ${mobileMenuAutoTextColor} 12%, transparent)`
+              : 'var(--color-default-200)',
+          }"
+        >
+          <span class="font-semibold text-sm" :style="mobileMenuTextStyle">
+            {{ props.mobileMenuTitle || 'Menu' }}
+          </span>
+          <button
+            class="flex items-center justify-center w-8 h-8 rounded-md transition-opacity hover:opacity-70"
+            :style="mobileMenuTextStyle"
+            aria-label="Close menu"
+            @click="mobileMenuOpen = false"
+          >
+            <UIcon name="i-lucide-x" class="size-4" />
+          </button>
+        </div>
+
+        <div class="flex flex-col gap-6 p-4 flex-1">
+          <!-- Nav links + CTA buttons as plain links -->
+          <nav
+            v-if="
+              (props.showNav && props.navLinks.length) ||
+              (props.showCta && resolvedCtaButtons.length)
+            "
+            class="flex flex-col gap-1"
+          >
+            <a
+              v-for="link in props.navLinks"
+              v-show="props.showNav"
+              :key="link.url"
+              :href="link.url"
+              class="px-3 py-2 rounded-md text-sm transition-opacity hover:opacity-70"
+              :style="mobileMenuTextStyle"
+              @click="mobileMenuOpen = false"
+              >{{ link.label }}</a
+            >
+            <a
+              v-for="btn in resolvedCtaButtons"
+              v-show="props.showCta"
+              :key="btn.id"
+              :href="btn.url"
+              class="px-3 py-2 rounded-md text-sm transition-opacity hover:opacity-70"
+              :style="mobileMenuTextStyle"
+              @click="mobileMenuOpen = false"
+              >{{ btn.label }}</a
+            >
+          </nav>
+
+          <!-- Social links -->
+          <div v-if="props.showSocials && props.socialLinks.length" class="flex items-center gap-3">
+            <a
+              v-for="s in props.socialLinks"
+              :key="s.id"
+              :href="s.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-70 transition-opacity"
+              :style="mobileMenuMutedStyle"
+            >
+              <UIcon :name="SOCIAL_ICONS[s.platform] ?? 'i-lucide-link'" class="size-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </template>
+  </USlideover>
 </template>
 
 <style>

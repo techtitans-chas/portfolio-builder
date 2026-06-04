@@ -5,6 +5,7 @@ export interface ThemeColors {
   bgPage: string;
   bgSurface: string;
   bgNav: string;
+  bgMobileMenu: string;
   primary: string;
   secondary: string;
   textPrimary: string;

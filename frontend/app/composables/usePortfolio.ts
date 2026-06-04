@@ -68,11 +68,29 @@ export function usePortfolio(
     return colorMode.value === 'dark';
   });
 
+  // Keep useActivePalette in sync so resolveColor() works correctly in block components
+  // on both the live site and in the editor. Use watchEffect (not watch+immediate) so the
+  // assignment runs synchronously during SSR before any component renders.
+  const { activeThemeId, activeThemeMode } = useActivePalette();
+  watchEffect(
+    () => {
+      activeThemeId.value = selectedTheme.value?.id ?? null;
+    },
+    { flush: 'sync' },
+  );
+  watchEffect(
+    () => {
+      activeThemeMode.value = isDark.value ? 'dark' : 'light';
+    },
+    { flush: 'sync' },
+  );
+
   function buildCssVars(colors: ThemeColors, theme: Theme, dark: boolean): Record<string, string> {
     const vars: Record<string, string> = {
       '--bg-page': colors.bgPage,
       '--bg-surface': colors.bgSurface,
       '--bg-nav': colors.bgNav,
+      '--bg-mobile-menu': colors.bgMobileMenu ?? colors.bgSurface,
       '--primary': colors.primary,
       '--secondary': colors.secondary,
       '--text-primary': colors.textPrimary,
@@ -87,11 +105,12 @@ export function usePortfolio(
 
   const selectedFonts = computed(() => themeSettings.value?.fonts ?? null);
 
+  const logoLight = computed(() => themeSettings.value?.logoLight ?? null);
+  const logoDark = computed(() => themeSettings.value?.logoDark ?? null);
+
   const activeLogo = computed(() => {
-    const light = themeSettings.value?.logoLight ?? null;
-    const dark = themeSettings.value?.logoDark ?? null;
-    if (isDark.value) return dark ?? light;
-    return light ?? dark;
+    if (isDark.value) return logoDark.value ?? logoLight.value;
+    return logoLight.value ?? logoDark.value;
   });
 
   const googleFontsUrl = computed(() => {
@@ -142,5 +161,7 @@ export function usePortfolio(
     footerBlock,
     baseURL,
     activeLogo,
+    logoLight,
+    logoDark,
   };
 }

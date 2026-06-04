@@ -198,8 +198,12 @@ function setValue(key: string, value: unknown) {
         <div v-for="(section, si) in activeSections" :key="si" class="flex flex-col gap-2">
           <template
             v-if="
-              section.fields.filter(f => f.type !== 'inline-text' && f.type !== 'inline-rich'
-                && (!f.showIf || getValue(f.showIf.key) === f.showIf.value)).length
+              section.fields.filter(
+                f =>
+                  f.type !== 'inline-text' &&
+                  f.type !== 'inline-rich' &&
+                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+              ).length
             "
           >
             <p
@@ -210,13 +214,15 @@ function setValue(key: string, value: unknown) {
             </p>
             <div
               v-for="field in section.fields.filter(
-                f => f.type !== 'inline-text' && f.type !== 'inline-rich'
-                  && (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+                f =>
+                  f.type !== 'inline-text' &&
+                  f.type !== 'inline-rich' &&
+                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
               )"
               :key="field.key"
               class="flex gap-1"
               :class="
-                ['theme-color', 'checkbox', 'color'].includes(field.type)
+                ['theme-color', 'checkbox', 'switch', 'color'].includes(field.type)
                   ? 'items-center justify-between'
                   : field.type === 'slider'
                     ? 'flex-col gap-1'
@@ -325,10 +331,13 @@ function setValue(key: string, value: unknown) {
                 :model-value="(getValue(field.key) as boolean) ?? false"
                 @update:model-value="setValue(field.key, $event)"
               />
-              <div
-                v-else-if="field.type === 'slider'"
-                class="flex items-center gap-2"
-              >
+              <USwitch
+                v-else-if="field.type === 'switch'"
+                :model-value="(getValue(field.key) as boolean) ?? false"
+                size="sm"
+                @update:model-value="setValue(field.key, $event)"
+              />
+              <div v-else-if="field.type === 'slider'" class="flex items-center gap-2">
                 <USlider
                   :model-value="(getValue(field.key) as number) ?? field.min ?? 0"
                   :min="field.min ?? 0"

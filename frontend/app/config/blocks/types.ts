@@ -17,6 +17,7 @@ export interface BlockField {
     | 'textarea'
     | 'select'
     | 'checkbox'
+    | 'switch'
     | 'color'
     | 'url'
     | 'image'

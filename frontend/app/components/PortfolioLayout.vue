@@ -15,7 +15,13 @@ const props = defineProps<{
   isEditor?: boolean;
   googleFontsUrl?: string | null;
   logoUrl?: string | null;
-  onSlotReorder?: (slots: { leftOrder: WidgetType[]; centerOrder: WidgetType[]; rightOrder: WidgetType[]; topOrder: WidgetType[] }) => void;
+  logoUrlDark?: string | null;
+  onSlotReorder?: (slots: {
+    leftOrder: WidgetType[];
+    centerOrder: WidgetType[];
+    rightOrder: WidgetType[];
+    topOrder: WidgetType[];
+  }) => void;
 }>();
 
 const headerRef = useTemplateRef<HeaderInstance>('headerBlock');
@@ -35,7 +41,7 @@ defineEmits<{
 
 <template>
   <div
-    class="portfolio-root min-h-screen"
+    class="portfolio-root @container min-h-screen"
     :style="{
       ...cssVars,
       backgroundColor: 'var(--bg-page)',
@@ -46,7 +52,14 @@ defineEmits<{
     <div
       v-if="isEditor"
       class="relative after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:ring-transparent hover:after:ring-primary/60 after:transition-shadow after:duration-150"
-      @click.capture="(e) => { if (!(e.target as HTMLElement).closest('[data-drag-zone]')) { e.preventDefault(); $emit('select-header'); } }"
+      @click.capture="
+        e => {
+          if (!(e.target as HTMLElement).closest('[data-drag-zone]')) {
+            e.preventDefault();
+            $emit('select-header');
+          }
+        }
+      "
     >
       <BlocksHeader
         ref="headerBlock"
@@ -66,15 +79,14 @@ defineEmits<{
         :show-logo="headerContent?.showLogo !== false"
         :show-nav="headerContent?.showNav !== false"
         :show-cta="headerContent?.showCta !== false"
-        :show-socials="!!(headerContent?.showSocials)"
+        :show-socials="!!headerContent?.showSocials"
         :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
         :logo-size="(headerContent?.logoSize as any) || 'md'"
-        :logo-stacked="!!(headerContent?.logoStacked)"
+        :logo-stacked="!!headerContent?.logoStacked"
         :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
         :background="(headerContent?.background as string | null) ?? null"
         :text-color="(headerContent?.textColor as string | null) ?? null"
-        :logo-tint="(headerContent?.logoTint as string | null) ?? null"
-        :logo-dark="!!(headerContent?.logoDark)"
+        :logo-url-dark="logoUrlDark"
         :nav-variant="(headerContent?.navVariant as any) || 'ghost'"
         :nav-color="(headerContent?.navColor as string | null) ?? null"
         :nav-radius="(headerContent?.navRadius as any) || 'md'"
@@ -84,6 +96,8 @@ defineEmits<{
         :border-width="(headerContent?.borderWidth as number) ?? 1"
         :max-width="(headerContent?.maxWidth as any) || '7xl'"
         :position="(headerContent?.position as any) || 'static'"
+        :mobile-menu-title="(headerContent?.mobileMenuTitle as string) || ''"
+        :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
       />
     </div>
 
@@ -103,15 +117,14 @@ defineEmits<{
       :show-logo="headerContent?.showLogo !== false"
       :show-nav="headerContent?.showNav !== false"
       :show-cta="headerContent?.showCta !== false"
-      :show-socials="!!(headerContent?.showSocials)"
+      :show-socials="!!headerContent?.showSocials"
       :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
       :logo-size="(headerContent?.logoSize as any) || 'md'"
-      :logo-stacked="!!(headerContent?.logoStacked)"
+      :logo-stacked="!!headerContent?.logoStacked"
       :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
       :background="(headerContent?.background as string | null) ?? null"
       :text-color="(headerContent?.textColor as string | null) ?? null"
-      :logo-tint="(headerContent?.logoTint as string | null) ?? null"
-      :logo-dark="!!(headerContent?.logoDark)"
+      :logo-url-dark="logoUrlDark"
       :nav-variant="(headerContent?.navVariant as any) || 'ghost'"
       :nav-color="(headerContent?.navColor as string | null) ?? null"
       :nav-radius="(headerContent?.navRadius as any) || 'md'"
@@ -121,6 +134,8 @@ defineEmits<{
       :border-width="(headerContent?.borderWidth as number) ?? 1"
       :max-width="(headerContent?.maxWidth as any) || '7xl'"
       :position="(headerContent?.position as any) || 'static'"
+      :mobile-menu-title="(headerContent?.mobileMenuTitle as string) || ''"
+      :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
     />
 
     <UMain>

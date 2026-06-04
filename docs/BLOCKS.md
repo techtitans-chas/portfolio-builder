@@ -155,11 +155,47 @@ interface BlockDefinition {
   component: Component; // The Vue component that renders this block
   defaultContent: Record<string, unknown>; // Initial values when a new block is added
   sections?: BlockSection[]; // Sidebar fields, flat layout
-  tabs?: BlockTab[]; // Sidebar fields grouped into tabs (use instead of sections for complex blocks)
+  tabs?: BlockTab[]; // Sidebar fields grouped into tabs
+  allowedCollections?: string[]; // If set, block only appears in picker when these collection types exist
 }
 ```
 
-Use `sections` for simple blocks. Use `tabs` when the block has many fields that benefit from being grouped (see the Header or Footer blocks for examples).
+Use `sections` for simple blocks. Use `tabs` when the block has many fields that benefit from being grouped (see the Header block for an example).
+
+### Tabs
+
+Tabs split the sidebar into named panels, each with an optional icon and its own sections:
+
+```ts
+tabs: [
+  {
+    label: 'Layout',
+    icon: 'i-lucide-layout-panel-left',
+    sections: [
+      {
+        label: 'Spacing',
+        fields: [
+          { key: 'padding', label: 'Padding', type: 'slider', min: 0, max: 64, step: 2 },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Branding',
+    icon: 'i-lucide-building-2',
+    sections: [
+      {
+        fields: [
+          { key: 'siteName', label: 'Site name', type: 'text' },
+          { key: 'showLogo', label: 'Show logo', type: 'switch' },
+        ],
+      },
+    ],
+  },
+],
+```
+
+Sections within a tab are optional — a section with no `label` renders without a heading.
 
 ---
 
@@ -172,7 +208,9 @@ Fields defined in `sections` or `tabs` appear in the right sidebar when the bloc
 | `text`        | Single-line text input        |                                                                                    |
 | `textarea`    | Multi-line text input         |                                                                                    |
 | `select`      | Dropdown                      | Requires `options: [{ label, value }]`                                             |
-| `checkbox`    | Toggle switch                 | Label appears to the left, toggle to the right                                     |
+| `switch`      | Toggle switch (USwitch)       | Stores a boolean; label left, toggle right. Preferred over `checkbox` for booleans |
+| `checkbox`    | Checkbox                      | Stores a boolean                                                                   |
+| `slider`      | Range slider                  | Stores a number; requires `min`, `max`, and `step`                                 |
 | `url`         | URL input                     | Validated as a URL                                                                 |
 | `color`       | Native color picker           | Stores a raw hex string                                                            |
 | `theme-color` | Palette swatch picker         | Stores a palette key (e.g. `'primary'`); resolves to `var(--palette-<key>)` in CSS |
@@ -192,8 +230,52 @@ interface BlockField {
   type: FieldType;
   placeholder?: string; // Placeholder text for text inputs
   options?: { label: string; value: string }[]; // Required for 'select'
+  min?: number; // Required for 'slider'
+  max?: number; // Required for 'slider'
+  step?: number; // Required for 'slider'
+  showIf?: { key: string; value: unknown }; // Conditionally show this field
 }
 ```
+
+### Slider field
+
+```ts
+{
+  key: 'padding',
+  label: 'Padding',
+  type: 'slider',
+  min: 0,
+  max: 64,
+  step: 2,
+}
+```
+
+### Switch field
+
+Use `switch` for boolean toggles — it renders as a labelled `USwitch` with the label on the left and the toggle on the right.
+
+```ts
+{ key: 'showLogo', label: 'Show logo', type: 'switch' }
+```
+
+### Conditional field visibility (`showIf`)
+
+Any field can be conditionally hidden based on the value of another field in the same block using `showIf`:
+
+```ts
+{
+  key: 'logoSize',
+  label: 'Logo size',
+  type: 'select',
+  showIf: { key: 'showLogo', value: true }, // only shown when showLogo === true
+  options: [
+    { label: 'Small', value: 'sm' },
+    { label: 'Medium', value: 'md' },
+  ],
+}
+```
+
+`showIf.key` must match a `key` in the same block's content. The field is hidden unless the referenced key equals `showIf.value` (strict equality).
 
 ### List field
 
@@ -214,6 +296,8 @@ The `list` type renders a reorderable list of items, each with their own sub-fie
 ```
 
 `inline: true` on an item field renders it as an editable label directly in the list row (no separate input shown).
+
+Each item should include a unique `id` field (use `crypto.randomUUID()` in `defaultItem`) so Vue can key the list correctly.
 
 ---
 

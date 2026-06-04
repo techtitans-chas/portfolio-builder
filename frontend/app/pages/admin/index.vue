@@ -162,11 +162,19 @@ async function save() {
           }),
         // Header slot order — read from component, not pendingContentEdits
         headerBlock && headerSlotOrder
-          ? fetcher(`/api/portfolios/${portfolioId}/pages/${pageIdFor(headerBlock.id)}/blocks/${headerBlock.id}`, {
-              method: 'PATCH',
-              credentials: 'include',
-              body: JSON.stringify({ content: { ...(headerBlock.content as Record<string, unknown>), ...headerSlotOrder } }),
-            })
+          ? fetcher(
+              `/api/portfolios/${portfolioId}/pages/${pageIdFor(headerBlock.id)}/blocks/${headerBlock.id}`,
+              {
+                method: 'PATCH',
+                credentials: 'include',
+                body: JSON.stringify({
+                  content: {
+                    ...(headerBlock.content as Record<string, unknown>),
+                    ...headerSlotOrder,
+                  },
+                }),
+              },
+            )
           : Promise.resolve(),
         // Content edits — skip pending IDs and blocks queued for deletion
         ...Object.entries(pendingContentEdits.value)

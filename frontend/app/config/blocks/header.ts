@@ -38,8 +38,6 @@ export const headerDefinition: BlockDefinition = {
     brandingDisplay: 'logo-and-title',
     background: null,
     textColor: null,
-    logoTint: null,
-    logoDark: false,
     navVariant: 'ghost',
     navColor: null,
     navRadius: 'md',
@@ -49,6 +47,7 @@ export const headerDefinition: BlockDefinition = {
     borderWidth: 1,
     maxWidth: '7xl',
     position: 'static',
+    mobileMenuTitle: '',
   },
   tabs: [
     {
@@ -128,7 +127,7 @@ export const headerDefinition: BlockDefinition = {
         {
           fields: [
             { key: 'siteName', label: 'Site name', type: 'text', placeholder: 'Your name' },
-            { key: 'showLogo', label: 'Show logo', type: 'checkbox' },
+            { key: 'showLogo', label: 'Show logo', type: 'switch' },
             {
               key: 'logoSize',
               label: 'Logo size',
@@ -145,7 +144,7 @@ export const headerDefinition: BlockDefinition = {
             {
               key: 'logoStacked',
               label: 'Stack logo above title',
-              type: 'checkbox',
+              type: 'switch',
               showIf: { key: 'showLogo', value: true },
             },
             {
@@ -159,18 +158,6 @@ export const headerDefinition: BlockDefinition = {
                 { label: 'Title only', value: 'title-only' },
               ],
             },
-            {
-              key: 'logoTint',
-              label: 'Logo tint',
-              type: 'theme-color',
-              showIf: { key: 'showLogo', value: true },
-            },
-            {
-              key: 'logoDark',
-              label: 'Invert logo color',
-              type: 'checkbox',
-              showIf: { key: 'showLogo', value: true },
-            },
           ],
         },
       ],
@@ -181,7 +168,7 @@ export const headerDefinition: BlockDefinition = {
       sections: [
         {
           fields: [
-            { key: 'showNav', label: 'Show navigation', type: 'checkbox' },
+            { key: 'showNav', label: 'Show navigation', type: 'switch' },
             {
               key: 'navVariant',
               label: 'Style',
@@ -246,7 +233,7 @@ export const headerDefinition: BlockDefinition = {
         {
           label: 'CTA buttons',
           fields: [
-            { key: 'showCta', label: 'Show CTA buttons', type: 'checkbox' },
+            { key: 'showCta', label: 'Show CTA buttons', type: 'switch' },
             {
               key: 'ctaButtons',
               label: 'Buttons',
@@ -279,7 +266,7 @@ export const headerDefinition: BlockDefinition = {
         {
           label: 'Social links',
           fields: [
-            { key: 'showSocials', label: 'Show social links', type: 'checkbox' },
+            { key: 'showSocials', label: 'Show social links', type: 'switch' },
             {
               key: 'socialLinks',
               label: 'Accounts',
@@ -302,7 +289,23 @@ export const headerDefinition: BlockDefinition = {
         },
         {
           label: 'Color mode toggle',
-          fields: [{ key: 'showColorModeToggle', label: 'Show toggle', type: 'checkbox' }],
+          fields: [{ key: 'showColorModeToggle', label: 'Show toggle', type: 'switch' }],
+        },
+      ],
+    },
+    {
+      label: 'Mobile',
+      icon: 'i-lucide-smartphone',
+      sections: [
+        {
+          fields: [
+            {
+              key: 'mobileMenuTitle',
+              label: 'Menu header text',
+              type: 'text',
+              placeholder: 'Menu',
+            },
+          ],
         },
       ],
     },
