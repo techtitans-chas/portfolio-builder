@@ -53,7 +53,7 @@ defineEmits<{
       v-if="isEditor"
       class="relative after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:ring-transparent hover:after:ring-primary/60 after:transition-shadow after:duration-150"
       @click.capture="
-        e => {
+        (e: MouseEvent) => {
           if (!(e.target as HTMLElement).closest('[data-drag-zone]')) {
             e.preventDefault();
             $emit('select-header');
