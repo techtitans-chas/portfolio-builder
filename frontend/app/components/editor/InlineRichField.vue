@@ -448,7 +448,7 @@ function runAndClose(fn: () => void) {
     <div
       :style="
         isFocused
-          ? 'outline: 2px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;'
+          ? 'outline: 1px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;'
           : ''
       "
     >
