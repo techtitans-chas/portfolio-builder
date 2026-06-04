@@ -150,84 +150,87 @@ watch(
       <!-- Live mode: carousel -->
       <div
         v-else-if="items && items.length"
-        class="relative"
         @mouseenter="stopAutoplay"
         @mouseleave="startAutoplay"
       >
-        <div class="overflow-hidden">
-          <div
-            class="flex transition-transform duration-500 ease-in-out"
-            :style="{ transform: `translateX(-${current * 100}%)` }"
-          >
+        <!-- Card track + arrows share the same relative container so top-1/2 centers on the card, not the dots -->
+        <div class="relative">
+          <div class="overflow-hidden">
             <div
-              v-for="(item, index) in items"
-              :key="item.id ?? index"
-              class="w-full shrink-0 px-1"
+              class="flex transition-transform duration-500 ease-in-out"
+              :style="{ transform: `translateX(-${current * 100}%)` }"
             >
-              <div class="rounded-2xl p-8" :style="{ backgroundColor: 'var(--bg-surface)' }">
-                <UIcon
-                  name="i-lucide-quote"
-                  class="w-8 h-8 mb-4 opacity-20"
-                  :style="{ color: 'var(--primary)' }"
-                />
-                <!-- eslint-disable-next-line vue/no-v-html -->
-                <div
-                  v-if="item.quote"
-                  class="rich-text text-lg leading-relaxed mb-6"
-                  :style="{ color: 'var(--text-primary)' }"
-                  v-html="item.quote"
-                />
-
-                <div class="flex items-center gap-3">
-                  <img
-                    v-if="item.avatar"
-                    :src="item.avatar"
-                    :alt="item.author"
-                    class="w-10 h-10 rounded-full object-cover shrink-0"
+              <div
+                v-for="(item, index) in items"
+                :key="item.id ?? index"
+                class="w-full shrink-0 px-1"
+              >
+                <div class="rounded-2xl p-8" :style="{ backgroundColor: 'var(--bg-surface)' }">
+                  <UIcon
+                    name="i-lucide-quote"
+                    class="w-8 h-8 mb-4 opacity-20"
+                    :style="{ color: 'var(--primary)' }"
                   />
+                  <!-- eslint-disable-next-line vue/no-v-html -->
+                  <!-- eslint-disable-next-line vue/no-v-html -->
                   <div
-                    v-else
-                    class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
-                    :style="{
-                      backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
-                      color: 'var(--primary)',
-                    }"
-                  >
-                    {{ item.author?.charAt(0) ?? '?' }}
-                  </div>
-                  <div>
-                    <p class="font-semibold text-sm" :style="{ color: 'var(--text-primary)' }">
-                      {{ item.author }}
-                    </p>
-                    <p class="text-sm" :style="{ color: 'var(--text-secondary)' }">
-                      {{ item.role }}
-                    </p>
+                    v-if="item.quote"
+                    class="rich-text text-lg leading-relaxed mb-6"
+                    :style="{ color: 'var(--text-primary)' }"
+                    v-html="item.quote"
+                  />
+
+                  <div class="flex items-center gap-3">
+                    <img
+                      v-if="item.avatar"
+                      :src="item.avatar"
+                      :alt="item.author"
+                      class="w-10 h-10 rounded-full object-cover shrink-0"
+                    />
+                    <div
+                      v-else
+                      class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
+                      :style="{
+                        backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
+                        color: 'var(--primary)',
+                      }"
+                    >
+                      {{ item.author?.charAt(0) ?? '?' }}
+                    </div>
+                    <div>
+                      <p class="font-semibold text-sm" :style="{ color: 'var(--text-primary)' }">
+                        {{ item.author }}
+                      </p>
+                      <p class="text-sm" :style="{ color: 'var(--text-secondary)' }">
+                        {{ item.role }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Prev / Next -->
-        <button
-          v-if="items.length > 1"
-          class="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
-          :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
-          aria-label="Previous"
-          @click="prev"
-        >
-          <UIcon name="i-lucide-chevron-left" class="w-4 h-4" />
-        </button>
-        <button
-          v-if="items.length > 1"
-          class="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
-          :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
-          aria-label="Next"
-          @click="next"
-        >
-          <UIcon name="i-lucide-chevron-right" class="w-4 h-4" />
-        </button>
+          <!-- Prev / Next — inside the card-track wrapper so top-1/2 aligns to the card height -->
+          <button
+            v-if="items.length > 1"
+            class="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
+            :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
+            aria-label="Previous"
+            @click="prev"
+          >
+            <UIcon name="i-lucide-chevron-left" class="w-4 h-4" />
+          </button>
+          <button
+            v-if="items.length > 1"
+            class="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
+            :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
+            aria-label="Next"
+            @click="next"
+          >
+            <UIcon name="i-lucide-chevron-right" class="w-4 h-4" />
+          </button>
+        </div>
 
         <!-- Dot indicators -->
         <div v-if="items.length > 1" class="flex justify-center gap-2 mt-6">
