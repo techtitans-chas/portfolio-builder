@@ -58,6 +58,17 @@ const footerContent = computed(
 );
 
 const { selectedBlock, selectBlock, clearSelection } = useSelectedBlock();
+
+const blockEls = ref<Record<string, HTMLElement>>({});
+function setBlockRef(id: string, el: unknown) {
+  if (el) blockEls.value[id] = el as HTMLElement;
+}
+
+watch(selectedBlock, async block => {
+  if (!block) return;
+  await nextTick();
+  blockEls.value[block.id]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
 const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent, pendingContentEdits } =
   usePageEditor();
 
@@ -201,12 +212,9 @@ function onBlockDropped(event: { newIndex?: number }) {
         <div
           v-for="block in localBlocks"
           :key="block.id"
-          class="group/block relative after:absolute after:inset-0 after:pointer-events-none after:ring-2 after:ring-inset after:transition-shadow after:duration-150"
-          :class="
-            isSelected(block)
-              ? 'after:ring-primary'
-              : 'after:ring-transparent hover:after:ring-primary/60'
-          "
+          :ref="(el: unknown) => setBlockRef(block.id, el)"
+          class="group/block relative after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:outline-offset-[-2px]"
+          :class="isSelected(block) ? 'block-selected' : 'block-hoverable'"
           @dragstart="onBlockDragStart($event, block)"
           @click="selectBlock(block)"
         >
@@ -250,5 +258,15 @@ function onBlockDropped(event: { newIndex?: number }) {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.block-selected::after {
+  outline: 3px dashed var(--ui-primary);
+}
+.block-hoverable::after {
+  outline: 3px dashed transparent;
+}
+.block-hoverable:hover::after {
+  outline: 3px dashed color-mix(in srgb, var(--ui-primary) 60%, transparent);
 }
 </style>

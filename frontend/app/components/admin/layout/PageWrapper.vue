@@ -12,8 +12,9 @@ defineProps<{
           <slot name="left" />
         </template>
 
+        <slot name="middle" />
+
         <template #right>
-          <!-- Right content -->
           <slot name="right" />
         </template>
       </UDashboardNavbar>

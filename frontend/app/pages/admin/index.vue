@@ -243,6 +243,17 @@ async function save() {
     <template #left>
       <PagebuilderPageControls :portfolio-id="portfolio?.id ?? null" />
     </template>
+    <!-- Viewport mode tabs pinned to bottom of preview -->
+    <template #middle>
+      <UTabs
+        v-model="activeViewMode"
+        :items="VIEWPORT_MODES"
+        default-value="desktop"
+        size="sm"
+        class="w-56"
+        :content="false"
+      />
+    </template>
     <!-- Header right -->
     <template #right>
       <UTooltip v-if="saveError" :text="saveError">
@@ -259,6 +270,21 @@ async function save() {
         :disabled="!isDirty && !saving"
         @click="save"
       />
+      <UTooltip text="View page">
+        <UButton
+          color="primary"
+          variant="solid"
+          icon="i-lucide-external-link"
+          aria-label="View page"
+          tooltip="View page"
+          :to="
+            activePage?.slug && activePage.slug !== 'home'
+              ? `/p/${portfolio?.slug}/${activePage.slug}`
+              : `/p/${portfolio?.slug}`
+          "
+          target="_blank"
+        />
+      </UTooltip>
     </template>
 
     <div class="flex h-full w-full min-h-0">
@@ -285,19 +311,6 @@ async function save() {
         </div>
         <div v-else class="flex items-center justify-center h-full text-sm text-muted">
           No portfolio found
-        </div>
-        <!-- Viewport mode tabs pinned to bottom of preview -->
-        <div
-          class="sticky bottom-0 flex justify-center bg-white dark:bg-neutral-900 border-t border-default px-4 py-2 shadow-sm"
-        >
-          <UTabs
-            v-model="activeViewMode"
-            :items="VIEWPORT_MODES"
-            default-value="desktop"
-            size="sm"
-            class="w-56"
-            :content="false"
-          />
         </div>
       </div>
 

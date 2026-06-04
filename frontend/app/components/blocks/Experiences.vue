@@ -37,13 +37,17 @@ const experiences = computed(() => {
 
 <template>
   <section v-if="experiences.length" class="px-8 py-16 max-w-3xl mx-auto">
-    <h2
+    <EditorInlineTextField
       v-if="showHeading"
+      field-key="heading"
+      tag="h2"
       class="text-3xl font-bold mb-8"
       :style="{ fontFamily: 'var(--font-heading)' }"
     >
-      {{ heading }}
-    </h2>
+      <h2 class="text-3xl font-bold mb-8" :style="{ fontFamily: 'var(--font-heading)' }">
+        {{ heading }}
+      </h2>
+    </EditorInlineTextField>
     <ul class="space-y-6">
       <li
         v-for="experience in experiences"
