@@ -315,17 +315,21 @@ function setValue(key: string, value: unknown) {
                 :model-value="(getValue(field.key) as Record<string, unknown>[]) ?? []"
                 @update:model-value="setValue(field.key, $event)"
               />
-              <UTextarea
-                v-else-if="field.type === 'textarea'"
-                :model-value="(getValue(field.key) as string) ?? ''"
-                :placeholder="field.placeholder"
-                size="sm"
-                :rows="3"
-                :maxrows="5"
-                autoresize
-                class="overflow-y-auto"
-                @update:model-value="setValue(field.key, $event)"
-              />
+              <div v-else-if="field.type === 'textarea'" class="flex flex-col gap-0.5">
+                <UTextarea
+                  :model-value="(getValue(field.key) as string) ?? ''"
+                  :placeholder="field.placeholder"
+                  size="sm"
+                  :rows="3"
+                  :maxrows="5"
+                  autoresize
+                  class="overflow-y-auto"
+                  @update:model-value="setValue(field.key, $event)"
+                />
+                <p v-if="field.maxLength" class="text-xs text-muted text-right tabular-nums">
+                  {{ ((getValue(field.key) as string) ?? '').length }} / {{ field.maxLength }}
+                </p>
+              </div>
               <UCheckbox
                 v-else-if="field.type === 'checkbox'"
                 :model-value="(getValue(field.key) as boolean) ?? false"
@@ -376,14 +380,18 @@ function setValue(key: string, value: unknown) {
                   @input="setValue(field.key, ($event.target as HTMLInputElement).value)"
                 />
               </label>
-              <UInput
-                v-else
-                :model-value="(getValue(field.key) as string) ?? ''"
-                :placeholder="field.placeholder"
-                :type="field.type === 'url' ? 'url' : 'text'"
-                size="sm"
-                @update:model-value="setValue(field.key, $event)"
-              />
+              <div v-else class="flex flex-col gap-0.5">
+                <UInput
+                  :model-value="(getValue(field.key) as string) ?? ''"
+                  :placeholder="field.placeholder"
+                  :type="field.type === 'url' ? 'url' : 'text'"
+                  size="sm"
+                  @update:model-value="setValue(field.key, $event)"
+                />
+                <p v-if="field.maxLength" class="text-xs text-muted text-right tabular-nums">
+                  {{ ((getValue(field.key) as string) ?? '').length }} / {{ field.maxLength }}
+                </p>
+              </div>
             </div>
           </template>
         </div>

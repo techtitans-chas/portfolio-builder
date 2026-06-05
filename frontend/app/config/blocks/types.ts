@@ -36,6 +36,8 @@ export interface BlockField {
   defaultItem?: () => Record<string, unknown>;
   // For 'text'/'textarea': also render as editable inline in the preview
   inline?: boolean;
+  // Character limit — shows a live counter below the input
+  maxLength?: number;
   // For 'slider':
   min?: number;
   max?: number;
