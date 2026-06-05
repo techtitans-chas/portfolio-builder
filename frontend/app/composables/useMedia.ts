@@ -165,8 +165,15 @@ export function useMedia() {
         resolve(null);
       });
 
+      xhr.addEventListener('timeout', () => {
+        entry.error = 'Upload timed out. Check your connection and try again.';
+        entry.status = 'error';
+        resolve(null);
+      });
+
       xhr.open('POST', `${apiBase}/api/media`);
       xhr.withCredentials = true;
+      xhr.timeout = 30_000;
       entry.status = 'uploading';
       xhr.send(formData);
     });
