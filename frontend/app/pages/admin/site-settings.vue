@@ -130,73 +130,78 @@ async function save() {
 
       <USeparator class="mt-8 mb-6" />
 
-      <UFormField
-        label="Logo (light mode)"
-        name="logoLight"
-        description="Shown on light backgrounds. SVG or transparent PNG recommended."
-      >
-        <div class="flex flex-col gap-2 w-full">
-          <div
-            v-if="form.logoLight"
-            class="relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"
-          >
-            <img :src="form.logoLight" alt="" class="max-h-full max-w-full object-contain p-2" />
-            <UButton
-              icon="i-lucide-x"
-              color="neutral"
-              variant="solid"
-              size="xs"
-              class="absolute top-1 right-1 opacity-80 hover:opacity-100"
-              aria-label="Remove light logo"
-              @click="form.logoLight = ''"
-            />
-          </div>
-          <UButton
-            :icon="form.logoLight ? 'i-lucide-image' : 'i-lucide-plus'"
-            color="neutral"
-            variant="outline"
-            class="w-full"
-            @click="logoLightPickerOpen = true"
-          >
-            {{ form.logoLight ? 'Change logo' : 'Choose logo' }}
-          </UButton>
-        </div>
-      </UFormField>
+      <h2 class="font-medium mb-2">Logo</h2>
 
-      <UFormField
-        label="Logo (dark mode)"
-        name="logoDark"
-        description="Shown on dark backgrounds. Falls back to light logo if not set."
-      >
-        <div class="flex flex-col gap-2 w-full">
-          <div
-            v-if="form.logoDark"
-            class="relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"
-          >
-            <img :src="form.logoDark" alt="" class="max-h-full max-w-full object-contain p-2" />
+      <UAlert
+        color="neutral"
+        variant="subtle"
+        title="SVG or transparent PNG recommended."
+        description="Dark mode falls back to light logo if not set."
+      />
+
+      <div class="grid grid-cols-2 gap-4">
+        <UFormField label="Light mode" name="logoLight">
+          <div class="flex flex-col gap-2 w-full">
             <UButton
-              icon="i-lucide-x"
+              :icon="form.logoLight ? 'i-lucide-image' : 'i-lucide-plus'"
               color="neutral"
-              variant="solid"
-              size="xs"
-              class="absolute top-1 right-1 opacity-80 hover:opacity-100"
-              aria-label="Remove dark logo"
-              @click="form.logoDark = ''"
-            />
+              variant="outline"
+              class="w-full"
+              @click="logoLightPickerOpen = true"
+            >
+              {{ form.logoLight ? 'Change logo' : 'Choose logo' }}
+            </UButton>
+            <div
+              v-if="form.logoLight"
+              class="relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"
+            >
+              <img :src="form.logoLight" alt="" class="max-h-full max-w-full object-contain p-2" />
+              <UButton
+                icon="i-lucide-x"
+                color="neutral"
+                variant="solid"
+                size="xs"
+                class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+                aria-label="Remove light logo"
+                @click="form.logoLight = ''"
+              />
+            </div>
           </div>
-          <UButton
-            :icon="form.logoDark ? 'i-lucide-image' : 'i-lucide-plus'"
-            color="neutral"
-            variant="outline"
-            class="w-full"
-            @click="logoDarkPickerOpen = true"
-          >
-            {{ form.logoDark ? 'Change logo' : 'Choose logo' }}
-          </UButton>
-        </div>
-      </UFormField>
+        </UFormField>
+
+        <UFormField label="Dark mode" name="logoDark">
+          <div class="flex flex-col gap-2 w-full">
+            <div
+              v-if="form.logoDark"
+              class="relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"
+            >
+              <img :src="form.logoDark" alt="" class="max-h-full max-w-full object-contain p-2" />
+              <UButton
+                icon="i-lucide-x"
+                color="neutral"
+                variant="solid"
+                size="xs"
+                class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+                aria-label="Remove dark logo"
+                @click="form.logoDark = ''"
+              />
+            </div>
+            <UButton
+              :icon="form.logoDark ? 'i-lucide-image' : 'i-lucide-plus'"
+              color="neutral"
+              variant="outline"
+              class="w-full"
+              @click="logoDarkPickerOpen = true"
+            >
+              {{ form.logoDark ? 'Change logo' : 'Choose logo' }}
+            </UButton>
+          </div>
+        </UFormField>
+      </div>
 
       <USeparator class="mt-8 mb-6" />
+
+      <h2 class="font-medium mb-2">SEO</h2>
 
       <UFormField label="SEO title" name="seoTitle">
         <UInput v-model="form.seoTitle" placeholder="SEO title" class="w-full" />

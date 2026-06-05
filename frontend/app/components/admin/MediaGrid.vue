@@ -53,7 +53,9 @@ const filteredDefaultFiles = computed(() => {
   }
   if (localSearch.value.trim()) {
     const q = localSearch.value.toLowerCase();
-    list = list.filter(f => f.filename.toLowerCase().includes(q) || f.label.toLowerCase().includes(q));
+    list = list.filter(
+      f => f.filename.toLowerCase().includes(q) || f.label.toLowerCase().includes(q),
+    );
   }
   return list;
 });
@@ -98,7 +100,10 @@ function isImage(fileType: string): boolean {
 }
 
 onMounted(async () => {
-  await Promise.all([fetchDefaultMedia(), files.value.length === 0 ? fetchMedia() : Promise.resolve()]);
+  await Promise.all([
+    fetchDefaultMedia(),
+    files.value.length === 0 ? fetchMedia() : Promise.resolve(),
+  ]);
 });
 </script>
 
@@ -122,12 +127,7 @@ onMounted(async () => {
           My uploads
         </UButton>
       </div>
-      <UButton
-        v-if="canUpload"
-        icon="i-lucide-upload"
-        size="sm"
-        @click="emit('upload')"
-      >
+      <UButton v-if="canUpload" icon="i-lucide-upload" size="sm" @click="emit('upload')">
         Upload
       </UButton>
     </div>
@@ -172,7 +172,10 @@ onMounted(async () => {
 
     <!-- Default images tab -->
     <template v-if="activeTab === 'default'">
-      <div v-if="filteredDefaultFiles.length === 0" class="flex flex-col items-center justify-center py-12 text-muted gap-2">
+      <div
+        v-if="filteredDefaultFiles.length === 0"
+        class="flex flex-col items-center justify-center py-12 text-muted gap-2"
+      >
         <UIcon name="i-lucide-image-off" class="w-10 h-10" />
         <p class="text-sm">No default images available.</p>
       </div>
@@ -186,7 +189,9 @@ onMounted(async () => {
           :class="
             selectMode && selectedUrl === file.url
               ? 'border-primary ring-2 ring-primary'
-              : selectMode ? 'border-default hover:border-primary' : 'border-default cursor-default'
+              : selectMode
+                ? 'border-default hover:border-primary'
+                : 'border-default cursor-default'
           "
           @click="handleDefaultClick(file)"
         >
@@ -285,7 +290,8 @@ onMounted(async () => {
 
       <!-- Count -->
       <p v-if="!loading && filteredUploadedFiles.length > 0" class="text-xs text-muted">
-        {{ filteredUploadedFiles.length }} {{ filteredUploadedFiles.length === 1 ? 'file' : 'files' }}
+        {{ filteredUploadedFiles.length }}
+        {{ filteredUploadedFiles.length === 1 ? 'file' : 'files' }}
       </p>
     </template>
   </div>
