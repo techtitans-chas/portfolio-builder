@@ -6,6 +6,7 @@ import { FONT_OPTIONS } from '~/config/fonts';
 
 const { selectedBlock } = useSelectedBlock();
 const { setBlockContent, setBlockName, pendingContentEdits } = usePageEditor();
+const { collections } = useCollections();
 
 const pickerFieldKey = ref<string | null>(null);
 const pickerOpen = ref(false);
@@ -354,6 +355,18 @@ function setValue(key: string, value: unknown) {
                   {{ (getValue(field.key) as number) ?? field.min ?? 0 }}px
                 </span>
               </div>
+              <USelect
+                v-else-if="field.type === 'collection-select'"
+                :model-value="(getValue(field.key) as string) || '__default__'"
+                :items="[
+                  { label: 'All (default)', value: '__default__' },
+                  ...collections
+                    .filter(c => c.type === field.collectionType)
+                    .map(c => ({ label: c.name, value: c.id })),
+                ]"
+                size="sm"
+                @update:model-value="setValue(field.key, $event === '__default__' ? '' : $event)"
+              />
               <USelect
                 v-else-if="field.type === 'select'"
                 :model-value="(getValue(field.key) as string) ?? ''"

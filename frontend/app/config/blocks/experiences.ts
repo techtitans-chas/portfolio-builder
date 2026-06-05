@@ -20,6 +20,12 @@ export const experiencesDefinition: BlockDefinition = {
         { key: 'heading', label: 'Heading', type: 'text', placeholder: 'Experience' },
         { key: 'showHeading', label: 'Show heading', type: 'checkbox' },
         {
+          key: 'collectionId',
+          label: 'Collection',
+          type: 'collection-select' as const,
+          collectionType: 'experiences',
+        },
+        {
           key: 'filterTag',
           label: 'Filter by tag',
           type: 'text',

@@ -27,7 +27,10 @@ export interface BlockField {
     | 'theme-color'
     | 'slider'
     | 'inline-text'
-    | 'inline-rich';
+    | 'inline-rich'
+    | 'collection-select';
+  /** Required when type === 'collection-select': the collection type to filter by */
+  collectionType?: string;
   placeholder?: string;
   options?: { label: string; value: string }[];
   // Only used when type === 'list':

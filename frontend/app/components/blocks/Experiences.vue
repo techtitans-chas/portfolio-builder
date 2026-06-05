@@ -7,12 +7,14 @@ export interface ExperiencesBlockProps {
   heading?: string;
   showHeading?: boolean;
   filterTag?: string;
+  collectionId?: string;
 }
 
 const props = withDefaults(defineProps<ExperiencesBlockProps>(), {
   heading: 'Experience',
   showHeading: true,
   filterTag: '',
+  collectionId: '',
 });
 
 const slug = inject(portfolioSlugKey, '');
@@ -20,12 +22,13 @@ const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
 const { data } = await useAsyncData(
-  `portfolio-${slug}-experiences`,
-  () =>
-    $fetch<{ items: CollectionItem[] }>(`/api/portfolios/${slug}/collections/experiences`, {
-      baseURL,
-    }),
-  { watch: [] },
+  () => `portfolio-${slug}-experiences-${props.collectionId || 'default'}`,
+  () => {
+    const url = props.collectionId
+      ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}`
+      : `/api/portfolios/${slug}/collections/experiences`;
+    return $fetch<{ items: CollectionItem[] }>(url, { baseURL });
+  },
 );
 
 const experiences = computed(() => {

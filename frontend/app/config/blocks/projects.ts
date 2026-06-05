@@ -8,6 +8,12 @@ const sharedFields = [
   { key: 'showHeading', label: 'Show heading', type: 'switch' as const },
   { key: 'linkToPage', label: 'Link to project page', type: 'switch' as const },
   {
+    key: 'collectionId',
+    label: 'Collection',
+    type: 'collection-select' as const,
+    collectionType: 'projects',
+  },
+  {
     key: 'filterTag',
     label: 'Filter by tag',
     type: 'text' as const,

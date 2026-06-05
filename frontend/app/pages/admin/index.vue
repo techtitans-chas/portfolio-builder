@@ -121,7 +121,7 @@ async function save() {
       // Read slot order directly from the header component (not via pendingContentEdits)
       // to avoid the reactive loop that caused post-drag duplication
       const headerSlotOrder = preview.value?.portfolioLayout?.headerRef?.slotOrder;
-      console.log('[save] headerSlotOrder:', headerSlotOrder, 'headerBlock:', headerBlock?.id);
+
       // Any block not in the map (e.g. header/footer edited without being in contentBlocks)
       // falls back to homePageId, then to pageId as last resort
       const homePageId = layers!.homePageId ?? pageId;
@@ -297,21 +297,23 @@ async function save() {
 
       <!-- Main content / live preview -->
       <div ref="previewCanvas" class="relative flex-1 overflow-auto bg-muted/30">
-        <div v-if="portfolio" :style="wrapperStyle">
-          <div ref="previewEl" class="@container" :style="scaleStyle">
-            <PagebuilderPreview
-              ref="preview"
-              :portfolio-slug="portfolio.slug"
-              :portfolio-title="portfolio.title"
-              :page-slug="activePage?.slug ?? 'home'"
-              :layers-view="leftSidebar?.layersView"
-              :live-theme-settings="leftSidebar?.themeSettings"
-            />
+        <ClientOnly>
+          <div v-if="portfolio" :style="wrapperStyle">
+            <div ref="previewEl" class="@container" :style="scaleStyle">
+              <PagebuilderPreview
+                ref="preview"
+                :portfolio-slug="portfolio.slug"
+                :portfolio-title="portfolio.title"
+                :page-slug="activePage?.slug ?? 'home'"
+                :layers-view="leftSidebar?.layersView"
+                :live-theme-settings="leftSidebar?.themeSettings"
+              />
+            </div>
           </div>
-        </div>
-        <div v-else class="flex items-center justify-center h-full text-sm text-muted">
-          No portfolio found
-        </div>
+          <div v-else class="flex items-center justify-center h-full text-sm text-muted">
+            No portfolio found
+          </div>
+        </ClientOnly>
       </div>
 
       <!-- Right sidebar -->

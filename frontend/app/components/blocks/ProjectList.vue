@@ -9,6 +9,7 @@ export interface ProjectListBlockProps {
   showHeading?: boolean;
   filterTag?: string;
   linkToPage?: boolean;
+  collectionId?: string;
 }
 
 const props = withDefaults(defineProps<ProjectListBlockProps>(), {
@@ -16,6 +17,7 @@ const props = withDefaults(defineProps<ProjectListBlockProps>(), {
   showHeading: true,
   filterTag: '',
   linkToPage: true,
+  collectionId: '',
 });
 
 const slug = inject(portfolioSlugKey, '');
@@ -23,12 +25,13 @@ const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
 const { data } = await useAsyncData(
-  `portfolio-${slug}-projects`,
-  () =>
-    $fetch<{ items: CollectionItem[] }>(`/api/portfolios/${slug}/collections/projects`, {
-      baseURL,
-    }),
-  { watch: [] },
+  () => `portfolio-${slug}-projects-${props.collectionId || 'default'}`,
+  () => {
+    const url = props.collectionId
+      ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}`
+      : `/api/portfolios/${slug}/collections/projects`;
+    return $fetch<{ items: CollectionItem[] }>(url, { baseURL });
+  },
 );
 
 const projects = computed(() => {
