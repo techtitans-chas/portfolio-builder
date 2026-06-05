@@ -196,6 +196,177 @@ const seeds = [
       },
     ],
   },
+  {
+    name: 'Edward Nygma',
+    email: 'riddler@gotham.villain',
+    password: 'Riddler1234!',
+    slug: 'riddler',
+    title: 'Edward Nygma',
+    description: 'The Riddler — Consulting Detective & Puzzle Architect',
+    collections: [
+      {
+        type: 'projects',
+        name: 'Projects',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Riddle Engine v3',
+              description:
+                'A self-updating cryptographic puzzle generator that stumps even Batman.',
+              time: '2024',
+              tags: ['Cryptography', 'Python', 'Obsession'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Gotham IQ Census',
+              description:
+                'Collected and ranked the intelligence of 12,000 Gotham citizens. Spoiler: I won.',
+              time: '2023',
+              tags: ['Data Science', 'Statistics', 'R'],
+            },
+          },
+        ],
+      },
+      {
+        type: 'experiences',
+        name: 'Experiences',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Chief Puzzle Officer',
+              place: 'Nygmatech',
+              location: 'Gotham City',
+              time: '2020 – present',
+              description:
+                'Designing unsolvable riddles for corporate espionage and personal amusement.',
+              tags: ['Leadership', 'Cryptography', 'Villain Operations'],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Pamela Isley',
+    email: 'poison.ivy@gotham.villain',
+    password: 'PoisonIvy1234!',
+    slug: 'poison-ivy',
+    title: 'Pamela Isley',
+    description: 'Poison Ivy — Botanist, Eco-Activist & Biotech Specialist',
+    collections: [
+      {
+        type: 'projects',
+        name: 'Projects',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Pheromone Control SDK',
+              description:
+                'Open-source library for synthesising airborne compliance compounds. Use responsibly.',
+              time: '2025',
+              tags: ['Biochemistry', 'Python', 'Biotech'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Gotham Rewilding Initiative',
+              description:
+                'Replaced 40 city blocks of concrete with sentient flora. No humans were harmed. Probably.',
+              time: '2023',
+              tags: ['Urban Planning', 'Botany', 'Guerrilla Gardening'],
+            },
+          },
+        ],
+      },
+      {
+        type: 'experiences',
+        name: 'Experiences',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Senior Research Botanist',
+              place: 'Gotham University',
+              location: 'Gotham City',
+              time: '2015 – 2021',
+              description:
+                'Led research into plant-based neurotoxins and rapid-growth mutagens before the accident.',
+              tags: ['Research', 'Botany', 'Chemistry'],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Oswald Cobblepot',
+    email: 'penguin@gotham.villain',
+    password: 'Penguin1234!',
+    slug: 'penguin',
+    title: 'Oswald Cobblepot',
+    description: 'The Penguin — Entrepreneur, Arms Dealer & Gotham Socialite',
+    collections: [
+      {
+        type: 'projects',
+        name: 'Projects',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'Iceberg Lounge Platform',
+              description:
+                'Full-stack reservation and underground weapons marketplace SaaS. 4.9 stars on Yelp.',
+              time: '2024',
+              tags: ['Next.js', 'Stripe', 'Crime'],
+            },
+          },
+          {
+            isPublished: true,
+            sortOrder: 1,
+            data: {
+              title: 'Umbrella Gadget Suite',
+              description:
+                'IoT-connected combat umbrellas with OTA firmware updates and remote detonation.',
+              time: '2023',
+              tags: ['IoT', 'Embedded C', 'Hardware'],
+            },
+          },
+        ],
+      },
+      {
+        type: 'experiences',
+        name: 'Experiences',
+        items: [
+          {
+            isPublished: true,
+            sortOrder: 0,
+            data: {
+              title: 'CEO & Proprietor',
+              place: 'Iceberg Lounge',
+              location: 'Gotham City Waterfront',
+              time: '2018 – present',
+              description:
+                "Running Gotham's premier nightclub and covert criminal enterprise simultaneously.",
+              tags: ['Management', 'Hospitality', 'Arms Trafficking'],
+            },
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 async function seed() {
