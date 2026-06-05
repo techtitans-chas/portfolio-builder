@@ -160,6 +160,10 @@ async function save() {
                 @click="addTag(field.key)"
               />
             </div>
+            <p class="text-xs text-muted mt-1">
+              Prefix a tag with <code>::</code> (e.g. <code>::featured</code>) to use it for
+              filtering only — it won't be shown publicly.
+            </p>
             <div
               v-if="(form.data[field.key] as string[])?.length"
               class="flex flex-wrap gap-2 mt-2"

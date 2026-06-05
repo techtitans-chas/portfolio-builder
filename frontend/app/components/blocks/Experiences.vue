@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
+import { visibleTags } from '~/utils/sanitize';
 
 export interface ExperiencesBlockProps {
   heading?: string;
@@ -73,9 +74,12 @@ const experiences = computed(() => {
         >
           {{ experience.data.description }}
         </p>
-        <div v-if="(experience.data.tags as string[])?.length" class="flex flex-wrap gap-1 mt-3">
+        <div
+          v-if="visibleTags((experience.data.tags as string[]) ?? []).length"
+          class="flex flex-wrap gap-1 mt-3"
+        >
           <span
-            v-for="tag in experience.data.tags as string[]"
+            v-for="tag in visibleTags((experience.data.tags as string[]) ?? [])"
             :key="tag"
             class="text-xs px-2 py-0.5 rounded-full"
             :style="{

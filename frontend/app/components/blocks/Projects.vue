@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
+import { visibleTags } from '~/utils/sanitize';
 
 export interface ProjectsBlockProps {
   heading?: string;
@@ -82,9 +83,12 @@ const projects = computed(() => {
         >
           {{ project.data.description }}
         </p>
-        <div v-if="(project.data.tags as string[])?.length" class="flex flex-wrap gap-1 mt-auto">
+        <div
+          v-if="visibleTags((project.data.tags as string[]) ?? []).length"
+          class="flex flex-wrap gap-1 mt-auto"
+        >
           <span
-            v-for="tag in project.data.tags as string[]"
+            v-for="tag in visibleTags((project.data.tags as string[]) ?? [])"
             :key="tag"
             class="text-xs px-2 py-0.5 rounded-full"
             :style="{
