@@ -12,9 +12,10 @@ const links = ref<ButtonProps[]>([
 
 <template>
   <UPageHero
-    title="Build Your Portfolio in Minutes"
-    description="Create a stunning, professional portfolio without writing a single line of code. Choose a template, add your work, and share it with the world."
+    title="Build Your Next Project in Minutes"
+    description="Create a stunning, professional project without writing a single line of code. Choose a template, add your work, and share it with the world."
     :links="links"
   />
+  <LandingDemoSandbox />
   <HealthStatus />
 </template>
