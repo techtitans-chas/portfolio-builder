@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import { sanitizeHtml } from '~/utils/sanitize';
 
 export interface TextBlockProps {
   content?: string;
@@ -31,7 +32,7 @@ const isEmpty = computed(() => {
     >
       <EditorInlineRichField field-key="content" placeholder="Start typing..." html class="w-full">
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-if="content" v-html="content" />
+        <div v-if="content" v-html="sanitizeHtml(content)" />
       </EditorInlineRichField>
     </div>
   </section>

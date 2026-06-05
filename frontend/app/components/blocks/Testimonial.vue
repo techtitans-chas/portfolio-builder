@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import { sanitizeHtml } from '~/utils/sanitize';
 
 export interface TestimonialItem {
   id?: string;
@@ -103,7 +104,7 @@ watch(
             html
           >
             <!-- eslint-disable-next-line vue/no-v-html -->
-            <div v-if="item.quote" v-html="item.quote" />
+            <div v-if="item.quote" v-html="sanitizeHtml(item.quote)" />
           </EditorInlineRichField>
 
           <div class="flex items-center gap-3">
@@ -167,14 +168,13 @@ watch(
                     class="w-8 h-8 mb-4 opacity-20"
                     :style="{ color: 'var(--primary)' }"
                   />
-                  <!-- eslint-disable vue/no-v-html -->
+                  <!-- eslint-disable-next-line vue/no-v-html -->
                   <div
                     v-if="item.quote"
                     class="rich-text text-lg leading-relaxed mb-6"
                     :style="{ color: 'var(--text-primary)' }"
-                    v-html="item.quote"
+                    v-html="sanitizeHtml(item.quote)"
                   />
-                  <!-- eslint-enable vue/no-v-html -->
 
                   <div class="flex items-center gap-3">
                     <img

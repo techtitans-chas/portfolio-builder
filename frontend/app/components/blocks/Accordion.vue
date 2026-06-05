@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import { sanitizeHtml } from '~/utils/sanitize';
 
 export interface AccordionItem {
   id?: string;
@@ -99,7 +100,7 @@ function isOpen(index: number) {
                 html
               >
                 <!-- eslint-disable-next-line vue/no-v-html -->
-                <div v-if="item.answer" v-html="item.answer" />
+                <div v-if="item.answer" v-html="sanitizeHtml(item.answer)" />
               </EditorInlineRichField>
             </div>
           </Transition>
