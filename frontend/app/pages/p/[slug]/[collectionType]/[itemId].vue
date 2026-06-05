@@ -88,5 +88,6 @@ useSeoMeta({
     :logo-url-dark="logoDark"
   >
     <CollectionPagesProjectDetail v-if="typeDef.pageTemplate === 'ProjectDetail'" :item="item" />
+    <CollectionPagesPostDetail v-else-if="typeDef.pageTemplate === 'PostDetail'" :item="item" />
   </PortfolioLayout>
 </template>

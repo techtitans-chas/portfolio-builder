@@ -4,6 +4,7 @@ import { heroDefinition } from './hero';
 import { textDefinition } from './text';
 import { projectsDefinition, projectListDefinition } from './projects';
 import { experiencesDefinition } from './experiences';
+import { postFeedDefinition, postListDefinition } from './posts';
 import { demoDefinition } from './demo';
 import { accordionDefinition } from './accordion';
 import { testimonialDefinition } from './testimonial';
@@ -18,6 +19,8 @@ export {
   projectsDefinition,
   projectListDefinition,
   experiencesDefinition,
+  postFeedDefinition,
+  postListDefinition,
   demoDefinition,
   accordionDefinition,
   testimonialDefinition,
@@ -30,8 +33,10 @@ export const blockDefinitions = [
   textDefinition,
   projectsDefinition,
   projectListDefinition,
+  postFeedDefinition,
+  postListDefinition,
   experiencesDefinition,
-  demoDefinition,
+  // demoDefinition,
   accordionDefinition,
   testimonialDefinition,
   skillsDefinition,
@@ -45,6 +50,8 @@ export const allBlockDefinitions = [
   textDefinition,
   projectsDefinition,
   projectListDefinition,
+  postFeedDefinition,
+  postListDefinition,
   experiencesDefinition,
   demoDefinition,
   accordionDefinition,
