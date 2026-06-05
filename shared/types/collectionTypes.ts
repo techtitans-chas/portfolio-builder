@@ -1,7 +1,7 @@
 export interface CollectionFieldDef {
   key: string;
   label: string;
-  type: 'text' | 'textarea' | 'url' | 'number' | 'boolean' | 'tags';
+  type: 'text' | 'textarea' | 'url' | 'number' | 'boolean' | 'tags' | 'image';
   required?: boolean;
   placeholder?: string;
 }
@@ -28,7 +28,7 @@ export const collectionTypes: CollectionTypeDef[] = [
       { key: 'title', label: 'Title', type: 'text', required: true },
       { key: 'description', label: 'Description', type: 'textarea' },
       { key: 'time', label: 'Time / Period', type: 'text', placeholder: 'e.g. 2023–2024' },
-      { key: 'previewImageUrl', label: 'Preview image URL', type: 'url' },
+      { key: 'previewImageUrl', label: 'Preview image', type: 'image' },
       { key: 'tags', label: 'Tags', type: 'tags' },
     ],
     allowedBlocks: ['projects'],

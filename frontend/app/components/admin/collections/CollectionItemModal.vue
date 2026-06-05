@@ -86,6 +86,15 @@ function onTagKeydown(e: KeyboardEvent, fieldKey: string) {
   }
 }
 
+// Image picker
+const imagePickerField = ref<string | null>(null);
+const imagePickerOpen = computed({
+  get: () => imagePickerField.value !== null,
+  set: val => {
+    if (!val) imagePickerField.value = null;
+  },
+});
+
 // Save
 const saving = ref(false);
 const errorMessage = ref('');
@@ -189,6 +198,42 @@ async function save() {
             />
           </UFormField>
 
+          <!-- Image field -->
+          <UFormField v-else-if="field.type === 'image'" :label="field.label" :name="field.key">
+            <div class="flex gap-3 items-start">
+              <div
+                class="relative w-24 h-16 rounded-md overflow-hidden border border-default bg-muted flex items-center justify-center cursor-pointer hover:border-primary transition-colors shrink-0"
+                @click="imagePickerField = field.key"
+              >
+                <img
+                  v-if="form.data[field.key]"
+                  :src="form.data[field.key] as string"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+                <UIcon v-else name="i-lucide-image" class="text-muted size-5" />
+                <UButton
+                  v-if="form.data[field.key]"
+                  icon="i-lucide-x"
+                  color="neutral"
+                  variant="solid"
+                  size="xs"
+                  class="absolute top-0.5 right-0.5 opacity-80 hover:opacity-100"
+                  aria-label="Remove image"
+                  @click.stop="form.data[field.key] = ''"
+                />
+              </div>
+              <UButton
+                color="neutral"
+                variant="outline"
+                size="xs"
+                @click="imagePickerField = field.key"
+              >
+                {{ form.data[field.key] ? 'Change image' : 'Choose image' }}
+              </UButton>
+            </div>
+          </UFormField>
+
           <!-- Text / url / number -->
           <UFormField v-else :label="field.label" :name="field.key">
             <UInput
@@ -228,4 +273,18 @@ async function save() {
       </div>
     </template>
   </UModal>
+
+  <AdminMediaPickerModal
+    v-model:open="imagePickerOpen"
+    images-only
+    :selected-url="imagePickerField ? (form.data[imagePickerField] as string | null) : null"
+    @select="
+      url => {
+        if (imagePickerField) {
+          form.data[imagePickerField] = url;
+          imagePickerField = null;
+        }
+      }
+    "
+  />
 </template>

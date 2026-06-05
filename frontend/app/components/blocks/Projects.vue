@@ -56,14 +56,21 @@ const projects = computed(() => {
         :style="{ backgroundColor: 'var(--bg-surface)' }"
       >
         <div
-          class="h-32 rounded-lg"
+          class="h-32 rounded-lg overflow-hidden"
           :style="{
             backgroundColor:
               i % 2 === 0
                 ? 'color-mix(in srgb, var(--secondary) 20%, var(--bg-surface))'
                 : 'color-mix(in srgb, var(--primary) 20%, var(--bg-surface))',
           }"
-        />
+        >
+          <img
+            v-if="project.data.previewImageUrl"
+            :src="project.data.previewImageUrl as string"
+            :alt="project.data.title as string"
+            class="w-full h-full object-cover"
+          />
+        </div>
         <h3 class="font-semibold text-lg">{{ project.data.title }}</h3>
         <p v-if="project.data.time" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
           {{ project.data.time }}
