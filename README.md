@@ -12,6 +12,26 @@ A fullstack TypeScript monorepo with a Nuxt frontend, Hono backend, and shared t
 | `backend`  | Hono API on Node.js                     |
 | `shared`   | Shared Zod schemas and TypeScript types |
 
+## Environment setup
+
+Copy the example file and fill in your values before starting any service:
+
+```bash
+cp .env.example .env
+```
+
+| Variable | Required | Description |
+|---|---|---|
+| `DATABASE_URL` | ✅ | PostgreSQL connection string |
+| `BETTER_AUTH_SECRET` | ✅ | Random secret — generate with `openssl rand -base64 32` |
+| `BETTER_AUTH_URL` | ✅ | Public URL of the backend API |
+| `FRONTEND_URL` | ✅ | Public URL of the frontend |
+| `NUXT_PUBLIC_API_URL` | ✅ | Backend API URL used by the browser |
+| `RESEND_API_KEY` | ☑️ optional | Enables email sending. Without it, email features are silently disabled. |
+| `R2_*` | ☑️ optional | Cloudflare R2 credentials. Without them, file uploads are disabled and the media gallery shows only default images. |
+
+Both services validate their env vars at startup and exit immediately with a clear error message if a required variable is missing.
+
 ## Development
 
 ```bash

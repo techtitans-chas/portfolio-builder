@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { MediaFile } from '~/composables/useMedia';
-
 const props = defineProps<{
   open: boolean;
   /** Currently selected file URL (shown as highlighted in the grid) */
@@ -29,8 +27,8 @@ function close() {
   emit('update:open', false);
 }
 
-function onSelect(file: MediaFile) {
-  emit('select', file.url);
+function onSelect(url: string) {
+  emit('select', url);
   close();
 }
 

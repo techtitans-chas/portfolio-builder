@@ -1,0 +1,26 @@
+[
+  {
+    "filename": "placeholder-hero.svg",
+    "label": "Hero banner",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-hero.svg"
+  },
+  {
+    "filename": "placeholder-cover.svg",
+    "label": "Cover image",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-cover.svg"
+  },
+  {
+    "filename": "placeholder-project.svg",
+    "label": "Project screenshot",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-project.svg"
+  },
+  {
+    "filename": "placeholder-profile.svg",
+    "label": "Profile photo",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-profile.svg"
+  }
+]
