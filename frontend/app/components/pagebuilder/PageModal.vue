@@ -146,7 +146,13 @@ async function save() {
             <UInput v-model="form.title" placeholder="About" class="w-full" />
           </UFormField>
           <UFormField label="Page slug" name="slug" class="col-span-2 sm:col-span-1">
-            <UInput v-model="form.slug" placeholder="about" class="w-full" @input="onSlugInput">
+            <UInput
+              v-model="form.slug"
+              placeholder="about"
+              class="w-full"
+              :ui="{ base: 'ps-4' }"
+              @input="onSlugInput"
+            >
               <template #leading>
                 <span class="text-muted text-sm">/</span>
               </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus';
 import type { Page } from '@portfolio-builder/shared/types';
+import { MAX_PAGES_PER_PORTFOLIO } from '@portfolio-builder/shared/schemas';
 import { useActivePage } from '~/composables/useActivePage';
 
 const props = defineProps<{
@@ -86,10 +87,13 @@ async function confirmDelete() {
   }
 }
 
+const atPageLimit = computed(() => pages.value.length >= MAX_PAGES_PER_PORTFOLIO);
+
 const pageModalOpen = ref(false);
 const pageToEdit = ref<Page | null>(null);
 
 function openAddPage() {
+  if (atPageLimit.value) return;
   pageToEdit.value = null;
   pageModalOpen.value = true;
 }
@@ -127,13 +131,22 @@ function onPageSaved(page: Page) {
       </UButton>
       <template #content>
         <div class="p-1 min-w-52">
-          <button
-            class="flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 text-primary font-medium"
-            @click="openAddPage"
-          >
-            <UIcon name="i-lucide-plus" class="size-4 shrink-0" />
-            Add page
-          </button>
+          <div class="flex items-center justify-between px-2 py-1.5">
+            <button
+              class="flex items-center gap-2 text-sm rounded-md font-medium transition-colors"
+              :class="
+                atPageLimit ? 'text-muted cursor-not-allowed' : 'text-primary hover:text-primary/80'
+              "
+              :disabled="atPageLimit"
+              @click="openAddPage"
+            >
+              <UIcon name="i-lucide-plus" class="size-4 shrink-0" />
+              Add page
+            </button>
+            <span class="text-xs text-muted tabular-nums">
+              {{ pages.length }}&thinsp;/&thinsp;{{ MAX_PAGES_PER_PORTFOLIO }}
+            </span>
+          </div>
           <div class="my-1 border-t border-default" />
           <div v-if="pagesLoading" class="flex items-center justify-center py-4">
             <UIcon name="i-lucide-loader-2" class="size-4 animate-spin text-muted" />
