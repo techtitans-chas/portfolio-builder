@@ -18,12 +18,21 @@ export interface UploadEntry {
 }
 
 export const MEDIA_ALLOWED_TYPES = [
+  // Images
   'image/jpeg',
   'image/png',
   'image/gif',
   'image/webp',
   'image/svg+xml',
+  // Documents
   'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  // Spreadsheets
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/csv',
+  'text/plain',
 ];
 
 export const MEDIA_MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB raw; server enforces 2 MB post-conversion
@@ -31,7 +40,7 @@ export const MEDIA_MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB raw; server enforc
 export const MEDIA_TYPE_OPTIONS = [
   { label: 'All', value: 'all' as const },
   { label: 'Images', value: 'image' as const },
-  { label: 'PDFs', value: 'pdf' as const },
+  { label: 'Docs', value: 'doc' as const },
 ];
 
 export const MEDIA_SORT_OPTIONS = [
@@ -45,7 +54,7 @@ const files = ref<MediaFile[]>([]);
 const loading = ref(true);
 const error = ref('');
 const search = ref('');
-const filterType = ref<'all' | 'image' | 'pdf'>('all');
+const filterType = ref<'all' | 'image' | 'doc'>('all');
 const sortBy = ref<'date' | 'name' | 'size'>('date');
 const uploadQueue = ref<UploadEntry[]>([]);
 const uploadError = ref('');
@@ -66,8 +75,8 @@ export function useMedia() {
 
     if (filterType.value === 'image') {
       list = list.filter(f => f.fileType.startsWith('image/'));
-    } else if (filterType.value === 'pdf') {
-      list = list.filter(f => f.fileType === 'application/pdf');
+    } else if (filterType.value === 'doc') {
+      list = list.filter(f => !f.fileType.startsWith('image/'));
     }
 
     return [...list].sort((a, b) => {

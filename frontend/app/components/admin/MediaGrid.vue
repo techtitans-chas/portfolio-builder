@@ -31,7 +31,7 @@ const activeTab = ref<Tab>('default');
 // Local search / filter / sort so the picker doesn't mutate gallery page state
 const localSearch = ref('');
 const localSort = ref<'date' | 'name' | 'size'>('date');
-const localFilterType = ref<'all' | 'image' | 'pdf'>('all');
+const localFilterType = ref<'all' | 'image' | 'doc'>('all');
 
 const sortOptions = [
   { label: 'Newest first', value: 'date' as const },
@@ -42,7 +42,7 @@ const sortOptions = [
 const typeOptions = [
   { label: 'All', value: 'all' as const },
   { label: 'Images', value: 'image' as const },
-  { label: 'PDFs', value: 'pdf' as const },
+  { label: 'Docs', value: 'doc' as const },
 ];
 
 // Filtered default files
@@ -67,8 +67,8 @@ const filteredUploadedFiles = computed(() => {
     list = list.filter(f => f.fileType.startsWith('image/'));
   } else if (localFilterType.value === 'image') {
     list = list.filter(f => f.fileType.startsWith('image/'));
-  } else if (localFilterType.value === 'pdf') {
-    list = list.filter(f => f.fileType === 'application/pdf');
+  } else if (localFilterType.value === 'doc') {
+    list = list.filter(f => !f.fileType.startsWith('image/'));
   }
   if (localSearch.value.trim()) {
     const q = localSearch.value.toLowerCase();
@@ -97,6 +97,22 @@ function handleUploadClick(file: MediaFile) {
 
 function isImage(fileType: string): boolean {
   return fileType.startsWith('image/');
+}
+
+function fileIcon(fileType: string): string {
+  if (fileType === 'application/pdf') return 'i-lucide-file-text';
+  if (
+    fileType === 'application/msword' ||
+    fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  )
+    return 'i-lucide-file-type';
+  if (
+    fileType === 'application/vnd.ms-excel' ||
+    fileType === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+    fileType === 'text/csv'
+  )
+    return 'i-lucide-table';
+  return 'i-lucide-file';
 }
 
 onMounted(async () => {
@@ -266,7 +282,7 @@ onMounted(async () => {
             loading="lazy"
           />
           <div v-else class="flex flex-col items-center gap-1.5 p-2 text-muted">
-            <UIcon name="i-lucide-file-text" class="w-8 h-8" />
+            <UIcon :name="fileIcon(file.fileType)" class="w-8 h-8" />
             <span class="text-xs text-center break-all line-clamp-2">{{ file.filename }}</span>
           </div>
 
