@@ -129,7 +129,11 @@ const t = computed(() =>
       <!-- Browser chrome -->
       <div
         class="rounded-2xl overflow-hidden"
-        style="box-shadow: 0 25px 60px -12px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06)"
+        style="
+          box-shadow:
+            0 25px 60px -12px rgba(0, 0, 0, 0.18),
+            0 0 0 1px rgba(0, 0, 0, 0.06);
+        "
       >
         <!-- Chrome top bar -->
         <div
@@ -166,10 +170,7 @@ const t = computed(() =>
             :aria-label="demoDark ? 'Switch to light mode' : 'Switch to dark mode'"
             @click="demoDark = !demoDark"
           >
-            <UIcon
-              :name="demoDark ? 'i-lucide-sun' : 'i-lucide-moon'"
-              class="w-3.5 h-3.5"
-            />
+            <UIcon :name="demoDark ? 'i-lucide-sun' : 'i-lucide-moon'" class="w-3.5 h-3.5" />
           </button>
         </div>
 
