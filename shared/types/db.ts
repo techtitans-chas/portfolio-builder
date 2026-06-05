@@ -42,6 +42,7 @@ export interface CollectionItem {
   id: string;
   collectionId: string;
   data: Record<string, unknown>;
+  pageBody: string | null;
   isPublished: boolean;
   sortOrder: number;
   createdAt: Date;

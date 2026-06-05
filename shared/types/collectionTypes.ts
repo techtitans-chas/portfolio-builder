@@ -17,6 +17,12 @@ export interface CollectionTypeDef {
   fields: CollectionFieldDef[];
   /** Block types that are unlocked when this collection exists in the portfolio */
   allowedBlocks: string[];
+  /**
+   * Name of the Vue component (without extension) in components/collection-pages/
+   * that renders the detail page for an item in this collection.
+   * When set, item cards link to /p/:slug/:collectionType/:itemId.
+   */
+  pageTemplate?: string;
 }
 
 export const collectionTypes: CollectionTypeDef[] = [
@@ -32,6 +38,7 @@ export const collectionTypes: CollectionTypeDef[] = [
       { key: 'tags', label: 'Tags', type: 'tags' },
     ],
     allowedBlocks: ['projects'],
+    pageTemplate: 'ProjectDetail',
   },
   {
     type: 'experiences',

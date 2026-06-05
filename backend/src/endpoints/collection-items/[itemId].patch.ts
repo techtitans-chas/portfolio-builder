@@ -8,6 +8,7 @@ import { unauthorized, badRequest, notFound, parseBody } from '../../utils/error
 
 const itemPatchSchema = z.object({
   data: z.record(z.string(), z.unknown()).optional(),
+  pageBody: z.string().nullable().optional(),
   isPublished: z.boolean().optional(),
   sortOrder: z.number().optional(),
 });

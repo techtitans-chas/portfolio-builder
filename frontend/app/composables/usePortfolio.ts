@@ -95,6 +95,7 @@ export function usePortfolio(
       '--secondary': colors.secondary,
       '--text-primary': colors.textPrimary,
       '--text-secondary': colors.textSecondary,
+      '--border': colors.border ?? (dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'),
     };
     for (const entry of theme.palette ?? []) {
       const color = dark ? entry.dark : entry.light;

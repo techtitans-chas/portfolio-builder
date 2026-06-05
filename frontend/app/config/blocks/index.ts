@@ -2,7 +2,7 @@ import { headerDefinition } from './header';
 import { footerDefinition } from './footer';
 import { heroDefinition } from './hero';
 import { textDefinition } from './text';
-import { projectsDefinition } from './projects';
+import { projectsDefinition, projectListDefinition } from './projects';
 import { experiencesDefinition } from './experiences';
 import { demoDefinition } from './demo';
 import { accordionDefinition } from './accordion';
@@ -16,6 +16,7 @@ export {
   heroDefinition,
   textDefinition,
   projectsDefinition,
+  projectListDefinition,
   experiencesDefinition,
   demoDefinition,
   accordionDefinition,
@@ -28,6 +29,7 @@ export const blockDefinitions = [
   heroDefinition,
   textDefinition,
   projectsDefinition,
+  projectListDefinition,
   experiencesDefinition,
   demoDefinition,
   accordionDefinition,
@@ -42,6 +44,7 @@ export const allBlockDefinitions = [
   heroDefinition,
   textDefinition,
   projectsDefinition,
+  projectListDefinition,
   experiencesDefinition,
   demoDefinition,
   accordionDefinition,

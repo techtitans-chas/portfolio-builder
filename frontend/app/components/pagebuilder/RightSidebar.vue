@@ -400,7 +400,7 @@ function setValue(key: string, value: unknown) {
 
     <!-- Empty state -->
     <div v-else class="flex-1 flex items-center justify-center p-4">
-      <p class="text-sm text-muted text-center">Select a block in the Layers panel to edit it</p>
+      <p class="text-sm text-muted text-center">Select a block</p>
     </div>
   </div>
 

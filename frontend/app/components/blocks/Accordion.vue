@@ -47,7 +47,10 @@ function isOpen(index: number) {
         class="text-3xl font-bold mb-8"
         :style="{ color: 'var(--text-primary)' }"
       >
-        <h2 class="text-3xl font-bold mb-8" :style="{ color: 'var(--text-primary)' }">
+        <h2
+          class="text-3xl font-bold mb-8"
+          :style="{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }"
+        >
           {{ heading }}
         </h2>
       </EditorInlineTextField>

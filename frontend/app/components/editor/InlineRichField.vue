@@ -209,7 +209,7 @@ function runAndClose(fn: () => void) {
           <button
             v-for="lvl in [1, 2, 3, 4, 5, 6]"
             :key="lvl"
-            class="toolbar-btn text-xs font-semibold w-7"
+            class="tiptap-toolbar-btn text-xs font-semibold w-7"
             :class="{ active: fmt[`h${lvl}` as keyof typeof fmt] }"
             @click="
               runAndClose(() =>
@@ -231,7 +231,7 @@ function runAndClose(fn: () => void) {
           class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5"
         >
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: fmt.bulletList }"
             title="Bullet list"
             @click="runAndClose(() => editor!.chain().focus().toggleBulletList().run())"
@@ -239,7 +239,7 @@ function runAndClose(fn: () => void) {
             <UIcon name="i-lucide-list" class="size-3.5" />
           </button>
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: fmt.orderedList }"
             title="Numbered list"
             @click="runAndClose(() => editor!.chain().focus().toggleOrderedList().run())"
@@ -247,7 +247,7 @@ function runAndClose(fn: () => void) {
             <UIcon name="i-lucide-list-ordered" class="size-3.5" />
           </button>
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: fmt.blockquote }"
             title="Blockquote"
             @click="runAndClose(() => editor!.chain().focus().toggleBlockquote().run())"
@@ -262,7 +262,7 @@ function runAndClose(fn: () => void) {
           class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5"
         >
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: fmt.alignLeft }"
             title="Align left"
             @click="runAndClose(() => editor!.chain().focus().setTextAlign('left').run())"
@@ -270,7 +270,7 @@ function runAndClose(fn: () => void) {
             <UIcon name="i-lucide-align-left" class="size-3.5" />
           </button>
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: fmt.alignCenter }"
             title="Align center"
             @click="runAndClose(() => editor!.chain().focus().setTextAlign('center').run())"
@@ -278,7 +278,7 @@ function runAndClose(fn: () => void) {
             <UIcon name="i-lucide-align-center" class="size-3.5" />
           </button>
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: fmt.alignRight }"
             title="Align right"
             @click="runAndClose(() => editor!.chain().focus().setTextAlign('right').run())"
@@ -299,12 +299,15 @@ function runAndClose(fn: () => void) {
             @keydown.enter.prevent="applyLink"
             @keydown.escape.prevent="openPanel = null"
           />
-          <button class="toolbar-btn text-xs bg-white/20 hover:bg-white/30" @click="applyLink">
+          <button
+            class="tiptap-toolbar-btn text-xs bg-white/20 hover:bg-white/30"
+            @click="applyLink"
+          >
             Apply
           </button>
           <button
             v-if="fmt.link"
-            class="toolbar-btn text-xs text-red-400"
+            class="tiptap-toolbar-btn text-xs text-red-400"
             @click="
               editor!.chain().focus().unsetLink().run();
               openPanel = null;
@@ -320,7 +323,7 @@ function runAndClose(fn: () => void) {
         >
           <!-- Bold / Italic / Underline / Strike / Code -->
           <button
-            class="toolbar-btn font-bold"
+            class="tiptap-toolbar-btn font-bold"
             :class="{ active: fmt.bold }"
             title="Bold"
             @click="editor!.chain().focus().toggleBold().run()"
@@ -328,7 +331,7 @@ function runAndClose(fn: () => void) {
             B
           </button>
           <button
-            class="toolbar-btn italic"
+            class="tiptap-toolbar-btn italic"
             :class="{ active: fmt.italic }"
             title="Italic"
             @click="editor!.chain().focus().toggleItalic().run()"
@@ -336,7 +339,7 @@ function runAndClose(fn: () => void) {
             <em>I</em>
           </button>
           <button
-            class="toolbar-btn underline text-xs"
+            class="tiptap-toolbar-btn underline text-xs"
             :class="{ active: fmt.underline }"
             title="Underline"
             @click="editor!.chain().focus().toggleUnderline().run()"
@@ -344,7 +347,7 @@ function runAndClose(fn: () => void) {
             U
           </button>
           <button
-            class="toolbar-btn line-through text-xs"
+            class="tiptap-toolbar-btn line-through text-xs"
             :class="{ active: fmt.strike }"
             title="Strikethrough"
             @click="editor!.chain().focus().toggleStrike().run()"
@@ -352,7 +355,7 @@ function runAndClose(fn: () => void) {
             S
           </button>
           <button
-            class="toolbar-btn font-mono text-xs"
+            class="tiptap-toolbar-btn font-mono text-xs"
             :class="{ active: fmt.code }"
             title="Inline code"
             @click="editor!.chain().focus().toggleCode().run()"
@@ -360,11 +363,11 @@ function runAndClose(fn: () => void) {
             &lt;/&gt;
           </button>
 
-          <div class="toolbar-divider" />
+          <div class="tiptap-toolbar-divider" />
 
           <!-- Heading dropdown trigger -->
           <button
-            class="toolbar-btn text-xs font-semibold w-7"
+            class="tiptap-toolbar-btn text-xs font-semibold w-7"
             :class="{
               active:
                 openPanel === 'heading' || fmt.h1 || fmt.h2 || fmt.h3 || fmt.h4 || fmt.h5 || fmt.h6,
@@ -377,7 +380,7 @@ function runAndClose(fn: () => void) {
 
           <!-- List dropdown trigger -->
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{
               active: openPanel === 'list' || fmt.bulletList || fmt.orderedList || fmt.blockquote,
             }"
@@ -396,7 +399,7 @@ function runAndClose(fn: () => void) {
 
           <!-- Align dropdown trigger -->
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: openPanel === 'align' || fmt.alignCenter || fmt.alignRight }"
             title="Text alignment"
             @click="togglePanel('align')"
@@ -404,11 +407,11 @@ function runAndClose(fn: () => void) {
             <UIcon :name="activeAlign" class="size-3.5" />
           </button>
 
-          <div class="toolbar-divider" />
+          <div class="tiptap-toolbar-divider" />
 
           <!-- Link -->
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             :class="{ active: openPanel === 'link' || fmt.link }"
             title="Link"
             @click="togglePanel('link')"
@@ -418,25 +421,25 @@ function runAndClose(fn: () => void) {
 
           <!-- HR -->
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             title="Horizontal rule"
             @click="editor!.chain().focus().setHorizontalRule().run()"
           >
             <UIcon name="i-lucide-minus" class="size-3.5" />
           </button>
 
-          <div class="toolbar-divider" />
+          <div class="tiptap-toolbar-divider" />
 
           <!-- Undo / Redo -->
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             title="Undo"
             @click="editor!.chain().focus().undo().run()"
           >
             <UIcon name="i-lucide-undo-2" class="size-3.5" />
           </button>
           <button
-            class="toolbar-btn text-xs"
+            class="tiptap-toolbar-btn text-xs"
             title="Redo"
             @click="editor!.chain().focus().redo().run()"
           >
@@ -459,9 +462,7 @@ function runAndClose(fn: () => void) {
   <slot v-else />
 </template>
 
-<style scoped lang="postcss">
-@reference "~/assets/css/main.css";
-
+<style scoped>
 :deep(.ProseMirror p.is-editor-empty:first-child::before) {
   content: attr(data-placeholder);
   float: left;
@@ -469,15 +470,5 @@ function runAndClose(fn: () => void) {
   opacity: 0.35;
   pointer-events: none;
   height: 0;
-}
-
-.toolbar-btn {
-  @apply px-1.5 py-0.5 rounded transition-colors hover:bg-white/10 leading-none flex items-center justify-center min-w-[1.5rem];
-}
-.toolbar-btn.active {
-  @apply bg-white/20;
-}
-.toolbar-divider {
-  @apply w-px h-4 bg-white/20 mx-0.5 shrink-0;
 }
 </style>

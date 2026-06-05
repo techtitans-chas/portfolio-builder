@@ -9,7 +9,8 @@
     "primary": "#3a7d6e",
     "secondary": "#e8703a",
     "textPrimary": "#2c2218",
-    "textSecondary": "#6b5a4e"
+    "textSecondary": "#6b5a4e",
+    "border": "#e0cec2"
   },
   "dark": {
     "bgPage": "#1e1610",
@@ -19,7 +20,8 @@
     "primary": "#5aad9a",
     "secondary": "#f0885a",
     "textPrimary": "#fdf0e8",
-    "textSecondary": "#c0a898"
+    "textSecondary": "#c0a898",
+    "border": "#3a2e26"
   },
   "palette": [
     { "key": "page", "label": "Page", "light": "#fdf0e8", "dark": "#1e1610" },

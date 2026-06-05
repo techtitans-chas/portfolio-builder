@@ -4,14 +4,14 @@ import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
 
-export interface ProjectsBlockProps {
+export interface ProjectListBlockProps {
   heading?: string;
   showHeading?: boolean;
   filterTag?: string;
   linkToPage?: boolean;
 }
 
-const props = withDefaults(defineProps<ProjectsBlockProps>(), {
+const props = withDefaults(defineProps<ProjectListBlockProps>(), {
   heading: 'Projects',
   showHeading: true,
   filterTag: '',
@@ -55,24 +55,20 @@ const isLinked = computed(() => hasDetailPage && props.linkToPage);
         {{ heading }}
       </h2>
     </EditorInlineTextField>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="flex flex-col">
       <component
         :is="isLinked ? 'a' : 'div'"
         v-for="(project, i) in projects"
         :key="project.id"
-        class="rounded-xl p-6 flex flex-col gap-3 transition-opacity hover:opacity-80"
+        class="flex gap-4 py-5 transition-opacity hover:opacity-80"
         :class="{ 'cursor-pointer': isLinked }"
+        :style="i > 0 ? { borderTop: '1px solid var(--border)' } : {}"
         :href="isLinked ? `/p/${slug}/projects/${project.id}` : undefined"
-        :style="{ backgroundColor: 'var(--bg-surface)' }"
       >
+        <!-- Thumbnail -->
         <div
-          class="h-32 rounded-lg overflow-hidden"
-          :style="{
-            backgroundColor:
-              i % 2 === 0
-                ? 'color-mix(in srgb, var(--secondary) 20%, var(--bg-surface))'
-                : 'color-mix(in srgb, var(--primary) 20%, var(--bg-surface))',
-          }"
+          class="w-24 h-20 shrink-0 rounded-lg overflow-hidden"
+          :style="{ backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))' }"
         >
           <img
             v-if="project.data.previewImageUrl"
@@ -81,31 +77,42 @@ const isLinked = computed(() => hasDetailPage && props.linkToPage);
             class="w-full h-full object-cover"
           />
         </div>
-        <h3 class="font-semibold text-lg">{{ project.data.title }}</h3>
-        <p v-if="project.data.time" class="text-sm" :style="{ color: 'var(--text-secondary)' }">
-          {{ project.data.time }}
-        </p>
-        <p
-          v-if="project.data.description"
-          class="text-sm"
-          :style="{ color: 'var(--text-secondary)' }"
-        >
-          {{ project.data.description }}
-        </p>
-        <div
-          v-if="visibleTags((project.data.tags as string[]) ?? []).length"
-          class="flex flex-wrap gap-1 mt-auto"
-        >
-          <span
-            v-for="tag in visibleTags((project.data.tags as string[]) ?? [])"
-            :key="tag"
-            class="text-xs px-2 py-0.5 rounded-full"
-            :style="{
-              backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
-              color: 'var(--primary)',
-            }"
-            >{{ tag }}</span
+
+        <!-- Content -->
+        <div class="flex flex-col gap-1 min-w-0 flex-1 justify-center">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="font-semibold text-base leading-snug">{{ project.data.title }}</h3>
+            <span
+              v-if="project.data.time"
+              class="text-xs shrink-0 pt-0.5"
+              :style="{ color: 'var(--text-secondary)' }"
+            >
+              {{ project.data.time }}
+            </span>
+          </div>
+          <p
+            v-if="project.data.description"
+            class="text-sm line-clamp-2"
+            :style="{ color: 'var(--text-secondary)' }"
           >
+            {{ project.data.description }}
+          </p>
+          <div
+            v-if="visibleTags((project.data.tags as string[]) ?? []).length"
+            class="flex flex-wrap gap-1 mt-1"
+          >
+            <span
+              v-for="tag in visibleTags((project.data.tags as string[]) ?? [])"
+              :key="tag"
+              class="text-xs px-2 py-0.5 rounded-full"
+              :style="{
+                backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
+                color: 'var(--primary)',
+              }"
+            >
+              {{ tag }}
+            </span>
+          </div>
         </div>
       </component>
     </div>

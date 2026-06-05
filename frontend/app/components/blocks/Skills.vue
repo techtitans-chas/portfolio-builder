@@ -74,7 +74,7 @@ onMounted(() => {
 
 <template>
   <section ref="sectionRef" class="px-8 py-12">
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
@@ -82,7 +82,10 @@ onMounted(() => {
         class="text-3xl font-bold mb-10"
         :style="{ color: 'var(--text-primary)' }"
       >
-        <h2 class="text-3xl font-bold mb-10" :style="{ color: 'var(--text-primary)' }">
+        <h2
+          class="text-3xl font-bold mb-10"
+          :style="{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }"
+        >
           {{ heading }}
         </h2>
       </EditorInlineTextField>

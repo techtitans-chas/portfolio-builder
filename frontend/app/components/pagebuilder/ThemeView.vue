@@ -10,6 +10,7 @@ export interface ThemeColors {
   secondary: string;
   textPrimary: string;
   textSecondary: string;
+  border?: string;
 }
 
 export interface ThemePaletteColor {
