@@ -64,6 +64,32 @@ function onAvatarSuccess(imageUrl: string) {
 
 const { features, fetchFeatures } = useServerFeatures();
 await fetchFeatures();
+
+// ---------------------------------------------------------------------------
+// Delete account
+// ---------------------------------------------------------------------------
+const deleteModalOpen = ref(false);
+const deleting = ref(false);
+const deleteError = ref('');
+
+async function confirmDeleteAccount() {
+  deleting.value = true;
+  deleteError.value = '';
+
+  try {
+    await fetcher('/api/users/me', {
+      method: 'DELETE',
+      credentials: 'include',
+      body: JSON.stringify({ email: user.value?.email }),
+    });
+
+    deleteModalOpen.value = false;
+    await navigateTo('/?deleted=true');
+  } catch {
+    deleteError.value = 'Something went wrong. Please try again.';
+    deleting.value = false;
+  }
+}
 </script>
 
 <template>
@@ -142,6 +168,37 @@ await fetchFeatures();
         <h2 class="font-medium mb-1">Password</h2>
         <p class="text-muted text-sm mb-3">Send a password reset link to your email address.</p>
         <UButton to="/reset-password" variant="outline">Reset password</UButton>
+      </div>
+
+      <USeparator class="mt-8 mb-6" />
+
+      <!-- ---------------------------------------------------------------- -->
+      <!-- Danger zone                                                       -->
+      <!-- ---------------------------------------------------------------- -->
+      <div class="max-w-md">
+        <h2 class="font-medium mb-1 text-red-600 dark:text-red-400">Danger zone</h2>
+        <p class="text-muted text-sm mb-3">
+          Permanently delete your account and all associated data. This cannot be undone.
+        </p>
+
+        <UAlert
+          v-if="deleteError"
+          color="error"
+          variant="soft"
+          :description="deleteError"
+          class="mb-3"
+        />
+
+        <UButton color="error" variant="outline" @click="deleteModalOpen = true">
+          Delete account
+        </UButton>
+
+        <AdminDeleteAccountModal
+          v-model:open="deleteModalOpen"
+          :user-email="user?.email ?? ''"
+          @confirm="confirmDeleteAccount"
+          @cancel="deleteError = ''"
+        />
       </div>
     </div>
   </AdminLayoutPageStructure>
