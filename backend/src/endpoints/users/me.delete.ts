@@ -19,10 +19,7 @@ export const meDelete = factory.createHandlers(async c => {
   const userId = session.user.id;
 
   // Fetch user row (need avatar URL) and all media files before deletion
-  const [userRow] = await db
-    .select({ image: users.image })
-    .from(users)
-    .where(eq(users.id, userId));
+  const [userRow] = await db.select({ image: users.image }).from(users).where(eq(users.id, userId));
 
   const userMedia = await db.select().from(media).where(eq(media.userId, userId));
 
