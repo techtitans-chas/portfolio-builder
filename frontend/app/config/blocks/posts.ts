@@ -64,7 +64,7 @@ export const postCardsDefinition: BlockDefinition = {
 export const postFeedDefinition: BlockDefinition = {
   type: 'post-feed',
   label: 'Post feed',
-  icon: 'i-lucide-layout-grid',
+  icon: 'i-lucide-stretch-horizontal',
   component: BlocksPostFeed as Component,
   allowedCollections: ['posts'],
   defaultContent: {
