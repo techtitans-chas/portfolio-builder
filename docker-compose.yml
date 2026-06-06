@@ -67,6 +67,7 @@ services:
       target: frontend
     stdin_open: true
     tty: true
+    command: pnpm --filter frontend dev
     environment:
       CI: 'true'
       NUXT_HOST: 0.0.0.0
