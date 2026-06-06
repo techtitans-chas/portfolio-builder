@@ -11,6 +11,7 @@ export interface PostListBlockProps {
   background?: string | null;
   surfaceColor?: string | null;
   backgroundImage?: string | null;
+  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<PostListBlockProps>(), {
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<PostListBlockProps>(), {
   background: null,
   surfaceColor: null,
   backgroundImage: null,
+  backgroundFixed: false,
 });
 
 const slug = inject(portfolioSlugKey, '');
@@ -38,6 +40,7 @@ const sectionStyle = computed(() => ({
         backgroundImage: `url(${props.backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
       }
     : {}),
 }));

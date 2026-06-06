@@ -14,6 +14,7 @@ export interface AccordionBlockProps {
   items?: AccordionItem[];
   background?: string | null;
   backgroundImage?: string | null;
+  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<AccordionBlockProps>(), {
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<AccordionBlockProps>(), {
   items: () => [],
   background: null,
   backgroundImage: null,
+  backgroundFixed: false,
 });
 
 const { resolveColor, resolveTextColor } = useActivePalette();
@@ -35,6 +37,7 @@ const sectionStyle = computed(() => ({
         backgroundImage: `url(${props.backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
       }
     : {}),
 }));

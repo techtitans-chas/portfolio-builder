@@ -15,6 +15,7 @@ export interface SkillsBlockProps {
   skills?: SkillItem[];
   background?: string | null;
   backgroundImage?: string | null;
+  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<SkillsBlockProps>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<SkillsBlockProps>(), {
   skills: () => [],
   background: null,
   backgroundImage: null,
+  backgroundFixed: false,
 });
 
 const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
@@ -37,6 +39,7 @@ const sectionStyle = computed(() => ({
         backgroundImage: `url(${props.backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
       }
     : {}),
 }));

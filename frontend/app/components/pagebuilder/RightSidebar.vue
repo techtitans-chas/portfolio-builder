@@ -140,6 +140,18 @@ function getValue(key: string): unknown {
   return getPath(localContent.value, key);
 }
 
+function checkCondition(cond: { key: string; value: unknown }): boolean {
+  const val = getValue(cond.key);
+  if (cond.value === 'truthy') return !!val;
+  return val === cond.value;
+}
+
+function fieldVisible(f: { showIf?: { key: string; value: unknown }; showIfAll?: { key: string; value: unknown }[] }): boolean {
+  if (f.showIfAll) return f.showIfAll.every(checkCondition);
+  if (f.showIf) return checkCondition(f.showIf);
+  return true;
+}
+
 function setValue(key: string, value: unknown) {
   if (!selectedBlock.value) return;
   localContent.value = setPath(localContent.value, key, value);
@@ -214,7 +226,7 @@ function setValue(key: string, value: unknown) {
                 f =>
                   f.type !== 'inline-text' &&
                   f.type !== 'inline-rich' &&
-                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+                  fieldVisible(f),
               ).length
             "
           >
@@ -229,7 +241,7 @@ function setValue(key: string, value: unknown) {
                 f =>
                   f.type !== 'inline-text' &&
                   f.type !== 'inline-rich' &&
-                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+                  fieldVisible(f),
               )"
               :key="field.key"
               class="flex gap-1"
@@ -374,8 +386,8 @@ function setValue(key: string, value: unknown) {
                   class="flex-1"
                   @update:model-value="setValue(field.key, $event)"
                 />
-                <span class="text-xs text-muted w-8 text-right tabular-nums">
-                  {{ (getValue(field.key) as number) ?? field.min ?? 0 }}px
+                <span class="text-xs text-muted w-10 text-right tabular-nums shrink-0">
+                  {{ (getValue(field.key) as number) ?? field.min ?? 0 }}{{ field.unit !== '' ? (field.unit ?? 'px') : '' }}
                 </span>
               </div>
               <USelect

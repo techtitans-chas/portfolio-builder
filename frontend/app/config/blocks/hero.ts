@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 import BlocksHero from '~/components/blocks/Hero.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 export const heroDefinition: BlockDefinition = {
   type: 'hero',
@@ -9,50 +10,136 @@ export const heroDefinition: BlockDefinition = {
   component: BlocksHero as Component,
   defaultContent: {
     heading: 'Your name',
-    subheading: 'Your tagline',
-    background: null,
-    backgroundImage: null,
-    ctaButtons: [
-      { id: crypto.randomUUID(), label: 'View my work', url: '#projects' },
-      { id: crypto.randomUUID(), label: 'Get in touch', url: '#contact' },
-    ],
+    subheading: '<p>Your tagline</p>',
+    alignH: 'center',
+    alignV: 'center',
+    showButton1: true,
+    button1Label: 'View my work',
+    button1Url: '#projects',
+    button1Style: { variant: 'solid', radius: 'md', size: 'md', spacing: 4, uppercase: false, letterSpacing: 0 },
+    showButton2: true,
+    button2Label: 'Get in touch',
+    button2Url: '#contact',
+    button2Style: { variant: 'outline', radius: 'md', size: 'md', spacing: 4, uppercase: false, letterSpacing: 0 },
+    image: null,
+    imagePosition: 'right',
+    headingFont: null,
+    textShadow: false,
+    fullHeight: false,
+    height: 500,
+    padding: 48,
+    maxWidth: 'md',
+    ...styleDefaults,
   },
-  sections: [
+  tabs: [
     {
       label: 'Content',
-      fields: [
-        { key: 'heading', label: 'Heading', type: 'inline-text', placeholder: 'Your name' },
+      icon: 'i-lucide-text',
+      sections: [
         {
-          key: 'subheading',
-          label: 'Subheading',
-          type: 'inline-rich',
-          placeholder: 'Your tagline',
+          label: 'Text',
+          fields: [
+            { key: 'heading', label: 'Heading', type: 'inline-text', placeholder: 'Your name' },
+            { key: 'subheading', label: 'Subheading', type: 'inline-rich', placeholder: 'Your tagline' },
+            { key: 'headingFont', label: 'Heading font', type: 'font' },
+          ],
         },
-        { key: 'headingFont', label: 'Heading font', type: 'font' },
-      ],
-    },
-    {
-      label: 'Background',
-      fields: [
-        { key: 'background', label: 'Background color', type: 'theme-color' },
-        { key: 'backgroundImage', label: 'Background image', type: 'image' },
-      ],
-    },
-    {
-      label: 'CTA Buttons',
-      fields: [
         {
-          key: 'ctaButtons',
-          label: 'Buttons',
-          type: 'list',
-          itemLabel: 'Button',
-          defaultItem: () => ({ id: crypto.randomUUID(), label: 'Click here', url: '#' }),
-          itemFields: [
-            { key: 'label', label: 'Label', placeholder: 'Click here', inline: true },
-            { key: 'url', label: 'URL', placeholder: '#', type: 'url' },
+          label: 'Image',
+          fields: [
+            { key: 'image', label: 'Side image', type: 'image' },
+            {
+              key: 'imagePosition',
+              label: 'Image position',
+              type: 'select',
+              options: [
+                { label: 'Left', value: 'left' },
+                { label: 'Right', value: 'right' },
+              ],
+              showIf: { key: 'image', value: 'truthy' },
+            },
+          ],
+        },
+        {
+          label: 'Button 1',
+          fields: [
+            { key: 'showButton1', label: 'Show button 1', type: 'switch' },
+            { key: 'button1Label', label: 'Label', type: 'text', placeholder: 'View my work', showIf: { key: 'showButton1', value: true } },
+            { key: 'button1Url', label: 'URL', type: 'url', placeholder: '#projects', showIf: { key: 'showButton1', value: true } },
+            { key: 'button1Style', label: 'Button style', type: 'button-style', showIf: { key: 'showButton1', value: true } },
+          ],
+        },
+        {
+          label: 'Button 2',
+          fields: [
+            { key: 'showButton2', label: 'Show button 2', type: 'switch' },
+            { key: 'button2Label', label: 'Label', type: 'text', placeholder: 'Get in touch', showIf: { key: 'showButton2', value: true } },
+            { key: 'button2Url', label: 'URL', type: 'url', placeholder: '#contact', showIf: { key: 'showButton2', value: true } },
+            { key: 'button2Style', label: 'Button style', type: 'button-style', showIf: { key: 'showButton2', value: true } },
           ],
         },
       ],
     },
+    {
+      label: 'Layout',
+      icon: 'i-lucide-layout',
+      sections: [
+        {
+          fields: [
+            {
+              key: 'alignH',
+              label: 'Horizontal alignment',
+              type: 'select',
+              options: [
+                { label: 'Left', value: 'left' },
+                { label: 'Center', value: 'center' },
+                { label: 'Right', value: 'right' },
+              ],
+            },
+            {
+              key: 'alignV',
+              label: 'Vertical alignment',
+              type: 'select',
+              options: [
+                { label: 'Top', value: 'top' },
+                { label: 'Center', value: 'center' },
+                { label: 'Bottom', value: 'bottom' },
+              ],
+            },
+            {
+              key: 'maxWidth',
+              label: 'Content width',
+              type: 'select',
+              options: [
+                { label: 'Narrow', value: 'sm' },
+                { label: 'Medium', value: 'md' },
+                { label: 'Wide', value: 'lg' },
+                { label: 'Full', value: 'full' },
+              ],
+            },
+            { key: 'fullHeight', label: 'Full viewport height', type: 'switch' },
+            {
+              key: 'height',
+              label: 'Height',
+              type: 'slider',
+              min: 200,
+              max: 900,
+              step: 50,
+              showIf: { key: 'fullHeight', value: false },
+            },
+            {
+              key: 'padding',
+              label: 'Padding',
+              type: 'slider',
+              min: 0,
+              max: 192,
+              step: 8,
+            },
+            { key: 'textShadow', label: 'Text shadow', type: 'switch' },
+          ],
+        },
+      ],
+    },
+    styleTab,
   ],
 };

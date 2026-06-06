@@ -48,8 +48,13 @@ export interface BlockField {
   min?: number;
   max?: number;
   step?: number;
-  // Only show this field when another field has a specific value
-  showIf?: { key: string; value: unknown };
+  // Unit suffix shown next to slider value (e.g. '%', 'deg', 'rem'). Defaults to 'px' when omitted.
+  unit?: string;
+  // Only show this field when another field has a specific value.
+  // Use value: 'truthy' to show whenever the field is non-null / non-empty.
+  showIf?: { key: string; value: unknown | 'truthy' };
+  // Like showIf but ALL conditions must pass.
+  showIfAll?: { key: string; value: unknown | 'truthy' }[];
 }
 
 export interface BlockSection {

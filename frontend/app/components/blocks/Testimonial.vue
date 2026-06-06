@@ -18,6 +18,7 @@ export interface TestimonialBlockProps {
   background?: string | null;
   surfaceColor?: string | null;
   backgroundImage?: string | null;
+  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<TestimonialBlockProps>(), {
@@ -28,6 +29,7 @@ const props = withDefaults(defineProps<TestimonialBlockProps>(), {
   background: null,
   surfaceColor: null,
   backgroundImage: null,
+  backgroundFixed: false,
 });
 
 const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
@@ -42,6 +44,7 @@ const sectionStyle = computed(() => ({
         backgroundImage: `url(${props.backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
       }
     : {}),
 }));

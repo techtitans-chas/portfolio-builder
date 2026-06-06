@@ -7,6 +7,7 @@ export interface TextBlockProps {
   align?: 'left' | 'center' | 'right';
   background?: string | null;
   backgroundImage?: string | null;
+  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<TextBlockProps>(), {
@@ -14,6 +15,7 @@ const props = withDefaults(defineProps<TextBlockProps>(), {
   align: 'left',
   background: null,
   backgroundImage: null,
+  backgroundFixed: false,
 });
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
@@ -34,6 +36,7 @@ const sectionStyle = computed(() => ({
         backgroundImage: `url(${props.backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
       }
     : {}),
 }));
