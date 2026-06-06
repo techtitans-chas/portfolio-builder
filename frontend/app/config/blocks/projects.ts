@@ -2,6 +2,7 @@ import type { Component } from 'vue';
 import BlocksProjects from '~/components/blocks/Projects.vue';
 import BlocksProjectList from '~/components/blocks/ProjectList.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 const sharedFields = [
   { key: 'heading', label: 'Heading', type: 'inline-text' as const },
@@ -32,8 +33,16 @@ export const projectsDefinition: BlockDefinition = {
     showHeading: true,
     filterTag: '',
     linkToPage: true,
+    ...styleDefaults,
   },
-  sections: [{ label: 'Settings', fields: sharedFields }],
+  tabs: [
+    {
+      label: 'Content',
+      icon: 'i-lucide-text',
+      sections: [{ label: 'Settings', fields: sharedFields }],
+    },
+    styleTab,
+  ],
 };
 
 export const projectListDefinition: BlockDefinition = {
@@ -47,6 +56,14 @@ export const projectListDefinition: BlockDefinition = {
     showHeading: true,
     filterTag: '',
     linkToPage: true,
+    ...styleDefaults,
   },
-  sections: [{ label: 'Settings', fields: sharedFields }],
+  tabs: [
+    {
+      label: 'Content',
+      icon: 'i-lucide-text',
+      sections: [{ label: 'Settings', fields: sharedFields }],
+    },
+    styleTab,
+  ],
 };

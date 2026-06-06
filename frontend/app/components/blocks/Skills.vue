@@ -13,6 +13,8 @@ export interface SkillsBlockProps {
   showHeading?: boolean;
   columns?: '1' | '2';
   skills?: SkillItem[];
+  background?: string | null;
+  backgroundImage?: string | null;
 }
 
 const props = withDefaults(defineProps<SkillsBlockProps>(), {
@@ -20,7 +22,48 @@ const props = withDefaults(defineProps<SkillsBlockProps>(), {
   showHeading: true,
   columns: '2',
   skills: () => [],
+  background: null,
+  backgroundImage: null,
 });
+
+const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
+
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+
+const sectionStyle = computed(() => ({
+  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
+  ...(props.backgroundImage
+    ? {
+        backgroundImage: `url(${props.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : {}),
+}));
+
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
+const textPrimaryStyle = computed(() =>
+  autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
+);
+const textMutedStyle = computed(() =>
+  autoTextColor.value
+    ? { color: autoTextColor.value, opacity: '0.6' }
+    : { color: 'var(--text-secondary)' },
+);
+
+const bgPrimary = computed(() => resolvePrimary(props.background));
+const bgSecondary = computed(() => resolveSecondary(props.background));
+
+const trackStyle = computed(() => ({
+  backgroundColor: `color-mix(in srgb, ${bgPrimary.value} 12%, ${bgHex.value ?? 'var(--bg-surface)'})`,
+}));
+
+const barGradient = computed(
+  () =>
+    `linear-gradient(to right, ${bgPrimary.value}, color-mix(in srgb, ${bgPrimary.value} 75%, ${bgSecondary.value}))`,
+);
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
@@ -73,18 +116,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="px-8 py-12">
+  <section ref="sectionRef" class="px-8 py-12" :style="sectionStyle">
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
         tag="h2"
         class="text-3xl font-bold mb-10"
-        :style="{ color: 'var(--text-primary)' }"
+        :style="textPrimaryStyle"
       >
         <h2
           class="text-3xl font-bold mb-10"
-          :style="{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }"
+          :style="{ ...textPrimaryStyle, fontFamily: 'var(--font-heading)' }"
         >
           {{ heading }}
         </h2>
@@ -95,49 +138,41 @@ onMounted(() => {
         :class="columns === '2' ? 'grid grid-cols-1 sm:grid-cols-2' : 'flex flex-col'"
       >
         <div v-for="[category, entries] in grouped" :key="category">
-          <!-- Category header — only shown when there are named groups -->
           <p
             v-if="hasCategories"
             class="text-xs font-semibold uppercase tracking-widest mb-4"
-            :style="{ color: 'var(--text-secondary)' }"
+            :style="textMutedStyle"
           >
             {{ category }}
           </p>
 
           <div class="flex flex-col gap-4">
             <div v-for="entry in entries" :key="entry.item.id ?? entry.flatIndex">
-              <!-- Skill name row -->
               <div class="flex items-center justify-between mb-2">
                 <EditorInlineTextField
                   :field-key="`skills.${entry.flatIndex}.name`"
                   tag="span"
                   class="text-sm font-medium"
-                  :style="{ color: 'var(--text-primary)' }"
+                  :style="textPrimaryStyle"
                   :data-placeholder="entry.item.name"
                 >
                   {{ entry.item.name }}
                 </EditorInlineTextField>
                 <span
                   class="text-xs tabular-nums font-medium ml-3 shrink-0"
-                  :style="{ color: 'var(--text-secondary)' }"
+                  :style="textMutedStyle"
                 >
                   {{ entry.item.level ?? 0 }}%
                 </span>
               </div>
 
               <!-- Progress track -->
-              <div
-                class="w-full h-1.5 rounded-full overflow-hidden"
-                :style="{
-                  backgroundColor: 'color-mix(in srgb, var(--primary) 12%, var(--bg-surface))',
-                }"
-              >
+              <div class="w-full h-1.5 rounded-full overflow-hidden" :style="trackStyle">
                 <div
                   class="h-full rounded-full"
                   :style="{
                     width: animated ? (Number(entry.item.level) || 0) + '%' : '0%',
-                    background:
-                      'linear-gradient(to right, var(--primary), color-mix(in srgb, var(--primary) 75%, var(--secondary)))',
+                    background: barGradient,
                     transition: animated
                       ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${delayMap.get(entry.flatIndex) ?? 0}ms`
                       : 'none',

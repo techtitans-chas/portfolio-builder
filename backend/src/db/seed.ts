@@ -39,6 +39,64 @@ const defaultPages = [
   },
 ];
 
+const blogItems = [
+  {
+    isPublished: true,
+    sortOrder: 0,
+    data: {
+      title: 'Getting started with Nuxt 4',
+      excerpt:
+        'A practical guide to setting up a Nuxt 4 project from scratch, covering directory structure, auto-imports, and the new app/ layout.',
+      date: '2025-05-12',
+      tags: ['Nuxt', 'Vue', 'Tutorial'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 1,
+    data: {
+      title: 'Why I switched from REST to tRPC',
+      excerpt:
+        "After a year of maintaining a hand-rolled REST API I moved to tRPC. Here's what I gained, what I lost, and when it makes sense.",
+      date: '2025-04-03',
+      tags: ['TypeScript', 'API', 'tRPC'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 2,
+    data: {
+      title: 'CSS color-mix() is surprisingly powerful',
+      excerpt:
+        'A deep dive into the color-mix() function — how it works, where it shines, and a few gotchas I ran into building a theming system.',
+      date: '2025-03-18',
+      tags: ['CSS', 'Design', 'Theming'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 3,
+    data: {
+      title: 'Drizzle ORM: first impressions after six months',
+      excerpt:
+        'My honest take on Drizzle after using it in production — the good (type safety, migrations), the bad (relation queries), and the ugly.',
+      date: '2025-02-27',
+      tags: ['Drizzle', 'TypeScript', 'Database'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 4,
+    data: {
+      title: 'Building accessible modals without a library',
+      excerpt:
+        'Focus trapping, aria-modal, scroll locking, and closing on Escape — everything you need to roll your own accessible dialog from scratch.',
+      date: '2025-01-14',
+      tags: ['Accessibility', 'HTML', 'JavaScript'],
+    },
+  },
+];
+
 const seeds = [
   {
     name: 'Martin Södersten',
@@ -113,6 +171,11 @@ const seeds = [
             },
           },
         ],
+      },
+      {
+        type: 'posts',
+        name: 'Blog',
+        items: blogItems,
       },
     ],
   },
@@ -193,6 +256,11 @@ const seeds = [
             },
           },
         ],
+      },
+      {
+        type: 'posts',
+        name: 'Blog',
+        items: blogItems,
       },
     ],
   },

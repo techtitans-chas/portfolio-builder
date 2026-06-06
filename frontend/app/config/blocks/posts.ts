@@ -2,6 +2,7 @@ import type { Component } from 'vue';
 import BlocksPostFeed from '~/components/blocks/PostFeed.vue';
 import BlocksPostList from '~/components/blocks/PostList.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 const sharedFields = [
   { key: 'heading', label: 'Heading', type: 'inline-text' as const },
@@ -32,22 +33,30 @@ export const postFeedDefinition: BlockDefinition = {
     collectionId: '',
     filterTag: '',
     pageSize: 6,
+    ...styleDefaults,
   },
-  sections: [
+  tabs: [
     {
-      label: 'Settings',
-      fields: [
-        ...sharedFields,
+      label: 'Content',
+      icon: 'i-lucide-text',
+      sections: [
         {
-          key: 'pageSize',
-          label: 'Posts per page',
-          type: 'slider' as const,
-          min: 2,
-          max: 12,
-          step: 2,
+          label: 'Settings',
+          fields: [
+            ...sharedFields,
+            {
+              key: 'pageSize',
+              label: 'Posts per page',
+              type: 'slider' as const,
+              min: 2,
+              max: 12,
+              step: 2,
+            },
+          ],
         },
       ],
     },
+    styleTab,
   ],
 };
 
@@ -62,6 +71,14 @@ export const postListDefinition: BlockDefinition = {
     showHeading: true,
     collectionId: '',
     filterTag: '',
+    ...styleDefaults,
   },
-  sections: [{ label: 'Settings', fields: sharedFields }],
+  tabs: [
+    {
+      label: 'Content',
+      icon: 'i-lucide-text',
+      sections: [{ label: 'Settings', fields: sharedFields }],
+    },
+    styleTab,
+  ],
 };

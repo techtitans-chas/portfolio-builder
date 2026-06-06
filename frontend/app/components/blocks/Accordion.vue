@@ -12,13 +12,49 @@ export interface AccordionBlockProps {
   heading?: string;
   showHeading?: boolean;
   items?: AccordionItem[];
+  background?: string | null;
+  backgroundImage?: string | null;
 }
 
-withDefaults(defineProps<AccordionBlockProps>(), {
+const props = withDefaults(defineProps<AccordionBlockProps>(), {
   heading: 'FAQ',
   showHeading: true,
   items: () => [],
+  background: null,
+  backgroundImage: null,
 });
+
+const { resolveColor, resolveTextColor } = useActivePalette();
+
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+
+const sectionStyle = computed(() => ({
+  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
+  ...(props.backgroundImage
+    ? {
+        backgroundImage: `url(${props.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : {}),
+}));
+
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
+const textPrimaryStyle = computed(() =>
+  autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
+);
+const textMutedStyle = computed(() =>
+  autoTextColor.value
+    ? { color: autoTextColor.value, opacity: '0.6' }
+    : { color: 'var(--text-secondary)' },
+);
+const borderColorStyle = computed(() => ({
+  borderColor: autoTextColor.value
+    ? `color-mix(in srgb, ${autoTextColor.value} 15%, transparent)`
+    : 'color-mix(in srgb, var(--text-primary) 12%, transparent)',
+}));
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 const openSet = ref<Set<number>>(new Set([0]));
@@ -38,32 +74,25 @@ function isOpen(index: number) {
 </script>
 
 <template>
-  <section class="px-8 py-12">
+  <section class="px-8 py-12" :style="sectionStyle">
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
         tag="h2"
         class="text-3xl font-bold mb-8"
-        :style="{ color: 'var(--text-primary)' }"
+        :style="textPrimaryStyle"
       >
         <h2
           class="text-3xl font-bold mb-8"
-          :style="{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }"
+          :style="{ ...textPrimaryStyle, fontFamily: 'var(--font-heading)' }"
         >
           {{ heading }}
         </h2>
       </EditorInlineTextField>
 
-      <div
-        class="divide-y"
-        :style="{ borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)' }"
-      >
-        <div
-          v-for="(item, index) in items"
-          :key="item.id ?? index"
-          :style="{ borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)' }"
-        >
+      <div class="divide-y" :style="borderColorStyle">
+        <div v-for="(item, index) in items" :key="item.id ?? index" :style="borderColorStyle">
           <component
             :is="inEditor ? 'div' : 'button'"
             class="w-full flex items-center justify-between py-4 text-left gap-4"
@@ -74,7 +103,7 @@ function isOpen(index: number) {
               :field-key="`items.${index}.question`"
               tag="span"
               class="font-semibold flex-1 text-base"
-              :style="{ color: 'var(--text-primary)' }"
+              :style="textPrimaryStyle"
             >
               {{ item.question }}
             </EditorInlineTextField>
@@ -82,7 +111,7 @@ function isOpen(index: number) {
               name="i-lucide-chevron-down"
               class="w-5 h-5 shrink-0 transition-transform duration-200"
               :class="{ 'rotate-180': isOpen(index) }"
-              :style="{ color: 'var(--text-secondary)' }"
+              :style="textMutedStyle"
             />
           </component>
 
@@ -99,7 +128,7 @@ function isOpen(index: number) {
                 :field-key="`items.${index}.answer`"
                 placeholder="Write your answer..."
                 class="rich-text"
-                :style="{ color: 'var(--text-secondary)' }"
+                :style="textMutedStyle"
                 html
               >
                 <!-- eslint-disable-next-line vue/no-v-html -->
