@@ -204,6 +204,7 @@ defineExpose({
   homePageId,
   refresh: fetchBlocks,
   contentBlocks,
+  dbContentBlocks,
   headerBlock: liveHeaderBlock,
   footerBlock: liveFooterBlock,
   reorder,

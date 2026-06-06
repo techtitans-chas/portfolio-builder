@@ -108,9 +108,10 @@ async function save() {
     if (pageId) {
       const { visibilityChanges, reorderedIds } = layers!.layersChanges;
 
-      // Build a blockId → pageId map so header/footer edits go to the right page URL
+      // Build a blockId → pageId map so header/footer edits go to the right page URL.
+      // Use dbContentBlocks (not contentBlocks) so deleted blocks are still in the map.
       const blockPageMap = new Map<string, string>();
-      for (const b of layers!.contentBlocks ?? []) {
+      for (const b of layers!.dbContentBlocks ?? []) {
         if (b.pageId) blockPageMap.set(b.id, b.pageId);
       }
       const headerBlock = layers!.headerBlock;

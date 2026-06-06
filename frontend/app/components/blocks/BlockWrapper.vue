@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { hexToRgba } from '~/composables/useBlockColors';
 defineOptions({ inheritAttrs: false });
 
 export interface BlockWrapperProps {
@@ -62,12 +63,12 @@ const overlayColor2Hex = computed(() =>
 const overlayStyle = computed(() => {
   if (!props.overlayEnabled) return null;
   const opacity = (props.overlayOpacity ?? 40) / 100;
-  const c1 = overlayColorHex.value ?? '#000000';
+  const c1 = hexToRgba(overlayColorHex.value ?? '#000000', opacity);
   const bg =
     props.overlayType === 'gradient'
-      ? `linear-gradient(${props.overlayDegree ?? 180}deg, ${c1}, ${overlayColor2Hex.value ?? '#000000'})`
+      ? `linear-gradient(${props.overlayDegree ?? 180}deg, ${c1}, ${hexToRgba(overlayColor2Hex.value ?? '#000000', opacity)})`
       : c1;
-  return { background: bg, opacity: String(opacity) };
+  return { background: bg };
 });
 
 const sectionEl = useTemplateRef<HTMLElement>('sectionEl');
