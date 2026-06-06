@@ -12,8 +12,22 @@ export const styleBackgroundImageSection: BlockSection = {
   label: 'Background image',
   fields: [
     { key: 'backgroundImage', label: 'Image', type: 'image' },
-    { key: 'backgroundOpacity', label: 'Image opacity', type: 'slider', min: 0, max: 100, step: 5, unit: '%', showIf: { key: 'backgroundImage', value: 'truthy' } },
-    { key: 'backgroundFixed', label: 'Fixed / parallax', type: 'switch', showIf: { key: 'backgroundImage', value: 'truthy' } },
+    {
+      key: 'backgroundOpacity',
+      label: 'Image opacity',
+      type: 'slider',
+      min: 0,
+      max: 100,
+      step: 5,
+      unit: '%',
+      showIf: { key: 'backgroundImage', value: 'truthy' },
+    },
+    {
+      key: 'backgroundFixed',
+      label: 'Fixed / parallax',
+      type: 'switch',
+      showIf: { key: 'backgroundImage', value: 'truthy' },
+    },
   ],
 };
 
@@ -31,7 +45,12 @@ export const styleOverlaySection: BlockSection = {
       ],
       showIf: { key: 'overlayEnabled', value: true },
     },
-    { key: 'overlayColor', label: 'Color', type: 'theme-color', showIf: { key: 'overlayEnabled', value: true } },
+    {
+      key: 'overlayColor',
+      label: 'Color',
+      type: 'theme-color',
+      showIf: { key: 'overlayEnabled', value: true },
+    },
     {
       key: 'overlayColor2',
       label: 'Gradient end color',

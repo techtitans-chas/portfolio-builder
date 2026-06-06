@@ -23,7 +23,9 @@ const props = withDefaults(defineProps<AccordionBlockProps>(), {
   ...styleDefaults,
 });
 
-const { autoTextColor, textPrimaryStyle, textMutedStyle } = useBlockBackground(() => props.background);
+const { autoTextColor, textPrimaryStyle, textMutedStyle } = useBlockBackground(
+  () => props.background,
+);
 
 const borderColorStyle = computed(() => ({
   borderColor: autoTextColor.value
@@ -51,7 +53,18 @@ function isOpen(index: number) {
 <template>
   <BlocksBlockWrapper
     class="px-8 py-12"
-    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
   >
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField

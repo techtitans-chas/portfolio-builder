@@ -33,7 +33,14 @@ const bgHex = computed(() => (props.background ? resolveColor(props.background) 
 const bgPrimary = computed(() => resolvePrimary(props.background));
 
 const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
-const { surfaceHex, surfaceHexOrDefault, surfaceStyle, surfaceTextStyle, surfaceTextMutedStyle, surfacePrimary } = useBlockSurface(() => props.surfaceColor);
+const {
+  surfaceHex,
+  surfaceHexOrDefault,
+  surfaceStyle,
+  surfaceTextStyle,
+  surfaceTextMutedStyle,
+  surfacePrimary,
+} = useBlockSurface(() => props.surfaceColor);
 
 const { data } = await useAsyncData(
   () => `portfolio-${slug}-posts-${props.collectionId || 'default'}`,
@@ -66,7 +73,18 @@ const posts = computed(() => {
   <BlocksBlockWrapper
     v-if="allPosts.length"
     class="py-16"
-    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
   >
     <div class="max-w-3xl mx-auto px-8">
       <EditorInlineTextField

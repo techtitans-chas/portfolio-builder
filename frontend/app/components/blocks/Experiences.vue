@@ -25,7 +25,14 @@ const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
 const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
-const { surfaceHex, surfaceHexOrDefault, surfaceStyle, surfaceTextStyle, surfaceTextMutedStyle, surfaceSecondary } = useBlockSurface(() => props.surfaceColor);
+const {
+  surfaceHex,
+  surfaceHexOrDefault,
+  surfaceStyle,
+  surfaceTextStyle,
+  surfaceTextMutedStyle,
+  surfaceSecondary,
+} = useBlockSurface(() => props.surfaceColor);
 
 const { data } = await useAsyncData(
   () => `portfolio-${slug}-experiences-${props.collectionId || 'default'}`,
@@ -49,7 +56,18 @@ const experiences = computed(() => {
   <BlocksBlockWrapper
     v-if="experiences.length"
     class="py-16"
-    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
   >
     <div class="px-8 max-w-3xl mx-auto">
       <EditorInlineTextField

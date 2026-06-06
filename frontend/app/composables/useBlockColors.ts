@@ -17,9 +17,7 @@ export function useBlockBackground(background: MaybeRefOrGetter<string | null | 
   );
 
   const textPrimaryStyle = computed(() =>
-    autoTextColor.value
-      ? { color: autoTextColor.value }
-      : { color: 'var(--text-primary)' },
+    autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
   );
 
   const textMutedStyle = computed(() =>
@@ -57,9 +55,7 @@ export function useBlockSurface(surfaceColor: MaybeRefOrGetter<string | null | u
   });
 
   const surfaceTextStyle = computed(() =>
-    surfaceTextColor.value
-      ? { color: surfaceTextColor.value }
-      : { color: 'var(--text-primary)' },
+    surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: 'var(--text-primary)' },
   );
 
   const surfaceTextMutedStyle = computed(() =>

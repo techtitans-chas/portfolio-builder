@@ -146,7 +146,10 @@ function checkCondition(cond: { key: string; value: unknown }): boolean {
   return val === cond.value;
 }
 
-function fieldVisible(f: { showIf?: { key: string; value: unknown }; showIfAll?: { key: string; value: unknown }[] }): boolean {
+function fieldVisible(f: {
+  showIf?: { key: string; value: unknown };
+  showIfAll?: { key: string; value: unknown }[];
+}): boolean {
   if (f.showIfAll) return f.showIfAll.every(checkCondition);
   if (f.showIf) return checkCondition(f.showIf);
   return true;
@@ -223,10 +226,7 @@ function setValue(key: string, value: unknown) {
           <template
             v-if="
               section.fields.filter(
-                f =>
-                  f.type !== 'inline-text' &&
-                  f.type !== 'inline-rich' &&
-                  fieldVisible(f),
+                f => f.type !== 'inline-text' && f.type !== 'inline-rich' && fieldVisible(f),
               ).length
             "
           >
@@ -238,10 +238,7 @@ function setValue(key: string, value: unknown) {
             </p>
             <div
               v-for="field in section.fields.filter(
-                f =>
-                  f.type !== 'inline-text' &&
-                  f.type !== 'inline-rich' &&
-                  fieldVisible(f),
+                f => f.type !== 'inline-text' && f.type !== 'inline-rich' && fieldVisible(f),
               )"
               :key="field.key"
               class="flex gap-1"
@@ -387,7 +384,8 @@ function setValue(key: string, value: unknown) {
                   @update:model-value="setValue(field.key, $event)"
                 />
                 <span class="text-xs text-muted w-10 text-right tabular-nums shrink-0">
-                  {{ (getValue(field.key) as number) ?? field.min ?? 0 }}{{ field.unit !== '' ? (field.unit ?? 'px') : '' }}
+                  {{ (getValue(field.key) as number) ?? field.min ?? 0
+                  }}{{ field.unit !== '' ? (field.unit ?? 'px') : '' }}
                 </span>
               </div>
               <USelect

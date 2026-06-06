@@ -30,7 +30,14 @@ const props = withDefaults(defineProps<TestimonialBlockProps>(), {
 const { resolvePrimary } = useActivePalette();
 
 const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
-const { surfaceHex, surfaceStyle, surfaceTextColor, surfaceTextStyle, surfaceTextMutedStyle, surfacePrimary } = useBlockSurface(() => props.surfaceColor);
+const {
+  surfaceHex,
+  surfaceStyle,
+  surfaceTextColor,
+  surfaceTextStyle,
+  surfaceTextMutedStyle,
+  surfacePrimary,
+} = useBlockSurface(() => props.surfaceColor);
 
 // Quote icon: derived from surface text color at low opacity so it's always visible
 const quoteIconStyle = computed(() =>
@@ -41,7 +48,6 @@ const quoteIconStyle = computed(() =>
 
 // Primary resolved against the block background (for pagination dots etc.)
 const bgPrimary = computed(() => resolvePrimary(props.background));
-
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
@@ -90,7 +96,18 @@ watch(
 <template>
   <BlocksBlockWrapper
     class="px-8 py-12"
-    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
   >
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField

@@ -36,8 +36,22 @@ export interface HeroBlockProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'full';
 }
 
-const B1_DEFAULTS: ButtonStyleValue = { variant: 'solid', radius: 'md', size: 'md', spacing: 4, uppercase: false, letterSpacing: 0 };
-const B2_DEFAULTS: ButtonStyleValue = { variant: 'outline', radius: 'md', size: 'md', spacing: 4, uppercase: false, letterSpacing: 0 };
+const B1_DEFAULTS: ButtonStyleValue = {
+  variant: 'solid',
+  radius: 'md',
+  size: 'md',
+  spacing: 4,
+  uppercase: false,
+  letterSpacing: 0,
+};
+const B2_DEFAULTS: ButtonStyleValue = {
+  variant: 'outline',
+  radius: 'md',
+  size: 'md',
+  spacing: 4,
+  uppercase: false,
+  letterSpacing: 0,
+};
 
 const props = withDefaults(defineProps<HeroBlockProps>(), {
   heading: '',
@@ -76,7 +90,9 @@ const props = withDefaults(defineProps<HeroBlockProps>(), {
 const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
 
 const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-const autoTextColor = computed(() => (props.background ? resolveTextColor(props.background) : null));
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
 const hasBackgroundImage = computed(() => !!props.backgroundImage);
 
 // Text colors always derived from background color; CSS vars as fallback.
@@ -166,7 +182,9 @@ const hasImage = computed(() => !!props.image);
 // When a side image is present, use flex-row. V alignment is handled by the section's justifyVClass.
 // H alignment on the text column only; the image is a sibling, not affected by text alignment.
 const contentLayout = computed(() => (hasImage.value ? 'flex-row gap-12' : 'flex-col'));
-const imageOrderClass = computed(() => (props.imagePosition === 'left' ? 'order-first' : 'order-last'));
+const imageOrderClass = computed(() =>
+  props.imagePosition === 'left' ? 'order-first' : 'order-last',
+);
 
 const textShadowStyle = computed(() =>
   props.textShadow ? { textShadow: `0 1px 4px ${textShadowColor.value}` } : {},
@@ -191,7 +209,9 @@ function btnSizeClass(size: ButtonStyleValue['size']): string {
 function btnTextStyle(style: ButtonStyleValue) {
   return {
     ...(style.uppercase ? { textTransform: 'uppercase' as const } : {}),
-    ...(style.letterSpacing > 0 ? { letterSpacing: `${(style.letterSpacing * 0.0625).toFixed(4)}em` } : {}),
+    ...(style.letterSpacing > 0
+      ? { letterSpacing: `${(style.letterSpacing * 0.0625).toFixed(4)}em` }
+      : {}),
   };
 }
 
@@ -217,7 +237,8 @@ function btnStyle(bStyle: ButtonStyleValue, color: string): Record<string, strin
     return { backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, color, ...text };
   }
   if (variant === 'outline') {
-    if (hasBackgroundImage.value) return { border: '1px solid rgba(255,255,255,0.6)', color: '#ffffff', ...text };
+    if (hasBackgroundImage.value)
+      return { border: '1px solid rgba(255,255,255,0.6)', color: '#ffffff', ...text };
     return { border: `1px solid ${color}`, color, backgroundColor: 'transparent', ...text };
   }
   if (variant === 'link') {
@@ -228,11 +249,13 @@ function btnStyle(bStyle: ButtonStyleValue, color: string): Record<string, strin
 
 const btn1Resolved = computed(() => ({ ...B1_DEFAULTS, ...props.button1Style }));
 const btn2Resolved = computed(() => ({ ...B2_DEFAULTS, ...props.button2Style }));
-const btn1Class = computed(() =>
-  `font-medium transition-opacity hover:opacity-90 ${btnRadiusClass(btn1Resolved.value.radius)} ${btnSizeClass(btn1Resolved.value.size)}`,
+const btn1Class = computed(
+  () =>
+    `font-medium transition-opacity hover:opacity-90 ${btnRadiusClass(btn1Resolved.value.radius)} ${btnSizeClass(btn1Resolved.value.size)}`,
 );
-const btn2Class = computed(() =>
-  `font-medium transition-opacity hover:opacity-90 ${btnRadiusClass(btn2Resolved.value.radius)} ${btnSizeClass(btn2Resolved.value.size)}`,
+const btn2Class = computed(
+  () =>
+    `font-medium transition-opacity hover:opacity-90 ${btnRadiusClass(btn2Resolved.value.radius)} ${btnSizeClass(btn2Resolved.value.size)}`,
 );
 const btn1StyleVal = computed(() => btnStyle(btn1Resolved.value, bgPrimary.value));
 const btn2StyleVal = computed(() => btnStyle(btn2Resolved.value, bgSecondary.value));
@@ -244,11 +267,7 @@ const subheadingIsEmpty = computed(() => {
 </script>
 
 <template>
-  <section
-    class="relative px-8 flex flex-col"
-    :class="justifyVClass"
-    :style="sectionStyle"
-  >
+  <section class="relative px-8 flex flex-col" :class="justifyVClass" :style="sectionStyle">
     <!-- Background image as absolute element so opacity is independent of content.
          When fixed/parallax is on, the image is applied via CSS background-image on the section instead. -->
     <img
@@ -275,11 +294,19 @@ const subheadingIsEmpty = computed(() => {
             field-key="heading"
             tag="h1"
             class="text-5xl font-bold leading-tight"
-            :style="{ color: headingColor, fontFamily: headingFont ?? undefined, ...textShadowStyle }"
+            :style="{
+              color: headingColor,
+              fontFamily: headingFont ?? undefined,
+              ...textShadowStyle,
+            }"
           >
             <h1
               class="text-5xl font-bold leading-tight"
-              :style="{ color: headingColor, fontFamily: headingFont ?? undefined, ...textShadowStyle }"
+              :style="{
+                color: headingColor,
+                fontFamily: headingFont ?? undefined,
+                ...textShadowStyle,
+              }"
             >
               {{ heading }}
             </h1>
@@ -293,7 +320,11 @@ const subheadingIsEmpty = computed(() => {
               class="text-lg mt-4 max-w-xl rich-text"
             >
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div v-if="!subheadingIsEmpty" class="text-lg mt-4 max-w-xl rich-text" v-html="sanitizeHtml(subheading ?? '')" />
+              <div
+                v-if="!subheadingIsEmpty"
+                class="text-lg mt-4 max-w-xl rich-text"
+                v-html="sanitizeHtml(subheading ?? '')"
+              />
             </EditorInlineRichField>
           </div>
 
