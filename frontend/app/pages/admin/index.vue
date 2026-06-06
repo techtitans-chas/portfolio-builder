@@ -128,13 +128,46 @@ async function save() {
       const homePageId = layers!.homePageId ?? pageId;
       const pageIdFor = (blockId: string) => blockPageMap.get(blockId) ?? homePageId;
 
+      // Post new blocks first so we get their real IDs, then use those IDs
+      // to send a final reorder that preserves the user's intended position.
+      const newBlocksOnPage = pendingNewBlocks.value.filter(b => b.pageId === pageId);
+      const createdBlocks: Array<{ pendingId: string; realId: string }> = await Promise.all(
+        newBlocksOnPage.map(async b => {
+          const content = { ...b.content, ...(pendingContentEdits.value[b.id] ?? {}) };
+          const res = await fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({ type: b.type, content }),
+          });
+          return { pendingId: b.id, realId: res.block.id as string };
+        }),
+      );
+
+      // Build a pending→real ID map for the reorder step
+      const pendingToReal = new Map(
+        createdBlocks.map(({ pendingId, realId }) => [pendingId, realId]),
+      );
+
+      // Determine the final block order. If the user explicitly arranged blocks (drag/duplicate),
+      // use that order (explicitOrder) and substitute real IDs for pending ones.
+      // Otherwise fall back to reorderedIds (existing blocks only) or skip reorder entirely.
+      const explicitOrder = layers!.explicitOrder;
+      let finalOrderIds: string[] | null = null;
+      if (explicitOrder) {
+        finalOrderIds = explicitOrder
+          .map(id => pendingToReal.get(id) ?? id)
+          .filter(id => !id.startsWith('pending-') && !pendingDeletions.value.has(id));
+      } else if (reorderedIds) {
+        finalOrderIds = reorderedIds.filter(id => !pendingDeletions.value.has(id));
+      }
+
       await Promise.all([
-        // Reorder
-        reorderedIds
+        // Reorder — uses merged real IDs so new blocks land in the right position
+        finalOrderIds
           ? fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks/reorder`, {
               method: 'PATCH',
               credentials: 'include',
-              body: JSON.stringify({ blockIds: reorderedIds }),
+              body: JSON.stringify({ blockIds: finalOrderIds }),
             })
           : Promise.resolve(),
         // Visibility toggles — skip blocks queued for deletion
@@ -150,17 +183,6 @@ async function save() {
               },
             ),
           ),
-        // New blocks — merge any sidebar edits made before saving into the content
-        ...pendingNewBlocks.value
-          .filter(b => b.pageId === pageId)
-          .map(b => {
-            const content = { ...b.content, ...(pendingContentEdits.value[b.id] ?? {}) };
-            return fetcher(`/api/portfolios/${portfolioId}/pages/${pageId}/blocks`, {
-              method: 'POST',
-              credentials: 'include',
-              body: JSON.stringify({ type: b.type, content }),
-            });
-          }),
         // Header slot order — read from component, not pendingContentEdits
         headerBlock && headerSlotOrder
           ? fetcher(
