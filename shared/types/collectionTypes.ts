@@ -47,11 +47,12 @@ export const collectionTypes: CollectionTypeDef[] = [
     fields: [
       { key: 'title', label: 'Title', type: 'text', required: true },
       { key: 'date', label: 'Date', type: 'text', placeholder: 'e.g. 2024-06-01' },
+      { key: 'author', label: 'Author', type: 'text' },
       { key: 'excerpt', label: 'Excerpt', type: 'textarea' },
       { key: 'coverImageUrl', label: 'Cover image', type: 'image' },
       { key: 'tags', label: 'Tags', type: 'tags' },
     ],
-    allowedBlocks: ['post-feed', 'post-list'],
+    allowedBlocks: ['post-cards', 'post-feed', 'post-list'],
     pageTemplate: 'PostDetail',
   },
   {

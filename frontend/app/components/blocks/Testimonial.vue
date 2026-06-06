@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
+import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
 
 export interface TestimonialItem {
   id?: string;
@@ -10,15 +12,11 @@ export interface TestimonialItem {
   avatar?: string | null;
 }
 
-export interface TestimonialBlockProps {
+export interface TestimonialBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
   showHeading?: boolean;
   autoplay?: boolean;
   items?: TestimonialItem[];
-  background?: string | null;
-  surfaceColor?: string | null;
-  backgroundImage?: string | null;
-  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<TestimonialBlockProps>(), {
@@ -26,55 +24,13 @@ const props = withDefaults(defineProps<TestimonialBlockProps>(), {
   showHeading: true,
   autoplay: false,
   items: () => [],
-  background: null,
-  surfaceColor: null,
-  backgroundImage: null,
-  backgroundFixed: false,
+  ...styleDefaults,
 });
 
-const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
+const { resolvePrimary } = useActivePalette();
 
-const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-const surfaceHex = computed(() => (props.surfaceColor ? resolveColor(props.surfaceColor) : null));
-
-const sectionStyle = computed(() => ({
-  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
-  ...(props.backgroundImage
-    ? {
-        backgroundImage: `url(${props.backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
-      }
-    : {}),
-}));
-
-// Auto text color based on block background — does NOT apply inside surface cards
-const autoTextColor = computed(() =>
-  props.background ? resolveTextColor(props.background) : null,
-);
-
-const textColorStyle = computed(() => (autoTextColor.value ? { color: autoTextColor.value } : {}));
-
-const surfaceStyle = computed(() =>
-  surfaceHex.value
-    ? { backgroundColor: surfaceHex.value }
-    : { backgroundColor: 'var(--bg-surface)' },
-);
-
-const surfaceTextColor = computed(() =>
-  props.surfaceColor ? resolveTextColor(props.surfaceColor) : null,
-);
-
-const surfaceTextStyle = computed(() =>
-  surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: 'var(--text-primary)' },
-);
-
-const surfaceTextMutedStyle = computed(() =>
-  surfaceTextColor.value
-    ? { color: surfaceTextColor.value, opacity: '0.6' }
-    : { color: 'var(--text-secondary)' },
-);
+const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
+const { surfaceHex, surfaceStyle, surfaceTextColor, surfaceTextStyle, surfaceTextMutedStyle, surfacePrimary } = useBlockSurface(() => props.surfaceColor);
 
 // Quote icon: derived from surface text color at low opacity so it's always visible
 const quoteIconStyle = computed(() =>
@@ -83,11 +39,9 @@ const quoteIconStyle = computed(() =>
     : { color: 'var(--primary)', opacity: '1' },
 );
 
-// Primary/secondary resolved against the block background (for pagination dots etc.)
+// Primary resolved against the block background (for pagination dots etc.)
 const bgPrimary = computed(() => resolvePrimary(props.background));
 
-// Primary resolved against the surface color (for avatar initials inside cards)
-const surfacePrimary = computed(() => resolvePrimary(props.surfaceColor));
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
@@ -134,7 +88,10 @@ watch(
 </script>
 
 <template>
-  <section class="px-8 py-12" :style="sectionStyle">
+  <BlocksBlockWrapper
+    class="px-8 py-12"
+    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+  >
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
@@ -312,5 +269,5 @@ watch(
         </div>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

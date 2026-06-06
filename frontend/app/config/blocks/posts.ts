@@ -1,4 +1,5 @@
 import type { Component } from 'vue';
+import BlocksPostCards from '~/components/blocks/PostCards.vue';
 import BlocksPostFeed from '~/components/blocks/PostFeed.vue';
 import BlocksPostList from '~/components/blocks/PostList.vue';
 import type { BlockDefinition } from './types';
@@ -20,6 +21,45 @@ const sharedFields = [
     placeholder: 'Leave empty to show all',
   },
 ];
+
+export const postCardsDefinition: BlockDefinition = {
+  type: 'post-cards',
+  label: 'Post cards',
+  icon: 'i-lucide-layout-grid',
+  component: BlocksPostCards as Component,
+  allowedCollections: ['posts'],
+  defaultContent: {
+    heading: 'Posts',
+    showHeading: true,
+    collectionId: '',
+    filterTag: '',
+    pageSize: 6,
+    ...styleDefaults,
+  },
+  tabs: [
+    {
+      label: 'Content',
+      icon: 'i-lucide-text',
+      sections: [
+        {
+          label: 'Settings',
+          fields: [
+            ...sharedFields,
+            {
+              key: 'pageSize',
+              label: 'Posts per page',
+              type: 'slider' as const,
+              min: 2,
+              max: 12,
+              step: 2,
+            },
+          ],
+        },
+      ],
+    },
+    styleTab,
+  ],
+};
 
 export const postFeedDefinition: BlockDefinition = {
   type: 'post-feed',

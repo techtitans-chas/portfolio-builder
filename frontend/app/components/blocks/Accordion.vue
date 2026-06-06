@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
+import type { BlockStyleProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
 
 export interface AccordionItem {
   id?: string;
@@ -8,51 +10,21 @@ export interface AccordionItem {
   answer: string;
 }
 
-export interface AccordionBlockProps {
+export interface AccordionBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   items?: AccordionItem[];
-  background?: string | null;
-  backgroundImage?: string | null;
-  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<AccordionBlockProps>(), {
   heading: 'FAQ',
   showHeading: true,
   items: () => [],
-  background: null,
-  backgroundImage: null,
-  backgroundFixed: false,
+  ...styleDefaults,
 });
 
-const { resolveColor, resolveTextColor } = useActivePalette();
+const { autoTextColor, textPrimaryStyle, textMutedStyle } = useBlockBackground(() => props.background);
 
-const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-
-const sectionStyle = computed(() => ({
-  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
-  ...(props.backgroundImage
-    ? {
-        backgroundImage: `url(${props.backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
-      }
-    : {}),
-}));
-
-const autoTextColor = computed(() =>
-  props.background ? resolveTextColor(props.background) : null,
-);
-const textPrimaryStyle = computed(() =>
-  autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
-);
-const textMutedStyle = computed(() =>
-  autoTextColor.value
-    ? { color: autoTextColor.value, opacity: '0.6' }
-    : { color: 'var(--text-secondary)' },
-);
 const borderColorStyle = computed(() => ({
   borderColor: autoTextColor.value
     ? `color-mix(in srgb, ${autoTextColor.value} 15%, transparent)`
@@ -77,7 +49,10 @@ function isOpen(index: number) {
 </script>
 
 <template>
-  <section class="px-8 py-12" :style="sectionStyle">
+  <BlocksBlockWrapper
+    class="px-8 py-12"
+    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+  >
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
@@ -142,5 +117,5 @@ function isOpen(index: number) {
         </div>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

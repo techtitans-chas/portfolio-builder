@@ -1,21 +1,18 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
+import type { BlockStyleProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
 
-export interface TextBlockProps {
+export interface TextBlockProps extends BlockStyleProps {
   content?: string;
   align?: 'left' | 'center' | 'right';
-  background?: string | null;
-  backgroundImage?: string | null;
-  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<TextBlockProps>(), {
   content: '',
   align: 'left',
-  background: null,
-  backgroundImage: null,
-  backgroundFixed: false,
+  ...styleDefaults,
 });
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
@@ -25,29 +22,15 @@ const isEmpty = computed(() => {
   return !t || t === '<p></p>';
 });
 
-const { resolveColor, resolveTextColor } = useActivePalette();
-
-const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-
-const sectionStyle = computed(() => ({
-  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
-  ...(props.backgroundImage
-    ? {
-        backgroundImage: `url(${props.backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
-      }
-    : {}),
-}));
-
-const autoTextColor = computed(() =>
-  props.background ? resolveTextColor(props.background) : null,
-);
+const { autoTextColor } = useBlockBackground(() => props.background);
 </script>
 
 <template>
-  <section v-if="inEditor || !isEmpty" class="px-8 py-12" :style="sectionStyle">
+  <BlocksBlockWrapper
+    v-if="inEditor || !isEmpty"
+    class="px-8 py-12"
+    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+  >
     <div
       class="max-w-3xl mx-auto rich-text"
       :class="{
@@ -62,5 +45,5 @@ const autoTextColor = computed(() =>
         <div v-if="content" v-html="sanitizeHtml(content)" />
       </EditorInlineRichField>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

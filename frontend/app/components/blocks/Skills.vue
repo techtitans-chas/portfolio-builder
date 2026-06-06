@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import type { BlockStyleProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
 
 export interface SkillItem {
   id?: string;
@@ -8,14 +10,11 @@ export interface SkillItem {
   category: string;
 }
 
-export interface SkillsBlockProps {
+export interface SkillsBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   columns?: '1' | '2';
   skills?: SkillItem[];
-  background?: string | null;
-  backgroundImage?: string | null;
-  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<SkillsBlockProps>(), {
@@ -23,41 +22,16 @@ const props = withDefaults(defineProps<SkillsBlockProps>(), {
   showHeading: true,
   columns: '2',
   skills: () => [],
-  background: null,
-  backgroundImage: null,
-  backgroundFixed: false,
+  ...styleDefaults,
 });
 
-const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
+const { resolveColor, resolvePrimary, resolveSecondary } = useActivePalette();
 
 const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-
-const sectionStyle = computed(() => ({
-  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
-  ...(props.backgroundImage
-    ? {
-        backgroundImage: `url(${props.backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
-      }
-    : {}),
-}));
-
-const autoTextColor = computed(() =>
-  props.background ? resolveTextColor(props.background) : null,
-);
-const textPrimaryStyle = computed(() =>
-  autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
-);
-const textMutedStyle = computed(() =>
-  autoTextColor.value
-    ? { color: autoTextColor.value, opacity: '0.6' }
-    : { color: 'var(--text-secondary)' },
-);
-
 const bgPrimary = computed(() => resolvePrimary(props.background));
 const bgSecondary = computed(() => resolveSecondary(props.background));
+
+const { textPrimaryStyle, textMutedStyle } = useBlockBackground(() => props.background);
 
 const trackStyle = computed(() => ({
   backgroundColor: `color-mix(in srgb, ${bgPrimary.value} 12%, ${bgHex.value ?? 'var(--bg-surface)'})`,
@@ -71,7 +45,6 @@ const barGradient = computed(
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
 // Group skills by category, preserving insertion order.
-// Each entry carries the original flat index so field-keys stay correct.
 const grouped = computed(() => {
   const map = new Map<string, { item: SkillItem; flatIndex: number }[]>();
   (props.skills ?? []).forEach((item, i) => {
@@ -100,11 +73,12 @@ const delayMap = computed(() => {
 });
 
 // Animation: bars start at 0 and grow when the section enters the viewport
-const sectionRef = ref<HTMLElement | null>(null);
+const wrapperRef = ref<{ el: HTMLElement | null } | null>(null);
 const animated = ref(inEditor);
 
 onMounted(() => {
-  if (animated.value || !sectionRef.value) return;
+  const el = wrapperRef.value?.el;
+  if (animated.value || !el) return;
   const observer = new IntersectionObserver(
     entries => {
       if (entries[0]?.isIntersecting) {
@@ -114,12 +88,16 @@ onMounted(() => {
     },
     { threshold: 0.1 },
   );
-  observer.observe(sectionRef.value);
+  observer.observe(el);
 });
 </script>
 
 <template>
-  <section ref="sectionRef" class="px-8 py-12" :style="sectionStyle">
+  <BlocksBlockWrapper
+    ref="wrapperRef"
+    class="px-8 py-12"
+    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
+  >
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
@@ -187,5 +165,5 @@ onMounted(() => {
         </div>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

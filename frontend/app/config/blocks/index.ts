@@ -4,7 +4,7 @@ import { heroDefinition } from './hero';
 import { textDefinition } from './text';
 import { projectsDefinition, projectListDefinition } from './projects';
 import { experiencesDefinition } from './experiences';
-import { postFeedDefinition, postListDefinition } from './posts';
+import { postCardsDefinition, postFeedDefinition, postListDefinition } from './posts';
 import { demoDefinition } from './demo';
 import { accordionDefinition } from './accordion';
 import { testimonialDefinition } from './testimonial';
@@ -19,6 +19,7 @@ export {
   projectsDefinition,
   projectListDefinition,
   experiencesDefinition,
+  postCardsDefinition,
   postFeedDefinition,
   postListDefinition,
   demoDefinition,
@@ -33,6 +34,7 @@ export const blockDefinitions = [
   textDefinition,
   projectsDefinition,
   projectListDefinition,
+  postCardsDefinition,
   postFeedDefinition,
   postListDefinition,
   experiencesDefinition,
@@ -50,6 +52,7 @@ export const allBlockDefinitions = [
   textDefinition,
   projectsDefinition,
   projectListDefinition,
+  postCardsDefinition,
   postFeedDefinition,
   postListDefinition,
   experiencesDefinition,

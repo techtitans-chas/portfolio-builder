@@ -3,37 +3,78 @@ import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
-import { styleDefaults } from '~/config/blocks/presets';
 
-export interface PostFeedBlockProps extends BlockStyleWithSurfaceProps {
+export interface PostCardsBlockProps {
   heading?: string;
   showHeading?: boolean;
   collectionId?: string;
   filterTag?: string;
   pageSize?: number;
+  background?: string | null;
+  surfaceColor?: string | null;
+  backgroundImage?: string | null;
+  backgroundFixed?: boolean;
 }
 
-const props = withDefaults(defineProps<PostFeedBlockProps>(), {
+const props = withDefaults(defineProps<PostCardsBlockProps>(), {
   heading: 'Posts',
   showHeading: true,
   collectionId: '',
   filterTag: '',
   pageSize: 6,
-  ...styleDefaults,
+  background: null,
+  surfaceColor: null,
+  backgroundImage: null,
+  backgroundFixed: false,
 });
 
 const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
-const { resolveColor, resolvePrimary } = useActivePalette();
+const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
 
 const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-const bgPrimary = computed(() => resolvePrimary(props.background));
+const surfaceHex = computed(() => (props.surfaceColor ? resolveColor(props.surfaceColor) : null));
 
-const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
-const { surfaceHex, surfaceHexOrDefault, surfaceStyle, surfaceTextStyle, surfaceTextMutedStyle, surfacePrimary } = useBlockSurface(() => props.surfaceColor);
+const sectionStyle = computed(() => ({
+  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
+  ...(props.backgroundImage
+    ? {
+        backgroundImage: `url(${props.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
+      }
+    : {}),
+}));
+
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
+const textColorStyle = computed(() => (autoTextColor.value ? { color: autoTextColor.value } : {}));
+
+const surfaceStyle = computed(() =>
+  surfaceHex.value
+    ? { backgroundColor: surfaceHex.value }
+    : { backgroundColor: 'var(--bg-surface)' },
+);
+
+const surfaceTextColor = computed(() =>
+  props.surfaceColor ? resolveTextColor(props.surfaceColor) : null,
+);
+const surfaceTextStyle = computed(() =>
+  surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: 'var(--text-primary)' },
+);
+const surfaceTextMutedStyle = computed(() =>
+  surfaceTextColor.value
+    ? { color: surfaceTextColor.value, opacity: '0.6' }
+    : { color: 'var(--text-secondary)' },
+);
+
+const surfacePrimary = computed(() => resolvePrimary(props.surfaceColor));
+const bgPrimary = computed(() => resolvePrimary(props.background));
+const surfaceHexOrDefault = computed(() => surfaceHex.value ?? 'var(--bg-surface)');
 
 const { data } = await useAsyncData(
   () => `portfolio-${slug}-posts-${props.collectionId || 'default'}`,
@@ -63,11 +104,7 @@ const posts = computed(() => {
 </script>
 
 <template>
-  <BlocksBlockWrapper
-    v-if="allPosts.length"
-    class="py-16"
-    v-bind="{ background, backgroundImage, backgroundOpacity, backgroundFixed, overlayEnabled, overlayType, overlayColor, overlayColor2, overlayDegree, overlayOpacity }"
-  >
+  <section v-if="allPosts.length" class="py-16" :style="sectionStyle">
     <div class="max-w-3xl mx-auto px-8">
       <EditorInlineTextField
         v-if="showHeading"
@@ -87,19 +124,19 @@ const posts = computed(() => {
         </h2>
       </EditorInlineTextField>
 
-      <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <component
           :is="hasDetailPage ? 'a' : 'div'"
           v-for="post in posts"
           :key="post.id"
-          class="rounded-xl overflow-hidden flex flex-row transition-opacity hover:opacity-80"
+          class="rounded-xl overflow-hidden flex flex-col transition-opacity hover:opacity-80"
           :class="{ 'cursor-pointer': hasDetailPage }"
           :href="hasDetailPage ? `/p/${slug}/posts/${post.id}` : undefined"
           :style="surfaceStyle"
         >
-          <!-- Cover image (left side) -->
+          <!-- Cover image -->
           <div
-            class="relative w-40 sm:w-52 shrink-0 overflow-hidden"
+            class="h-44 w-full overflow-hidden shrink-0"
             :style="{
               backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHexOrDefault})`,
             }"
@@ -108,75 +145,50 @@ const posts = computed(() => {
               v-if="post.data.coverImageUrl"
               :src="post.data.coverImageUrl as string"
               :alt="post.data.title as string"
-              class="w-full h-full object-cover absolute inset-0"
+              class="w-full h-full object-cover"
             />
-            <!-- Category badge -->
-            <span
-              v-if="visibleTags((post.data.tags as string[]) ?? []).length"
-              class="absolute top-3 left-3 text-xs px-2.5 py-1 rounded-md font-medium"
-              :style="{
-                backgroundColor: surfacePrimary,
-                color: surfaceHexOrDefault,
-              }"
-            >
-              {{ visibleTags((post.data.tags as string[]) ?? [])[0] }}
-            </span>
           </div>
 
-          <!-- Content (right side) -->
-          <div class="p-5 flex flex-col gap-2 flex-1 min-w-0">
-            <!-- Meta row -->
-            <div
-              class="flex justify-between items-center gap-3 text-xs"
-              :style="surfaceTextMutedStyle"
-            >
-              <span v-if="post.data.date">{{ post.data.date }}</span>
+          <!-- Content -->
+          <div class="p-5 flex flex-col gap-2 flex-1">
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="font-semibold text-base leading-snug" :style="surfaceTextStyle">
+                {{ post.data.title }}
+              </h3>
+              <span
+                v-if="post.data.date"
+                class="text-xs shrink-0 pt-0.5"
+                :style="surfaceTextMutedStyle"
+              >
+                {{ post.data.date }}
+              </span>
             </div>
-
-            <!-- Title -->
-            <h3 class="font-bold text-base leading-snug" :style="surfaceTextStyle">
-              {{ post.data.title }}
-            </h3>
-
-            <!-- Excerpt -->
-            <p v-if="post.data.excerpt" class="text-sm line-clamp-2" :style="surfaceTextMutedStyle">
+            <p v-if="post.data.excerpt" class="text-sm line-clamp-3" :style="surfaceTextMutedStyle">
               {{ post.data.excerpt }}
             </p>
-
-            <!-- Tags + author row -->
-            <div class="flex items-center justify-between gap-2 mt-auto pt-2">
-              <div
-                v-if="visibleTags((post.data.tags as string[]) ?? []).length > 1"
-                class="flex flex-wrap gap-x-1.5 gap-y-1"
+            <div
+              v-if="visibleTags((post.data.tags as string[]) ?? []).length"
+              class="flex flex-wrap gap-1 mt-auto pt-2"
+            >
+              <span
+                v-for="tag in visibleTags((post.data.tags as string[]) ?? [])"
+                :key="tag"
+                class="text-xs px-2 py-0.5 rounded-full"
                 :style="{
+                  backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHexOrDefault})`,
                   color: surfacePrimary,
                 }"
               >
-                <span
-                  v-for="tag in visibleTags((post.data.tags as string[]) ?? []).slice(1)"
-                  :key="tag"
-                  class="text-xs px-2 py-0.5 rounded-full"
-                  :style="{
-                    backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHexOrDefault})`,
-                    color: surfacePrimary,
-                  }"
-                >
-                  {{ tag }}
-                </span>
-              </div>
-              <span
-                v-if="post.data.author"
-                class="text-xs shrink-0 flex items-center gap-1.5"
-                :style="surfaceTextMutedStyle"
-              >
-                <span
-                  class="w-1.5 h-1.5 rounded-full inline-block"
-                  :style="{ backgroundColor: surfacePrimary }"
-                />
-                {{ post.data.author }}
+                {{ tag }}
               </span>
-              <div v-else class="flex-1" />
             </div>
+            <span
+              v-if="hasDetailPage"
+              class="text-xs font-medium mt-auto pt-1"
+              :style="{ color: surfacePrimary }"
+            >
+              Read more →
+            </span>
           </div>
         </component>
       </div>
@@ -198,5 +210,5 @@ const posts = computed(() => {
         </button>
       </div>
     </div>
-  </BlocksBlockWrapper>
+  </section>
 </template>
