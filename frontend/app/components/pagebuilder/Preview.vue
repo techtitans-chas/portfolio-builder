@@ -205,7 +205,7 @@ function onBlockDropped(event: { newIndex?: number }) {
         :prevent-on-filter="false"
         ghost-class="preview-drop-ghost"
         fallback-class="preview-drag-fallback"
-        class="min-h-64"
+        class="min-h-64 flex flex-col gap-2 py-2"
         @end="onReorder"
         @add="onBlockDropped"
       >
@@ -213,7 +213,7 @@ function onBlockDropped(event: { newIndex?: number }) {
           v-for="block in localBlocks"
           :key="block.id"
           :ref="(el: unknown) => setBlockRef(block.id, el)"
-          class="group/block relative after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:outline-offset-[-2px]"
+          class="group/block relative min-h-16 after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:-outline-offset-2"
           :class="isSelected(block) ? 'block-selected' : 'block-hoverable'"
           @dragstart="onBlockDragStart($event, block)"
           @click="selectBlock(block)"

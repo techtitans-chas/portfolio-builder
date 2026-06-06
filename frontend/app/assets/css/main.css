@@ -11,11 +11,15 @@
 }
 
 /* Block drag-into-preview: full-width placeholder shown in the drop target */
+/* Suppress the ::after outline inherited from block-selected/block-hoverable — ghost has its own dashed border */
+.preview-drop-ghost::after {
+  outline: none !important;
+}
 .preview-drop-ghost {
   width: 100% !important;
   height: 4rem !important;
   background: color-mix(in srgb, var(--ui-primary) 15%, transparent) !important;
-  border: 2px dashed var(--ui-primary) !important;
+  border: 3px dashed var(--ui-primary) !important;
   border-radius: 0.5rem !important;
   opacity: 1 !important;
   overflow: hidden !important;
