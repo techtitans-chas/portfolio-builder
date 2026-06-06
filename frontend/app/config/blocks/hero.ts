@@ -10,6 +10,7 @@ export const heroDefinition: BlockDefinition = {
   component: BlocksHero as Component,
   defaultContent: {
     heading: 'Your name',
+    showSubheading: true,
     subheading: '<p>Your tagline</p>',
     alignH: 'center',
     alignV: 'center',
@@ -57,11 +58,13 @@ export const heroDefinition: BlockDefinition = {
           label: 'Text',
           fields: [
             { key: 'heading', label: 'Heading', type: 'inline-text', placeholder: 'Your name' },
+            { key: 'showSubheading', label: 'Show tagline', type: 'switch' },
             {
               key: 'subheading',
               label: 'Subheading',
               type: 'inline-rich',
               placeholder: 'Your tagline',
+              showIf: { key: 'showSubheading', value: true },
             },
             { key: 'headingFont', label: 'Heading font', type: 'font' },
           ],
@@ -194,6 +197,8 @@ export const heroDefinition: BlockDefinition = {
               options: [
                 { label: 'Left', value: 'left' },
                 { label: 'Right', value: 'right' },
+                { label: 'Above', value: 'above' },
+                { label: 'Below', value: 'below' },
               ],
               showIf: { key: 'image', value: 'truthy' },
             },

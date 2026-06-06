@@ -5,6 +5,7 @@ import { hexToRgba } from '~/composables/useBlockColors';
 
 export interface HeroBlockProps {
   heading?: string;
+  showSubheading?: boolean;
   subheading?: string;
   alignH?: 'left' | 'center' | 'right';
   alignV?: 'top' | 'center' | 'bottom';
@@ -17,7 +18,7 @@ export interface HeroBlockProps {
   button2Url?: string;
   button2Style?: ButtonStyleValue | null;
   image?: string | null;
-  imagePosition?: 'left' | 'right';
+  imagePosition?: 'left' | 'right' | 'above' | 'below';
   imageSize?: 'sm' | 'md' | 'lg' | 'xl';
   imageRadius?: number;
   imageAspect?: 'auto' | 'square' | 'portrait' | 'video';
@@ -59,6 +60,7 @@ const B2_DEFAULTS: ButtonStyleValue = {
 
 const props = withDefaults(defineProps<HeroBlockProps>(), {
   heading: '',
+  showSubheading: true,
   subheading: '',
   alignH: 'center',
   alignV: 'center',
@@ -186,15 +188,24 @@ const justifyVClass = computed(() => {
 });
 
 const hasImage = computed(() => !!props.image);
-// When a side image is present, use flex-row. V alignment is handled by the section's justifyVClass.
-// H alignment on the text column only; the image is a sibling, not affected by text alignment.
-const contentLayout = computed(() => (hasImage.value ? 'flex-row gap-12' : 'flex-col'));
-const imageOrderClass = computed(() =>
-  props.imagePosition === 'left' ? 'order-first' : 'order-last',
+const isVerticalImage = computed(
+  () => props.imagePosition === 'above' || props.imagePosition === 'below',
 );
+const contentLayout = computed(() => {
+  if (!hasImage.value) return 'flex-col';
+  return isVerticalImage.value ? 'flex-col' : 'flex-row gap-12';
+});
+const imageOrderClass = computed(() => {
+  if (props.imagePosition === 'left' || props.imagePosition === 'above') return 'order-first';
+  return 'order-last';
+});
 
 const imageSizeClass = computed(() => {
-  const map = { sm: 'sm:max-w-xs', md: 'sm:max-w-sm', lg: 'sm:max-w-md', xl: 'sm:max-w-lg' };
+  if (isVerticalImage.value) {
+    const map = { sm: 'max-w-xs', md: 'max-w-sm', lg: 'max-w-lg', xl: 'max-w-2xl' };
+    return map[props.imageSize ?? 'md'];
+  }
+  const map = { sm: 'sm:max-w-[200px]', md: 'sm:max-w-xs', lg: 'sm:max-w-sm', xl: 'sm:max-w-md' };
   return map[props.imageSize ?? 'md'];
 });
 
@@ -337,7 +348,7 @@ const subheadingIsEmpty = computed(() => {
           </EditorInlineTextField>
 
           <!-- Wrapper div carries the color so it's inherited by the tiptap editor (inheritAttrs: false) -->
-          <div :style="{ color: subheadingColor, ...textShadowStyle }">
+          <div v-if="showSubheading" :style="{ color: subheadingColor, ...textShadowStyle }">
             <EditorInlineRichField
               field-key="subheading"
               placeholder="Your tagline"
@@ -370,11 +381,14 @@ const subheadingIsEmpty = computed(() => {
           </div>
         </div>
 
-        <!-- Side image -->
+        <!-- Side image / above / below image -->
         <div
           v-if="image"
-          class="shrink-0 w-full sm:w-auto"
-          :class="[imageOrderClass, imageSizeClass]"
+          :class="[
+            imageOrderClass,
+            imageSizeClass,
+            isVerticalImage ? 'w-full mx-auto' : 'shrink-0 w-full sm:w-auto',
+          ]"
         >
           <img
             :src="image"

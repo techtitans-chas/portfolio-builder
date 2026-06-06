@@ -108,7 +108,7 @@ const posts = computed(() => {
 </script>
 
 <template>
-  <section v-if="allPosts.length" class="py-16" :style="sectionStyle">
+  <section v-if="allPosts.length" class="px-8 py-16" :style="sectionStyle">
     <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"

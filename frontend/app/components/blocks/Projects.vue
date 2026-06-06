@@ -64,7 +64,7 @@ const isLinked = computed(() => hasDetailPage && props.linkToPage);
 <template>
   <BlocksBlockWrapper
     v-if="projects.length"
-    class="py-16"
+    class="px-8 py-16"
     v-bind="{
       background,
       backgroundImage,
