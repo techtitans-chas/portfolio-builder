@@ -3,17 +3,16 @@ import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
+import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
 
-export interface ProjectListBlockProps {
+export interface ProjectListBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
   showHeading?: boolean;
   filterTag?: string;
   linkToPage?: boolean;
   collectionId?: string;
-  background?: string | null;
-  surfaceColor?: string | null;
-  backgroundImage?: string | null;
-  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<ProjectListBlockProps>(), {
@@ -22,38 +21,24 @@ const props = withDefaults(defineProps<ProjectListBlockProps>(), {
   filterTag: '',
   linkToPage: true,
   collectionId: '',
-  background: null,
-  surfaceColor: null,
-  backgroundImage: null,
-  backgroundFixed: false,
+  ...styleDefaults,
 });
 
 const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+
 const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
-
-const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-const surfaceHex = computed(() => (props.surfaceColor ? resolveColor(props.surfaceColor) : null));
-
-const sectionStyle = computed(() => ({
-  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
-  ...(props.backgroundImage
-    ? {
-        backgroundImage: `url(${props.backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
-      }
-    : {}),
-}));
 
 const autoTextColor = computed(() =>
   props.background ? resolveTextColor(props.background) : null,
 );
 const textColorStyle = computed(() => (autoTextColor.value ? { color: autoTextColor.value } : {}));
 
+const surfaceHex = computed(() => (props.surfaceColor ? resolveColor(props.surfaceColor) : null));
 const surfaceTextColor = computed(() =>
   props.surfaceColor ? resolveTextColor(props.surfaceColor) : null,
 );
@@ -95,8 +80,23 @@ const isLinked = computed(() => hasDetailPage && props.linkToPage);
 </script>
 
 <template>
-  <section v-if="projects.length" class="py-16" :style="sectionStyle">
-    <div class="max-w-3xl mx-auto px-8">
+  <BlocksBlockWrapper
+    v-if="projects.length"
+    class="px-8 py-16"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
+  >
+    <div class="mx-auto" :class="maxWidthClass">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
@@ -180,5 +180,5 @@ const isLinked = computed(() => hasDetailPage && props.linkToPage);
         </component>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

@@ -4,6 +4,7 @@ import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
 import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface ExperiencesBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
@@ -24,9 +25,11 @@ const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+
 const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
 const {
-  surfaceHex,
   surfaceHexOrDefault,
   surfaceStyle,
   surfaceTextStyle,
@@ -69,7 +72,7 @@ const experiences = computed(() => {
       overlayOpacity,
     }"
   >
-    <div class="px-8 max-w-3xl mx-auto">
+    <div class="px-8 mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"

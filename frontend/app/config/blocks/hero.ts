@@ -37,6 +37,9 @@ export const heroDefinition: BlockDefinition = {
     },
     image: null,
     imagePosition: 'right',
+    imageSize: 'md',
+    imageRadius: 12,
+    imageAspect: 'auto',
     headingFont: null,
     textShadow: false,
     fullHeight: false,
@@ -61,22 +64,6 @@ export const heroDefinition: BlockDefinition = {
               placeholder: 'Your tagline',
             },
             { key: 'headingFont', label: 'Heading font', type: 'font' },
-          ],
-        },
-        {
-          label: 'Image',
-          fields: [
-            { key: 'image', label: 'Side image', type: 'image' },
-            {
-              key: 'imagePosition',
-              label: 'Image position',
-              type: 'select',
-              options: [
-                { label: 'Left', value: 'left' },
-                { label: 'Right', value: 'right' },
-              ],
-              showIf: { key: 'image', value: 'truthy' },
-            },
           ],
         },
         {
@@ -189,6 +176,61 @@ export const heroDefinition: BlockDefinition = {
               step: 8,
             },
             { key: 'textShadow', label: 'Text shadow', type: 'switch' },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Side image',
+      icon: 'i-lucide-image',
+      sections: [
+        {
+          fields: [
+            { key: 'image', label: 'Image', type: 'image' },
+            {
+              key: 'imagePosition',
+              label: 'Position',
+              type: 'select',
+              options: [
+                { label: 'Left', value: 'left' },
+                { label: 'Right', value: 'right' },
+              ],
+              showIf: { key: 'image', value: 'truthy' },
+            },
+            {
+              key: 'imageSize',
+              label: 'Size',
+              type: 'select',
+              options: [
+                { label: 'Small', value: 'sm' },
+                { label: 'Medium', value: 'md' },
+                { label: 'Large', value: 'lg' },
+                { label: 'Extra large', value: 'xl' },
+              ],
+              showIf: { key: 'image', value: 'truthy' },
+            },
+            {
+              key: 'imageAspect',
+              label: 'Aspect ratio',
+              type: 'select',
+              options: [
+                { label: 'Auto', value: 'auto' },
+                { label: 'Square (1:1)', value: 'square' },
+                { label: 'Portrait (3:4)', value: 'portrait' },
+                { label: 'Video (16:9)', value: 'video' },
+              ],
+              showIf: { key: 'image', value: 'truthy' },
+            },
+            {
+              key: 'imageRadius',
+              label: 'Corner radius',
+              type: 'slider',
+              min: 0,
+              max: 200,
+              step: 1,
+              unit: 'px',
+              showIf: { key: 'image', value: 'truthy' },
+            },
           ],
         },
       ],

@@ -3,6 +3,7 @@ import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
 import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface TextBlockProps extends BlockStyleProps {
   content?: string;
@@ -23,6 +24,9 @@ const isEmpty = computed(() => {
 });
 
 const { autoTextColor } = useBlockBackground(() => props.background);
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 </script>
 
 <template>
@@ -43,12 +47,15 @@ const { autoTextColor } = useBlockBackground(() => props.background);
     }"
   >
     <div
-      class="max-w-3xl mx-auto rich-text"
-      :class="{
-        'text-left': align === 'left',
-        'text-center': align === 'center',
-        'text-right': align === 'right',
-      }"
+      class="mx-auto rich-text"
+      :class="[
+        maxWidthClass,
+        {
+          'text-left': align === 'left',
+          'text-center': align === 'center',
+          'text-right': align === 'right',
+        },
+      ]"
       :style="autoTextColor ? { color: autoTextColor } : {}"
     >
       <EditorInlineRichField field-key="content" placeholder="Start typing..." html class="w-full">

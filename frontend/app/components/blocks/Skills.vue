@@ -2,6 +2,7 @@
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface SkillItem {
   id?: string;
@@ -24,6 +25,9 @@ const props = withDefaults(defineProps<SkillsBlockProps>(), {
   skills: () => [],
   ...styleDefaults,
 });
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 
 const { resolveColor, resolvePrimary, resolveSecondary } = useActivePalette();
 
@@ -109,7 +113,7 @@ onMounted(() => {
       overlayOpacity,
     }"
   >
-    <div class="max-w-3xl mx-auto">
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"

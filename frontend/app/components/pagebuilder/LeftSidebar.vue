@@ -2,6 +2,7 @@
 import type { TabsItem } from '@nuxt/ui';
 import { useActivePalette } from '~/composables/useActivePalette';
 import { useActivePage } from '~/composables/useActivePage';
+import { useLayoutSettings, type MaxContentWidth } from '~/composables/useLayoutSettings';
 
 interface FontSettings {
   heading: string;
@@ -14,6 +15,7 @@ interface ThemeSettings {
   fonts?: FontSettings | null;
   logoLight?: string | null;
   logoDark?: string | null;
+  maxContentWidth?: MaxContentWidth | null;
 }
 
 const props = defineProps<{
@@ -31,6 +33,9 @@ const selectedThemeId = ref<string | null>(props.initialThemeSettings?.themeId ?
 const selectedFonts = ref<FontSettings>(
   props.initialThemeSettings?.fonts ?? { heading: 'Inter', body: 'Inter' },
 );
+const selectedMaxContentWidth = ref<MaxContentWidth>(
+  props.initialThemeSettings?.maxContentWidth ?? 'sm',
+);
 
 const themeSettings = computed(() => ({
   themeId: selectedThemeId.value,
@@ -38,6 +43,7 @@ const themeSettings = computed(() => ({
   fonts: selectedFonts.value,
   logoLight: props.initialThemeSettings?.logoLight ?? null,
   logoDark: props.initialThemeSettings?.logoDark ?? null,
+  maxContentWidth: selectedMaxContentWidth.value,
 }));
 
 watch(
@@ -47,6 +53,7 @@ watch(
     selectedThemeId.value = settings.themeId ?? null;
     currentThemeMode.value = settings.mode ?? 'light';
     selectedFonts.value = settings.fonts ?? { heading: 'Inter', body: 'Inter' };
+    selectedMaxContentWidth.value = settings.maxContentWidth ?? 'sm';
   },
 );
 
@@ -55,7 +62,8 @@ const isThemeDirty = computed(
     selectedThemeId.value !== (props.initialThemeSettings?.themeId ?? null) ||
     currentThemeMode.value !== (props.initialThemeSettings?.mode ?? 'light') ||
     selectedFonts.value.heading !== (props.initialThemeSettings?.fonts?.heading ?? 'Inter') ||
-    selectedFonts.value.body !== (props.initialThemeSettings?.fonts?.body ?? 'Inter'),
+    selectedFonts.value.body !== (props.initialThemeSettings?.fonts?.body ?? 'Inter') ||
+    selectedMaxContentWidth.value !== (props.initialThemeSettings?.maxContentWidth ?? 'sm'),
 );
 
 const { activePageId } = useActivePage();
@@ -73,6 +81,16 @@ watch(
   currentThemeMode,
   mode => {
     activeThemeMode.value = mode;
+  },
+  { immediate: true },
+);
+
+// Keep shared layout state in sync so blocks can read maxContentWidth
+const { maxContentWidth: activeMaxContentWidth } = useLayoutSettings();
+watch(
+  selectedMaxContentWidth,
+  w => {
+    activeMaxContentWidth.value = w;
   },
   { immediate: true },
 );
@@ -114,6 +132,7 @@ defineExpose({ themeSettings, isThemeDirty, layersView });
           v-model:selected="selectedThemeId"
           v-model:fonts="selectedFonts"
           v-model:mode="currentThemeMode"
+          v-model:max-content-width="selectedMaxContentWidth"
         />
       </div>
     </div>

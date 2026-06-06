@@ -5,6 +5,7 @@ import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
 import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface ProjectsBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
@@ -27,9 +28,11 @@ const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
-const { resolveColor, resolvePrimary, resolveSecondary } = useActivePalette();
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 
-const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+const { resolvePrimary, resolveSecondary } = useActivePalette();
+
 const bgPrimary = computed(() => resolvePrimary(props.background));
 const bgSecondary = computed(() => resolveSecondary(props.background));
 
@@ -75,7 +78,7 @@ const isLinked = computed(() => hasDetailPage && props.linkToPage);
       overlayOpacity,
     }"
   >
-    <div class="max-w-3xl mx-auto px-8">
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"

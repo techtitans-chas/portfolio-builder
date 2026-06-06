@@ -3,6 +3,7 @@ import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
 import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface AccordionItem {
   id?: string;
@@ -22,6 +23,9 @@ const props = withDefaults(defineProps<AccordionBlockProps>(), {
   items: () => [],
   ...styleDefaults,
 });
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 
 const { autoTextColor, textPrimaryStyle, textMutedStyle } = useBlockBackground(
   () => props.background,
@@ -66,7 +70,7 @@ function isOpen(index: number) {
       overlayOpacity,
     }"
   >
-    <div class="max-w-3xl mx-auto">
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"

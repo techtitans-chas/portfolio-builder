@@ -2,16 +2,15 @@
 import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
+import type { BlockStyleProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
 
-export interface PostListBlockProps {
+export interface PostListBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   collectionId?: string;
   filterTag?: string;
-  background?: string | null;
-  surfaceColor?: string | null;
-  backgroundImage?: string | null;
-  backgroundFixed?: boolean;
 }
 
 const props = withDefaults(defineProps<PostListBlockProps>(), {
@@ -19,31 +18,17 @@ const props = withDefaults(defineProps<PostListBlockProps>(), {
   showHeading: true,
   collectionId: '',
   filterTag: '',
-  background: null,
-  surfaceColor: null,
-  backgroundImage: null,
-  backgroundFixed: false,
+  ...styleDefaults,
 });
 
 const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
 
-const { resolveColor, resolveTextColor } = useActivePalette();
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 
-const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
-
-const sectionStyle = computed(() => ({
-  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
-  ...(props.backgroundImage
-    ? {
-        backgroundImage: `url(${props.backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: props.backgroundFixed ? 'fixed' : 'scroll',
-      }
-    : {}),
-}));
+const { resolveTextColor } = useActivePalette();
 
 const autoTextColor = computed(() =>
   props.background ? resolveTextColor(props.background) : null,
@@ -80,8 +65,23 @@ const posts = computed(() => {
 </script>
 
 <template>
-  <section v-if="posts.length" class="py-16" :style="sectionStyle">
-    <div class="max-w-3xl mx-auto px-8">
+  <BlocksBlockWrapper
+    v-if="posts.length"
+    class="px-8 py-16"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
+  >
+    <div class="mx-auto" :class="maxWidthClass">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
@@ -121,5 +121,5 @@ const posts = computed(() => {
         </component>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

@@ -34,9 +34,7 @@
 .rich-text h1,
 .rich-text h2,
 .rich-text h3,
-.rich-text h4,
-.rich-text h5,
-.rich-text h6 {
+.rich-text h4 {
   font-family: var(--font-heading);
 }
 .rich-text h1 {

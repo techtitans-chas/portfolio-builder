@@ -18,6 +18,9 @@ export interface HeroBlockProps {
   button2Style?: ButtonStyleValue | null;
   image?: string | null;
   imagePosition?: 'left' | 'right';
+  imageSize?: 'sm' | 'md' | 'lg' | 'xl';
+  imageRadius?: number;
+  imageAspect?: 'auto' | 'square' | 'portrait' | 'video';
   headingFont?: string | null;
   background?: string | null;
   surfaceColor?: string | null;
@@ -69,6 +72,9 @@ const props = withDefaults(defineProps<HeroBlockProps>(), {
   button2Style: null,
   image: null,
   imagePosition: 'right',
+  imageSize: 'md',
+  imageRadius: 12,
+  imageAspect: 'auto',
   headingFont: null,
   background: null,
   surfaceColor: null,
@@ -186,6 +192,23 @@ const contentLayout = computed(() => (hasImage.value ? 'flex-row gap-12' : 'flex
 const imageOrderClass = computed(() =>
   props.imagePosition === 'left' ? 'order-first' : 'order-last',
 );
+
+const imageSizeClass = computed(() => {
+  const map = { sm: 'sm:max-w-xs', md: 'sm:max-w-sm', lg: 'sm:max-w-md', xl: 'sm:max-w-lg' };
+  return map[props.imageSize ?? 'md'];
+});
+
+const imageAspectClass = computed(() => {
+  const map = {
+    auto: '',
+    square: 'aspect-square',
+    portrait: 'aspect-[3/4]',
+    video: 'aspect-video',
+  };
+  return map[props.imageAspect ?? 'auto'];
+});
+
+const imageRadiusStyle = computed(() => ({ borderRadius: `${props.imageRadius ?? 12}px` }));
 
 const textShadowStyle = computed(() =>
   props.textShadow ? { textShadow: `0 1px 4px ${textShadowColor.value}` } : {},
@@ -348,8 +371,18 @@ const subheadingIsEmpty = computed(() => {
         </div>
 
         <!-- Side image -->
-        <div v-if="image" class="shrink-0 w-full sm:w-auto sm:max-w-sm" :class="imageOrderClass">
-          <img :src="image" alt="" class="w-full h-auto rounded-xl object-cover" />
+        <div
+          v-if="image"
+          class="shrink-0 w-full sm:w-auto"
+          :class="[imageOrderClass, imageSizeClass]"
+        >
+          <img
+            :src="image"
+            alt=""
+            class="w-full object-cover"
+            :class="imageAspectClass || 'h-auto'"
+            :style="imageRadiusStyle"
+          />
         </div>
       </div>
     </div>

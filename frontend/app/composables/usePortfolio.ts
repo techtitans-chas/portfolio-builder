@@ -43,6 +43,7 @@ export function usePortfolio(
         fonts?: { heading: string; body: string } | null;
         logoLight?: string | null;
         logoDark?: string | null;
+        maxContentWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | null;
       } | null,
   );
 
@@ -81,6 +82,15 @@ export function usePortfolio(
   watchEffect(
     () => {
       activeThemeMode.value = isDark.value ? 'dark' : 'light';
+    },
+    { flush: 'sync' },
+  );
+
+  // Keep useLayoutSettings in sync so maxContentWidth is available to block components
+  const { maxContentWidth: activeMaxContentWidth } = useLayoutSettings();
+  watchEffect(
+    () => {
+      activeMaxContentWidth.value = themeSettings.value?.maxContentWidth ?? 'sm';
     },
     { flush: 'sync' },
   );

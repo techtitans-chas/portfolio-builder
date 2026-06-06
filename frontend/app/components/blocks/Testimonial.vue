@@ -3,6 +3,7 @@ import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
 import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface TestimonialItem {
   id?: string;
@@ -26,6 +27,9 @@ const props = withDefaults(defineProps<TestimonialBlockProps>(), {
   items: () => [],
   ...styleDefaults,
 });
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 
 const { resolvePrimary } = useActivePalette();
 
@@ -109,7 +113,7 @@ watch(
       overlayOpacity,
     }"
   >
-    <div class="max-w-3xl mx-auto">
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"

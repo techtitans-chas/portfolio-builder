@@ -42,6 +42,7 @@ const initialThemeSettings = computed(() => {
     fonts?: { heading: string; body: string } | null;
     logoLight?: string | null;
     logoDark?: string | null;
+    maxContentWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | null;
   } | null;
   return s ?? null;
 });

@@ -3,6 +3,7 @@ import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface PostCardsBlockProps {
   heading?: string;
@@ -31,6 +32,9 @@ const props = withDefaults(defineProps<PostCardsBlockProps>(), {
 const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
 const baseURL = import.meta.server ? (config.apiUrl as string) : (config.public.apiUrl as string);
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
 
 const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
 
@@ -105,7 +109,7 @@ const posts = computed(() => {
 
 <template>
   <section v-if="allPosts.length" class="py-16" :style="sectionStyle">
-    <div class="max-w-3xl mx-auto px-8">
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
