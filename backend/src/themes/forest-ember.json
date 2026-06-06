@@ -24,10 +24,53 @@
     "border": "#252b20"
   },
   "palette": [
-    { "key": "page", "label": "Page", "light": "#f5f3ee", "dark": "#0f110d" },
-    { "key": "surface", "label": "Card", "light": "#ffffff", "dark": "#1a1f17" },
-    { "key": "primary", "label": "Primary", "light": "#16a34a", "dark": "#4ade80" },
-    { "key": "secondary", "label": "Accent", "light": "#f97316", "dark": "#fb923c" },
-    { "key": "dark", "label": "Dark", "light": "#1c1917", "dark": "#f0fdf4" }
+    {
+      "key": "page",
+      "label": "Page",
+      "light": "#f5f3ee",
+      "dark": "#0f110d",
+      "textLight": "#1c1917",
+      "textDark": "#f0fdf4"
+    },
+    {
+      "key": "surface",
+      "label": "Card",
+      "light": "#ffffff",
+      "dark": "#1a1f17",
+      "textLight": "#1c1917",
+      "textDark": "#f0fdf4"
+    },
+    {
+      "key": "primary",
+      "label": "Green",
+      "light": "#16a34a",
+      "dark": "#4ade80",
+      "textLight": "#ffffff",
+      "textDark": "#1c1917",
+      "primaryLight": "#f97316",
+      "primaryDark": "#fb923c",
+      "secondaryLight": "#fb923c",
+      "secondaryDark": "#f97316"
+    },
+    {
+      "key": "secondary",
+      "label": "Ember",
+      "light": "#f97316",
+      "dark": "#fb923c",
+      "textLight": "#ffffff",
+      "textDark": "#1c1917",
+      "primaryLight": "#16a34a",
+      "primaryDark": "#4ade80",
+      "secondaryLight": "#4ade80",
+      "secondaryDark": "#16a34a"
+    },
+    {
+      "key": "dark",
+      "label": "Dark",
+      "light": "#1c1917",
+      "dark": "#f0fdf4",
+      "textLight": "#f0fdf4",
+      "textDark": "#1c1917"
+    }
   ]
 }

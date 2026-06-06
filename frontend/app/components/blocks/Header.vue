@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import HeaderWidget from './HeaderWidget.vue';
+import type { ButtonStyleValue } from '~/config/blocks/types';
 
 export interface NavLink {
   label: string;
@@ -44,12 +45,8 @@ export interface HeaderBlockProps {
   brandingDisplay?: 'logo-only' | 'title-only' | 'logo-and-title';
 
   background?: string | null;
-  textColor?: string | null;
-  navVariant?: 'ghost' | 'soft' | 'solid' | 'outline' | 'link';
-  navColor?: string | null;
-  navRadius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
-  navSize?: 'xs' | 'sm' | 'md' | 'lg';
-  navSpacing?: number;
+  navStyle?: ButtonStyleValue | null;
+  ctaStyle?: ButtonStyleValue | null;
   padding?: number;
   borderWidth?: number;
   maxWidth?: 'full' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl';
@@ -61,6 +58,7 @@ export interface HeaderBlockProps {
 
   mobileMenuTitle?: string;
   mobileMenuBg?: string | null;
+  mobileBackground?: string | null;
 
   isEditor?: boolean;
   onSlotReorder?: (slots: {
@@ -92,12 +90,8 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
   logoStacked: false,
   brandingDisplay: 'logo-and-title',
   background: null,
-  textColor: null,
-  navVariant: 'ghost',
-  navColor: null,
-  navRadius: 'md',
-  navSize: 'sm',
-  navSpacing: 4,
+  navStyle: null,
+  ctaStyle: null,
   padding: 16,
   borderWidth: 1,
   maxWidth: '7xl',
@@ -107,6 +101,7 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
   showSocials: false,
   mobileMenuTitle: '',
   mobileMenuBg: null,
+  mobileBackground: null,
   isEditor: false,
   onSlotReorder: undefined,
   cta: null,
@@ -115,7 +110,7 @@ const props = withDefaults(defineProps<HeaderBlockProps>(), {
 const inlineEditor = inject(inlineEditorKey, null);
 const inEditor = computed(() => props.isEditor || !!inlineEditor);
 
-const { resolveColor } = useActivePalette();
+const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
 
 // ── Styles ──────────────────────────────────────────────────────────────────
 
@@ -145,12 +140,13 @@ function hexLuminance(hex: string): number {
   return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
 }
 
-const autoTextColor = computed(() => {
-  if (props.textColor) return `var(--palette-${props.textColor})`;
-  const bg = bgColor.value;
-  if (!bg || !bg.startsWith('#')) return null;
-  return hexLuminance(bg) > 0.179 ? '#1a1a1a' : '#ffffff';
-});
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
+
+// Primary/secondary resolved against the header background
+const bgPrimary = computed(() => resolvePrimary(props.background));
+const bgSecondary = computed(() => resolveSecondary(props.background));
 
 const textStyle = computed<Record<string, string>>(() =>
   autoTextColor.value ? { color: autoTextColor.value } : { color: 'var(--text-primary)' },
@@ -158,9 +154,8 @@ const textStyle = computed<Record<string, string>>(() =>
 
 const zoneOutlineColor = computed(() => {
   const auto = autoTextColor.value;
-  if (auto === '#ffffff') return 'rgba(255,255,255,0.35)';
-  if (auto === '#1a1a1a') return 'rgba(0,0,0,0.18)';
-  return 'rgba(128,128,128,0.25)';
+  if (!auto?.startsWith('#')) return 'rgba(128,128,128,0.25)';
+  return hexLuminance(auto) > 0.5 ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.18)';
 });
 
 const mutedTextStyle = computed<Record<string, string>>(() =>
@@ -171,28 +166,25 @@ const mutedTextStyle = computed<Record<string, string>>(() =>
 
 // ── Mobile menu background + contrast text ──────────────────────────────────
 
-// mobileMenuBg is passed as a hex string from PortfolioLayout (resolved from --bg-mobile-menu)
-const mobileMenuAutoTextColor = computed(() => {
-  const hex = props.mobileMenuBg;
-  if (!hex || !hex.startsWith('#')) return null;
-  return hexLuminance(hex) > 0.179 ? '#1a1a1a' : '#ffffff';
+// mobileBackground is a palette key; fall back to the theme's --bg-mobile-menu CSS var
+const mobileMenuBgStyle = computed(() => {
+  const hex = props.mobileBackground ? resolveColor(props.mobileBackground) : null;
+  return hex ? { backgroundColor: hex } : { backgroundColor: 'var(--bg-mobile-menu)' };
 });
 
-const mobileMenuBgStyle = computed(() =>
-  props.mobileMenuBg
-    ? { backgroundColor: props.mobileMenuBg }
-    : { backgroundColor: 'var(--bg-mobile-menu)' },
+const mobileMenuTextColor = computed(() =>
+  props.mobileBackground ? resolveTextColor(props.mobileBackground) : null,
 );
 
 const mobileMenuTextStyle = computed<Record<string, string>>(() =>
-  mobileMenuAutoTextColor.value
-    ? { color: mobileMenuAutoTextColor.value }
+  mobileMenuTextColor.value
+    ? { color: mobileMenuTextColor.value }
     : { color: 'var(--text-primary)' },
 );
 
 const mobileMenuMutedStyle = computed<Record<string, string>>(() =>
-  mobileMenuAutoTextColor.value
-    ? { color: mobileMenuAutoTextColor.value, opacity: '0.7' }
+  mobileMenuTextColor.value
+    ? { color: mobileMenuTextColor.value, opacity: '0.7' }
     : { color: 'var(--text-secondary)', opacity: '1' },
 );
 
@@ -216,35 +208,65 @@ const logoTitleSizeClass = computed(() => {
 // Pick light or dark logo based on header background luminance
 const resolvedLogoUrl = computed(() => {
   if (!props.logoUrlDark) return props.logoUrl ?? null;
-  // autoTextColor is '#ffffff' on dark bg, '#1a1a1a' on light bg
-  return autoTextColor.value === '#ffffff'
-    ? props.logoUrlDark
-    : (props.logoUrl ?? props.logoUrlDark);
+  const text = autoTextColor.value;
+  // Use dark logo when text color is light (i.e. background is dark)
+  const useDark = text?.startsWith('#') ? hexLuminance(text) > 0.179 : false;
+  return useDark ? props.logoUrlDark : (props.logoUrl ?? props.logoUrlDark);
 });
 
-const navColorResolved = computed(() => (props.navColor ? resolveColor(props.navColor) : null));
+// Nav always uses the resolved primary for the header background
+const navColorResolved = computed(() => bgPrimary.value);
 
-const navRadiusClass = computed(() => {
-  const r = props.navRadius ?? 'md';
+const NAV_DEFAULTS: ButtonStyleValue = {
+  variant: 'ghost',
+  radius: 'md',
+  size: 'sm',
+  spacing: 4,
+  uppercase: false,
+  letterSpacing: 0,
+};
+const CTA_DEFAULTS: ButtonStyleValue = {
+  variant: 'solid',
+  radius: 'md',
+  size: 'sm',
+  spacing: 4,
+  uppercase: false,
+  letterSpacing: 0,
+};
+
+const navStyleResolved = computed(() => ({ ...NAV_DEFAULTS, ...props.navStyle }));
+const ctaStyleResolved = computed(() => ({ ...CTA_DEFAULTS, ...props.ctaStyle }));
+
+function radiusClass(r: string): string {
   if (r === 'none') return 'rounded-none';
   if (r === 'sm') return 'rounded-sm';
   if (r === 'lg') return 'rounded-lg';
   if (r === 'full') return 'rounded-full';
   return 'rounded-md';
-});
+}
 
-// Size → font size + padding scale
-const navSizeClass = computed(() => {
-  const s = props.navSize ?? 'sm';
+function sizeClass(s: string): { text: string; pad: string } {
   if (s === 'xs') return { text: 'text-xs', pad: 'px-2 py-0.5' };
   if (s === 'md') return { text: 'text-base', pad: 'px-3 py-1.5' };
   if (s === 'lg') return { text: 'text-lg', pad: 'px-4 py-2' };
   return { text: 'text-sm', pad: 'px-2.5 py-1' };
-});
+}
+
+function buttonTextStyle(style: ButtonStyleValue): Record<string, string> {
+  return {
+    ...(style.uppercase ? { textTransform: 'uppercase' } : {}),
+    ...(style.letterSpacing > 0
+      ? { letterSpacing: `${(style.letterSpacing * 0.0625).toFixed(4)}em` }
+      : {}),
+  };
+}
+
+const navRadiusClass = computed(() => radiusClass(navStyleResolved.value.radius));
+const navSizeClass = computed(() => sizeClass(navStyleResolved.value.size));
 
 // Nav link classes mirroring Nuxt UI button variants
 const navLinkClass = computed(() => {
-  const v = props.navVariant ?? 'ghost';
+  const v = navStyleResolved.value.variant;
   const r = navRadiusClass.value;
   const { text, pad } = navSizeClass.value;
   const base = `nav-link ${text} ${pad} transition-colors ${r}`;
@@ -257,41 +279,43 @@ const navLinkClass = computed(() => {
   return `${base} nav-link-ghost`;
 });
 
-const navGapStyle = computed(() => ({ gap: `${props.navSpacing ?? 4}px` }));
+const navGapStyle = computed(() => ({ gap: `${navStyleResolved.value.spacing}px` }));
 
-// Nav link inline styles — color-aware per variant
+// Nav link inline styles — nav color is always bgPrimary (resolved against header bg)
 const navLinkStyle = computed((): Record<string, string> => {
-  const v = props.navVariant ?? 'ghost';
-  const color = navColorResolved.value;
+  const v = navStyleResolved.value.variant;
+  const primary = navColorResolved.value; // bgPrimary — always a real color
   const text = autoTextColor.value ?? 'var(--text-primary)';
+  const extraStyle = buttonTextStyle(navStyleResolved.value);
 
   if (v === 'solid') {
-    const bg = color ?? 'var(--primary)';
-    const textColor = bg.startsWith('#')
-      ? hexLuminance(bg) > 0.179
+    const navTextColor = props.background
+      ? (resolveTextColor(props.background) ??
+        (hexLuminance(primary) > 0.179 ? '#1a1a1a' : '#ffffff'))
+      : hexLuminance(primary) > 0.179
         ? '#1a1a1a'
-        : '#ffffff'
-      : '#fff';
-    return { backgroundColor: bg, color: textColor };
+        : '#ffffff';
+    return { backgroundColor: primary, color: navTextColor, ...extraStyle };
   }
   if (v === 'soft') {
-    const bg = color ?? 'var(--primary)';
-    return { backgroundColor: `color-mix(in srgb, ${bg} 15%, transparent)`, color: bg };
+    return {
+      backgroundColor: `color-mix(in srgb, ${primary} 15%, transparent)`,
+      color: primary,
+      ...extraStyle,
+    };
   }
   if (v === 'outline') {
-    const c = color ?? text;
-    return { borderColor: c, color: c };
+    return { borderColor: primary, color: primary, ...extraStyle };
   }
   if (v === 'link') {
-    const c = color ?? text;
-    return { color: c };
+    return { color: primary, ...extraStyle };
   }
-  // ghost: set color, hover bg via CSS var
-  const c = color ?? text;
-  const hoverBg = color
-    ? `color-mix(in srgb, ${color} 12%, transparent)`
-    : 'color-mix(in srgb, currentColor 10%, transparent)';
-  return { color: c, '--nav-ghost-hover': hoverBg } as Record<string, string>;
+  // ghost
+  return {
+    color: text,
+    '--nav-ghost-hover': `color-mix(in srgb, ${text} 12%, transparent)`,
+    ...extraStyle,
+  } as Record<string, string>;
 });
 
 const MAX_WIDTH_CLASSES: Record<string, string> = {
@@ -338,20 +362,32 @@ const resolvedCtaButtons = computed<CtaButton[]>(() => {
   return [];
 });
 
+const ctaRadiusClass = computed(() => radiusClass(ctaStyleResolved.value.radius));
+const ctaSizeClass = computed(() => sizeClass(ctaStyleResolved.value.size));
+const ctaGapStyle = computed(() => ({ gap: `${ctaStyleResolved.value.spacing}px` }));
+
 function ctaButtonStyle(style?: string): Record<string, string> {
+  const secondary = bgSecondary.value;
+  const extraStyle = buttonTextStyle(ctaStyleResolved.value);
   if (style === 'outline')
     return {
-      border: '1.5px solid currentColor',
+      border: `1.5px solid ${secondary}`,
       backgroundColor: 'transparent',
-      color: 'currentColor',
+      color: secondary,
+      ...extraStyle,
     };
   if (style === 'ghost')
-    return { backgroundColor: 'transparent', color: 'var(--primary)', border: 'none' };
-  return { backgroundColor: 'var(--primary)', color: '#fff', border: 'none' };
+    return { backgroundColor: 'transparent', color: secondary, border: 'none', ...extraStyle };
+  // filled — text color that contrasts with secondary
+  const filledText = hexLuminance(secondary) > 0.179 ? '#1a1a1a' : '#ffffff';
+  return { backgroundColor: secondary, color: filledText, border: 'none', ...extraStyle };
 }
+
 function ctaButtonClass(style?: string) {
+  const { text, pad } = ctaSizeClass.value;
+  const r = ctaRadiusClass.value;
   return (
-    'px-4 py-1.5 rounded-lg text-sm font-medium transition-opacity ' +
+    `${pad} ${r} ${text} font-medium transition-opacity ` +
     (style === 'filled' ? 'hover:opacity-90' : 'hover:opacity-70')
   );
 }
@@ -470,11 +506,11 @@ const widgetProps = computed(() => ({
   navLinks: props.navLinks,
   navLinkClass: navLinkClass.value,
   navLinkStyle: navLinkStyle.value,
-  navVariant: props.navVariant ?? 'ghost',
   navGapStyle: navGapStyle.value,
   resolvedCtaButtons: resolvedCtaButtons.value,
   ctaButtonClass: ctaButtonClass,
   ctaButtonStyle: ctaButtonStyle,
+  ctaGapStyle: ctaGapStyle.value,
   socialLinks: props.socialLinks,
   showColorModeToggle: props.showColorModeToggle,
 }));
@@ -648,8 +684,8 @@ const widgetProps = computed(() => ({
         <div
           class="flex items-center justify-between px-4 py-3 border-b shrink-0"
           :style="{
-            borderColor: mobileMenuAutoTextColor
-              ? `color-mix(in srgb, ${mobileMenuAutoTextColor} 12%, transparent)`
+            borderColor: mobileMenuTextColor
+              ? `color-mix(in srgb, ${mobileMenuTextColor} 12%, transparent)`
               : 'var(--color-default-200)',
           }"
         >

@@ -24,10 +24,53 @@
     "border": "#1e3838"
   },
   "palette": [
-    { "key": "page", "label": "Page", "light": "#ffffff", "dark": "#0a1a1a" },
-    { "key": "surface", "label": "Card", "light": "#f4f4f4", "dark": "#122626" },
-    { "key": "primary", "label": "Teal", "light": "#00b4b4", "dark": "#00d4d4" },
-    { "key": "secondary", "label": "Orange", "light": "#ff6b00", "dark": "#ff8c2a" },
-    { "key": "dark", "label": "Dark", "light": "#111111", "dark": "#f0fafa" }
+    {
+      "key": "page",
+      "label": "Page",
+      "light": "#ffffff",
+      "dark": "#0a1a1a",
+      "textLight": "#111111",
+      "textDark": "#f0fafa"
+    },
+    {
+      "key": "surface",
+      "label": "Card",
+      "light": "#f4f4f4",
+      "dark": "#122626",
+      "textLight": "#111111",
+      "textDark": "#f0fafa"
+    },
+    {
+      "key": "primary",
+      "label": "Teal",
+      "light": "#00b4b4",
+      "dark": "#00d4d4",
+      "textLight": "#111111",
+      "textDark": "#111111",
+      "primaryLight": "#ff6b00",
+      "primaryDark": "#ff8c2a",
+      "secondaryLight": "#ff8c2a",
+      "secondaryDark": "#ff6b00"
+    },
+    {
+      "key": "secondary",
+      "label": "Orange",
+      "light": "#ff6b00",
+      "dark": "#ff8c2a",
+      "textLight": "#ffffff",
+      "textDark": "#111111",
+      "primaryLight": "#00b4b4",
+      "primaryDark": "#00d4d4",
+      "secondaryLight": "#00d4d4",
+      "secondaryDark": "#00b4b4"
+    },
+    {
+      "key": "dark",
+      "label": "Dark",
+      "light": "#111111",
+      "dark": "#f0fafa",
+      "textLight": "#f0fafa",
+      "textDark": "#111111"
+    }
   ]
 }

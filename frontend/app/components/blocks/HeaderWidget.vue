@@ -36,6 +36,7 @@ defineProps<{
   resolvedCtaButtons: CtaButton[];
   ctaButtonClass: (style?: string) => string;
   ctaButtonStyle: (style?: string) => Record<string, string>;
+  ctaGapStyle: Record<string, string>;
 
   socialLinks: SocialLink[];
   showColorModeToggle: boolean;
@@ -99,8 +100,9 @@ defineOptions({ inheritAttrs: false });
     <!-- CTA widget -->
     <div
       v-else-if="widget === 'cta' && resolvedCtaButtons.length"
-      class="flex items-center gap-2"
+      class="flex items-center"
       :class="inEditor && 'pointer-events-none'"
+      :style="ctaGapStyle"
     >
       <a
         v-for="btn in resolvedCtaButtons"
@@ -135,6 +137,7 @@ defineOptions({ inheritAttrs: false });
     <div
       v-else-if="widget === 'toggle' && showColorModeToggle"
       :class="inEditor && 'pointer-events-none'"
+      :style="textStyle"
     >
       <UColorModeButton />
     </div>

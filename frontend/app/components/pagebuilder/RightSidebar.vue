@@ -3,6 +3,7 @@ import type { TabsItem } from '@nuxt/ui';
 import { allBlockDefinitions } from '~/config/blocks';
 import { getPath, setPath } from '~/utils/dotPath';
 import { FONT_OPTIONS } from '~/config/fonts';
+import type { ButtonStyleValue } from '~/config/blocks/types';
 
 const { selectedBlock } = useSelectedBlock();
 const { setBlockContent, setBlockName, pendingContentEdits } = usePageEditor();
@@ -11,6 +12,16 @@ const { collections } = useCollections();
 const pickerFieldKey = ref<string | null>(null);
 const pickerOpen = ref(false);
 const pickerImagesOnly = ref(true);
+
+const buttonStyleFieldKey = ref<string | null>(null);
+const buttonStyleLabel = ref<string | undefined>(undefined);
+const buttonStyleOpen = ref(false);
+
+function openButtonStyleModal(key: string, label?: string) {
+  buttonStyleFieldKey.value = key;
+  buttonStyleLabel.value = label;
+  buttonStyleOpen.value = true;
+}
 
 function openPicker(key: string, imagesOnly = true) {
   pickerFieldKey.value = key;
@@ -310,6 +321,18 @@ function setValue(key: string, value: unknown) {
                 @update:model-value="setValue(field.key, $event)"
               />
 
+              <UButton
+                v-else-if="field.type === 'button-style'"
+                color="neutral"
+                variant="subtle"
+                size="xs"
+                icon="i-lucide-sliders-horizontal"
+                class="w-full flex justify-center"
+                @click="openButtonStyleModal(field.key, field.label)"
+              >
+                Customize button
+              </UButton>
+
               <PagebuilderListFieldEditor
                 v-else-if="field.type === 'list'"
                 :field="field"
@@ -422,5 +445,14 @@ function setValue(key: string, value: unknown) {
     :images-only="pickerImagesOnly"
     :selected-url="pickerFieldKey ? (getValue(pickerFieldKey) as string | null) : null"
     @select="onImageSelected"
+  />
+
+  <PagebuilderButtonStyleModal
+    v-if="buttonStyleFieldKey"
+    :key="buttonStyleFieldKey"
+    v-model:open="buttonStyleOpen"
+    :model-value="getValue(buttonStyleFieldKey) as ButtonStyleValue"
+    :label="buttonStyleLabel"
+    @update:model-value="setValue(buttonStyleFieldKey!, $event)"
   />
 </template>

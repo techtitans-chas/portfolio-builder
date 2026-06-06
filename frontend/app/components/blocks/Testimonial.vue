@@ -15,6 +15,9 @@ export interface TestimonialBlockProps {
   showHeading?: boolean;
   autoplay?: boolean;
   items?: TestimonialItem[];
+  background?: string | null;
+  surfaceColor?: string | null;
+  backgroundImage?: string | null;
 }
 
 const props = withDefaults(defineProps<TestimonialBlockProps>(), {
@@ -22,7 +25,66 @@ const props = withDefaults(defineProps<TestimonialBlockProps>(), {
   showHeading: true,
   autoplay: false,
   items: () => [],
+  background: null,
+  surfaceColor: null,
+  backgroundImage: null,
 });
+
+const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
+
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+const surfaceHex = computed(() => (props.surfaceColor ? resolveColor(props.surfaceColor) : null));
+
+const sectionStyle = computed(() => ({
+  ...(bgHex.value ? { backgroundColor: bgHex.value } : {}),
+  ...(props.backgroundImage
+    ? {
+        backgroundImage: `url(${props.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : {}),
+}));
+
+// Auto text color based on block background — does NOT apply inside surface cards
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
+
+const textColorStyle = computed(() => (autoTextColor.value ? { color: autoTextColor.value } : {}));
+
+const surfaceStyle = computed(() =>
+  surfaceHex.value
+    ? { backgroundColor: surfaceHex.value }
+    : { backgroundColor: 'var(--bg-surface)' },
+);
+
+const surfaceTextColor = computed(() =>
+  props.surfaceColor ? resolveTextColor(props.surfaceColor) : null,
+);
+
+const surfaceTextStyle = computed(() =>
+  surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: 'var(--text-primary)' },
+);
+
+const surfaceTextMutedStyle = computed(() =>
+  surfaceTextColor.value
+    ? { color: surfaceTextColor.value, opacity: '0.6' }
+    : { color: 'var(--text-secondary)' },
+);
+
+// Quote icon: derived from surface text color at low opacity so it's always visible
+const quoteIconStyle = computed(() =>
+  surfaceTextColor.value
+    ? { color: surfaceTextColor.value, opacity: '0.25' }
+    : { color: 'var(--primary)', opacity: '1' },
+);
+
+// Primary/secondary resolved against the block background (for pagination dots etc.)
+const bgPrimary = computed(() => resolvePrimary(props.background));
+
+// Primary resolved against the surface color (for avatar initials inside cards)
+const surfacePrimary = computed(() => resolvePrimary(props.surfaceColor));
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
@@ -69,18 +131,21 @@ watch(
 </script>
 
 <template>
-  <section class="px-8 py-12">
+  <section class="px-8 py-12" :style="sectionStyle">
     <div class="max-w-3xl mx-auto">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
         tag="h2"
         class="text-3xl font-bold mb-10 text-center"
-        :style="{ color: 'var(--text-primary)' }"
+        :style="autoTextColor ? textColorStyle : { color: 'var(--text-primary)' }"
       >
         <h2
           class="text-3xl font-bold mb-10 text-center"
-          :style="{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }"
+          :style="{
+            ...(autoTextColor ? textColorStyle : { color: 'var(--text-primary)' }),
+            fontFamily: 'var(--font-heading)',
+          }"
         >
           {{ heading }}
         </h2>
@@ -92,18 +157,14 @@ watch(
           v-for="(item, index) in items"
           :key="item.id ?? index"
           class="rounded-2xl p-8"
-          :style="{ backgroundColor: 'var(--bg-surface)' }"
+          :style="surfaceStyle"
         >
-          <UIcon
-            name="i-lucide-quote"
-            class="w-8 h-8 mb-4 opacity-20"
-            :style="{ color: 'var(--primary)' }"
-          />
+          <UIcon name="i-lucide-quote" class="w-8 h-8 mb-4" :style="quoteIconStyle" />
           <EditorInlineRichField
             :field-key="`items.${index}.quote`"
             placeholder="Write a testimonial..."
             class="rich-text text-lg leading-relaxed mb-6"
-            :style="{ color: 'var(--text-primary)' }"
+            :style="surfaceTextStyle"
             html
           >
             <!-- eslint-disable-next-line vue/no-v-html -->
@@ -121,8 +182,8 @@ watch(
               v-else
               class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
               :style="{
-                backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
-                color: 'var(--primary)',
+                backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHex ?? 'var(--bg-surface)'})`,
+                color: surfacePrimary,
               }"
             >
               {{ item.author?.charAt(0) ?? '?' }}
@@ -132,7 +193,7 @@ watch(
                 :field-key="`items.${index}.author`"
                 tag="p"
                 class="font-semibold text-sm"
-                :style="{ color: 'var(--text-primary)' }"
+                :style="surfaceTextStyle"
                 :data-placeholder="item.author"
               >
                 {{ item.author }}
@@ -141,7 +202,7 @@ watch(
                 :field-key="`items.${index}.role`"
                 tag="p"
                 class="text-sm"
-                :style="{ color: 'var(--text-secondary)' }"
+                :style="surfaceTextMutedStyle"
                 :data-placeholder="item.role"
               >
                 {{ item.role }}
@@ -165,17 +226,13 @@ watch(
                 :key="item.id ?? index"
                 class="w-full shrink-0 px-1"
               >
-                <div class="rounded-2xl p-8" :style="{ backgroundColor: 'var(--bg-surface)' }">
-                  <UIcon
-                    name="i-lucide-quote"
-                    class="w-8 h-8 mb-4 opacity-20"
-                    :style="{ color: 'var(--primary)' }"
-                  />
+                <div class="rounded-2xl p-8" :style="surfaceStyle">
+                  <UIcon name="i-lucide-quote" class="w-8 h-8 mb-4" :style="quoteIconStyle" />
                   <!-- eslint-disable-next-line vue/no-v-html -->
                   <div
                     v-if="item.quote"
                     class="rich-text text-lg leading-relaxed mb-6"
-                    :style="{ color: 'var(--text-primary)' }"
+                    :style="surfaceTextStyle"
                     v-html="sanitizeHtml(item.quote)"
                   />
 
@@ -190,18 +247,17 @@ watch(
                       v-else
                       class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
                       :style="{
-                        backgroundColor:
-                          'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
-                        color: 'var(--primary)',
+                        backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHex ?? 'var(--bg-surface)'})`,
+                        color: surfacePrimary,
                       }"
                     >
                       {{ item.author?.charAt(0) ?? '?' }}
                     </div>
                     <div>
-                      <p class="font-semibold text-sm" :style="{ color: 'var(--text-primary)' }">
+                      <p class="font-semibold text-sm" :style="surfaceTextStyle">
                         {{ item.author }}
                       </p>
-                      <p class="text-sm" :style="{ color: 'var(--text-secondary)' }">
+                      <p class="text-sm" :style="surfaceTextMutedStyle">
                         {{ item.role }}
                       </p>
                     </div>
@@ -215,7 +271,7 @@ watch(
           <button
             v-if="items.length > 1"
             class="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
-            :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
+            :style="{ ...surfaceStyle, ...surfaceTextStyle }"
             aria-label="Previous"
             @click="prev"
           >
@@ -224,7 +280,7 @@ watch(
           <button
             v-if="items.length > 1"
             class="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
-            :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
+            :style="{ ...surfaceStyle, ...surfaceTextStyle }"
             aria-label="Next"
             @click="next"
           >
@@ -241,8 +297,10 @@ watch(
             :style="{
               backgroundColor:
                 i === current
-                  ? 'var(--primary)'
-                  : 'color-mix(in srgb, var(--text-primary) 20%, transparent)',
+                  ? bgPrimary
+                  : autoTextColor
+                    ? `color-mix(in srgb, ${autoTextColor} 20%, transparent)`
+                    : 'color-mix(in srgb, var(--text-primary) 20%, transparent)',
               transform: i === current ? 'scale(1.25)' : 'scale(1)',
             }"
             :aria-label="`Go to slide ${i + 1}`"

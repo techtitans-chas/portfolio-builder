@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 import BlocksHeader from '~/components/blocks/Header.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 const PLATFORM_OPTIONS = [
   { label: 'Twitter / X', value: 'twitter' },
@@ -36,18 +37,29 @@ export const headerDefinition: BlockDefinition = {
     logoSize: 'md',
     logoStacked: false,
     brandingDisplay: 'logo-and-title',
-    background: null,
-    textColor: null,
-    navVariant: 'ghost',
-    navColor: null,
-    navRadius: 'md',
-    navSize: 'sm',
-    navSpacing: 4,
+    ...styleDefaults,
+    navStyle: {
+      variant: 'ghost',
+      radius: 'md',
+      size: 'sm',
+      spacing: 4,
+      uppercase: false,
+      letterSpacing: 0,
+    },
+    ctaStyle: {
+      variant: 'solid',
+      radius: 'md',
+      size: 'sm',
+      spacing: 4,
+      uppercase: false,
+      letterSpacing: 0,
+    },
     padding: 16,
     borderWidth: 1,
     maxWidth: '7xl',
     position: 'static',
     mobileMenuTitle: '',
+    mobileBackground: null,
   },
   tabs: [
     {
@@ -111,13 +123,6 @@ export const headerDefinition: BlockDefinition = {
             },
           ],
         },
-        {
-          label: 'Colors',
-          fields: [
-            { key: 'background', label: 'Background', type: 'theme-color' },
-            { key: 'textColor', label: 'Text color override', type: 'theme-color' },
-          ],
-        },
       ],
     },
     {
@@ -170,57 +175,10 @@ export const headerDefinition: BlockDefinition = {
           fields: [
             { key: 'showNav', label: 'Show navigation', type: 'switch' },
             {
-              key: 'navVariant',
-              label: 'Style',
-              type: 'select',
+              key: 'navStyle',
+              label: 'Links style',
+              type: 'button-style',
               showIf: { key: 'showNav', value: true },
-              options: [
-                { label: 'Ghost', value: 'ghost' },
-                { label: 'Soft', value: 'soft' },
-                { label: 'Solid', value: 'solid' },
-                { label: 'Outline', value: 'outline' },
-                { label: 'Link', value: 'link' },
-              ],
-            },
-            {
-              key: 'navColor',
-              label: 'Color',
-              type: 'theme-color',
-              showIf: { key: 'showNav', value: true },
-            },
-            {
-              key: 'navRadius',
-              label: 'Corner radius',
-              type: 'select',
-              showIf: { key: 'showNav', value: true },
-              options: [
-                { label: 'None', value: 'none' },
-                { label: 'Small', value: 'sm' },
-                { label: 'Medium', value: 'md' },
-                { label: 'Large', value: 'lg' },
-                { label: 'Full', value: 'full' },
-              ],
-            },
-            {
-              key: 'navSize',
-              label: 'Size',
-              type: 'select',
-              showIf: { key: 'showNav', value: true },
-              options: [
-                { label: 'Extra small', value: 'xs' },
-                { label: 'Small', value: 'sm' },
-                { label: 'Medium', value: 'md' },
-                { label: 'Large', value: 'lg' },
-              ],
-            },
-            {
-              key: 'navSpacing',
-              label: 'Spacing',
-              type: 'slider',
-              showIf: { key: 'showNav', value: true },
-              min: 0,
-              max: 32,
-              step: 1,
             },
           ],
         },
@@ -234,6 +192,12 @@ export const headerDefinition: BlockDefinition = {
           label: 'CTA buttons',
           fields: [
             { key: 'showCta', label: 'Show CTA buttons', type: 'switch' },
+            {
+              key: 'ctaStyle',
+              label: 'Button style',
+              type: 'button-style',
+              showIf: { key: 'showCta', value: true },
+            },
             {
               key: 'ctaButtons',
               label: 'Buttons',
@@ -305,9 +269,11 @@ export const headerDefinition: BlockDefinition = {
               type: 'text',
               placeholder: 'Menu',
             },
+            { key: 'mobileBackground', label: 'Menu background', type: 'theme-color' },
           ],
         },
       ],
     },
+    styleTab,
   ],
 };

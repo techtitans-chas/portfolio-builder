@@ -1,4 +1,6 @@
 import type { Component } from 'vue';
+import type { ButtonStyleValue } from '~/components/pagebuilder/ButtonStyleModal.vue';
+export type { ButtonStyleValue };
 
 export interface ListItemField {
   key: string;
@@ -28,7 +30,8 @@ export interface BlockField {
     | 'slider'
     | 'inline-text'
     | 'inline-rich'
-    | 'collection-select';
+    | 'collection-select'
+    | 'button-style';
   /** Required when type === 'collection-select': the collection type to filter by */
   collectionType?: string;
   placeholder?: string;

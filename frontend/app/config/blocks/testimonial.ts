@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 import BlocksTestimonial from '~/components/blocks/Testimonial.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 export const testimonialDefinition: BlockDefinition = {
   type: 'testimonial',
@@ -11,6 +12,7 @@ export const testimonialDefinition: BlockDefinition = {
     heading: 'What people say',
     showHeading: true,
     autoplay: false,
+    ...styleDefaults,
     items: [
       {
         id: crypto.randomUUID(),
@@ -38,48 +40,59 @@ export const testimonialDefinition: BlockDefinition = {
       },
     ],
   },
-  sections: [
+  tabs: [
     {
       label: 'Content',
-      fields: [
-        { key: 'showHeading', label: 'Show heading', type: 'switch' },
+      icon: 'i-lucide-text',
+      sections: [
         {
-          key: 'heading',
-          label: 'Heading',
-          type: 'inline-text',
-          placeholder: 'What people say',
-          showIf: { key: 'showHeading', value: true },
-        },
-        {
-          key: 'items',
-          label: 'Testimonials',
-          type: 'list',
-          itemLabel: 'Testimonial',
-          defaultItem: () => ({
-            id: crypto.randomUUID(),
-            quote: '<p>Your testimonial here.</p>',
-            author: 'Full Name',
-            role: 'Role at Company',
-            avatar: null,
-          }),
-          itemFields: [
+          fields: [
+            { key: 'showHeading', label: 'Show heading', type: 'switch' },
             {
-              key: 'quote',
-              label: 'Quote',
-              type: 'textarea',
-              placeholder: 'Their words...',
-              inline: true,
+              key: 'heading',
+              label: 'Heading',
+              type: 'inline-text',
+              placeholder: 'What people say',
+              showIf: { key: 'showHeading', value: true },
             },
-            { key: 'author', label: 'Author', placeholder: 'Full Name', inline: true },
-            { key: 'role', label: 'Role / Company', placeholder: 'CEO at Acme', inline: true },
-            { key: 'avatar', label: 'Avatar URL', type: 'url', placeholder: 'https://...' },
+            {
+              key: 'items',
+              label: 'Testimonials',
+              type: 'list',
+              itemLabel: 'Testimonial',
+              defaultItem: () => ({
+                id: crypto.randomUUID(),
+                quote: '<p>Your testimonial here.</p>',
+                author: 'Full Name',
+                role: 'Role at Company',
+                avatar: null,
+              }),
+              itemFields: [
+                {
+                  key: 'quote',
+                  label: 'Quote',
+                  type: 'textarea',
+                  placeholder: 'Their words...',
+                  inline: true,
+                },
+                { key: 'author', label: 'Author', placeholder: 'Full Name', inline: true },
+                { key: 'role', label: 'Role / Company', placeholder: 'CEO at Acme', inline: true },
+                { key: 'avatar', label: 'Avatar URL', type: 'url', placeholder: 'https://...' },
+              ],
+            },
           ],
         },
       ],
     },
     {
       label: 'Settings',
-      fields: [{ key: 'autoplay', label: 'Autoplay', type: 'switch' }],
+      icon: 'i-lucide-settings-2',
+      sections: [
+        {
+          fields: [{ key: 'autoplay', label: 'Autoplay', type: 'switch' }],
+        },
+      ],
     },
+    styleTab,
   ],
 };

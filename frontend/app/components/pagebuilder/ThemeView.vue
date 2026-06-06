@@ -18,6 +18,12 @@ export interface ThemePaletteColor {
   label: string;
   light: string | null;
   dark: string | null;
+  textLight?: string | null;
+  textDark?: string | null;
+  primaryLight?: string | null;
+  primaryDark?: string | null;
+  secondaryLight?: string | null;
+  secondaryDark?: string | null;
 }
 
 export interface Theme {
