@@ -82,10 +82,10 @@ Palette colors are resolved at runtime using the `useActivePalette()` composable
 const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
 
 // Resolve a palette key (e.g. from a theme-color field) to a hex color
-const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
 
 // Resolve a contrast-safe text color for a given background palette key
-const textColor = computed(() => props.background ? resolveTextColor(props.background) : null);
+const textColor = computed(() => (props.background ? resolveTextColor(props.background) : null));
 </script>
 
 <template>
@@ -97,12 +97,12 @@ const textColor = computed(() => props.background ? resolveTextColor(props.backg
 
 #### Available composable functions
 
-| Function | Returns | Description |
-| --- | --- | --- |
-| `resolveColor(key)` | `string \| null` | Hex color for the palette key in the current mode |
-| `resolveTextColor(key)` | `string \| null` | Contrast-safe text color for the given background key. Uses a palette-defined text color if set, otherwise falls back to WCAG luminance detection |
-| `resolvePrimary(key)` | `string` | The primary accent color adjusted for the given background. If the background key defines a `primaryLight`/`primaryDark` override, that is returned instead of the theme's default primary — preventing the primary color from being invisible on a primary-colored background |
-| `resolveSecondary(key)` | `string` | Same as `resolvePrimary` but for the secondary accent color |
+| Function                | Returns          | Description                                                                                                                                                                                                                                                                    |
+| ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `resolveColor(key)`     | `string \| null` | Hex color for the palette key in the current mode                                                                                                                                                                                                                              |
+| `resolveTextColor(key)` | `string \| null` | Contrast-safe text color for the given background key. Uses a palette-defined text color if set, otherwise falls back to WCAG luminance detection                                                                                                                              |
+| `resolvePrimary(key)`   | `string`         | The primary accent color adjusted for the given background. If the background key defines a `primaryLight`/`primaryDark` override, that is returned instead of the theme's default primary — preventing the primary color from being invisible on a primary-colored background |
+| `resolveSecondary(key)` | `string`         | Same as `resolvePrimary` but for the secondary accent color                                                                                                                                                                                                                    |
 
 #### Palette entry structure
 
@@ -180,7 +180,9 @@ export const myBlockDefinition: BlockDefinition = {
     {
       label: 'Content',
       icon: 'i-lucide-text',
-      sections: [ /* ... */ ],
+      sections: [
+        /* ... */
+      ],
     },
     styleTab, // adds the full Style tab as the last tab
   ],
@@ -191,8 +193,10 @@ The component then reads these via `useActivePalette()`:
 
 ```ts
 const { resolveColor, resolveTextColor } = useActivePalette();
-const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
-const autoTextColor = computed(() => props.background ? resolveTextColor(props.background) : null);
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
 ```
 
 ---
