@@ -39,7 +39,7 @@ async function onSubmit() {
   <div class="flex min-h-screen items-center justify-center px-4 py-12">
     <div class="w-full max-w-md">
       <div class="mb-8 text-center">
-        <AppLogo class="mx-auto mb-4 h-10 w-auto" />
+        <AppLogo class="mx-auto mb-4 h-10 w-auto text-6xl rounded-sm" />
         <h1 class="text-2xl font-bold">Sign in</h1>
         <p class="text-muted mt-1 text-sm">Welcome back</p>
       </div>

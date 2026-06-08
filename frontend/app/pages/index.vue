@@ -5,7 +5,11 @@ const links = ref<ButtonProps[]>([
   {
     label: 'Get started',
     to: '/register',
-    icon: 'i-lucide-rocket',
+    color: 'neutral',
+    variant: 'outline',
+    size: 'xl',
+    trailingIcon: 'i-lucide-rocket',
+    class: 'rounded-full font-bold text-xl px-5 py-3',
   },
 ]);
 
@@ -15,15 +19,30 @@ const accountDeleted = computed(() => route.query.deleted === 'true');
 
 <template>
   <UPageHero
-    title="Build Your Next Project in Minutes"
+    headline="Starta Website Builder"
     description="Create a stunning, professional project without writing a single line of code. Choose a template, add your work, and share it with the world."
     :links="links"
-    class="[background:linear-gradient(135deg,#00CC99_0%,#088b8b_100%)] m-10 rounded-2xl max-w-7xl mx-auto text-center"
+    orientation="horizontal"
+    class="relative bg-fixed overflow-hidden"
+    :style="{ backgroundImage: 'url(./media/tylijura-sparkle-10229779.webp)' }"
     :ui="{
       title: 'text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-white',
       description: 'text-lg sm:text-xl/8 text-white/80 mt-6',
+      wrapper: 'relative z-10',
+      headline: 'text-teal-200',
     }"
-  />
+  >
+    <template #title>Build Your Next Project in Minutes</template>
+    <div class="absolute inset-0 z-0 bg-sky-500 opacity-80 mix-blend-multiply" />
+    <div
+      class="absolute inset-0 z-0 bg-linear-to-br/oklch from-teal-500 from-30% to-sky-500 opacity-60"
+    />
+    <img
+      src="/media/hero-builder.svg"
+      alt="Website builder interface"
+      class="rounded-lg relative z-10"
+    />
+  </UPageHero>
   <UAlert
     v-if="accountDeleted"
     color="success"

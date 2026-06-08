@@ -72,7 +72,7 @@ async function onSubmit() {
   <div class="flex min-h-screen items-center justify-center px-4 py-12">
     <div class="w-full max-w-md">
       <div class="mb-8 text-center">
-        <AppLogo class="mx-auto mb-4 h-10 w-auto" />
+        <AppLogo class="mx-auto mb-4 h-10 w-auto text-6xl rounded-sm" />
         <h1 class="text-2xl font-bold">Create your account</h1>
         <p class="text-muted mt-1 text-sm">Start building your portfolio today</p>
       </div>
@@ -116,12 +116,12 @@ async function onSubmit() {
               placeholder="my-portfolio"
               class="w-full"
               :ui="{
-                base: 'pl-21',
+                base: 'pl-8',
                 leading: 'pointer-events-none',
               }"
             >
               <template #leading>
-                <span class="text-muted text-sm">folio.app/u/</span>
+                <span class="text-muted text-sm">/p/</span>
               </template>
             </UInput>
           </UFormField>

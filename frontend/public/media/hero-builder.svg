@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 460" width="680" height="460">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0c1a2e"/>
+    </linearGradient>
+    <linearGradient id="canvasBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="heroBlock" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="btnGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <clipPath id="windowClip">
+      <rect x="40" y="30" width="600" height="400" rx="10"/>
+    </clipPath>
+  </defs>
+
+  <!-- Window frame -->
+  <rect x="40" y="30" width="600" height="400" rx="10" fill="url(#bg)" filter="url(#shadow)"/>
+
+  <!-- Title bar -->
+  <rect x="40" y="30" width="600" height="36" rx="10" fill="#1e293b"/>
+  <rect x="40" y="52" width="600" height="14" fill="#1e293b"/>
+
+  <!-- Traffic lights -->
+  <circle cx="64" cy="48" r="6" fill="#ef4444" opacity="0.85"/>
+  <circle cx="84" cy="48" r="6" fill="#f59e0b" opacity="0.85"/>
+  <circle cx="104" cy="48" r="6" fill="#22c55e" opacity="0.85"/>
+
+  <!-- URL bar -->
+  <rect x="180" y="38" width="280" height="20" rx="10" fill="#0f172a" opacity="0.6"/>
+  <text x="320" y="52" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">starta.app/editor</text>
+
+  <!-- App area below titlebar -->
+  <g clip-path="url(#windowClip)">
+    <rect x="40" y="66" width="600" height="364" fill="#0f172a"/>
+
+    <!-- Left sidebar -->
+    <rect x="40" y="66" width="140" height="364" fill="#1e293b"/>
+
+    <!-- Sidebar label -->
+    <text x="110" y="92" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="1">BLOCKS</text>
+
+    <!-- Sidebar block items -->
+    <!-- Hero block item -->
+    <rect x="56" y="100" width="108" height="44" rx="6" fill="#0f172a"/>
+    <rect x="60" y="104" width="100" height="18" rx="3" fill="url(#heroBlock)" opacity="0.7"/>
+    <rect x="64" y="108" width="40" height="4" rx="2" fill="#fff" opacity="0.7"/>
+    <rect x="64" y="114" width="28" height="2" rx="1" fill="#fff" opacity="0.4"/>
+    <text x="110" y="140" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#94a3b8">Hero</text>
+
+    <!-- Cards block item -->
+    <rect x="56" y="152" width="108" height="44" rx="6" fill="#0f172a"/>
+    <rect x="60" y="156" width="30" height="22" rx="3" fill="#1d4ed8" opacity="0.5"/>
+    <rect x="94" y="156" width="30" height="22" rx="3" fill="#7c3aed" opacity="0.5"/>
+    <rect x="128" y="156" width="30" height="22" rx="3" fill="#0d9488" opacity="0.5"/>
+    <text x="110" y="192" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#94a3b8">Cards</text>
+
+    <!-- Text block item -->
+    <rect x="56" y="204" width="108" height="44" rx="6" fill="#0f172a"/>
+    <rect x="64" y="212" width="70" height="3" rx="1.5" fill="#64748b"/>
+    <rect x="64" y="219" width="84" height="2" rx="1" fill="#475569"/>
+    <rect x="64" y="224" width="76" height="2" rx="1" fill="#475569"/>
+    <rect x="64" y="229" width="60" height="2" rx="1" fill="#475569"/>
+    <text x="110" y="244" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#94a3b8">Text</text>
+
+    <!-- Image block item -->
+    <rect x="56" y="256" width="108" height="44" rx="6" fill="#0f172a"/>
+    <rect x="64" y="262" width="92" height="28" rx="3" fill="#1e3a5f"/>
+    <polygon points="80,282 96,268 108,278 120,264 148,282" fill="#0ea5e9" opacity="0.4"/>
+    <circle cx="78" cy="270" r="5" fill="#fbbf24" opacity="0.5"/>
+    <text x="110" y="296" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#94a3b8">Image</text>
+
+    <!-- Sidebar divider -->
+    <line x1="180" y1="66" x2="180" y2="430" stroke="#334155" stroke-width="1"/>
+
+    <!-- Canvas area -->
+    <rect x="180" y="66" width="380" height="364" fill="url(#canvasBg)"/>
+
+    <!-- Canvas toolbar -->
+    <rect x="180" y="66" width="380" height="30" fill="#f1f5f9"/>
+    <line x1="180" y1="96" x2="560" y2="96" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="192" y="74" width="28" height="14" rx="3" fill="#e2e8f0"/>
+    <rect x="224" y="74" width="28" height="14" rx="3" fill="#e2e8f0"/>
+    <rect x="256" y="74" width="28" height="14" rx="3" fill="#e2e8f0"/>
+    <text x="206" y="84" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#64748b">T</text>
+    <text x="238" y="84" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#64748b">⬡</text>
+    <text x="270" y="84" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#64748b">⊞</text>
+
+    <!-- Publish button -->
+    <rect x="500" y="72" width="50" height="18" rx="9" fill="url(#btnGrad)"/>
+    <text x="525" y="84" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="600" fill="#fff">Publish</text>
+
+    <!-- Canvas content: Hero section being built -->
+    <rect x="196" y="106" width="348" height="110" rx="6" fill="url(#heroBlock)"/>
+    <!-- Hero image placeholder -->
+    <rect x="290" y="116" width="140" height="70" rx="4" fill="#ffffff" opacity="0.12"/>
+    <text x="360" y="154" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#fff" opacity="0.4">image</text>
+    <!-- Hero text -->
+    <rect x="208" y="120" width="70" height="7" rx="3" fill="#fff" opacity="0.9"/>
+    <rect x="208" y="132" width="56" height="5" rx="2.5" fill="#fff" opacity="0.6"/>
+    <rect x="208" y="141" width="62" height="5" rx="2.5" fill="#fff" opacity="0.6"/>
+    <rect x="208" y="153" width="48" height="5" rx="2.5" fill="#fff" opacity="0.5"/>
+    <!-- CTA button -->
+    <rect x="208" y="164" width="56" height="16" rx="8" fill="#fff" opacity="0.95"/>
+    <rect x="208" y="164" width="56" height="16" rx="8" fill="none" stroke="#fff" stroke-width="0"/>
+    <text x="236" y="175" text-anchor="middle" font-family="sans-serif" font-size="7.5" font-weight="600" fill="#0d9488">Get started</text>
+
+    <!-- Drag handle / selection outline on hero block -->
+    <rect x="196" y="106" width="348" height="110" rx="6" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="5,3" opacity="0.8"/>
+    <!-- Selection corner handles -->
+    <rect x="193" y="103" width="8" height="8" rx="1" fill="#0ea5e9"/>
+    <rect x="536" y="103" width="8" height="8" rx="1" fill="#0ea5e9"/>
+    <rect x="193" y="213" width="8" height="8" rx="1" fill="#0ea5e9"/>
+    <rect x="536" y="213" width="8" height="8" rx="1" fill="#0ea5e9"/>
+
+    <!-- Cards section below hero -->
+    <rect x="196" y="228" width="108" height="70" rx="5" fill="#fff" filter="url(#softShadow)"/>
+    <rect x="204" y="236" width="92" height="32" rx="3" fill="#e0f2fe"/>
+    <rect x="208" y="274" width="50" height="5" rx="2" fill="#334155" opacity="0.6"/>
+    <rect x="208" y="283" width="70" height="3" rx="1.5" fill="#94a3b8" opacity="0.7"/>
+    <rect x="208" y="289" width="60" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+
+    <rect x="316" y="228" width="108" height="70" rx="5" fill="#fff" filter="url(#softShadow)"/>
+    <rect x="324" y="236" width="92" height="32" rx="3" fill="#d1fae5"/>
+    <rect x="328" y="274" width="50" height="5" rx="2" fill="#334155" opacity="0.6"/>
+    <rect x="328" y="283" width="70" height="3" rx="1.5" fill="#94a3b8" opacity="0.7"/>
+    <rect x="328" y="289" width="60" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+
+    <rect x="436" y="228" width="108" height="70" rx="5" fill="#fff" filter="url(#softShadow)"/>
+    <rect x="444" y="236" width="92" height="32" rx="3" fill="#ede9fe"/>
+    <rect x="448" y="274" width="50" height="5" rx="2" fill="#334155" opacity="0.6"/>
+    <rect x="448" y="283" width="70" height="3" rx="1.5" fill="#94a3b8" opacity="0.7"/>
+    <rect x="448" y="289" width="60" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+
+    <!-- Floating "drag here" label -->
+    <rect x="270" y="312" width="120" height="28" rx="14" fill="#0ea5e9" opacity="0.15"/>
+    <text x="330" y="330" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#0ea5e9" font-weight="600">+ drag a block here</text>
+
+    <!-- Right panel -->
+    <rect x="560" y="66" width="80" height="364" fill="#1e293b"/>
+    <line x1="560" y1="66" x2="560" y2="430" stroke="#334155" stroke-width="1"/>
+    <text x="600" y="92" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="1">STYLE</text>
+
+    <!-- Style panel items -->
+    <text x="570" y="112" font-family="sans-serif" font-size="7.5" fill="#64748b">Color</text>
+    <rect x="570" y="116" width="60" height="12" rx="3" fill="#0f172a"/>
+    <circle cx="576" cy="122" r="4" fill="#0d9488"/>
+    <text x="584" y="125" font-family="sans-serif" font-size="7" fill="#94a3b8">Teal 500</text>
+
+    <text x="570" y="140" font-family="sans-serif" font-size="7.5" fill="#64748b">Font</text>
+    <rect x="570" y="144" width="60" height="12" rx="3" fill="#0f172a"/>
+    <text x="575" y="153" font-family="sans-serif" font-size="7" fill="#94a3b8">Inter</text>
+
+    <text x="570" y="168" font-family="sans-serif" font-size="7.5" fill="#64748b">Spacing</text>
+    <rect x="570" y="172" width="60" height="6" rx="3" fill="#0f172a"/>
+    <rect x="570" y="172" width="38" height="6" rx="3" fill="#0d9488" opacity="0.7"/>
+
+    <text x="570" y="196" font-family="sans-serif" font-size="7.5" fill="#64748b">Radius</text>
+    <rect x="570" y="200" width="60" height="6" rx="3" fill="#0f172a"/>
+    <rect x="570" y="200" width="24" height="6" rx="3" fill="#0ea5e9" opacity="0.7"/>
+  </g>
+
+  <!-- Window border -->
+  <rect x="40" y="30" width="600" height="400" rx="10" fill="none" stroke="#334155" stroke-width="1"/>
+</svg>
