@@ -33,7 +33,7 @@ services:
   backend:
     build:
       context: .
-      target: backend
+      target: base
     stdin_open: true
     tty: true
     # Override dev command — env vars come from Docker, no --env-file needed
@@ -72,7 +72,7 @@ services:
   frontend:
     build:
       context: .
-      target: frontend
+      target: base
     stdin_open: true
     tty: true
     command: pnpm --filter frontend dev

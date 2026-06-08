@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    noExternals: true,
+    noExternals: process.env.NODE_ENV === 'production',
   },
 
   routeRules: {
