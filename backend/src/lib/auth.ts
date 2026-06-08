@@ -55,6 +55,10 @@ export const auth = betterAuth({
       enabled: true,
       domain: '.starlitepixels.com',
     },
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+    },
   },
 });
 
