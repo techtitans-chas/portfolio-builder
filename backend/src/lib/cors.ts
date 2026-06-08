@@ -1,5 +1,7 @@
 const allowed = [
   process.env.FRONTEND_URL || 'http://localhost:3000',
+  'https://starta.starlitepixels.com',
+  'https://starta-api.starlitepixels.com',
   'http://0.0.0.0:3000',
   process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3111',
 ];

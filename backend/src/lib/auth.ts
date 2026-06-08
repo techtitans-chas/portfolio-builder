@@ -45,13 +45,15 @@ export const auth = betterAuth({
   trustedOrigins: [
     process.env.BETTER_AUTH_URL ?? 'http://localhost:3111',
     process.env.FRONTEND_URL ?? 'http://localhost:3000',
+    'https://starta.starlitepixels.com',
+    'https://starta-api.starlitepixels.com',
     'http://0.0.0.0:3000',
   ],
   advanced: {
     cookiePrefix: 'better-auth',
     crossSubdomainCookies: {
-      enabled: true,
-      domain: process.env.COOKIE_DOMAIN ?? '.starlitepixels.com',
+      enabled: Boolean(process.env.COOKIE_DOMAIN),
+      domain: process.env.COOKIE_DOMAIN ?? '',
     },
   },
 });
