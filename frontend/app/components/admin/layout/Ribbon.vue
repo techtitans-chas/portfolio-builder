@@ -62,7 +62,7 @@ const topLinks = computed(
       ...collectionLinks.value,
       { label: 'Site', type: 'label' },
       { label: 'Site settings', icon: 'i-lucide-info', to: '/admin/site-settings' },
-      { label: 'Contact form', icon: 'i-lucide-mail', to: '/admin/contact-form', badge: '4' },
+      // { label: 'Contact form', icon: 'i-lucide-mail', to: '/admin/contact-form', badge: '4' },
     ] satisfies NavigationMenuItem[],
 );
 
@@ -74,6 +74,7 @@ const bottomLinks = [
 
 <template>
   <UDashboardSidebar
+    id="admin-sidebar"
     v-model:open="isSidebarOpen"
     collapsible
     :ui="{ header: 'border-b border-default' }"
