@@ -13,18 +13,12 @@ const NATIVE_DEPS = ['sharp', 'mysql2'];
 
 await build({
   entryPoints: ['src/server.ts'],
-  outfile: 'dist/server.mjs',
+  outfile: 'dist/server.js',
   bundle: true,
   platform: 'node',
-  format: 'esm',
+  format: 'cjs',
   target: 'node22',
-  // Native modules: keep external so the server uses its own Linux-x64 binaries.
-  // better-auth and drizzle are pure JS and safe to bundle.
   external: NATIVE_DEPS,
-  // ESM interop: let bundled CJS deps use require() at runtime.
-  banner: {
-    js: "import { createRequire as __cr } from 'node:module'; const require = __cr(import.meta.url);",
-  },
   logLevel: 'info',
 });
 
@@ -34,10 +28,9 @@ await build({
 const srcPkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const deployPkg = {
   name: 'backend',
-  type: 'module',
   private: true,
-  main: 'server.mjs',
-  scripts: { start: 'node server.mjs' },
+  main: 'server.js',
+  scripts: { start: 'node server.js' },
   dependencies: Object.fromEntries(NATIVE_DEPS.map(d => [d, srcPkg.dependencies[d]])),
 };
 writeFileSync('dist/package.json', JSON.stringify(deployPkg, null, 2) + '\n');
