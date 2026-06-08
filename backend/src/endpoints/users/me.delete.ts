@@ -54,8 +54,9 @@ export const meDelete = factory.createHandlers(async c => {
     }
   });
 
-  // Sessions are cascade-deleted with the user row above, so the session
-  // cookie is already invalid. Nothing more to revoke.
+  // Sessions are cascade-deleted with the user row above. Clear cookies so
+  // the browser doesn't hold a stale session token.
+  await auth.api.signOut({ headers: c.req.raw.headers }).catch(() => {});
 
   return c.json({ success: true });
 });
