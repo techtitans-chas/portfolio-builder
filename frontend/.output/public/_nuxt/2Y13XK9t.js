@@ -1,1 +1,0 @@
-import{_ as o}from"./D6gyf3sW.js";import{I as e,q as n,ay as r}from"./BUsRsfpZ.js";import"./BQJIcF5j.js";import"./BOslmtQG.js";import"./DCHWF6_d.js";const f=e({__name:"contact-form",setup(a){return(c,m)=>{const t=o;return r(),n(t,{title:"Contact form"})}}});export{f as default};

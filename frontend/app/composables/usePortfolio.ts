@@ -13,6 +13,7 @@ type ThemeSettingsOverride = {
 export function usePortfolio(
   slug: string,
   themeOverride?: Ref<ThemeSettingsOverride> | ComputedRef<ThemeSettingsOverride>,
+  options?: { skipBlocks?: boolean },
 ) {
   const config = useRuntimeConfig();
   const colorMode = useColorMode();
@@ -28,9 +29,12 @@ export function usePortfolio(
 
   const allThemesRef = useThemes();
 
-  // Header and footer are portfolio-level layout blocks stored once on the home page
+  // Header and footer are portfolio-level layout blocks stored once on the home page.
+  // Skip in admin context (page builder) where LayersView already has these blocks.
   const { data: layoutBlocksData } = useAsyncData(`portfolio-${slug}-layout-blocks`, () =>
-    $fetch<{ blocks: Block[] }>(`/api/portfolios/${slug}/pages/home/blocks`, { baseURL }),
+    options?.skipBlocks
+      ? Promise.resolve({ blocks: [] as Block[] })
+      : $fetch<{ blocks: Block[] }>(`/api/portfolios/${slug}/pages/home/blocks`, { baseURL }),
   );
 
   const portfolio = computed(() => portfolioData.value?.portfolio ?? null);

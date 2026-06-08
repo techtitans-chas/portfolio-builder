@@ -26,6 +26,7 @@ const liveThemeOverride = computed(() => props.liveThemeSettings ?? null);
 const { cssVars, portfolioMode, navLinks, googleFontsUrl, logoLight, logoDark } = usePortfolio(
   props.portfolioSlug,
   liveThemeOverride,
+  { skipBlocks: true },
 );
 
 provide(portfolioSlugKey, props.portfolioSlug);

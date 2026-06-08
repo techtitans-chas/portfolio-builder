@@ -10221,7 +10221,7 @@ const _routes = [
     name: "admin-site-settings",
     path: "/admin/site-settings",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./site-settings-LXwnemV1.mjs')
+    component: () => import('./site-settings-Ff5GjD6Z.mjs')
   },
   {
     name: "reset-password-confirm",
@@ -10232,25 +10232,25 @@ const _routes = [
     name: "p-slug-collectionType-itemId",
     path: "/p/:slug()/:collectionType()/:itemId()",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./_itemId_-B3Yo2G4i.mjs')
+    component: () => import('./_itemId_-BZIpYc8p.mjs')
   },
   {
     name: "p-slug-page",
     path: "/p/:slug()/:page()",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./_page_-B-iQx51Q.mjs')
+    component: () => import('./_page_-B4HPbM0g.mjs')
   },
   {
     name: "p-slug",
     path: "/p/:slug()",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-DWz9pePn.mjs')
+    component: () => import('./index-BtyFbedT.mjs')
   },
   {
     name: "admin",
     path: "/admin",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-CNsm2VXk.mjs')
+    component: () => import('./index-CK_Az38-.mjs')
   },
   {
     name: "login",
