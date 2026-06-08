@@ -1,0 +1,204 @@
+<script setup lang="ts">
+import { inlineEditorKey } from '~/utils/inlineEditor';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
+
+interface SkillItem {
+  id?: string;
+  name: string;
+  level: string;
+  category: string;
+}
+
+const props = withDefaults(
+  defineProps<{
+    background?: string | null;
+    backgroundImage?: string | null;
+    backgroundOpacity?: number;
+    backgroundFixed?: boolean;
+    overlayEnabled?: boolean;
+    overlayType?: 'solid' | 'gradient';
+    overlayColor?: string | null;
+    overlayColor2?: string | null;
+    overlayDegree?: number;
+    overlayOpacity?: number;
+    surfaceColor?: string | null;
+    heading?: string;
+    showHeading?: boolean;
+    columns?: '1' | '2';
+    skills?: SkillItem[];
+  }>(),
+  {
+    background: null,
+    backgroundImage: null,
+    backgroundOpacity: 100,
+    backgroundFixed: false,
+    overlayEnabled: false,
+    overlayType: 'solid',
+    overlayColor: null,
+    overlayColor2: null,
+    overlayDegree: 180,
+    overlayOpacity: 40,
+    surfaceColor: null,
+    heading: 'Skills & Expertise',
+    showHeading: true,
+    columns: '2',
+    skills: () => [],
+  },
+);
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+
+const { resolveColor, resolvePrimary, resolveSecondary } = useActivePalette();
+
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+const bgPrimary = computed(() => resolvePrimary(props.background));
+const bgSecondary = computed(() => resolveSecondary(props.background));
+
+const { textPrimaryStyle, textMutedStyle } = useBlockBackground(() => props.background);
+
+const trackStyle = computed(() => ({
+  backgroundColor: `color-mix(in srgb, ${bgPrimary.value} 12%, ${bgHex.value ?? 'var(--bg-surface)'})`,
+}));
+
+const barGradient = computed(
+  () =>
+    `linear-gradient(to right, ${bgPrimary.value}, color-mix(in srgb, ${bgPrimary.value} 75%, ${bgSecondary.value}))`,
+);
+
+const inEditor = Boolean(inject(inlineEditorKey, null));
+
+// Group skills by category, preserving insertion order.
+const grouped = computed(() => {
+  const map = new Map<string, { item: SkillItem; flatIndex: number }[]>();
+  (props.skills ?? []).forEach((item, i) => {
+    const cat = item.category?.trim() || 'General';
+    if (!map.has(cat)) map.set(cat, []);
+    map.get(cat)!.push({ item, flatIndex: i });
+  });
+  return [...map.entries()];
+});
+
+const hasCategories = computed(
+  () => grouped.value.length > 1 || grouped.value[0]?.[0] !== 'General',
+);
+
+// Build a global stagger delay map: flatIndex → delay in ms
+const delayMap = computed(() => {
+  const m = new Map<number, number>();
+  let counter = 0;
+  for (const [, entries] of grouped.value) {
+    for (const entry of entries) {
+      m.set(entry.flatIndex, counter * 60);
+      counter++;
+    }
+  }
+  return m;
+});
+
+// Animation: bars start at 0 and grow when the section enters the viewport
+const wrapperRef = ref<{ el: HTMLElement | null } | null>(null);
+const animated = ref(inEditor);
+
+onMounted(() => {
+  const el = wrapperRef.value?.el;
+  if (animated.value || !el) return;
+  const observer = new IntersectionObserver(
+    entries => {
+      if (entries[0]?.isIntersecting) {
+        animated.value = true;
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.1 },
+  );
+  observer.observe(el);
+});
+</script>
+
+<template>
+  <BlocksBlockWrapper
+    ref="wrapperRef"
+    class="px-8 py-12"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
+  >
+    <div class="mx-auto" :class="[maxWidthClass]">
+      <EditorInlineTextField
+        v-if="showHeading"
+        field-key="heading"
+        tag="h2"
+        class="text-3xl font-bold mb-10"
+        :style="textPrimaryStyle"
+      >
+        <h2
+          class="text-3xl font-bold mb-10"
+          :style="{ ...textPrimaryStyle, fontFamily: 'var(--font-heading)' }"
+        >
+          {{ heading }}
+        </h2>
+      </EditorInlineTextField>
+
+      <div
+        class="gap-x-12 gap-y-10"
+        :class="columns === '2' ? 'grid grid-cols-1 sm:grid-cols-2' : 'flex flex-col'"
+      >
+        <div v-for="[category, entries] in grouped" :key="category">
+          <p
+            v-if="hasCategories"
+            class="text-xs font-semibold uppercase tracking-widest mb-4"
+            :style="textMutedStyle"
+          >
+            {{ category }}
+          </p>
+
+          <div class="flex flex-col gap-4">
+            <div v-for="entry in entries" :key="entry.item.id ?? entry.flatIndex">
+              <div class="flex items-center justify-between mb-2">
+                <EditorInlineTextField
+                  :field-key="`skills.${entry.flatIndex}.name`"
+                  tag="span"
+                  class="text-sm font-medium"
+                  :style="textPrimaryStyle"
+                  :data-placeholder="entry.item.name"
+                >
+                  {{ entry.item.name }}
+                </EditorInlineTextField>
+                <span
+                  class="text-xs tabular-nums font-medium ml-3 shrink-0"
+                  :style="textMutedStyle"
+                >
+                  {{ entry.item.level ?? 0 }}%
+                </span>
+              </div>
+
+              <!-- Progress track -->
+              <div class="w-full h-1.5 rounded-full overflow-hidden" :style="trackStyle">
+                <div
+                  class="h-full rounded-full"
+                  :style="{
+                    width: animated ? (Number(entry.item.level) || 0) + '%' : '0%',
+                    background: barGradient,
+                    transition: animated
+                      ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${delayMap.get(entry.flatIndex) ?? 0}ms`
+                      : 'none',
+                  }"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BlocksBlockWrapper>
+</template>

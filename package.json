@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "dev": "dotenv -e .env -- concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
     "build": "concurrently --names backend,frontend --prefix-colors cyan,blue \"pnpm --filter backend build\" \"pnpm --filter frontend build\"",
     "dev:backend": "pnpm --filter backend dev",
     "dev:frontend": "pnpm --filter frontend dev",
@@ -12,12 +12,18 @@
     "lint": "eslint . && pnpm --filter frontend lint",
     "lint:fix": "eslint . --fix && pnpm --filter frontend lint:fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:generate": "dotenv -e .env -- pnpm --filter backend db:generate",
+    "db:migrate": "dotenv -e .env -- pnpm --filter backend db:migrate",
+    "db:studio": "dotenv -e .env -- pnpm --filter backend db:studio",
+    "db:seed": "dotenv -e .env -- pnpm --filter backend db:seed",
+    "db:reseed-blocks": "dotenv -e .env -- pnpm --filter backend db:reseed-blocks"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "concurrently": "^9.0.0",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^10.4.0",
     "eslint-plugin-vue": "^10.9.1",
     "prettier": "^3.8.3",

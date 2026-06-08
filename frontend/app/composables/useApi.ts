@@ -1,23 +1,38 @@
-// Configure API client for backend communication
+export class ApiError extends Error {
+  status: number;
+  data: unknown;
+
+  constructor(status: number, message: string, data?: unknown) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.data = data;
+  }
+}
+
 export const useApi = () => {
   const config = useRuntimeConfig();
-  const apiBase = config.public.apiUrl || 'http://localhost:3001';
+  const apiBase = import.meta.server
+    ? (config.apiUrl as string) || config.public.apiUrl || 'http://localhost:3111'
+    : config.public.apiUrl || 'http://localhost:3111';
 
   const fetcher = async (endpoint: string, options?: RequestInit) => {
-    const url = `${apiBase}${endpoint}`;
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers,
-      },
+    const response = await fetch(`${apiBase}${endpoint}`, {
+      headers: { 'Content-Type': 'application/json', ...options?.headers },
       ...options,
     });
 
+    const body = await response.json().catch(() => ({}));
+
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      throw new ApiError(
+        response.status,
+        body?.errors?.[0]?.detail ?? body?.message ?? response.statusText,
+        body,
+      );
     }
 
-    return response.json();
+    return body;
   };
 
   return { fetcher, apiBase };

@@ -70,6 +70,8 @@ Rebuild images after code changes:
 
 ```bash
 docker compose up --build
+pnpm db:migrate
+
 ```
 
 ---
@@ -153,6 +155,38 @@ Key variables:
 | `POSTGRES_DB`         | `portfolio_builder`     | Database name          |
 | `PORT`                | `3111`                  | Backend port           |
 | `NUXT_PUBLIC_API_URL` | `http://localhost:3111` | Frontend → backend URL |
+
+## Database
+
+### Migrations
+
+Run migrations after first setup or after `docker compose down -v` (which wipes the database volume):
+
+```bash
+pnpm db:migrate
+```
+
+### Seeding
+
+Seed the database with two pre-verified user accounts for development:
+
+```bash
+pnpm db:seed
+```
+
+| Name             | Email                              | Password    | Portfolio slug |
+| ---------------- | ---------------------------------- | ----------- | -------------- |
+| Martin Södersten | martin.sodersten@chasacademy.se    | Martin1234! | martin         |
+| Ida Öhlén        | ida-alexandra.ohlen@chasacademy.se | Ida1234!    | ida            |
+
+Both accounts are created with email already verified, so you can log in immediately without going through the email flow. Re-running the seed is safe — existing users are skipped.
+
+To fully reset and reseed:
+
+```bash
+docker exec portfolio-builder-postgres-1 psql -U postgres -d portfolio_builder -c "DELETE FROM users;"
+pnpm db:seed
+```
 
 ## API Endpoints
 

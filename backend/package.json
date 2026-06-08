@@ -2,25 +2,34 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch --env-file=../.env src/server.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:reseed-blocks": "tsx src/db/reseed-blocks.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1054.0",
     "@hono/node-server": "^1.19.14",
+    "@portfolio-builder/shared": "workspace:*",
+    "better-auth": "^1.6.11",
     "drizzle-orm": "^0.45.2",
     "hono": "^4.12.23",
     "postgres": "^3.4.9",
+    "resend": "^6.12.3",
+    "sanitize-html": "^2.17.4",
+    "sharp": "^0.34.5",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "@types/sanitize-html": "^2.16.1",
     "drizzle-kit": "^0.31.10",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3"

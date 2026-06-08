@@ -1,0 +1,76 @@
+{
+  "id": "creative-pop",
+  "label": "Creative Pop",
+  "light": {
+    "bgPage": "#f5f0d8",
+    "bgSurface": "#fffdf0",
+    "bgNav": "#f5f0d8",
+    "bgMobileMenu": "#fffdf0",
+    "primary": "#2db8c5",
+    "secondary": "#f5c518",
+    "textPrimary": "#1a1a2e",
+    "textSecondary": "#3a3a4a",
+    "border": "#ddd8ba"
+  },
+  "dark": {
+    "bgPage": "#1a1a2e",
+    "bgSurface": "#252538",
+    "bgNav": "#1a1a2e",
+    "bgMobileMenu": "#252538",
+    "primary": "#2db8c5",
+    "secondary": "#f5c518",
+    "textPrimary": "#f5f0d8",
+    "textSecondary": "#c8c4a8",
+    "border": "#303048"
+  },
+  "palette": [
+    {
+      "key": "page",
+      "label": "Page",
+      "light": "#f5f0d8",
+      "dark": "#1a1a2e",
+      "textLight": "#1a1a2e",
+      "textDark": "#f5f0d8"
+    },
+    {
+      "key": "surface",
+      "label": "Card",
+      "light": "#fffdf0",
+      "dark": "#252538",
+      "textLight": "#1a1a2e",
+      "textDark": "#f5f0d8"
+    },
+    {
+      "key": "primary",
+      "label": "Teal",
+      "light": "#2db8c5",
+      "dark": "#2db8c5",
+      "textLight": "#ffffff",
+      "textDark": "#ffffff",
+      "primaryLight": "#f5c518",
+      "primaryDark": "#f5c518",
+      "secondaryLight": "#f5c518",
+      "secondaryDark": "#f5c518"
+    },
+    {
+      "key": "secondary",
+      "label": "Yellow",
+      "light": "#f5c518",
+      "dark": "#f5c518",
+      "textLight": "#1a1a2e",
+      "textDark": "#1a1a2e",
+      "primaryLight": "#2db8c5",
+      "primaryDark": "#2db8c5",
+      "secondaryLight": "#2db8c5",
+      "secondaryDark": "#2db8c5"
+    },
+    {
+      "key": "dark",
+      "label": "Dark",
+      "light": "#1a1a2e",
+      "dark": "#f5f0d8",
+      "textLight": "#f5f0d8",
+      "textDark": "#1a1a2e"
+    }
+  ]
+}
