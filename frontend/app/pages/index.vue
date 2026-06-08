@@ -24,16 +24,15 @@ const accountDeleted = computed(() => route.query.deleted === 'true');
       description: 'text-lg sm:text-xl/8 text-white/80 mt-6',
     }"
   />
-  <div>
-    <UAlert
-      v-if="accountDeleted"
-      color="success"
-      variant="soft"
-      icon="i-lucide-check-circle"
-      title="Account deleted"
-      description="Your account and all associated data have been permanently deleted. We're sorry to see you go."
-      class="max-w-2xl mx-auto mt-6 px-4"
-    />
+  <UAlert
+    v-if="accountDeleted"
+    color="success"
+    variant="soft"
+    icon="i-lucide-check-circle"
+    title="Account deleted"
+    description="Your account and all associated data have been permanently deleted. We're sorry to see you go."
+    class="max-w-2xl mx-auto mt-6 px-4"
+  />
   <LandingDemoSandbox />
   <HealthStatus />
 </template>
