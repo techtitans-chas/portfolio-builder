@@ -97,6 +97,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build shared
+        run: pnpm --filter @portfolio-builder/shared build
+
       - name: Build
         run: pnpm build
 
