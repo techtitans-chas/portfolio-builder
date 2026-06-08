@@ -97,6 +97,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build shared
+        run: pnpm --filter @portfolio-builder/shared build
+
       - name: Build
         run: pnpm build
 
@@ -122,7 +125,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          target: backend
+          file: ./Dockerfile.backend
           platforms: linux/amd64
           push: true
           tags: |
@@ -132,7 +135,8 @@ jobs:
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/portfolio-builder-backend:buildcache,mode=max
 
       - name: Trigger Render backend deploy
-        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}"
+        run: |
+          curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}&imgURL=docker.io%2F${{ secrets.DOCKER_USERNAME }}%2Fportfolio-builder-backend%3A${{ github.sha }}"
 
   docker-frontend:
     name: Docker — Frontend
@@ -156,7 +160,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          target: frontend
+          file: ./Dockerfile.frontend
           platforms: linux/amd64
           push: true
           tags: |
@@ -166,4 +170,5 @@ jobs:
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/portfolio-builder-frontend:buildcache,mode=max
 
       - name: Trigger Render frontend deploy
-        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}"
+        run: |
+          curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}&imgURL=docker.io%2F${{ secrets.DOCKER_USERNAME }}%2Fportfolio-builder-frontend%3A${{ github.sha }}"

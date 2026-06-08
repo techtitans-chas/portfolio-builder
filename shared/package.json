@@ -6,24 +6,29 @@
   "description": "Shared types and schemas for portfolio-builder",
   "exports": {
     "./types": {
-      "import": "./types/index.ts",
-      "types": "./types/index.ts"
+      "types": "./types/index.ts",
+      "default": "./dist/types/index.js"
     },
     "./schemas": {
-      "import": "./schemas/index.ts",
-      "types": "./schemas/index.ts"
+      "types": "./schemas/index.ts",
+      "default": "./dist/schemas/index.js"
     }
   },
   "files": [
     "types",
-    "schemas"
+    "schemas",
+    "dist"
   ],
   "scripts": {
+    "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }

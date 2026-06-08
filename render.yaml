@@ -2,18 +2,18 @@ databases:
   - name: portfolio-builder-db
     databaseName: portfolio_builder
     user: portfolio_builder
-    plan: free
+    plan: starter
     region: frankfurt
 
 services:
   - type: web
     name: portfolio-builder-backend
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
-    dockerBuildTarget: backend
-    plan: free
+    runtime: image
+    image:
+      url: docker.io/idaohlen/portfolio-builder-backend:latest
+    plan: starter
     region: frankfurt
+    autoDeploy: false
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
@@ -45,12 +45,12 @@ services:
 
   - type: web
     name: portfolio-builder-frontend
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
-    dockerBuildTarget: frontend
-    plan: free
+    runtime: image
+    image:
+      url: docker.io/idaohlen/portfolio-builder-frontend:latest
+    plan: starter
     region: frankfurt
+    autoDeploy: false
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
