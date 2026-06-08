@@ -1,1 +1,0 @@
-import{g as t,ay as e,t as o}from"./Cr0fWA7H.js";const n={},_={class:"text-5xl font-extrabold"};function c(s,a){return e(),o("div",_,"Starta")}const p=Object.assign(t(n,[["render",c]]),{__name:"AppLogo"});export{p as _};

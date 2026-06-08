@@ -17194,7 +17194,7 @@ _sfc_main$3.setup = (props, ctx) => {
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$3, { __name: "UApp" });
 const layouts = {
-  admin: vueExports.defineAsyncComponent(() => import('./admin-CeGY3R7Y.mjs').then((m) => m.default || m)),
+  admin: vueExports.defineAsyncComponent(() => import('./admin-CYsC6alG.mjs').then((m) => m.default || m)),
   default: vueExports.defineAsyncComponent(() => import('./default-CBW_-h-m.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
