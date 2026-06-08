@@ -647,12 +647,16 @@ async function seed() {
       const collectionId = crypto.randomUUID();
       await db
         .insert(collections)
-        .values({ id: collectionId, portfolioId: portfolio.id, type: col.type, name: col.name, sortOrder: i });
+        .values({
+          id: collectionId,
+          portfolioId: portfolio.id,
+          type: col.type,
+          name: col.name,
+          sortOrder: i,
+        });
 
       if (col.items.length) {
-        await db
-          .insert(collectionItems)
-          .values(col.items.map(item => ({ collectionId, ...item })));
+        await db.insert(collectionItems).values(col.items.map(item => ({ collectionId, ...item })));
       }
 
       console.log(`  Created collection "${col.name}" with ${col.items.length} items`);

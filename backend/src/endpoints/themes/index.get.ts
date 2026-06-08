@@ -10,7 +10,16 @@ import retro from '../../themes/retro.json' with { type: 'json' };
 import softBloom from '../../themes/soft-bloom.json' with { type: 'json' };
 import woodlandGold from '../../themes/woodland-gold.json' with { type: 'json' };
 
-const themes = [boldTeal, creativePop, forestEmber, midnightSlate, nightExplorer, retro, softBloom, woodlandGold];
+const themes = [
+  boldTeal,
+  creativePop,
+  forestEmber,
+  midnightSlate,
+  nightExplorer,
+  retro,
+  softBloom,
+  woodlandGold,
+];
 
 export const themesGet = factory.createHandlers(async c => {
   return c.json({ themes });

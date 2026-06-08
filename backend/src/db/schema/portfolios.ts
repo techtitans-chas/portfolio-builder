@@ -9,9 +9,7 @@ export const portfolios = mysqlTable('portfolios', {
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
   slug: varchar('slug', { length: 255 }).notNull().unique(),
-  title: varchar('title', { length: 500 })
-    .notNull()
-    .default(''),
+  title: varchar('title', { length: 500 }).notNull().default(''),
   description: text('description'),
   ogImageUrl: text('og_image_url'),
   themeSettings: json('theme_settings'),

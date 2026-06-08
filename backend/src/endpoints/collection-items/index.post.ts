@@ -56,10 +56,7 @@ export const collectionItemsPost = factory.createHandlers(async c => {
     isPublished: result.data.isPublished,
     sortOrder: result.data.sortOrder ?? 0,
   });
-  const [created] = await db
-    .select()
-    .from(collectionItems)
-    .where(eq(collectionItems.id, id));
+  const [created] = await db.select().from(collectionItems).where(eq(collectionItems.id, id));
 
   return c.json({ item: created }, 201);
 });

@@ -1,8 +1,8 @@
 # Deployment Guide (Netcup Plesk)
 
-This project deploys to **Netcup webhost 4000** — a shared **Plesk** host with **no Docker**. The two Node apps (Hono backend + Nuxt SSR frontend) run under Plesk's Node.js (Phusion Passenger), each on its own subdomain, both pulling from the **same Git repo** via Plesk Git deployment. The database is the **MySQL 8** instance included with the package.
+This project deploys to **Netcup webhost** — a shared **Plesk** host with **no Docker**. The two Node apps (Hono backend + Nuxt SSR frontend) run under Plesk's Node.js (Phusion Passenger), each on its own subdomain, both pulling from the **same Git repo** via Plesk Git deployment. The database is the **MySQL 8** instance included with the package.
 
-Because the host can't build a pnpm monorepo (no Docker, awkward `workspace:*` resolution, limited memory), **build artifacts are committed to a dedicated `deploy` branch** and the server only runs `node`.
+Because the host can't build a pnpm monorepo (no Docker, awkward `workspace:*` resolution, limited memory), **build artifacts are committed to the `deploy` branch** and the server only runs `node`.
 
 ---
 
@@ -13,14 +13,15 @@ Local / CI:  pnpm build  ──►  frontend/.output  +  backend/dist (esbuild b
                               │
                               ▼  committed to the `deploy` branch
 Plesk Git deployment (tracks `deploy`)
-  ├── app.<domain>  → Application Root: frontend, startup: .output/server/index.mjs   (Nuxt SSR)
-  └── api.<domain>  → Application Root: backend/dist, startup: server.js              (Hono API)
+  ├── <FRONTEND URL>   → Application Root: frontend,      Startup: .output/server/index.mjs
+  └── <BACKEND URL> → Application Root: backend/dist, Startup: server.js
                               │
                               ▼
                        MySQL 8 (utf8mb4)   ← included with Netcup package
+                       Database: <DBNAME>
 ```
 
-The backend is bundled with esbuild into a single `dist/server.js` (see [`backend/build.mjs`](../backend/build.mjs)). Only the **native** modules `sharp` and `mysql2` are left external — they ship platform-specific binaries that must be installed on the Linux server, not bundled from a dev machine.
+The backend is bundled with esbuild into a single `dist/server.js` (see [`backend/build.mjs`](../backend/build.mjs)). Only the **native** modules `sharp` and `mysql2` are left external — they ship platform-specific binaries that must be installed on the Linux server.
 
 ---
 
@@ -28,152 +29,202 @@ The backend is bundled with esbuild into a single `dist/server.js` (see [`backen
 
 The Netcup MySQL server defaults to `latin1`/`cp1252`. If the database is created with that charset, emoji and many non-ASCII characters (`åäö`, etc.) in portfolio content will be **corrupted**. The connection already forces `utf8mb4` (see [`backend/src/db/client.ts`](../backend/src/db/client.ts)), but the **database itself** must also be utf8mb4.
 
-In phpMyAdmin (or Plesk → Databases) run once, before migrating:
+In phpMyAdmin run once, before migrating:
 
 ```sql
-ALTER DATABASE `your_db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE `<DBNAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
+
+---
+
+## ⚠️ Critical: DATABASE_URL special characters
+
+If the database password contains special characters (e.g. `#` or `&`), they **must** be percent-encoded in the `DATABASE_URL`:
+
+- `#` → `%23`
+- `&` → `%26`
+- `@` → `%40`
+
+Example: `mysql://user:p%23ssw%26rd@host:3306/dbname`
 
 ---
 
 ## One-time setup
 
-### 1. Create the two subdomains in Plesk
+### 1. Subdomains in Plesk
 
-Create `app.<domain>` (or use the apex domain) for the frontend and `api.<domain>` for the backend.
+Both subdomains already exist:
+— frontend
+— backend
 
-### 2. Configure Git deployment (per subdomain)
+### 2. Git deployment (per subdomain)
 
-For **each** subdomain: Plesk → **Git** → add this repository, set the deployed branch to **`deploy`**, and enable automatic deployment on push if desired. Both subdomains point at the same repo/branch.
+Plesk → **Git** → repository URL, branch **`deploy`**. Both subdomains point at the same repo and branch.
 
-### 3. Configure Node.js (per subdomain)
+### 3. Node.js configuration (per subdomain)
 
 Plesk → **Node.js** for each subdomain:
 
-| Field                     | Frontend (`app.`)            | Backend (`api.`)   |
-| ------------------------- | ---------------------------- | ------------------ |
-| **Application Root**      | `frontend`                   | `backend/dist`     |
-| **Application Startup File** | `.output/server/index.mjs` | `server.js`        |
-| **Run Node.js commands**  | _(none — `.output` is self-contained)_ | `npm install --omit=dev` (see step 6) |
+| Field                        | Frontend                   | Backend                  |
+| ---------------------------- | -------------------------- | ------------------------ |
+| **Node.js version**          | 22                         | 22                       |
+| **Application Root**         | `frontend`                 | `backend/dist`           |
+| **Application Startup File** | `.output/server/index.mjs` | `server.js`              |
+| **Document Root**            | `frontend/.output/public`  | `backend/dist/public`    |
+| **Run Node.js commands**     | _(leave empty)_            | `npm install --omit=dev` |
 
-> The startup files don't exist in the repo until you build — they're committed artifacts (step 5). `.output` is a hidden folder.
+> `.output` and `dist/` are not in the repo on `main` but **are** committed on `deploy`. Plesk finds them after pulling.
+>
+> The frontend `.output` is fully self-contained — no npm install needed.
 
-### 4. Set environment variables (per subdomain)
+### 4. Environment variables (per subdomain)
 
 Plesk → Node.js → **Custom environment variables**.
 
-Generate the auth secret locally: `openssl rand -base64 32`
+Generate the auth secret: `openssl rand -base64 32`
 
-**Backend (`api.`):**
+**Backend:**
 
-| Variable               | Value                                                       |
-| ---------------------- | ----------------------------------------------------------- |
-| `DATABASE_URL`         | `mysql://user:pass@host:3306/dbname` (from Plesk Databases) |
-| `BETTER_AUTH_SECRET`   | output of `openssl rand -base64 32`                         |
-| `BETTER_AUTH_URL`      | `https://api.<domain>`                                      |
-| `FRONTEND_URL`         | `https://app.<domain>`                                      |
-| `RESEND_API_KEY`       | Resend key (blank to disable email)                         |
-| `R2_ACCOUNT_ID`        | Cloudflare account ID (blank to disable uploads)            |
-| `R2_ACCESS_KEY_ID`     | R2 access key                                               |
-| `R2_SECRET_ACCESS_KEY` | R2 secret key                                               |
-| `R2_BUCKET_NAME`       | R2 bucket name                                              |
-| `R2_PUBLIC_URL`        | e.g. `https://pub-abc123.r2.dev`                            |
+| Variable               | Value                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| `DATABASE_URL`         | `mysql://user:pass@host:3306/dbname` (percent-encode special chars in password) |
+| `BETTER_AUTH_SECRET`   | output of `openssl rand -base64 32`                                             |
+| `BETTER_AUTH_URL`      | `<BACKEND URL>`                                                                 |
+| `FRONTEND_URL`         | `<FRONTEND URL>`                                                                |
+| `RESEND_API_KEY`       | Resend API key (omit to disable email)                                          |
+| `R2_ACCOUNT_ID`        | Cloudflare account ID (omit to disable uploads)                                 |
+| `R2_ACCESS_KEY_ID`     | R2 access key                                                                   |
+| `R2_SECRET_ACCESS_KEY` | R2 secret key                                                                   |
+| `R2_BUCKET_NAME`       | R2 bucket name                                                                  |
+| `R2_PUBLIC_URL`        | e.g. `https://pub-abc123.r2.dev`                                                |
 
-**Frontend (`app.`):**
+**Frontend:**
 
-| Variable              | Value                                                  |
-| --------------------- | ------------------------------------------------------ |
-| `NUXT_PUBLIC_API_URL` | `https://api.<domain>` (used by the browser)           |
-| `NUXT_API_URL`        | `https://api.<domain>` (used by SSR; no internal network on Plesk, so same URL) |
-| `FRONTEND_URL`        | `https://app.<domain>`                                 |
-| `NUXT_HOST`           | `0.0.0.0`                                               |
+| Variable              | Value            |
+| --------------------- | ---------------- |
+| `NUXT_PUBLIC_API_URL` | `<BACKEND URL>`  |
+| `NUXT_API_URL`        | `<BACKEND URL>`  |
+| `FRONTEND_URL`        | `<FRONTEND URL>` |
+| `NUXT_HOST`           | `0.0.0.0`        |
 
-### 5. Build artifacts and commit them to `deploy`
+> `NUXT_PUBLIC_API_URL` and `NUXT_API_URL` are **baked into the frontend bundle at build time**. Changing them in Plesk after building has no effect — you must rebuild and push.
 
-On your machine (or in CI), with Node 22 + pnpm 11.1.3:
+### 5. Build and commit artifacts
+
+On your machine with Node 22 + pnpm:
 
 ```bash
 pnpm install
-pnpm --filter @portfolio-builder/shared build
-NUXT_PUBLIC_API_URL=https://api.<domain> \
-  NUXT_API_URL=https://api.<domain> \
-  FRONTEND_URL=https://app.<domain> \
-  NUXT_PRERENDER=true \
-  NODE_OPTIONS=--max-old-space-size=4096 \
-  pnpm --filter frontend build        # → frontend/.output
-pnpm --filter backend build           # → backend/dist/server.js + backend/dist/package.json
+pnpm --filter @portfolio-builder/shared build   # shared package must build first
+
+pnpm build:backend    # → backend/dist/server.js + backend/dist/package.json
+pnpm build:frontend   # → frontend/.output (production URLs baked in)
 ```
 
-On the `deploy` branch, `dist/` and `.output/` are **not** gitignored (they are on `main`). Commit them:
+The `build:frontend` script in the root `package.json` already includes the correct production env vars. Do not use the plain `pnpm --filter frontend build` for deploys — it will bake in `localhost` URLs.
+
+Then commit to the `deploy` branch:
 
 ```bash
 git checkout deploy
-git merge main                       # bring in source changes
-# rebuild as above, then:
-git add -f frontend/.output backend/dist
+git merge main                         # bring in source changes
+pnpm --filter @portfolio-builder/shared build
+pnpm build:backend
+pnpm build:frontend
+git add backend/dist frontend/.output
 git commit -m "build: deploy artifacts"
-git push                             # Plesk pulls and restarts both apps
+git push
 ```
 
 ### 6. Native modules on the server (`sharp` + `mysql2`)
 
-The backend bundle externalizes `sharp` and `mysql2`; the build emits a minimal `backend/dist/package.json` listing only those two. The server needs their **Linux-x64** binaries.
+The backend bundle externalizes `sharp` and `mysql2`. A minimal `backend/dist/package.json` listing only those two is committed alongside `server.js`.
 
-**Preferred** — let Plesk install them. In the backend subdomain's **Run Node.js commands**, run (from the Application Root `backend/dist`):
+In the backend subdomain's Plesk **Run Node.js commands** field, set:
 
 ```
 npm install --omit=dev
 ```
 
-**Fallback** — if the Plesk hook can't run `npm install` (no npm / no outbound access): install the Linux binaries on a matching Linux x64 environment and commit `backend/dist/node_modules` to the `deploy` branch as well (`git add -f backend/dist/node_modules`). Do **not** commit macOS binaries — they won't run on the server.
-
-> **Verify which path applies before relying on it:** test whether the "Run Node.js commands" field can run `npm install` on your Netcup plan.
+This runs from the Application Root (`backend/dist`) and installs the Linux-x64 binaries. Run it once after first deploy, and again any time `sharp` or `mysql2` versions change.
 
 ### 7. Run database migrations
 
-> Migrations are **not** run on Plesk (Plesk has `npm` but no `pnpm`, and no project tooling). They run either from your own machine or directly through phpMyAdmin. Pick the route that matches your DB access.
-
-**Which route?** Check the DB host in Plesk → Databases. A `localhost` / `127.0.0.1` / private `10.x.x.x` host means external connections are off → use Route A. A public hostname/IP means Route B may work.
-
-**Route A — phpMyAdmin (no tooling, always works):**
-
-1. phpMyAdmin → select your database → **SQL** tab → run the `utf8mb4` `ALTER DATABASE` (see the utf8mb4 section above) **first**.
-2. → **Import** tab → upload [`backend/migrations/0000_nebulous_layla_miller.sql`](../backend/migrations/) → **Go**. This creates all 11 tables.
-3. Seeding uses Node, so it only works with an external connection (Route B). Otherwise skip it and let the app create data.
-
-**Route B — from your machine (only if the DB is reachable externally):**
+Migrations are run from your local machine (Plesk has no pnpm):
 
 ```bash
-DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:migrate
-DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:seed   # optional
+DATABASE_URL="mysql://user:pass@host:3306/<database>" pnpm db:migrate
 ```
 
-> Note: the migration filename above may differ if the schema is regenerated — use the latest `.sql` file in [`backend/migrations/`](../backend/migrations/).
+**Alternatively via phpMyAdmin:**
 
-### 8. First deploy
+1. Run the `ALTER DATABASE` utf8mb4 statement (see above) first.
+2. phpMyAdmin → select database → **Import** → upload the `.sql` file from [`backend/migrations/`](../backend/migrations/).
 
-Push the `deploy` branch (step 5). Plesk pulls and restarts both apps. Then:
+> If the migration SQL contains Drizzle breakpoint markers (`--> statement-breakpoint`), remove them before importing in phpMyAdmin — it does not understand them.
 
-```
-https://api.<domain>/api/health   →  {"status":"healthy","db":"connected"}
-https://app.<domain>/             →  the SSR frontend, fetching from the API
-```
+### 8. First deploy checklist
+
+After pushing the `deploy` branch and configuring both apps:
+
+1. Backend: pull → click **npm install** button → restart
+2. Frontend: pull → restart (no npm install)
+3. Check `<BACKEND URL>/api/health` → `{"status":"healthy","db":"connected"}`
+4. Check `<FRONTEND URL>` → SSR frontend loads
 
 ---
 
 ## Subsequent deploys
 
-1. Merge/develop on `main`.
-2. Check out `deploy`, merge `main`, rebuild artifacts (step 5), commit, push.
-3. New DB migrations: `DATABASE_URL=… pnpm db:migrate` against the Netcup database.
+### Backend only (source change, no frontend change):
 
-A small helper script can automate the build-and-commit; until then the steps above are the source of truth.
+```bash
+git checkout deploy
+git merge main
+pnpm build:backend
+git add backend/dist
+git commit -m "build: backend"
+git push
+```
+
+Then on Plesk: backend subdomain → pull → restart. No npm install needed unless `sharp`/`mysql2` versions changed.
+
+### Frontend only:
+
+```bash
+git checkout deploy
+git merge main
+pnpm --filter @portfolio-builder/shared build
+pnpm build:frontend
+git add frontend/.output
+git commit -m "build: frontend"
+git push
+```
+
+Then on Plesk: frontend subdomain → pull → restart.
+
+### Both:
+
+```bash
+git checkout deploy
+git merge main
+pnpm --filter @portfolio-builder/shared build
+pnpm build:backend
+pnpm build:frontend
+git add backend/dist frontend/.output
+git commit -m "build: deploy artifacts"
+git push
+```
+
+### New database migrations:
+
+```bash
+DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:migrate
+```
 
 ---
 
 ## Local development
-
-Unchanged — local dev still uses Postgres-or-MySQL via your `.env`:
 
 ```bash
 pnpm install
@@ -186,17 +237,22 @@ pnpm dev                 # frontend :3000, backend :3111
 For a local MySQL matching production:
 
 ```bash
-docker run -d --name pb-mysql -e MYSQL_ROOT_PASSWORD=root \
-  -e MYSQL_DATABASE=portfolio_builder -e MYSQL_USER=pb -e MYSQL_PASSWORD=pbpw \
+docker run -d --name pb-mysql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -e MYSQL_DATABASE=portfolio_builder \
+  -e MYSQL_USER=pb \
+  -e MYSQL_PASSWORD=pbpw \
   -p 3307:3306 mysql:8.0 \
-  --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  --character-set-server=utf8mb4 \
+  --collation-server=utf8mb4_unicode_ci
 # DATABASE_URL="mysql://pb:pbpw@127.0.0.1:3307/portfolio_builder"
 ```
 
 ---
 
-## Notes on the migration from Render/Postgres
+## Notes
 
-- The database moved from **PostgreSQL to MySQL 8**. Schema uses `varchar(36)` UUID primary keys (generated app-side via `crypto.randomUUID()`), `json` columns, `datetime` timestamps, and `bigint` byte counters. better-auth runs with `provider: 'mysql'` and keeps `varchar(255)` ids.
-- MySQL has no `RETURNING`; insert/update/delete endpoints generate the id app-side (or re-select) to return the affected row.
-- The old Docker/Render path (`Dockerfile.*`, `render.yaml`, the Docker jobs in CI) is no longer used for Netcup. The Dockerfiles still work for local `docker-compose` if desired.
+- **Session cookies** are set with `Domain=.<DOMAIN>.com`, `SameSite=None`, `Secure` so they work across `starta.` and `starta-api.` subdomains. The Nuxt SSR server forwards the cookie to the backend via `useRequestHeaders(['cookie'])` in the auth middleware.
+- **The `deploy` branch** has `frontend/.output/` and `backend/dist/` un-gitignored (`.gitignore` on that branch carves them out). The `main` branch gitignores them as usual.
+- **Phusion Passenger** injects `PORT` at runtime. The backend reads `process.env.PORT` and passes it to `serve()`.
+- The old Docker path (`Dockerfile.*`) is not used for Netcup, but the Dockerfiles still work for local `docker-compose` if desired.

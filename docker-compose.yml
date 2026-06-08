@@ -1,25 +1,33 @@
 services:
-  # ── Postgres ──────────────────────────────────────────────────────────────
-  postgres:
-    image: postgres:17-alpine
+  # ── MySQL ──────────────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-portfolio_builder}
+      MYSQL_USER: ${MYSQL_USER:-portfolio}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-portfolio}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-portfolio_builder}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
     ports:
-      - '5433:5432'
+      - '3307:3306'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     healthcheck:
       test:
         [
-          'CMD-SHELL',
-          'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-portfolio_builder}',
+          'CMD',
+          'mysqladmin',
+          'ping',
+          '-h',
+          'localhost',
+          '-u',
+          '${MYSQL_USER:-portfolio}',
+          '-p${MYSQL_PASSWORD:-portfolio}',
         ]
       interval: 5s
       timeout: 5s
-      retries: 5
-      start_period: 10s
+      retries: 10
+      start_period: 30s
 
   # ── Backend (Hono) ─────────────────────────────────────────────────────────
   backend:
@@ -33,7 +41,7 @@ services:
     environment:
       CI: 'true'
       PORT: ${PORT:-3111}
-      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-portfolio_builder}
+      DATABASE_URL: mysql://${MYSQL_USER:-portfolio}:${MYSQL_PASSWORD:-portfolio}@mysql:3306/${MYSQL_DATABASE:-portfolio_builder}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3111}
       FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
@@ -51,7 +59,7 @@ services:
       - nm_backend:/app/backend/node_modules
       - nm_shared:/app/shared/node_modules
     depends_on:
-      postgres:
+      mysql:
         condition: service_healthy
     healthcheck:
       test: ['CMD-SHELL', 'wget -qO- http://localhost:${PORT:-3111}/api/health || exit 1']
@@ -86,7 +94,7 @@ services:
         condition: service_healthy
 
 volumes:
-  postgres_data:
+  mysql_data:
   nm_root:
   nm_backend:
   nm_shared:

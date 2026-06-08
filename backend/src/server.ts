@@ -21,12 +21,15 @@ app.onError(onError);
 app.route('/', router);
 app.on(['GET', 'POST', 'OPTIONS'], '/api/auth/*', c => auth.handler(c.req.raw));
 
-serve({
-  fetch: app.fetch,
-  port: PORT,
-}, () => {
-  console.log(`Backend API running on http://localhost:${PORT}`);
-});
+serve(
+  {
+    fetch: app.fetch,
+    port: PORT,
+  },
+  () => {
+    console.log(`Backend API running on http://localhost:${PORT}`);
+  },
+);
 
 process.on('SIGINT', () => process.exit(0));
 process.on('SIGTERM', () => process.exit(0));

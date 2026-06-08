@@ -35,4 +35,3 @@ const deployPkg = {
 };
 writeFileSync('dist/package.json', JSON.stringify(deployPkg, null, 2) + '\n');
 console.log('Wrote dist/package.json with native deps:', NATIVE_DEPS.join(', '));
-
