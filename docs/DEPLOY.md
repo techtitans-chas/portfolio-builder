@@ -191,10 +191,10 @@ The two Docker jobs run in parallel once all three check jobs pass. A failed lin
 
 Each service has its own dedicated Dockerfile at the repo root.
 
-| Image               | Dockerfile            | Docker Hub tag                       |
-| ------------------- | --------------------- | ------------------------------------ |
-| Backend (Hono API)  | `Dockerfile.backend`  | `<you>/portfolio-builder-backend`    |
-| Frontend (Nuxt SSR) | `Dockerfile.frontend` | `<you>/portfolio-builder-frontend`   |
+| Image               | Dockerfile            | Docker Hub tag                     |
+| ------------------- | --------------------- | ---------------------------------- |
+| Backend (Hono API)  | `Dockerfile.backend`  | `<you>/portfolio-builder-backend`  |
+| Frontend (Nuxt SSR) | `Dockerfile.frontend` | `<you>/portfolio-builder-frontend` |
 
 Each push produces two tags:
 

@@ -10,7 +10,7 @@ services:
     name: portfolio-builder-backend
     runtime: image
     image:
-      url: docker.io/DOCKER_USERNAME/portfolio-builder-backend:latest
+      url: docker.io/idaohlen/portfolio-builder-backend:latest
     plan: starter
     region: frankfurt
     autoDeploy: false
@@ -47,7 +47,7 @@ services:
     name: portfolio-builder-frontend
     runtime: image
     image:
-      url: docker.io/DOCKER_USERNAME/portfolio-builder-frontend:latest
+      url: docker.io/idaohlen/portfolio-builder-frontend:latest
     plan: starter
     region: frankfurt
     autoDeploy: false
