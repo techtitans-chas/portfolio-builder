@@ -17,6 +17,90 @@ export interface BlockStyleProps {
   surfaceColor?: string | null;
 }
 
+export interface TextBlockProps extends BlockStyleProps {
+  content?: string;
+  align?: 'left' | 'center' | 'right';
+}
+
+export interface PostFeedBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  collectionId?: string;
+  filterTag?: string;
+  pageSize?: number;
+}
+
+export interface ProjectsBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  filterTag?: string;
+  linkToPage?: boolean;
+  collectionId?: string;
+}
+
+export interface ProjectListBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  filterTag?: string;
+  linkToPage?: boolean;
+  collectionId?: string;
+}
+
+export interface ExperiencesBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  filterTag?: string;
+  collectionId?: string;
+}
+
+export interface TestimonialItem {
+  id?: string;
+  quote: string;
+  author: string;
+  role: string;
+  avatar?: string | null;
+}
+
+export interface TestimonialBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  autoplay?: boolean;
+  items?: TestimonialItem[];
+}
+
+export interface AccordionItem {
+  id?: string;
+  question: string;
+  answer: string;
+}
+
+export interface AccordionBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  items?: AccordionItem[];
+}
+
+export interface PostListBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  collectionId?: string;
+  filterTag?: string;
+}
+
+export interface SkillItem {
+  id?: string;
+  name: string;
+  level: string;
+  category: string;
+}
+
+export interface SkillsBlockProps extends BlockStyleProps {
+  heading?: string;
+  showHeading?: boolean;
+  columns?: '1' | '2';
+  skills?: SkillItem[];
+}
+
 export interface ListItemField {
   key: string;
   label: string;
