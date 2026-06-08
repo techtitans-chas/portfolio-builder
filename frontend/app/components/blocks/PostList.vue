@@ -20,6 +20,7 @@ const props = withDefaults(
     showHeading?: boolean;
     collectionId?: string;
     filterTag?: string;
+    maxItems?: number;
   }>(),
   {
     background: null,
@@ -37,6 +38,7 @@ const props = withDefaults(
     showHeading: true,
     collectionId: '',
     filterTag: '',
+    maxItems: 5,
   },
 );
 
@@ -77,9 +79,10 @@ const hasDetailPage = !!getCollectionType('posts')?.pageTemplate;
 
 const posts = computed(() => {
   const all = data.value?.items ?? [];
-  return props.filterTag
+  const filtered = props.filterTag
     ? all.filter(p => (p.data.tags as string[] | undefined)?.includes(props.filterTag!))
     : all;
+  return props.maxItems ? filtered.slice(0, props.maxItems) : filtered;
 });
 </script>
 
