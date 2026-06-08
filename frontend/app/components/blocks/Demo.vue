@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { sanitizeHtml } from '~/utils/sanitize';
+
 export interface DemoBlockProps {
   // Tab 1 — Text fields
   textField?: string;
@@ -57,7 +59,7 @@ withDefaults(defineProps<DemoBlockProps>(), {
         class="w-full"
       >
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-if="inlineRichField" v-html="inlineRichField" />
+        <div v-if="inlineRichField" v-html="sanitizeHtml(inlineRichField)" />
       </EditorInlineRichField>
     </div>
 

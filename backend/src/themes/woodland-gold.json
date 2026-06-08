@@ -9,7 +9,8 @@
     "primary": "#1b4332",
     "secondary": "#e9a719",
     "textPrimary": "#1b2a1e",
-    "textSecondary": "#4a5c4e"
+    "textSecondary": "#4a5c4e",
+    "border": "#ddd8c8"
   },
   "dark": {
     "bgPage": "#0d1f16",
@@ -19,13 +20,57 @@
     "primary": "#52b788",
     "secondary": "#f0b429",
     "textPrimary": "#f0f7f2",
-    "textSecondary": "#8aab94"
+    "textSecondary": "#8aab94",
+    "border": "#1f3328"
   },
   "palette": [
-    { "key": "page", "label": "Page", "light": "#f7f3e8", "dark": "#0d1f16" },
-    { "key": "surface", "label": "Card", "light": "#ffffff", "dark": "#162b1e" },
-    { "key": "primary", "label": "Forest", "light": "#1b4332", "dark": "#52b788" },
-    { "key": "secondary", "label": "Gold", "light": "#e9a719", "dark": "#f0b429" },
-    { "key": "dark", "label": "Dark", "light": "#1b2a1e", "dark": "#f0f7f2" }
+    {
+      "key": "page",
+      "label": "Page",
+      "light": "#f7f3e8",
+      "dark": "#0d1f16",
+      "textLight": "#1b2a1e",
+      "textDark": "#f0f7f2"
+    },
+    {
+      "key": "surface",
+      "label": "Card",
+      "light": "#ffffff",
+      "dark": "#162b1e",
+      "textLight": "#1b2a1e",
+      "textDark": "#f0f7f2"
+    },
+    {
+      "key": "primary",
+      "label": "Forest",
+      "light": "#1b4332",
+      "dark": "#52b788",
+      "textLight": "#ffffff",
+      "textDark": "#1b2a1e",
+      "primaryLight": "#e9a719",
+      "primaryDark": "#f0b429",
+      "secondaryLight": "#f0b429",
+      "secondaryDark": "#e9a719"
+    },
+    {
+      "key": "secondary",
+      "label": "Gold",
+      "light": "#e9a719",
+      "dark": "#f0b429",
+      "textLight": "#1b2a1e",
+      "textDark": "#1b2a1e",
+      "primaryLight": "#1b4332",
+      "primaryDark": "#52b788",
+      "secondaryLight": "#52b788",
+      "secondaryDark": "#1b4332"
+    },
+    {
+      "key": "dark",
+      "label": "Dark",
+      "light": "#1b2a1e",
+      "dark": "#f0f7f2",
+      "textLight": "#f0f7f2",
+      "textDark": "#1b2a1e"
+    }
   ]
 }

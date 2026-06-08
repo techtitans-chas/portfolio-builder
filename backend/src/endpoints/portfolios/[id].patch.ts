@@ -22,6 +22,7 @@ const themeSettingsSchema = z.object({
   fonts: fontsSchema.nullable().optional(),
   logoLight: z.url().nullable().optional(),
   logoDark: z.url().nullable().optional(),
+  maxContentWidth: z.enum(['sm', 'md', 'lg', 'xl', 'full']).nullable().optional(),
 });
 
 const settingsSchema = z.object({

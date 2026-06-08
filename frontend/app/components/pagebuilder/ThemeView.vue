@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { FONT_OPTIONS } from '~/config/fonts';
+import { MAX_CONTENT_WIDTH_OPTIONS, type MaxContentWidth } from '~/composables/useLayoutSettings';
 
 export interface ThemeColors {
   bgPage: string;
@@ -10,6 +11,7 @@ export interface ThemeColors {
   secondary: string;
   textPrimary: string;
   textSecondary: string;
+  border?: string;
 }
 
 export interface ThemePaletteColor {
@@ -17,6 +19,12 @@ export interface ThemePaletteColor {
   label: string;
   light: string | null;
   dark: string | null;
+  textLight?: string | null;
+  textDark?: string | null;
+  primaryLight?: string | null;
+  primaryDark?: string | null;
+  secondaryLight?: string | null;
+  secondaryDark?: string | null;
 }
 
 export interface Theme {
@@ -37,6 +45,7 @@ const fonts = defineModel<FontSettings>('fonts', {
   default: () => ({ heading: 'Inter', body: 'Inter' }),
 });
 const mode = defineModel<'light' | 'dark' | 'both'>('mode', { default: 'light' });
+const maxContentWidth = defineModel<MaxContentWidth>('maxContentWidth', { default: 'sm' });
 
 const themes = useThemes();
 
@@ -49,6 +58,7 @@ const themeModeOptions = [
 const accordionItems = [
   { label: 'Colors', slot: 'colors' as const },
   { label: 'Typography', slot: 'typography' as const },
+  { label: 'Layout', slot: 'layout' as const },
 ];
 </script>
 
@@ -56,7 +66,7 @@ const accordionItems = [
   <UAccordion
     :items="accordionItems"
     multiple
-    :default-value="['Colors', 'Typography']"
+    :default-value="['Colors', 'Typography', 'Layout']"
     class="-mt-4"
   >
     <template #colors>
@@ -123,6 +133,15 @@ const accordionItems = [
             value-key="value"
             @update:model-value="fonts = { ...fonts, body: $event }"
           />
+        </div>
+      </div>
+    </template>
+
+    <template #layout>
+      <div class="flex flex-col gap-3 pb-3">
+        <div class="flex flex-col gap-1">
+          <label class="text-xs text-muted">Max content width</label>
+          <USelect v-model="maxContentWidth" :items="MAX_CONTENT_WIDTH_OPTIONS" value-key="value" />
         </div>
       </div>
     </template>

@@ -75,13 +75,57 @@ const inEditor = Boolean(inject(inlineEditorKey, null));
 
 ### Theme palette colors
 
-To use a palette color selected by the user (via a `theme-color` field), reference it as a CSS variable:
+Palette colors are resolved at runtime using the `useActivePalette()` composable. This is the correct approach — do **not** use CSS variables like `var(--palette-<key>)` directly in style bindings, as they don't handle text contrast, primary/secondary overrides, or light/dark mode switching.
 
 ```vue
-<section :style="background ? { backgroundColor: `var(--palette-${background})` } : {}">
+<script setup lang="ts">
+const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
+
+// Resolve a palette key (e.g. from a theme-color field) to a hex color
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+
+// Resolve a contrast-safe text color for a given background palette key
+const textColor = computed(() => (props.background ? resolveTextColor(props.background) : null));
+</script>
+
+<template>
+  <section :style="bgHex ? { backgroundColor: bgHex } : {}">
+    <p :style="textColor ? { color: textColor } : {}">Content</p>
+  </section>
+</template>
 ```
 
-The CSS variables `--palette-<key>` are automatically set on the portfolio root element for the active theme and mode.
+#### Available composable functions
+
+| Function                | Returns          | Description                                                                                                                                                                                                                                                                    |
+| ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `resolveColor(key)`     | `string \| null` | Hex color for the palette key in the current mode                                                                                                                                                                                                                              |
+| `resolveTextColor(key)` | `string \| null` | Contrast-safe text color for the given background key. Uses a palette-defined text color if set, otherwise falls back to WCAG luminance detection                                                                                                                              |
+| `resolvePrimary(key)`   | `string`         | The primary accent color adjusted for the given background. If the background key defines a `primaryLight`/`primaryDark` override, that is returned instead of the theme's default primary — preventing the primary color from being invisible on a primary-colored background |
+| `resolveSecondary(key)` | `string`         | Same as `resolvePrimary` but for the secondary accent color                                                                                                                                                                                                                    |
+
+#### Palette entry structure
+
+Each palette entry in a theme JSON file can define optional override fields:
+
+```json
+{
+  "key": "primary",
+  "label": "Indigo",
+  "light": "#5c4bdb",
+  "dark": "#7b6ef6",
+  "textLight": "#ffffff",
+  "textDark": "#ffffff",
+  "primaryLight": "#f27224",
+  "primaryDark": "#f5883a",
+  "secondaryLight": "#f5883a",
+  "secondaryDark": "#f27224"
+}
+```
+
+- **`textLight`/`textDark`** — explicit text color to use when this palette color is the block background. If omitted, `resolveTextColor` falls back to WCAG luminance detection (`#ffffff` or `#1a1a1a`).
+- **`primaryLight`/`primaryDark`** — replacement primary color to use when this palette color is the block background. Prevents the theme primary from being invisible on itself (e.g. a blue button on a blue background).
+- **`secondaryLight`/`secondaryDark`** — same for the secondary accent color.
 
 ---
 
@@ -113,6 +157,46 @@ export const myBlockDefinition: BlockDefinition = {
     },
   ],
 };
+```
+
+### Reusable config presets
+
+Common tab and default configurations are available from `frontend/app/config/blocks/presets.ts` to avoid repetition across blocks.
+
+#### `styleTab` and `styleDefaults`
+
+Adds a **Style** tab with background color, surface color, and background image fields — the standard set of appearance controls used by most content blocks.
+
+```ts
+import { styleTab, styleDefaults } from './presets';
+
+export const myBlockDefinition: BlockDefinition = {
+  // ...
+  defaultContent: {
+    heading: 'Hello',
+    ...styleDefaults, // adds: background: null, surfaceColor: null, backgroundImage: null
+  },
+  tabs: [
+    {
+      label: 'Content',
+      icon: 'i-lucide-text',
+      sections: [
+        /* ... */
+      ],
+    },
+    styleTab, // adds the full Style tab as the last tab
+  ],
+};
+```
+
+The component then reads these via `useActivePalette()`:
+
+```ts
+const { resolveColor, resolveTextColor } = useActivePalette();
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+const autoTextColor = computed(() =>
+  props.background ? resolveTextColor(props.background) : null,
+);
 ```
 
 ---
@@ -203,23 +287,24 @@ Sections within a tab are optional — a section with no `label` renders without
 
 Fields defined in `sections` or `tabs` appear in the right sidebar when the block is selected.
 
-| `type`        | UI control                    | Notes                                                                              |
-| ------------- | ----------------------------- | ---------------------------------------------------------------------------------- |
-| `text`        | Single-line text input        |                                                                                    |
-| `textarea`    | Multi-line text input         |                                                                                    |
-| `select`      | Dropdown                      | Requires `options: [{ label, value }]`                                             |
-| `switch`      | Toggle switch (USwitch)       | Stores a boolean; label left, toggle right. Preferred over `checkbox` for booleans |
-| `checkbox`    | Checkbox                      | Stores a boolean                                                                   |
-| `slider`      | Range slider                  | Stores a number; requires `min`, `max`, and `step`                                 |
-| `url`         | URL input                     | Validated as a URL                                                                 |
-| `color`       | Native color picker           | Stores a raw hex string                                                            |
-| `theme-color` | Palette swatch picker         | Stores a palette key (e.g. `'primary'`); resolves to `var(--palette-<key>)` in CSS |
-| `font`        | Font select                   | Populated from the project's font list                                             |
-| `image`       | Media picker (images only)    | Stores a URL string                                                                |
-| `file`        | Media picker (any file)       | Stores a URL string                                                                |
-| `list`        | Reorderable list of sub-items | Requires `itemFields`, `itemLabel`, and `defaultItem`                              |
-| `inline-text` | Editable directly in preview  | Hidden from sidebar; use `EditorInlineTextField` in the component                  |
-| `inline-rich` | Editable directly in preview  | Hidden from sidebar; use `EditorInlineRichField` in the component                  |
+| `type`         | UI control                    | Notes                                                                              |
+| -------------- | ----------------------------- | ---------------------------------------------------------------------------------- |
+| `text`         | Single-line text input        |                                                                                    |
+| `textarea`     | Multi-line text input         |                                                                                    |
+| `select`       | Dropdown                      | Requires `options: [{ label, value }]`                                             |
+| `switch`       | Toggle switch (USwitch)       | Stores a boolean; label left, toggle right. Preferred over `checkbox` for booleans |
+| `checkbox`     | Checkbox                      | Stores a boolean                                                                   |
+| `slider`       | Range slider                  | Stores a number; requires `min`, `max`, and `step`                                 |
+| `url`          | URL input                     | Validated as a URL                                                                 |
+| `color`        | Native color picker           | Stores a raw hex string                                                            |
+| `theme-color`  | Palette swatch picker         | Stores a palette key string (e.g. `'primary'`); resolve with `useActivePalette()`  |
+| `button-style` | Button style editor (modal)   | Stores a `ButtonStyleValue` object; opens a full editor modal with live preview    |
+| `font`         | Font select                   | Populated from the project's font list                                             |
+| `image`        | Media picker (images only)    | Stores a URL string                                                                |
+| `file`         | Media picker (any file)       | Stores a URL string                                                                |
+| `list`         | Reorderable list of sub-items | Requires `itemFields`, `itemLabel`, and `defaultItem`                              |
+| `inline-text`  | Editable directly in preview  | Hidden from sidebar; use `EditorInlineTextField` in the component                  |
+| `inline-rich`  | Editable directly in preview  | Hidden from sidebar; use `EditorInlineRichField` in the component                  |
 
 ### Common field properties
 
@@ -256,6 +341,54 @@ Use `switch` for boolean toggles — it renders as a labelled `USwitch` with the
 
 ```ts
 { key: 'showLogo', label: 'Show logo', type: 'switch' }
+```
+
+### Theme color field
+
+Use `theme-color` to let the user pick a color from the active theme's palette. The stored value is the palette key string (e.g. `'primary'`, `'surface'`).
+
+```ts
+{ key: 'background', label: 'Background', type: 'theme-color' }
+```
+
+In the component, resolve it with `useActivePalette()` rather than using it as a CSS variable directly:
+
+```ts
+const { resolveColor, resolveTextColor } = useActivePalette();
+const bgHex = computed(() => resolveColor(props.background));
+const textColor = computed(() => resolveTextColor(props.background));
+```
+
+### Button style field
+
+Use `button-style` to give users a full button appearance editor for a group of buttons (e.g. nav links or CTA buttons). The stored value is a `ButtonStyleValue` object.
+
+```ts
+{ key: 'navStyle', label: 'Nav links', type: 'button-style', showIf: { key: 'showNav', value: true } }
+```
+
+Clicking the field in the sidebar opens a modal with controls for variant, corner radius, size, spacing, letter spacing, and uppercase — plus a live preview showing primary and secondary colored buttons.
+
+The stored `ButtonStyleValue` shape:
+
+```ts
+interface ButtonStyleValue {
+  variant: 'ghost' | 'soft' | 'solid' | 'outline' | 'link';
+  radius: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  size: 'xs' | 'sm' | 'md' | 'lg';
+  spacing: number; // gap between buttons in px
+  uppercase: boolean;
+  letterSpacing: number; // in px, converted to em on render (0–8)
+}
+```
+
+Import the type from `~/config/blocks/types` or `~/components/pagebuilder/ButtonStyleModal.vue`:
+
+```ts
+import type { ButtonStyleValue } from '~/config/blocks/types';
+
+// In defaultContent:
+navStyle: { variant: 'ghost', radius: 'md', size: 'sm', spacing: 4, uppercase: false, letterSpacing: 0 }
 ```
 
 ### Conditional field visibility (`showIf`)

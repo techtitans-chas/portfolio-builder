@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 import BlocksAccordion from '~/components/blocks/Accordion.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 export const accordionDefinition: BlockDefinition = {
   type: 'accordion',
@@ -10,6 +11,7 @@ export const accordionDefinition: BlockDefinition = {
   defaultContent: {
     heading: 'Frequently Asked Questions',
     showHeading: true,
+    ...styleDefaults,
     items: [
       {
         id: crypto.randomUUID(),
@@ -31,34 +33,41 @@ export const accordionDefinition: BlockDefinition = {
       },
     ],
   },
-  sections: [
+  tabs: [
     {
       label: 'Content',
-      fields: [
-        { key: 'showHeading', label: 'Show heading', type: 'switch' },
+      icon: 'i-lucide-text',
+      sections: [
         {
-          key: 'heading',
-          label: 'Heading',
-          type: 'inline-text',
-          placeholder: 'FAQ',
-          showIf: { key: 'showHeading', value: true },
-        },
-        {
-          key: 'items',
-          label: 'Questions',
-          type: 'list',
-          itemLabel: 'Question',
-          defaultItem: () => ({
-            id: crypto.randomUUID(),
-            question: 'New question',
-            answer: '<p>Your answer here.</p>',
-          }),
-          itemFields: [
-            { key: 'question', label: 'Question', placeholder: 'Your question', inline: true },
-            { key: 'answer', label: 'Answer', type: 'textarea', placeholder: 'Your answer' },
+          label: 'Content',
+          fields: [
+            { key: 'showHeading', label: 'Show heading', type: 'switch' },
+            {
+              key: 'heading',
+              label: 'Heading',
+              type: 'inline-text',
+              placeholder: 'FAQ',
+              showIf: { key: 'showHeading', value: true },
+            },
+            {
+              key: 'items',
+              label: 'Questions',
+              type: 'list',
+              itemLabel: 'Question',
+              defaultItem: () => ({
+                id: crypto.randomUUID(),
+                question: 'New question',
+                answer: '<p>Your answer here.</p>',
+              }),
+              itemFields: [
+                { key: 'question', label: 'Question', placeholder: 'Your question', inline: true },
+                { key: 'answer', label: 'Answer', type: 'textarea', placeholder: 'Your answer' },
+              ],
+            },
           ],
         },
       ],
     },
+    styleTab,
   ],
 };

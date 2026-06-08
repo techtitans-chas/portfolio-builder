@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 import BlocksText from '~/components/blocks/Text.vue';
 import type { BlockDefinition } from './types';
+import { styleTab, styleDefaults } from './presets';
 
 export const textDefinition: BlockDefinition = {
   type: 'text',
@@ -10,28 +11,41 @@ export const textDefinition: BlockDefinition = {
   defaultContent: {
     content: '',
     align: 'left',
+    ...styleDefaults,
   },
-  sections: [
+  tabs: [
     {
       label: 'Content',
-      fields: [
-        { key: 'content', label: 'Content', type: 'inline-rich', placeholder: 'Start typing...' },
-      ],
-    },
-    {
-      label: 'Layout',
-      fields: [
+      icon: 'i-lucide-text',
+      sections: [
         {
-          key: 'align',
-          label: 'Text alignment',
-          type: 'select',
-          options: [
-            { label: 'Left', value: 'left' },
-            { label: 'Center', value: 'center' },
-            { label: 'Right', value: 'right' },
+          label: 'Content',
+          fields: [
+            {
+              key: 'content',
+              label: 'Content',
+              type: 'inline-rich',
+              placeholder: 'Start typing...',
+            },
+          ],
+        },
+        {
+          label: 'Layout',
+          fields: [
+            {
+              key: 'align',
+              label: 'Text alignment',
+              type: 'select',
+              options: [
+                { label: 'Left', value: 'left' },
+                { label: 'Center', value: 'center' },
+                { label: 'Right', value: 'right' },
+              ],
+            },
           ],
         },
       ],
     },
+    styleTab,
   ],
 };

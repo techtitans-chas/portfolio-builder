@@ -43,6 +43,7 @@ export function usePortfolio(
         fonts?: { heading: string; body: string } | null;
         logoLight?: string | null;
         logoDark?: string | null;
+        maxContentWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | null;
       } | null,
   );
 
@@ -85,6 +86,15 @@ export function usePortfolio(
     { flush: 'sync' },
   );
 
+  // Keep useLayoutSettings in sync so maxContentWidth is available to block components
+  const { maxContentWidth: activeMaxContentWidth } = useLayoutSettings();
+  watchEffect(
+    () => {
+      activeMaxContentWidth.value = themeSettings.value?.maxContentWidth ?? 'sm';
+    },
+    { flush: 'sync' },
+  );
+
   function buildCssVars(colors: ThemeColors, theme: Theme, dark: boolean): Record<string, string> {
     const vars: Record<string, string> = {
       '--bg-page': colors.bgPage,
@@ -95,6 +105,7 @@ export function usePortfolio(
       '--secondary': colors.secondary,
       '--text-primary': colors.textPrimary,
       '--text-secondary': colors.textSecondary,
+      '--border': colors.border ?? (dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'),
     };
     for (const entry of theme.palette ?? []) {
       const color = dark ? entry.dark : entry.light;

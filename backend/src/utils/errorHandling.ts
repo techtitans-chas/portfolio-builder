@@ -32,6 +32,8 @@ export const forbidden = (msg = 'Forbidden') => new AppError(403, msg);
 
 export const conflict = (msg = 'Conflict') => new AppError(409, msg);
 
+export const tooManyRequests = (msg = 'Too many requests') => new AppError(429, msg);
+
 export const unprocessable = (msg = 'Unprocessable', data?: unknown) =>
   new AppError(422, msg, data);
 

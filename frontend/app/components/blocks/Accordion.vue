@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import { sanitizeHtml } from '~/utils/sanitize';
+import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface AccordionItem {
   id?: string;
@@ -7,17 +11,31 @@ export interface AccordionItem {
   answer: string;
 }
 
-export interface AccordionBlockProps {
+export interface AccordionBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
   showHeading?: boolean;
   items?: AccordionItem[];
 }
 
-withDefaults(defineProps<AccordionBlockProps>(), {
+const props = withDefaults(defineProps<AccordionBlockProps>(), {
   heading: 'FAQ',
   showHeading: true,
   items: () => [],
+  ...styleDefaults,
 });
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+
+const { autoTextColor, textPrimaryStyle, textMutedStyle } = useBlockBackground(
+  () => props.background,
+);
+
+const borderColorStyle = computed(() => ({
+  borderColor: autoTextColor.value
+    ? `color-mix(in srgb, ${autoTextColor.value} 15%, transparent)`
+    : 'color-mix(in srgb, var(--text-primary) 12%, transparent)',
+}));
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 const openSet = ref<Set<number>>(new Set([0]));
@@ -37,29 +55,39 @@ function isOpen(index: number) {
 </script>
 
 <template>
-  <section class="px-8 py-12">
-    <div class="max-w-3xl mx-auto">
+  <BlocksBlockWrapper
+    class="px-8 py-12"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
+  >
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
         tag="h2"
         class="text-3xl font-bold mb-8"
-        :style="{ color: 'var(--text-primary)' }"
+        :style="textPrimaryStyle"
       >
-        <h2 class="text-3xl font-bold mb-8" :style="{ color: 'var(--text-primary)' }">
+        <h2
+          class="text-3xl font-bold mb-8"
+          :style="{ ...textPrimaryStyle, fontFamily: 'var(--font-heading)' }"
+        >
           {{ heading }}
         </h2>
       </EditorInlineTextField>
 
-      <div
-        class="divide-y"
-        :style="{ borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)' }"
-      >
-        <div
-          v-for="(item, index) in items"
-          :key="item.id ?? index"
-          :style="{ borderColor: 'color-mix(in srgb, var(--text-primary) 12%, transparent)' }"
-        >
+      <div class="divide-y" :style="borderColorStyle">
+        <div v-for="(item, index) in items" :key="item.id ?? index" :style="borderColorStyle">
           <component
             :is="inEditor ? 'div' : 'button'"
             class="w-full flex items-center justify-between py-4 text-left gap-4"
@@ -70,7 +98,7 @@ function isOpen(index: number) {
               :field-key="`items.${index}.question`"
               tag="span"
               class="font-semibold flex-1 text-base"
-              :style="{ color: 'var(--text-primary)' }"
+              :style="textPrimaryStyle"
             >
               {{ item.question }}
             </EditorInlineTextField>
@@ -78,7 +106,7 @@ function isOpen(index: number) {
               name="i-lucide-chevron-down"
               class="w-5 h-5 shrink-0 transition-transform duration-200"
               :class="{ 'rotate-180': isOpen(index) }"
-              :style="{ color: 'var(--text-secondary)' }"
+              :style="textMutedStyle"
             />
           </component>
 
@@ -95,16 +123,16 @@ function isOpen(index: number) {
                 :field-key="`items.${index}.answer`"
                 placeholder="Write your answer..."
                 class="rich-text"
-                :style="{ color: 'var(--text-secondary)' }"
+                :style="textMutedStyle"
                 html
               >
                 <!-- eslint-disable-next-line vue/no-v-html -->
-                <div v-if="item.answer" v-html="item.answer" />
+                <div v-if="item.answer" v-html="sanitizeHtml(item.answer)" />
               </EditorInlineRichField>
             </div>
           </Transition>
         </div>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

@@ -60,8 +60,8 @@ const hasErrors = computed(() => uploadQueue.value.some(e => e.status === 'error
           <div class="text-center">
             <p class="font-medium">Drop files here or click to browse</p>
             <p class="text-sm text-muted mt-1">
-              Images (JPG, PNG, GIF, WebP, SVG) and PDFs · JPG/PNG converted to WebP · max 2 MB for
-              images
+              Images (JPG, PNG, GIF, WebP, SVG) · Documents (PDF, DOC, DOCX) · Spreadsheets (XLS,
+              XLSX, CSV) · Text · JPG/PNG converted to WebP · max 2 MB for images
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 interface ServerFeatures {
   storage: boolean;
+  email: boolean;
 }
 
 /**
@@ -10,7 +11,8 @@ export const useServerFeatures = () => {
   const { apiBase } = useApi();
 
   const features = useState<ServerFeatures>('server-features', () => ({
-    storage: true, // optimistic default — flipped to false if health says otherwise
+    storage: true,
+    email: true,
   }));
 
   const pending = useState<boolean>('server-features-pending', () => false);

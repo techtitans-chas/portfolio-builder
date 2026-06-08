@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface SkillItem {
   id?: string;
@@ -8,7 +11,7 @@ export interface SkillItem {
   category: string;
 }
 
-export interface SkillsBlockProps {
+export interface SkillsBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
   showHeading?: boolean;
   columns?: '1' | '2';
@@ -20,12 +23,32 @@ const props = withDefaults(defineProps<SkillsBlockProps>(), {
   showHeading: true,
   columns: '2',
   skills: () => [],
+  ...styleDefaults,
 });
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+
+const { resolveColor, resolvePrimary, resolveSecondary } = useActivePalette();
+
+const bgHex = computed(() => (props.background ? resolveColor(props.background) : null));
+const bgPrimary = computed(() => resolvePrimary(props.background));
+const bgSecondary = computed(() => resolveSecondary(props.background));
+
+const { textPrimaryStyle, textMutedStyle } = useBlockBackground(() => props.background);
+
+const trackStyle = computed(() => ({
+  backgroundColor: `color-mix(in srgb, ${bgPrimary.value} 12%, ${bgHex.value ?? 'var(--bg-surface)'})`,
+}));
+
+const barGradient = computed(
+  () =>
+    `linear-gradient(to right, ${bgPrimary.value}, color-mix(in srgb, ${bgPrimary.value} 75%, ${bgSecondary.value}))`,
+);
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
 // Group skills by category, preserving insertion order.
-// Each entry carries the original flat index so field-keys stay correct.
 const grouped = computed(() => {
   const map = new Map<string, { item: SkillItem; flatIndex: number }[]>();
   (props.skills ?? []).forEach((item, i) => {
@@ -54,11 +77,12 @@ const delayMap = computed(() => {
 });
 
 // Animation: bars start at 0 and grow when the section enters the viewport
-const sectionRef = ref<HTMLElement | null>(null);
+const wrapperRef = ref<{ el: HTMLElement | null } | null>(null);
 const animated = ref(inEditor);
 
 onMounted(() => {
-  if (animated.value || !sectionRef.value) return;
+  const el = wrapperRef.value?.el;
+  if (animated.value || !el) return;
   const observer = new IntersectionObserver(
     entries => {
       if (entries[0]?.isIntersecting) {
@@ -68,21 +92,39 @@ onMounted(() => {
     },
     { threshold: 0.1 },
   );
-  observer.observe(sectionRef.value);
+  observer.observe(el);
 });
 </script>
 
 <template>
-  <section ref="sectionRef" class="px-8 py-12">
-    <div class="max-w-4xl mx-auto">
+  <BlocksBlockWrapper
+    ref="wrapperRef"
+    class="px-8 py-12"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
+  >
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
         tag="h2"
         class="text-3xl font-bold mb-10"
-        :style="{ color: 'var(--text-primary)' }"
+        :style="textPrimaryStyle"
       >
-        <h2 class="text-3xl font-bold mb-10" :style="{ color: 'var(--text-primary)' }">
+        <h2
+          class="text-3xl font-bold mb-10"
+          :style="{ ...textPrimaryStyle, fontFamily: 'var(--font-heading)' }"
+        >
           {{ heading }}
         </h2>
       </EditorInlineTextField>
@@ -92,49 +134,41 @@ onMounted(() => {
         :class="columns === '2' ? 'grid grid-cols-1 sm:grid-cols-2' : 'flex flex-col'"
       >
         <div v-for="[category, entries] in grouped" :key="category">
-          <!-- Category header — only shown when there are named groups -->
           <p
             v-if="hasCategories"
             class="text-xs font-semibold uppercase tracking-widest mb-4"
-            :style="{ color: 'var(--text-secondary)' }"
+            :style="textMutedStyle"
           >
             {{ category }}
           </p>
 
           <div class="flex flex-col gap-4">
             <div v-for="entry in entries" :key="entry.item.id ?? entry.flatIndex">
-              <!-- Skill name row -->
               <div class="flex items-center justify-between mb-2">
                 <EditorInlineTextField
                   :field-key="`skills.${entry.flatIndex}.name`"
                   tag="span"
                   class="text-sm font-medium"
-                  :style="{ color: 'var(--text-primary)' }"
+                  :style="textPrimaryStyle"
                   :data-placeholder="entry.item.name"
                 >
                   {{ entry.item.name }}
                 </EditorInlineTextField>
                 <span
                   class="text-xs tabular-nums font-medium ml-3 shrink-0"
-                  :style="{ color: 'var(--text-secondary)' }"
+                  :style="textMutedStyle"
                 >
                   {{ entry.item.level ?? 0 }}%
                 </span>
               </div>
 
               <!-- Progress track -->
-              <div
-                class="w-full h-1.5 rounded-full overflow-hidden"
-                :style="{
-                  backgroundColor: 'color-mix(in srgb, var(--primary) 12%, var(--bg-surface))',
-                }"
-              >
+              <div class="w-full h-1.5 rounded-full overflow-hidden" :style="trackStyle">
                 <div
                   class="h-full rounded-full"
                   :style="{
                     width: animated ? (Number(entry.item.level) || 0) + '%' : '0%',
-                    background:
-                      'linear-gradient(to right, var(--primary), color-mix(in srgb, var(--primary) 75%, var(--secondary)))',
+                    background: barGradient,
                     transition: animated
                       ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${delayMap.get(entry.flatIndex) ?? 0}ms`
                       : 'none',
@@ -146,5 +180,5 @@ onMounted(() => {
         </div>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

@@ -18,6 +18,9 @@ const { fetcher } = useApi();
 
 const typeDef = computed(() => getCollectionType(props.collectionType));
 const isEdit = computed(() => !!props.item);
+const hasDetailPage = computed(() => !!typeDef.value?.pageTemplate);
+
+const activeTab = ref<'fields' | 'page'>('fields');
 
 const form = reactive<{
   data: Record<string, unknown>;
@@ -27,6 +30,7 @@ const form = reactive<{
   isPublished: false,
 });
 
+const pageBody = ref('');
 const snapshot = ref('');
 
 function resetForm() {
@@ -39,7 +43,9 @@ function resetForm() {
   }
   form.data = initialData;
   form.isPublished = props.item?.isPublished ?? false;
+  pageBody.value = props.item?.pageBody ?? '';
   snapshot.value = JSON.stringify(form);
+  activeTab.value = 'fields';
 }
 
 watch(open, val => {
@@ -86,6 +92,15 @@ function onTagKeydown(e: KeyboardEvent, fieldKey: string) {
   }
 }
 
+// Image picker
+const imagePickerField = ref<string | null>(null);
+const imagePickerOpen = computed({
+  get: () => imagePickerField.value !== null,
+  set: val => {
+    if (!val) imagePickerField.value = null;
+  },
+});
+
 // Save
 const saving = ref(false);
 const errorMessage = ref('');
@@ -94,7 +109,11 @@ async function save() {
   saving.value = true;
   errorMessage.value = '';
   try {
-    const payload = { data: form.data, isPublished: form.isPublished };
+    const payload = {
+      data: form.data,
+      pageBody: pageBody.value || null,
+      isPublished: form.isPublished,
+    };
     let result: { item: CollectionItem };
     if (isEdit.value && props.item) {
       result = await fetcher(`/api/collections/${props.collectionId}/items/${props.item.id}`, {
@@ -133,71 +152,135 @@ async function save() {
   >
     <template #body>
       <div v-if="typeDef" class="space-y-4">
-        <template v-for="field in typeDef.fields" :key="field.key">
-          <!-- Tags field -->
-          <div v-if="field.type === 'tags'">
-            <p class="text-sm font-medium mb-2">{{ field.label }}</p>
-            <div class="flex gap-2">
-              <UInput
-                v-model="tagInputs[field.key]"
-                :placeholder="field.placeholder ?? 'Add a tag'"
-                class="flex-1"
-                @keydown="onTagKeydown($event, field.key)"
-              />
-              <UButton
-                variant="outline"
-                icon="i-lucide-plus"
-                aria-label="Add tag"
-                @click="addTag(field.key)"
-              />
-            </div>
-            <div
-              v-if="(form.data[field.key] as string[])?.length"
-              class="flex flex-wrap gap-2 mt-2"
-            >
-              <UBadge
-                v-for="tag in form.data[field.key] as string[]"
-                :key="tag"
-                variant="soft"
-                class="gap-1 cursor-default"
+        <!-- Tab switcher — only shown for collection types with a detail page -->
+        <UTabs
+          v-if="hasDetailPage"
+          :items="[
+            { label: 'Fields', value: 'fields' },
+            { label: 'Page', value: 'page' },
+          ]"
+          :model-value="activeTab"
+          @update:model-value="activeTab = $event as 'fields' | 'page'"
+        />
+
+        <!-- Page body editor -->
+        <EditorRichField
+          v-if="activeTab === 'page'"
+          v-model="pageBody"
+          placeholder="Write the page content here…"
+        />
+
+        <template v-if="activeTab === 'fields'">
+          <template v-for="field in typeDef.fields" :key="field.key">
+            <!-- Tags field -->
+            <div v-if="field.type === 'tags'">
+              <p class="text-sm font-medium mb-2">{{ field.label }}</p>
+              <div class="flex gap-2">
+                <UInput
+                  v-model="tagInputs[field.key]"
+                  :placeholder="field.placeholder ?? 'Add a tag'"
+                  class="flex-1"
+                  @keydown="onTagKeydown($event, field.key)"
+                />
+                <UButton
+                  variant="outline"
+                  icon="i-lucide-plus"
+                  aria-label="Add tag"
+                  @click="addTag(field.key)"
+                />
+              </div>
+              <p class="text-xs text-muted mt-1">
+                Prefix a tag with <code>::</code> (e.g. <code>::featured</code>) to use it for
+                filtering only — it won't be shown publicly.
+              </p>
+              <div
+                v-if="(form.data[field.key] as string[])?.length"
+                class="flex flex-wrap gap-2 mt-2"
               >
-                {{ tag }}
-                <button
-                  type="button"
-                  class="ml-1 flex justify-center opacity-60 hover:opacity-100"
-                  :aria-label="`Remove tag ${tag}`"
-                  @click="removeTag(field.key, tag)"
+                <UBadge
+                  v-for="tag in form.data[field.key] as string[]"
+                  :key="tag"
+                  variant="soft"
+                  class="gap-1 cursor-default"
                 >
-                  <UIcon name="i-lucide-x" class="size-3" />
-                </button>
-              </UBadge>
+                  {{ tag }}
+                  <button
+                    type="button"
+                    class="ml-1 flex justify-center opacity-60 hover:opacity-100"
+                    :aria-label="`Remove tag ${tag}`"
+                    @click="removeTag(field.key, tag)"
+                  >
+                    <UIcon name="i-lucide-x" class="size-3" />
+                  </button>
+                </UBadge>
+              </div>
             </div>
-          </div>
 
-          <!-- Boolean field -->
-          <UFormField v-else-if="field.type === 'boolean'" :label="field.label" :name="field.key">
-            <USwitch v-model="form.data[field.key] as boolean" />
-          </UFormField>
+            <!-- Boolean field -->
+            <UFormField v-else-if="field.type === 'boolean'" :label="field.label" :name="field.key">
+              <USwitch v-model="form.data[field.key] as boolean" />
+            </UFormField>
 
-          <!-- Textarea field -->
-          <UFormField v-else-if="field.type === 'textarea'" :label="field.label" :name="field.key">
-            <UTextarea
-              v-model="form.data[field.key] as string"
-              :placeholder="field.placeholder"
-              class="w-full"
-              :rows="3"
-            />
-          </UFormField>
+            <!-- Textarea field -->
+            <UFormField
+              v-else-if="field.type === 'textarea'"
+              :label="field.label"
+              :name="field.key"
+            >
+              <UTextarea
+                v-model="form.data[field.key] as string"
+                :placeholder="field.placeholder"
+                class="w-full"
+                :rows="3"
+              />
+            </UFormField>
 
-          <!-- Text / url / number -->
-          <UFormField v-else :label="field.label" :name="field.key">
-            <UInput
-              v-model="form.data[field.key] as string"
-              :placeholder="field.placeholder"
-              :type="field.type === 'url' ? 'url' : field.type === 'number' ? 'number' : 'text'"
-              class="w-full"
-            />
-          </UFormField>
+            <!-- Image field -->
+            <UFormField v-else-if="field.type === 'image'" :label="field.label" :name="field.key">
+              <div class="flex gap-3 items-start">
+                <div
+                  class="relative w-24 h-16 rounded-md overflow-hidden border border-default bg-muted flex items-center justify-center cursor-pointer hover:border-primary transition-colors shrink-0"
+                  @click="imagePickerField = field.key"
+                >
+                  <img
+                    v-if="form.data[field.key]"
+                    :src="form.data[field.key] as string"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                  <UIcon v-else name="i-lucide-image" class="text-muted size-5" />
+                  <UButton
+                    v-if="form.data[field.key]"
+                    icon="i-lucide-x"
+                    color="neutral"
+                    variant="solid"
+                    size="xs"
+                    class="absolute top-0.5 right-0.5 opacity-80 hover:opacity-100"
+                    aria-label="Remove image"
+                    @click.stop="form.data[field.key] = ''"
+                  />
+                </div>
+                <UButton
+                  color="neutral"
+                  variant="outline"
+                  size="xs"
+                  @click="imagePickerField = field.key"
+                >
+                  {{ form.data[field.key] ? 'Change image' : 'Choose image' }}
+                </UButton>
+              </div>
+            </UFormField>
+
+            <!-- Text / url / number -->
+            <UFormField v-else :label="field.label" :name="field.key">
+              <UInput
+                v-model="form.data[field.key] as string"
+                :placeholder="field.placeholder"
+                :type="field.type === 'url' ? 'url' : field.type === 'number' ? 'number' : 'text'"
+                class="w-full"
+              />
+            </UFormField>
+          </template>
         </template>
 
         <UAlert v-if="errorMessage" color="error" variant="soft" :description="errorMessage" />
@@ -228,4 +311,18 @@ async function save() {
       </div>
     </template>
   </UModal>
+
+  <AdminMediaPickerModal
+    v-model:open="imagePickerOpen"
+    images-only
+    :selected-url="imagePickerField ? (form.data[imagePickerField] as string | null) : null"
+    @select="
+      url => {
+        if (imagePickerField) {
+          form.data[imagePickerField] = url;
+          imagePickerField = null;
+        }
+      }
+    "
+  />
 </template>

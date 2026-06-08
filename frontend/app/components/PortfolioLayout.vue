@@ -63,79 +63,29 @@ defineEmits<{
     >
       <BlocksHeader
         ref="headerBlock"
+        v-bind="headerContent"
         :site-name="(headerContent?.siteName as string) || siteName"
         :home-url="homeUrl"
         :nav-links="navLinks"
         :logo-url="logoUrl"
+        :logo-url-dark="logoUrlDark"
+        :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
+        :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
         :is-editor="true"
         :on-slot-reorder="onSlotReorder"
-        :layout="(headerContent?.layout as any) || 'single'"
-        :left-order="(headerContent?.leftOrder as any) || ['logo', 'nav']"
-        :center-order="(headerContent?.centerOrder as any) || []"
-        :right-order="(headerContent?.rightOrder as any) || ['cta']"
-        :top-order="(headerContent?.topOrder as any) || ['logo']"
-        :cta-buttons="(headerContent?.ctaButtons as any[]) ?? []"
-        :social-links="(headerContent?.socialLinks as any[]) ?? []"
-        :show-logo="headerContent?.showLogo !== false"
-        :show-nav="headerContent?.showNav !== false"
-        :show-cta="headerContent?.showCta !== false"
-        :show-socials="!!headerContent?.showSocials"
-        :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
-        :logo-size="(headerContent?.logoSize as any) || 'md'"
-        :logo-stacked="!!headerContent?.logoStacked"
-        :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
-        :background="(headerContent?.background as string | null) ?? null"
-        :text-color="(headerContent?.textColor as string | null) ?? null"
-        :logo-url-dark="logoUrlDark"
-        :nav-variant="(headerContent?.navVariant as any) || 'ghost'"
-        :nav-color="(headerContent?.navColor as string | null) ?? null"
-        :nav-radius="(headerContent?.navRadius as any) || 'md'"
-        :nav-size="(headerContent?.navSize as any) || 'sm'"
-        :nav-spacing="(headerContent?.navSpacing as number) ?? 4"
-        :padding="(headerContent?.padding as number) ?? 16"
-        :border-width="(headerContent?.borderWidth as number) ?? 1"
-        :max-width="(headerContent?.maxWidth as any) || '7xl'"
-        :position="(headerContent?.position as any) || 'static'"
-        :mobile-menu-title="(headerContent?.mobileMenuTitle as string) || ''"
-        :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
       />
     </div>
 
     <BlocksHeader
       v-else
+      v-bind="headerContent"
       :site-name="(headerContent?.siteName as string) || siteName"
       :home-url="homeUrl"
       :nav-links="navLinks"
       :logo-url="logoUrl"
-      :layout="(headerContent?.layout as any) || 'single'"
-      :left-order="(headerContent?.leftOrder as any) || ['logo', 'nav']"
-      :center-order="(headerContent?.centerOrder as any) || []"
-      :right-order="(headerContent?.rightOrder as any) || ['cta']"
-      :top-order="(headerContent?.topOrder as any) || ['logo']"
-      :cta-buttons="(headerContent?.ctaButtons as any[]) ?? []"
-      :social-links="(headerContent?.socialLinks as any[]) ?? []"
-      :show-logo="headerContent?.showLogo !== false"
-      :show-nav="headerContent?.showNav !== false"
-      :show-cta="headerContent?.showCta !== false"
-      :show-socials="!!headerContent?.showSocials"
-      :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
-      :logo-size="(headerContent?.logoSize as any) || 'md'"
-      :logo-stacked="!!headerContent?.logoStacked"
-      :branding-display="(headerContent?.brandingDisplay as any) || 'logo-and-title'"
-      :background="(headerContent?.background as string | null) ?? null"
-      :text-color="(headerContent?.textColor as string | null) ?? null"
       :logo-url-dark="logoUrlDark"
-      :nav-variant="(headerContent?.navVariant as any) || 'ghost'"
-      :nav-color="(headerContent?.navColor as string | null) ?? null"
-      :nav-radius="(headerContent?.navRadius as any) || 'md'"
-      :nav-size="(headerContent?.navSize as any) || 'sm'"
-      :nav-spacing="(headerContent?.navSpacing as number) ?? 4"
-      :padding="(headerContent?.padding as number) ?? 16"
-      :border-width="(headerContent?.borderWidth as number) ?? 1"
-      :max-width="(headerContent?.maxWidth as any) || '7xl'"
-      :position="(headerContent?.position as any) || 'static'"
-      :mobile-menu-title="(headerContent?.mobileMenuTitle as string) || ''"
       :mobile-menu-bg="cssVars['--bg-mobile-menu'] ?? null"
+      :show-color-mode-toggle="portfolioMode === 'both' && !!headerContent?.showColorModeToggle"
     />
 
     <UMain>
@@ -148,16 +98,16 @@ defineEmits<{
       @click.capture.prevent="$emit('select-footer')"
     >
       <BlocksFooter
+        v-bind="footerContent"
         :site-name="(footerContent?.siteName as string) || siteName"
         :links="navLinks"
-        :copyright-text="(footerContent?.copyrightText as string) || ''"
       />
     </div>
     <BlocksFooter
       v-else
+      v-bind="footerContent"
       :site-name="(footerContent?.siteName as string) || siteName"
       :links="navLinks"
-      :copyright-text="(footerContent?.copyrightText as string) || ''"
     />
   </div>
 </template>

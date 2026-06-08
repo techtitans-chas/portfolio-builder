@@ -83,6 +83,8 @@ function forceClose() {
   open.value = false;
 }
 
+const ogImagePickerOpen = ref(false);
+
 const saving = ref(false);
 const errorMessage = ref('');
 
@@ -146,7 +148,13 @@ async function save() {
             <UInput v-model="form.title" placeholder="About" class="w-full" />
           </UFormField>
           <UFormField label="Page slug" name="slug" class="col-span-2 sm:col-span-1">
-            <UInput v-model="form.slug" placeholder="about" class="w-full" @input="onSlugInput">
+            <UInput
+              v-model="form.slug"
+              placeholder="about"
+              class="w-full"
+              :ui="{ base: 'ps-4' }"
+              @input="onSlugInput"
+            >
               <template #leading>
                 <span class="text-muted text-sm">/</span>
               </template>
@@ -168,15 +176,41 @@ async function save() {
 
         <!-- OG image + SEO fields -->
         <div class="flex gap-5 items-start">
-          <div class="shrink-0">
-            <p class="text-sm font-medium mb-2">OG image</p>
-            <div
-              class="w-24 h-20 rounded-md border-2 border-dashed border-muted flex items-center justify-center bg-muted/30"
-            >
-              <UIcon name="i-lucide-image" class="text-muted size-7" />
+          <UFormField label="OG image" name="seoOgImageUrl" class="shrink-0">
+            <div class="flex flex-col gap-2">
+              <div
+                class="relative w-32 h-[72px] rounded-md overflow-hidden border border-default bg-muted flex items-center justify-center cursor-pointer hover:border-primary transition-colors"
+                @click="ogImagePickerOpen = true"
+              >
+                <img
+                  v-if="form.seoOgImageUrl"
+                  :src="form.seoOgImageUrl"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+                <UIcon v-else name="i-lucide-image" class="text-muted size-6" />
+                <UButton
+                  v-if="form.seoOgImageUrl"
+                  icon="i-lucide-x"
+                  color="neutral"
+                  variant="solid"
+                  size="xs"
+                  class="absolute top-1 right-1 opacity-80 hover:opacity-100"
+                  aria-label="Remove OG image"
+                  @click.stop="form.seoOgImageUrl = null"
+                />
+              </div>
+              <UButton
+                color="neutral"
+                variant="outline"
+                size="xs"
+                class="w-32 flex justify-center"
+                @click="ogImagePickerOpen = true"
+              >
+                {{ form.seoOgImageUrl ? 'Change' : 'Choose' }}
+              </UButton>
             </div>
-            <p class="text-xs text-muted mt-1">Coming soon</p>
-          </div>
+          </UFormField>
 
           <div class="flex-1 space-y-4">
             <UFormField label="SEO title" name="seoTitle">
@@ -223,4 +257,11 @@ async function save() {
       </div>
     </template>
   </UModal>
+
+  <AdminMediaPickerModal
+    v-model:open="ogImagePickerOpen"
+    images-only
+    :selected-url="form.seoOgImageUrl"
+    @select="url => (form.seoOgImageUrl = url)"
+  />
 </template>

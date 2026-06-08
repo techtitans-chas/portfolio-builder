@@ -2,12 +2,14 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { prettyJSON } from 'hono/pretty-json';
+import { validateBackendEnv } from './lib/validateEnv.js';
 import { corsOptions } from './lib/cors.js';
 import { onError } from './utils/errorHandling.js';
 import { auth } from './lib/auth.js';
 import router from './router.js';
 
-const PORT = parseInt(process.env.PORT ?? '3111', 10);
+const env = validateBackendEnv();
+const PORT = parseInt(env.PORT ?? '3111', 10);
 
 async function startServer(): Promise<void> {
   const app = new Hono();

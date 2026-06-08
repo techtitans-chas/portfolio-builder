@@ -8,8 +8,14 @@ const props = defineProps<{
 }>();
 
 const { fetcher } = useApi();
-const { pendingNewBlocks, pendingDeletions, pendingContentEdits, queueDeletion, setCurrentPage } =
-  usePageEditor();
+const {
+  pendingNewBlocks,
+  pendingDeletions,
+  pendingContentEdits,
+  queueDeletion,
+  setCurrentPage,
+  addPendingBlock,
+} = usePageEditor();
 
 const blockToDelete = ref<Block | null>(null);
 const confirmDeleteOpen = ref(false);
@@ -29,6 +35,16 @@ function confirmDelete() {
   }
   blockToDelete.value = null;
   confirmDeleteOpen.value = false;
+}
+
+function duplicateBlock(block: Block) {
+  const content = pendingContentEdits.value[block.id] ?? (block.content as Record<string, unknown>);
+  const newBlock = addPendingBlock(block.type, { ...content });
+  const idx = contentBlocks.value.findIndex(b => b.id === block.id);
+  const newOrder = [...contentBlocks.value];
+  newOrder.splice(idx + 1, 0, newBlock);
+  reorder(newOrder);
+  selectBlock(newBlock);
 }
 
 // Blocks loaded from DB for this page (excludes header/footer)
@@ -204,8 +220,10 @@ defineExpose({
   homePageId,
   refresh: fetchBlocks,
   contentBlocks,
+  dbContentBlocks,
   headerBlock: liveHeaderBlock,
   footerBlock: liveFooterBlock,
+  explicitOrder,
   reorder,
 });
 </script>
@@ -291,6 +309,15 @@ defineExpose({
                 :class="block.isVisible ? 'text-highlighted' : 'text-muted'"
                 class="hover:text-highlighted hover:bg-accented/50"
                 @click="toggleVisibility(block)"
+              />
+              <UButton
+                icon="i-lucide-copy"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                class="text-muted hover:text-highlighted hover:bg-accented/50"
+                title="Duplicate block"
+                @click.stop="duplicateBlock(block)"
               />
               <UButton
                 icon="i-lucide-trash"

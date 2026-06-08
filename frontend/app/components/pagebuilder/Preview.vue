@@ -110,6 +110,17 @@ function confirmDelete() {
   confirmDeleteOpen.value = false;
 }
 
+function duplicateBlock(block: Block) {
+  const content = pendingContentEdits.value[block.id] ?? (block.content as Record<string, unknown>);
+  const newBlock = addPendingBlock(block.type, { ...content });
+  const idx = localBlocks.value.findIndex(b => b.id === block.id);
+  if (idx !== -1) {
+    localBlocks.value.splice(idx + 1, 0, newBlock);
+    props.layersView?.reorder([...localBlocks.value]);
+  }
+  selectBlock(newBlock);
+}
+
 function isSelected(block: Block) {
   return selectedBlock.value?.id === block.id;
 }
@@ -205,7 +216,7 @@ function onBlockDropped(event: { newIndex?: number }) {
         :prevent-on-filter="false"
         ghost-class="preview-drop-ghost"
         fallback-class="preview-drag-fallback"
-        class="min-h-64"
+        class="min-h-64 flex flex-col gap-2 py-2"
         @end="onReorder"
         @add="onBlockDropped"
       >
@@ -213,7 +224,7 @@ function onBlockDropped(event: { newIndex?: number }) {
           v-for="block in localBlocks"
           :key="block.id"
           :ref="(el: unknown) => setBlockRef(block.id, el)"
-          class="group/block relative after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:outline-offset-[-2px]"
+          class="group/block relative min-h-16 after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:-outline-offset-2"
           :class="isSelected(block) ? 'block-selected' : 'block-hoverable'"
           @dragstart="onBlockDragStart($event, block)"
           @click="selectBlock(block)"
@@ -224,14 +235,25 @@ function onBlockDropped(event: { newIndex?: number }) {
           >
             <UIcon name="i-lucide-grip-horizontal" class="size-4 text-white" />
           </div>
-          <!-- Delete button — visible on hover, top-right corner -->
-          <button
-            class="absolute top-2 right-2 z-10 w-7 h-7 flex items-center justify-center opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 hover:bg-red-600 rounded"
-            title="Delete block"
-            @click.stop="requestDelete(block)"
+          <!-- Block action buttons — visible on hover, top-right corner -->
+          <div
+            class="absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity"
           >
-            <UIcon name="i-lucide-trash-2" class="size-3.5 text-white" />
-          </button>
+            <button
+              class="w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded"
+              title="Duplicate block"
+              @click.stop="duplicateBlock(block)"
+            >
+              <UIcon name="i-lucide-copy" class="size-3.5 text-white" />
+            </button>
+            <button
+              class="w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-red-600 rounded"
+              title="Delete block"
+              @click.stop="requestDelete(block)"
+            >
+              <UIcon name="i-lucide-trash-2" class="size-3.5 text-white" />
+            </button>
+          </div>
           <PagebuilderPreviewBlock :block="block">
             <BlocksRenderer :block="block" />
           </PagebuilderPreviewBlock>

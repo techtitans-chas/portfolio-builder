@@ -3,13 +3,25 @@ import type { TabsItem } from '@nuxt/ui';
 import { allBlockDefinitions } from '~/config/blocks';
 import { getPath, setPath } from '~/utils/dotPath';
 import { FONT_OPTIONS } from '~/config/fonts';
+import type { ButtonStyleValue } from '~/config/blocks/types';
 
 const { selectedBlock } = useSelectedBlock();
 const { setBlockContent, setBlockName, pendingContentEdits } = usePageEditor();
+const { collections } = useCollections();
 
 const pickerFieldKey = ref<string | null>(null);
 const pickerOpen = ref(false);
 const pickerImagesOnly = ref(true);
+
+const buttonStyleFieldKey = ref<string | null>(null);
+const buttonStyleLabel = ref<string | undefined>(undefined);
+const buttonStyleOpen = ref(false);
+
+function openButtonStyleModal(key: string, label?: string) {
+  buttonStyleFieldKey.value = key;
+  buttonStyleLabel.value = label;
+  buttonStyleOpen.value = true;
+}
 
 function openPicker(key: string, imagesOnly = true) {
   pickerFieldKey.value = key;
@@ -128,6 +140,21 @@ function getValue(key: string): unknown {
   return getPath(localContent.value, key);
 }
 
+function checkCondition(cond: { key: string; value: unknown }): boolean {
+  const val = getValue(cond.key);
+  if (cond.value === 'truthy') return !!val;
+  return val === cond.value;
+}
+
+function fieldVisible(f: {
+  showIf?: { key: string; value: unknown };
+  showIfAll?: { key: string; value: unknown }[];
+}): boolean {
+  if (f.showIfAll) return f.showIfAll.every(checkCondition);
+  if (f.showIf) return checkCondition(f.showIf);
+  return true;
+}
+
 function setValue(key: string, value: unknown) {
   if (!selectedBlock.value) return;
   localContent.value = setPath(localContent.value, key, value);
@@ -199,10 +226,7 @@ function setValue(key: string, value: unknown) {
           <template
             v-if="
               section.fields.filter(
-                f =>
-                  f.type !== 'inline-text' &&
-                  f.type !== 'inline-rich' &&
-                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+                f => f.type !== 'inline-text' && f.type !== 'inline-rich' && fieldVisible(f),
               ).length
             "
           >
@@ -214,10 +238,7 @@ function setValue(key: string, value: unknown) {
             </p>
             <div
               v-for="field in section.fields.filter(
-                f =>
-                  f.type !== 'inline-text' &&
-                  f.type !== 'inline-rich' &&
-                  (!f.showIf || getValue(f.showIf.key) === f.showIf.value),
+                f => f.type !== 'inline-text' && f.type !== 'inline-rich' && fieldVisible(f),
               )"
               :key="field.key"
               class="flex gap-1"
@@ -309,23 +330,39 @@ function setValue(key: string, value: unknown) {
                 @update:model-value="setValue(field.key, $event)"
               />
 
+              <UButton
+                v-else-if="field.type === 'button-style'"
+                color="neutral"
+                variant="subtle"
+                size="xs"
+                icon="i-lucide-sliders-horizontal"
+                class="w-full flex justify-center"
+                @click="openButtonStyleModal(field.key, field.label)"
+              >
+                Customize button
+              </UButton>
+
               <PagebuilderListFieldEditor
                 v-else-if="field.type === 'list'"
                 :field="field"
                 :model-value="(getValue(field.key) as Record<string, unknown>[]) ?? []"
                 @update:model-value="setValue(field.key, $event)"
               />
-              <UTextarea
-                v-else-if="field.type === 'textarea'"
-                :model-value="(getValue(field.key) as string) ?? ''"
-                :placeholder="field.placeholder"
-                size="sm"
-                :rows="3"
-                :maxrows="5"
-                autoresize
-                class="overflow-y-auto"
-                @update:model-value="setValue(field.key, $event)"
-              />
+              <div v-else-if="field.type === 'textarea'" class="flex flex-col gap-0.5">
+                <UTextarea
+                  :model-value="(getValue(field.key) as string) ?? ''"
+                  :placeholder="field.placeholder"
+                  size="sm"
+                  :rows="3"
+                  :maxrows="5"
+                  autoresize
+                  class="overflow-y-auto"
+                  @update:model-value="setValue(field.key, $event)"
+                />
+                <p v-if="field.maxLength" class="text-xs text-muted text-right tabular-nums">
+                  {{ ((getValue(field.key) as string) ?? '').length }} / {{ field.maxLength }}
+                </p>
+              </div>
               <UCheckbox
                 v-else-if="field.type === 'checkbox'"
                 :model-value="(getValue(field.key) as boolean) ?? false"
@@ -346,10 +383,23 @@ function setValue(key: string, value: unknown) {
                   class="flex-1"
                   @update:model-value="setValue(field.key, $event)"
                 />
-                <span class="text-xs text-muted w-8 text-right tabular-nums">
-                  {{ (getValue(field.key) as number) ?? field.min ?? 0 }}px
+                <span class="text-xs text-muted w-10 text-right tabular-nums shrink-0">
+                  {{ (getValue(field.key) as number) ?? field.min ?? 0
+                  }}{{ field.unit !== '' ? (field.unit ?? 'px') : '' }}
                 </span>
               </div>
+              <USelect
+                v-else-if="field.type === 'collection-select'"
+                :model-value="(getValue(field.key) as string) || '__default__'"
+                :items="[
+                  { label: 'All (default)', value: '__default__' },
+                  ...collections
+                    .filter(c => c.type === field.collectionType)
+                    .map(c => ({ label: c.name, value: c.id })),
+                ]"
+                size="sm"
+                @update:model-value="setValue(field.key, $event === '__default__' ? '' : $event)"
+              />
               <USelect
                 v-else-if="field.type === 'select'"
                 :model-value="(getValue(field.key) as string) ?? ''"
@@ -376,14 +426,18 @@ function setValue(key: string, value: unknown) {
                   @input="setValue(field.key, ($event.target as HTMLInputElement).value)"
                 />
               </label>
-              <UInput
-                v-else
-                :model-value="(getValue(field.key) as string) ?? ''"
-                :placeholder="field.placeholder"
-                :type="field.type === 'url' ? 'url' : 'text'"
-                size="sm"
-                @update:model-value="setValue(field.key, $event)"
-              />
+              <div v-else class="flex flex-col gap-0.5">
+                <UInput
+                  :model-value="(getValue(field.key) as string) ?? ''"
+                  :placeholder="field.placeholder"
+                  :type="field.type === 'url' ? 'url' : 'text'"
+                  size="sm"
+                  @update:model-value="setValue(field.key, $event)"
+                />
+                <p v-if="field.maxLength" class="text-xs text-muted text-right tabular-nums">
+                  {{ ((getValue(field.key) as string) ?? '').length }} / {{ field.maxLength }}
+                </p>
+              </div>
             </div>
           </template>
         </div>
@@ -392,7 +446,7 @@ function setValue(key: string, value: unknown) {
 
     <!-- Empty state -->
     <div v-else class="flex-1 flex items-center justify-center p-4">
-      <p class="text-sm text-muted text-center">Select a block in the Layers panel to edit it</p>
+      <p class="text-sm text-muted text-center">Select a block</p>
     </div>
   </div>
 
@@ -401,5 +455,14 @@ function setValue(key: string, value: unknown) {
     :images-only="pickerImagesOnly"
     :selected-url="pickerFieldKey ? (getValue(pickerFieldKey) as string | null) : null"
     @select="onImageSelected"
+  />
+
+  <PagebuilderButtonStyleModal
+    v-if="buttonStyleFieldKey"
+    :key="buttonStyleFieldKey"
+    v-model:open="buttonStyleOpen"
+    :model-value="getValue(buttonStyleFieldKey) as ButtonStyleValue"
+    :label="buttonStyleLabel"
+    @update:model-value="setValue(buttonStyleFieldKey!, $event)"
   />
 </template>

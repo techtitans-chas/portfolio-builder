@@ -39,6 +39,64 @@ const defaultPages = [
   },
 ];
 
+const blogItems = [
+  {
+    isPublished: true,
+    sortOrder: 0,
+    data: {
+      title: 'Getting started with Nuxt 4',
+      excerpt:
+        'A practical guide to setting up a Nuxt 4 project from scratch, covering directory structure, auto-imports, and the new app/ layout.',
+      date: '2025-05-12',
+      tags: ['Nuxt', 'Vue', 'Tutorial'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 1,
+    data: {
+      title: 'Why I switched from REST to tRPC',
+      excerpt:
+        "After a year of maintaining a hand-rolled REST API I moved to tRPC. Here's what I gained, what I lost, and when it makes sense.",
+      date: '2025-04-03',
+      tags: ['TypeScript', 'API', 'tRPC'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 2,
+    data: {
+      title: 'CSS color-mix() is surprisingly powerful',
+      excerpt:
+        'A deep dive into the color-mix() function — how it works, where it shines, and a few gotchas I ran into building a theming system.',
+      date: '2025-03-18',
+      tags: ['CSS', 'Design', 'Theming'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 3,
+    data: {
+      title: 'Drizzle ORM: first impressions after six months',
+      excerpt:
+        'My honest take on Drizzle after using it in production — the good (type safety, migrations), the bad (relation queries), and the ugly.',
+      date: '2025-02-27',
+      tags: ['Drizzle', 'TypeScript', 'Database'],
+    },
+  },
+  {
+    isPublished: true,
+    sortOrder: 4,
+    data: {
+      title: 'Building accessible modals without a library',
+      excerpt:
+        'Focus trapping, aria-modal, scroll locking, and closing on Escape — everything you need to roll your own accessible dialog from scratch.',
+      date: '2025-01-14',
+      tags: ['Accessibility', 'HTML', 'JavaScript'],
+    },
+  },
+];
+
 const seeds = [
   {
     name: 'Martin Södersten',
@@ -113,6 +171,11 @@ const seeds = [
             },
           },
         ],
+      },
+      {
+        type: 'posts',
+        name: 'Blog',
+        items: blogItems,
       },
     ],
   },
@@ -193,6 +256,11 @@ const seeds = [
             },
           },
         ],
+      },
+      {
+        type: 'posts',
+        name: 'Blog',
+        items: blogItems,
       },
     ],
   },
@@ -477,17 +545,28 @@ async function seed() {
             logoStacked: false,
             brandingDisplay: 'logo-and-title',
             background: null,
-            textColor: null,
-            navVariant: 'ghost',
-            navColor: null,
-            navRadius: 'md',
-            navSize: 'sm',
-            navSpacing: 4,
+            navStyle: {
+              variant: 'ghost',
+              radius: 'md',
+              size: 'sm',
+              spacing: 4,
+              uppercase: false,
+              letterSpacing: 0,
+            },
+            ctaStyle: {
+              variant: 'solid',
+              radius: 'md',
+              size: 'sm',
+              spacing: 4,
+              uppercase: false,
+              letterSpacing: 0,
+            },
             padding: 16,
             borderWidth: 1,
             maxWidth: '7xl',
             position: 'static',
             mobileMenuTitle: '',
+            mobileBackground: null,
           },
           styles: {},
         },
@@ -499,11 +578,47 @@ async function seed() {
           isMandatory: false,
           content: {
             heading: heroContent.heading,
-            subheading: heroContent.subheading,
-            ctaButtons: [
-              { id: crypto.randomUUID(), label: 'View my work', url: '#projects' },
-              { id: crypto.randomUUID(), label: 'Get in touch', url: '#contact' },
-            ],
+            subheading: `<p>${heroContent.subheading}</p>`,
+            alignH: 'center',
+            alignV: 'center',
+            showButton1: true,
+            button1Label: 'View my work',
+            button1Url: '#projects',
+            button1Style: {
+              variant: 'solid',
+              radius: 'md',
+              size: 'md',
+              spacing: 4,
+              uppercase: false,
+              letterSpacing: 0,
+            },
+            showButton2: true,
+            button2Label: 'Get in touch',
+            button2Url: '#contact',
+            button2Style: {
+              variant: 'outline',
+              radius: 'md',
+              size: 'md',
+              spacing: 4,
+              uppercase: false,
+              letterSpacing: 0,
+            },
+            image: null,
+            imagePosition: 'right',
+            headingFont: null,
+            background: null,
+            backgroundImage: null,
+            backgroundFixed: false,
+            overlayEnabled: false,
+            overlayType: 'solid',
+            overlayColor: null,
+            overlayColor2: null,
+            overlayDegree: 180,
+            overlayOpacity: 40,
+            textShadow: false,
+            fullHeight: false,
+            height: 500,
+            maxWidth: 'md',
           },
           styles: {},
         },

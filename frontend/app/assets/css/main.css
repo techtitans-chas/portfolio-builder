@@ -11,11 +11,15 @@
 }
 
 /* Block drag-into-preview: full-width placeholder shown in the drop target */
+/* Suppress the ::after outline inherited from block-selected/block-hoverable — ghost has its own dashed border */
+.preview-drop-ghost::after {
+  outline: none !important;
+}
 .preview-drop-ghost {
   width: 100% !important;
   height: 4rem !important;
   background: color-mix(in srgb, var(--ui-primary) 15%, transparent) !important;
-  border: 2px dashed var(--ui-primary) !important;
+  border: 3px dashed var(--ui-primary) !important;
   border-radius: 0.5rem !important;
   opacity: 1 !important;
   overflow: hidden !important;
@@ -30,9 +34,7 @@
 .rich-text h1,
 .rich-text h2,
 .rich-text h3,
-.rich-text h4,
-.rich-text h5,
-.rich-text h6 {
+.rich-text h4 {
   font-family: var(--font-heading);
 }
 .rich-text h1 {
@@ -126,6 +128,31 @@
   border-top: 1px solid currentColor;
   opacity: 0.2;
   margin: 1.25em 0;
+}
+
+/* Tiptap floating toolbar — used by InlineRichField */
+.tiptap-toolbar-btn {
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  transition: background-color 150ms;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+}
+.tiptap-toolbar-btn:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.tiptap-toolbar-btn.active {
+  background-color: rgb(255 255 255 / 0.2);
+}
+.tiptap-toolbar-divider {
+  width: 1px;
+  height: 1rem;
+  background-color: rgb(255 255 255 / 0.2);
+  margin-inline: 0.125rem;
+  flex-shrink: 0;
 }
 
 @theme static {

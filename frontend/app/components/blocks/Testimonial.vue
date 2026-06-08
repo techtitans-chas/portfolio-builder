@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
+import { sanitizeHtml } from '~/utils/sanitize';
+import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import { styleDefaults } from '~/config/blocks/presets';
+import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
 export interface TestimonialItem {
   id?: string;
@@ -9,7 +13,7 @@ export interface TestimonialItem {
   avatar?: string | null;
 }
 
-export interface TestimonialBlockProps {
+export interface TestimonialBlockProps extends BlockStyleWithSurfaceProps {
   heading?: string;
   showHeading?: boolean;
   autoplay?: boolean;
@@ -21,7 +25,33 @@ const props = withDefaults(defineProps<TestimonialBlockProps>(), {
   showHeading: true,
   autoplay: false,
   items: () => [],
+  ...styleDefaults,
 });
+
+const { maxContentWidth } = useLayoutSettings();
+const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+
+const { resolvePrimary } = useActivePalette();
+
+const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
+const {
+  surfaceHex,
+  surfaceStyle,
+  surfaceTextColor,
+  surfaceTextStyle,
+  surfaceTextMutedStyle,
+  surfacePrimary,
+} = useBlockSurface(() => props.surfaceColor);
+
+// Quote icon: derived from surface text color at low opacity so it's always visible
+const quoteIconStyle = computed(() =>
+  surfaceTextColor.value
+    ? { color: surfaceTextColor.value, opacity: '0.25' }
+    : { color: 'var(--primary)', opacity: '1' },
+);
+
+// Primary resolved against the block background (for pagination dots etc.)
+const bgPrimary = computed(() => resolvePrimary(props.background));
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 
@@ -68,16 +98,36 @@ watch(
 </script>
 
 <template>
-  <section class="px-8 py-12">
-    <div class="max-w-3xl mx-auto">
+  <BlocksBlockWrapper
+    class="px-8 py-12"
+    v-bind="{
+      background,
+      backgroundImage,
+      backgroundOpacity,
+      backgroundFixed,
+      overlayEnabled,
+      overlayType,
+      overlayColor,
+      overlayColor2,
+      overlayDegree,
+      overlayOpacity,
+    }"
+  >
+    <div class="mx-auto" :class="[maxWidthClass]">
       <EditorInlineTextField
         v-if="showHeading"
         field-key="heading"
         tag="h2"
         class="text-3xl font-bold mb-10 text-center"
-        :style="{ color: 'var(--text-primary)' }"
+        :style="autoTextColor ? textColorStyle : { color: 'var(--text-primary)' }"
       >
-        <h2 class="text-3xl font-bold mb-10 text-center" :style="{ color: 'var(--text-primary)' }">
+        <h2
+          class="text-3xl font-bold mb-10 text-center"
+          :style="{
+            ...(autoTextColor ? textColorStyle : { color: 'var(--text-primary)' }),
+            fontFamily: 'var(--font-heading)',
+          }"
+        >
           {{ heading }}
         </h2>
       </EditorInlineTextField>
@@ -88,22 +138,18 @@ watch(
           v-for="(item, index) in items"
           :key="item.id ?? index"
           class="rounded-2xl p-8"
-          :style="{ backgroundColor: 'var(--bg-surface)' }"
+          :style="surfaceStyle"
         >
-          <UIcon
-            name="i-lucide-quote"
-            class="w-8 h-8 mb-4 opacity-20"
-            :style="{ color: 'var(--primary)' }"
-          />
+          <UIcon name="i-lucide-quote" class="w-8 h-8 mb-4" :style="quoteIconStyle" />
           <EditorInlineRichField
             :field-key="`items.${index}.quote`"
             placeholder="Write a testimonial..."
             class="rich-text text-lg leading-relaxed mb-6"
-            :style="{ color: 'var(--text-primary)' }"
+            :style="surfaceTextStyle"
             html
           >
             <!-- eslint-disable-next-line vue/no-v-html -->
-            <div v-if="item.quote" v-html="item.quote" />
+            <div v-if="item.quote" v-html="sanitizeHtml(item.quote)" />
           </EditorInlineRichField>
 
           <div class="flex items-center gap-3">
@@ -117,8 +163,8 @@ watch(
               v-else
               class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
               :style="{
-                backgroundColor: 'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
-                color: 'var(--primary)',
+                backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHex ?? 'var(--bg-surface)'})`,
+                color: surfacePrimary,
               }"
             >
               {{ item.author?.charAt(0) ?? '?' }}
@@ -128,7 +174,7 @@ watch(
                 :field-key="`items.${index}.author`"
                 tag="p"
                 class="font-semibold text-sm"
-                :style="{ color: 'var(--text-primary)' }"
+                :style="surfaceTextStyle"
                 :data-placeholder="item.author"
               >
                 {{ item.author }}
@@ -137,7 +183,7 @@ watch(
                 :field-key="`items.${index}.role`"
                 tag="p"
                 class="text-sm"
-                :style="{ color: 'var(--text-secondary)' }"
+                :style="surfaceTextMutedStyle"
                 :data-placeholder="item.role"
               >
                 {{ item.role }}
@@ -161,20 +207,15 @@ watch(
                 :key="item.id ?? index"
                 class="w-full shrink-0 px-1"
               >
-                <div class="rounded-2xl p-8" :style="{ backgroundColor: 'var(--bg-surface)' }">
-                  <UIcon
-                    name="i-lucide-quote"
-                    class="w-8 h-8 mb-4 opacity-20"
-                    :style="{ color: 'var(--primary)' }"
-                  />
-                  <!-- eslint-disable vue/no-v-html -->
+                <div class="rounded-2xl p-8" :style="surfaceStyle">
+                  <UIcon name="i-lucide-quote" class="w-8 h-8 mb-4" :style="quoteIconStyle" />
+                  <!-- eslint-disable-next-line vue/no-v-html -->
                   <div
                     v-if="item.quote"
                     class="rich-text text-lg leading-relaxed mb-6"
-                    :style="{ color: 'var(--text-primary)' }"
-                    v-html="item.quote"
+                    :style="surfaceTextStyle"
+                    v-html="sanitizeHtml(item.quote)"
                   />
-                  <!-- eslint-enable vue/no-v-html -->
 
                   <div class="flex items-center gap-3">
                     <img
@@ -187,18 +228,17 @@ watch(
                       v-else
                       class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold"
                       :style="{
-                        backgroundColor:
-                          'color-mix(in srgb, var(--primary) 15%, var(--bg-surface))',
-                        color: 'var(--primary)',
+                        backgroundColor: `color-mix(in srgb, ${surfacePrimary} 15%, ${surfaceHex ?? 'var(--bg-surface)'})`,
+                        color: surfacePrimary,
                       }"
                     >
                       {{ item.author?.charAt(0) ?? '?' }}
                     </div>
                     <div>
-                      <p class="font-semibold text-sm" :style="{ color: 'var(--text-primary)' }">
+                      <p class="font-semibold text-sm" :style="surfaceTextStyle">
                         {{ item.author }}
                       </p>
-                      <p class="text-sm" :style="{ color: 'var(--text-secondary)' }">
+                      <p class="text-sm" :style="surfaceTextMutedStyle">
                         {{ item.role }}
                       </p>
                     </div>
@@ -212,7 +252,7 @@ watch(
           <button
             v-if="items.length > 1"
             class="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
-            :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
+            :style="{ ...surfaceStyle, ...surfaceTextStyle }"
             aria-label="Previous"
             @click="prev"
           >
@@ -221,7 +261,7 @@ watch(
           <button
             v-if="items.length > 1"
             class="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80"
-            :style="{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-primary)' }"
+            :style="{ ...surfaceStyle, ...surfaceTextStyle }"
             aria-label="Next"
             @click="next"
           >
@@ -238,8 +278,10 @@ watch(
             :style="{
               backgroundColor:
                 i === current
-                  ? 'var(--primary)'
-                  : 'color-mix(in srgb, var(--text-primary) 20%, transparent)',
+                  ? bgPrimary
+                  : autoTextColor
+                    ? `color-mix(in srgb, ${autoTextColor} 20%, transparent)`
+                    : 'color-mix(in srgb, var(--text-primary) 20%, transparent)',
               transform: i === current ? 'scale(1.25)' : 'scale(1)',
             }"
             :aria-label="`Go to slide ${i + 1}`"
@@ -248,5 +290,5 @@ watch(
         </div>
       </div>
     </div>
-  </section>
+  </BlocksBlockWrapper>
 </template>

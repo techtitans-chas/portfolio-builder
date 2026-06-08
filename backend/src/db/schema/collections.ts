@@ -19,6 +19,7 @@ export const collectionItems = pgTable('collection_items', {
     .notNull()
     .references(() => collections.id, { onDelete: 'cascade' }),
   data: jsonb('data').notNull().default({}),
+  pageBody: text('page_body'),
   isPublished: boolean('is_published').notNull().default(false),
   sortOrder: real('sort_order').notNull().default(0),
   createdAt: timestamp('created_at').notNull().defaultNow(),

@@ -8,6 +8,7 @@ import { unauthorized, badRequest, notFound, parseBody } from '../../utils/error
 
 const itemSchema = z.object({
   data: z.record(z.string(), z.unknown()).default({}),
+  pageBody: z.string().nullable().optional(),
   isPublished: z.boolean().default(false),
   sortOrder: z.number().optional(),
 });
@@ -51,6 +52,7 @@ export const collectionItemsPost = factory.createHandlers(async c => {
     .values({
       collectionId,
       data: result.data.data,
+      pageBody: result.data.pageBody ?? null,
       isPublished: result.data.isPublished,
       sortOrder: result.data.sortOrder ?? 0,
     })

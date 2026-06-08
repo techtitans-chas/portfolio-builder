@@ -1,6 +1,6 @@
 FROM node:22-alpine AS base
 
-RUN corepack enable && corepack prepare pnpm@11.1.3 --activate
+RUN apk upgrade --no-cache && corepack enable && corepack prepare pnpm@11.1.3 --activate
 
 WORKDIR /app
 
@@ -17,13 +17,15 @@ RUN pnpm install --frozen-lockfile
 FROM base AS backend
 COPY shared/ ./shared/
 COPY backend/ ./backend/
+RUN pnpm --filter backend build
 EXPOSE 3111
-CMD ["pnpm", "--filter", "backend", "dev"]
+CMD ["node", "./backend/dist/server.js"]
 
 # ── Frontend target ───────────────────────────────────────────────────────────
 FROM base AS frontend
 COPY shared/ ./shared/
 COPY frontend/ ./frontend/
 ENV NUXT_HOST=0.0.0.0
+RUN pnpm --filter frontend build
 EXPOSE 3000
-CMD ["pnpm", "--filter", "frontend", "dev"]
+CMD ["node", "./frontend/.output/server/index.mjs"]

@@ -1,4 +1,25 @@
 import type { Component } from 'vue';
+import type { ButtonStyleValue } from '~/components/pagebuilder/ButtonStyleModal.vue';
+export type { ButtonStyleValue };
+
+/** Shared style props present on every block that uses the styleTab preset. */
+export interface BlockStyleProps {
+  background?: string | null;
+  backgroundImage?: string | null;
+  backgroundOpacity?: number;
+  backgroundFixed?: boolean;
+  overlayEnabled?: boolean;
+  overlayType?: 'solid' | 'gradient';
+  overlayColor?: string | null;
+  overlayColor2?: string | null;
+  overlayDegree?: number;
+  overlayOpacity?: number;
+}
+
+/** Extended style props for blocks that also have a surface color. */
+export interface BlockStyleWithSurfaceProps extends BlockStyleProps {
+  surfaceColor?: string | null;
+}
 
 export interface ListItemField {
   key: string;
@@ -27,7 +48,11 @@ export interface BlockField {
     | 'theme-color'
     | 'slider'
     | 'inline-text'
-    | 'inline-rich';
+    | 'inline-rich'
+    | 'collection-select'
+    | 'button-style';
+  /** Required when type === 'collection-select': the collection type to filter by */
+  collectionType?: string;
   placeholder?: string;
   options?: { label: string; value: string }[];
   // Only used when type === 'list':
@@ -36,12 +61,19 @@ export interface BlockField {
   defaultItem?: () => Record<string, unknown>;
   // For 'text'/'textarea': also render as editable inline in the preview
   inline?: boolean;
+  // Character limit — shows a live counter below the input
+  maxLength?: number;
   // For 'slider':
   min?: number;
   max?: number;
   step?: number;
-  // Only show this field when another field has a specific value
-  showIf?: { key: string; value: unknown };
+  // Unit suffix shown next to slider value (e.g. '%', 'deg', 'rem'). Defaults to 'px' when omitted.
+  unit?: string;
+  // Only show this field when another field has a specific value.
+  // Use value: 'truthy' to show whenever the field is non-null / non-empty.
+  showIf?: { key: string; value: unknown | 'truthy' };
+  // Like showIf but ALL conditions must pass.
+  showIfAll?: { key: string; value: unknown | 'truthy' }[];
 }
 
 export interface BlockSection {

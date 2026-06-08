@@ -1,4 +1,4 @@
-import { eq, and, max } from 'drizzle-orm';
+import { eq, and, max, count } from 'drizzle-orm';
 import { z } from 'zod';
 import { factory } from '../../lib/factory.js';
 import { auth } from '../../lib/auth.js';
@@ -9,8 +9,10 @@ import {
   notFound,
   conflict,
   badRequest,
+  forbidden,
   parseBody,
 } from '../../utils/errorHandling.js';
+import { MAX_PAGES_PER_PORTFOLIO } from '@portfolio-builder/shared/schemas';
 
 function slugify(title: string): string {
   return title
@@ -58,6 +60,17 @@ export const pagesPost = factory.createHandlers(async c => {
 
   const { slug: rawSlug, title, ...rest } = result.data;
   const slug = rawSlug ? slugify(rawSlug) : slugify(title || 'page');
+
+  const [countRow] = await db
+    .select({ total: count() })
+    .from(pages)
+    .where(eq(pages.portfolioId, portfolio.id));
+
+  if ((countRow?.total ?? 0) >= MAX_PAGES_PER_PORTFOLIO) {
+    throw forbidden(
+      `Page limit reached — portfolios may have at most ${MAX_PAGES_PER_PORTFOLIO} pages.`,
+    );
+  }
 
   const [existing] = await db
     .select({ id: pages.id })
