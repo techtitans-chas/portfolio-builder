@@ -17,22 +17,18 @@ export const portfolioCollectionItemsGet = factory.createHandlers(async c => {
     throw notFound('Portfolio not found');
   }
 
-  const [collection] = await db
-    .select({ id: collections.id })
-    .from(collections)
-    .where(and(eq(collections.portfolioId, portfolio.id), eq(collections.type, collectionType)));
-
-  if (!collection) {
-    return c.json({ items: [] });
-  }
-
   const rows = await db
-    .select()
+    .select({ item: collectionItems })
     .from(collectionItems)
+    .innerJoin(collections, eq(collectionItems.collectionId, collections.id))
     .where(
-      and(eq(collectionItems.collectionId, collection.id), eq(collectionItems.isPublished, true)),
+      and(
+        eq(collections.portfolioId, portfolio.id),
+        eq(collections.type, collectionType),
+        eq(collectionItems.isPublished, true),
+      ),
     )
     .orderBy(collectionItems.sortOrder, collectionItems.createdAt);
 
-  return c.json({ items: rows });
+  return c.json({ items: rows.map(r => r.item) });
 });

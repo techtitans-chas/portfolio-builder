@@ -9,38 +9,24 @@ export const portfolioCollectionItemGet = factory.createHandlers(async c => {
   const collectionType = c.req.param('collectionType') as string;
   const itemId = c.req.param('itemId') as string;
 
-  const [portfolio] = await db
-    .select({ id: portfolios.id })
-    .from(portfolios)
-    .where(and(eq(portfolios.slug, slug), eq(portfolios.isPublished, true)));
-
-  if (!portfolio) {
-    throw notFound('Portfolio not found');
-  }
-
-  const [collection] = await db
-    .select({ id: collections.id })
-    .from(collections)
-    .where(and(eq(collections.portfolioId, portfolio.id), eq(collections.type, collectionType)));
-
-  if (!collection) {
-    throw notFound('Collection not found');
-  }
-
-  const [item] = await db
-    .select()
+  const [row] = await db
+    .select({ item: collectionItems })
     .from(collectionItems)
+    .innerJoin(collections, eq(collectionItems.collectionId, collections.id))
+    .innerJoin(portfolios, eq(collections.portfolioId, portfolios.id))
     .where(
       and(
         eq(collectionItems.id, itemId),
-        eq(collectionItems.collectionId, collection.id),
         eq(collectionItems.isPublished, true),
+        eq(collections.type, collectionType),
+        eq(portfolios.slug, slug),
+        eq(portfolios.isPublished, true),
       ),
     );
 
-  if (!item) {
+  if (!row) {
     throw notFound('Item not found');
   }
 
-  return c.json({ item });
+  return c.json({ item: row.item });
 });
