@@ -1,0 +1,164 @@
+[
+  {
+    "filename": "placeholder-hero.svg",
+    "label": "Hero banner",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-hero.svg"
+  },
+  {
+    "filename": "placeholder-cover.svg",
+    "label": "Cover image",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-cover.svg"
+  },
+  {
+    "filename": "placeholder-project.svg",
+    "label": "Project screenshot",
+    "fileType": "image/svg+xml",
+    "url": "/media/placeholder-project.svg"
+  },
+  {
+    "filename": "acekreations-background-1462755.webp",
+    "label": "Background",
+    "fileType": "image/webp",
+    "url": "/media/acekreations-background-1462755.webp"
+  },
+  {
+    "filename": "annomaria-abstract-7310307.webp",
+    "label": "Abstract",
+    "fileType": "image/webp",
+    "url": "/media/annomaria-abstract-7310307.webp"
+  },
+  {
+    "filename": "barbaraalane-texture-1668079.webp",
+    "label": "Texture",
+    "fileType": "image/webp",
+    "url": "/media/barbaraalane-texture-1668079.webp"
+  },
+  {
+    "filename": "colrizeboks-leaves-7910755.webp",
+    "label": "Leaves",
+    "fileType": "image/webp",
+    "url": "/media/colrizeboks-leaves-7910755.webp"
+  },
+  {
+    "filename": "flutie8211-sky-7232494.webp",
+    "label": "Sky",
+    "fileType": "image/webp",
+    "url": "/media/flutie8211-sky-7232494.webp"
+  },
+  {
+    "filename": "flutie8211-sunset-10308969.webp",
+    "label": "Sunset",
+    "fileType": "image/webp",
+    "url": "/media/flutie8211-sunset-10308969.webp"
+  },
+  {
+    "filename": "lyubmalee-flowers-7230812.webp",
+    "label": "Flowers",
+    "fileType": "image/webp",
+    "url": "/media/lyubmalee-flowers-7230812.webp"
+  },
+  {
+    "filename": "missperfectkaos-flowers-8511539.webp",
+    "label": "Flowers",
+    "fileType": "image/webp",
+    "url": "/media/missperfectkaos-flowers-8511539.webp"
+  },
+  {
+    "filename": "pfefferminza_viktualia-flower-9173950.webp",
+    "label": "Flower",
+    "fileType": "image/webp",
+    "url": "/media/pfefferminza_viktualia-flower-9173950.webp"
+  },
+  {
+    "filename": "pfefferminza_viktualia-flower-9173953.webp",
+    "label": "Flower",
+    "fileType": "image/webp",
+    "url": "/media/pfefferminza_viktualia-flower-9173953.webp"
+  },
+  {
+    "filename": "pfefferminza_viktualia-flower-9311569.webp",
+    "label": "Flower",
+    "fileType": "image/webp",
+    "url": "/media/pfefferminza_viktualia-flower-9311569.webp"
+  },
+  {
+    "filename": "pfefferminza_viktualia-flower-9327880.webp",
+    "label": "Flower",
+    "fileType": "image/webp",
+    "url": "/media/pfefferminza_viktualia-flower-9327880.webp"
+  },
+  {
+    "filename": "placidplace-space-7273891.webp",
+    "label": "Space",
+    "fileType": "image/webp",
+    "url": "/media/placidplace-space-7273891.webp"
+  },
+  {
+    "filename": "schueler-design-background-1404310.webp",
+    "label": "Background",
+    "fileType": "image/webp",
+    "url": "/media/schueler-design-background-1404310.webp"
+  },
+  {
+    "filename": "sylvie_sheng-background-1311251.webp",
+    "label": "Background",
+    "fileType": "image/webp",
+    "url": "/media/sylvie_sheng-background-1311251.webp"
+  },
+  {
+    "filename": "thedigitalartist-network-5656534.webp",
+    "label": "Network",
+    "fileType": "image/webp",
+    "url": "/media/thedigitalartist-network-5656534.webp"
+  },
+  {
+    "filename": "tommyvideo-abstract-5719221.webp",
+    "label": "Abstract",
+    "fileType": "image/webp",
+    "url": "/media/tommyvideo-abstract-5719221.webp"
+  },
+  {
+    "filename": "tylijura-sparkle-10229779.webp",
+    "label": "Sparkle",
+    "fileType": "image/webp",
+    "url": "/media/tylijura-sparkle-10229779.webp"
+  },
+  {
+    "filename": "visaxslr-background-7520075.webp",
+    "label": "Background",
+    "fileType": "image/webp",
+    "url": "/media/visaxslr-background-7520075.webp"
+  },
+  {
+    "filename": "visaxslr-colored-7292420.webp",
+    "label": "Colored",
+    "fileType": "image/webp",
+    "url": "/media/visaxslr-colored-7292420.webp"
+  },
+  {
+    "filename": "visaxslr-colorful-7957401.webp",
+    "label": "Colorful",
+    "fileType": "image/webp",
+    "url": "/media/visaxslr-colorful-7957401.webp"
+  },
+  {
+    "filename": "visaxslr-design-7968252.webp",
+    "label": "Design",
+    "fileType": "image/webp",
+    "url": "/media/visaxslr-design-7968252.webp"
+  },
+  {
+    "filename": "visaxslr-gradient-7966115.webp",
+    "label": "Gradient",
+    "fileType": "image/webp",
+    "url": "/media/visaxslr-gradient-7966115.webp"
+  },
+  {
+    "filename": "visaxslr-mosaic-8156855.webp",
+    "label": "Mosaic",
+    "fileType": "image/webp",
+    "url": "/media/visaxslr-mosaic-8156855.webp"
+  }
+]

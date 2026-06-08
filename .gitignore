@@ -1,7 +1,9 @@
 node_modules/
 .pnpm-store/
 .nuxt/
-.output/
+# .output/ is committed on the `deploy` branch so Plesk can serve the built frontend.
+# Keep this line commented ONLY on `deploy` — do not merge to `main`.
+# .output/
 *.log
 .env.local
 .env
