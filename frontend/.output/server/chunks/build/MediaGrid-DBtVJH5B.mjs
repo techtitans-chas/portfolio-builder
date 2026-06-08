@@ -6,7 +6,7 @@ import { u as useDirection, c as PopperRoot_default, P as PopperAnchor_default, 
 import { reactivePick, unrefElement, useVModel, useResizeObserver } from '@vueuse/core';
 import { l as useId, u as useBodyScrollLock, k as useHideOthers, F as FocusScope_default, h as DismissableLayer_default, j as handleAndDispatchCustomEvent, i as focusFirst } from './overlay-BWwBD9XH.mjs';
 import { refAutoReset } from '@vueuse/shared';
-import { g as defu, x as isEqual } from '../nitro/nitro.mjs';
+import { g as defu, y as isEqual } from '../nitro/nitro.mjs';
 import { _ as _sfc_main$3 } from './Alert-Nv5RlKkm.mjs';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 

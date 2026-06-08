@@ -4,7 +4,7 @@ import { defineComponent, openBlock, createBlock, unref, withCtx, renderSlot, co
 import { createSharedComposable, reactivePick, useVModel, useTimeoutFn, useEventListener } from '@vueuse/core';
 import { u as useDirection, a as PopperArrow_default, e as useForwardPropsEmits, P as PopperAnchor_default, c as PopperRoot_default, b as PopperContent_default, d as useFocusGuards } from './PopperArrow-CVyIWJ6M.mjs';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderList } from 'vue/server-renderer';
-import { g as defu, x as isEqual } from '../nitro/nitro.mjs';
+import { g as defu, y as isEqual } from '../nitro/nitro.mjs';
 import { syncRef, refAutoReset, tryOnScopeDispose, createEventHook, reactiveOmit } from '@vueuse/shared';
 
 function isValueEqualOrExist(base, current) {

@@ -1,4 +1,4 @@
-import { e as defineEventHandler, v as getRouterParam, K as useRuntimeConfig, c as createError, I as setResponseHeader } from '../../../nitro/nitro.mjs';
+import { e as defineEventHandler, w as getRouterParam, L as useRuntimeConfig, c as createError, J as setResponseHeader } from '../../../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -7,7 +7,6 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import '@iconify/utils';
 import 'consola';
 
 const sitemap_xml = defineEventHandler(async (event) => {

@@ -1,5 +1,5 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { computed, isRef, defineComponent, provide, toRefs, ref, getCurrentInstance, h, inject, toValue, Comment, mergeProps, cloneVNode, unref, openBlock, createBlock, Teleport, renderSlot, createCommentVNode, withCtx, toHandlerKey, camelize, toRef, hasInjectionContext, shallowRef, createElementBlock, createVNode, resolveDynamicComponent, useSlots, toDisplayString, watch, useModel, createTextVNode, mergeModels, nextTick, Fragment, watchEffect, markRaw, resolveComponent, onServerPrefetch, defineAsyncComponent, useSSRContext, shallowReactive, Suspense, createApp, renderList, useId, onErrorCaptured, reactive, effectScope, useTemplateRef, withModifiers, normalizeProps, guardReactiveProps, normalizeStyle, getCurrentScope, onScopeDispose, isReadonly, isShallow, isReactive, toRaw } from 'vue';
-import { G as serialize, w as hasProtocol, y as isScriptProtocol, z as joinURL, A as klona, g as defu, q as getRequestHeaders, c as createError$1, L as withQuery, F as sanitizeStatusCode, D as parseURL, k as encodePath, d as decodePath, h as defuFn, C as parseQuery, x as isEqual, m as getContext, M as withTrailingSlash, N as withoutTrailingSlash, $ as $fetch$1, b as baseURL, l as executeAsync } from '../nitro/nitro.mjs';
+import { H as serialize, x as hasProtocol, z as isScriptProtocol, A as joinURL, B as klona, g as defu, r as getRequestHeaders, c as createError$1, M as withQuery, G as sanitizeStatusCode, E as parseURL, k as encodePath, d as decodePath, h as defuFn, D as parseQuery, y as isEqual, m as getContext, o as getIconCSS, N as withTrailingSlash, O as withoutTrailingSlash, $ as $fetch$1, b as baseURL, l as executeAsync } from '../nitro/nitro.mjs';
 import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { Icon, getIcon, loadIcon as loadIcon$1, _api, addAPIProvider, setCustomIconsLoader } from '@iconify/vue';
 import colors from 'tailwindcss/colors';
@@ -8,7 +8,6 @@ import { ssrRenderComponent, ssrRenderVNode, ssrRenderSlot, ssrRenderClass, ssrI
 import { reactivePick, unrefElement, useMounted, useDebounceFn, reactiveOmit, defaultWindow, onKeyStroke, useVModel, createSharedComposable, useRafFn } from '@vueuse/core';
 import { isClient, useTimeoutFn, useTimeout } from '@vueuse/shared';
 import { createTV } from 'tailwind-variants';
-import { getIconCSS } from '@iconify/utils/lib/css/icon';
 import { u as useHead$1, a as useSeoMeta$1, h as headSymbol } from '../routes/renderer.mjs';
 import 'node:http';
 import 'node:https';
@@ -18,7 +17,6 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import '@iconify/utils';
 import 'consola';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';

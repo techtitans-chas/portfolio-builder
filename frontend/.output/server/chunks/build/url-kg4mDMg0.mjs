@@ -1,6 +1,6 @@
 import { O as useAsyncData, a6 as useRequestEvent, a9 as useRuntimeConfig } from './server.mjs';
 import { computed } from 'vue';
-import { r as getRequestURL } from '../nitro/nitro.mjs';
+import { s as getRequestURL } from '../nitro/nitro.mjs';
 
 function usePageBlocks(slug, pageSlug) {
   const config = useRuntimeConfig();
