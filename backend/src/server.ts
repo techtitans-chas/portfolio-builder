@@ -1,3 +1,4 @@
+import { createServer } from 'node:http';
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
@@ -20,30 +21,39 @@ app.onError(onError);
 app.route('/', router);
 app.on(['GET', 'POST', 'OPTIONS'], '/api/auth/*', c => auth.handler(c.req.raw));
 
-// Passenger expects a CommonJS export of the request handler.
-// When run directly with `node server.js`, start the HTTP server instead.
+// Passenger expects an http.Server or Express-style (req, res) export.
+// We build a plain Node http.Server wrapping the Hono fetch handler.
+const server = createServer(async (req, res) => {
+  // Convert Node IncomingMessage → Web Request
+  const chunks: Buffer[] = [];
+  for await (const chunk of req) chunks.push(chunk as Buffer);
+  const body = chunks.length ? Buffer.concat(chunks) : undefined;
+
+  const url = `http://${req.headers.host}${req.url}`;
+  const init: RequestInit = {
+    method: req.method ?? 'GET',
+    headers: req.headers as Record<string, string>,
+  };
+  if (body?.length) init.body = body;
+  const webReq = new Request(url, init);
+
+  const webRes = await app.fetch(webReq);
+
+  res.statusCode = webRes.status;
+  webRes.headers.forEach((value, key) => res.setHeader(key, value));
+  const buf = await webRes.arrayBuffer();
+  res.end(Buffer.from(buf));
+});
+
+// Passenger integration: export the http.Server
+module.exports = server;
+
+// When run directly with `node server.js`, bind to port
 if (require.main === module) {
-  const server = serve({
-    fetch: app.fetch,
-    port: PORT,
+  server.listen(PORT, () => {
+    console.log(`Backend API running on http://localhost:${PORT}`);
   });
 
-  console.log(`Backend API running on http://localhost:${PORT}`);
-
-  process.on('SIGINT', () => {
-    server.close();
-    process.exit(0);
-  });
-  process.on('SIGTERM', () => {
-    server.close(err => {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-      process.exit(0);
-    });
-  });
+  process.on('SIGINT', () => { server.close(); process.exit(0); });
+  process.on('SIGTERM', () => { server.close(() => process.exit(0)); });
 }
-
-// Passenger integration: export the fetch handler
-module.exports = app.fetch;
