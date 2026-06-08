@@ -27,7 +27,7 @@ const form = reactive<{
   isPublished: boolean;
 }>({
   data: {},
-  isPublished: false,
+  isPublished: true,
 });
 
 const pageBody = ref('');
@@ -42,7 +42,7 @@ function resetForm() {
       (field.type === 'tags' ? [] : field.type === 'boolean' ? false : '');
   }
   form.data = initialData;
-  form.isPublished = props.item?.isPublished ?? false;
+  form.isPublished = props.item?.isPublished ?? true;
   pageBody.value = props.item?.pageBody ?? '';
   snapshot.value = JSON.stringify(form);
   activeTab.value = 'fields';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
@@ -11,7 +11,7 @@ export interface AccordionItem {
   answer: string;
 }
 
-export interface AccordionBlockProps extends BlockStyleWithSurfaceProps {
+export interface AccordionBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   items?: AccordionItem[];

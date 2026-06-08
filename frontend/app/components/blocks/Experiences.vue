@@ -2,11 +2,11 @@
 import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
-export interface ExperiencesBlockProps extends BlockStyleWithSurfaceProps {
+export interface ExperiencesBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   filterTag?: string;
