@@ -2,7 +2,7 @@ databases:
   - name: portfolio-builder-db
     databaseName: portfolio_builder
     user: portfolio_builder
-    plan: free
+    plan: starter
     region: frankfurt
 
 services:
