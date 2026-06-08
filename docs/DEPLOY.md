@@ -95,8 +95,13 @@ On your machine (or in CI), with Node 22 + pnpm 11.1.3:
 ```bash
 pnpm install
 pnpm --filter @portfolio-builder/shared build
-pnpm --filter frontend build        # → frontend/.output
-pnpm --filter backend build         # → backend/dist/server.js + backend/dist/package.json
+NUXT_PUBLIC_API_URL=https://api.<domain> \
+  NUXT_API_URL=https://api.<domain> \
+  FRONTEND_URL=https://app.<domain> \
+  NUXT_PRERENDER=true \
+  NODE_OPTIONS=--max-old-space-size=4096 \
+  pnpm --filter frontend build        # → frontend/.output
+pnpm --filter backend build           # → backend/dist/server.js + backend/dist/package.json
 ```
 
 On the `deploy` branch, `dist/` and `.output/` are **not** gitignored (they are on `main`). Commit them:
