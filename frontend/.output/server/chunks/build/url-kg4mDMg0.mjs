@@ -1,5 +1,4 @@
-import { O as useAsyncData, a6 as useRequestEvent, a9 as useRuntimeConfig } from './server.mjs';
-import { computed } from 'vue';
+import { ak as useAsyncData, aO as vueExports, aD as useRequestEvent, aH as useRuntimeConfig } from './server.mjs';
 import { s as getRequestURL } from '../nitro/nitro.mjs';
 
 function usePageBlocks(slug, pageSlug) {
@@ -9,7 +8,7 @@ function usePageBlocks(slug, pageSlug) {
     `portfolio-${slug}-page-${pageSlug}-blocks`,
     () => $fetch(`/api/portfolios/${slug}/pages/${pageSlug}/blocks`, { baseURL })
   );
-  const contentBlocks = computed(
+  const contentBlocks = vueExports.computed(
     () => (data.value?.blocks ?? []).filter((b) => b.type !== "header" && b.type !== "footer")
   );
   return { contentBlocks, error };

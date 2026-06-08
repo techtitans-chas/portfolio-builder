@@ -7,5 +7,7 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 //# sourceMappingURL=index.mjs.map

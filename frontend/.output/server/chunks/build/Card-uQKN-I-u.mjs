@@ -1,6 +1,4 @@
-import { useSlots, computed, unref, mergeProps, withCtx, openBlock, createBlock, renderSlot, createTextVNode, toDisplayString, createCommentVNode, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate } from 'vue/server-renderer';
-import { U as useComponentProps, N as useAppConfig, M as tv, b as Primitive } from './server.mjs';
+import { aO as vueExports, an as useComponentProps, aj as useAppConfig, ag as tv, a7 as ssrRenderComponent_1, b as Primitive, a6 as ssrRenderClass_1, a9 as ssrRenderSlot_1, a3 as ssrInterpolate_1 } from './server.mjs';
 
 const theme = {
   "slots": {
@@ -46,36 +44,36 @@ const _sfc_main = {
   },
   setup(__props) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("card", _props);
     const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.card || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.card || {} })({
       variant: props.variant
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            if (!!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description)) {
-              _push2(`<div data-slot="header" class="${ssrRenderClass(ui.value.header({ class: unref(props).ui?.header }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "header", {}, () => {
-                if (unref(props).title || !!slots.title) {
-                  _push2(`<div data-slot="title" class="${ssrRenderClass(ui.value.title({ class: unref(props).ui?.title }))}"${_scopeId}>`);
-                  ssrRenderSlot(_ctx.$slots, "title", {}, () => {
-                    _push2(`${ssrInterpolate(unref(props).title)}`);
+            if (!!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description)) {
+              _push2(`<div data-slot="header" class="${ssrRenderClass_1(ui.value.header({ class: vueExports.unref(props).ui?.header }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "header", {}, () => {
+                if (vueExports.unref(props).title || !!slots.title) {
+                  _push2(`<div data-slot="title" class="${ssrRenderClass_1(ui.value.title({ class: vueExports.unref(props).ui?.title }))}"${_scopeId}>`);
+                  ssrRenderSlot_1(_ctx.$slots, "title", {}, () => {
+                    _push2(`${ssrInterpolate_1(vueExports.unref(props).title)}`);
                   }, _push2, _parent2, _scopeId);
                   _push2(`</div>`);
                 } else {
                   _push2(`<!---->`);
                 }
-                if (unref(props).description || !!slots.description) {
-                  _push2(`<div data-slot="description" class="${ssrRenderClass(ui.value.description({ class: unref(props).ui?.description }))}"${_scopeId}>`);
-                  ssrRenderSlot(_ctx.$slots, "description", {}, () => {
-                    _push2(`${ssrInterpolate(unref(props).description)}`);
+                if (vueExports.unref(props).description || !!slots.description) {
+                  _push2(`<div data-slot="description" class="${ssrRenderClass_1(ui.value.description({ class: vueExports.unref(props).ui?.description }))}"${_scopeId}>`);
+                  ssrRenderSlot_1(_ctx.$slots, "description", {}, () => {
+                    _push2(`${ssrInterpolate_1(vueExports.unref(props).description)}`);
                   }, _push2, _parent2, _scopeId);
                   _push2(`</div>`);
                 } else {
@@ -87,61 +85,61 @@ const _sfc_main = {
               _push2(`<!---->`);
             }
             if (!!slots.default) {
-              _push2(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: unref(props).ui?.body }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+              _push2(`<div data-slot="body" class="${ssrRenderClass_1(ui.value.body({ class: vueExports.unref(props).ui?.body }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
               _push2(`</div>`);
             } else {
               _push2(`<!---->`);
             }
             if (!!slots.footer) {
-              _push2(`<div data-slot="footer" class="${ssrRenderClass(ui.value.footer({ class: unref(props).ui?.footer }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "footer", {}, null, _push2, _parent2, _scopeId);
+              _push2(`<div data-slot="footer" class="${ssrRenderClass_1(ui.value.footer({ class: vueExports.unref(props).ui?.footer }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "footer", {}, null, _push2, _parent2, _scopeId);
               _push2(`</div>`);
             } else {
               _push2(`<!---->`);
             }
           } else {
             return [
-              !!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description) ? (openBlock(), createBlock("div", {
+              !!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "header",
-                class: ui.value.header({ class: unref(props).ui?.header })
+                class: ui.value.header({ class: vueExports.unref(props).ui?.header })
               }, [
-                renderSlot(_ctx.$slots, "header", {}, () => [
-                  unref(props).title || !!slots.title ? (openBlock(), createBlock("div", {
+                vueExports.renderSlot(_ctx.$slots, "header", {}, () => [
+                  vueExports.unref(props).title || !!slots.title ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     "data-slot": "title",
-                    class: ui.value.title({ class: unref(props).ui?.title })
+                    class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                   }, [
-                    renderSlot(_ctx.$slots, "title", {}, () => [
-                      createTextVNode(toDisplayString(unref(props).title), 1)
+                    vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                     ])
-                  ], 2)) : createCommentVNode("", true),
-                  unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                  ], 2)) : vueExports.createCommentVNode("", true),
+                  vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 1,
                     "data-slot": "description",
-                    class: ui.value.description({ class: unref(props).ui?.description })
+                    class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                   }, [
-                    renderSlot(_ctx.$slots, "description", {}, () => [
-                      createTextVNode(toDisplayString(unref(props).description), 1)
+                    vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                     ])
-                  ], 2)) : createCommentVNode("", true)
+                  ], 2)) : vueExports.createCommentVNode("", true)
                 ])
-              ], 2)) : createCommentVNode("", true),
-              !!slots.default ? (openBlock(), createBlock("div", {
+              ], 2)) : vueExports.createCommentVNode("", true),
+              !!slots.default ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 1,
                 "data-slot": "body",
-                class: ui.value.body({ class: unref(props).ui?.body })
+                class: ui.value.body({ class: vueExports.unref(props).ui?.body })
               }, [
-                renderSlot(_ctx.$slots, "default")
-              ], 2)) : createCommentVNode("", true),
-              !!slots.footer ? (openBlock(), createBlock("div", {
+                vueExports.renderSlot(_ctx.$slots, "default")
+              ], 2)) : vueExports.createCommentVNode("", true),
+              !!slots.footer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 2,
                 "data-slot": "footer",
-                class: ui.value.footer({ class: unref(props).ui?.footer })
+                class: ui.value.footer({ class: vueExports.unref(props).ui?.footer })
               }, [
-                renderSlot(_ctx.$slots, "footer")
-              ], 2)) : createCommentVNode("", true)
+                vueExports.renderSlot(_ctx.$slots, "footer")
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -152,7 +150,7 @@ const _sfc_main = {
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Card.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

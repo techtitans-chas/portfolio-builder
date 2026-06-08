@@ -2,11 +2,8 @@ import { _ as __nuxt_component_0 } from './AppLogo-0DVehps_.mjs';
 import { _ as _sfc_main$1 } from './Card-uQKN-I-u.mjs';
 import { _ as _sfc_main$2 } from './FormField-9wkfNHPa.mjs';
 import { _ as _sfc_main$3 } from './Input-DWHPzDmy.mjs';
-import { f as _sfc_main$8, _ as __nuxt_component_0$1, e as _sfc_main$d, a9 as useRuntimeConfig } from './server.mjs';
-import { defineComponent, ref, mergeProps, unref, withCtx, isRef, createVNode, createTextVNode, withModifiers, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderComponent } from 'vue/server-renderer';
+import { aO as vueExports, a5 as ssrRenderAttrs_1, a7 as ssrRenderComponent_1, e as _sfc_main$8, _ as __nuxt_component_0$1, j as _sfc_main$d, aH as useRuntimeConfig } from './server.mjs';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
-import '@vueuse/core';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -16,28 +13,21 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import '@vueuse/shared';
-import 'tailwind-variants';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   setup(__props) {
     const { fetcher } = useApi();
-    const email = ref("");
-    const submitted = ref(false);
-    const isLoading = ref(false);
+    const email = vueExports.ref("");
+    const submitted = vueExports.ref(false);
+    const isLoading = vueExports.ref(false);
     async function onSubmit() {
       isLoading.value = true;
       try {
@@ -63,23 +53,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UButton = _sfc_main$8;
       const _component_NuxtLink = __nuxt_component_0$1;
       const _component_UIcon = _sfc_main$d;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex min-h-screen items-center justify-center px-4 py-12" }, _attrs))}><div class="w-full max-w-md"><div class="mb-8 text-center">`);
-      _push(ssrRenderComponent(_component_AppLogo, { class: "mx-auto mb-4 h-10 w-auto" }, null, _parent));
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({ class: "flex min-h-screen items-center justify-center px-4 py-12" }, _attrs))}><div class="w-full max-w-md"><div class="mb-8 text-center">`);
+      _push(ssrRenderComponent_1(_component_AppLogo, { class: "mx-auto mb-4 h-10 w-auto" }, null, _parent));
       _push(`<h1 class="text-2xl font-bold">Reset your password</h1><p class="text-muted mt-1 text-sm">Enter your email and we&#39;ll send you a reset link.</p></div>`);
-      if (!unref(submitted)) {
-        _push(ssrRenderComponent(_component_UCard, null, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (!vueExports.unref(submitted)) {
+        _push(ssrRenderComponent_1(_component_UCard, null, {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`<form class="space-y-4"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UFormField, {
+              _push2(ssrRenderComponent_1(_component_UFormField, {
                 label: "Email",
                 name: "email"
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(ssrRenderComponent(_component_UInput, {
-                      modelValue: unref(email),
-                      "onUpdate:modelValue": ($event) => isRef(email) ? email.value = $event : null,
+                    _push3(ssrRenderComponent_1(_component_UInput, {
+                      modelValue: vueExports.unref(email),
+                      "onUpdate:modelValue": ($event) => vueExports.isRef(email) ? email.value = $event : null,
                       type: "email",
                       placeholder: "you@example.com",
                       autocomplete: "email",
@@ -88,9 +78,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }, null, _parent3, _scopeId2));
                   } else {
                     return [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(email),
-                        "onUpdate:modelValue": ($event) => isRef(email) ? email.value = $event : null,
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(email),
+                        "onUpdate:modelValue": ($event) => vueExports.isRef(email) ? email.value = $event : null,
                         type: "email",
                         placeholder: "you@example.com",
                         autocomplete: "email",
@@ -102,33 +92,33 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 }),
                 _: 1
               }, _parent2, _scopeId));
-              _push2(ssrRenderComponent(_component_UButton, {
+              _push2(ssrRenderComponent_1(_component_UButton, {
                 type: "submit",
                 class: "w-full justify-center",
-                loading: unref(isLoading)
+                loading: vueExports.unref(isLoading)
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(` Send reset link `);
                   } else {
                     return [
-                      createTextVNode(" Send reset link ")
+                      vueExports.createTextVNode(" Send reset link ")
                     ];
                   }
                 }),
                 _: 1
               }, _parent2, _scopeId));
               _push2(`<p class="text-muted text-center text-sm"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_NuxtLink, {
+              _push2(ssrRenderComponent_1(_component_NuxtLink, {
                 to: "/login",
                 class: "text-primary font-medium hover:underline"
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(` Back to sign in `);
                   } else {
                     return [
-                      createTextVNode(" Back to sign in ")
+                      vueExports.createTextVNode(" Back to sign in ")
                     ];
                   }
                 }),
@@ -137,18 +127,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               _push2(`</p></form>`);
             } else {
               return [
-                createVNode("form", {
+                vueExports.createVNode("form", {
                   class: "space-y-4",
-                  onSubmit: withModifiers(onSubmit, ["prevent"])
+                  onSubmit: vueExports.withModifiers(onSubmit, ["prevent"])
                 }, [
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "Email",
                     name: "email"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(email),
-                        "onUpdate:modelValue": ($event) => isRef(email) ? email.value = $event : null,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(email),
+                        "onUpdate:modelValue": ($event) => vueExports.isRef(email) ? email.value = $event : null,
                         type: "email",
                         placeholder: "you@example.com",
                         autocomplete: "email",
@@ -158,23 +148,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UButton, {
+                  vueExports.createVNode(_component_UButton, {
                     type: "submit",
                     class: "w-full justify-center",
-                    loading: unref(isLoading)
+                    loading: vueExports.unref(isLoading)
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode(" Send reset link ")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode(" Send reset link ")
                     ]),
                     _: 1
                   }, 8, ["loading"]),
-                  createVNode("p", { class: "text-muted text-center text-sm" }, [
-                    createVNode(_component_NuxtLink, {
+                  vueExports.createVNode("p", { class: "text-muted text-center text-sm" }, [
+                    vueExports.createVNode(_component_NuxtLink, {
                       to: "/login",
                       class: "text-primary font-medium hover:underline"
                     }, {
-                      default: withCtx(() => [
-                        createTextVNode(" Back to sign in ")
+                      default: vueExports.withCtx(() => [
+                        vueExports.createTextVNode(" Back to sign in ")
                       ]),
                       _: 1
                     })
@@ -187,22 +177,22 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }, _parent));
       } else {
         _push(`<div class="text-center">`);
-        _push(ssrRenderComponent(_component_UIcon, {
+        _push(ssrRenderComponent_1(_component_UIcon, {
           name: "i-lucide-mail",
           class: "text-primary mx-auto mb-4 h-12 w-12"
         }, null, _parent));
         _push(`<h2 class="mb-2 text-xl font-bold">Check your inbox</h2><p class="text-muted mb-8 text-sm"> If an account exists for that email, you&#39;ll receive a reset link shortly. </p>`);
-        _push(ssrRenderComponent(_component_UButton, {
+        _push(ssrRenderComponent_1(_component_UButton, {
           to: "/login",
           variant: "outline",
           class: "w-full justify-center"
         }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(` Back to sign in `);
             } else {
               return [
-                createTextVNode(" Back to sign in ")
+                vueExports.createTextVNode(" Back to sign in ")
               ];
             }
           }),
@@ -216,7 +206,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/reset-password/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

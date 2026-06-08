@@ -1,13 +1,10 @@
-import { useSlots, useId, useAttrs, computed, unref, mergeProps, withCtx, openBlock, createBlock, Fragment, createCommentVNode, createVNode, renderSlot, createTextVNode, toDisplayString, useTemplateRef, watch, nextTick, defineComponent, toRefs, withKeys, withModifiers, ref, renderList, createElementBlock, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate, ssrRenderAttrs, ssrRenderList, ssrRenderStyle, ssrRenderAttr } from 'vue/server-renderer';
-import { U as useComponentProps, N as useAppConfig, $ as useForwardProps, Y as useFormField, M as tv, b as Primitive, e as _sfc_main$d, R as useComponentIcons, g as _sfc_main$b, Z as useForwardExpose, f as _sfc_main$8, k as createContext, J as looseToNumber, a5 as usePrimitiveElement, V as VisuallyHidden_default } from './server.mjs';
+import { aO as vueExports, an as useComponentProps, aj as useAppConfig, av as useForwardProps, $ as reactivePick, at as useFormField, ag as tv, a7 as ssrRenderComponent_1, b as Primitive, a6 as ssrRenderClass_1, j as _sfc_main$d, a9 as ssrRenderSlot_1, a3 as ssrInterpolate_1, aM as useVModel, am as useComponentIcons, a5 as ssrRenderAttrs_1, h as _sfc_main$b, au as useForwardExpose, a8 as ssrRenderList_1, aa as ssrRenderStyle_1, e as _sfc_main$8, a4 as ssrRenderAttr_1, l as createContext, R as looseToNumber, aC as usePrimitiveElement, V as VisuallyHidden_default } from './server.mjs';
 import { L as Label_default } from './FormField-9wkfNHPa.mjs';
 import { u as useFormControl, b as useMedia, _ as __nuxt_component_2 } from './MediaGrid-DBtVJH5B.mjs';
-import { reactivePick, useVModel } from '@vueuse/core';
 import { _ as _sfc_main$3 } from './Modal-D9bZkufO.mjs';
 import { u as useServerFeatures } from './useServerFeatures-DOIxALfL.mjs';
 
-var VisuallyHiddenInputBubble_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var VisuallyHiddenInputBubble_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "VisuallyHiddenInputBubble",
   props: {
@@ -41,8 +38,8 @@ var VisuallyHiddenInputBubble_vue_vue_type_script_setup_true_lang_default = /* @
   setup(__props) {
     const props = __props;
     const { primitiveElement, currentElement } = usePrimitiveElement();
-    const valueState = computed(() => props.checked ?? props.value);
-    watch(valueState, (cur, prev) => {
+    const valueState = vueExports.computed(() => props.checked ?? props.value);
+    vueExports.watch(valueState, (cur, prev) => {
       if (!currentElement.value) return;
       const input = currentElement.value;
       const inputProto = (void 0).HTMLInputElement.prototype;
@@ -57,7 +54,7 @@ var VisuallyHiddenInputBubble_vue_vue_type_script_setup_true_lang_default = /* @
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(VisuallyHidden_default, mergeProps({
+      return vueExports.openBlock(), vueExports.createBlock(VisuallyHidden_default, vueExports.mergeProps({
         ref_key: "primitiveElement",
         ref: primitiveElement
       }, {
@@ -68,7 +65,7 @@ var VisuallyHiddenInputBubble_vue_vue_type_script_setup_true_lang_default = /* @
   }
 });
 var VisuallyHiddenInputBubble_default = VisuallyHiddenInputBubble_vue_vue_type_script_setup_true_lang_default;
-var VisuallyHiddenInput_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var VisuallyHiddenInput_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "VisuallyHiddenInput",
   props: {
@@ -101,8 +98,8 @@ var VisuallyHiddenInput_vue_vue_type_script_setup_true_lang_default = /* @__PURE
   },
   setup(__props) {
     const props = __props;
-    const isFormArrayEmptyAndRequired = computed(() => typeof props.value === "object" && Array.isArray(props.value) && props.value.length === 0 && props.required);
-    const parsedValue = computed(() => {
+    const isFormArrayEmptyAndRequired = vueExports.computed(() => typeof props.value === "object" && Array.isArray(props.value) && props.value.length === 0 && props.required);
+    const parsedValue = vueExports.computed(() => {
       if (typeof props.value === "string" || typeof props.value === "number" || typeof props.value === "boolean" || props.value === null || props.value === void 0) return [{
         name: props.name,
         value: props.value
@@ -124,14 +121,14 @@ var VisuallyHiddenInput_vue_vue_type_script_setup_true_lang_default = /* @__PURE
       return [];
     });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock(Fragment, null, [createCommentVNode(" We render single input if it's required "), isFormArrayEmptyAndRequired.value ? (openBlock(), createBlock(VisuallyHiddenInputBubble_default, mergeProps({ key: _ctx.name }, {
+      return vueExports.openBlock(), vueExports.createElementBlock(vueExports.Fragment, null, [vueExports.createCommentVNode(" We render single input if it's required "), isFormArrayEmptyAndRequired.value ? (vueExports.openBlock(), vueExports.createBlock(VisuallyHiddenInputBubble_default, vueExports.mergeProps({ key: _ctx.name }, {
         ...props,
         ..._ctx.$attrs
       }, {
         name: _ctx.name,
         value: _ctx.value
-      }), null, 16, ["name", "value"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(parsedValue.value, (parsed) => {
-        return openBlock(), createBlock(VisuallyHiddenInputBubble_default, mergeProps({ key: parsed.name }, { ref_for: true }, {
+      }), null, 16, ["name", "value"])) : (vueExports.openBlock(true), vueExports.createElementBlock(vueExports.Fragment, { key: 1 }, vueExports.renderList(parsedValue.value, (parsed) => {
+        return vueExports.openBlock(), vueExports.createBlock(VisuallyHiddenInputBubble_default, vueExports.mergeProps({ key: parsed.name }, { ref_for: true }, {
           ...props,
           ..._ctx.$attrs
         }, {
@@ -144,7 +141,7 @@ var VisuallyHiddenInput_vue_vue_type_script_setup_true_lang_default = /* @__PURE
 });
 var VisuallyHiddenInput_default = VisuallyHiddenInput_vue_vue_type_script_setup_true_lang_default;
 const [injectSwitchRootContext, provideSwitchRootContext] = /* @__PURE__ */ createContext("SwitchRoot");
-var SwitchRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SwitchRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SwitchRoot",
   props: {
     defaultValue: {
@@ -201,28 +198,28 @@ var SwitchRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit = __emit;
-    const { disabled } = toRefs(props);
+    const { disabled } = vueExports.toRefs(props);
     const modelValue = useVModel(props, "modelValue", emit, {
       defaultValue: props.defaultValue ?? props.falseValue,
       passive: props.modelValue === void 0
     });
-    const checked = computed(() => modelValue.value === props.trueValue);
+    const checked = vueExports.computed(() => modelValue.value === props.trueValue);
     function toggleCheck() {
       if (disabled.value) return;
       modelValue.value = checked.value ? props.falseValue : props.trueValue;
     }
     const { forwardRef, currentElement } = useForwardExpose();
     const isFormControl = useFormControl(currentElement);
-    const ariaLabel = computed(() => props.id && currentElement.value ? (void 0).querySelector(`[for="${props.id}"]`)?.innerText : void 0);
+    const ariaLabel = vueExports.computed(() => props.id && currentElement.value ? (void 0).querySelector(`[for="${props.id}"]`)?.innerText : void 0);
     provideSwitchRootContext({
       checked,
       toggleCheck,
       disabled
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(_ctx.$attrs, {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(_ctx.$attrs, {
         id: _ctx.id,
-        ref: unref(forwardRef),
+        ref: vueExports.unref(forwardRef),
         role: "switch",
         type: _ctx.as === "button" ? "button" : void 0,
         value: _ctx.value,
@@ -230,21 +227,21 @@ var SwitchRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
         "aria-checked": checked.value,
         "aria-required": _ctx.required,
         "data-state": checked.value ? "checked" : "unchecked",
-        "data-disabled": unref(disabled) ? "" : void 0,
+        "data-disabled": vueExports.unref(disabled) ? "" : void 0,
         "as-child": _ctx.asChild,
         as: _ctx.as,
-        disabled: unref(disabled),
+        disabled: vueExports.unref(disabled),
         onClick: toggleCheck,
-        onKeydown: withKeys(withModifiers(toggleCheck, ["prevent"]), ["enter"])
+        onKeydown: vueExports.withKeys(vueExports.withModifiers(toggleCheck, ["prevent"]), ["enter"])
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
-          modelValue: unref(modelValue),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", {
+          modelValue: vueExports.unref(modelValue),
           checked: checked.value
-        }), unref(isFormControl) && _ctx.name ? (openBlock(), createBlock(unref(VisuallyHiddenInput_default), {
+        }), vueExports.unref(isFormControl) && _ctx.name ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHiddenInput_default), {
           key: 0,
           type: "checkbox",
           name: _ctx.name,
-          disabled: unref(disabled),
+          disabled: vueExports.unref(disabled),
           required: _ctx.required,
           value: _ctx.value,
           checked: checked.value
@@ -254,7 +251,7 @@ var SwitchRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
           "required",
           "value",
           "checked"
-        ])) : createCommentVNode("v-if", true)]),
+        ])) : vueExports.createCommentVNode("v-if", true)]),
         _: 3
       }, 16, [
         "id",
@@ -274,7 +271,7 @@ var SwitchRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   }
 });
 var SwitchRoot_default = SwitchRoot_vue_vue_type_script_setup_true_lang_default;
-var SwitchThumb_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SwitchThumb_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SwitchThumb",
   props: {
     asChild: {
@@ -291,13 +288,13 @@ var SwitchThumb_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const rootContext = injectSwitchRootContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        "data-state": unref(rootContext).checked.value ? "checked" : "unchecked",
-        "data-disabled": unref(rootContext).disabled.value ? "" : void 0,
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
+        "data-state": vueExports.unref(rootContext).checked.value ? "checked" : "unchecked",
+        "data-disabled": vueExports.unref(rootContext).disabled.value ? "" : void 0,
         "as-child": _ctx.asChild,
         as: _ctx.as
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "data-state",
@@ -506,19 +503,19 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   emits: ["change", "update:modelValue"],
   setup(__props, { emit: __emit }) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const emits = __emit;
     const props = useComponentProps("switch", _props);
     const appConfig = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "required", "value", "defaultValue", "modelValue", "trueValue", "falseValue"), emits);
     const { id: _id, emitFormChange, emitFormInput, size, color, highlight, name, disabled, ariaAttrs } = useFormField(_props);
-    const id = _id.value ?? useId();
-    const attrs = useAttrs();
-    const forwardedAttrs = computed(() => {
+    const id = _id.value ?? vueExports.useId();
+    const attrs = vueExports.useAttrs();
+    const forwardedAttrs = vueExports.computed(() => {
       const { "data-state": _, ...rest } = attrs;
       return rest;
     });
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.switch || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.switch || {} })({
       size: size.value ?? props.size,
       color: color.value ?? props.color,
       highlight: highlight.value ?? props.highlight,
@@ -533,51 +530,51 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       emitFormInput();
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div data-slot="container" class="${ssrRenderClass(ui.value.container({ class: unref(props).ui?.container }))}"${_scopeId}>`);
-            _push2(ssrRenderComponent(unref(SwitchRoot_default), mergeProps({ id: unref(id) }, { ...unref(rootProps), ...forwardedAttrs.value, ...unref(ariaAttrs) }, {
-              name: unref(name),
-              disabled: unref(disabled) || unref(props).loading,
+            _push2(`<div data-slot="container" class="${ssrRenderClass_1(ui.value.container({ class: vueExports.unref(props).ui?.container }))}"${_scopeId}>`);
+            _push2(ssrRenderComponent_1(vueExports.unref(SwitchRoot_default), vueExports.mergeProps({ id: vueExports.unref(id) }, { ...vueExports.unref(rootProps), ...forwardedAttrs.value, ...vueExports.unref(ariaAttrs) }, {
+              name: vueExports.unref(name),
+              disabled: vueExports.unref(disabled) || vueExports.unref(props).loading,
               "data-slot": "base",
-              class: ui.value.base({ class: unref(props).ui?.base }),
+              class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
               "onUpdate:modelValue": onUpdate
             }), {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(SwitchThumb_default), {
+                  _push3(ssrRenderComponent_1(vueExports.unref(SwitchThumb_default), {
                     "data-slot": "thumb",
-                    class: ui.value.thumb({ class: unref(props).ui?.thumb })
+                    class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb })
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        if (unref(props).loading) {
-                          _push4(ssrRenderComponent(_sfc_main$d, {
-                            name: unref(props).loadingIcon || unref(appConfig).ui.icons.loading,
+                        if (vueExports.unref(props).loading) {
+                          _push4(ssrRenderComponent_1(_sfc_main$d, {
+                            name: vueExports.unref(props).loadingIcon || vueExports.unref(appConfig).ui.icons.loading,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon, checked: true, unchecked: true })
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true, unchecked: true })
                           }, null, _parent4, _scopeId3));
                         } else {
                           _push4(`<!--[-->`);
-                          if (unref(props).checkedIcon) {
-                            _push4(ssrRenderComponent(_sfc_main$d, {
-                              name: unref(props).checkedIcon,
+                          if (vueExports.unref(props).checkedIcon) {
+                            _push4(ssrRenderComponent_1(_sfc_main$d, {
+                              name: vueExports.unref(props).checkedIcon,
                               "data-slot": "icon",
-                              class: ui.value.icon({ class: unref(props).ui?.icon, checked: true })
+                              class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true })
                             }, null, _parent4, _scopeId3));
                           } else {
                             _push4(`<!---->`);
                           }
-                          if (unref(props).uncheckedIcon) {
-                            _push4(ssrRenderComponent(_sfc_main$d, {
-                              name: unref(props).uncheckedIcon,
+                          if (vueExports.unref(props).uncheckedIcon) {
+                            _push4(ssrRenderComponent_1(_sfc_main$d, {
+                              name: vueExports.unref(props).uncheckedIcon,
                               "data-slot": "icon",
-                              class: ui.value.icon({ class: unref(props).ui?.icon, unchecked: true })
+                              class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, unchecked: true })
                             }, null, _parent4, _scopeId3));
                           } else {
                             _push4(`<!---->`);
@@ -586,24 +583,24 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                         }
                       } else {
                         return [
-                          unref(props).loading ? (openBlock(), createBlock(_sfc_main$d, {
+                          vueExports.unref(props).loading ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 0,
-                            name: unref(props).loadingIcon || unref(appConfig).ui.icons.loading,
+                            name: vueExports.unref(props).loadingIcon || vueExports.unref(appConfig).ui.icons.loading,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon, checked: true, unchecked: true })
-                          }, null, 8, ["name", "class"])) : (openBlock(), createBlock(Fragment, { key: 1 }, [
-                            unref(props).checkedIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true, unchecked: true })
+                          }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 1 }, [
+                            vueExports.unref(props).checkedIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                               key: 0,
-                              name: unref(props).checkedIcon,
+                              name: vueExports.unref(props).checkedIcon,
                               "data-slot": "icon",
-                              class: ui.value.icon({ class: unref(props).ui?.icon, checked: true })
-                            }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                            unref(props).uncheckedIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                              class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true })
+                            }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                            vueExports.unref(props).uncheckedIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                               key: 1,
-                              name: unref(props).uncheckedIcon,
+                              name: vueExports.unref(props).uncheckedIcon,
                               "data-slot": "icon",
-                              class: ui.value.icon({ class: unref(props).ui?.icon, unchecked: true })
-                            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                              class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, unchecked: true })
+                            }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                           ], 64))
                         ];
                       }
@@ -612,29 +609,29 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(SwitchThumb_default), {
+                    vueExports.createVNode(vueExports.unref(SwitchThumb_default), {
                       "data-slot": "thumb",
-                      class: ui.value.thumb({ class: unref(props).ui?.thumb })
+                      class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb })
                     }, {
-                      default: withCtx(() => [
-                        unref(props).loading ? (openBlock(), createBlock(_sfc_main$d, {
+                      default: vueExports.withCtx(() => [
+                        vueExports.unref(props).loading ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                           key: 0,
-                          name: unref(props).loadingIcon || unref(appConfig).ui.icons.loading,
+                          name: vueExports.unref(props).loadingIcon || vueExports.unref(appConfig).ui.icons.loading,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon, checked: true, unchecked: true })
-                        }, null, 8, ["name", "class"])) : (openBlock(), createBlock(Fragment, { key: 1 }, [
-                          unref(props).checkedIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true, unchecked: true })
+                        }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 1 }, [
+                          vueExports.unref(props).checkedIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 0,
-                            name: unref(props).checkedIcon,
+                            name: vueExports.unref(props).checkedIcon,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon, checked: true })
-                          }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                          unref(props).uncheckedIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true })
+                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                          vueExports.unref(props).uncheckedIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 1,
-                            name: unref(props).uncheckedIcon,
+                            name: vueExports.unref(props).uncheckedIcon,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon, unchecked: true })
-                          }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, unchecked: true })
+                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                         ], 64))
                       ]),
                       _: 1
@@ -645,27 +642,27 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               _: 1
             }, _parent2, _scopeId));
             _push2(`</div>`);
-            if (unref(props).label || !!slots.label || (unref(props).description || !!slots.description)) {
-              _push2(`<div data-slot="wrapper" class="${ssrRenderClass(ui.value.wrapper({ class: unref(props).ui?.wrapper }))}"${_scopeId}>`);
-              if (unref(props).label || !!slots.label) {
-                _push2(ssrRenderComponent(unref(Label_default), {
-                  for: unref(id),
+            if (vueExports.unref(props).label || !!slots.label || (vueExports.unref(props).description || !!slots.description)) {
+              _push2(`<div data-slot="wrapper" class="${ssrRenderClass_1(ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper }))}"${_scopeId}>`);
+              if (vueExports.unref(props).label || !!slots.label) {
+                _push2(ssrRenderComponent_1(vueExports.unref(Label_default), {
+                  for: vueExports.unref(id),
                   "data-slot": "label",
-                  class: ui.value.label({ class: unref(props).ui?.label })
+                  class: ui.value.label({ class: vueExports.unref(props).ui?.label })
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      ssrRenderSlot(_ctx.$slots, "label", {
-                        label: unref(props).label
+                      ssrRenderSlot_1(_ctx.$slots, "label", {
+                        label: vueExports.unref(props).label
                       }, () => {
-                        _push3(`${ssrInterpolate(unref(props).label)}`);
+                        _push3(`${ssrInterpolate_1(vueExports.unref(props).label)}`);
                       }, _push3, _parent3, _scopeId2);
                     } else {
                       return [
-                        renderSlot(_ctx.$slots, "label", {
-                          label: unref(props).label
+                        vueExports.renderSlot(_ctx.$slots, "label", {
+                          label: vueExports.unref(props).label
                         }, () => [
-                          createTextVNode(toDisplayString(unref(props).label), 1)
+                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).label), 1)
                         ])
                       ];
                     }
@@ -675,12 +672,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               } else {
                 _push2(`<!---->`);
               }
-              if (unref(props).description || !!slots.description) {
-                _push2(`<p data-slot="description" class="${ssrRenderClass(ui.value.description({ class: unref(props).ui?.description }))}"${_scopeId}>`);
-                ssrRenderSlot(_ctx.$slots, "description", {
-                  description: unref(props).description
+              if (vueExports.unref(props).description || !!slots.description) {
+                _push2(`<p data-slot="description" class="${ssrRenderClass_1(ui.value.description({ class: vueExports.unref(props).ui?.description }))}"${_scopeId}>`);
+                ssrRenderSlot_1(_ctx.$slots, "description", {
+                  description: vueExports.unref(props).description
                 }, () => {
-                  _push2(`${ssrInterpolate(unref(props).description)}`);
+                  _push2(`${ssrInterpolate_1(vueExports.unref(props).description)}`);
                 }, _push2, _parent2, _scopeId);
                 _push2(`</p>`);
               } else {
@@ -692,41 +689,41 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }
           } else {
             return [
-              createVNode("div", {
+              vueExports.createVNode("div", {
                 "data-slot": "container",
-                class: ui.value.container({ class: unref(props).ui?.container })
+                class: ui.value.container({ class: vueExports.unref(props).ui?.container })
               }, [
-                createVNode(unref(SwitchRoot_default), mergeProps({ id: unref(id) }, { ...unref(rootProps), ...forwardedAttrs.value, ...unref(ariaAttrs) }, {
-                  name: unref(name),
-                  disabled: unref(disabled) || unref(props).loading,
+                vueExports.createVNode(vueExports.unref(SwitchRoot_default), vueExports.mergeProps({ id: vueExports.unref(id) }, { ...vueExports.unref(rootProps), ...forwardedAttrs.value, ...vueExports.unref(ariaAttrs) }, {
+                  name: vueExports.unref(name),
+                  disabled: vueExports.unref(disabled) || vueExports.unref(props).loading,
                   "data-slot": "base",
-                  class: ui.value.base({ class: unref(props).ui?.base }),
+                  class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
                   "onUpdate:modelValue": onUpdate
                 }), {
-                  default: withCtx(() => [
-                    createVNode(unref(SwitchThumb_default), {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode(vueExports.unref(SwitchThumb_default), {
                       "data-slot": "thumb",
-                      class: ui.value.thumb({ class: unref(props).ui?.thumb })
+                      class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb })
                     }, {
-                      default: withCtx(() => [
-                        unref(props).loading ? (openBlock(), createBlock(_sfc_main$d, {
+                      default: vueExports.withCtx(() => [
+                        vueExports.unref(props).loading ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                           key: 0,
-                          name: unref(props).loadingIcon || unref(appConfig).ui.icons.loading,
+                          name: vueExports.unref(props).loadingIcon || vueExports.unref(appConfig).ui.icons.loading,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon, checked: true, unchecked: true })
-                        }, null, 8, ["name", "class"])) : (openBlock(), createBlock(Fragment, { key: 1 }, [
-                          unref(props).checkedIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true, unchecked: true })
+                        }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 1 }, [
+                          vueExports.unref(props).checkedIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 0,
-                            name: unref(props).checkedIcon,
+                            name: vueExports.unref(props).checkedIcon,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon, checked: true })
-                          }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                          unref(props).uncheckedIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, checked: true })
+                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                          vueExports.unref(props).uncheckedIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 1,
-                            name: unref(props).uncheckedIcon,
+                            name: vueExports.unref(props).uncheckedIcon,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon, unchecked: true })
-                          }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon, unchecked: true })
+                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                         ], 64))
                       ]),
                       _: 1
@@ -735,38 +732,38 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   _: 1
                 }, 16, ["id", "name", "disabled", "class"])
               ], 2),
-              unref(props).label || !!slots.label || (unref(props).description || !!slots.description) ? (openBlock(), createBlock("div", {
+              vueExports.unref(props).label || !!slots.label || (vueExports.unref(props).description || !!slots.description) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "wrapper",
-                class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
               }, [
-                unref(props).label || !!slots.label ? (openBlock(), createBlock(unref(Label_default), {
+                vueExports.unref(props).label || !!slots.label ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Label_default), {
                   key: 0,
-                  for: unref(id),
+                  for: vueExports.unref(id),
                   "data-slot": "label",
-                  class: ui.value.label({ class: unref(props).ui?.label })
+                  class: ui.value.label({ class: vueExports.unref(props).ui?.label })
                 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "label", {
-                      label: unref(props).label
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "label", {
+                      label: vueExports.unref(props).label
                     }, () => [
-                      createTextVNode(toDisplayString(unref(props).label), 1)
+                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).label), 1)
                     ])
                   ]),
                   _: 3
-                }, 8, ["for", "class"])) : createCommentVNode("", true),
-                unref(props).description || !!slots.description ? (openBlock(), createBlock("p", {
+                }, 8, ["for", "class"])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                   key: 1,
                   "data-slot": "description",
-                  class: ui.value.description({ class: unref(props).ui?.description })
+                  class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                 }, [
-                  renderSlot(_ctx.$slots, "description", {
-                    description: unref(props).description
+                  vueExports.renderSlot(_ctx.$slots, "description", {
+                    description: vueExports.unref(props).description
                   }, () => [
-                    createTextVNode(toDisplayString(unref(props).description), 1)
+                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                   ])
-                ], 2)) : createCommentVNode("", true)
-              ], 2)) : createCommentVNode("", true)
+                ], 2)) : vueExports.createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -777,7 +774,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Switch.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -1111,13 +1108,13 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   setup(__props, { expose: __expose, emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("textarea", _props);
     const modelValue = useVModel(props, "modelValue", emits, { defaultValue: props.defaultValue });
     const appConfig = useAppConfig();
     const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField(_props, { deferInputValidation: true });
     const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.textarea || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.textarea || {} })({
       color: color.value ?? props.color,
       variant: props.variant,
       size: size?.value ?? props.size,
@@ -1128,7 +1125,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       leading: isLeading.value || !!props.avatar || !!slots.leading,
       trailing: isTrailing.value || !!slots.trailing
     }));
-    const textareaRef = useTemplateRef("textareaRef");
+    const textareaRef = vueExports.useTemplateRef("textareaRef");
     function updateInput(value) {
       if (props.modelModifiers?.trim && (typeof value === "string" || value === null || value === void 0)) {
         value = value?.trim() ?? null;
@@ -1184,8 +1181,8 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         textareaRef.value.style.overflow = overflow;
       }
     }
-    watch(modelValue, () => {
-      nextTick(autoResize);
+    vueExports.watch(modelValue, () => {
+      vueExports.nextTick(autoResize);
     });
     __expose({
       textareaRef,
@@ -1193,42 +1190,42 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     });
     return (_ctx, _push, _parent, _attrs) => {
       let _temp0;
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<textarea${ssrRenderAttrs(_temp0 = mergeProps({
-              id: unref(id),
+            _push2(`<textarea${ssrRenderAttrs_1(_temp0 = vueExports.mergeProps({
+              id: vueExports.unref(id),
               ref_key: "textareaRef",
               ref: textareaRef,
-              value: unref(modelValue),
-              name: unref(name),
-              rows: unref(props).rows,
-              placeholder: unref(props).placeholder,
+              value: vueExports.unref(modelValue),
+              name: vueExports.unref(name),
+              rows: vueExports.unref(props).rows,
+              placeholder: vueExports.unref(props).placeholder,
               "data-slot": "base",
-              class: ui.value.base({ class: unref(props).ui?.base }),
-              disabled: unref(disabled),
-              required: unref(props).required
-            }, { ..._ctx.$attrs, ...unref(ariaAttrs) }), "textarea")}${_scopeId}>${ssrInterpolate("value" in _temp0 ? _temp0.value : "")}</textarea>`);
-            ssrRenderSlot(_ctx.$slots, "default", { ui: ui.value }, null, _push2, _parent2, _scopeId);
-            if (unref(isLeading) || !!unref(props).avatar || !!slots.leading) {
-              _push2(`<span data-slot="leading" class="${ssrRenderClass(ui.value.leading({ class: unref(props).ui?.leading }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
-                if (unref(isLeading) && unref(leadingIconName)) {
-                  _push2(ssrRenderComponent(_sfc_main$d, {
-                    name: unref(leadingIconName),
+              class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
+              disabled: vueExports.unref(disabled),
+              required: vueExports.unref(props).required
+            }, { ..._ctx.$attrs, ...vueExports.unref(ariaAttrs) }), "textarea")}${_scopeId}>${ssrInterpolate_1("value" in _temp0 ? _temp0.value : "")}</textarea>`);
+            ssrRenderSlot_1(_ctx.$slots, "default", { ui: ui.value }, null, _push2, _parent2, _scopeId);
+            if (vueExports.unref(isLeading) || !!vueExports.unref(props).avatar || !!slots.leading) {
+              _push2(`<span data-slot="leading" class="${ssrRenderClass_1(ui.value.leading({ class: vueExports.unref(props).ui?.leading }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "leading", { ui: ui.value }, () => {
+                if (vueExports.unref(isLeading) && vueExports.unref(leadingIconName)) {
+                  _push2(ssrRenderComponent_1(_sfc_main$d, {
+                    name: vueExports.unref(leadingIconName),
                     "data-slot": "leadingIcon",
-                    class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
+                    class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
                   }, null, _parent2, _scopeId));
-                } else if (!!unref(props).avatar) {
-                  _push2(ssrRenderComponent(_sfc_main$b, mergeProps({
-                    size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                  }, unref(props).avatar, {
+                } else if (!!vueExports.unref(props).avatar) {
+                  _push2(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                    size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                  }, vueExports.unref(props).avatar, {
                     "data-slot": "leadingAvatar",
-                    class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar })
+                    class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar })
                   }), null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
@@ -1238,14 +1235,14 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             } else {
               _push2(`<!---->`);
             }
-            if (unref(isTrailing) || !!slots.trailing) {
-              _push2(`<span data-slot="trailing" class="${ssrRenderClass(ui.value.trailing({ class: unref(props).ui?.trailing }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => {
-                if (unref(trailingIconName)) {
-                  _push2(ssrRenderComponent(_sfc_main$d, {
-                    name: unref(trailingIconName),
+            if (vueExports.unref(isTrailing) || !!slots.trailing) {
+              _push2(`<span data-slot="trailing" class="${ssrRenderClass_1(ui.value.trailing({ class: vueExports.unref(props).ui?.trailing }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "trailing", { ui: ui.value }, () => {
+                if (vueExports.unref(trailingIconName)) {
+                  _push2(ssrRenderComponent_1(_sfc_main$d, {
+                    name: vueExports.unref(trailingIconName),
                     "data-slot": "trailingIcon",
-                    class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
+                    class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
                   }, null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
@@ -1257,59 +1254,59 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }
           } else {
             return [
-              createVNode("textarea", mergeProps({
-                id: unref(id),
+              vueExports.createVNode("textarea", vueExports.mergeProps({
+                id: vueExports.unref(id),
                 ref_key: "textareaRef",
                 ref: textareaRef,
-                value: unref(modelValue),
-                name: unref(name),
-                rows: unref(props).rows,
-                placeholder: unref(props).placeholder,
+                value: vueExports.unref(modelValue),
+                name: vueExports.unref(name),
+                rows: vueExports.unref(props).rows,
+                placeholder: vueExports.unref(props).placeholder,
                 "data-slot": "base",
-                class: ui.value.base({ class: unref(props).ui?.base }),
-                disabled: unref(disabled),
-                required: unref(props).required
-              }, { ..._ctx.$attrs, ...unref(ariaAttrs) }, {
+                class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
+                disabled: vueExports.unref(disabled),
+                required: vueExports.unref(props).required
+              }, { ..._ctx.$attrs, ...vueExports.unref(ariaAttrs) }, {
                 onInput,
                 onBlur,
                 onChange,
-                onFocus: unref(emitFormFocus)
+                onFocus: vueExports.unref(emitFormFocus)
               }), null, 16, ["id", "value", "name", "rows", "placeholder", "disabled", "required", "onFocus"]),
-              renderSlot(_ctx.$slots, "default", { ui: ui.value }),
-              unref(isLeading) || !!unref(props).avatar || !!slots.leading ? (openBlock(), createBlock("span", {
+              vueExports.renderSlot(_ctx.$slots, "default", { ui: ui.value }),
+              vueExports.unref(isLeading) || !!vueExports.unref(props).avatar || !!slots.leading ? (vueExports.openBlock(), vueExports.createBlock("span", {
                 key: 0,
                 "data-slot": "leading",
-                class: ui.value.leading({ class: unref(props).ui?.leading })
+                class: ui.value.leading({ class: vueExports.unref(props).ui?.leading })
               }, [
-                renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
-                  unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                vueExports.renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
+                  vueExports.unref(isLeading) && vueExports.unref(leadingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                     key: 0,
-                    name: unref(leadingIconName),
+                    name: vueExports.unref(leadingIconName),
                     "data-slot": "leadingIcon",
-                    class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
-                  }, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                    class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
+                  }, null, 8, ["name", "class"])) : !!vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                     key: 1,
-                    size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                  }, unref(props).avatar, {
+                    size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                  }, vueExports.unref(props).avatar, {
                     "data-slot": "leadingAvatar",
-                    class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar })
-                  }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                    class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar })
+                  }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                 ])
-              ], 2)) : createCommentVNode("", true),
-              unref(isTrailing) || !!slots.trailing ? (openBlock(), createBlock("span", {
+              ], 2)) : vueExports.createCommentVNode("", true),
+              vueExports.unref(isTrailing) || !!slots.trailing ? (vueExports.openBlock(), vueExports.createBlock("span", {
                 key: 1,
                 "data-slot": "trailing",
-                class: ui.value.trailing({ class: unref(props).ui?.trailing })
+                class: ui.value.trailing({ class: vueExports.unref(props).ui?.trailing })
               }, [
-                renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
-                  unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                vueExports.renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
+                  vueExports.unref(trailingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                     key: 0,
-                    name: unref(trailingIconName),
+                    name: vueExports.unref(trailingIconName),
                     "data-slot": "trailingIcon",
-                    class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
-                  }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                    class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
+                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                 ])
-              ], 2)) : createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -1320,11 +1317,11 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Textarea.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "MediaPickerModal",
   __ssrInlineRender: true,
   props: {
@@ -1338,13 +1335,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const emit = __emit;
     const { features } = useServerFeatures();
     const { allowedTypes, handleFiles, uploadQueue, uploading, clearUploadQueue } = useMedia();
-    const fileInput = ref(null);
-    const showProgress = ref(false);
-    const title = computed(() => props.imagesOnly ? "Choose image" : "Choose file");
-    const acceptTypes = computed(
+    const fileInput = vueExports.ref(null);
+    const showProgress = vueExports.ref(false);
+    const title = vueExports.computed(() => props.imagesOnly ? "Choose image" : "Choose file");
+    const acceptTypes = vueExports.computed(
       () => props.imagesOnly ? allowedTypes.filter((t) => t.startsWith("image/")) : allowedTypes
     );
-    const uploadDone = computed(() => showProgress.value && !uploading.value);
+    const uploadDone = vueExports.computed(() => showProgress.value && !uploading.value);
     function close() {
       emit("update:open", false);
     }
@@ -1368,15 +1365,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_AdminMediaGrid = __nuxt_component_2;
       const _component_UIcon = _sfc_main$d;
       const _component_UButton = _sfc_main$8;
-      _push(ssrRenderComponent(_component_UModal, mergeProps({
+      _push(ssrRenderComponent_1(_component_UModal, vueExports.mergeProps({
         open: __props.open,
-        title: unref(title),
+        title: vueExports.unref(title),
         ui: { content: "max-w-2xl" },
         "onUpdate:open": ($event) => emit("update:open", $event)
       }, _attrs), {
-        body: withCtx((_, _push2, _parent2, _scopeId) => {
+        body: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_AdminMediaGrid, {
+            _push2(ssrRenderComponent_1(_component_AdminMediaGrid, {
               "select-mode": "",
               "images-only": __props.imagesOnly,
               "selected-url": __props.selectedUrl,
@@ -1384,7 +1381,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             }, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_component_AdminMediaGrid, {
+              vueExports.createVNode(_component_AdminMediaGrid, {
                 "select-mode": "",
                 "images-only": __props.imagesOnly,
                 "selected-url": __props.selectedUrl,
@@ -1393,49 +1390,49 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+        footer: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex flex-col gap-3 w-full"${_scopeId}>`);
-            if (unref(showProgress) && unref(uploadQueue).length > 0) {
+            if (vueExports.unref(showProgress) && vueExports.unref(uploadQueue).length > 0) {
               _push2(`<div class="rounded-lg border border-default bg-elevated p-3 space-y-2"${_scopeId}><ul class="space-y-2"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(uploadQueue), (entry) => {
-                _push2(`<li class="space-y-1"${_scopeId}><div class="flex items-center justify-between text-xs"${_scopeId}><span class="truncate max-w-[75%] font-medium"${_scopeId}>${ssrInterpolate(entry.file.name)}</span><span class="shrink-0 ml-2 text-muted"${_scopeId}>`);
+              ssrRenderList_1(vueExports.unref(uploadQueue), (entry) => {
+                _push2(`<li class="space-y-1"${_scopeId}><div class="flex items-center justify-between text-xs"${_scopeId}><span class="truncate max-w-[75%] font-medium"${_scopeId}>${ssrInterpolate_1(entry.file.name)}</span><span class="shrink-0 ml-2 text-muted"${_scopeId}>`);
                 if (entry.status === "done") {
-                  _push2(ssrRenderComponent(_component_UIcon, {
+                  _push2(ssrRenderComponent_1(_component_UIcon, {
                     name: "i-lucide-check",
                     class: "w-3.5 h-3.5 text-success"
                   }, null, _parent2, _scopeId));
                 } else if (entry.status === "error") {
-                  _push2(ssrRenderComponent(_component_UIcon, {
+                  _push2(ssrRenderComponent_1(_component_UIcon, {
                     name: "i-lucide-x",
                     class: "w-3.5 h-3.5 text-error"
                   }, null, _parent2, _scopeId));
                 } else {
-                  _push2(`<span${_scopeId}>${ssrInterpolate(entry.progress)}%</span>`);
+                  _push2(`<span${_scopeId}>${ssrInterpolate_1(entry.progress)}%</span>`);
                 }
-                _push2(`</span></div><div class="h-1 rounded-full bg-muted overflow-hidden"${_scopeId}><div class="${ssrRenderClass([entry.status === "error" ? "bg-error" : "bg-primary", "h-full rounded-full transition-all duration-200"])}" style="${ssrRenderStyle({ width: `${entry.progress}%` })}"${_scopeId}></div></div>`);
+                _push2(`</span></div><div class="h-1 rounded-full bg-muted overflow-hidden"${_scopeId}><div class="${ssrRenderClass_1([entry.status === "error" ? "bg-error" : "bg-primary", "h-full rounded-full transition-all duration-200"])}" style="${ssrRenderStyle_1({ width: `${entry.progress}%` })}"${_scopeId}></div></div>`);
                 if (entry.error) {
-                  _push2(`<p class="text-xs text-error"${_scopeId}>${ssrInterpolate(entry.error)}</p>`);
+                  _push2(`<p class="text-xs text-error"${_scopeId}>${ssrInterpolate_1(entry.error)}</p>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 _push2(`</li>`);
               });
               _push2(`<!--]--></ul>`);
-              if (unref(uploadDone)) {
+              if (vueExports.unref(uploadDone)) {
                 _push2(`<div class="flex justify-end pt-1"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UButton, {
+                _push2(ssrRenderComponent_1(_component_UButton, {
                   size: "xs",
                   variant: "subtle",
                   color: "neutral",
                   onClick: dismissProgress
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
                       _push3(` Dismiss `);
                     } else {
                       return [
-                        createTextVNode(" Dismiss ")
+                        vueExports.createTextVNode(" Dismiss ")
                       ];
                     }
                   }),
@@ -1450,21 +1447,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               _push2(`<!---->`);
             }
             _push2(`<div class="flex justify-end"${_scopeId}>`);
-            if (unref(features).storage) {
-              _push2(ssrRenderComponent(_component_UButton, {
+            if (vueExports.unref(features).storage) {
+              _push2(ssrRenderComponent_1(_component_UButton, {
                 variant: "outline",
                 icon: "i-lucide-upload",
                 size: "sm",
-                loading: unref(uploading),
-                disabled: unref(uploading),
-                onClick: ($event) => unref(fileInput)?.click()
+                loading: vueExports.unref(uploading),
+                disabled: vueExports.unref(uploading),
+                onClick: ($event) => vueExports.unref(fileInput)?.click()
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(` Upload new `);
                   } else {
                     return [
-                      createTextVNode(" Upload new ")
+                      vueExports.createTextVNode(" Upload new ")
                     ];
                   }
                 }),
@@ -1473,85 +1470,85 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(`<input type="file" multiple${ssrRenderAttr("accept", unref(acceptTypes).join(","))} class="hidden"${_scopeId}></div></div>`);
+            _push2(`<input type="file" multiple${ssrRenderAttr_1("accept", vueExports.unref(acceptTypes).join(","))} class="hidden"${_scopeId}></div></div>`);
           } else {
             return [
-              createVNode("div", { class: "flex flex-col gap-3 w-full" }, [
-                unref(showProgress) && unref(uploadQueue).length > 0 ? (openBlock(), createBlock("div", {
+              vueExports.createVNode("div", { class: "flex flex-col gap-3 w-full" }, [
+                vueExports.unref(showProgress) && vueExports.unref(uploadQueue).length > 0 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   class: "rounded-lg border border-default bg-elevated p-3 space-y-2"
                 }, [
-                  createVNode("ul", { class: "space-y-2" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(uploadQueue), (entry) => {
-                      return openBlock(), createBlock("li", {
+                  vueExports.createVNode("ul", { class: "space-y-2" }, [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(uploadQueue), (entry) => {
+                      return vueExports.openBlock(), vueExports.createBlock("li", {
                         key: entry.file.name,
                         class: "space-y-1"
                       }, [
-                        createVNode("div", { class: "flex items-center justify-between text-xs" }, [
-                          createVNode("span", { class: "truncate max-w-[75%] font-medium" }, toDisplayString(entry.file.name), 1),
-                          createVNode("span", { class: "shrink-0 ml-2 text-muted" }, [
-                            entry.status === "done" ? (openBlock(), createBlock(_component_UIcon, {
+                        vueExports.createVNode("div", { class: "flex items-center justify-between text-xs" }, [
+                          vueExports.createVNode("span", { class: "truncate max-w-[75%] font-medium" }, vueExports.toDisplayString(entry.file.name), 1),
+                          vueExports.createVNode("span", { class: "shrink-0 ml-2 text-muted" }, [
+                            entry.status === "done" ? (vueExports.openBlock(), vueExports.createBlock(_component_UIcon, {
                               key: 0,
                               name: "i-lucide-check",
                               class: "w-3.5 h-3.5 text-success"
-                            })) : entry.status === "error" ? (openBlock(), createBlock(_component_UIcon, {
+                            })) : entry.status === "error" ? (vueExports.openBlock(), vueExports.createBlock(_component_UIcon, {
                               key: 1,
                               name: "i-lucide-x",
                               class: "w-3.5 h-3.5 text-error"
-                            })) : (openBlock(), createBlock("span", { key: 2 }, toDisplayString(entry.progress) + "%", 1))
+                            })) : (vueExports.openBlock(), vueExports.createBlock("span", { key: 2 }, vueExports.toDisplayString(entry.progress) + "%", 1))
                           ])
                         ]),
-                        createVNode("div", { class: "h-1 rounded-full bg-muted overflow-hidden" }, [
-                          createVNode("div", {
+                        vueExports.createVNode("div", { class: "h-1 rounded-full bg-muted overflow-hidden" }, [
+                          vueExports.createVNode("div", {
                             class: ["h-full rounded-full transition-all duration-200", entry.status === "error" ? "bg-error" : "bg-primary"],
                             style: { width: `${entry.progress}%` }
                           }, null, 6)
                         ]),
-                        entry.error ? (openBlock(), createBlock("p", {
+                        entry.error ? (vueExports.openBlock(), vueExports.createBlock("p", {
                           key: 0,
                           class: "text-xs text-error"
-                        }, toDisplayString(entry.error), 1)) : createCommentVNode("", true)
+                        }, vueExports.toDisplayString(entry.error), 1)) : vueExports.createCommentVNode("", true)
                       ]);
                     }), 128))
                   ]),
-                  unref(uploadDone) ? (openBlock(), createBlock("div", {
+                  vueExports.unref(uploadDone) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     class: "flex justify-end pt-1"
                   }, [
-                    createVNode(_component_UButton, {
+                    vueExports.createVNode(_component_UButton, {
                       size: "xs",
                       variant: "subtle",
                       color: "neutral",
                       onClick: dismissProgress
                     }, {
-                      default: withCtx(() => [
-                        createTextVNode(" Dismiss ")
+                      default: vueExports.withCtx(() => [
+                        vueExports.createTextVNode(" Dismiss ")
                       ]),
                       _: 1
                     })
-                  ])) : createCommentVNode("", true)
-                ])) : createCommentVNode("", true),
-                createVNode("div", { class: "flex justify-end" }, [
-                  unref(features).storage ? (openBlock(), createBlock(_component_UButton, {
+                  ])) : vueExports.createCommentVNode("", true)
+                ])) : vueExports.createCommentVNode("", true),
+                vueExports.createVNode("div", { class: "flex justify-end" }, [
+                  vueExports.unref(features).storage ? (vueExports.openBlock(), vueExports.createBlock(_component_UButton, {
                     key: 0,
                     variant: "outline",
                     icon: "i-lucide-upload",
                     size: "sm",
-                    loading: unref(uploading),
-                    disabled: unref(uploading),
-                    onClick: ($event) => unref(fileInput)?.click()
+                    loading: vueExports.unref(uploading),
+                    disabled: vueExports.unref(uploading),
+                    onClick: ($event) => vueExports.unref(fileInput)?.click()
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode(" Upload new ")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode(" Upload new ")
                     ]),
                     _: 1
-                  }, 8, ["loading", "disabled", "onClick"])) : createCommentVNode("", true),
-                  createVNode("input", {
+                  }, 8, ["loading", "disabled", "onClick"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode("input", {
                     ref_key: "fileInput",
                     ref: fileInput,
                     type: "file",
                     multiple: "",
-                    accept: unref(acceptTypes).join(","),
+                    accept: vueExports.unref(acceptTypes).join(","),
                     class: "hidden",
                     onChange: onFileInput
                   }, null, 40, ["accept"])
@@ -1567,7 +1564,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/MediaPickerModal.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

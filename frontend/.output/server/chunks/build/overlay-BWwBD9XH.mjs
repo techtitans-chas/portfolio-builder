@@ -1,10 +1,182 @@
-import { W as useEmitAsProps, Z as useForwardExpose, P as Presence_default, b as Primitive, T as Teleport_default, C as injectConfigProviderContext, k as createContext, I as isNullish, w as getActiveElement, A as AUTOFOCUS_ON_MOUNT, n as focusFirst$1, z as getTabbableCandidates, m as focus, a as AUTOFOCUS_ON_UNMOUNT, E as EVENT_OPTIONS, B as getTabbableEdges } from './server.mjs';
-import * as vue from 'vue';
-import { defineComponent, ref, toRefs, renderSlot, unref, openBlock, createBlock, withCtx, mergeProps, normalizeProps, guardReactiveProps, createVNode, createCommentVNode, computed, watchEffect, normalizeStyle, watch, reactive, toValue, nextTick } from 'vue';
-import { useVModel, onKeyStroke, unrefElement, createSharedComposable, useEventListener, createGlobalState } from '@vueuse/core';
-import { hideOthers } from 'aria-hidden';
-import { tryOnBeforeUnmount, isClient, isIOS } from '@vueuse/shared';
-import { g as defu } from '../nitro/nitro.mjs';
+import { aO as vueExports, aM as useVModel, ap as useEmitAsProps, au as useForwardExpose, P as Presence_default, b as Primitive, T as Teleport_default, aN as vue, K as injectConfigProviderContext, l as createContext, X as onKeyStroke, Q as isNullish, ah as unrefElement, ae as tryOnBeforeUnmount, D as getActiveElement, A as AUTOFOCUS_ON_MOUNT, t as focusFirst$1, I as getTabbableCandidates, s as focus, a as AUTOFOCUS_ON_UNMOUNT, q as createSharedComposable, E as EVENT_OPTIONS, J as getTabbableEdges, o as createGlobalState } from './server.mjs';
+
+var es5 = {};
+
+(function (exports) {
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.suppressOthers = exports.supportsInert = exports.inertOthers = exports.hideOthers = void 0;
+	var getDefaultParent = function (originalTarget) {
+	    if (typeof document === 'undefined') {
+	        return null;
+	    }
+	    var sampleTarget = Array.isArray(originalTarget) ? originalTarget[0] : originalTarget;
+	    return sampleTarget.ownerDocument.body;
+	};
+	var counterMap = new WeakMap();
+	var uncontrolledNodes = new WeakMap();
+	var markerMap = {};
+	var lockCount = 0;
+	var unwrapHost = function (node) {
+	    return node && (node.host || unwrapHost(node.parentNode));
+	};
+	var correctTargets = function (parent, targets) {
+	    return targets
+	        .map(function (target) {
+	        if (parent.contains(target)) {
+	            return target;
+	        }
+	        var correctedTarget = unwrapHost(target);
+	        if (correctedTarget && parent.contains(correctedTarget)) {
+	            return correctedTarget;
+	        }
+	        console.error('aria-hidden', target, 'in not contained inside', parent, '. Doing nothing');
+	        return null;
+	    })
+	        .filter(function (x) { return Boolean(x); });
+	};
+	/**
+	 * Marks everything except given node(or nodes) as aria-hidden
+	 * @param {Element | Element[]} originalTarget - elements to keep on the page
+	 * @param [parentNode] - top element, defaults to document.body
+	 * @param {String} [markerName] - a special attribute to mark every node
+	 * @param {String} [controlAttribute] - html Attribute to control
+	 * @return {Undo} undo command
+	 */
+	var applyAttributeToOthers = function (originalTarget, parentNode, markerName, controlAttribute) {
+	    var targets = correctTargets(parentNode, Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
+	    if (!markerMap[markerName]) {
+	        markerMap[markerName] = new WeakMap();
+	    }
+	    var markerCounter = markerMap[markerName];
+	    var hiddenNodes = [];
+	    var elementsToKeep = new Set();
+	    var elementsToStop = new Set(targets);
+	    var keep = function (el) {
+	        if (!el || elementsToKeep.has(el)) {
+	            return;
+	        }
+	        elementsToKeep.add(el);
+	        keep(el.parentNode);
+	    };
+	    targets.forEach(keep);
+	    var deep = function (parent) {
+	        if (!parent || elementsToStop.has(parent)) {
+	            return;
+	        }
+	        Array.prototype.forEach.call(parent.children, function (node) {
+	            if (elementsToKeep.has(node)) {
+	                deep(node);
+	            }
+	            else {
+	                try {
+	                    var attr = node.getAttribute(controlAttribute);
+	                    var alreadyHidden = attr !== null && attr !== 'false';
+	                    var counterValue = (counterMap.get(node) || 0) + 1;
+	                    var markerValue = (markerCounter.get(node) || 0) + 1;
+	                    counterMap.set(node, counterValue);
+	                    markerCounter.set(node, markerValue);
+	                    hiddenNodes.push(node);
+	                    if (counterValue === 1 && alreadyHidden) {
+	                        uncontrolledNodes.set(node, true);
+	                    }
+	                    if (markerValue === 1) {
+	                        node.setAttribute(markerName, 'true');
+	                    }
+	                    if (!alreadyHidden) {
+	                        node.setAttribute(controlAttribute, 'true');
+	                    }
+	                }
+	                catch (e) {
+	                    console.error('aria-hidden: cannot operate on ', node, e);
+	                }
+	            }
+	        });
+	    };
+	    deep(parentNode);
+	    elementsToKeep.clear();
+	    lockCount++;
+	    return function () {
+	        hiddenNodes.forEach(function (node) {
+	            var counterValue = counterMap.get(node) - 1;
+	            var markerValue = markerCounter.get(node) - 1;
+	            counterMap.set(node, counterValue);
+	            markerCounter.set(node, markerValue);
+	            if (!counterValue) {
+	                if (!uncontrolledNodes.has(node)) {
+	                    node.removeAttribute(controlAttribute);
+	                }
+	                uncontrolledNodes.delete(node);
+	            }
+	            if (!markerValue) {
+	                node.removeAttribute(markerName);
+	            }
+	        });
+	        lockCount--;
+	        if (!lockCount) {
+	            // clear
+	            counterMap = new WeakMap();
+	            counterMap = new WeakMap();
+	            uncontrolledNodes = new WeakMap();
+	            markerMap = {};
+	        }
+	    };
+	};
+	/**
+	 * Marks everything except given node(or nodes) as aria-hidden
+	 * @param {Element | Element[]} originalTarget - elements to keep on the page
+	 * @param [parentNode] - top element, defaults to document.body
+	 * @param {String} [markerName] - a special attribute to mark every node
+	 * @return {Undo} undo command
+	 */
+	var hideOthers = function (originalTarget, parentNode, markerName) {
+	    if (markerName === void 0) { markerName = 'data-aria-hidden'; }
+	    var targets = Array.from(Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
+	    var activeParentNode = parentNode || getDefaultParent(originalTarget);
+	    if (!activeParentNode) {
+	        return function () { return null; };
+	    }
+	    // we should not hide aria-live elements - https://github.com/theKashey/aria-hidden/issues/10
+	    // and script elements, as they have no impact on accessibility.
+	    targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll('[aria-live], script')));
+	    return applyAttributeToOthers(targets, activeParentNode, markerName, 'aria-hidden');
+	};
+	exports.hideOthers = hideOthers;
+	/**
+	 * Marks everything except given node(or nodes) as inert
+	 * @param {Element | Element[]} originalTarget - elements to keep on the page
+	 * @param [parentNode] - top element, defaults to document.body
+	 * @param {String} [markerName] - a special attribute to mark every node
+	 * @return {Undo} undo command
+	 */
+	var inertOthers = function (originalTarget, parentNode, markerName) {
+	    if (markerName === void 0) { markerName = 'data-inert-ed'; }
+	    var activeParentNode = parentNode || getDefaultParent(originalTarget);
+	    if (!activeParentNode) {
+	        return function () { return null; };
+	    }
+	    return applyAttributeToOthers(originalTarget, activeParentNode, markerName, 'inert');
+	};
+	exports.inertOthers = inertOthers;
+	/**
+	 * @returns if current browser supports inert
+	 */
+	var supportsInert = function () {
+	    return typeof HTMLElement !== 'undefined' && HTMLElement.prototype.hasOwnProperty('inert');
+	};
+	exports.supportsInert = supportsInert;
+	/**
+	 * Automatic function to "suppress" DOM elements - _hide_ or _inert_ in the best possible way
+	 * @param {Element | Element[]} originalTarget - elements to keep on the page
+	 * @param [parentNode] - top element, defaults to document.body
+	 * @param {String} [markerName] - a special attribute to mark every node
+	 * @return {Undo} undo command
+	 */
+	var suppressOthers = function (originalTarget, parentNode, markerName) {
+	    if (markerName === void 0) { markerName = 'data-suppressed'; }
+	    return ((0, exports.supportsInert)() ? exports.inertOthers : exports.hideOthers)(originalTarget, parentNode, markerName);
+	};
+	exports.suppressOthers = suppressOthers; 
+} (es5));
 
 function handleAndDispatchCustomEvent(name, handler, detail) {
   const target = detail.originalEvent.target;
@@ -17,54 +189,15 @@ function handleAndDispatchCustomEvent(name, handler, detail) {
   target.dispatchEvent(event);
 }
 const useBodyLockStackCount = createSharedComposable(() => {
-  const map = ref(/* @__PURE__ */ new Map());
-  const initialOverflow = ref();
-  const locked = computed(() => {
+  const map = vueExports.ref(/* @__PURE__ */ new Map());
+  vueExports.ref();
+  const locked = vueExports.computed(() => {
     for (const value of map.value.values()) if (value) return true;
     return false;
   });
-  const context2 = injectConfigProviderContext({ scrollBody: ref(true) });
-  let stopTouchMoveListener = null;
-  const resetBodyStyle = () => {
-    (void 0).body.style.paddingRight = "";
-    (void 0).body.style.marginRight = "";
-    (void 0).body.style.pointerEvents = "";
-    (void 0).documentElement.style.removeProperty("--scrollbar-width");
-    (void 0).body.style.overflow = initialOverflow.value ?? "";
-    isIOS && stopTouchMoveListener?.();
-    initialOverflow.value = void 0;
-  };
-  watch(locked, (val, oldVal) => {
-    if (!isClient) return;
-    if (!val) {
-      if (oldVal) resetBodyStyle();
-      return;
-    }
-    if (initialOverflow.value === void 0) initialOverflow.value = (void 0).body.style.overflow;
-    const verticalScrollbarWidth = (void 0).innerWidth - (void 0).documentElement.clientWidth;
-    const defaultConfig = {
-      padding: verticalScrollbarWidth,
-      margin: 0
-    };
-    const config = context2.scrollBody?.value ? typeof context2.scrollBody.value === "object" ? defu({
-      padding: context2.scrollBody.value.padding === true ? verticalScrollbarWidth : context2.scrollBody.value.padding,
-      margin: context2.scrollBody.value.margin === true ? verticalScrollbarWidth : context2.scrollBody.value.margin
-    }, defaultConfig) : defaultConfig : {
-      padding: 0,
-      margin: 0
-    };
-    if (verticalScrollbarWidth > 0) {
-      (void 0).body.style.paddingRight = typeof config.padding === "number" ? `${config.padding}px` : String(config.padding);
-      (void 0).body.style.marginRight = typeof config.margin === "number" ? `${config.margin}px` : String(config.margin);
-      (void 0).documentElement.style.setProperty("--scrollbar-width", `${verticalScrollbarWidth}px`);
-      (void 0).body.style.overflow = "hidden";
-    }
-    if (isIOS) stopTouchMoveListener = useEventListener(void 0, "touchmove", (e) => preventDefault(e), { passive: false });
-    nextTick(() => {
-      if (!locked.value) return;
-      (void 0).body.style.pointerEvents = "none";
-      (void 0).body.style.overflow = "hidden";
-    });
+  injectConfigProviderContext({ scrollBody: vueExports.ref(true) });
+  vueExports.watch(locked, (val, oldVal) => {
+    return;
   }, {
     immediate: true,
     flush: "sync"
@@ -75,7 +208,7 @@ function useBodyScrollLock(initialState) {
   const id = Math.random().toString(36).substring(2, 7);
   const map = useBodyLockStackCount();
   map.value.set(id, initialState ?? false);
-  const locked = computed({
+  const locked = vueExports.computed({
     get: () => map.value.get(id) ?? false,
     set: (value) => map.value.set(id, value)
   });
@@ -84,32 +217,15 @@ function useBodyScrollLock(initialState) {
   });
   return locked;
 }
-function checkOverflowScroll(ele) {
-  const style = (void 0).getComputedStyle(ele);
-  if (style.overflowX === "scroll" || style.overflowY === "scroll" || style.overflowX === "auto" && ele.clientWidth < ele.scrollWidth || style.overflowY === "auto" && ele.clientHeight < ele.scrollHeight) return true;
-  else {
-    const parent = ele.parentNode;
-    if (!(parent instanceof Element) || parent.tagName === "BODY") return false;
-    return checkOverflowScroll(parent);
-  }
-}
-function preventDefault(rawEvent) {
-  const e = rawEvent || (void 0).event;
-  const _target = e.target;
-  if (_target instanceof Element && checkOverflowScroll(_target)) return false;
-  if (e.touches.length > 1) return true;
-  if (e.preventDefault && e.cancelable) e.preventDefault();
-  return false;
-}
 function useHideOthers(target) {
   let undo;
-  watch(() => unrefElement(target), (el) => {
+  vueExports.watch(() => unrefElement(target), (el) => {
     let isInsideClosedPopover = false;
     try {
       isInsideClosedPopover = !!el?.closest("[popover]:not(:popover-open)");
     } catch {
     }
-    if (el && !isInsideClosedPopover) undo = hideOthers(el);
+    if (el && !isInsideClosedPopover) undo = es5.hideOthers(el);
     else if (undo) undo();
   });
 }
@@ -117,7 +233,7 @@ let count = 0;
 function useId(deterministicId, prefix = "reka") {
   if (deterministicId) return deterministicId;
   let id;
-  if ("useId" in vue) id = vue.useId?.();
+  if ("useId" in vue) id = vueExports.useId?.();
   else {
     const configProviderContext = injectConfigProviderContext({ useId: void 0 });
     id = configProviderContext.useId?.() ?? `${++count}`;
@@ -125,7 +241,7 @@ function useId(deterministicId, prefix = "reka") {
   return prefix ? `${prefix}-${id}` : id;
 }
 const [injectDialogRootContext, provideDialogRootContext] = /* @__PURE__ */ createContext("DialogRoot");
-var DialogRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "DialogRoot",
   props: {
@@ -153,9 +269,9 @@ var DialogRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       defaultValue: props.defaultOpen,
       passive: props.open === void 0
     });
-    const triggerElement = ref();
-    const contentElement = ref();
-    const { modal } = toRefs(props);
+    const triggerElement = vueExports.ref();
+    const contentElement = vueExports.ref();
+    const { modal } = vueExports.toRefs(props);
     provideDialogRootContext({
       open,
       modal,
@@ -175,15 +291,15 @@ var DialogRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       contentElement
     });
     return (_ctx, _cache) => {
-      return renderSlot(_ctx.$slots, "default", {
-        open: unref(open),
+      return vueExports.renderSlot(_ctx.$slots, "default", {
+        open: vueExports.unref(open),
         close: () => open.value = false
       });
     };
   }
 });
 var DialogRoot_default = DialogRoot_vue_vue_type_script_setup_true_lang_default;
-var DialogClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogClose",
   props: {
     asChild: {
@@ -201,105 +317,54 @@ var DialogClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     useForwardExpose();
     const rootContext = injectDialogRootContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, {
         type: _ctx.as === "button" ? "button" : void 0,
-        onClick: _cache[0] || (_cache[0] = ($event) => unref(rootContext).onOpenChange(false))
+        onClick: _cache[0] || (_cache[0] = ($event) => vueExports.unref(rootContext).onOpenChange(false))
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["type"]);
     };
   }
 });
 var DialogClose_default = DialogClose_vue_vue_type_script_setup_true_lang_default;
-const POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside";
-const FOCUS_OUTSIDE = "dismissableLayer.focusOutside";
-function isLayerExist(layerElement, targetElement) {
-  if (!(targetElement instanceof Element)) return false;
-  const targetLayer = targetElement.closest("[data-dismissable-layer]");
-  const mainLayer = layerElement.dataset.dismissableLayer === "" ? layerElement : layerElement.querySelector("[data-dismissable-layer]");
-  const nodeList = Array.from(layerElement.ownerDocument.querySelectorAll("[data-dismissable-layer]"));
-  if (targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer))) return true;
-  else return false;
-}
 function usePointerDownOutside(onPointerDownOutside, element, enabled = true) {
-  const ownerDocument = element?.value?.ownerDocument ?? globalThis?.document;
-  const isPointerInsideDOMTree = ref(false);
-  const handleClickRef = ref(() => {
+  element?.value?.ownerDocument ?? globalThis?.document;
+  const isPointerInsideDOMTree = vueExports.ref(false);
+  vueExports.ref(() => {
   });
-  watchEffect((cleanupFn) => {
-    if (!isClient || !toValue(enabled)) return;
-    const handlePointerDown = async (event) => {
-      const target = event.target;
-      if (!element?.value || !target) return;
-      if (isLayerExist(element.value, target)) {
-        isPointerInsideDOMTree.value = false;
-        return;
-      }
-      if (event.target && !isPointerInsideDOMTree.value) {
-        let handleAndDispatchPointerDownOutsideEvent = function() {
-          handleAndDispatchCustomEvent(POINTER_DOWN_OUTSIDE, onPointerDownOutside, eventDetail);
-        };
-        const eventDetail = { originalEvent: event };
-        if (event.pointerType === "touch") {
-          ownerDocument.removeEventListener("click", handleClickRef.value);
-          handleClickRef.value = handleAndDispatchPointerDownOutsideEvent;
-          ownerDocument.addEventListener("click", handleClickRef.value, { once: true });
-        } else handleAndDispatchPointerDownOutsideEvent();
-      } else ownerDocument.removeEventListener("click", handleClickRef.value);
-      isPointerInsideDOMTree.value = false;
-    };
-    const timerId = (void 0).setTimeout(() => {
-      ownerDocument.addEventListener("pointerdown", handlePointerDown);
-    }, 0);
-    cleanupFn(() => {
-      (void 0).clearTimeout(timerId);
-      ownerDocument.removeEventListener("pointerdown", handlePointerDown);
-      ownerDocument.removeEventListener("click", handleClickRef.value);
-    });
+  vueExports.watchEffect((cleanupFn) => {
+    return;
   });
   return { onPointerDownCapture: () => {
-    if (!toValue(enabled)) return;
+    if (!vueExports.toValue(enabled)) return;
     isPointerInsideDOMTree.value = true;
   } };
 }
 function useFocusOutside(onFocusOutside, element, enabled = true) {
-  const ownerDocument = element?.value?.ownerDocument ?? globalThis?.document;
-  const isFocusInsideDOMTree = ref(false);
-  watchEffect((cleanupFn) => {
-    if (!isClient || !toValue(enabled)) return;
-    const handleFocus = async (event) => {
-      if (!element?.value) return;
-      await nextTick();
-      await nextTick();
-      const target = event.target;
-      if (!element.value || !target || isLayerExist(element.value, target)) return;
-      if (event.target && !isFocusInsideDOMTree.value) {
-        const eventDetail = { originalEvent: event };
-        handleAndDispatchCustomEvent(FOCUS_OUTSIDE, onFocusOutside, eventDetail);
-      }
-    };
-    ownerDocument.addEventListener("focusin", handleFocus);
-    cleanupFn(() => ownerDocument.removeEventListener("focusin", handleFocus));
+  element?.value?.ownerDocument ?? globalThis?.document;
+  const isFocusInsideDOMTree = vueExports.ref(false);
+  vueExports.watchEffect((cleanupFn) => {
+    return;
   });
   return {
     onFocusCapture: () => {
-      if (!toValue(enabled)) return;
+      if (!vueExports.toValue(enabled)) return;
       isFocusInsideDOMTree.value = true;
     },
     onBlurCapture: () => {
-      if (!toValue(enabled)) return;
+      if (!vueExports.toValue(enabled)) return;
       isFocusInsideDOMTree.value = false;
     }
   };
 }
-const context = /* @__PURE__ */ reactive({
+const context = /* @__PURE__ */ vueExports.reactive({
   layersRoot: /* @__PURE__ */ new Set(),
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   originalBodyPointerEvents: void 0,
   branches: /* @__PURE__ */ new Set()
 });
-var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DismissableLayer",
   props: {
     disableOutsidePointerEvents: {
@@ -327,15 +392,15 @@ var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
     const props = __props;
     const emits = __emit;
     const { forwardRef, currentElement: layerElement } = useForwardExpose();
-    const ownerDocument = computed(() => layerElement.value?.ownerDocument ?? globalThis.document);
-    const layers = computed(() => context.layersRoot);
-    const index = computed(() => {
+    const ownerDocument = vueExports.computed(() => layerElement.value?.ownerDocument ?? globalThis.document);
+    const layers = vueExports.computed(() => context.layersRoot);
+    const index = vueExports.computed(() => {
       return layerElement.value ? Array.from(layers.value).indexOf(layerElement.value) : -1;
     });
-    const isBodyPointerEventsDisabled = computed(() => {
+    const isBodyPointerEventsDisabled = vueExports.computed(() => {
       return context.layersWithOutsidePointerEventsDisabled.size > 0;
     });
-    const isPointerEventsEnabled = computed(() => {
+    const isPointerEventsEnabled = vueExports.computed(() => {
       const localLayers = Array.from(layers.value);
       const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1);
       const highestLayerWithOutsidePointerEventsDisabledIndex = localLayers.indexOf(highestLayerWithOutsidePointerEventsDisabled);
@@ -346,7 +411,7 @@ var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
       if (!isPointerEventsEnabled.value || isPointerDownOnBranch) return;
       emits("pointerDownOutside", event);
       emits("interactOutside", event);
-      await nextTick();
+      await vueExports.nextTick();
       if (!event.defaultPrevented) emits("dismiss");
     }, layerElement);
     const focusOutside = useFocusOutside((event) => {
@@ -362,7 +427,7 @@ var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
       emits("escapeKeyDown", event);
       if (!event.defaultPrevented) emits("dismiss");
     });
-    watchEffect((cleanupFn) => {
+    vueExports.watchEffect((cleanupFn) => {
       if (!layerElement.value) return;
       if (props.disableOutsidePointerEvents) {
         if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
@@ -376,7 +441,7 @@ var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
         if (props.disableOutsidePointerEvents && context.layersWithOutsidePointerEventsDisabled.size === 1 && !isNullish(context.originalBodyPointerEvents)) ownerDocument.value.body.style.pointerEvents = context.originalBodyPointerEvents;
       });
     });
-    watchEffect((cleanupFn) => {
+    vueExports.watchEffect((cleanupFn) => {
       cleanupFn(() => {
         if (!layerElement.value) return;
         layers.value.delete(layerElement.value);
@@ -384,17 +449,17 @@ var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
       });
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
+        ref: vueExports.unref(forwardRef),
         "as-child": _ctx.asChild,
         as: _ctx.as,
         "data-dismissable-layer": "",
-        style: normalizeStyle({ pointerEvents: isBodyPointerEventsDisabled.value ? isPointerEventsEnabled.value ? "auto" : "none" : void 0 }),
-        onFocusCapture: unref(focusOutside).onFocusCapture,
-        onBlurCapture: unref(focusOutside).onBlurCapture,
-        onPointerdownCapture: unref(pointerDownOutside2).onPointerDownCapture
+        style: vueExports.normalizeStyle({ pointerEvents: isBodyPointerEventsDisabled.value ? isPointerEventsEnabled.value ? "auto" : "none" : void 0 }),
+        onFocusCapture: vueExports.unref(focusOutside).onFocusCapture,
+        onBlurCapture: vueExports.unref(focusOutside).onBlurCapture,
+        onPointerdownCapture: vueExports.unref(pointerDownOutside2).onPointerDownCapture
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "as-child",
@@ -409,7 +474,7 @@ var DismissableLayer_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
 });
 var DismissableLayer_default = DismissableLayer_vue_vue_type_script_setup_true_lang_default;
 const useFocusStackState = createGlobalState(() => {
-  const stack = ref([]);
+  const stack = vueExports.ref([]);
   return stack;
 });
 function createFocusScopesStack() {
@@ -433,7 +498,7 @@ function arrayRemove(array, item) {
   if (index !== -1) updatedArray.splice(index, 1);
   return updatedArray;
 }
-var FocusScope_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var FocusScope_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "FocusScope",
   props: {
     loop: {
@@ -460,9 +525,9 @@ var FocusScope_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
     const props = __props;
     const emits = __emit;
     const { currentRef, currentElement } = useForwardExpose();
-    const lastFocusedElementRef = ref(null);
+    vueExports.ref(null);
     const focusScopesStack = createFocusScopesStack();
-    const focusScope = /* @__PURE__ */ reactive({
+    const focusScope = /* @__PURE__ */ vueExports.reactive({
       paused: false,
       pause() {
         this.paused = true;
@@ -471,46 +536,12 @@ var FocusScope_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
         this.paused = false;
       }
     });
-    watchEffect((cleanupFn) => {
-      if (!isClient) return;
-      const container = currentElement.value;
-      if (!props.trapped) return;
-      function handleFocusIn(event) {
-        if (focusScope.paused || !container) return;
-        const target = event.target;
-        if (container.contains(target)) lastFocusedElementRef.value = target;
-        else focus(lastFocusedElementRef.value, { select: true });
-      }
-      function handleFocusOut(event) {
-        if (focusScope.paused || !container) return;
-        const relatedTarget = event.relatedTarget;
-        if (relatedTarget === null) return;
-        if (!container.contains(relatedTarget)) focus(lastFocusedElementRef.value, { select: true });
-      }
-      function handleMutations(mutations) {
-        const lastFocusedElement = lastFocusedElementRef.value;
-        if (lastFocusedElement === null) return;
-        const anyNodesRemoved = mutations.some((m) => m.removedNodes.length > 0);
-        if (!anyNodesRemoved) return;
-        const isLastFocusedElementExist = container.contains(lastFocusedElement);
-        if (!isLastFocusedElementExist) focus(container);
-      }
-      (void 0).addEventListener("focusin", handleFocusIn);
-      (void 0).addEventListener("focusout", handleFocusOut);
-      const mutationObserver = new MutationObserver(handleMutations);
-      if (container) mutationObserver.observe(container, {
-        childList: true,
-        subtree: true
-      });
-      cleanupFn(() => {
-        (void 0).removeEventListener("focusin", handleFocusIn);
-        (void 0).removeEventListener("focusout", handleFocusOut);
-        mutationObserver.disconnect();
-      });
+    vueExports.watchEffect((cleanupFn) => {
+      return;
     });
-    watchEffect(async (cleanupFn) => {
+    vueExports.watchEffect(async (cleanupFn) => {
       const container = currentElement.value;
-      await nextTick();
+      await vueExports.nextTick();
       if (!container) return;
       focusScopesStack.add(focusScope);
       const previouslyFocusedElement = getActiveElement();
@@ -560,7 +591,7 @@ var FocusScope_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       }
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         ref_key: "currentRef",
         ref: currentRef,
         tabindex: "-1",
@@ -568,7 +599,7 @@ var FocusScope_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
         as: _ctx.as,
         onKeydown: handleKeyDown
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, ["as-child", "as"]);
     };
@@ -586,7 +617,7 @@ function focusFirst(candidates) {
     if (getActiveElement() !== PREVIOUSLY_FOCUSED_ELEMENT) return;
   }
 }
-var DialogContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogContentImpl",
   props: {
     forceMount: {
@@ -626,31 +657,31 @@ var DialogContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
     rootContext.titleId ||= useId(void 0, "reka-dialog-title");
     rootContext.descriptionId ||= useId(void 0, "reka-dialog-description");
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(FocusScope_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(FocusScope_default), {
         "as-child": "",
         loop: "",
         trapped: props.trapFocus,
         onMountAutoFocus: _cache[5] || (_cache[5] = ($event) => emits("openAutoFocus", $event)),
         onUnmountAutoFocus: _cache[6] || (_cache[6] = ($event) => emits("closeAutoFocus", $event))
       }, {
-        default: withCtx(() => [createVNode(unref(DismissableLayer_default), mergeProps({
-          id: unref(rootContext).contentId,
-          ref: unref(forwardRef),
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(DismissableLayer_default), vueExports.mergeProps({
+          id: vueExports.unref(rootContext).contentId,
+          ref: vueExports.unref(forwardRef),
           as: _ctx.as,
           "as-child": _ctx.asChild,
           "disable-outside-pointer-events": _ctx.disableOutsidePointerEvents,
           role: "dialog",
-          "aria-describedby": unref(rootContext).descriptionId,
-          "aria-labelledby": unref(rootContext).titleId,
-          "data-state": unref(getOpenState)(unref(rootContext).open.value)
+          "aria-describedby": vueExports.unref(rootContext).descriptionId,
+          "aria-labelledby": vueExports.unref(rootContext).titleId,
+          "data-state": vueExports.unref(getOpenState)(vueExports.unref(rootContext).open.value)
         }, _ctx.$attrs, {
-          onDismiss: _cache[0] || (_cache[0] = ($event) => unref(rootContext).onOpenChange(false)),
+          onDismiss: _cache[0] || (_cache[0] = ($event) => vueExports.unref(rootContext).onOpenChange(false)),
           onEscapeKeyDown: _cache[1] || (_cache[1] = ($event) => emits("escapeKeyDown", $event)),
           onFocusOutside: _cache[2] || (_cache[2] = ($event) => emits("focusOutside", $event)),
           onInteractOutside: _cache[3] || (_cache[3] = ($event) => emits("interactOutside", $event)),
           onPointerDownOutside: _cache[4] || (_cache[4] = ($event) => emits("pointerDownOutside", $event))
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, [
           "id",
@@ -667,7 +698,7 @@ var DialogContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
   }
 });
 var DialogContentImpl_default = DialogContentImpl_vue_vue_type_script_setup_true_lang_default;
-var DialogContentModal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogContentModal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogContentModal",
   props: {
     forceMount: {
@@ -707,17 +738,17 @@ var DialogContentModal_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
     const { forwardRef, currentElement } = useForwardExpose();
     useHideOthers(currentElement);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(DialogContentImpl_default, mergeProps({
+      return vueExports.openBlock(), vueExports.createBlock(DialogContentImpl_default, vueExports.mergeProps({
         ...props,
-        ...unref(emitsAsProps)
+        ...vueExports.unref(emitsAsProps)
       }, {
-        ref: unref(forwardRef),
-        "trap-focus": unref(rootContext).open.value,
+        ref: vueExports.unref(forwardRef),
+        "trap-focus": vueExports.unref(rootContext).open.value,
         "disable-outside-pointer-events": true,
         onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
           if (!event.defaultPrevented) {
             event.preventDefault();
-            unref(rootContext).triggerElement.value?.focus();
+            vueExports.unref(rootContext).triggerElement.value?.focus();
           }
         }),
         onPointerDownOutside: _cache[1] || (_cache[1] = (event) => {
@@ -730,14 +761,14 @@ var DialogContentModal_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
           event.preventDefault();
         })
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["trap-focus"]);
     };
   }
 });
 var DialogContentModal_default = DialogContentModal_vue_vue_type_script_setup_true_lang_default;
-var DialogContentNonModal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogContentNonModal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogContentNonModal",
   props: {
     forceMount: {
@@ -775,18 +806,18 @@ var DialogContentNonModal_vue_vue_type_script_setup_true_lang_default = /* @__PU
     const emitsAsProps = useEmitAsProps(emits);
     useForwardExpose();
     const rootContext = injectDialogRootContext();
-    const hasInteractedOutsideRef = ref(false);
-    const hasPointerDownOutsideRef = ref(false);
+    const hasInteractedOutsideRef = vueExports.ref(false);
+    const hasPointerDownOutsideRef = vueExports.ref(false);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(DialogContentImpl_default, mergeProps({
+      return vueExports.openBlock(), vueExports.createBlock(DialogContentImpl_default, vueExports.mergeProps({
         ...props,
-        ...unref(emitsAsProps)
+        ...vueExports.unref(emitsAsProps)
       }, {
         "trap-focus": false,
         "disable-outside-pointer-events": false,
         onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
           if (!event.defaultPrevented) {
-            if (!hasInteractedOutsideRef.value) unref(rootContext).triggerElement.value?.focus();
+            if (!hasInteractedOutsideRef.value) vueExports.unref(rootContext).triggerElement.value?.focus();
             event.preventDefault();
           }
           hasInteractedOutsideRef.value = false;
@@ -798,19 +829,19 @@ var DialogContentNonModal_vue_vue_type_script_setup_true_lang_default = /* @__PU
             if (event.detail.originalEvent.type === "pointerdown") hasPointerDownOutsideRef.value = true;
           }
           const target = event.target;
-          const targetIsTrigger = unref(rootContext).triggerElement.value?.contains(target);
+          const targetIsTrigger = vueExports.unref(rootContext).triggerElement.value?.contains(target);
           if (targetIsTrigger) event.preventDefault();
           if (event.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.value) event.preventDefault();
         })
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var DialogContentNonModal_default = DialogContentNonModal_vue_vue_type_script_setup_true_lang_default;
-var DialogContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogContent",
   props: {
     forceMount: {
@@ -845,26 +876,26 @@ var DialogContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const emitsAsProps = useEmitAsProps(emits);
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Presence_default), { present: _ctx.forceMount || unref(rootContext).open.value }, {
-        default: withCtx(() => [unref(rootContext).modal.value ? (openBlock(), createBlock(DialogContentModal_default, mergeProps({
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Presence_default), { present: _ctx.forceMount || vueExports.unref(rootContext).open.value }, {
+        default: vueExports.withCtx(() => [vueExports.unref(rootContext).modal.value ? (vueExports.openBlock(), vueExports.createBlock(DialogContentModal_default, vueExports.mergeProps({
           key: 0,
-          ref: unref(forwardRef)
+          ref: vueExports.unref(forwardRef)
         }, {
           ...props,
-          ...unref(emitsAsProps),
+          ...vueExports.unref(emitsAsProps),
           ..._ctx.$attrs
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
-        }, 16)) : (openBlock(), createBlock(DialogContentNonModal_default, mergeProps({
+        }, 16)) : (vueExports.openBlock(), vueExports.createBlock(DialogContentNonModal_default, vueExports.mergeProps({
           key: 1,
-          ref: unref(forwardRef)
+          ref: vueExports.unref(forwardRef)
         }, {
           ...props,
-          ...unref(emitsAsProps),
+          ...vueExports.unref(emitsAsProps),
           ..._ctx.$attrs
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16))]),
         _: 3
@@ -873,7 +904,7 @@ var DialogContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
   }
 });
 var DialogContent_default = DialogContent_vue_vue_type_script_setup_true_lang_default;
-var DialogDescription_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogDescription_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogDescription",
   props: {
     asChild: {
@@ -891,15 +922,15 @@ var DialogDescription_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
     useForwardExpose();
     const rootContext = injectDialogRootContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(props, { id: unref(rootContext).descriptionId }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, { id: vueExports.unref(rootContext).descriptionId }), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["id"]);
     };
   }
 });
 var DialogDescription_default = DialogDescription_vue_vue_type_script_setup_true_lang_default;
-var DialogOverlayImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogOverlayImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogOverlayImpl",
   props: {
     asChild: {
@@ -916,13 +947,13 @@ var DialogOverlayImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
     useBodyScrollLock(true);
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         as: _ctx.as,
         "as-child": _ctx.asChild,
-        "data-state": unref(rootContext).open.value ? "open" : "closed",
+        "data-state": vueExports.unref(rootContext).open.value ? "open" : "closed",
         style: { "pointer-events": "auto" }
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "as",
@@ -933,7 +964,7 @@ var DialogOverlayImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
   }
 });
 var DialogOverlayImpl_default = DialogOverlayImpl_vue_vue_type_script_setup_true_lang_default;
-var DialogOverlay_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogOverlay_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogOverlay",
   props: {
     forceMount: {
@@ -953,25 +984,25 @@ var DialogOverlay_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const rootContext = injectDialogRootContext();
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return unref(rootContext)?.modal.value ? (openBlock(), createBlock(unref(Presence_default), {
+      return vueExports.unref(rootContext)?.modal.value ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Presence_default), {
         key: 0,
-        present: _ctx.forceMount || unref(rootContext).open.value
+        present: _ctx.forceMount || vueExports.unref(rootContext).open.value
       }, {
-        default: withCtx(() => [createVNode(DialogOverlayImpl_default, mergeProps(_ctx.$attrs, {
-          ref: unref(forwardRef),
+        default: vueExports.withCtx(() => [vueExports.createVNode(DialogOverlayImpl_default, vueExports.mergeProps(_ctx.$attrs, {
+          ref: vueExports.unref(forwardRef),
           as: _ctx.as,
           "as-child": _ctx.asChild
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, ["as", "as-child"])]),
         _: 3
-      }, 8, ["present"])) : createCommentVNode("v-if", true);
+      }, 8, ["present"])) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
 var DialogOverlay_default = DialogOverlay_vue_vue_type_script_setup_true_lang_default;
-var DialogPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogPortal",
   props: {
     to: {
@@ -994,15 +1025,15 @@ var DialogPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Teleport_default), normalizeProps(guardReactiveProps(props)), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Teleport_default), vueExports.normalizeProps(vueExports.guardReactiveProps(props)), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var DialogPortal_default = DialogPortal_vue_vue_type_script_setup_true_lang_default;
-var DialogTitle_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogTitle_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogTitle",
   props: {
     asChild: {
@@ -1020,15 +1051,15 @@ var DialogTitle_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const rootContext = injectDialogRootContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(props, { id: unref(rootContext).titleId }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, { id: vueExports.unref(rootContext).titleId }), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["id"]);
     };
   }
 });
 var DialogTitle_default = DialogTitle_vue_vue_type_script_setup_true_lang_default;
-var DialogTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DialogTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DialogTrigger",
   props: {
     asChild: {
@@ -1047,16 +1078,16 @@ var DialogTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const { forwardRef } = useForwardExpose();
     rootContext.contentId ||= useId(void 0, "reka-dialog-content");
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
-        ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, {
+        ref: vueExports.unref(forwardRef),
         type: _ctx.as === "button" ? "button" : void 0,
         "aria-haspopup": "dialog",
-        "aria-expanded": unref(rootContext).open.value || false,
-        "aria-controls": unref(rootContext).open.value ? unref(rootContext).contentId : void 0,
-        "data-state": unref(rootContext).open.value ? "open" : "closed",
-        onClick: unref(rootContext).onOpenToggle
+        "aria-expanded": vueExports.unref(rootContext).open.value || false,
+        "aria-controls": vueExports.unref(rootContext).open.value ? vueExports.unref(rootContext).contentId : void 0,
+        "data-state": vueExports.unref(rootContext).open.value ? "open" : "closed",
+        onClick: vueExports.unref(rootContext).onOpenToggle
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, [
         "type",
@@ -1083,5 +1114,5 @@ function pointerDownOutside(e, options = {}) {
   }
 }
 
-export { DialogClose_default as D, FocusScope_default as F, DialogContent_default as a, DialogDescription_default as b, DialogOverlay_default as c, DialogPortal_default as d, DialogRoot_default as e, DialogTitle_default as f, DialogTrigger_default as g, DismissableLayer_default as h, focusFirst as i, handleAndDispatchCustomEvent as j, useHideOthers as k, useId as l, pointerDownOutside as p, useBodyScrollLock as u };
+export { DialogClose_default as D, FocusScope_default as F, DialogContent_default as a, DialogDescription_default as b, DialogOverlay_default as c, DialogPortal_default as d, DialogRoot_default as e, DialogTitle_default as f, DialogTrigger_default as g, DismissableLayer_default as h, es5 as i, focusFirst as j, handleAndDispatchCustomEvent as k, useHideOthers as l, useId as m, pointerDownOutside as p, useBodyScrollLock as u };
 //# sourceMappingURL=overlay-BWwBD9XH.mjs.map

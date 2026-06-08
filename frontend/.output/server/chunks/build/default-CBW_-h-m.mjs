@@ -1,24 +1,12 @@
-import { withCtx, renderSlot, mergeProps, createVNode, toDisplayString, useSlots, useModel, computed, watch, toRef, unref, openBlock, createBlock, createCommentVNode, createTextVNode, mergeModels, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderSlot, ssrInterpolate, ssrRenderClass } from 'vue/server-renderer';
-import { d as _export_sfc, f as _sfc_main$8, U as useComponentProps, a8 as useRoute, a2 as useLocale, N as useAppConfig, y as getSlotChildrenText, M as tv, i as _sfc_main$9, b as Primitive } from './server.mjs';
+import { d as _export_sfc, a7 as ssrRenderComponent_1, aO as vueExports, a9 as ssrRenderSlot_1, e as _sfc_main$8, a3 as ssrInterpolate_1, an as useComponentProps, aG as useRoute, ay as useLocale, aj as useAppConfig, p as createReusableTemplate, H as getSlotChildrenText, ag as tv, a6 as ssrRenderClass_1, f as _sfc_main$9, b as Primitive } from './server.mjs';
 import { g as defu } from '../nitro/nitro.mjs';
-import { createReusableTemplate } from '@vueuse/core';
 import { _ as _sfc_main$a } from './Container-CXQFSuFJ.mjs';
 import { _ as _sfc_main$5, a as _sfc_main$1$1, b as _sfc_main$2$1 } from './Main-CoIIuktv.mjs';
 import { _ as _sfc_main$7 } from './Modal-D9bZkufO.mjs';
 import { _ as _sfc_main$6 } from './Drawer-Cit23QJO.mjs';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import '@vueuse/shared';
-import 'tailwind-variants';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -27,11 +15,11 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 import './overlay-BWwBD9XH.mjs';
-import 'aria-hidden';
 import './usePrefix-DEbZTxVe.mjs';
-import 'vaul-vue';
 
 const theme$1 = {
   "slots": {
@@ -61,7 +49,7 @@ const theme$1 = {
 const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "UHeader",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     as: { type: null, required: false, default: "header" },
     title: { type: String, required: false, default: "Nuxt UI" },
     to: { type: String, required: false, default: "/" },
@@ -79,52 +67,52 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   emits: ["update:open"],
   setup(__props) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("header", _props);
-    const open = useModel(__props, "open", { type: Boolean, ...{ default: false } });
+    const open = vueExports.useModel(__props, "open", { type: Boolean, ...{ default: false } });
     const route = useRoute();
     const { t } = useLocale();
     const appConfig = useAppConfig();
     const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate();
     const [DefineRightTemplate, ReuseRightTemplate] = createReusableTemplate();
     const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate();
-    const ariaLabel = computed(() => {
+    const ariaLabel = vueExports.computed(() => {
       const slotText = slots.title && getSlotChildrenText(slots.title());
       return (slotText || props.title || "Nuxt UI").trim();
     });
-    watch(() => route.fullPath, () => {
+    vueExports.watch(() => route.fullPath, () => {
       if (!props.autoClose) return;
       open.value = false;
     });
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.header || {} })());
-    const Menu = computed(() => ({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.header || {} })());
+    const Menu = vueExports.computed(() => ({
       slideover: _sfc_main$2$1,
       modal: _sfc_main$7,
       drawer: _sfc_main$6
     })[props.mode]);
-    const menuProps = toRef(() => defu(props.menu, {}, props.mode === "modal" ? { fullscreen: true, transition: false } : {}));
+    const menuProps = vueExports.toRef(() => defu(props.menu, {}, props.mode === "modal" ? { fullscreen: true, transition: false } : {}));
     function toggleOpen() {
       open.value = !open.value;
     }
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(unref(DefineToggleTemplate), null, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineToggleTemplate), null, {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "toggle", {
+            ssrRenderSlot_1(_ctx.$slots, "toggle", {
               open: open.value,
               toggle: toggleOpen,
               ui: ui.value
             }, () => {
-              if (unref(props).toggle) {
-                _push2(ssrRenderComponent(_sfc_main$8, mergeProps({
+              if (vueExports.unref(props).toggle) {
+                _push2(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
                   color: "neutral",
                   variant: "ghost",
-                  "aria-label": open.value ? unref(t)("header.close") : unref(t)("header.open"),
-                  icon: open.value ? unref(appConfig).ui.icons.close : unref(appConfig).ui.icons.menu
-                }, typeof unref(props).toggle === "object" ? unref(props).toggle : {}, {
+                  "aria-label": open.value ? vueExports.unref(t)("header.close") : vueExports.unref(t)("header.open"),
+                  icon: open.value ? vueExports.unref(appConfig).ui.icons.close : vueExports.unref(appConfig).ui.icons.menu
+                }, typeof vueExports.unref(props).toggle === "object" ? vueExports.unref(props).toggle : {}, {
                   "data-slot": "toggle",
-                  class: ui.value.toggle({ class: unref(props).ui?.toggle, toggleSide: unref(props).toggleSide }),
+                  class: ui.value.toggle({ class: vueExports.unref(props).ui?.toggle, toggleSide: vueExports.unref(props).toggleSide }),
                   onClick: toggleOpen
                 }), null, _parent2, _scopeId));
               } else {
@@ -133,53 +121,53 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "toggle", {
+              vueExports.renderSlot(_ctx.$slots, "toggle", {
                 open: open.value,
                 toggle: toggleOpen,
                 ui: ui.value
               }, () => [
-                unref(props).toggle ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                vueExports.unref(props).toggle ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                   key: 0,
                   color: "neutral",
                   variant: "ghost",
-                  "aria-label": open.value ? unref(t)("header.close") : unref(t)("header.open"),
-                  icon: open.value ? unref(appConfig).ui.icons.close : unref(appConfig).ui.icons.menu
-                }, typeof unref(props).toggle === "object" ? unref(props).toggle : {}, {
+                  "aria-label": open.value ? vueExports.unref(t)("header.close") : vueExports.unref(t)("header.open"),
+                  icon: open.value ? vueExports.unref(appConfig).ui.icons.close : vueExports.unref(appConfig).ui.icons.menu
+                }, typeof vueExports.unref(props).toggle === "object" ? vueExports.unref(props).toggle : {}, {
                   "data-slot": "toggle",
-                  class: ui.value.toggle({ class: unref(props).ui?.toggle, toggleSide: unref(props).toggleSide }),
+                  class: ui.value.toggle({ class: vueExports.unref(props).ui?.toggle, toggleSide: vueExports.unref(props).toggleSide }),
                   onClick: toggleOpen
-                }), null, 16, ["aria-label", "icon", "class"])) : createCommentVNode("", true)
+                }), null, 16, ["aria-label", "icon", "class"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(DefineLeftTemplate), null, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineLeftTemplate), null, {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div data-slot="left" class="${ssrRenderClass(ui.value.left({ class: unref(props).ui?.left }))}"${_scopeId}>`);
-            if (unref(props).toggleSide === "left") {
-              _push2(ssrRenderComponent(unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
+            _push2(`<div data-slot="left" class="${ssrRenderClass_1(ui.value.left({ class: vueExports.unref(props).ui?.left }))}"${_scopeId}>`);
+            if (vueExports.unref(props).toggleSide === "left") {
+              _push2(ssrRenderComponent_1(vueExports.unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
             }
-            ssrRenderSlot(_ctx.$slots, "left", {}, () => {
-              _push2(ssrRenderComponent(_sfc_main$9, {
-                to: unref(props).to,
+            ssrRenderSlot_1(_ctx.$slots, "left", {}, () => {
+              _push2(ssrRenderComponent_1(_sfc_main$9, {
+                to: vueExports.unref(props).to,
                 "aria-label": ariaLabel.value,
                 "data-slot": "title",
-                class: ui.value.title({ class: unref(props).ui?.title })
+                class: ui.value.title({ class: vueExports.unref(props).ui?.title })
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    ssrRenderSlot(_ctx.$slots, "title", {}, () => {
-                      _push3(`${ssrInterpolate(unref(props).title)}`);
+                    ssrRenderSlot_1(_ctx.$slots, "title", {}, () => {
+                      _push3(`${ssrInterpolate_1(vueExports.unref(props).title)}`);
                     }, _push3, _parent3, _scopeId2);
                   } else {
                     return [
-                      renderSlot(_ctx.$slots, "title", {}, () => [
-                        createTextVNode(toDisplayString(unref(props).title), 1)
+                      vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                       ])
                     ];
                   }
@@ -190,21 +178,21 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", {
+              vueExports.createVNode("div", {
                 "data-slot": "left",
-                class: ui.value.left({ class: unref(props).ui?.left })
+                class: ui.value.left({ class: vueExports.unref(props).ui?.left })
               }, [
-                unref(props).toggleSide === "left" ? (openBlock(), createBlock(unref(ReuseToggleTemplate), { key: 0 })) : createCommentVNode("", true),
-                renderSlot(_ctx.$slots, "left", {}, () => [
-                  createVNode(_sfc_main$9, {
-                    to: unref(props).to,
+                vueExports.unref(props).toggleSide === "left" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseToggleTemplate), { key: 0 })) : vueExports.createCommentVNode("", true),
+                vueExports.renderSlot(_ctx.$slots, "left", {}, () => [
+                  vueExports.createVNode(_sfc_main$9, {
+                    to: vueExports.unref(props).to,
                     "aria-label": ariaLabel.value,
                     "data-slot": "title",
-                    class: ui.value.title({ class: unref(props).ui?.title })
+                    class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                   }, {
-                    default: withCtx(() => [
-                      renderSlot(_ctx.$slots, "title", {}, () => [
-                        createTextVNode(toDisplayString(unref(props).title), 1)
+                    default: vueExports.withCtx(() => [
+                      vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                       ])
                     ]),
                     _: 3
@@ -216,134 +204,134 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(DefineRightTemplate), null, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineRightTemplate), null, {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div data-slot="right" class="${ssrRenderClass(ui.value.right({ class: unref(props).ui?.right }))}"${_scopeId}>`);
-            ssrRenderSlot(_ctx.$slots, "right", {}, null, _push2, _parent2, _scopeId);
-            if (unref(props).toggleSide === "right") {
-              _push2(ssrRenderComponent(unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
+            _push2(`<div data-slot="right" class="${ssrRenderClass_1(ui.value.right({ class: vueExports.unref(props).ui?.right }))}"${_scopeId}>`);
+            ssrRenderSlot_1(_ctx.$slots, "right", {}, null, _push2, _parent2, _scopeId);
+            if (vueExports.unref(props).toggleSide === "right") {
+              _push2(ssrRenderComponent_1(vueExports.unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
             }
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", {
+              vueExports.createVNode("div", {
                 "data-slot": "right",
-                class: ui.value.right({ class: unref(props).ui?.right })
+                class: ui.value.right({ class: vueExports.unref(props).ui?.right })
               }, [
-                renderSlot(_ctx.$slots, "right"),
-                unref(props).toggleSide === "right" ? (openBlock(), createBlock(unref(ReuseToggleTemplate), { key: 0 })) : createCommentVNode("", true)
+                vueExports.renderSlot(_ctx.$slots, "right"),
+                vueExports.unref(props).toggleSide === "right" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseToggleTemplate), { key: 0 })) : vueExports.createCommentVNode("", true)
               ], 2)
             ];
           }
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as
       }, _ctx.$attrs, {
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "top", {}, null, _push2, _parent2, _scopeId);
-            _push2(ssrRenderComponent(_sfc_main$a, {
+            ssrRenderSlot_1(_ctx.$slots, "top", {}, null, _push2, _parent2, _scopeId);
+            _push2(ssrRenderComponent_1(_sfc_main$a, {
               "data-slot": "container",
-              class: ui.value.container({ class: unref(props).ui?.container })
+              class: ui.value.container({ class: vueExports.unref(props).ui?.container })
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(ReuseLeftTemplate), null, null, _parent3, _scopeId2));
-                  _push3(`<div data-slot="center" class="${ssrRenderClass(ui.value.center({ class: unref(props).ui?.center }))}"${_scopeId2}>`);
-                  ssrRenderSlot(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
+                  _push3(ssrRenderComponent_1(vueExports.unref(ReuseLeftTemplate), null, null, _parent3, _scopeId2));
+                  _push3(`<div data-slot="center" class="${ssrRenderClass_1(ui.value.center({ class: vueExports.unref(props).ui?.center }))}"${_scopeId2}>`);
+                  ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
                   _push3(`</div>`);
-                  _push3(ssrRenderComponent(unref(ReuseRightTemplate), null, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent_1(vueExports.unref(ReuseRightTemplate), null, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(ReuseLeftTemplate)),
-                    createVNode("div", {
+                    vueExports.createVNode(vueExports.unref(ReuseLeftTemplate)),
+                    vueExports.createVNode("div", {
                       "data-slot": "center",
-                      class: ui.value.center({ class: unref(props).ui?.center })
+                      class: ui.value.center({ class: vueExports.unref(props).ui?.center })
                     }, [
-                      renderSlot(_ctx.$slots, "default")
+                      vueExports.renderSlot(_ctx.$slots, "default")
                     ], 2),
-                    createVNode(unref(ReuseRightTemplate))
+                    vueExports.createVNode(vueExports.unref(ReuseRightTemplate))
                   ];
                 }
               }),
               _: 3
             }, _parent2, _scopeId));
-            ssrRenderSlot(_ctx.$slots, "bottom", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "bottom", {}, null, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "top"),
-              createVNode(_sfc_main$a, {
+              vueExports.renderSlot(_ctx.$slots, "top"),
+              vueExports.createVNode(_sfc_main$a, {
                 "data-slot": "container",
-                class: ui.value.container({ class: unref(props).ui?.container })
+                class: ui.value.container({ class: vueExports.unref(props).ui?.container })
               }, {
-                default: withCtx(() => [
-                  createVNode(unref(ReuseLeftTemplate)),
-                  createVNode("div", {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(vueExports.unref(ReuseLeftTemplate)),
+                  vueExports.createVNode("div", {
                     "data-slot": "center",
-                    class: ui.value.center({ class: unref(props).ui?.center })
+                    class: ui.value.center({ class: vueExports.unref(props).ui?.center })
                   }, [
-                    renderSlot(_ctx.$slots, "default")
+                    vueExports.renderSlot(_ctx.$slots, "default")
                   ], 2),
-                  createVNode(unref(ReuseRightTemplate))
+                  vueExports.createVNode(vueExports.unref(ReuseRightTemplate))
                 ]),
                 _: 3
               }, 8, ["class"]),
-              renderSlot(_ctx.$slots, "bottom")
+              vueExports.renderSlot(_ctx.$slots, "bottom")
             ];
           }
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(Menu), mergeProps({
+      _push(ssrRenderComponent_1(vueExports.unref(Menu), vueExports.mergeProps({
         open: open.value,
         "onUpdate:open": ($event) => open.value = $event,
-        title: unref(t)("header.title"),
-        description: unref(t)("header.description")
+        title: vueExports.unref(t)("header.title"),
+        description: vueExports.unref(t)("header.description")
       }, menuProps.value, {
         ui: {
-          overlay: ui.value.overlay({ class: unref(props).ui?.overlay }),
-          content: ui.value.content({ class: unref(props).ui?.content })
+          overlay: ui.value.overlay({ class: vueExports.unref(props).ui?.overlay }),
+          content: ui.value.content({ class: vueExports.unref(props).ui?.content })
         }
       }), {
-        content: withCtx((contentData, _push2, _parent2, _scopeId) => {
+        content: vueExports.withCtx((contentData, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "content", contentData, () => {
-              if (unref(props).mode !== "drawer") {
-                _push2(`<div data-slot="header" class="${ssrRenderClass(ui.value.header({ class: unref(props).ui?.header }))}"${_scopeId}>`);
-                _push2(ssrRenderComponent(unref(ReuseLeftTemplate), null, null, _parent2, _scopeId));
-                _push2(ssrRenderComponent(unref(ReuseRightTemplate), null, null, _parent2, _scopeId));
+            ssrRenderSlot_1(_ctx.$slots, "content", contentData, () => {
+              if (vueExports.unref(props).mode !== "drawer") {
+                _push2(`<div data-slot="header" class="${ssrRenderClass_1(ui.value.header({ class: vueExports.unref(props).ui?.header }))}"${_scopeId}>`);
+                _push2(ssrRenderComponent_1(vueExports.unref(ReuseLeftTemplate), null, null, _parent2, _scopeId));
+                _push2(ssrRenderComponent_1(vueExports.unref(ReuseRightTemplate), null, null, _parent2, _scopeId));
                 _push2(`</div>`);
               } else {
                 _push2(`<!---->`);
               }
-              _push2(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: unref(props).ui?.body }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "body", {}, null, _push2, _parent2, _scopeId);
+              _push2(`<div data-slot="body" class="${ssrRenderClass_1(ui.value.body({ class: vueExports.unref(props).ui?.body }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "body", {}, null, _push2, _parent2, _scopeId);
               _push2(`</div>`);
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "content", contentData, () => [
-                unref(props).mode !== "drawer" ? (openBlock(), createBlock("div", {
+              vueExports.renderSlot(_ctx.$slots, "content", contentData, () => [
+                vueExports.unref(props).mode !== "drawer" ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   "data-slot": "header",
-                  class: ui.value.header({ class: unref(props).ui?.header })
+                  class: ui.value.header({ class: vueExports.unref(props).ui?.header })
                 }, [
-                  createVNode(unref(ReuseLeftTemplate)),
-                  createVNode(unref(ReuseRightTemplate))
-                ], 2)) : createCommentVNode("", true),
-                createVNode("div", {
+                  vueExports.createVNode(vueExports.unref(ReuseLeftTemplate)),
+                  vueExports.createVNode(vueExports.unref(ReuseRightTemplate))
+                ], 2)) : vueExports.createCommentVNode("", true),
+                vueExports.createVNode("div", {
                   "data-slot": "body",
-                  class: ui.value.body({ class: unref(props).ui?.body })
+                  class: ui.value.body({ class: vueExports.unref(props).ui?.body })
                 }, [
-                  renderSlot(_ctx.$slots, "body")
+                  vueExports.renderSlot(_ctx.$slots, "body")
                 ], 2)
               ])
             ];
@@ -357,7 +345,7 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Header.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
@@ -365,20 +353,20 @@ const _sfc_main$3 = {};
 function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
   const _component_UHeader = _sfc_main$4;
   const _component_UButton = _sfc_main$8;
-  _push(ssrRenderComponent(_component_UHeader, mergeProps({
+  _push(ssrRenderComponent_1(_component_UHeader, vueExports.mergeProps({
     title: "Starta",
     toggle: false
   }, _attrs), {
-    right: withCtx((_, _push2, _parent2, _scopeId) => {
+    right: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(ssrRenderComponent(_component_UButton, {
+        _push2(ssrRenderComponent_1(_component_UButton, {
           color: "neutral",
           variant: "ghost",
           to: "/login",
           "aria-label": "Login",
           label: "Login"
         }, null, _parent2, _scopeId));
-        _push2(ssrRenderComponent(_component_UButton, {
+        _push2(ssrRenderComponent_1(_component_UButton, {
           color: "primary",
           variant: "solid",
           to: "/register",
@@ -387,14 +375,14 @@ function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
         }, null, _parent2, _scopeId));
       } else {
         return [
-          createVNode(_component_UButton, {
+          vueExports.createVNode(_component_UButton, {
             color: "neutral",
             variant: "ghost",
             to: "/login",
             "aria-label": "Login",
             label: "Login"
           }),
-          createVNode(_component_UButton, {
+          vueExports.createVNode(_component_UButton, {
             color: "primary",
             variant: "solid",
             to: "/register",
@@ -409,7 +397,7 @@ function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
 }
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/landing/layout/Header.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
@@ -435,57 +423,57 @@ const _sfc_main$2 = {
   },
   setup(__props) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("footer", _props);
     const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.footer || {} })());
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.footer || {} })());
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (!!slots.top) {
-              _push2(`<div data-slot="top" class="${ssrRenderClass(ui.value.top({ class: unref(props).ui?.top }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "top", {}, null, _push2, _parent2, _scopeId);
+              _push2(`<div data-slot="top" class="${ssrRenderClass_1(ui.value.top({ class: vueExports.unref(props).ui?.top }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "top", {}, null, _push2, _parent2, _scopeId);
               _push2(`</div>`);
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(_sfc_main$a, {
+            _push2(ssrRenderComponent_1(_sfc_main$a, {
               "data-slot": "container",
-              class: ui.value.container({ class: unref(props).ui?.container })
+              class: ui.value.container({ class: vueExports.unref(props).ui?.container })
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div data-slot="right" class="${ssrRenderClass(ui.value.right({ class: unref(props).ui?.right }))}"${_scopeId2}>`);
-                  ssrRenderSlot(_ctx.$slots, "right", {}, null, _push3, _parent3, _scopeId2);
-                  _push3(`</div><div data-slot="center" class="${ssrRenderClass(ui.value.center({ class: unref(props).ui?.center }))}"${_scopeId2}>`);
-                  ssrRenderSlot(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
-                  _push3(`</div><div data-slot="left" class="${ssrRenderClass(ui.value.left({ class: unref(props).ui?.left }))}"${_scopeId2}>`);
-                  ssrRenderSlot(_ctx.$slots, "left", {}, null, _push3, _parent3, _scopeId2);
+                  _push3(`<div data-slot="right" class="${ssrRenderClass_1(ui.value.right({ class: vueExports.unref(props).ui?.right }))}"${_scopeId2}>`);
+                  ssrRenderSlot_1(_ctx.$slots, "right", {}, null, _push3, _parent3, _scopeId2);
+                  _push3(`</div><div data-slot="center" class="${ssrRenderClass_1(ui.value.center({ class: vueExports.unref(props).ui?.center }))}"${_scopeId2}>`);
+                  ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
+                  _push3(`</div><div data-slot="left" class="${ssrRenderClass_1(ui.value.left({ class: vueExports.unref(props).ui?.left }))}"${_scopeId2}>`);
+                  ssrRenderSlot_1(_ctx.$slots, "left", {}, null, _push3, _parent3, _scopeId2);
                   _push3(`</div>`);
                 } else {
                   return [
-                    createVNode("div", {
+                    vueExports.createVNode("div", {
                       "data-slot": "right",
-                      class: ui.value.right({ class: unref(props).ui?.right })
+                      class: ui.value.right({ class: vueExports.unref(props).ui?.right })
                     }, [
-                      renderSlot(_ctx.$slots, "right")
+                      vueExports.renderSlot(_ctx.$slots, "right")
                     ], 2),
-                    createVNode("div", {
+                    vueExports.createVNode("div", {
                       "data-slot": "center",
-                      class: ui.value.center({ class: unref(props).ui?.center })
+                      class: ui.value.center({ class: vueExports.unref(props).ui?.center })
                     }, [
-                      renderSlot(_ctx.$slots, "default")
+                      vueExports.renderSlot(_ctx.$slots, "default")
                     ], 2),
-                    createVNode("div", {
+                    vueExports.createVNode("div", {
                       "data-slot": "left",
-                      class: ui.value.left({ class: unref(props).ui?.left })
+                      class: ui.value.left({ class: vueExports.unref(props).ui?.left })
                     }, [
-                      renderSlot(_ctx.$slots, "left")
+                      vueExports.renderSlot(_ctx.$slots, "left")
                     ], 2)
                   ];
                 }
@@ -493,54 +481,54 @@ const _sfc_main$2 = {
               _: 3
             }, _parent2, _scopeId));
             if (!!slots.bottom) {
-              _push2(`<div data-slot="bottom" class="${ssrRenderClass(ui.value.bottom({ class: unref(props).ui?.bottom }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "bottom", {}, null, _push2, _parent2, _scopeId);
+              _push2(`<div data-slot="bottom" class="${ssrRenderClass_1(ui.value.bottom({ class: vueExports.unref(props).ui?.bottom }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "bottom", {}, null, _push2, _parent2, _scopeId);
               _push2(`</div>`);
             } else {
               _push2(`<!---->`);
             }
           } else {
             return [
-              !!slots.top ? (openBlock(), createBlock("div", {
+              !!slots.top ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "top",
-                class: ui.value.top({ class: unref(props).ui?.top })
+                class: ui.value.top({ class: vueExports.unref(props).ui?.top })
               }, [
-                renderSlot(_ctx.$slots, "top")
-              ], 2)) : createCommentVNode("", true),
-              createVNode(_sfc_main$a, {
+                vueExports.renderSlot(_ctx.$slots, "top")
+              ], 2)) : vueExports.createCommentVNode("", true),
+              vueExports.createVNode(_sfc_main$a, {
                 "data-slot": "container",
-                class: ui.value.container({ class: unref(props).ui?.container })
+                class: ui.value.container({ class: vueExports.unref(props).ui?.container })
               }, {
-                default: withCtx(() => [
-                  createVNode("div", {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode("div", {
                     "data-slot": "right",
-                    class: ui.value.right({ class: unref(props).ui?.right })
+                    class: ui.value.right({ class: vueExports.unref(props).ui?.right })
                   }, [
-                    renderSlot(_ctx.$slots, "right")
+                    vueExports.renderSlot(_ctx.$slots, "right")
                   ], 2),
-                  createVNode("div", {
+                  vueExports.createVNode("div", {
                     "data-slot": "center",
-                    class: ui.value.center({ class: unref(props).ui?.center })
+                    class: ui.value.center({ class: vueExports.unref(props).ui?.center })
                   }, [
-                    renderSlot(_ctx.$slots, "default")
+                    vueExports.renderSlot(_ctx.$slots, "default")
                   ], 2),
-                  createVNode("div", {
+                  vueExports.createVNode("div", {
                     "data-slot": "left",
-                    class: ui.value.left({ class: unref(props).ui?.left })
+                    class: ui.value.left({ class: vueExports.unref(props).ui?.left })
                   }, [
-                    renderSlot(_ctx.$slots, "left")
+                    vueExports.renderSlot(_ctx.$slots, "left")
                   ], 2)
                 ]),
                 _: 3
               }, 8, ["class"]),
-              !!slots.bottom ? (openBlock(), createBlock("div", {
+              !!slots.bottom ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 1,
                 "data-slot": "bottom",
-                class: ui.value.bottom({ class: unref(props).ui?.bottom })
+                class: ui.value.bottom({ class: vueExports.unref(props).ui?.bottom })
               }, [
-                renderSlot(_ctx.$slots, "bottom")
-              ], 2)) : createCommentVNode("", true)
+                vueExports.renderSlot(_ctx.$slots, "bottom")
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -551,7 +539,7 @@ const _sfc_main$2 = {
 };
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Footer.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -560,19 +548,19 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
   const _component_UFooter = _sfc_main$2;
   const _component_UButton = _sfc_main$8;
   const _component_UColorModeButton = _sfc_main$1$1;
-  _push(ssrRenderComponent(_component_UFooter, _attrs, {
-    left: withCtx((_, _push2, _parent2, _scopeId) => {
+  _push(ssrRenderComponent_1(_component_UFooter, _attrs, {
+    left: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(`<p class="text-muted text-sm"${_scopeId}>Copyright © ${ssrInterpolate((/* @__PURE__ */ new Date()).getFullYear())}</p>`);
+        _push2(`<p class="text-muted text-sm"${_scopeId}>Copyright © ${ssrInterpolate_1((/* @__PURE__ */ new Date()).getFullYear())}</p>`);
       } else {
         return [
-          createVNode("p", { class: "text-muted text-sm" }, "Copyright © " + toDisplayString((/* @__PURE__ */ new Date()).getFullYear()), 1)
+          vueExports.createVNode("p", { class: "text-muted text-sm" }, "Copyright © " + vueExports.toDisplayString((/* @__PURE__ */ new Date()).getFullYear()), 1)
         ];
       }
     }),
-    right: withCtx((_, _push2, _parent2, _scopeId) => {
+    right: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(ssrRenderComponent(_component_UButton, {
+        _push2(ssrRenderComponent_1(_component_UButton, {
           icon: "i-simple-icons-discord",
           color: "neutral",
           variant: "ghost",
@@ -580,7 +568,7 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
           target: "_blank",
           "aria-label": "Discord"
         }, null, _parent2, _scopeId));
-        _push2(ssrRenderComponent(_component_UButton, {
+        _push2(ssrRenderComponent_1(_component_UButton, {
           icon: "i-simple-icons-x",
           color: "neutral",
           variant: "ghost",
@@ -588,7 +576,7 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
           target: "_blank",
           "aria-label": "X"
         }, null, _parent2, _scopeId));
-        _push2(ssrRenderComponent(_component_UButton, {
+        _push2(ssrRenderComponent_1(_component_UButton, {
           icon: "i-simple-icons-github",
           color: "neutral",
           variant: "ghost",
@@ -596,10 +584,10 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
           target: "_blank",
           "aria-label": "GitHub"
         }, null, _parent2, _scopeId));
-        _push2(ssrRenderComponent(_component_UColorModeButton, null, null, _parent2, _scopeId));
+        _push2(ssrRenderComponent_1(_component_UColorModeButton, null, null, _parent2, _scopeId));
       } else {
         return [
-          createVNode(_component_UButton, {
+          vueExports.createVNode(_component_UButton, {
             icon: "i-simple-icons-discord",
             color: "neutral",
             variant: "ghost",
@@ -607,7 +595,7 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
             target: "_blank",
             "aria-label": "Discord"
           }),
-          createVNode(_component_UButton, {
+          vueExports.createVNode(_component_UButton, {
             icon: "i-simple-icons-x",
             color: "neutral",
             variant: "ghost",
@@ -615,7 +603,7 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
             target: "_blank",
             "aria-label": "X"
           }),
-          createVNode(_component_UButton, {
+          vueExports.createVNode(_component_UButton, {
             icon: "i-simple-icons-github",
             color: "neutral",
             variant: "ghost",
@@ -623,7 +611,7 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
             target: "_blank",
             "aria-label": "GitHub"
           }),
-          createVNode(_component_UColorModeButton)
+          vueExports.createVNode(_component_UColorModeButton)
         ];
       }
     }),
@@ -632,7 +620,7 @@ function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
 }
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/landing/layout/Footer.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -643,25 +631,25 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   const _component_UMain = _sfc_main$5;
   const _component_LandingLayoutFooter = __nuxt_component_2;
   _push(`<!--[-->`);
-  _push(ssrRenderComponent(_component_LandingLayoutHeader, null, null, _parent));
-  _push(ssrRenderComponent(_component_UMain, null, {
-    default: withCtx((_, _push2, _parent2, _scopeId) => {
+  _push(ssrRenderComponent_1(_component_LandingLayoutHeader, null, null, _parent));
+  _push(ssrRenderComponent_1(_component_UMain, null, {
+    default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+        ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
       } else {
         return [
-          renderSlot(_ctx.$slots, "default")
+          vueExports.renderSlot(_ctx.$slots, "default")
         ];
       }
     }),
     _: 3
   }, _parent));
-  _push(ssrRenderComponent(_component_LandingLayoutFooter, null, null, _parent));
+  _push(ssrRenderComponent_1(_component_LandingLayoutFooter, null, null, _parent));
   _push(`<!--]-->`);
 }
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("layouts/default.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

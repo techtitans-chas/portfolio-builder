@@ -1,9 +1,8 @@
-import { ref, computed } from 'vue';
-import { onBeforeRouteLeave } from 'vue-router';
+import { aO as vueExports, W as onBeforeRouteLeave } from './server.mjs';
 
 function useUnsavedChanges(form) {
-  const snapshot = ref(JSON.stringify(form));
-  const isDirty = computed(() => snapshot.value !== JSON.stringify(form));
+  const snapshot = vueExports.ref(JSON.stringify(form));
+  const isDirty = vueExports.computed(() => snapshot.value !== JSON.stringify(form));
   function markSaved() {
     snapshot.value = JSON.stringify(form);
   }

@@ -1,11 +1,7 @@
-import { f as _sfc_main$8, e as _sfc_main$d, U as useComponentProps, N as useAppConfig, $ as useForwardProps, a4 as usePortal, Y as useFormField, X as useFieldGroup, R as useComponentIcons, M as tv, H as isArrayOfArray, g as _sfc_main$b, F as FieldGroupReset, v as get, h as _sfc_main$c, I as isNullish, Q as useCollection, J as looseToNumber, Z as useForwardExpose, b as Primitive, x as getDisplayValue, T as Teleport_default, P as Presence_default, k as createContext, V as VisuallyHidden_default, a0 as useForwardProps$1, C as injectConfigProviderContext, w as getActiveElement } from './server.mjs';
+import { aO as vueExports, a5 as ssrRenderAttrs_1, a7 as ssrRenderComponent_1, e as _sfc_main$8, j as _sfc_main$d, a8 as ssrRenderList_1, a6 as ssrRenderClass_1, a4 as ssrRenderAttr_1, a3 as ssrInterpolate_1, an as useComponentProps, aj as useAppConfig, av as useForwardProps, $ as reactivePick, aB as usePortal, at as useFormField, as as useFieldGroup, am as useComponentIcons, ag as tv, N as isArrayOfArray, a9 as ssrRenderSlot_1, h as _sfc_main$b, F as FieldGroupReset, ac as ssrRenderVNode, C as get, i as _sfc_main$c, ah as unrefElement, aM as useVModel, Q as isNullish, al as useCollection, R as looseToNumber, au as useForwardExpose, b as Primitive, G as getDisplayValue, T as Teleport_default, P as Presence_default, l as createContext, V as VisuallyHidden_default, a0 as refAutoReset, aw as useForwardProps$1, K as injectConfigProviderContext, D as getActiveElement, aF as useResizeObserver } from './server.mjs';
 import { _ as _sfc_main$2 } from './Input-DWHPzDmy.mjs';
-import { computed, ref, defineComponent, mergeProps, unref, withCtx, createTextVNode, isRef, useSlots, toRef, useTemplateRef, renderSlot, toDisplayString, openBlock, createBlock, createCommentVNode, Fragment, renderList, createVNode, resolveDynamicComponent, toValue, toRefs, createElementBlock, withModifiers, normalizeProps, guardReactiveProps, watch, Teleport, createElementVNode, watchEffect, nextTick, normalizeStyle, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrRenderClass, ssrRenderAttr, ssrInterpolate, ssrRenderSlot, ssrRenderVNode } from 'vue/server-renderer';
 import { u as useDirection, c as PopperRoot_default, P as PopperAnchor_default, e as useForwardPropsEmits, a as PopperArrow_default, d as useFocusGuards, b as PopperContent_default } from './PopperArrow-CVyIWJ6M.mjs';
-import { reactivePick, unrefElement, useVModel, useResizeObserver } from '@vueuse/core';
-import { l as useId, u as useBodyScrollLock, k as useHideOthers, F as FocusScope_default, h as DismissableLayer_default, j as handleAndDispatchCustomEvent, i as focusFirst } from './overlay-BWwBD9XH.mjs';
-import { refAutoReset } from '@vueuse/shared';
+import { m as useId, u as useBodyScrollLock, l as useHideOthers, F as FocusScope_default, h as DismissableLayer_default, k as handleAndDispatchCustomEvent, j as focusFirst } from './overlay-BWwBD9XH.mjs';
 import { g as defu, y as isEqual } from '../nitro/nitro.mjs';
 import { _ as _sfc_main$3 } from './Alert-Nv5RlKkm.mjs';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
@@ -14,7 +10,7 @@ function clamp(value, min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_INFI
   return Math.min(max, Math.max(min, value));
 }
 function useFormControl(el) {
-  return computed(() => toValue(el) ? Boolean(unrefElement(el)?.closest("form")) : true);
+  return vueExports.computed(() => vueExports.toValue(el) ? Boolean(unrefElement(el)?.closest("form")) : true);
 }
 function useTypeahead(callback) {
   const search2 = refAutoReset("", 1e3);
@@ -57,8 +53,8 @@ function getNextMatch(values, search2, currentMatch) {
   return nextMatch !== currentMatch ? nextMatch : void 0;
 }
 function useNonce(nonce) {
-  const context = injectConfigProviderContext({ nonce: ref() });
-  return computed(() => nonce?.value || context.nonce?.value);
+  const context = injectConfigProviderContext({ nonce: vueExports.ref() });
+  return vueExports.computed(() => nonce?.value || context.nonce?.value);
 }
 const OPEN_KEYS = [
   " ",
@@ -88,7 +84,7 @@ const _hoisted_1$1 = {
   value: ""
 };
 const [injectSelectRootContext, provideSelectRootContext] = /* @__PURE__ */ createContext("SelectRoot");
-var SelectRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SelectRoot",
   props: {
@@ -143,7 +139,7 @@ var SelectRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emits = __emit;
-    const { required, disabled, multiple, dir: propDir } = toRefs(props);
+    const { required, disabled, multiple, dir: propDir } = vueExports.toRefs(props);
     const modelValue = useVModel(props, "modelValue", emits, {
       defaultValue: props.defaultValue ?? (multiple.value ? [] : void 0),
       passive: props.modelValue === void 0,
@@ -153,21 +149,21 @@ var SelectRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       defaultValue: props.defaultOpen,
       passive: props.open === void 0
     });
-    const triggerElement = ref();
-    const valueElement = ref();
-    const triggerPointerDownPosRef = ref({
+    const triggerElement = vueExports.ref();
+    const valueElement = vueExports.ref();
+    const triggerPointerDownPosRef = vueExports.ref({
       x: 0,
       y: 0
     });
-    const isEmptyModelValue = computed(() => {
+    const isEmptyModelValue = vueExports.computed(() => {
       if (multiple.value && Array.isArray(modelValue.value)) return modelValue.value?.length === 0;
       else return isNullish(modelValue.value);
     });
     useCollection({ isProvider: true });
     const dir = useDirection(propDir);
     const isFormControl = useFormControl(triggerElement);
-    const optionsSet = ref(/* @__PURE__ */ new Set());
-    const nativeSelectKey = computed(() => {
+    const optionsSet = vueExports.ref(/* @__PURE__ */ new Set());
+    const nativeSelectKey = vueExports.computed(() => {
       return Array.from(optionsSet.value).map((option) => option.value).join(";");
     });
     function handleValueChange(value) {
@@ -216,23 +212,23 @@ var SelectRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(PopperRoot_default), null, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
-          modelValue: unref(modelValue),
-          open: unref(open)
-        }), unref(isFormControl) && _ctx.name ? (openBlock(), createBlock(BubbleSelect_default, {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(PopperRoot_default), null, {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", {
+          modelValue: vueExports.unref(modelValue),
+          open: vueExports.unref(open)
+        }), vueExports.unref(isFormControl) && _ctx.name ? (vueExports.openBlock(), vueExports.createBlock(BubbleSelect_default, {
           key: nativeSelectKey.value,
           "aria-hidden": "true",
           tabindex: "-1",
-          multiple: unref(multiple),
-          required: unref(required),
+          multiple: vueExports.unref(multiple),
+          required: vueExports.unref(required),
           name: _ctx.name,
           autocomplete: _ctx.autocomplete,
-          disabled: unref(disabled),
-          value: unref(modelValue)
+          disabled: vueExports.unref(disabled),
+          value: vueExports.unref(modelValue)
         }, {
-          default: withCtx(() => [unref(isNullish)(unref(modelValue)) ? (openBlock(), createElementBlock("option", _hoisted_1$1)) : createCommentVNode("v-if", true), (openBlock(true), createElementBlock(Fragment, null, renderList(Array.from(optionsSet.value), (option) => {
-            return openBlock(), createElementBlock("option", mergeProps({ key: option.value ?? "" }, { ref_for: true }, option), null, 16);
+          default: vueExports.withCtx(() => [vueExports.unref(isNullish)(vueExports.unref(modelValue)) ? (vueExports.openBlock(), vueExports.createElementBlock("option", _hoisted_1$1)) : vueExports.createCommentVNode("v-if", true), (vueExports.openBlock(true), vueExports.createElementBlock(vueExports.Fragment, null, vueExports.renderList(Array.from(optionsSet.value), (option) => {
+            return vueExports.openBlock(), vueExports.createElementBlock("option", vueExports.mergeProps({ key: option.value ?? "" }, { ref_for: true }, option), null, 16);
           }), 128))]),
           _: 1
         }, 8, [
@@ -242,14 +238,14 @@ var SelectRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
           "autocomplete",
           "disabled",
           "value"
-        ])) : createCommentVNode("v-if", true)]),
+        ])) : vueExports.createCommentVNode("v-if", true)]),
         _: 3
       });
     };
   }
 });
 var SelectRoot_default = SelectRoot_vue_vue_type_script_setup_true_lang_default;
-var BubbleSelect_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var BubbleSelect_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "BubbleSelect",
   props: {
     autocomplete: {
@@ -291,9 +287,9 @@ var BubbleSelect_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
   },
   setup(__props) {
     const props = __props;
-    const selectElement = ref();
+    const selectElement = vueExports.ref();
     const rootContext = injectSelectRootContext();
-    watch(() => props.value, (cur, prev) => {
+    vueExports.watch(() => props.value, (cur, prev) => {
       const selectProto = (void 0).HTMLSelectElement.prototype;
       const descriptor = Object.getOwnPropertyDescriptor(selectProto, "value");
       const setValue = descriptor.set;
@@ -307,18 +303,18 @@ var BubbleSelect_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
       rootContext.onValueChange(event.target.value);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(VisuallyHidden_default), { "as-child": "" }, {
-        default: withCtx(() => [createElementVNode("select", mergeProps({
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), { "as-child": "" }, {
+        default: vueExports.withCtx(() => [vueExports.createElementVNode("select", vueExports.mergeProps({
           ref_key: "selectElement",
           ref: selectElement
-        }, props, { onInput: handleInput }), [renderSlot(_ctx.$slots, "default")], 16)]),
+        }, props, { onInput: handleInput }), [vueExports.renderSlot(_ctx.$slots, "default")], 16)]),
         _: 3
       });
     };
   }
 });
 var BubbleSelect_default = BubbleSelect_vue_vue_type_script_setup_true_lang_default;
-var SelectPopperPosition_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectPopperPosition_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectPopperPosition",
   props: {
     side: {
@@ -408,7 +404,7 @@ var SelectPopperPosition_vue_vue_type_script_setup_true_lang_default = /* @__PUR
     const props = __props;
     const forwarded = useForwardProps$1(props);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(PopperContent_default), mergeProps(unref(forwarded), { style: {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(PopperContent_default), vueExports.mergeProps(vueExports.unref(forwarded), { style: {
         "boxSizing": "border-box",
         "--reka-select-content-transform-origin": "var(--reka-popper-transform-origin)",
         "--reka-select-content-available-width": "var(--reka-popper-available-width)",
@@ -416,7 +412,7 @@ var SelectPopperPosition_vue_vue_type_script_setup_true_lang_default = /* @__PUR
         "--reka-select-trigger-width": "var(--reka-popper-anchor-width)",
         "--reka-select-trigger-height": "var(--reka-popper-anchor-height)"
       } }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
@@ -432,7 +428,7 @@ const SelectContentDefaultContextValue = {
   }
 };
 const [injectSelectContentContext, provideSelectContentContext] = /* @__PURE__ */ createContext("SelectContent");
-var SelectContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectContentImpl",
   props: {
     position: {
@@ -544,23 +540,23 @@ var SelectContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
     useFocusGuards();
     useBodyScrollLock(props.bodyLock);
     const { CollectionSlot, getItems } = useCollection();
-    const content = ref();
+    const content = vueExports.ref();
     useHideOthers(content);
     const { search: search2, handleTypeaheadSearch } = useTypeahead();
-    const viewport = ref();
-    const selectedItem = ref();
-    const selectedItemText = ref();
-    const isPositioned = ref(false);
-    const firstValidItemFoundRef = ref(false);
-    const firstSelectedItemInArrayFoundRef = ref(false);
+    const viewport = vueExports.ref();
+    const selectedItem = vueExports.ref();
+    const selectedItemText = vueExports.ref();
+    const isPositioned = vueExports.ref(false);
+    const firstValidItemFoundRef = vueExports.ref(false);
+    const firstSelectedItemInArrayFoundRef = vueExports.ref(false);
     function focusSelectedItem() {
       if (selectedItem.value && content.value) focusFirst([selectedItem.value, content.value]);
     }
-    watch(isPositioned, () => {
+    vueExports.watch(isPositioned, () => {
       focusSelectedItem();
     });
     const { onOpenChange, triggerPointerDownPosRef } = rootContext;
-    watchEffect((cleanupFn) => {
+    vueExports.watchEffect((cleanupFn) => {
       if (!content.value) return;
       let pointerMoveDelta = {
         x: 0,
@@ -613,7 +609,7 @@ var SelectContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
         event.preventDefault();
       }
     }
-    const pickedProps = computed(() => {
+    const pickedProps = vueExports.computed(() => {
       if (props.position === "popper") return props;
       else return {};
     });
@@ -652,53 +648,53 @@ var SelectContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
       searchRef: search2
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(CollectionSlot), null, {
-        default: withCtx(() => [createVNode(unref(FocusScope_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(CollectionSlot), null, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(FocusScope_default), {
           "as-child": "",
-          onMountAutoFocus: _cache[6] || (_cache[6] = withModifiers(() => {
+          onMountAutoFocus: _cache[6] || (_cache[6] = vueExports.withModifiers(() => {
           }, ["prevent"])),
           onUnmountAutoFocus: _cache[7] || (_cache[7] = (event) => {
             emits("closeAutoFocus", event);
             if (event.defaultPrevented) return;
-            unref(rootContext).triggerElement.value?.focus({ preventScroll: true });
+            vueExports.unref(rootContext).triggerElement.value?.focus({ preventScroll: true });
             event.preventDefault();
           })
         }, {
-          default: withCtx(() => [createVNode(unref(DismissableLayer_default), {
+          default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(DismissableLayer_default), {
             "as-child": "",
             "disable-outside-pointer-events": _ctx.disableOutsidePointerEvents,
-            onFocusOutside: _cache[2] || (_cache[2] = withModifiers(() => {
+            onFocusOutside: _cache[2] || (_cache[2] = vueExports.withModifiers(() => {
             }, ["prevent"])),
-            onDismiss: _cache[3] || (_cache[3] = ($event) => unref(rootContext).onOpenChange(false)),
+            onDismiss: _cache[3] || (_cache[3] = ($event) => vueExports.unref(rootContext).onOpenChange(false)),
             onEscapeKeyDown: _cache[4] || (_cache[4] = ($event) => emits("escapeKeyDown", $event)),
             onPointerDownOutside: _cache[5] || (_cache[5] = ($event) => emits("pointerDownOutside", $event))
           }, {
-            default: withCtx(() => [(openBlock(), createBlock(resolveDynamicComponent(_ctx.position === "popper" ? SelectPopperPosition_default : SelectItemAlignedPosition_default), mergeProps({
+            default: vueExports.withCtx(() => [(vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(_ctx.position === "popper" ? SelectPopperPosition_default : SelectItemAlignedPosition_default), vueExports.mergeProps({
               ..._ctx.$attrs,
-              ...unref(forwardedProps)
+              ...vueExports.unref(forwardedProps)
             }, {
-              id: unref(rootContext).contentId,
+              id: vueExports.unref(rootContext).contentId,
               ref: (vnode) => {
                 if (!vnode) return void 0;
-                const el = unref(unrefElement)(vnode);
+                const el = vueExports.unref(unrefElement)(vnode);
                 if (el?.hasAttribute("data-reka-popper-content-wrapper")) content.value = el.firstElementChild;
                 else content.value = el;
                 return void 0;
               },
               role: "listbox",
-              "data-state": unref(rootContext).open.value ? "open" : "closed",
-              dir: unref(rootContext).dir.value,
+              "data-state": vueExports.unref(rootContext).open.value ? "open" : "closed",
+              dir: vueExports.unref(rootContext).dir.value,
               style: {
                 display: "flex",
                 flexDirection: "column",
                 outline: "none"
               },
-              onContextmenu: _cache[0] || (_cache[0] = withModifiers(() => {
+              onContextmenu: _cache[0] || (_cache[0] = vueExports.withModifiers(() => {
               }, ["prevent"])),
               onPlaced: _cache[1] || (_cache[1] = ($event) => isPositioned.value = true),
               onKeydown: handleKeyDown
             }), {
-              default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+              default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
               _: 3
             }, 16, [
               "id",
@@ -717,7 +713,7 @@ var SelectContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
 });
 var SelectContentImpl_default = SelectContentImpl_vue_vue_type_script_setup_true_lang_default;
 const [injectSelectItemAlignedPositionContext, provideSelectItemAlignedPositionContext] = /* @__PURE__ */ createContext("SelectItemAlignedPosition");
-var SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SelectItemAlignedPosition",
   props: {
@@ -737,9 +733,9 @@ var SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default = /* @
     const { getItems } = useCollection();
     const rootContext = injectSelectRootContext();
     const contentContext = injectSelectContentContext();
-    const shouldExpandOnScrollRef = ref(false);
-    const shouldRepositionRef = ref(true);
-    const contentWrapperElement = ref();
+    const shouldExpandOnScrollRef = vueExports.ref(false);
+    const shouldRepositionRef = vueExports.ref(true);
+    const contentWrapperElement = vueExports.ref();
     const { forwardRef, currentElement: contentElement } = useForwardExpose();
     const { viewport, selectedItem, selectedItemText, focusSelectedItem } = contentContext;
     function position() {
@@ -811,7 +807,7 @@ var SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default = /* @
         requestAnimationFrame(() => shouldExpandOnScrollRef.value = true);
       }
     }
-    const contentZIndex = ref("");
+    const contentZIndex = vueExports.ref("");
     function handleScrollButtonChange(node) {
       if (node && shouldRepositionRef.value === true) {
         position();
@@ -828,17 +824,17 @@ var SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default = /* @
       onScrollButtonChange: handleScrollButtonChange
     });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
+      return vueExports.openBlock(), vueExports.createElementBlock("div", {
         ref_key: "contentWrapperElement",
         ref: contentWrapperElement,
-        style: normalizeStyle({
+        style: vueExports.normalizeStyle({
           display: "flex",
           flexDirection: "column",
           position: "fixed",
           zIndex: contentZIndex.value
         })
-      }, [createVNode(unref(Primitive), mergeProps({
-        ref: unref(forwardRef),
+      }, [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
+        ref: vueExports.unref(forwardRef),
         style: {
           boxSizing: "border-box",
           maxHeight: "100%"
@@ -847,14 +843,14 @@ var SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default = /* @
         ..._ctx.$attrs,
         ...props
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16)], 4);
     };
   }
 });
 var SelectItemAlignedPosition_default = SelectItemAlignedPosition_vue_vue_type_script_setup_true_lang_default;
-var SelectArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectArrow",
   props: {
     width: {
@@ -885,15 +881,15 @@ var SelectArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const props = __props;
     const contentContext = injectSelectContentContext(SelectContentDefaultContextValue);
     return (_ctx, _cache) => {
-      return unref(contentContext).position === "popper" ? (openBlock(), createBlock(unref(PopperArrow_default), normalizeProps(mergeProps({ key: 0 }, props)), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.unref(contentContext).position === "popper" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(PopperArrow_default), vueExports.normalizeProps(vueExports.mergeProps({ key: 0 }, props)), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
-      }, 16)) : createCommentVNode("v-if", true);
+      }, 16)) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
 var SelectArrow_default = SelectArrow_vue_vue_type_script_setup_true_lang_default;
-var SelectProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SelectProvider",
   props: { context: {
@@ -905,13 +901,13 @@ var SelectProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
     provideSelectRootContext(props.context);
     provideSelectContentContext(SelectContentDefaultContextValue);
     return (_ctx, _cache) => {
-      return renderSlot(_ctx.$slots, "default");
+      return vueExports.renderSlot(_ctx.$slots, "default");
     };
   }
 });
 var SelectProvider_default = SelectProvider_vue_vue_type_script_setup_true_lang_default;
 const _hoisted_1 = { key: 1 };
-var SelectContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SelectContent",
   props: {
@@ -1022,38 +1018,38 @@ var SelectContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const emits = __emit;
     const forwarded = useForwardPropsEmits(props, emits);
     const rootContext = injectSelectRootContext();
-    const fragment = ref();
-    const presenceRef = ref();
-    const present = computed(() => props.forceMount || rootContext.open.value);
-    const renderPresence = ref(present.value);
-    watch(present, () => {
+    const fragment = vueExports.ref();
+    const presenceRef = vueExports.ref();
+    const present = vueExports.computed(() => props.forceMount || rootContext.open.value);
+    const renderPresence = vueExports.ref(present.value);
+    vueExports.watch(present, () => {
       setTimeout(() => renderPresence.value = present.value);
     });
     return (_ctx, _cache) => {
-      return present.value || renderPresence.value || presenceRef.value?.present ? (openBlock(), createBlock(unref(Presence_default), {
+      return present.value || renderPresence.value || presenceRef.value?.present ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Presence_default), {
         key: 0,
         ref_key: "presenceRef",
         ref: presenceRef,
         present: present.value
       }, {
-        default: withCtx(() => [createVNode(SelectContentImpl_default, normalizeProps(guardReactiveProps({
-          ...unref(forwarded),
+        default: vueExports.withCtx(() => [vueExports.createVNode(SelectContentImpl_default, vueExports.normalizeProps(vueExports.guardReactiveProps({
+          ...vueExports.unref(forwarded),
           ..._ctx.$attrs
         })), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16)]),
         _: 3
-      }, 8, ["present"])) : fragment.value ? (openBlock(), createElementBlock("div", _hoisted_1, [(openBlock(), createBlock(Teleport, { to: fragment.value }, [createVNode(SelectProvider_default, { context: unref(rootContext) }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      }, 8, ["present"])) : fragment.value ? (vueExports.openBlock(), vueExports.createElementBlock("div", _hoisted_1, [(vueExports.openBlock(), vueExports.createBlock(vueExports.Teleport, { to: fragment.value }, [vueExports.createVNode(SelectProvider_default, { context: vueExports.unref(rootContext) }, {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
-      }, 8, ["context"])], 8, ["to"]))])) : createCommentVNode("v-if", true);
+      }, 8, ["context"])], 8, ["to"]))])) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
 var SelectContent_default = SelectContent_vue_vue_type_script_setup_true_lang_default;
 const [injectSelectGroupContext, provideSelectGroupContext] = /* @__PURE__ */ createContext("SelectGroup");
-var SelectGroup_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectGroup_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectGroup",
   props: {
     asChild: {
@@ -1070,8 +1066,8 @@ var SelectGroup_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const id = useId(void 0, "reka-select-group");
     provideSelectGroupContext({ id });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps({ role: "group" }, props, { "aria-labelledby": unref(id) }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps({ role: "group" }, props, { "aria-labelledby": vueExports.unref(id) }), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["aria-labelledby"]);
     };
@@ -1079,7 +1075,7 @@ var SelectGroup_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
 });
 var SelectGroup_default = SelectGroup_vue_vue_type_script_setup_true_lang_default;
 const [injectSelectItemContext, provideSelectItemContext] = /* @__PURE__ */ createContext("SelectItem");
-var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectItem",
   props: {
     value: {
@@ -1107,14 +1103,14 @@ var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emits = __emit;
-    const { disabled } = toRefs(props);
+    const { disabled } = vueExports.toRefs(props);
     const rootContext = injectSelectRootContext();
     const contentContext = injectSelectContentContext();
     const { forwardRef } = useForwardExpose();
     const { CollectionItem } = useCollection();
-    const isSelected = computed(() => valueComparator(rootContext.modelValue?.value, props.value, rootContext.by));
-    const isFocused = ref(false);
-    const textValue = ref(props.textValue ?? "");
+    const isSelected = vueExports.computed(() => valueComparator(rootContext.modelValue?.value, props.value, rootContext.by));
+    const isFocused = vueExports.ref(false);
+    const textValue = vueExports.ref(props.textValue ?? "");
     const textId = useId(void 0, "reka-select-item-text");
     const SELECT_SELECT = "select.select";
     async function handleSelectCustomEvent(ev) {
@@ -1126,7 +1122,7 @@ var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       handleAndDispatchCustomEvent(SELECT_SELECT, handleSelect, eventDetail);
     }
     async function handleSelect(ev) {
-      await nextTick();
+      await vueExports.nextTick();
       emits("select", ev);
       if (ev.defaultPrevented) return;
       if (!disabled.value) {
@@ -1135,18 +1131,18 @@ var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       }
     }
     async function handlePointerMove(event) {
-      await nextTick();
+      await vueExports.nextTick();
       if (event.defaultPrevented) return;
       if (disabled.value) contentContext.onItemLeave?.();
       else event.currentTarget?.focus({ preventScroll: true });
     }
     async function handlePointerLeave(event) {
-      await nextTick();
+      await vueExports.nextTick();
       if (event.defaultPrevented) return;
       if (event.currentTarget === getActiveElement()) contentContext.onItemLeave?.();
     }
     async function handleKeyDown(event) {
-      await nextTick();
+      await vueExports.nextTick();
       if (event.defaultPrevented) return;
       const isTypingAhead = contentContext.searchRef?.value !== "";
       if (isTypingAhead && event.key === " ") return;
@@ -1164,17 +1160,17 @@ var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(CollectionItem), { value: { textValue: textValue.value } }, {
-        default: withCtx(() => [createVNode(unref(Primitive), {
-          ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(CollectionItem), { value: { textValue: textValue.value } }, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), {
+          ref: vueExports.unref(forwardRef),
           role: "option",
-          "aria-labelledby": unref(textId),
+          "aria-labelledby": vueExports.unref(textId),
           "data-highlighted": isFocused.value ? "" : void 0,
           "aria-selected": isSelected.value,
           "data-state": isSelected.value ? "checked" : "unchecked",
-          "aria-disabled": unref(disabled) || void 0,
-          "data-disabled": unref(disabled) ? "" : void 0,
-          tabindex: unref(disabled) ? void 0 : -1,
+          "aria-disabled": vueExports.unref(disabled) || void 0,
+          "data-disabled": vueExports.unref(disabled) ? "" : void 0,
+          tabindex: vueExports.unref(disabled) ? void 0 : -1,
           as: _ctx.as,
           "as-child": _ctx.asChild,
           onFocus: _cache[0] || (_cache[0] = ($event) => isFocused.value = true),
@@ -1183,13 +1179,13 @@ var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
           onPointerdown: _cache[2] || (_cache[2] = (event) => {
             event.currentTarget.focus({ preventScroll: true });
           }),
-          onTouchend: _cache[3] || (_cache[3] = withModifiers(() => {
+          onTouchend: _cache[3] || (_cache[3] = vueExports.withModifiers(() => {
           }, ["prevent", "stop"])),
           onPointermove: handlePointerMove,
           onPointerleave: handlePointerLeave,
           onKeydown: handleKeyDown
         }, {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 8, [
           "aria-labelledby",
@@ -1208,7 +1204,7 @@ var SelectItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   }
 });
 var SelectItem_default = SelectItem_vue_vue_type_script_setup_true_lang_default;
-var SelectItemIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectItemIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectItemIndicator",
   props: {
     asChild: {
@@ -1225,18 +1221,18 @@ var SelectItemIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE
     const props = __props;
     const itemContext = injectSelectItemContext();
     return (_ctx, _cache) => {
-      return unref(itemContext).isSelected.value ? (openBlock(), createBlock(unref(Primitive), mergeProps({
+      return vueExports.unref(itemContext).isSelected.value ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps({
         key: 0,
         "aria-hidden": "true"
       }, props), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
-      }, 16)) : createCommentVNode("v-if", true);
+      }, 16)) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
 var SelectItemIndicator_default = SelectItemIndicator_vue_vue_type_script_setup_true_lang_default;
-var SelectItemText_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectItemText_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SelectItemText",
   props: {
@@ -1256,7 +1252,7 @@ var SelectItemText_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
     injectSelectContentContext();
     const itemContext = injectSelectItemContext();
     const { forwardRef, currentElement: itemTextElement } = useForwardExpose();
-    computed(() => {
+    vueExports.computed(() => {
       return {
         value: itemContext.value,
         disabled: itemContext.disabled.value,
@@ -1264,21 +1260,21 @@ var SelectItemText_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
       };
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps({
-        id: unref(itemContext).textId,
-        ref: unref(forwardRef)
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps({
+        id: vueExports.unref(itemContext).textId,
+        ref: vueExports.unref(forwardRef)
       }, {
         ...props,
         ..._ctx.$attrs
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["id"]);
     };
   }
 });
 var SelectItemText_default = SelectItemText_vue_vue_type_script_setup_true_lang_default;
-var SelectLabel_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectLabel_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectLabel",
   props: {
     for: {
@@ -1299,15 +1295,15 @@ var SelectLabel_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const props = __props;
     const groupContext = injectSelectGroupContext({ id: "" });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(props, { id: unref(groupContext).id }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, { id: vueExports.unref(groupContext).id }), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["id"]);
     };
   }
 });
 var SelectLabel_default = SelectLabel_vue_vue_type_script_setup_true_lang_default;
-var SelectPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectPortal",
   props: {
     to: {
@@ -1330,15 +1326,15 @@ var SelectPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Teleport_default), normalizeProps(guardReactiveProps(props)), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Teleport_default), vueExports.normalizeProps(vueExports.guardReactiveProps(props)), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var SelectPortal_default = SelectPortal_vue_vue_type_script_setup_true_lang_default;
-var SelectSeparator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectSeparator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectSeparator",
   props: {
     asChild: {
@@ -1353,15 +1349,15 @@ var SelectSeparator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ *
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps({ "aria-hidden": "true" }, props), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps({ "aria-hidden": "true" }, props), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var SelectSeparator_default = SelectSeparator_vue_vue_type_script_setup_true_lang_default;
-var SelectTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectTrigger",
   props: {
     disabled: {
@@ -1386,7 +1382,7 @@ var SelectTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const props = __props;
     const rootContext = injectSelectRootContext();
     const { forwardRef } = useForwardExpose();
-    const isDisabled = computed(() => rootContext.disabled?.value || props.disabled);
+    const isDisabled = vueExports.computed(() => rootContext.disabled?.value || props.disabled);
     rootContext.contentId ||= useId(void 0, "reka-select-content");
     const { getItems } = useCollection();
     const { search: search2, handleTypeaheadSearch, resetTypeahead } = useTypeahead();
@@ -1404,23 +1400,23 @@ var SelectTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
       };
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(PopperAnchor_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(PopperAnchor_default), {
         "as-child": "",
         reference: _ctx.reference
       }, {
-        default: withCtx(() => [createVNode(unref(Primitive), {
-          ref: unref(forwardRef),
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), {
+          ref: vueExports.unref(forwardRef),
           role: "combobox",
           type: _ctx.as === "button" ? "button" : void 0,
-          "aria-controls": unref(rootContext).contentId,
-          "aria-expanded": unref(rootContext).open.value || false,
-          "aria-required": unref(rootContext).required?.value,
+          "aria-controls": vueExports.unref(rootContext).contentId,
+          "aria-expanded": vueExports.unref(rootContext).open.value || false,
+          "aria-required": vueExports.unref(rootContext).required?.value,
           "aria-autocomplete": "none",
           disabled: isDisabled.value,
-          dir: unref(rootContext)?.dir.value,
-          "data-state": unref(rootContext)?.open.value ? "open" : "closed",
+          dir: vueExports.unref(rootContext)?.dir.value,
+          "data-state": vueExports.unref(rootContext)?.open.value ? "open" : "closed",
           "data-disabled": isDisabled.value ? "" : void 0,
-          "data-placeholder": unref(shouldShowPlaceholder)(unref(rootContext).modelValue?.value) ? "" : void 0,
+          "data-placeholder": vueExports.unref(shouldShowPlaceholder)(vueExports.unref(rootContext).modelValue?.value) ? "" : void 0,
           "as-child": _ctx.asChild,
           as: _ctx.as,
           onClick: _cache[0] || (_cache[0] = (event) => {
@@ -1435,23 +1431,23 @@ var SelectTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
               event.preventDefault();
             }
           }),
-          onPointerup: _cache[2] || (_cache[2] = withModifiers((event) => {
+          onPointerup: _cache[2] || (_cache[2] = vueExports.withModifiers((event) => {
             if (event.pointerType === "touch") handlePointerOpen(event);
           }, ["prevent"])),
           onKeydown: _cache[3] || (_cache[3] = (event) => {
-            const isTypingAhead = unref(search2) !== "";
+            const isTypingAhead = vueExports.unref(search2) !== "";
             const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
             if (!isModifierKey && event.key.length === 1) {
               if (isTypingAhead && event.key === " ") return;
             }
-            unref(handleTypeaheadSearch)(event.key, unref(getItems)());
-            if (unref(OPEN_KEYS).includes(event.key)) {
+            vueExports.unref(handleTypeaheadSearch)(event.key, vueExports.unref(getItems)());
+            if (vueExports.unref(OPEN_KEYS).includes(event.key)) {
               handleOpen();
               event.preventDefault();
             }
           })
         }, {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 8, [
           "type",
@@ -1472,7 +1468,7 @@ var SelectTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
   }
 });
 var SelectTrigger_default = SelectTrigger_vue_vue_type_script_setup_true_lang_default;
-var SelectValue_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectValue_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectValue",
   props: {
     placeholder: {
@@ -1494,7 +1490,7 @@ var SelectValue_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const props = __props;
     const { forwardRef } = useForwardExpose();
     const rootContext = injectSelectRootContext();
-    const selectedLabel = computed(() => {
+    const selectedLabel = vueExports.computed(() => {
       let list = [];
       const options = Array.from(rootContext.optionsSet.value);
       const getOption = (value) => options.find((option) => valueComparator(value, option.value, rootContext.by));
@@ -1502,21 +1498,21 @@ var SelectValue_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
       else list = [getOption(rootContext.modelValue.value)?.textContent ?? ""];
       return list.filter(Boolean);
     });
-    const slotText = computed(() => {
+    const slotText = vueExports.computed(() => {
       return selectedLabel.value.length ? selectedLabel.value.join(", ") : props.placeholder;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
+        ref: vueExports.unref(forwardRef),
         as: _ctx.as,
         "as-child": _ctx.asChild,
         style: { pointerEvents: "none" },
         "data-placeholder": selectedLabel.value.length ? void 0 : props.placeholder
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", {
           selectedLabel: selectedLabel.value,
-          modelValue: unref(rootContext).modelValue.value
-        }, () => [createTextVNode(toDisplayString(slotText.value), 1)])]),
+          modelValue: vueExports.unref(rootContext).modelValue.value
+        }, () => [vueExports.createTextVNode(vueExports.toDisplayString(slotText.value), 1)])]),
         _: 3
       }, 8, [
         "as",
@@ -1527,7 +1523,7 @@ var SelectValue_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
   }
 });
 var SelectValue_default = SelectValue_vue_vue_type_script_setup_true_lang_default;
-var SelectViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SelectViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SelectViewport",
   props: {
     nonce: {
@@ -1545,12 +1541,12 @@ var SelectViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
   },
   setup(__props) {
     const props = __props;
-    const { nonce: propNonce } = toRefs(props);
+    const { nonce: propNonce } = vueExports.toRefs(props);
     const nonce = useNonce(propNonce);
     const contentContext = injectSelectContentContext();
     const alignedPositionContext = contentContext.position === "item-aligned" ? injectSelectItemAlignedPositionContext() : void 0;
     const { forwardRef } = useForwardExpose();
-    const prevScrollTopRef = ref(0);
+    const prevScrollTopRef = vueExports.ref(0);
     function handleScroll(event) {
       const viewport = event.currentTarget;
       const { shouldExpandOnScrollRef, contentWrapper } = alignedPositionContext ?? {};
@@ -1576,8 +1572,8 @@ var SelectViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
       prevScrollTopRef.value = viewport.scrollTop;
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock(Fragment, null, [createVNode(unref(Primitive), mergeProps({
-        ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createElementBlock(vueExports.Fragment, null, [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
+        ref: vueExports.unref(forwardRef),
         "data-reka-select-viewport": "",
         role: "presentation"
       }, {
@@ -1591,13 +1587,13 @@ var SelectViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
         },
         onScroll: handleScroll
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
-      }, 16), createVNode(unref(Primitive), {
+      }, 16), vueExports.createVNode(vueExports.unref(Primitive), {
         as: "style",
-        nonce: unref(nonce)
+        nonce: vueExports.unref(nonce)
       }, {
-        default: withCtx(() => _cache[0] || (_cache[0] = [createTextVNode(" /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */ [data-reka-select-viewport] { scrollbar-width:none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; } [data-reka-select-viewport]::-webkit-scrollbar { display: none; } ")])),
+        default: vueExports.withCtx(() => _cache[0] || (_cache[0] = [vueExports.createTextVNode(" /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */ [data-reka-select-viewport] { scrollbar-width:none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; } [data-reka-select-viewport]::-webkit-scrollbar { display: none; } ")])),
         _: 1,
         __: [0]
       }, 8, ["nonce"])], 64);
@@ -2004,20 +2000,20 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   setup(__props, { expose: __expose, emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("select", _props);
     const appConfig = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "open", "defaultOpen", "disabled", "autocomplete", "required", "multiple"), emits);
-    const portalProps = usePortal(toRef(() => props.portal));
-    const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position);
-    const contentProps = toRef(() => defu(props.content, { side: "bottom", sideOffset: 8, collisionPadding: 8, position: position.value }));
-    const arrowProps = toRef(() => defu(props.arrow, { rounded: true }));
+    const portalProps = usePortal(vueExports.toRef(() => props.portal));
+    const position = vueExports.computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position);
+    const contentProps = vueExports.toRef(() => defu(props.content, { side: "bottom", sideOffset: 8, collisionPadding: 8, position: position.value }));
+    const arrowProps = vueExports.toRef(() => defu(props.arrow, { rounded: true }));
     const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField(_props);
     const { orientation, size: fieldGroupSize } = useFieldGroup(_props);
-    const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })));
-    const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value);
-    const isItemAligned = computed(() => position.value === "item-aligned");
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.select || {} })({
+    const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(vueExports.toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })));
+    const selectSize = vueExports.computed(() => fieldGroupSize.value || formFieldSize.value);
+    const isItemAligned = vueExports.computed(() => position.value === "item-aligned");
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.select || {} })({
       color: color.value ?? props.color,
       variant: props.variant,
       size: selectSize.value ?? props.size,
@@ -2028,10 +2024,10 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       fieldGroup: orientation.value,
       position: position.value
     }));
-    const groups = computed(
+    const groups = vueExports.computed(
       () => props.items?.length ? isArrayOfArray(props.items) ? props.items : [props.items] : []
     );
-    const items = computed(() => groups.value.flatMap((group) => group));
+    const items = vueExports.computed(() => groups.value.flatMap((group) => group));
     function displayValue(value) {
       if (props.multiple && Array.isArray(value)) {
         const displayedValues = value.map((item) => getDisplayValue(items.value, item, {
@@ -2045,7 +2041,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         valueKey: props.valueKey
       });
     }
-    const triggerRef = useTemplateRef("triggerRef");
+    const triggerRef = vueExports.useTemplateRef("triggerRef");
     function onUpdate(value) {
       if (props.modelModifiers?.trim && (typeof value === "string" || value === null || value === void 0)) {
         value = value?.trim() ?? null;
@@ -2078,53 +2074,53 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     function isSelectItem(item) {
       return typeof item === "object" && item !== null;
     }
-    const viewportRef = useTemplateRef("viewportRef");
+    const viewportRef = vueExports.useTemplateRef("viewportRef");
     __expose({
-      triggerRef: toRef(() => triggerRef.value?.$el),
-      viewportRef: toRef(() => {
+      triggerRef: vueExports.toRef(() => triggerRef.value?.$el),
+      viewportRef: vueExports.toRef(() => {
         const instance = viewportRef.value;
         return instance && typeof instance === "object" && "$el" in instance ? instance.$el : instance;
       })
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(SelectRoot_default), mergeProps({ name: unref(name) }, unref(rootProps), {
-        autocomplete: unref(props).autocomplete,
-        disabled: unref(disabled),
-        "default-value": unref(props).defaultValue,
+      _push(ssrRenderComponent_1(vueExports.unref(SelectRoot_default), vueExports.mergeProps({ name: vueExports.unref(name) }, vueExports.unref(rootProps), {
+        autocomplete: vueExports.unref(props).autocomplete,
+        disabled: vueExports.unref(disabled),
+        "default-value": vueExports.unref(props).defaultValue,
         "model-value": __props.modelValue,
         "onUpdate:modelValue": onUpdate,
         "onUpdate:open": onUpdateOpen
       }, _attrs), {
-        default: withCtx(({ modelValue, open }, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx(({ modelValue, open }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(unref(SelectTrigger_default), mergeProps({
-              id: unref(id),
+            _push2(ssrRenderComponent_1(vueExports.unref(SelectTrigger_default), vueExports.mergeProps({
+              id: vueExports.unref(id),
               ref_key: "triggerRef",
               ref: triggerRef,
               "data-slot": "base",
-              class: ui.value.base({ class: [unref(props).ui?.base, unref(props).class] })
-            }, { ..._ctx.$attrs, ...unref(ariaAttrs) }), {
-              default: withCtx((_, _push3, _parent3, _scopeId2) => {
+              class: ui.value.base({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] })
+            }, { ..._ctx.$attrs, ...vueExports.unref(ariaAttrs) }), {
+              default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  if (unref(isLeading) || !!unref(props).avatar || !!slots.leading) {
-                    _push3(`<span data-slot="leading" class="${ssrRenderClass(ui.value.leading({ class: unref(props).ui?.leading }))}"${_scopeId2}>`);
-                    ssrRenderSlot(_ctx.$slots, "leading", {
+                  if (vueExports.unref(isLeading) || !!vueExports.unref(props).avatar || !!slots.leading) {
+                    _push3(`<span data-slot="leading" class="${ssrRenderClass_1(ui.value.leading({ class: vueExports.unref(props).ui?.leading }))}"${_scopeId2}>`);
+                    ssrRenderSlot_1(_ctx.$slots, "leading", {
                       modelValue,
                       open,
                       ui: ui.value
                     }, () => {
-                      if (unref(isLeading) && unref(leadingIconName)) {
-                        _push3(ssrRenderComponent(_sfc_main$d, {
-                          name: unref(leadingIconName),
+                      if (vueExports.unref(isLeading) && vueExports.unref(leadingIconName)) {
+                        _push3(ssrRenderComponent_1(_sfc_main$d, {
+                          name: vueExports.unref(leadingIconName),
                           "data-slot": "leadingIcon",
-                          class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
+                          class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
                         }, null, _parent3, _scopeId2));
-                      } else if (!!unref(props).avatar) {
-                        _push3(ssrRenderComponent(_sfc_main$b, mergeProps({
-                          size: unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
-                        }, unref(props).avatar, {
+                      } else if (!!vueExports.unref(props).avatar) {
+                        _push3(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                          size: vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                        }, vueExports.unref(props).avatar, {
                           "data-slot": "itemLeadingAvatar",
-                          class: ui.value.itemLeadingAvatar({ class: unref(props).ui?.itemLeadingAvatar })
+                          class: ui.value.itemLeadingAvatar({ class: vueExports.unref(props).ui?.itemLeadingAvatar })
                         }), null, _parent3, _scopeId2));
                       } else {
                         _push3(`<!---->`);
@@ -2135,28 +2131,28 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                     _push3(`<!---->`);
                   }
                   _push3(`<!--[-->`);
-                  ssrRenderList([displayValue(modelValue)], (displayedModelValue) => {
-                    _push3(ssrRenderComponent(unref(SelectValue_default), {
+                  ssrRenderList_1([displayValue(modelValue)], (displayedModelValue) => {
+                    _push3(ssrRenderComponent_1(vueExports.unref(SelectValue_default), {
                       "data-slot": displayedModelValue != null ? "value" : "placeholder",
-                      class: displayedModelValue != null ? ui.value.value({ class: unref(props).ui?.value }) : ui.value.placeholder({ class: unref(props).ui?.placeholder })
+                      class: displayedModelValue != null ? ui.value.value({ class: vueExports.unref(props).ui?.value }) : ui.value.placeholder({ class: vueExports.unref(props).ui?.placeholder })
                     }, {
-                      default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                      default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          ssrRenderSlot(_ctx.$slots, "default", {
+                          ssrRenderSlot_1(_ctx.$slots, "default", {
                             modelValue,
                             open,
                             ui: ui.value
                           }, () => {
-                            _push4(`${ssrInterpolate(displayedModelValue ?? (unref(props).placeholder ?? " "))}`);
+                            _push4(`${ssrInterpolate_1(displayedModelValue ?? (vueExports.unref(props).placeholder ?? " "))}`);
                           }, _push4, _parent4, _scopeId3);
                         } else {
                           return [
-                            renderSlot(_ctx.$slots, "default", {
+                            vueExports.renderSlot(_ctx.$slots, "default", {
                               modelValue,
                               open,
                               ui: ui.value
                             }, () => [
-                              createTextVNode(toDisplayString(displayedModelValue ?? (unref(props).placeholder ?? " ")), 1)
+                              vueExports.createTextVNode(vueExports.toDisplayString(displayedModelValue ?? (vueExports.unref(props).placeholder ?? " ")), 1)
                             ])
                           ];
                         }
@@ -2165,18 +2161,18 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                     }, _parent3, _scopeId2));
                   });
                   _push3(`<!--]-->`);
-                  if (unref(isTrailing) || !!slots.trailing) {
-                    _push3(`<span data-slot="trailing" class="${ssrRenderClass(ui.value.trailing({ class: unref(props).ui?.trailing }))}"${_scopeId2}>`);
-                    ssrRenderSlot(_ctx.$slots, "trailing", {
+                  if (vueExports.unref(isTrailing) || !!slots.trailing) {
+                    _push3(`<span data-slot="trailing" class="${ssrRenderClass_1(ui.value.trailing({ class: vueExports.unref(props).ui?.trailing }))}"${_scopeId2}>`);
+                    ssrRenderSlot_1(_ctx.$slots, "trailing", {
                       modelValue,
                       open,
                       ui: ui.value
                     }, () => {
-                      if (unref(trailingIconName)) {
-                        _push3(ssrRenderComponent(_sfc_main$d, {
-                          name: unref(trailingIconName),
+                      if (vueExports.unref(trailingIconName)) {
+                        _push3(ssrRenderComponent_1(_sfc_main$d, {
+                          name: vueExports.unref(trailingIconName),
                           "data-slot": "trailingIcon",
-                          class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
+                          class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
                         }, null, _parent3, _scopeId2));
                       } else {
                         _push3(`<!---->`);
@@ -2188,230 +2184,230 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   }
                 } else {
                   return [
-                    unref(isLeading) || !!unref(props).avatar || !!slots.leading ? (openBlock(), createBlock("span", {
+                    vueExports.unref(isLeading) || !!vueExports.unref(props).avatar || !!slots.leading ? (vueExports.openBlock(), vueExports.createBlock("span", {
                       key: 0,
                       "data-slot": "leading",
-                      class: ui.value.leading({ class: unref(props).ui?.leading })
+                      class: ui.value.leading({ class: vueExports.unref(props).ui?.leading })
                     }, [
-                      renderSlot(_ctx.$slots, "leading", {
+                      vueExports.renderSlot(_ctx.$slots, "leading", {
                         modelValue,
                         open,
                         ui: ui.value
                       }, () => [
-                        unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                        vueExports.unref(isLeading) && vueExports.unref(leadingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                           key: 0,
-                          name: unref(leadingIconName),
+                          name: vueExports.unref(leadingIconName),
                           "data-slot": "leadingIcon",
-                          class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
-                        }, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                          class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
+                        }, null, 8, ["name", "class"])) : !!vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                           key: 1,
-                          size: unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
-                        }, unref(props).avatar, {
+                          size: vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                        }, vueExports.unref(props).avatar, {
                           "data-slot": "itemLeadingAvatar",
-                          class: ui.value.itemLeadingAvatar({ class: unref(props).ui?.itemLeadingAvatar })
-                        }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                          class: ui.value.itemLeadingAvatar({ class: vueExports.unref(props).ui?.itemLeadingAvatar })
+                        }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                       ])
-                    ], 2)) : createCommentVNode("", true),
-                    (openBlock(true), createBlock(Fragment, null, renderList([displayValue(modelValue)], (displayedModelValue) => {
-                      return openBlock(), createBlock(unref(SelectValue_default), {
+                    ], 2)) : vueExports.createCommentVNode("", true),
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList([displayValue(modelValue)], (displayedModelValue) => {
+                      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectValue_default), {
                         key: displayedModelValue,
                         "data-slot": displayedModelValue != null ? "value" : "placeholder",
-                        class: displayedModelValue != null ? ui.value.value({ class: unref(props).ui?.value }) : ui.value.placeholder({ class: unref(props).ui?.placeholder })
+                        class: displayedModelValue != null ? ui.value.value({ class: vueExports.unref(props).ui?.value }) : ui.value.placeholder({ class: vueExports.unref(props).ui?.placeholder })
                       }, {
-                        default: withCtx(() => [
-                          renderSlot(_ctx.$slots, "default", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.renderSlot(_ctx.$slots, "default", {
                             modelValue,
                             open,
                             ui: ui.value
                           }, () => [
-                            createTextVNode(toDisplayString(displayedModelValue ?? (unref(props).placeholder ?? " ")), 1)
+                            vueExports.createTextVNode(vueExports.toDisplayString(displayedModelValue ?? (vueExports.unref(props).placeholder ?? " ")), 1)
                           ])
                         ]),
                         _: 2
                       }, 1032, ["data-slot", "class"]);
                     }), 128)),
-                    unref(isTrailing) || !!slots.trailing ? (openBlock(), createBlock("span", {
+                    vueExports.unref(isTrailing) || !!slots.trailing ? (vueExports.openBlock(), vueExports.createBlock("span", {
                       key: 1,
                       "data-slot": "trailing",
-                      class: ui.value.trailing({ class: unref(props).ui?.trailing })
+                      class: ui.value.trailing({ class: vueExports.unref(props).ui?.trailing })
                     }, [
-                      renderSlot(_ctx.$slots, "trailing", {
+                      vueExports.renderSlot(_ctx.$slots, "trailing", {
                         modelValue,
                         open,
                         ui: ui.value
                       }, () => [
-                        unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                        vueExports.unref(trailingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                           key: 0,
-                          name: unref(trailingIconName),
+                          name: vueExports.unref(trailingIconName),
                           "data-slot": "trailingIcon",
-                          class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
-                        }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                          class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
+                        }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                       ])
-                    ], 2)) : createCommentVNode("", true)
+                    ], 2)) : vueExports.createCommentVNode("", true)
                   ];
                 }
               }),
               _: 2
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(unref(SelectPortal_default), unref(portalProps), {
-              default: withCtx((_, _push3, _parent3, _scopeId2) => {
+            _push2(ssrRenderComponent_1(vueExports.unref(SelectPortal_default), vueExports.unref(portalProps), {
+              default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(FieldGroupReset), null, {
-                    default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                  _push3(ssrRenderComponent_1(vueExports.unref(FieldGroupReset), null, {
+                    default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(unref(SelectContent_default), mergeProps({
+                        _push4(ssrRenderComponent_1(vueExports.unref(SelectContent_default), vueExports.mergeProps({
                           "data-slot": "content",
-                          class: ui.value.content({ class: unref(props).ui?.content })
+                          class: ui.value.content({ class: vueExports.unref(props).ui?.content })
                         }, contentProps.value), {
-                          default: withCtx((_3, _push5, _parent5, _scopeId4) => {
+                          default: vueExports.withCtx((_3, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              ssrRenderSlot(_ctx.$slots, "content-top", {}, null, _push5, _parent5, _scopeId4);
-                              ssrRenderVNode(_push5, createVNode(resolveDynamicComponent(isItemAligned.value ? unref(SelectViewport_default) : "div"), {
+                              ssrRenderSlot_1(_ctx.$slots, "content-top", {}, null, _push5, _parent5, _scopeId4);
+                              ssrRenderVNode(_push5, vueExports.createVNode(vueExports.resolveDynamicComponent(isItemAligned.value ? vueExports.unref(SelectViewport_default) : "div"), {
                                 ref_key: "viewportRef",
                                 ref: viewportRef,
                                 role: "presentation",
                                 "data-slot": "viewport",
-                                class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                                class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
                               }, {
-                                default: withCtx((_4, _push6, _parent6, _scopeId5) => {
+                                default: vueExports.withCtx((_4, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
                                     _push6(`<!--[-->`);
-                                    ssrRenderList(groups.value, (group, groupIndex) => {
-                                      _push6(ssrRenderComponent(unref(SelectGroup_default), {
+                                    ssrRenderList_1(groups.value, (group, groupIndex) => {
+                                      _push6(ssrRenderComponent_1(vueExports.unref(SelectGroup_default), {
                                         key: `group-${groupIndex}`,
                                         "data-slot": "group",
-                                        class: ui.value.group({ class: unref(props).ui?.group })
+                                        class: ui.value.group({ class: vueExports.unref(props).ui?.group })
                                       }, {
-                                        default: withCtx((_5, _push7, _parent7, _scopeId6) => {
+                                        default: vueExports.withCtx((_5, _push7, _parent7, _scopeId6) => {
                                           if (_push7) {
                                             _push7(`<!--[-->`);
-                                            ssrRenderList(group, (item, index) => {
+                                            ssrRenderList_1(group, (item, index) => {
                                               _push7(`<!--[-->`);
                                               if (isSelectItem(item) && item.type === "label") {
-                                                _push7(ssrRenderComponent(unref(SelectLabel_default), {
+                                                _push7(ssrRenderComponent_1(vueExports.unref(SelectLabel_default), {
                                                   "data-slot": "label",
-                                                  class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                                  class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                                 }, {
-                                                  default: withCtx((_6, _push8, _parent8, _scopeId7) => {
+                                                  default: vueExports.withCtx((_6, _push8, _parent8, _scopeId7) => {
                                                     if (_push8) {
-                                                      _push8(`${ssrInterpolate(unref(get)(item, unref(props).labelKey))}`);
+                                                      _push8(`${ssrInterpolate_1(vueExports.unref(get)(item, vueExports.unref(props).labelKey))}`);
                                                     } else {
                                                       return [
-                                                        createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                                       ];
                                                     }
                                                   }),
                                                   _: 2
                                                 }, _parent7, _scopeId6));
                                               } else if (isSelectItem(item) && item.type === "separator") {
-                                                _push7(ssrRenderComponent(unref(SelectSeparator_default), {
+                                                _push7(ssrRenderComponent_1(vueExports.unref(SelectSeparator_default), {
                                                   "data-slot": "separator",
-                                                  class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                                  class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
                                                 }, null, _parent7, _scopeId6));
                                               } else {
-                                                _push7(ssrRenderComponent(unref(SelectItem_default), {
+                                                _push7(ssrRenderComponent_1(vueExports.unref(SelectItem_default), {
                                                   "data-slot": "item",
-                                                  class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                                  class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                                   disabled: isSelectItem(item) && item.disabled,
-                                                  value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                                  value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                                   onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                                 }, {
-                                                  default: withCtx((_6, _push8, _parent8, _scopeId7) => {
+                                                  default: vueExports.withCtx((_6, _push8, _parent8, _scopeId7) => {
                                                     if (_push8) {
-                                                      ssrRenderSlot(_ctx.$slots, "item", {
+                                                      ssrRenderSlot_1(_ctx.$slots, "item", {
                                                         item,
                                                         index,
                                                         ui: ui.value
                                                       }, () => {
-                                                        ssrRenderSlot(_ctx.$slots, "item-leading", {
+                                                        ssrRenderSlot_1(_ctx.$slots, "item-leading", {
                                                           item,
                                                           index,
                                                           ui: ui.value
                                                         }, () => {
                                                           if (isSelectItem(item) && item.icon) {
-                                                            _push8(ssrRenderComponent(_sfc_main$d, {
+                                                            _push8(ssrRenderComponent_1(_sfc_main$d, {
                                                               name: item.icon,
                                                               "data-slot": "itemLeadingIcon",
-                                                              class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                              class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
                                                             }, null, _parent8, _scopeId7));
                                                           } else if (isSelectItem(item) && item.avatar) {
-                                                            _push8(ssrRenderComponent(_sfc_main$b, mergeProps({
-                                                              size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                            _push8(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                                                              size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                             }, { ref_for: true }, item.avatar, {
                                                               "data-slot": "itemLeadingAvatar",
-                                                              class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                              class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
                                                             }), null, _parent8, _scopeId7));
                                                           } else if (isSelectItem(item) && item.chip) {
-                                                            _push8(ssrRenderComponent(_sfc_main$c, mergeProps({
-                                                              size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                            _push8(ssrRenderComponent_1(_sfc_main$c, vueExports.mergeProps({
+                                                              size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                               inset: "",
                                                               standalone: ""
                                                             }, { ref_for: true }, item.chip, {
                                                               "data-slot": "itemLeadingChip",
-                                                              class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                              class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
                                                             }), null, _parent8, _scopeId7));
                                                           } else {
                                                             _push8(`<!---->`);
                                                           }
                                                         }, _push8, _parent8, _scopeId7);
-                                                        _push8(`<span data-slot="itemWrapper" class="${ssrRenderClass(ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] }))}"${_scopeId7}>`);
-                                                        _push8(ssrRenderComponent(unref(SelectItemText_default), {
+                                                        _push8(`<span data-slot="itemWrapper" class="${ssrRenderClass_1(ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] }))}"${_scopeId7}>`);
+                                                        _push8(ssrRenderComponent_1(vueExports.unref(SelectItemText_default), {
                                                           "data-slot": "itemLabel",
-                                                          class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                          class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                         }, {
-                                                          default: withCtx((_7, _push9, _parent9, _scopeId8) => {
+                                                          default: vueExports.withCtx((_7, _push9, _parent9, _scopeId8) => {
                                                             if (_push9) {
-                                                              ssrRenderSlot(_ctx.$slots, "item-label", {
+                                                              ssrRenderSlot_1(_ctx.$slots, "item-label", {
                                                                 item,
                                                                 index
                                                               }, () => {
-                                                                _push9(`${ssrInterpolate(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item)}`);
+                                                                _push9(`${ssrInterpolate_1(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item)}`);
                                                               }, _push9, _parent9, _scopeId8);
                                                             } else {
                                                               return [
-                                                                renderSlot(_ctx.$slots, "item-label", {
+                                                                vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                                   item,
                                                                   index
                                                                 }, () => [
-                                                                  createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                                  vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                                 ])
                                                               ];
                                                             }
                                                           }),
                                                           _: 2
                                                         }, _parent8, _scopeId7));
-                                                        if (isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"])) {
-                                                          _push8(`<span data-slot="itemDescription" class="${ssrRenderClass(ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] }))}"${_scopeId7}>`);
-                                                          ssrRenderSlot(_ctx.$slots, "item-description", {
+                                                        if (isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"])) {
+                                                          _push8(`<span data-slot="itemDescription" class="${ssrRenderClass_1(ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] }))}"${_scopeId7}>`);
+                                                          ssrRenderSlot_1(_ctx.$slots, "item-description", {
                                                             item,
                                                             index
                                                           }, () => {
-                                                            _push8(`${ssrInterpolate(unref(get)(item, unref(props).descriptionKey))}`);
+                                                            _push8(`${ssrInterpolate_1(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey))}`);
                                                           }, _push8, _parent8, _scopeId7);
                                                           _push8(`</span>`);
                                                         } else {
                                                           _push8(`<!---->`);
                                                         }
-                                                        _push8(`</span><span data-slot="itemTrailing" class="${ssrRenderClass(ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] }))}"${_scopeId7}>`);
-                                                        ssrRenderSlot(_ctx.$slots, "item-trailing", {
+                                                        _push8(`</span><span data-slot="itemTrailing" class="${ssrRenderClass_1(ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] }))}"${_scopeId7}>`);
+                                                        ssrRenderSlot_1(_ctx.$slots, "item-trailing", {
                                                           item,
                                                           index,
                                                           ui: ui.value
                                                         }, null, _push8, _parent8, _scopeId7);
-                                                        _push8(ssrRenderComponent(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                          default: withCtx((_7, _push9, _parent9, _scopeId8) => {
+                                                        _push8(ssrRenderComponent_1(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                          default: vueExports.withCtx((_7, _push9, _parent9, _scopeId8) => {
                                                             if (_push9) {
-                                                              _push9(ssrRenderComponent(_sfc_main$d, {
-                                                                name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                              _push9(ssrRenderComponent_1(_sfc_main$d, {
+                                                                name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                                 "data-slot": "itemTrailingIcon",
-                                                                class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                                class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                               }, null, _parent9, _scopeId8));
                                                             } else {
                                                               return [
-                                                                createVNode(_sfc_main$d, {
-                                                                  name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                                vueExports.createVNode(_sfc_main$d, {
+                                                                  name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                                   "data-slot": "itemTrailingIcon",
-                                                                  class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                                  class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                                 }, null, 8, ["name", "class"])
                                                               ];
                                                             }
@@ -2422,83 +2418,83 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                                       }, _push8, _parent8, _scopeId7);
                                                     } else {
                                                       return [
-                                                        renderSlot(_ctx.$slots, "item", {
+                                                        vueExports.renderSlot(_ctx.$slots, "item", {
                                                           item,
                                                           index,
                                                           ui: ui.value
                                                         }, () => [
-                                                          renderSlot(_ctx.$slots, "item-leading", {
+                                                          vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                             item,
                                                             index,
                                                             ui: ui.value
                                                           }, () => [
-                                                            isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                            isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                               key: 0,
                                                               name: item.icon,
                                                               "data-slot": "itemLeadingIcon",
-                                                              class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                            }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                              class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                            }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                               key: 1,
-                                                              size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                              size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                             }, { ref_for: true }, item.avatar, {
                                                               "data-slot": "itemLeadingAvatar",
-                                                              class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                            }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                              class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                            }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                               key: 2,
-                                                              size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                              size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                               inset: "",
                                                               standalone: ""
                                                             }, { ref_for: true }, item.chip, {
                                                               "data-slot": "itemLeadingChip",
-                                                              class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                            }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                              class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                            }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                                           ]),
-                                                          createVNode("span", {
+                                                          vueExports.createVNode("span", {
                                                             "data-slot": "itemWrapper",
-                                                            class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                            class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                                           }, [
-                                                            createVNode(unref(SelectItemText_default), {
+                                                            vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                               "data-slot": "itemLabel",
-                                                              class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                              class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                             }, {
-                                                              default: withCtx(() => [
-                                                                renderSlot(_ctx.$slots, "item-label", {
+                                                              default: vueExports.withCtx(() => [
+                                                                vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                                   item,
                                                                   index
                                                                 }, () => [
-                                                                  createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                                  vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                                 ])
                                                               ]),
                                                               _: 2
                                                             }, 1032, ["class"]),
-                                                            isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                            isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                               key: 0,
                                                               "data-slot": "itemDescription",
-                                                              class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                              class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                             }, [
-                                                              renderSlot(_ctx.$slots, "item-description", {
+                                                              vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                                 item,
                                                                 index
                                                               }, () => [
-                                                                createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                               ])
-                                                            ], 2)) : createCommentVNode("", true)
+                                                            ], 2)) : vueExports.createCommentVNode("", true)
                                                           ], 2),
-                                                          createVNode("span", {
+                                                          vueExports.createVNode("span", {
                                                             "data-slot": "itemTrailing",
-                                                            class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                            class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                                           }, [
-                                                            renderSlot(_ctx.$slots, "item-trailing", {
+                                                            vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                               item,
                                                               index,
                                                               ui: ui.value
                                                             }),
-                                                            createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                              default: withCtx(() => [
-                                                                createVNode(_sfc_main$d, {
-                                                                  name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                            vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                              default: vueExports.withCtx(() => [
+                                                                vueExports.createVNode(_sfc_main$d, {
+                                                                  name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                                   "data-slot": "itemTrailingIcon",
-                                                                  class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                                  class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                                 }, null, 8, ["name", "class"])
                                                               ]),
                                                               _: 2
@@ -2516,109 +2512,109 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                             _push7(`<!--]-->`);
                                           } else {
                                             return [
-                                              (openBlock(true), createBlock(Fragment, null, renderList(group, (item, index) => {
-                                                return openBlock(), createBlock(Fragment, {
+                                              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(group, (item, index) => {
+                                                return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                                                   key: `group-${groupIndex}-${index}`
                                                 }, [
-                                                  isSelectItem(item) && item.type === "label" ? (openBlock(), createBlock(unref(SelectLabel_default), {
+                                                  isSelectItem(item) && item.type === "label" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectLabel_default), {
                                                     key: 0,
                                                     "data-slot": "label",
-                                                    class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                                    class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                                   }, {
-                                                    default: withCtx(() => [
-                                                      createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                                    default: vueExports.withCtx(() => [
+                                                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                                     ]),
                                                     _: 2
-                                                  }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (openBlock(), createBlock(unref(SelectSeparator_default), {
+                                                  }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectSeparator_default), {
                                                     key: 1,
                                                     "data-slot": "separator",
-                                                    class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
-                                                  }, null, 8, ["class"])) : (openBlock(), createBlock(unref(SelectItem_default), {
+                                                    class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                                  }, null, 8, ["class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectItem_default), {
                                                     key: 2,
                                                     "data-slot": "item",
-                                                    class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                                    class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                                     disabled: isSelectItem(item) && item.disabled,
-                                                    value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                                    value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                                     onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                                   }, {
-                                                    default: withCtx(() => [
-                                                      renderSlot(_ctx.$slots, "item", {
+                                                    default: vueExports.withCtx(() => [
+                                                      vueExports.renderSlot(_ctx.$slots, "item", {
                                                         item,
                                                         index,
                                                         ui: ui.value
                                                       }, () => [
-                                                        renderSlot(_ctx.$slots, "item-leading", {
+                                                        vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                           item,
                                                           index,
                                                           ui: ui.value
                                                         }, () => [
-                                                          isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                          isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                             key: 0,
                                                             name: item.icon,
                                                             "data-slot": "itemLeadingIcon",
-                                                            class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                          }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                            class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                          }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                             key: 1,
-                                                            size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                            size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                           }, { ref_for: true }, item.avatar, {
                                                             "data-slot": "itemLeadingAvatar",
-                                                            class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                          }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                            class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                          }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                             key: 2,
-                                                            size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                            size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                             inset: "",
                                                             standalone: ""
                                                           }, { ref_for: true }, item.chip, {
                                                             "data-slot": "itemLeadingChip",
-                                                            class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                          }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                            class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                          }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                                         ]),
-                                                        createVNode("span", {
+                                                        vueExports.createVNode("span", {
                                                           "data-slot": "itemWrapper",
-                                                          class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                          class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                                         }, [
-                                                          createVNode(unref(SelectItemText_default), {
+                                                          vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                             "data-slot": "itemLabel",
-                                                            class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                            class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                           }, {
-                                                            default: withCtx(() => [
-                                                              renderSlot(_ctx.$slots, "item-label", {
+                                                            default: vueExports.withCtx(() => [
+                                                              vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                                 item,
                                                                 index
                                                               }, () => [
-                                                                createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                                vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                               ])
                                                             ]),
                                                             _: 2
                                                           }, 1032, ["class"]),
-                                                          isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                          isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                             key: 0,
                                                             "data-slot": "itemDescription",
-                                                            class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                            class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                           }, [
-                                                            renderSlot(_ctx.$slots, "item-description", {
+                                                            vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                               item,
                                                               index
                                                             }, () => [
-                                                              createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                             ])
-                                                          ], 2)) : createCommentVNode("", true)
+                                                          ], 2)) : vueExports.createCommentVNode("", true)
                                                         ], 2),
-                                                        createVNode("span", {
+                                                        vueExports.createVNode("span", {
                                                           "data-slot": "itemTrailing",
-                                                          class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                          class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                                         }, [
-                                                          renderSlot(_ctx.$slots, "item-trailing", {
+                                                          vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                             item,
                                                             index,
                                                             ui: ui.value
                                                           }),
-                                                          createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                            default: withCtx(() => [
-                                                              createVNode(_sfc_main$d, {
-                                                                name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                          vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                            default: vueExports.withCtx(() => [
+                                                              vueExports.createVNode(_sfc_main$d, {
+                                                                name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                                 "data-slot": "itemTrailingIcon",
-                                                                class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                                class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                               }, null, 8, ["name", "class"])
                                                             ]),
                                                             _: 2
@@ -2639,116 +2635,116 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                     _push6(`<!--]-->`);
                                   } else {
                                     return [
-                                      (openBlock(true), createBlock(Fragment, null, renderList(groups.value, (group, groupIndex) => {
-                                        return openBlock(), createBlock(unref(SelectGroup_default), {
+                                      (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(groups.value, (group, groupIndex) => {
+                                        return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectGroup_default), {
                                           key: `group-${groupIndex}`,
                                           "data-slot": "group",
-                                          class: ui.value.group({ class: unref(props).ui?.group })
+                                          class: ui.value.group({ class: vueExports.unref(props).ui?.group })
                                         }, {
-                                          default: withCtx(() => [
-                                            (openBlock(true), createBlock(Fragment, null, renderList(group, (item, index) => {
-                                              return openBlock(), createBlock(Fragment, {
+                                          default: vueExports.withCtx(() => [
+                                            (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(group, (item, index) => {
+                                              return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                                                 key: `group-${groupIndex}-${index}`
                                               }, [
-                                                isSelectItem(item) && item.type === "label" ? (openBlock(), createBlock(unref(SelectLabel_default), {
+                                                isSelectItem(item) && item.type === "label" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectLabel_default), {
                                                   key: 0,
                                                   "data-slot": "label",
-                                                  class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                                  class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                                 }, {
-                                                  default: withCtx(() => [
-                                                    createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                                  default: vueExports.withCtx(() => [
+                                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                                   ]),
                                                   _: 2
-                                                }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (openBlock(), createBlock(unref(SelectSeparator_default), {
+                                                }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectSeparator_default), {
                                                   key: 1,
                                                   "data-slot": "separator",
-                                                  class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
-                                                }, null, 8, ["class"])) : (openBlock(), createBlock(unref(SelectItem_default), {
+                                                  class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                                }, null, 8, ["class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectItem_default), {
                                                   key: 2,
                                                   "data-slot": "item",
-                                                  class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                                  class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                                   disabled: isSelectItem(item) && item.disabled,
-                                                  value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                                  value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                                   onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                                 }, {
-                                                  default: withCtx(() => [
-                                                    renderSlot(_ctx.$slots, "item", {
+                                                  default: vueExports.withCtx(() => [
+                                                    vueExports.renderSlot(_ctx.$slots, "item", {
                                                       item,
                                                       index,
                                                       ui: ui.value
                                                     }, () => [
-                                                      renderSlot(_ctx.$slots, "item-leading", {
+                                                      vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                         item,
                                                         index,
                                                         ui: ui.value
                                                       }, () => [
-                                                        isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                        isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                           key: 0,
                                                           name: item.icon,
                                                           "data-slot": "itemLeadingIcon",
-                                                          class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                        }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                          class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                        }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                           key: 1,
-                                                          size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                          size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                         }, { ref_for: true }, item.avatar, {
                                                           "data-slot": "itemLeadingAvatar",
-                                                          class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                        }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                          class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                        }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                           key: 2,
-                                                          size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                          size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                           inset: "",
                                                           standalone: ""
                                                         }, { ref_for: true }, item.chip, {
                                                           "data-slot": "itemLeadingChip",
-                                                          class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                        }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                          class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                        }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                                       ]),
-                                                      createVNode("span", {
+                                                      vueExports.createVNode("span", {
                                                         "data-slot": "itemWrapper",
-                                                        class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                        class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                                       }, [
-                                                        createVNode(unref(SelectItemText_default), {
+                                                        vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                           "data-slot": "itemLabel",
-                                                          class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                          class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                         }, {
-                                                          default: withCtx(() => [
-                                                            renderSlot(_ctx.$slots, "item-label", {
+                                                          default: vueExports.withCtx(() => [
+                                                            vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                               item,
                                                               index
                                                             }, () => [
-                                                              createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                              vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                             ])
                                                           ]),
                                                           _: 2
                                                         }, 1032, ["class"]),
-                                                        isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                        isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                           key: 0,
                                                           "data-slot": "itemDescription",
-                                                          class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                          class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                         }, [
-                                                          renderSlot(_ctx.$slots, "item-description", {
+                                                          vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                             item,
                                                             index
                                                           }, () => [
-                                                            createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                           ])
-                                                        ], 2)) : createCommentVNode("", true)
+                                                        ], 2)) : vueExports.createCommentVNode("", true)
                                                       ], 2),
-                                                      createVNode("span", {
+                                                      vueExports.createVNode("span", {
                                                         "data-slot": "itemTrailing",
-                                                        class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                        class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                                       }, [
-                                                        renderSlot(_ctx.$slots, "item-trailing", {
+                                                        vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                           item,
                                                           index,
                                                           ui: ui.value
                                                         }),
-                                                        createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                          default: withCtx(() => [
-                                                            createVNode(_sfc_main$d, {
-                                                              name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                        vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                          default: vueExports.withCtx(() => [
+                                                            vueExports.createVNode(_sfc_main$d, {
+                                                              name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                               "data-slot": "itemTrailingIcon",
-                                                              class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                              class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                             }, null, 8, ["name", "class"])
                                                           ]),
                                                           _: 2
@@ -2769,136 +2765,136 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 }),
                                 _: 2
                               }), _parent5, _scopeId4);
-                              ssrRenderSlot(_ctx.$slots, "content-bottom", {}, null, _push5, _parent5, _scopeId4);
-                              if (!!unref(props).arrow) {
-                                _push5(ssrRenderComponent(unref(SelectArrow_default), mergeProps(arrowProps.value, {
+                              ssrRenderSlot_1(_ctx.$slots, "content-bottom", {}, null, _push5, _parent5, _scopeId4);
+                              if (!!vueExports.unref(props).arrow) {
+                                _push5(ssrRenderComponent_1(vueExports.unref(SelectArrow_default), vueExports.mergeProps(arrowProps.value, {
                                   "data-slot": "arrow",
-                                  class: ui.value.arrow({ class: unref(props).ui?.arrow })
+                                  class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
                                 }), null, _parent5, _scopeId4));
                               } else {
                                 _push5(`<!---->`);
                               }
                             } else {
                               return [
-                                renderSlot(_ctx.$slots, "content-top"),
-                                (openBlock(), createBlock(resolveDynamicComponent(isItemAligned.value ? unref(SelectViewport_default) : "div"), {
+                                vueExports.renderSlot(_ctx.$slots, "content-top"),
+                                (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(isItemAligned.value ? vueExports.unref(SelectViewport_default) : "div"), {
                                   ref_key: "viewportRef",
                                   ref: viewportRef,
                                   role: "presentation",
                                   "data-slot": "viewport",
-                                  class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                                  class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
                                 }, {
-                                  default: withCtx(() => [
-                                    (openBlock(true), createBlock(Fragment, null, renderList(groups.value, (group, groupIndex) => {
-                                      return openBlock(), createBlock(unref(SelectGroup_default), {
+                                  default: vueExports.withCtx(() => [
+                                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(groups.value, (group, groupIndex) => {
+                                      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectGroup_default), {
                                         key: `group-${groupIndex}`,
                                         "data-slot": "group",
-                                        class: ui.value.group({ class: unref(props).ui?.group })
+                                        class: ui.value.group({ class: vueExports.unref(props).ui?.group })
                                       }, {
-                                        default: withCtx(() => [
-                                          (openBlock(true), createBlock(Fragment, null, renderList(group, (item, index) => {
-                                            return openBlock(), createBlock(Fragment, {
+                                        default: vueExports.withCtx(() => [
+                                          (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(group, (item, index) => {
+                                            return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                                               key: `group-${groupIndex}-${index}`
                                             }, [
-                                              isSelectItem(item) && item.type === "label" ? (openBlock(), createBlock(unref(SelectLabel_default), {
+                                              isSelectItem(item) && item.type === "label" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectLabel_default), {
                                                 key: 0,
                                                 "data-slot": "label",
-                                                class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                                class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                               }, {
-                                                default: withCtx(() => [
-                                                  createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                                default: vueExports.withCtx(() => [
+                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                                 ]),
                                                 _: 2
-                                              }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (openBlock(), createBlock(unref(SelectSeparator_default), {
+                                              }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectSeparator_default), {
                                                 key: 1,
                                                 "data-slot": "separator",
-                                                class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
-                                              }, null, 8, ["class"])) : (openBlock(), createBlock(unref(SelectItem_default), {
+                                                class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                              }, null, 8, ["class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectItem_default), {
                                                 key: 2,
                                                 "data-slot": "item",
-                                                class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                                class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                                 disabled: isSelectItem(item) && item.disabled,
-                                                value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                                value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                                 onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                               }, {
-                                                default: withCtx(() => [
-                                                  renderSlot(_ctx.$slots, "item", {
+                                                default: vueExports.withCtx(() => [
+                                                  vueExports.renderSlot(_ctx.$slots, "item", {
                                                     item,
                                                     index,
                                                     ui: ui.value
                                                   }, () => [
-                                                    renderSlot(_ctx.$slots, "item-leading", {
+                                                    vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                       item,
                                                       index,
                                                       ui: ui.value
                                                     }, () => [
-                                                      isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                      isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                         key: 0,
                                                         name: item.icon,
                                                         "data-slot": "itemLeadingIcon",
-                                                        class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                      }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                        class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                      }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                         key: 1,
-                                                        size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                        size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                       }, { ref_for: true }, item.avatar, {
                                                         "data-slot": "itemLeadingAvatar",
-                                                        class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                      }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                        class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                      }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                         key: 2,
-                                                        size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                        size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                         inset: "",
                                                         standalone: ""
                                                       }, { ref_for: true }, item.chip, {
                                                         "data-slot": "itemLeadingChip",
-                                                        class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                      }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                        class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                      }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                                     ]),
-                                                    createVNode("span", {
+                                                    vueExports.createVNode("span", {
                                                       "data-slot": "itemWrapper",
-                                                      class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                      class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                                     }, [
-                                                      createVNode(unref(SelectItemText_default), {
+                                                      vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                         "data-slot": "itemLabel",
-                                                        class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                        class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                       }, {
-                                                        default: withCtx(() => [
-                                                          renderSlot(_ctx.$slots, "item-label", {
+                                                        default: vueExports.withCtx(() => [
+                                                          vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                             item,
                                                             index
                                                           }, () => [
-                                                            createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                            vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                           ])
                                                         ]),
                                                         _: 2
                                                       }, 1032, ["class"]),
-                                                      isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                      isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                         key: 0,
                                                         "data-slot": "itemDescription",
-                                                        class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                        class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                       }, [
-                                                        renderSlot(_ctx.$slots, "item-description", {
+                                                        vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                           item,
                                                           index
                                                         }, () => [
-                                                          createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                         ])
-                                                      ], 2)) : createCommentVNode("", true)
+                                                      ], 2)) : vueExports.createCommentVNode("", true)
                                                     ], 2),
-                                                    createVNode("span", {
+                                                    vueExports.createVNode("span", {
                                                       "data-slot": "itemTrailing",
-                                                      class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                      class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                                     }, [
-                                                      renderSlot(_ctx.$slots, "item-trailing", {
+                                                      vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                         item,
                                                         index,
                                                         ui: ui.value
                                                       }),
-                                                      createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                        default: withCtx(() => [
-                                                          createVNode(_sfc_main$d, {
-                                                            name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                      vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                        default: vueExports.withCtx(() => [
+                                                          vueExports.createVNode(_sfc_main$d, {
+                                                            name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                             "data-slot": "itemTrailingIcon",
-                                                            class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                            class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                           }, null, 8, ["name", "class"])
                                                         ]),
                                                         _: 2
@@ -2917,11 +2913,11 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                   ]),
                                   _: 3
                                 }, 8, ["class"])),
-                                renderSlot(_ctx.$slots, "content-bottom"),
-                                !!unref(props).arrow ? (openBlock(), createBlock(unref(SelectArrow_default), mergeProps({ key: 0 }, arrowProps.value, {
+                                vueExports.renderSlot(_ctx.$slots, "content-bottom"),
+                                !!vueExports.unref(props).arrow ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectArrow_default), vueExports.mergeProps({ key: 0 }, arrowProps.value, {
                                   "data-slot": "arrow",
-                                  class: ui.value.arrow({ class: unref(props).ui?.arrow })
-                                }), null, 16, ["class"])) : createCommentVNode("", true)
+                                  class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
+                                }), null, 16, ["class"])) : vueExports.createCommentVNode("", true)
                               ];
                             }
                           }),
@@ -2929,130 +2925,130 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                         }, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(unref(SelectContent_default), mergeProps({
+                          vueExports.createVNode(vueExports.unref(SelectContent_default), vueExports.mergeProps({
                             "data-slot": "content",
-                            class: ui.value.content({ class: unref(props).ui?.content })
+                            class: ui.value.content({ class: vueExports.unref(props).ui?.content })
                           }, contentProps.value), {
-                            default: withCtx(() => [
-                              renderSlot(_ctx.$slots, "content-top"),
-                              (openBlock(), createBlock(resolveDynamicComponent(isItemAligned.value ? unref(SelectViewport_default) : "div"), {
+                            default: vueExports.withCtx(() => [
+                              vueExports.renderSlot(_ctx.$slots, "content-top"),
+                              (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(isItemAligned.value ? vueExports.unref(SelectViewport_default) : "div"), {
                                 ref_key: "viewportRef",
                                 ref: viewportRef,
                                 role: "presentation",
                                 "data-slot": "viewport",
-                                class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                                class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
                               }, {
-                                default: withCtx(() => [
-                                  (openBlock(true), createBlock(Fragment, null, renderList(groups.value, (group, groupIndex) => {
-                                    return openBlock(), createBlock(unref(SelectGroup_default), {
+                                default: vueExports.withCtx(() => [
+                                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(groups.value, (group, groupIndex) => {
+                                    return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectGroup_default), {
                                       key: `group-${groupIndex}`,
                                       "data-slot": "group",
-                                      class: ui.value.group({ class: unref(props).ui?.group })
+                                      class: ui.value.group({ class: vueExports.unref(props).ui?.group })
                                     }, {
-                                      default: withCtx(() => [
-                                        (openBlock(true), createBlock(Fragment, null, renderList(group, (item, index) => {
-                                          return openBlock(), createBlock(Fragment, {
+                                      default: vueExports.withCtx(() => [
+                                        (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(group, (item, index) => {
+                                          return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                                             key: `group-${groupIndex}-${index}`
                                           }, [
-                                            isSelectItem(item) && item.type === "label" ? (openBlock(), createBlock(unref(SelectLabel_default), {
+                                            isSelectItem(item) && item.type === "label" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectLabel_default), {
                                               key: 0,
                                               "data-slot": "label",
-                                              class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                              class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                             }, {
-                                              default: withCtx(() => [
-                                                createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                              default: vueExports.withCtx(() => [
+                                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                               ]),
                                               _: 2
-                                            }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (openBlock(), createBlock(unref(SelectSeparator_default), {
+                                            }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectSeparator_default), {
                                               key: 1,
                                               "data-slot": "separator",
-                                              class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
-                                            }, null, 8, ["class"])) : (openBlock(), createBlock(unref(SelectItem_default), {
+                                              class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                            }, null, 8, ["class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectItem_default), {
                                               key: 2,
                                               "data-slot": "item",
-                                              class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                              class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                               disabled: isSelectItem(item) && item.disabled,
-                                              value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                              value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                               onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                             }, {
-                                              default: withCtx(() => [
-                                                renderSlot(_ctx.$slots, "item", {
+                                              default: vueExports.withCtx(() => [
+                                                vueExports.renderSlot(_ctx.$slots, "item", {
                                                   item,
                                                   index,
                                                   ui: ui.value
                                                 }, () => [
-                                                  renderSlot(_ctx.$slots, "item-leading", {
+                                                  vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                     item,
                                                     index,
                                                     ui: ui.value
                                                   }, () => [
-                                                    isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                    isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                       key: 0,
                                                       name: item.icon,
                                                       "data-slot": "itemLeadingIcon",
-                                                      class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                    }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                      class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                    }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                       key: 1,
-                                                      size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                      size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                     }, { ref_for: true }, item.avatar, {
                                                       "data-slot": "itemLeadingAvatar",
-                                                      class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                    }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                      class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                    }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                       key: 2,
-                                                      size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                      size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                       inset: "",
                                                       standalone: ""
                                                     }, { ref_for: true }, item.chip, {
                                                       "data-slot": "itemLeadingChip",
-                                                      class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                    }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                      class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                    }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                                   ]),
-                                                  createVNode("span", {
+                                                  vueExports.createVNode("span", {
                                                     "data-slot": "itemWrapper",
-                                                    class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                    class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                                   }, [
-                                                    createVNode(unref(SelectItemText_default), {
+                                                    vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                       "data-slot": "itemLabel",
-                                                      class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                      class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                     }, {
-                                                      default: withCtx(() => [
-                                                        renderSlot(_ctx.$slots, "item-label", {
+                                                      default: vueExports.withCtx(() => [
+                                                        vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                           item,
                                                           index
                                                         }, () => [
-                                                          createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                          vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                         ])
                                                       ]),
                                                       _: 2
                                                     }, 1032, ["class"]),
-                                                    isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                    isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                       key: 0,
                                                       "data-slot": "itemDescription",
-                                                      class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                      class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                     }, [
-                                                      renderSlot(_ctx.$slots, "item-description", {
+                                                      vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                         item,
                                                         index
                                                       }, () => [
-                                                        createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                       ])
-                                                    ], 2)) : createCommentVNode("", true)
+                                                    ], 2)) : vueExports.createCommentVNode("", true)
                                                   ], 2),
-                                                  createVNode("span", {
+                                                  vueExports.createVNode("span", {
                                                     "data-slot": "itemTrailing",
-                                                    class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                    class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                                   }, [
-                                                    renderSlot(_ctx.$slots, "item-trailing", {
+                                                    vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                       item,
                                                       index,
                                                       ui: ui.value
                                                     }),
-                                                    createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                      default: withCtx(() => [
-                                                        createVNode(_sfc_main$d, {
-                                                          name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                    vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                      default: vueExports.withCtx(() => [
+                                                        vueExports.createVNode(_sfc_main$d, {
+                                                          name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                           "data-slot": "itemTrailingIcon",
-                                                          class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                          class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                         }, null, 8, ["name", "class"])
                                                       ]),
                                                       _: 2
@@ -3071,11 +3067,11 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 ]),
                                 _: 3
                               }, 8, ["class"])),
-                              renderSlot(_ctx.$slots, "content-bottom"),
-                              !!unref(props).arrow ? (openBlock(), createBlock(unref(SelectArrow_default), mergeProps({ key: 0 }, arrowProps.value, {
+                              vueExports.renderSlot(_ctx.$slots, "content-bottom"),
+                              !!vueExports.unref(props).arrow ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectArrow_default), vueExports.mergeProps({ key: 0 }, arrowProps.value, {
                                 "data-slot": "arrow",
-                                class: ui.value.arrow({ class: unref(props).ui?.arrow })
-                              }), null, 16, ["class"])) : createCommentVNode("", true)
+                                class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
+                              }), null, 16, ["class"])) : vueExports.createCommentVNode("", true)
                             ]),
                             _: 3
                           }, 16, ["class"])
@@ -3086,132 +3082,132 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(FieldGroupReset), null, {
-                      default: withCtx(() => [
-                        createVNode(unref(SelectContent_default), mergeProps({
+                    vueExports.createVNode(vueExports.unref(FieldGroupReset), null, {
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(vueExports.unref(SelectContent_default), vueExports.mergeProps({
                           "data-slot": "content",
-                          class: ui.value.content({ class: unref(props).ui?.content })
+                          class: ui.value.content({ class: vueExports.unref(props).ui?.content })
                         }, contentProps.value), {
-                          default: withCtx(() => [
-                            renderSlot(_ctx.$slots, "content-top"),
-                            (openBlock(), createBlock(resolveDynamicComponent(isItemAligned.value ? unref(SelectViewport_default) : "div"), {
+                          default: vueExports.withCtx(() => [
+                            vueExports.renderSlot(_ctx.$slots, "content-top"),
+                            (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(isItemAligned.value ? vueExports.unref(SelectViewport_default) : "div"), {
                               ref_key: "viewportRef",
                               ref: viewportRef,
                               role: "presentation",
                               "data-slot": "viewport",
-                              class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                              class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
                             }, {
-                              default: withCtx(() => [
-                                (openBlock(true), createBlock(Fragment, null, renderList(groups.value, (group, groupIndex) => {
-                                  return openBlock(), createBlock(unref(SelectGroup_default), {
+                              default: vueExports.withCtx(() => [
+                                (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(groups.value, (group, groupIndex) => {
+                                  return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectGroup_default), {
                                     key: `group-${groupIndex}`,
                                     "data-slot": "group",
-                                    class: ui.value.group({ class: unref(props).ui?.group })
+                                    class: ui.value.group({ class: vueExports.unref(props).ui?.group })
                                   }, {
-                                    default: withCtx(() => [
-                                      (openBlock(true), createBlock(Fragment, null, renderList(group, (item, index) => {
-                                        return openBlock(), createBlock(Fragment, {
+                                    default: vueExports.withCtx(() => [
+                                      (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(group, (item, index) => {
+                                        return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                                           key: `group-${groupIndex}-${index}`
                                         }, [
-                                          isSelectItem(item) && item.type === "label" ? (openBlock(), createBlock(unref(SelectLabel_default), {
+                                          isSelectItem(item) && item.type === "label" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectLabel_default), {
                                             key: 0,
                                             "data-slot": "label",
-                                            class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                            class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                           }, {
-                                            default: withCtx(() => [
-                                              createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                            default: vueExports.withCtx(() => [
+                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                             ]),
                                             _: 2
-                                          }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (openBlock(), createBlock(unref(SelectSeparator_default), {
+                                          }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectSeparator_default), {
                                             key: 1,
                                             "data-slot": "separator",
-                                            class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
-                                          }, null, 8, ["class"])) : (openBlock(), createBlock(unref(SelectItem_default), {
+                                            class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                          }, null, 8, ["class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectItem_default), {
                                             key: 2,
                                             "data-slot": "item",
-                                            class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                            class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                             disabled: isSelectItem(item) && item.disabled,
-                                            value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                            value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                             onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                           }, {
-                                            default: withCtx(() => [
-                                              renderSlot(_ctx.$slots, "item", {
+                                            default: vueExports.withCtx(() => [
+                                              vueExports.renderSlot(_ctx.$slots, "item", {
                                                 item,
                                                 index,
                                                 ui: ui.value
                                               }, () => [
-                                                renderSlot(_ctx.$slots, "item-leading", {
+                                                vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                   item,
                                                   index,
                                                   ui: ui.value
                                                 }, () => [
-                                                  isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                  isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                     key: 0,
                                                     name: item.icon,
                                                     "data-slot": "itemLeadingIcon",
-                                                    class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                  }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                    class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                  }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                     key: 1,
-                                                    size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                    size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                   }, { ref_for: true }, item.avatar, {
                                                     "data-slot": "itemLeadingAvatar",
-                                                    class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                  }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                    class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                  }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                     key: 2,
-                                                    size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                    size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                     inset: "",
                                                     standalone: ""
                                                   }, { ref_for: true }, item.chip, {
                                                     "data-slot": "itemLeadingChip",
-                                                    class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                  }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                    class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                  }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                                 ]),
-                                                createVNode("span", {
+                                                vueExports.createVNode("span", {
                                                   "data-slot": "itemWrapper",
-                                                  class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                  class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                                 }, [
-                                                  createVNode(unref(SelectItemText_default), {
+                                                  vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                     "data-slot": "itemLabel",
-                                                    class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                    class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                   }, {
-                                                    default: withCtx(() => [
-                                                      renderSlot(_ctx.$slots, "item-label", {
+                                                    default: vueExports.withCtx(() => [
+                                                      vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                         item,
                                                         index
                                                       }, () => [
-                                                        createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                        vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                       ])
                                                     ]),
                                                     _: 2
                                                   }, 1032, ["class"]),
-                                                  isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                  isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                     key: 0,
                                                     "data-slot": "itemDescription",
-                                                    class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                    class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                   }, [
-                                                    renderSlot(_ctx.$slots, "item-description", {
+                                                    vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                       item,
                                                       index
                                                     }, () => [
-                                                      createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                     ])
-                                                  ], 2)) : createCommentVNode("", true)
+                                                  ], 2)) : vueExports.createCommentVNode("", true)
                                                 ], 2),
-                                                createVNode("span", {
+                                                vueExports.createVNode("span", {
                                                   "data-slot": "itemTrailing",
-                                                  class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                  class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                                 }, [
-                                                  renderSlot(_ctx.$slots, "item-trailing", {
+                                                  vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                     item,
                                                     index,
                                                     ui: ui.value
                                                   }),
-                                                  createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                    default: withCtx(() => [
-                                                      createVNode(_sfc_main$d, {
-                                                        name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                  vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                    default: vueExports.withCtx(() => [
+                                                      vueExports.createVNode(_sfc_main$d, {
+                                                        name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                         "data-slot": "itemTrailingIcon",
-                                                        class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                        class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                       }, null, 8, ["name", "class"])
                                                     ]),
                                                     _: 2
@@ -3230,11 +3226,11 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                               ]),
                               _: 3
                             }, 8, ["class"])),
-                            renderSlot(_ctx.$slots, "content-bottom"),
-                            !!unref(props).arrow ? (openBlock(), createBlock(unref(SelectArrow_default), mergeProps({ key: 0 }, arrowProps.value, {
+                            vueExports.renderSlot(_ctx.$slots, "content-bottom"),
+                            !!vueExports.unref(props).arrow ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectArrow_default), vueExports.mergeProps({ key: 0 }, arrowProps.value, {
                               "data-slot": "arrow",
-                              class: ui.value.arrow({ class: unref(props).ui?.arrow })
-                            }), null, 16, ["class"])) : createCommentVNode("", true)
+                              class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
+                            }), null, 16, ["class"])) : vueExports.createCommentVNode("", true)
                           ]),
                           _: 3
                         }, 16, ["class"])
@@ -3248,205 +3244,205 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode(unref(SelectTrigger_default), mergeProps({
-                id: unref(id),
+              vueExports.createVNode(vueExports.unref(SelectTrigger_default), vueExports.mergeProps({
+                id: vueExports.unref(id),
                 ref_key: "triggerRef",
                 ref: triggerRef,
                 "data-slot": "base",
-                class: ui.value.base({ class: [unref(props).ui?.base, unref(props).class] })
-              }, { ..._ctx.$attrs, ...unref(ariaAttrs) }), {
-                default: withCtx(() => [
-                  unref(isLeading) || !!unref(props).avatar || !!slots.leading ? (openBlock(), createBlock("span", {
+                class: ui.value.base({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] })
+              }, { ..._ctx.$attrs, ...vueExports.unref(ariaAttrs) }), {
+                default: vueExports.withCtx(() => [
+                  vueExports.unref(isLeading) || !!vueExports.unref(props).avatar || !!slots.leading ? (vueExports.openBlock(), vueExports.createBlock("span", {
                     key: 0,
                     "data-slot": "leading",
-                    class: ui.value.leading({ class: unref(props).ui?.leading })
+                    class: ui.value.leading({ class: vueExports.unref(props).ui?.leading })
                   }, [
-                    renderSlot(_ctx.$slots, "leading", {
+                    vueExports.renderSlot(_ctx.$slots, "leading", {
                       modelValue,
                       open,
                       ui: ui.value
                     }, () => [
-                      unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                      vueExports.unref(isLeading) && vueExports.unref(leadingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                         key: 0,
-                        name: unref(leadingIconName),
+                        name: vueExports.unref(leadingIconName),
                         "data-slot": "leadingIcon",
-                        class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
-                      }, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                        class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
+                      }, null, 8, ["name", "class"])) : !!vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                         key: 1,
-                        size: unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
-                      }, unref(props).avatar, {
+                        size: vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                      }, vueExports.unref(props).avatar, {
                         "data-slot": "itemLeadingAvatar",
-                        class: ui.value.itemLeadingAvatar({ class: unref(props).ui?.itemLeadingAvatar })
-                      }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                        class: ui.value.itemLeadingAvatar({ class: vueExports.unref(props).ui?.itemLeadingAvatar })
+                      }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                     ])
-                  ], 2)) : createCommentVNode("", true),
-                  (openBlock(true), createBlock(Fragment, null, renderList([displayValue(modelValue)], (displayedModelValue) => {
-                    return openBlock(), createBlock(unref(SelectValue_default), {
+                  ], 2)) : vueExports.createCommentVNode("", true),
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList([displayValue(modelValue)], (displayedModelValue) => {
+                    return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectValue_default), {
                       key: displayedModelValue,
                       "data-slot": displayedModelValue != null ? "value" : "placeholder",
-                      class: displayedModelValue != null ? ui.value.value({ class: unref(props).ui?.value }) : ui.value.placeholder({ class: unref(props).ui?.placeholder })
+                      class: displayedModelValue != null ? ui.value.value({ class: vueExports.unref(props).ui?.value }) : ui.value.placeholder({ class: vueExports.unref(props).ui?.placeholder })
                     }, {
-                      default: withCtx(() => [
-                        renderSlot(_ctx.$slots, "default", {
+                      default: vueExports.withCtx(() => [
+                        vueExports.renderSlot(_ctx.$slots, "default", {
                           modelValue,
                           open,
                           ui: ui.value
                         }, () => [
-                          createTextVNode(toDisplayString(displayedModelValue ?? (unref(props).placeholder ?? " ")), 1)
+                          vueExports.createTextVNode(vueExports.toDisplayString(displayedModelValue ?? (vueExports.unref(props).placeholder ?? " ")), 1)
                         ])
                       ]),
                       _: 2
                     }, 1032, ["data-slot", "class"]);
                   }), 128)),
-                  unref(isTrailing) || !!slots.trailing ? (openBlock(), createBlock("span", {
+                  vueExports.unref(isTrailing) || !!slots.trailing ? (vueExports.openBlock(), vueExports.createBlock("span", {
                     key: 1,
                     "data-slot": "trailing",
-                    class: ui.value.trailing({ class: unref(props).ui?.trailing })
+                    class: ui.value.trailing({ class: vueExports.unref(props).ui?.trailing })
                   }, [
-                    renderSlot(_ctx.$slots, "trailing", {
+                    vueExports.renderSlot(_ctx.$slots, "trailing", {
                       modelValue,
                       open,
                       ui: ui.value
                     }, () => [
-                      unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                      vueExports.unref(trailingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                         key: 0,
-                        name: unref(trailingIconName),
+                        name: vueExports.unref(trailingIconName),
                         "data-slot": "trailingIcon",
-                        class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
-                      }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                        class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
+                      }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                     ])
-                  ], 2)) : createCommentVNode("", true)
+                  ], 2)) : vueExports.createCommentVNode("", true)
                 ]),
                 _: 2
               }, 1040, ["id", "class"]),
-              createVNode(unref(SelectPortal_default), unref(portalProps), {
-                default: withCtx(() => [
-                  createVNode(unref(FieldGroupReset), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(SelectContent_default), mergeProps({
+              vueExports.createVNode(vueExports.unref(SelectPortal_default), vueExports.unref(portalProps), {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(vueExports.unref(FieldGroupReset), null, {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(vueExports.unref(SelectContent_default), vueExports.mergeProps({
                         "data-slot": "content",
-                        class: ui.value.content({ class: unref(props).ui?.content })
+                        class: ui.value.content({ class: vueExports.unref(props).ui?.content })
                       }, contentProps.value), {
-                        default: withCtx(() => [
-                          renderSlot(_ctx.$slots, "content-top"),
-                          (openBlock(), createBlock(resolveDynamicComponent(isItemAligned.value ? unref(SelectViewport_default) : "div"), {
+                        default: vueExports.withCtx(() => [
+                          vueExports.renderSlot(_ctx.$slots, "content-top"),
+                          (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(isItemAligned.value ? vueExports.unref(SelectViewport_default) : "div"), {
                             ref_key: "viewportRef",
                             ref: viewportRef,
                             role: "presentation",
                             "data-slot": "viewport",
-                            class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                            class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
                           }, {
-                            default: withCtx(() => [
-                              (openBlock(true), createBlock(Fragment, null, renderList(groups.value, (group, groupIndex) => {
-                                return openBlock(), createBlock(unref(SelectGroup_default), {
+                            default: vueExports.withCtx(() => [
+                              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(groups.value, (group, groupIndex) => {
+                                return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectGroup_default), {
                                   key: `group-${groupIndex}`,
                                   "data-slot": "group",
-                                  class: ui.value.group({ class: unref(props).ui?.group })
+                                  class: ui.value.group({ class: vueExports.unref(props).ui?.group })
                                 }, {
-                                  default: withCtx(() => [
-                                    (openBlock(true), createBlock(Fragment, null, renderList(group, (item, index) => {
-                                      return openBlock(), createBlock(Fragment, {
+                                  default: vueExports.withCtx(() => [
+                                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(group, (item, index) => {
+                                      return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                                         key: `group-${groupIndex}-${index}`
                                       }, [
-                                        isSelectItem(item) && item.type === "label" ? (openBlock(), createBlock(unref(SelectLabel_default), {
+                                        isSelectItem(item) && item.type === "label" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectLabel_default), {
                                           key: 0,
                                           "data-slot": "label",
-                                          class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                                          class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                                         }, {
-                                          default: withCtx(() => [
-                                            createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                           ]),
                                           _: 2
-                                        }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (openBlock(), createBlock(unref(SelectSeparator_default), {
+                                        }, 1032, ["class"])) : isSelectItem(item) && item.type === "separator" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectSeparator_default), {
                                           key: 1,
                                           "data-slot": "separator",
-                                          class: ui.value.separator({ class: [unref(props).ui?.separator, item.ui?.separator, item.class] })
-                                        }, null, 8, ["class"])) : (openBlock(), createBlock(unref(SelectItem_default), {
+                                          class: ui.value.separator({ class: [vueExports.unref(props).ui?.separator, item.ui?.separator, item.class] })
+                                        }, null, 8, ["class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectItem_default), {
                                           key: 2,
                                           "data-slot": "item",
-                                          class: ui.value.item({ class: [unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
+                                          class: ui.value.item({ class: [vueExports.unref(props).ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] }),
                                           disabled: isSelectItem(item) && item.disabled,
-                                          value: isSelectItem(item) ? unref(get)(item, unref(props).valueKey) : item,
+                                          value: isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).valueKey) : item,
                                           onSelect: ($event) => isSelectItem(item) && item.onSelect?.($event)
                                         }, {
-                                          default: withCtx(() => [
-                                            renderSlot(_ctx.$slots, "item", {
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.renderSlot(_ctx.$slots, "item", {
                                               item,
                                               index,
                                               ui: ui.value
                                             }, () => [
-                                              renderSlot(_ctx.$slots, "item-leading", {
+                                              vueExports.renderSlot(_ctx.$slots, "item-leading", {
                                                 item,
                                                 index,
                                                 ui: ui.value
                                               }, () => [
-                                                isSelectItem(item) && item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                isSelectItem(item) && item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                   key: 0,
                                                   name: item.icon,
                                                   "data-slot": "itemLeadingIcon",
-                                                  class: ui.value.itemLeadingIcon({ class: [unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
-                                                }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                                                  class: ui.value.itemLeadingIcon({ class: [vueExports.unref(props).ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })
+                                                }, null, 8, ["name", "class"])) : isSelectItem(item) && item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                                                   key: 1,
-                                                  size: item.ui?.itemLeadingAvatarSize || unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
+                                                  size: item.ui?.itemLeadingAvatarSize || vueExports.unref(props).ui?.itemLeadingAvatarSize || ui.value.itemLeadingAvatarSize()
                                                 }, { ref_for: true }, item.avatar, {
                                                   "data-slot": "itemLeadingAvatar",
-                                                  class: ui.value.itemLeadingAvatar({ class: [unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
-                                                }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                                                  class: ui.value.itemLeadingAvatar({ class: [vueExports.unref(props).ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })
+                                                }), null, 16, ["size", "class"])) : isSelectItem(item) && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                                                   key: 2,
-                                                  size: item.ui?.itemLeadingChipSize || unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
+                                                  size: item.ui?.itemLeadingChipSize || vueExports.unref(props).ui?.itemLeadingChipSize || ui.value.itemLeadingChipSize(),
                                                   inset: "",
                                                   standalone: ""
                                                 }, { ref_for: true }, item.chip, {
                                                   "data-slot": "itemLeadingChip",
-                                                  class: ui.value.itemLeadingChip({ class: [unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
-                                                }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                                                  class: ui.value.itemLeadingChip({ class: [vueExports.unref(props).ui?.itemLeadingChip, item.ui?.itemLeadingChip] })
+                                                }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                                               ]),
-                                              createVNode("span", {
+                                              vueExports.createVNode("span", {
                                                 "data-slot": "itemWrapper",
-                                                class: ui.value.itemWrapper({ class: [unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
+                                                class: ui.value.itemWrapper({ class: [vueExports.unref(props).ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })
                                               }, [
-                                                createVNode(unref(SelectItemText_default), {
+                                                vueExports.createVNode(vueExports.unref(SelectItemText_default), {
                                                   "data-slot": "itemLabel",
-                                                  class: ui.value.itemLabel({ class: [unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
+                                                  class: ui.value.itemLabel({ class: [vueExports.unref(props).ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })
                                                 }, {
-                                                  default: withCtx(() => [
-                                                    renderSlot(_ctx.$slots, "item-label", {
+                                                  default: vueExports.withCtx(() => [
+                                                    vueExports.renderSlot(_ctx.$slots, "item-label", {
                                                       item,
                                                       index
                                                     }, () => [
-                                                      createTextVNode(toDisplayString(isSelectItem(item) ? unref(get)(item, unref(props).labelKey) : item), 1)
+                                                      vueExports.createTextVNode(vueExports.toDisplayString(isSelectItem(item) ? vueExports.unref(get)(item, vueExports.unref(props).labelKey) : item), 1)
                                                     ])
                                                   ]),
                                                   _: 2
                                                 }, 1032, ["class"]),
-                                                isSelectItem(item) && (unref(get)(item, unref(props).descriptionKey) || !!slots["item-description"]) ? (openBlock(), createBlock("span", {
+                                                isSelectItem(item) && (vueExports.unref(get)(item, vueExports.unref(props).descriptionKey) || !!slots["item-description"]) ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                                   key: 0,
                                                   "data-slot": "itemDescription",
-                                                  class: ui.value.itemDescription({ class: [unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
+                                                  class: ui.value.itemDescription({ class: [vueExports.unref(props).ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })
                                                 }, [
-                                                  renderSlot(_ctx.$slots, "item-description", {
+                                                  vueExports.renderSlot(_ctx.$slots, "item-description", {
                                                     item,
                                                     index
                                                   }, () => [
-                                                    createTextVNode(toDisplayString(unref(get)(item, unref(props).descriptionKey)), 1)
+                                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).descriptionKey)), 1)
                                                   ])
-                                                ], 2)) : createCommentVNode("", true)
+                                                ], 2)) : vueExports.createCommentVNode("", true)
                                               ], 2),
-                                              createVNode("span", {
+                                              vueExports.createVNode("span", {
                                                 "data-slot": "itemTrailing",
-                                                class: ui.value.itemTrailing({ class: [unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
+                                                class: ui.value.itemTrailing({ class: [vueExports.unref(props).ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })
                                               }, [
-                                                renderSlot(_ctx.$slots, "item-trailing", {
+                                                vueExports.renderSlot(_ctx.$slots, "item-trailing", {
                                                   item,
                                                   index,
                                                   ui: ui.value
                                                 }),
-                                                createVNode(unref(SelectItemIndicator_default), { "as-child": "" }, {
-                                                  default: withCtx(() => [
-                                                    createVNode(_sfc_main$d, {
-                                                      name: unref(props).selectedIcon || unref(appConfig).ui.icons.check,
+                                                vueExports.createVNode(vueExports.unref(SelectItemIndicator_default), { "as-child": "" }, {
+                                                  default: vueExports.withCtx(() => [
+                                                    vueExports.createVNode(_sfc_main$d, {
+                                                      name: vueExports.unref(props).selectedIcon || vueExports.unref(appConfig).ui.icons.check,
                                                       "data-slot": "itemTrailingIcon",
-                                                      class: ui.value.itemTrailingIcon({ class: [unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
+                                                      class: ui.value.itemTrailingIcon({ class: [vueExports.unref(props).ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })
                                                     }, null, 8, ["name", "class"])
                                                   ]),
                                                   _: 2
@@ -3465,11 +3461,11 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                             ]),
                             _: 3
                           }, 8, ["class"])),
-                          renderSlot(_ctx.$slots, "content-bottom"),
-                          !!unref(props).arrow ? (openBlock(), createBlock(unref(SelectArrow_default), mergeProps({ key: 0 }, arrowProps.value, {
+                          vueExports.renderSlot(_ctx.$slots, "content-bottom"),
+                          !!vueExports.unref(props).arrow ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SelectArrow_default), vueExports.mergeProps({ key: 0 }, arrowProps.value, {
                             "data-slot": "arrow",
-                            class: ui.value.arrow({ class: unref(props).ui?.arrow })
-                          }), null, 16, ["class"])) : createCommentVNode("", true)
+                            class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
+                          }), null, 16, ["class"])) : vueExports.createCommentVNode("", true)
                         ]),
                         _: 3
                       }, 16, ["class"])
@@ -3489,7 +3485,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Select.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -3521,17 +3517,17 @@ const MEDIA_SORT_OPTIONS = [
   { label: "Name", value: "name" },
   { label: "Largest first", value: "size" }
 ];
-const files = ref([]);
-const loading = ref(true);
-const error = ref("");
-const search = ref("");
-const filterType = ref("all");
-const sortBy = ref("date");
-const uploadQueue = ref([]);
-const uploadError = ref("");
+const files = vueExports.ref([]);
+const loading = vueExports.ref(true);
+const error = vueExports.ref("");
+const search = vueExports.ref("");
+const filterType = vueExports.ref("all");
+const sortBy = vueExports.ref("date");
+const uploadQueue = vueExports.ref([]);
+const uploadError = vueExports.ref("");
 function useMedia() {
   const { fetcher, apiBase } = useApi();
-  const filteredFiles = computed(() => {
+  const filteredFiles = vueExports.computed(() => {
     let list = files.value;
     if (search.value.trim()) {
       const q = search.value.toLowerCase();
@@ -3585,7 +3581,7 @@ function useMedia() {
       return false;
     }
   }
-  const uploading = computed(
+  const uploading = vueExports.computed(
     () => uploadQueue.value.some((e) => e.status === "uploading" || e.status === "pending")
   );
   function uploadFileWithProgress(entry, purpose) {
@@ -3679,8 +3675,8 @@ function useMedia() {
     clearUploadQueue
   };
 }
-const defaultFiles = ref([]);
-const loaded = ref(false);
+const defaultFiles = vueExports.ref([]);
+const loaded = vueExports.ref(false);
 function useDefaultMedia() {
   async function fetchDefaultMedia() {
     if (loaded.value) return;
@@ -3693,7 +3689,7 @@ function useDefaultMedia() {
   }
   return { defaultFiles, fetchDefaultMedia };
 }
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "MediaGrid",
   __ssrInlineRender: true,
   props: {
@@ -3708,10 +3704,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const emit = __emit;
     const { files: files2, loading: loading2, error: error2 } = useMedia();
     const { defaultFiles: defaultFiles2 } = useDefaultMedia();
-    const activeTab = ref("default");
-    const localSearch = ref("");
-    const localSort = ref("date");
-    const localFilterType = ref("all");
+    const activeTab = vueExports.ref("default");
+    const localSearch = vueExports.ref("");
+    const localSort = vueExports.ref("date");
+    const localFilterType = vueExports.ref("all");
     const sortOptions = [
       { label: "Newest first", value: "date" },
       { label: "Name", value: "name" },
@@ -3722,7 +3718,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { label: "Images", value: "image" },
       { label: "Docs", value: "doc" }
     ];
-    const filteredDefaultFiles = computed(() => {
+    const filteredDefaultFiles = vueExports.computed(() => {
       let list = defaultFiles2.value;
       if (props.imagesOnly) {
         list = list.filter((f) => f.fileType.startsWith("image/"));
@@ -3735,7 +3731,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       return list;
     });
-    const filteredUploadedFiles = computed(() => {
+    const filteredUploadedFiles = vueExports.computed(() => {
       let list = files2.value;
       if (props.imagesOnly) {
         list = list.filter((f) => f.fileType.startsWith("image/"));
@@ -3771,34 +3767,34 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_USelect = _sfc_main$1;
       const _component_UIcon = _sfc_main$d;
       const _component_UAlert = _sfc_main$3;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col gap-4" }, _attrs))}><div class="flex items-center justify-between"><div class="flex gap-1">`);
-      _push(ssrRenderComponent(_component_UButton, {
-        variant: unref(activeTab) === "default" ? "soft" : "ghost",
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({ class: "flex flex-col gap-4" }, _attrs))}><div class="flex items-center justify-between"><div class="flex gap-1">`);
+      _push(ssrRenderComponent_1(_component_UButton, {
+        variant: vueExports.unref(activeTab) === "default" ? "soft" : "ghost",
         size: "sm",
         onClick: ($event) => activeTab.value = "default"
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(` Default `);
           } else {
             return [
-              createTextVNode(" Default ")
+              vueExports.createTextVNode(" Default ")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_UButton, {
-        variant: unref(activeTab) === "uploads" ? "soft" : "ghost",
+      _push(ssrRenderComponent_1(_component_UButton, {
+        variant: vueExports.unref(activeTab) === "uploads" ? "soft" : "ghost",
         size: "sm",
         onClick: ($event) => activeTab.value = "uploads"
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(` My uploads `);
           } else {
             return [
-              createTextVNode(" My uploads ")
+              vueExports.createTextVNode(" My uploads ")
             ];
           }
         }),
@@ -3806,17 +3802,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</div>`);
       if (__props.canUpload) {
-        _push(ssrRenderComponent(_component_UButton, {
+        _push(ssrRenderComponent_1(_component_UButton, {
           icon: "i-lucide-upload",
           size: "sm",
           onClick: ($event) => emit("upload")
         }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(` Upload `);
             } else {
               return [
-                createTextVNode(" Upload ")
+                vueExports.createTextVNode(" Upload ")
               ];
             }
           }),
@@ -3826,28 +3822,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
       _push(`</div><div class="flex flex-wrap gap-2 items-center">`);
-      _push(ssrRenderComponent(_component_UInput, {
-        modelValue: unref(localSearch),
-        "onUpdate:modelValue": ($event) => isRef(localSearch) ? localSearch.value = $event : null,
+      _push(ssrRenderComponent_1(_component_UInput, {
+        modelValue: vueExports.unref(localSearch),
+        "onUpdate:modelValue": ($event) => vueExports.isRef(localSearch) ? localSearch.value = $event : null,
         icon: "i-lucide-search",
         placeholder: "Search files...",
         size: "sm",
         class: "flex-1 min-w-32"
       }, null, _parent));
-      if (unref(activeTab) === "uploads" && !__props.imagesOnly) {
+      if (vueExports.unref(activeTab) === "uploads" && !__props.imagesOnly) {
         _push(`<!--[-->`);
-        _push(ssrRenderComponent(_component_USelect, {
-          modelValue: unref(localFilterType),
-          "onUpdate:modelValue": ($event) => isRef(localFilterType) ? localFilterType.value = $event : null,
+        _push(ssrRenderComponent_1(_component_USelect, {
+          modelValue: vueExports.unref(localFilterType),
+          "onUpdate:modelValue": ($event) => vueExports.isRef(localFilterType) ? localFilterType.value = $event : null,
           items: typeOptions,
           "value-key": "value",
           "label-key": "label",
           size: "sm",
           class: "w-28 shrink-0"
         }, null, _parent));
-        _push(ssrRenderComponent(_component_USelect, {
-          modelValue: unref(localSort),
-          "onUpdate:modelValue": ($event) => isRef(localSort) ? localSort.value = $event : null,
+        _push(ssrRenderComponent_1(_component_USelect, {
+          modelValue: vueExports.unref(localSort),
+          "onUpdate:modelValue": ($event) => vueExports.isRef(localSort) ? localSort.value = $event : null,
           items: sortOptions,
           "value-key": "value",
           "label-key": "label",
@@ -3855,10 +3851,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           class: "w-36 shrink-0"
         }, null, _parent));
         _push(`<!--]-->`);
-      } else if (unref(activeTab) === "uploads" && __props.imagesOnly) {
-        _push(ssrRenderComponent(_component_USelect, {
-          modelValue: unref(localSort),
-          "onUpdate:modelValue": ($event) => isRef(localSort) ? localSort.value = $event : null,
+      } else if (vueExports.unref(activeTab) === "uploads" && __props.imagesOnly) {
+        _push(ssrRenderComponent_1(_component_USelect, {
+          modelValue: vueExports.unref(localSort),
+          "onUpdate:modelValue": ($event) => vueExports.isRef(localSort) ? localSort.value = $event : null,
           items: sortOptions,
           "value-key": "value",
           "label-key": "label",
@@ -3869,25 +3865,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
       _push(`</div>`);
-      if (unref(activeTab) === "default") {
+      if (vueExports.unref(activeTab) === "default") {
         _push(`<!--[-->`);
-        if (unref(filteredDefaultFiles).length === 0) {
+        if (vueExports.unref(filteredDefaultFiles).length === 0) {
           _push(`<div class="flex flex-col items-center justify-center py-12 text-muted gap-2">`);
-          _push(ssrRenderComponent(_component_UIcon, {
+          _push(ssrRenderComponent_1(_component_UIcon, {
             name: "i-lucide-image-off",
             class: "w-10 h-10"
           }, null, _parent));
           _push(`<p class="text-sm">No default images available.</p></div>`);
         } else {
           _push(`<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2"><!--[-->`);
-          ssrRenderList(unref(filteredDefaultFiles), (file) => {
-            _push(`<button type="button" class="${ssrRenderClass([
+          ssrRenderList_1(vueExports.unref(filteredDefaultFiles), (file) => {
+            _push(`<button type="button" class="${ssrRenderClass_1([
               __props.selectMode && __props.selectedUrl === file.url ? "border-primary ring-2 ring-primary" : __props.selectMode ? "border-default hover:border-primary" : "border-default cursor-default",
               "group relative rounded-lg overflow-hidden border bg-muted aspect-square flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            ])}"><img${ssrRenderAttr("src", file.url)}${ssrRenderAttr("alt", file.label)} class="w-full h-full object-cover" loading="lazy"><div class="${ssrRenderClass([{ "opacity-100": __props.selectMode && __props.selectedUrl === file.url }, "absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end"])}"><p class="text-white text-xs p-1.5 truncate w-full">${ssrInterpolate(file.label)}</p></div>`);
+            ])}"><img${ssrRenderAttr_1("src", file.url)}${ssrRenderAttr_1("alt", file.label)} class="w-full h-full object-cover" loading="lazy"><div class="${ssrRenderClass_1([{ "opacity-100": __props.selectMode && __props.selectedUrl === file.url }, "absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end"])}"><p class="text-white text-xs p-1.5 truncate w-full">${ssrInterpolate_1(file.label)}</p></div>`);
             if (__props.selectMode && __props.selectedUrl === file.url) {
               _push(`<div class="absolute flex items-center justify-center h-5 w-5 top-1.5 right-1.5 bg-primary rounded-full p-0.5">`);
-              _push(ssrRenderComponent(_component_UIcon, {
+              _push(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-check",
                 class: "size-3 text-white"
               }, null, _parent));
@@ -3899,55 +3895,55 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           });
           _push(`<!--]--></div>`);
         }
-        if (unref(filteredDefaultFiles).length > 0) {
-          _push(`<p class="text-xs text-muted">${ssrInterpolate(unref(filteredDefaultFiles).length)} ${ssrInterpolate(unref(filteredDefaultFiles).length === 1 ? "file" : "files")}</p>`);
+        if (vueExports.unref(filteredDefaultFiles).length > 0) {
+          _push(`<p class="text-xs text-muted">${ssrInterpolate_1(vueExports.unref(filteredDefaultFiles).length)} ${ssrInterpolate_1(vueExports.unref(filteredDefaultFiles).length === 1 ? "file" : "files")}</p>`);
         } else {
           _push(`<!---->`);
         }
         _push(`<!--]-->`);
       } else {
         _push(`<!--[-->`);
-        if (unref(loading2)) {
+        if (vueExports.unref(loading2)) {
           _push(`<div class="flex justify-center py-12">`);
-          _push(ssrRenderComponent(_component_UIcon, {
+          _push(ssrRenderComponent_1(_component_UIcon, {
             name: "i-lucide-loader-2",
             class: "w-7 h-7 animate-spin text-muted"
           }, null, _parent));
           _push(`</div>`);
-        } else if (unref(error2)) {
-          _push(ssrRenderComponent(_component_UAlert, {
+        } else if (vueExports.unref(error2)) {
+          _push(ssrRenderComponent_1(_component_UAlert, {
             color: "error",
             variant: "soft",
-            description: unref(error2)
+            description: vueExports.unref(error2)
           }, null, _parent));
-        } else if (unref(filteredUploadedFiles).length === 0) {
+        } else if (vueExports.unref(filteredUploadedFiles).length === 0) {
           _push(`<div class="flex flex-col items-center justify-center py-12 text-muted gap-2">`);
-          _push(ssrRenderComponent(_component_UIcon, {
+          _push(ssrRenderComponent_1(_component_UIcon, {
             name: "i-lucide-image-off",
             class: "w-10 h-10"
           }, null, _parent));
-          _push(`<p class="text-sm">${ssrInterpolate(unref(files2).length === 0 ? "No files uploaded yet." : "No files match your search.")}</p></div>`);
+          _push(`<p class="text-sm">${ssrInterpolate_1(vueExports.unref(files2).length === 0 ? "No files uploaded yet." : "No files match your search.")}</p></div>`);
         } else {
           _push(`<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2"><!--[-->`);
-          ssrRenderList(unref(filteredUploadedFiles), (file) => {
-            _push(`<button type="button" class="${ssrRenderClass([
+          ssrRenderList_1(vueExports.unref(filteredUploadedFiles), (file) => {
+            _push(`<button type="button" class="${ssrRenderClass_1([
               __props.selectMode && __props.selectedUrl === file.url ? "border-primary ring-2 ring-primary" : "border-default hover:border-primary",
               "group relative rounded-lg overflow-hidden border bg-muted aspect-square flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             ])}">`);
             if (isImage(file.fileType)) {
-              _push(`<img${ssrRenderAttr("src", file.url)}${ssrRenderAttr("alt", file.filename)} class="w-full h-full object-cover" loading="lazy">`);
+              _push(`<img${ssrRenderAttr_1("src", file.url)}${ssrRenderAttr_1("alt", file.filename)} class="w-full h-full object-cover" loading="lazy">`);
             } else {
               _push(`<div class="flex flex-col items-center gap-1.5 p-2 text-muted">`);
-              _push(ssrRenderComponent(_component_UIcon, {
+              _push(ssrRenderComponent_1(_component_UIcon, {
                 name: fileIcon(file.fileType),
                 class: "w-8 h-8"
               }, null, _parent));
-              _push(`<span class="text-xs text-center break-all line-clamp-2">${ssrInterpolate(file.filename)}</span></div>`);
+              _push(`<span class="text-xs text-center break-all line-clamp-2">${ssrInterpolate_1(file.filename)}</span></div>`);
             }
-            _push(`<div class="${ssrRenderClass([{ "opacity-100": __props.selectMode && __props.selectedUrl === file.url }, "absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end"])}"><p class="text-white text-xs p-1.5 truncate w-full">${ssrInterpolate(file.filename)}</p></div>`);
+            _push(`<div class="${ssrRenderClass_1([{ "opacity-100": __props.selectMode && __props.selectedUrl === file.url }, "absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end"])}"><p class="text-white text-xs p-1.5 truncate w-full">${ssrInterpolate_1(file.filename)}</p></div>`);
             if (__props.selectMode && __props.selectedUrl === file.url) {
               _push(`<div class="absolute flex items-center justify-center h-5 w-5 top-1.5 right-1.5 bg-primary rounded-full p-0.5">`);
-              _push(ssrRenderComponent(_component_UIcon, {
+              _push(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-check",
                 class: "size-3 text-white"
               }, null, _parent));
@@ -3959,8 +3955,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           });
           _push(`<!--]--></div>`);
         }
-        if (!unref(loading2) && unref(filteredUploadedFiles).length > 0) {
-          _push(`<p class="text-xs text-muted">${ssrInterpolate(unref(filteredUploadedFiles).length)} ${ssrInterpolate(unref(filteredUploadedFiles).length === 1 ? "file" : "files")}</p>`);
+        if (!vueExports.unref(loading2) && vueExports.unref(filteredUploadedFiles).length > 0) {
+          _push(`<p class="text-xs text-muted">${ssrInterpolate_1(vueExports.unref(filteredUploadedFiles).length)} ${ssrInterpolate_1(vueExports.unref(filteredUploadedFiles).length === 1 ? "file" : "files")}</p>`);
         } else {
           _push(`<!---->`);
         }
@@ -3972,7 +3968,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/MediaGrid.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

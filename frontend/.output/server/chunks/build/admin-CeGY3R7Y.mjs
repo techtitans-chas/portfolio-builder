@@ -1,33 +1,21 @@
 import { _ as _sfc_main$6, a as _sfc_main$1$1, b as _sfc_main$2$1 } from './Main-CoIIuktv.mjs';
-import { withCtx, createVNode, renderSlot, computed, ref, unref, mergeProps, defineComponent, isRef, openBlock, createBlock, createCommentVNode, toValue, useSlots, useModel, useId, toRef, watch, mergeModels, resolveDynamicComponent, createTextVNode, toDisplayString, Fragment, renderList, onScopeDispose, withKeys, createElementBlock, Teleport, toRefs, watchEffect, nextTick, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderSlot, ssrRenderAttrs, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList } from 'vue/server-renderer';
-import { d as _export_sfc, c as __nuxt_component_2$1, U as useComponentProps, a3 as useNuxtApp, N as useAppConfig, M as tv, b as Primitive, ab as useState, a8 as useRoute, a2 as useLocale, $ as useForwardProps, H as isArrayOfArray, g as _sfc_main$b, h as _sfc_main$c, e as _sfc_main$d, v as get, i as _sfc_main$9$1, L as pickLinkProps, j as _sfc_main$a$1, f as _sfc_main$8$1, Z as useForwardExpose, Q as useCollection, V as VisuallyHidden_default, P as Presence_default, K as navigateTo, k as createContext, w as getActiveElement } from './server.mjs';
+import { d as _export_sfc, a7 as ssrRenderComponent_1, aO as vueExports, c as __nuxt_component_2$1, a9 as ssrRenderSlot_1, an as useComponentProps, aA as useNuxtApp, aj as useAppConfig, ag as tv, b as Primitive, aJ as useState, ao as useDebounceFn, ar as useEventListener, aG as useRoute, ay as useLocale, p as createReusableTemplate, a5 as ssrRenderAttrs_1, a6 as ssrRenderClass_1, av as useForwardProps, $ as reactivePick, N as isArrayOfArray, h as _sfc_main$b, i as _sfc_main$c, j as _sfc_main$d, C as get, a3 as ssrInterpolate_1, ac as ssrRenderVNode, f as _sfc_main$9$1, Y as pickLinkProps, g as _sfc_main$a$1, a8 as ssrRenderList_1, Z as reactiveOmit, e as _sfc_main$8$1, ai as useActiveElement, au as useForwardExpose, al as useCollection, a0 as refAutoReset, V as VisuallyHidden_default, O as isClient, P as Presence_default, aM as useVModel, aF as useResizeObserver, U as navigateTo, l as createContext, D as getActiveElement, ah as unrefElement } from './server.mjs';
 import { p as provideDashboardContext, u as useDashboard$1, b as useResizable, _ as _sfc_main$9, a as _sfc_main$1$2 } from './DashboardSidebarToggle-uAAQWn-6.mjs';
 import { g as defu } from '../nitro/nitro.mjs';
-import { useDebounceFn, useActiveElement, useEventListener, createReusableTemplate, reactivePick, reactiveOmit, refAutoReset, useVModel, useResizeObserver, unrefElement } from '@vueuse/core';
 import { _ as _sfc_main$8 } from './Modal-D9bZkufO.mjs';
 import { _ as _sfc_main$7 } from './Drawer-Cit23QJO.mjs';
 import { g as useKbd, c as AccordionTrigger_default, a as AccordionItem_default, d as _sfc_main$2$2, _ as _sfc_main$e, A as AccordionContent_default, b as AccordionRoot_default, u as useArrowNavigation } from './Tooltip-DoUsDOvw.mjs';
 import { e as useForwardPropsEmits, u as useDirection } from './PopperArrow-CVyIWJ6M.mjs';
-import { l as useId$1, h as DismissableLayer_default } from './overlay-BWwBD9XH.mjs';
-import { reactiveOmit as reactiveOmit$1, isClient } from '@vueuse/shared';
+import { m as useId, h as DismissableLayer_default } from './overlay-BWwBD9XH.mjs';
 import { _ as _sfc_main$a } from './Badge-C0tQ5UcT.mjs';
 import { g as getCollectionType } from './collectionTypes-6EiXkZ_r.mjs';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 import { u as useCurrentUser } from './useCurrentUser-0x7hmjnh.mjs';
 import { u as useCollections } from './useCollections-Be_EdGTg.mjs';
 import './usePrefix-DEbZTxVe.mjs';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import 'tailwind-variants';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -36,10 +24,9 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
-import 'vaul-vue';
-import '@floating-ui/vue';
-import 'aria-hidden';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 
 function getOpenState(open) {
   return open ? "open" : "closed";
@@ -86,7 +73,7 @@ function whenMouse(handler) {
   return (event) => event.pointerType === "mouse" ? handler(event) : void 0;
 }
 const [injectNavigationMenuContext, provideNavigationMenuContext] = /* @__PURE__ */ createContext(["NavigationMenuRoot", "NavigationMenuSub"], "NavigationMenuContext");
-var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "NavigationMenuRoot",
   props: {
     modelValue: {
@@ -154,19 +141,19 @@ var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
       defaultValue: props.defaultValue ?? "",
       passive: props.modelValue === void 0
     });
-    const previousValue = ref("");
+    const previousValue = vueExports.ref("");
     const { forwardRef, currentElement: rootNavigationMenu } = useForwardExpose();
-    const indicatorTrack = ref();
-    const viewport = ref();
-    const activeTrigger = ref();
+    const indicatorTrack = vueExports.ref();
+    const viewport = vueExports.ref();
+    const activeTrigger = vueExports.ref();
     const { getItems, CollectionSlot } = useCollection({
       key: "NavigationMenu",
       isProvider: true
     });
-    const { delayDuration, skipDelayDuration, dir: propDir, disableClickTrigger, disableHoverTrigger, unmountOnHide } = toRefs(props);
+    const { delayDuration, skipDelayDuration, dir: propDir, disableClickTrigger, disableHoverTrigger, unmountOnHide } = vueExports.toRefs(props);
     const dir = useDirection(propDir);
     const isDelaySkipped = refAutoReset(false, skipDelayDuration);
-    const computedDelay = computed(() => {
+    const computedDelay = vueExports.computed(() => {
       const isOpen = modelValue.value !== "";
       if (isOpen || isDelaySkipped.value) return 150;
       else return delayDuration.value;
@@ -177,7 +164,7 @@ var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
         modelValue.value = val;
       }
     }, computedDelay);
-    watchEffect(() => {
+    vueExports.watchEffect(() => {
       if (!modelValue.value) return;
       const items = getItems().map((i) => i.ref);
       activeTrigger.value = items.find((item) => item.id.includes(modelValue.value));
@@ -187,7 +174,7 @@ var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
       isRootMenu: true,
       modelValue,
       previousValue,
-      baseId: useId$1(void 0, "reka-navigation-menu"),
+      baseId: useId(void 0, "reka-navigation-menu"),
       disableClickTrigger,
       disableHoverTrigger,
       dir,
@@ -227,16 +214,16 @@ var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
       modelValue.value = "";
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(CollectionSlot), null, {
-        default: withCtx(() => [createVNode(unref(Primitive), {
-          ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(CollectionSlot), null, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), {
+          ref: vueExports.unref(forwardRef),
           as: _ctx.as,
           "as-child": _ctx.asChild,
           "data-orientation": _ctx.orientation,
-          dir: unref(dir),
+          dir: vueExports.unref(dir),
           "data-reka-navigation-menu": ""
         }, {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) })]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", { modelValue: vueExports.unref(modelValue) })]),
           _: 3
         }, 8, [
           "as",
@@ -251,7 +238,7 @@ var NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
 });
 var NavigationMenuRoot_default = NavigationMenuRoot_vue_vue_type_script_setup_true_lang_default;
 const [injectNavigationMenuItemContext, provideNavigationMenuItemContext] = /* @__PURE__ */ createContext("NavigationMenuItem");
-var NavigationMenuItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "NavigationMenuItem",
   props: {
     value: {
@@ -273,12 +260,12 @@ var NavigationMenuItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
     useForwardExpose();
     const { getItems } = useCollection({ key: "NavigationMenu" });
     const context = injectNavigationMenuContext();
-    const value = useId$1(props.value);
-    const triggerRef$1 = ref();
-    const focusProxyRef = ref();
+    const value = useId(props.value);
+    const triggerRef$1 = vueExports.ref();
+    const focusProxyRef = vueExports.ref();
     const contentId = makeContentId(context.baseId, value);
     let restoreContentTabOrderRef = () => ({});
-    const wasEscapeCloseRef = ref(false);
+    const wasEscapeCloseRef = vueExports.ref(false);
     async function handleContentEntry(side = "start") {
       const el = (void 0).getElementById(contentId);
       if (el) {
@@ -331,11 +318,11 @@ var NavigationMenuItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
       ev.stopPropagation();
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         "as-child": _ctx.asChild,
         as: _ctx.as,
         "data-menu-item": "",
-        onKeydown: withKeys(handleKeydown, [
+        onKeydown: vueExports.withKeys(handleKeydown, [
           "up",
           "down",
           "left",
@@ -345,14 +332,14 @@ var NavigationMenuItem_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
           "space"
         ])
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, ["as-child", "as"]);
     };
   }
 });
 var NavigationMenuItem_default = NavigationMenuItem_vue_vue_type_script_setup_true_lang_default;
-var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "NavigationMenuContentImpl",
   props: {
     disableOutsidePointerEvents: {
@@ -383,8 +370,8 @@ var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @
     const itemContext = injectNavigationMenuItemContext();
     const triggerId = makeTriggerId(menuContext.baseId, itemContext.value);
     const contentId = makeContentId(menuContext.baseId, itemContext.value);
-    const prevMotionAttributeRef = ref(null);
-    const motionAttribute = computed(() => {
+    const prevMotionAttributeRef = vueExports.ref(null);
+    const motionAttribute = vueExports.computed(() => {
       const values = getItems().map((i) => i.ref.id.split("trigger-")[1]);
       if (menuContext.dir.value === "rtl") values.reverse();
       const index = values.indexOf(menuContext.modelValue.value);
@@ -422,7 +409,7 @@ var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @
         if (isTrigger || isRootViewport || !menuContext.isRootMenu) ev.preventDefault();
       }
     }
-    watchEffect((cleanupFn) => {
+    vueExports.watchEffect((cleanupFn) => {
       const content = currentElement.value;
       if (menuContext.isRootMenu && content) {
         const handleClose = () => {
@@ -473,13 +460,13 @@ var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @
       currentElement.value?.dispatchEvent(rootContentDismissEvent);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(DismissableLayer_default), mergeProps({
-        id: unref(contentId),
-        ref: unref(forwardRef),
-        "aria-labelledby": unref(triggerId),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DismissableLayer_default), vueExports.mergeProps({
+        id: vueExports.unref(contentId),
+        ref: vueExports.unref(forwardRef),
+        "aria-labelledby": vueExports.unref(triggerId),
         "data-motion": motionAttribute.value,
-        "data-state": unref(getOpenState)(unref(menuContext).modelValue.value === unref(itemContext).value),
-        "data-orientation": unref(menuContext).orientation
+        "data-state": vueExports.unref(getOpenState)(vueExports.unref(menuContext).modelValue.value === vueExports.unref(itemContext).value),
+        "data-orientation": vueExports.unref(menuContext).orientation
       }, props, {
         onKeydown: handleKeydown,
         onEscapeKeyDown: handleEscapeKeyDown,
@@ -487,7 +474,7 @@ var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @
         onFocusOutside: handleFocusOutside,
         onDismiss: handleDismiss
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, [
         "id",
@@ -500,7 +487,7 @@ var NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default = /* @
   }
 });
 var NavigationMenuContentImpl_default = NavigationMenuContentImpl_vue_vue_type_script_setup_true_lang_default;
-var NavigationMenuContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "NavigationMenuContent",
   props: {
@@ -530,41 +517,41 @@ var NavigationMenuContent_vue_vue_type_script_setup_true_lang_default = /* @__PU
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emits = __emit;
-    const forwarded = useForwardPropsEmits(reactiveOmit$1(props, "forceMount"), emits);
+    const forwarded = useForwardPropsEmits(reactiveOmit(props, "forceMount"), emits);
     const { forwardRef } = useForwardExpose();
     const menuContext = injectNavigationMenuContext();
     const itemContext = injectNavigationMenuItemContext();
-    const open = computed(() => itemContext.value === menuContext.modelValue.value);
-    const isLastActiveValue = computed(() => {
+    const open = vueExports.computed(() => itemContext.value === menuContext.modelValue.value);
+    const isLastActiveValue = vueExports.computed(() => {
       if (menuContext.viewport.value) {
         if (!menuContext.modelValue.value && menuContext.previousValue.value) return menuContext.previousValue.value === itemContext.value;
       }
       return false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, {
-        to: unref(isClient) && unref(menuContext).viewport.value ? unref(menuContext).viewport.value : "body",
-        disabled: unref(isClient) && unref(menuContext).viewport.value ? !unref(menuContext).viewport.value : true
-      }, [createVNode(unref(Presence_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.Teleport, {
+        to: vueExports.unref(isClient) && vueExports.unref(menuContext).viewport.value ? vueExports.unref(menuContext).viewport.value : "body",
+        disabled: vueExports.unref(isClient) && vueExports.unref(menuContext).viewport.value ? !vueExports.unref(menuContext).viewport.value : true
+      }, [vueExports.createVNode(vueExports.unref(Presence_default), {
         present: _ctx.forceMount || open.value || isLastActiveValue.value,
-        "force-mount": !unref(menuContext).unmountOnHide.value
+        "force-mount": !vueExports.unref(menuContext).unmountOnHide.value
       }, {
-        default: withCtx(({ present }) => [createVNode(NavigationMenuContentImpl_default, mergeProps({
-          ref: unref(forwardRef),
-          "data-state": unref(getOpenState)(open.value),
-          style: { pointerEvents: !open.value && unref(menuContext).isRootMenu ? "none" : void 0 }
+        default: vueExports.withCtx(({ present }) => [vueExports.createVNode(NavigationMenuContentImpl_default, vueExports.mergeProps({
+          ref: vueExports.unref(forwardRef),
+          "data-state": vueExports.unref(getOpenState)(open.value),
+          style: { pointerEvents: !open.value && vueExports.unref(menuContext).isRootMenu ? "none" : void 0 }
         }, {
           ..._ctx.$attrs,
-          ...unref(forwarded)
+          ...vueExports.unref(forwarded)
         }, {
           hidden: !present,
-          onPointerenter: _cache[0] || (_cache[0] = ($event) => unref(menuContext).onContentEnter(unref(itemContext).value)),
-          onPointerleave: _cache[1] || (_cache[1] = ($event) => unref(whenMouse)(() => unref(menuContext).onContentLeave())($event)),
+          onPointerenter: _cache[0] || (_cache[0] = ($event) => vueExports.unref(menuContext).onContentEnter(vueExports.unref(itemContext).value)),
+          onPointerleave: _cache[1] || (_cache[1] = ($event) => vueExports.unref(whenMouse)(() => vueExports.unref(menuContext).onContentLeave())($event)),
           onPointerDownOutside: _cache[2] || (_cache[2] = ($event) => emits("pointerDownOutside", $event)),
           onFocusOutside: _cache[3] || (_cache[3] = ($event) => emits("focusOutside", $event)),
           onInteractOutside: _cache[4] || (_cache[4] = ($event) => emits("interactOutside", $event))
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 2
         }, 1040, [
           "data-state",
@@ -577,7 +564,7 @@ var NavigationMenuContent_vue_vue_type_script_setup_true_lang_default = /* @__PU
   }
 });
 var NavigationMenuContent_default = NavigationMenuContent_vue_vue_type_script_setup_true_lang_default;
-var NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "NavigationMenuIndicator",
   props: {
@@ -598,9 +585,9 @@ var NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default = /* @__
     const props = __props;
     const { forwardRef } = useForwardExpose();
     const menuContext = injectNavigationMenuContext();
-    const indicatorStyle = ref();
-    const isHorizontal = computed(() => menuContext.orientation === "horizontal");
-    const isVisible = computed(() => !!menuContext.modelValue.value);
+    const indicatorStyle = vueExports.ref();
+    const isHorizontal = vueExports.computed(() => menuContext.orientation === "horizontal");
+    const isVisible = vueExports.computed(() => !!menuContext.modelValue.value);
     const { activeTrigger } = menuContext;
     function handlePositionChange() {
       if (!activeTrigger.value) return;
@@ -609,22 +596,22 @@ var NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default = /* @__
         position: isHorizontal.value ? activeTrigger.value.offsetLeft : activeTrigger.value.offsetTop
       };
     }
-    watchEffect(() => {
+    vueExports.watchEffect(() => {
       if (!menuContext.modelValue.value) return;
       handlePositionChange();
     });
     useResizeObserver(activeTrigger, handlePositionChange);
     useResizeObserver(menuContext.indicatorTrack, handlePositionChange);
     return (_ctx, _cache) => {
-      return unref(menuContext).indicatorTrack.value ? (openBlock(), createBlock(Teleport, {
+      return vueExports.unref(menuContext).indicatorTrack.value ? (vueExports.openBlock(), vueExports.createBlock(vueExports.Teleport, {
         key: 0,
-        to: unref(menuContext).indicatorTrack.value
-      }, [createVNode(unref(Presence_default), { present: _ctx.forceMount || isVisible.value }, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps({
-          ref: unref(forwardRef),
+        to: vueExports.unref(menuContext).indicatorTrack.value
+      }, [vueExports.createVNode(vueExports.unref(Presence_default), { present: _ctx.forceMount || isVisible.value }, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
+          ref: vueExports.unref(forwardRef),
           "aria-hidden": "true",
           "data-state": isVisible.value ? "visible" : "hidden",
-          "data-orientation": unref(menuContext).orientation,
+          "data-orientation": vueExports.unref(menuContext).orientation,
           "as-child": props.asChild,
           as: _ctx.as,
           style: { ...indicatorStyle.value ? {
@@ -632,7 +619,7 @@ var NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default = /* @__
             "--reka-navigation-menu-indicator-position": `${indicatorStyle.value.position}px`
           } : {} }
         }, _ctx.$attrs), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, [
           "data-state",
@@ -642,12 +629,12 @@ var NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default = /* @__
           "style"
         ])]),
         _: 3
-      }, 8, ["present"])], 8, ["to"])) : createCommentVNode("v-if", true);
+      }, 8, ["present"])], 8, ["to"])) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
 var NavigationMenuIndicator_default = NavigationMenuIndicator_vue_vue_type_script_setup_true_lang_default;
-var NavigationMenuLink_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuLink_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "NavigationMenuLink",
   props: {
     active: {
@@ -686,15 +673,15 @@ var NavigationMenuLink_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
       }
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(CollectionItem), null, {
-        default: withCtx(() => [createVNode(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(CollectionItem), null, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), {
           as: _ctx.as,
           "data-active": _ctx.active ? "" : void 0,
           "aria-current": _ctx.active ? "page" : void 0,
           "as-child": props.asChild,
           onClick: handleClick
         }, {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 8, [
           "as",
@@ -708,7 +695,7 @@ var NavigationMenuLink_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
   }
 });
 var NavigationMenuLink_default = NavigationMenuLink_vue_vue_type_script_setup_true_lang_default;
-var NavigationMenuList_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuList_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "NavigationMenuList",
   props: {
@@ -727,16 +714,16 @@ var NavigationMenuList_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
     const menuContext = injectNavigationMenuContext();
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
+        ref: vueExports.unref(forwardRef),
         style: { "position": "relative" }
       }, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps(_ctx.$attrs, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps(_ctx.$attrs, {
           "as-child": props.asChild,
           as: _ctx.as,
-          "data-orientation": unref(menuContext).orientation
+          "data-orientation": vueExports.unref(menuContext).orientation
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, [
           "as-child",
@@ -750,7 +737,7 @@ var NavigationMenuList_vue_vue_type_script_setup_true_lang_default = /* @__PURE_
 });
 var NavigationMenuList_default = NavigationMenuList_vue_vue_type_script_setup_true_lang_default;
 const _hoisted_1 = ["aria-owns"];
-var NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "NavigationMenuTrigger",
   props: {
@@ -774,11 +761,11 @@ var NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PU
     const itemContext = injectNavigationMenuItemContext();
     const { CollectionItem } = useCollection({ key: "NavigationMenu" });
     const { forwardRef, currentElement: triggerElement } = useForwardExpose();
-    const triggerId = ref("");
-    const contentId = ref("");
+    const triggerId = vueExports.ref("");
+    const contentId = vueExports.ref("");
     const hasPointerMoveOpenedRef = refAutoReset(false, 300);
-    const wasClickCloseRef = ref(false);
-    const open = computed(() => itemContext.value === menuContext.modelValue.value);
+    const wasClickCloseRef = vueExports.ref(false);
+    const open = vueExports.computed(() => itemContext.value === menuContext.modelValue.value);
     function handlePointerEnter() {
       if (menuContext.disableHoverTrigger.value) return;
       wasClickCloseRef.value = false;
@@ -832,13 +819,13 @@ var NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PU
       if (wasTriggerFocused || !wasFocusFromContent) itemContext.onFocusProxyEnter(wasTriggerFocused ? "start" : "end");
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock(Fragment, null, [createVNode(unref(CollectionItem), null, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps({
+      return vueExports.openBlock(), vueExports.createElementBlock(vueExports.Fragment, null, [vueExports.createVNode(vueExports.unref(CollectionItem), null, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
           id: triggerId.value,
-          ref: unref(forwardRef),
+          ref: vueExports.unref(forwardRef),
           disabled: _ctx.disabled,
           "data-disabled": _ctx.disabled ? "" : void 0,
-          "data-state": unref(getOpenState)(open.value),
+          "data-state": vueExports.unref(getOpenState)(open.value),
           "data-navigation-menu-trigger": "",
           "aria-expanded": open.value,
           "aria-controls": contentId.value,
@@ -851,7 +838,7 @@ var NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PU
           onClick: handleClick,
           onKeydown: handleKeydown
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, [
           "id",
@@ -864,20 +851,20 @@ var NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default = /* @__PU
           "as"
         ])]),
         _: 3
-      }), open.value ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [createVNode(unref(VisuallyHidden_default), {
+      }), open.value ? (vueExports.openBlock(), vueExports.createElementBlock(vueExports.Fragment, { key: 0 }, [vueExports.createVNode(vueExports.unref(VisuallyHidden_default), {
         ref: setFocusProxyRef,
         "aria-hidden": "true",
         tabindex: 0,
         onFocus: handleVisuallyHiddenFocus
-      }), unref(menuContext).viewport ? (openBlock(), createElementBlock("span", {
+      }), vueExports.unref(menuContext).viewport ? (vueExports.openBlock(), vueExports.createElementBlock("span", {
         key: 0,
         "aria-owns": contentId.value
-      }, null, 8, _hoisted_1)) : createCommentVNode("v-if", true)], 64)) : createCommentVNode("v-if", true)], 64);
+      }, null, 8, _hoisted_1)) : vueExports.createCommentVNode("v-if", true)], 64)) : vueExports.createCommentVNode("v-if", true)], 64);
     };
   }
 });
 var NavigationMenuTrigger_default = NavigationMenuTrigger_vue_vue_type_script_setup_true_lang_default;
-var NavigationMenuViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var NavigationMenuViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "NavigationMenuViewport",
   props: {
@@ -904,15 +891,15 @@ var NavigationMenuViewport_vue_vue_type_script_setup_true_lang_default = /* @__P
     const { forwardRef, currentElement } = useForwardExpose();
     const menuContext = injectNavigationMenuContext();
     const { activeTrigger, rootNavigationMenu, modelValue } = menuContext;
-    const size = ref();
-    const position = ref();
-    const open = computed(() => !!menuContext.modelValue.value);
-    watch(currentElement, () => {
+    const size = vueExports.ref();
+    const position = vueExports.ref();
+    const open = vueExports.computed(() => !!menuContext.modelValue.value);
+    vueExports.watch(currentElement, () => {
       menuContext.onViewportChange(currentElement.value);
     });
-    const content = ref();
-    watch([modelValue, open], () => {
-      nextTick(() => {
+    const content = vueExports.ref();
+    vueExports.watch([modelValue, open], () => {
+      vueExports.nextTick(() => {
         if (!currentElement.value) return;
         requestAnimationFrame(() => {
           const el = currentElement.value?.querySelector("[data-state=open]");
@@ -978,32 +965,32 @@ var NavigationMenuViewport_vue_vue_type_script_setup_true_lang_default = /* @__P
       updatePosition();
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Presence_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Presence_default), {
         present: _ctx.forceMount || open.value,
-        "force-mount": !unref(menuContext).unmountOnHide.value,
+        "force-mount": !vueExports.unref(menuContext).unmountOnHide.value,
         onAfterLeave: _cache[2] || (_cache[2] = () => {
           size.value = void 0;
           position.value = void 0;
         })
       }, {
-        default: withCtx(({ present }) => [createVNode(unref(Primitive), mergeProps(_ctx.$attrs, {
-          ref: unref(forwardRef),
+        default: vueExports.withCtx(({ present }) => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps(_ctx.$attrs, {
+          ref: vueExports.unref(forwardRef),
           as: _ctx.as,
           "as-child": _ctx.asChild,
-          "data-state": unref(getOpenState)(open.value),
-          "data-orientation": unref(menuContext).orientation,
+          "data-state": vueExports.unref(getOpenState)(open.value),
+          "data-orientation": vueExports.unref(menuContext).orientation,
           style: {
-            pointerEvents: !open.value && unref(menuContext).isRootMenu ? "none" : void 0,
+            pointerEvents: !open.value && vueExports.unref(menuContext).isRootMenu ? "none" : void 0,
             ["--reka-navigation-menu-viewport-width"]: size.value ? `${size.value?.width}px` : void 0,
             ["--reka-navigation-menu-viewport-height"]: size.value ? `${size.value?.height}px` : void 0,
             ["--reka-navigation-menu-viewport-left"]: position.value ? `${position.value?.left}px` : void 0,
             ["--reka-navigation-menu-viewport-top"]: position.value ? `${position.value?.top}px` : void 0
           },
           hidden: !present,
-          onPointerenter: _cache[0] || (_cache[0] = ($event) => unref(menuContext).onContentEnter(unref(menuContext).modelValue.value)),
-          onPointerleave: _cache[1] || (_cache[1] = ($event) => unref(whenMouse)(() => unref(menuContext).onContentLeave())($event))
+          onPointerenter: _cache[0] || (_cache[0] = ($event) => vueExports.unref(menuContext).onContentEnter(vueExports.unref(menuContext).modelValue.value)),
+          onPointerleave: _cache[1] || (_cache[1] = ($event) => vueExports.unref(whenMouse)(() => vueExports.unref(menuContext).onContentLeave())($event))
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 2
         }, 1040, [
           "as",
@@ -1040,9 +1027,9 @@ const _sfc_main$5 = {
     const props = useComponentProps("dashboardGroup", _props);
     const nuxtApp = useNuxtApp();
     const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$3), ...appConfig.ui?.dashboardGroup || {} }));
-    const sidebarOpen = ref(false);
-    const sidebarCollapsed = ref(false);
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$3), ...appConfig.ui?.dashboardGroup || {} }));
+    const sidebarOpen = vueExports.ref(false);
+    const sidebarCollapsed = vueExports.ref(false);
     provideDashboardContext({
       storage: props.storage,
       storageKey: props.storageKey,
@@ -1062,16 +1049,16 @@ const _sfc_main$5 = {
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
-        class: ui.value({ class: [unref(props).ui?.base, unref(props).class] })
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
+        class: ui.value({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "default")
+              vueExports.renderSlot(_ctx.$slots, "default")
             ];
           }
         }),
@@ -1082,7 +1069,7 @@ const _sfc_main$5 = {
 };
 const _sfc_setup$5 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/DashboardGroup.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
@@ -1126,12 +1113,12 @@ const theme$2 = {
 function useRuntimeHook(name, fn) {
   const nuxtApp = useNuxtApp();
   const unregister = nuxtApp.hook(name, fn);
-  onScopeDispose(unregister);
+  vueExports.onScopeDispose(unregister);
 }
 const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "UDashboardSidebar",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     mode: { type: null, required: false, default: "slideover" },
     menu: { type: null, required: false },
     toggle: { type: [Boolean, Object], required: false, default: true },
@@ -1156,21 +1143,21 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   emits: ["update:open", "update:collapsed"],
   setup(__props) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("dashboardSidebar", _props);
-    const open = useModel(__props, "open", { type: Boolean, ...{ default: false } });
-    const collapsed = useModel(__props, "collapsed", { type: Boolean, ...{ default: false } });
+    const open = vueExports.useModel(__props, "open", { type: Boolean, ...{ default: false } });
+    const collapsed = vueExports.useModel(__props, "collapsed", { type: Boolean, ...{ default: false } });
     const route = useRoute();
     const { t } = useLocale();
     const appConfig = useAppConfig();
     const dashboardContext = useDashboard$1({
       storageKey: "dashboard",
       unit: "%",
-      sidebarOpen: ref(false),
-      sidebarCollapsed: ref(false)
+      sidebarOpen: vueExports.ref(false),
+      sidebarCollapsed: vueExports.ref(false)
     });
-    const id = `${dashboardContext.storageKey}-sidebar-${props.id || useId()}`;
-    const { el, size, collapse, isCollapsed, isDragging, onMouseDown, onTouchStart, onDoubleClick } = useResizable(id, toRef(() => ({ ...dashboardContext, ...props })), { collapsed });
+    const id = `${dashboardContext.storageKey}-sidebar-${props.id || vueExports.useId()}`;
+    const { el, size, collapse, isCollapsed, isDragging, onMouseDown, onTouchStart, onDoubleClick } = useResizable(id, vueExports.toRef(() => ({ ...dashboardContext, ...props })), { collapsed });
     const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate();
     const [DefineResizeHandleTemplate, ReuseResizeHandleTemplate] = createReusableTemplate();
     useRuntimeHook("dashboard:sidebar:toggle", () => {
@@ -1179,39 +1166,39 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     useRuntimeHook("dashboard:sidebar:collapse", (value) => {
       isCollapsed.value = value;
     });
-    watch(open, () => dashboardContext.sidebarOpen.value = open.value, { immediate: true });
-    watch(isCollapsed, () => dashboardContext.sidebarCollapsed.value = isCollapsed.value, { immediate: true });
-    watch(() => route.fullPath, () => {
+    vueExports.watch(open, () => dashboardContext.sidebarOpen.value = open.value, { immediate: true });
+    vueExports.watch(isCollapsed, () => dashboardContext.sidebarCollapsed.value = isCollapsed.value, { immediate: true });
+    vueExports.watch(() => route.fullPath, () => {
       if (!props.autoClose) return;
       open.value = false;
     });
-    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.dashboardSidebar || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.dashboardSidebar || {} })({
       side: props.side
     }));
-    const Menu = computed(() => ({
+    const Menu = vueExports.computed(() => ({
       slideover: _sfc_main$2$1,
       modal: _sfc_main$8,
       drawer: _sfc_main$7
     })[props.mode]);
-    const menuProps = toRef(() => defu(props.menu, {}, props.mode === "modal" ? { fullscreen: true, transition: false } : props.mode === "slideover" ? { side: "left" } : {}));
+    const menuProps = vueExports.toRef(() => defu(props.menu, {}, props.mode === "modal" ? { fullscreen: true, transition: false } : props.mode === "slideover" ? { side: "left" } : {}));
     function toggleOpen() {
       open.value = !open.value;
     }
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(unref(DefineToggleTemplate), null, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineToggleTemplate), null, {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "toggle", {
+            ssrRenderSlot_1(_ctx.$slots, "toggle", {
               open: open.value,
               toggle: toggleOpen,
               ui: ui.value
             }, () => {
-              if (unref(props).toggle) {
-                _push2(ssrRenderComponent(_sfc_main$9, mergeProps(typeof unref(props).toggle === "object" ? unref(props).toggle : {}, {
-                  side: unref(props).toggleSide,
+              if (vueExports.unref(props).toggle) {
+                _push2(ssrRenderComponent_1(_sfc_main$9, vueExports.mergeProps(typeof vueExports.unref(props).toggle === "object" ? vueExports.unref(props).toggle : {}, {
+                  side: vueExports.unref(props).toggleSide,
                   "data-slot": "toggle",
-                  class: ui.value.toggle({ class: unref(props).ui?.toggle, toggleSide: unref(props).toggleSide })
+                  class: ui.value.toggle({ class: vueExports.unref(props).ui?.toggle, toggleSide: vueExports.unref(props).toggleSide })
                 }), null, _parent2, _scopeId));
               } else {
                 _push2(`<!---->`);
@@ -1219,39 +1206,39 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "toggle", {
+              vueExports.renderSlot(_ctx.$slots, "toggle", {
                 open: open.value,
                 toggle: toggleOpen,
                 ui: ui.value
               }, () => [
-                unref(props).toggle ? (openBlock(), createBlock(_sfc_main$9, mergeProps({ key: 0 }, typeof unref(props).toggle === "object" ? unref(props).toggle : {}, {
-                  side: unref(props).toggleSide,
+                vueExports.unref(props).toggle ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$9, vueExports.mergeProps({ key: 0 }, typeof vueExports.unref(props).toggle === "object" ? vueExports.unref(props).toggle : {}, {
+                  side: vueExports.unref(props).toggleSide,
                   "data-slot": "toggle",
-                  class: ui.value.toggle({ class: unref(props).ui?.toggle, toggleSide: unref(props).toggleSide })
-                }), null, 16, ["side", "class"])) : createCommentVNode("", true)
+                  class: ui.value.toggle({ class: vueExports.unref(props).ui?.toggle, toggleSide: vueExports.unref(props).toggleSide })
+                }), null, 16, ["side", "class"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(DefineResizeHandleTemplate), null, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineResizeHandleTemplate), null, {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "resize-handle", {
-              onMouseDown: unref(onMouseDown),
-              onTouchStart: unref(onTouchStart),
-              onDoubleClick: unref(onDoubleClick),
+            ssrRenderSlot_1(_ctx.$slots, "resize-handle", {
+              onMouseDown: vueExports.unref(onMouseDown),
+              onTouchStart: vueExports.unref(onTouchStart),
+              onDoubleClick: vueExports.unref(onDoubleClick),
               ui: ui.value
             }, () => {
-              if (unref(props).resizable) {
-                _push2(ssrRenderComponent(_sfc_main$1$2, {
+              if (vueExports.unref(props).resizable) {
+                _push2(ssrRenderComponent_1(_sfc_main$1$2, {
                   "aria-controls": id,
                   "data-slot": "handle",
-                  class: ui.value.handle({ class: unref(props).ui?.handle }),
-                  onMousedown: unref(onMouseDown),
-                  onTouchstart: unref(onTouchStart),
-                  onDblclick: unref(onDoubleClick)
+                  class: ui.value.handle({ class: vueExports.unref(props).ui?.handle }),
+                  onMousedown: vueExports.unref(onMouseDown),
+                  onTouchstart: vueExports.unref(onTouchStart),
+                  onDblclick: vueExports.unref(onDoubleClick)
                 }, null, _parent2, _scopeId));
               } else {
                 _push2(`<!---->`);
@@ -1259,103 +1246,103 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "resize-handle", {
-                onMouseDown: unref(onMouseDown),
-                onTouchStart: unref(onTouchStart),
-                onDoubleClick: unref(onDoubleClick),
+              vueExports.renderSlot(_ctx.$slots, "resize-handle", {
+                onMouseDown: vueExports.unref(onMouseDown),
+                onTouchStart: vueExports.unref(onTouchStart),
+                onDoubleClick: vueExports.unref(onDoubleClick),
                 ui: ui.value
               }, () => [
-                unref(props).resizable ? (openBlock(), createBlock(_sfc_main$1$2, {
+                vueExports.unref(props).resizable ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$1$2, {
                   key: 0,
                   "aria-controls": id,
                   "data-slot": "handle",
-                  class: ui.value.handle({ class: unref(props).ui?.handle }),
-                  onMousedown: unref(onMouseDown),
-                  onTouchstart: unref(onTouchStart),
-                  onDblclick: unref(onDoubleClick)
-                }, null, 8, ["class", "onMousedown", "onTouchstart", "onDblclick"])) : createCommentVNode("", true)
+                  class: ui.value.handle({ class: vueExports.unref(props).ui?.handle }),
+                  onMousedown: vueExports.unref(onMouseDown),
+                  onTouchstart: vueExports.unref(onTouchStart),
+                  onDblclick: vueExports.unref(onDoubleClick)
+                }, null, 8, ["class", "onMousedown", "onTouchstart", "onDblclick"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
         }),
         _: 3
       }, _parent));
-      if (unref(props).side === "right") {
-        _push(ssrRenderComponent(unref(ReuseResizeHandleTemplate), null, null, _parent));
+      if (vueExports.unref(props).side === "right") {
+        _push(ssrRenderComponent_1(vueExports.unref(ReuseResizeHandleTemplate), null, null, _parent));
       } else {
         _push(`<!---->`);
       }
-      _push(`<div${ssrRenderAttrs(mergeProps({
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({
         id,
         ref_key: "el",
         ref: el
       }, _ctx.$attrs, {
-        "data-collapsed": unref(isCollapsed),
-        "data-dragging": unref(isDragging),
+        "data-collapsed": vueExports.unref(isCollapsed),
+        "data-dragging": vueExports.unref(isDragging),
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] }),
-        style: { "--width": `${unref(size) || 0}${unref(dashboardContext).unit}` }
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] }),
+        style: { "--width": `${vueExports.unref(size) || 0}${vueExports.unref(dashboardContext).unit}` }
       }))}>`);
       if (!!slots.header) {
-        _push(`<div data-slot="header" class="${ssrRenderClass(ui.value.header({ class: unref(props).ui?.header }))}">`);
-        ssrRenderSlot(_ctx.$slots, "header", {
-          collapsed: unref(isCollapsed),
-          collapse: unref(collapse)
+        _push(`<div data-slot="header" class="${ssrRenderClass_1(ui.value.header({ class: vueExports.unref(props).ui?.header }))}">`);
+        ssrRenderSlot_1(_ctx.$slots, "header", {
+          collapsed: vueExports.unref(isCollapsed),
+          collapse: vueExports.unref(collapse)
         }, null, _push, _parent);
         _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: unref(props).ui?.body }))}">`);
-      ssrRenderSlot(_ctx.$slots, "default", {
-        collapsed: unref(isCollapsed),
-        collapse: unref(collapse)
+      _push(`<div data-slot="body" class="${ssrRenderClass_1(ui.value.body({ class: vueExports.unref(props).ui?.body }))}">`);
+      ssrRenderSlot_1(_ctx.$slots, "default", {
+        collapsed: vueExports.unref(isCollapsed),
+        collapse: vueExports.unref(collapse)
       }, null, _push, _parent);
       _push(`</div>`);
       if (!!slots.footer) {
-        _push(`<div data-slot="footer" class="${ssrRenderClass(ui.value.footer({ class: unref(props).ui?.footer }))}">`);
-        ssrRenderSlot(_ctx.$slots, "footer", {
-          collapsed: unref(isCollapsed),
-          collapse: unref(collapse)
+        _push(`<div data-slot="footer" class="${ssrRenderClass_1(ui.value.footer({ class: vueExports.unref(props).ui?.footer }))}">`);
+        ssrRenderSlot_1(_ctx.$slots, "footer", {
+          collapsed: vueExports.unref(isCollapsed),
+          collapse: vueExports.unref(collapse)
         }, null, _push, _parent);
         _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div>`);
-      if (unref(props).side === "left") {
-        _push(ssrRenderComponent(unref(ReuseResizeHandleTemplate), null, null, _parent));
+      if (vueExports.unref(props).side === "left") {
+        _push(ssrRenderComponent_1(vueExports.unref(ReuseResizeHandleTemplate), null, null, _parent));
       } else {
         _push(`<!---->`);
       }
-      _push(ssrRenderComponent(unref(Menu), mergeProps({
+      _push(ssrRenderComponent_1(vueExports.unref(Menu), vueExports.mergeProps({
         open: open.value,
         "onUpdate:open": ($event) => open.value = $event,
-        title: unref(t)("dashboardSidebar.title"),
-        description: unref(t)("dashboardSidebar.description")
+        title: vueExports.unref(t)("dashboardSidebar.title"),
+        description: vueExports.unref(t)("dashboardSidebar.description")
       }, menuProps.value, {
         ui: {
-          overlay: ui.value.overlay({ class: unref(props).ui?.overlay }),
-          content: ui.value.content({ class: unref(props).ui?.content })
+          overlay: ui.value.overlay({ class: vueExports.unref(props).ui?.overlay }),
+          content: ui.value.content({ class: vueExports.unref(props).ui?.content })
         }
       }), {
-        content: withCtx((contentData, _push2, _parent2, _scopeId) => {
+        content: vueExports.withCtx((contentData, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "content", contentData, () => {
-              if (!!slots.header || unref(props).mode !== "drawer") {
-                _push2(`<div data-slot="header" class="${ssrRenderClass(ui.value.header({ class: unref(props).ui?.header, menu: true }))}"${_scopeId}>`);
-                if (unref(props).mode !== "drawer" && unref(props).toggleSide === "left") {
-                  _push2(ssrRenderComponent(unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
+            ssrRenderSlot_1(_ctx.$slots, "content", contentData, () => {
+              if (!!slots.header || vueExports.unref(props).mode !== "drawer") {
+                _push2(`<div data-slot="header" class="${ssrRenderClass_1(ui.value.header({ class: vueExports.unref(props).ui?.header, menu: true }))}"${_scopeId}>`);
+                if (vueExports.unref(props).mode !== "drawer" && vueExports.unref(props).toggleSide === "left") {
+                  _push2(ssrRenderComponent_1(vueExports.unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
                 }
-                ssrRenderSlot(_ctx.$slots, "header", {
+                ssrRenderSlot_1(_ctx.$slots, "header", {
                   collapsed: false,
                   collapse: () => {
                   }
                 }, null, _push2, _parent2, _scopeId);
-                if (unref(props).mode !== "drawer" && unref(props).toggleSide === "right") {
-                  _push2(ssrRenderComponent(unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
+                if (vueExports.unref(props).mode !== "drawer" && vueExports.unref(props).toggleSide === "right") {
+                  _push2(ssrRenderComponent_1(vueExports.unref(ReuseToggleTemplate), null, null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
                 }
@@ -1363,16 +1350,16 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               } else {
                 _push2(`<!---->`);
               }
-              _push2(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: unref(props).ui?.body, menu: true }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "default", {
+              _push2(`<div data-slot="body" class="${ssrRenderClass_1(ui.value.body({ class: vueExports.unref(props).ui?.body, menu: true }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "default", {
                 collapsed: false,
                 collapse: () => {
                 }
               }, null, _push2, _parent2, _scopeId);
               _push2(`</div>`);
               if (!!slots.footer) {
-                _push2(`<div data-slot="footer" class="${ssrRenderClass(ui.value.footer({ class: unref(props).ui?.footer, menu: true }))}"${_scopeId}>`);
-                ssrRenderSlot(_ctx.$slots, "footer", {
+                _push2(`<div data-slot="footer" class="${ssrRenderClass_1(ui.value.footer({ class: vueExports.unref(props).ui?.footer, menu: true }))}"${_scopeId}>`);
+                ssrRenderSlot_1(_ctx.$slots, "footer", {
                   collapsed: false,
                   collapse: () => {
                   }
@@ -1384,41 +1371,41 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "content", contentData, () => [
-                !!slots.header || unref(props).mode !== "drawer" ? (openBlock(), createBlock("div", {
+              vueExports.renderSlot(_ctx.$slots, "content", contentData, () => [
+                !!slots.header || vueExports.unref(props).mode !== "drawer" ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   "data-slot": "header",
-                  class: ui.value.header({ class: unref(props).ui?.header, menu: true })
+                  class: ui.value.header({ class: vueExports.unref(props).ui?.header, menu: true })
                 }, [
-                  unref(props).mode !== "drawer" && unref(props).toggleSide === "left" ? (openBlock(), createBlock(unref(ReuseToggleTemplate), { key: 0 })) : createCommentVNode("", true),
-                  renderSlot(_ctx.$slots, "header", {
+                  vueExports.unref(props).mode !== "drawer" && vueExports.unref(props).toggleSide === "left" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseToggleTemplate), { key: 0 })) : vueExports.createCommentVNode("", true),
+                  vueExports.renderSlot(_ctx.$slots, "header", {
                     collapsed: false,
                     collapse: () => {
                     }
                   }),
-                  unref(props).mode !== "drawer" && unref(props).toggleSide === "right" ? (openBlock(), createBlock(unref(ReuseToggleTemplate), { key: 1 })) : createCommentVNode("", true)
-                ], 2)) : createCommentVNode("", true),
-                createVNode("div", {
+                  vueExports.unref(props).mode !== "drawer" && vueExports.unref(props).toggleSide === "right" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseToggleTemplate), { key: 1 })) : vueExports.createCommentVNode("", true)
+                ], 2)) : vueExports.createCommentVNode("", true),
+                vueExports.createVNode("div", {
                   "data-slot": "body",
-                  class: ui.value.body({ class: unref(props).ui?.body, menu: true })
+                  class: ui.value.body({ class: vueExports.unref(props).ui?.body, menu: true })
                 }, [
-                  renderSlot(_ctx.$slots, "default", {
+                  vueExports.renderSlot(_ctx.$slots, "default", {
                     collapsed: false,
                     collapse: () => {
                     }
                   })
                 ], 2),
-                !!slots.footer ? (openBlock(), createBlock("div", {
+                !!slots.footer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 1,
                   "data-slot": "footer",
-                  class: ui.value.footer({ class: unref(props).ui?.footer, menu: true })
+                  class: ui.value.footer({ class: vueExports.unref(props).ui?.footer, menu: true })
                 }, [
-                  renderSlot(_ctx.$slots, "footer", {
+                  vueExports.renderSlot(_ctx.$slots, "footer", {
                     collapsed: false,
                     collapse: () => {
                     }
                   })
-                ], 2)) : createCommentVNode("", true)
+                ], 2)) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
@@ -1431,7 +1418,7 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/DashboardSidebar.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
@@ -1481,25 +1468,25 @@ const _sfc_main$3 = {
     const buttonProps = useForwardProps(reactiveOmit(props, "icon", "side", "class"));
     const { t } = useLocale();
     const appConfig = useAppConfig();
-    const { sidebarCollapsed, collapseSidebar } = useDashboard$1({ sidebarCollapsed: ref(false), collapseSidebar: () => {
+    const { sidebarCollapsed, collapseSidebar } = useDashboard$1({ sidebarCollapsed: vueExports.ref(false), collapseSidebar: () => {
     } });
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.dashboardSidebarCollapse || {} }));
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.dashboardSidebarCollapse || {} }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$8$1, mergeProps({
-        ...unref(buttonProps),
-        "icon": unref(props).icon || (unref(sidebarCollapsed) ? unref(appConfig).ui.icons.panelOpen : unref(appConfig).ui.icons.panelClose),
-        "aria-label": unref(sidebarCollapsed) ? unref(t)("dashboardSidebarCollapse.expand") : unref(t)("dashboardSidebarCollapse.collapse"),
+      _push(ssrRenderComponent_1(_sfc_main$8$1, vueExports.mergeProps({
+        ...vueExports.unref(buttonProps),
+        "icon": vueExports.unref(props).icon || (vueExports.unref(sidebarCollapsed) ? vueExports.unref(appConfig).ui.icons.panelOpen : vueExports.unref(appConfig).ui.icons.panelClose),
+        "aria-label": vueExports.unref(sidebarCollapsed) ? vueExports.unref(t)("dashboardSidebarCollapse.expand") : vueExports.unref(t)("dashboardSidebarCollapse.collapse"),
         ..._ctx.$attrs
       }, {
-        class: ui.value({ class: [unref(props).ui?.base, unref(props).class], side: unref(props).side }),
-        onClick: ($event) => unref(collapseSidebar)?.(!unref(sidebarCollapsed))
+        class: ui.value({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class], side: vueExports.unref(props).side }),
+        onClick: ($event) => vueExports.unref(collapseSidebar)?.(!vueExports.unref(sidebarCollapsed))
       }, _attrs), null, _parent));
     };
   }
 };
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/DashboardSidebarCollapse.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
@@ -2020,10 +2007,10 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   setup(__props, { emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("navigationMenu", _props);
     const appConfig = useAppConfig();
-    const rootProps = useForwardProps(computed(() => ({
+    const rootProps = useForwardProps(vueExports.computed(() => ({
       as: props.as,
       delayDuration: props.delayDuration,
       skipDelayDuration: props.skipDelayDuration,
@@ -2034,9 +2021,9 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       unmountOnHide: props.unmountOnHide
     })), emits);
     const accordionProps = useForwardProps(reactivePick(props, "collapsible", "disabled", "type", "unmountOnHide"), emits);
-    const contentProps = toRef(() => props.content);
-    const tooltipProps = toRef(() => defu(typeof props.tooltip === "boolean" ? {} : props.tooltip, { ...props.orientation === "vertical" && { delayDuration: 0, content: { side: "right" } } }));
-    const popoverProps = toRef(() => defu(typeof props.popover === "boolean" ? {} : props.popover, { mode: "hover", content: { side: "right", align: "start", alignOffset: 2 } }));
+    const contentProps = vueExports.toRef(() => props.content);
+    const tooltipProps = vueExports.toRef(() => defu(typeof props.tooltip === "boolean" ? {} : props.tooltip, { ...props.orientation === "vertical" && { delayDuration: 0, content: { side: "right" } } }));
+    const popoverProps = vueExports.toRef(() => defu(typeof props.popover === "boolean" ? {} : props.popover, { mode: "hover", content: { side: "right", align: "start", alignOffset: 2 } }));
     const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate();
     const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate({
       props: {
@@ -2046,7 +2033,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         listIndex: Number
       }
     });
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.navigationMenu || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.navigationMenu || {} })({
       orientation: props.orientation,
       contentOrientation: props.orientation === "vertical" ? void 0 : props.contentOrientation,
       collapsed: props.collapsed,
@@ -2055,7 +2042,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       highlight: props.highlight,
       highlightColor: props.highlightColor || props.color
     }));
-    const lists = computed(
+    const lists = vueExports.computed(
       () => props.items?.length ? isArrayOfArray(props.items) ? props.items : [props.items] : []
     );
     function getItemValue(item, index, level, listIndex) {
@@ -2084,46 +2071,46 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     }
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(unref(DefineLinkTemplate), null, {
-        default: withCtx(({ item, active, index }, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineLinkTemplate), null, {
+        default: vueExports.withCtx(({ item, active, index }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, item.slot || "item", {
+            ssrRenderSlot_1(_ctx.$slots, item.slot || "item", {
               item,
               index,
               active,
               ui: ui.value
             }, () => {
-              ssrRenderSlot(_ctx.$slots, item.slot ? `${item.slot}-leading` : "item-leading", {
+              ssrRenderSlot_1(_ctx.$slots, item.slot ? `${item.slot}-leading` : "item-leading", {
                 item,
                 active,
                 index,
                 ui: ui.value
               }, () => {
                 if (item.avatar) {
-                  _push2(ssrRenderComponent(_sfc_main$b, mergeProps({
-                    size: item.ui?.linkLeadingAvatarSize || unref(props).ui?.linkLeadingAvatarSize || ui.value.linkLeadingAvatarSize()
+                  _push2(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                    size: item.ui?.linkLeadingAvatarSize || vueExports.unref(props).ui?.linkLeadingAvatarSize || ui.value.linkLeadingAvatarSize()
                   }, item.avatar, {
                     "data-slot": "linkLeadingAvatar",
-                    class: ui.value.linkLeadingAvatar({ class: [unref(props).ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })
+                    class: ui.value.linkLeadingAvatar({ class: [vueExports.unref(props).ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })
                   }), null, _parent2, _scopeId));
                 } else if (item.icon && item.chip) {
-                  _push2(ssrRenderComponent(_sfc_main$c, mergeProps({
-                    size: item.ui?.linkLeadingChipSize || unref(props).ui?.linkLeadingChipSize || ui.value.linkLeadingChipSize(),
+                  _push2(ssrRenderComponent_1(_sfc_main$c, vueExports.mergeProps({
+                    size: item.ui?.linkLeadingChipSize || vueExports.unref(props).ui?.linkLeadingChipSize || ui.value.linkLeadingChipSize(),
                     inset: ""
                   }, typeof item.chip === "object" ? item.chip : {}, { "data-slot": "linkLeadingChip" }), {
-                    default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                    default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                       if (_push3) {
-                        _push3(ssrRenderComponent(_sfc_main$d, {
+                        _push3(ssrRenderComponent_1(_sfc_main$d, {
                           name: item.icon,
                           "data-slot": "linkLeadingIcon",
-                          class: ui.value.linkLeadingIcon({ class: [unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
+                          class: ui.value.linkLeadingIcon({ class: [vueExports.unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
                         }, null, _parent3, _scopeId2));
                       } else {
                         return [
-                          createVNode(_sfc_main$d, {
+                          vueExports.createVNode(_sfc_main$d, {
                             name: item.icon,
                             "data-slot": "linkLeadingIcon",
-                            class: ui.value.linkLeadingIcon({ class: [unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
+                            class: ui.value.linkLeadingIcon({ class: [vueExports.unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
                           }, null, 8, ["name", "class"])
                         ];
                       }
@@ -2131,29 +2118,29 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                     _: 2
                   }, _parent2, _scopeId));
                 } else if (item.icon) {
-                  _push2(ssrRenderComponent(_sfc_main$d, {
+                  _push2(ssrRenderComponent_1(_sfc_main$d, {
                     name: item.icon,
                     "data-slot": "linkLeadingIcon",
-                    class: ui.value.linkLeadingIcon({ class: [unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
+                    class: ui.value.linkLeadingIcon({ class: [vueExports.unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
                   }, null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
                 }
               }, _push2, _parent2, _scopeId);
-              if (unref(get)(item, unref(props).labelKey) || !!slots[item.slot ? `${item.slot}-label` : "item-label"]) {
-                _push2(`<span data-slot="linkLabel" class="${ssrRenderClass(ui.value.linkLabel({ class: [unref(props).ui?.linkLabel, item.ui?.linkLabel] }))}"${_scopeId}>`);
-                ssrRenderSlot(_ctx.$slots, item.slot ? `${item.slot}-label` : "item-label", {
+              if (vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots[item.slot ? `${item.slot}-label` : "item-label"]) {
+                _push2(`<span data-slot="linkLabel" class="${ssrRenderClass_1(ui.value.linkLabel({ class: [vueExports.unref(props).ui?.linkLabel, item.ui?.linkLabel] }))}"${_scopeId}>`);
+                ssrRenderSlot_1(_ctx.$slots, item.slot ? `${item.slot}-label` : "item-label", {
                   item,
                   active,
                   index
                 }, () => {
-                  _push2(`${ssrInterpolate(unref(get)(item, unref(props).labelKey))}`);
+                  _push2(`${ssrInterpolate_1(vueExports.unref(get)(item, vueExports.unref(props).labelKey))}`);
                 }, _push2, _parent2, _scopeId);
-                if (item.target === "_blank" && unref(props).externalIcon !== false) {
-                  _push2(ssrRenderComponent(_sfc_main$d, {
-                    name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                if (item.target === "_blank" && vueExports.unref(props).externalIcon !== false) {
+                  _push2(ssrRenderComponent_1(_sfc_main$d, {
+                    name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                     "data-slot": "linkLabelExternalIcon",
-                    class: ui.value.linkLabelExternalIcon({ class: [unref(props).ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })
+                    class: ui.value.linkLabelExternalIcon({ class: [vueExports.unref(props).ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })
                   }, null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
@@ -2162,44 +2149,44 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               } else {
                 _push2(`<!---->`);
               }
-              if (item.badge || item.badge === 0 || unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || unref(props).orientation === "vertical" && item.children?.length || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : "item-trailing"]) {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed ? unref(AccordionTrigger_default) : "span"), {
-                  as: unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed ? "span" : void 0,
+              if (item.badge || item.badge === 0 || vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || vueExports.unref(props).orientation === "vertical" && item.children?.length || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : "item-trailing"]) {
+                ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed ? vueExports.unref(AccordionTrigger_default) : "span"), {
+                  as: vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed ? "span" : void 0,
                   "data-slot": "linkTrailing",
-                  class: ui.value.linkTrailing({ class: [unref(props).ui?.linkTrailing, item.ui?.linkTrailing] }),
+                  class: ui.value.linkTrailing({ class: [vueExports.unref(props).ui?.linkTrailing, item.ui?.linkTrailing] }),
                   onClick: (e) => onLinkTrailingClick(e, item)
                 }, {
-                  default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      ssrRenderSlot(_ctx.$slots, item.slot ? `${item.slot}-trailing` : "item-trailing", {
+                      ssrRenderSlot_1(_ctx.$slots, item.slot ? `${item.slot}-trailing` : "item-trailing", {
                         item,
                         active,
                         index,
                         ui: ui.value
                       }, () => {
                         if (item.badge || item.badge === 0) {
-                          _push3(ssrRenderComponent(_sfc_main$a, mergeProps({
+                          _push3(ssrRenderComponent_1(_sfc_main$a, vueExports.mergeProps({
                             color: "neutral",
                             variant: "outline",
-                            size: item.ui?.linkTrailingBadgeSize || unref(props).ui?.linkTrailingBadgeSize || ui.value.linkTrailingBadgeSize()
+                            size: item.ui?.linkTrailingBadgeSize || vueExports.unref(props).ui?.linkTrailingBadgeSize || ui.value.linkTrailingBadgeSize()
                           }, typeof item.badge === "string" || typeof item.badge === "number" ? { label: item.badge } : item.badge, {
                             "data-slot": "linkTrailingBadge",
-                            class: ui.value.linkTrailingBadge({ class: [unref(props).ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })
+                            class: ui.value.linkTrailingBadge({ class: [vueExports.unref(props).ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })
                           }), null, _parent3, _scopeId2));
                         } else {
                           _push3(`<!---->`);
                         }
-                        if (unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || unref(props).orientation === "vertical" && item.children?.length) {
-                          _push3(ssrRenderComponent(_sfc_main$d, {
-                            name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                        if (vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || vueExports.unref(props).orientation === "vertical" && item.children?.length) {
+                          _push3(ssrRenderComponent_1(_sfc_main$d, {
+                            name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                             "data-slot": "linkTrailingIcon",
-                            class: ui.value.linkTrailingIcon({ class: [unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
+                            class: ui.value.linkTrailingIcon({ class: [vueExports.unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
                           }, null, _parent3, _scopeId2));
                         } else if (item.trailingIcon) {
-                          _push3(ssrRenderComponent(_sfc_main$d, {
+                          _push3(ssrRenderComponent_1(_sfc_main$d, {
                             name: item.trailingIcon,
                             "data-slot": "linkTrailingIcon",
-                            class: ui.value.linkTrailingIcon({ class: [unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
+                            class: ui.value.linkTrailingIcon({ class: [vueExports.unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
                           }, null, _parent3, _scopeId2));
                         } else {
                           _push3(`<!---->`);
@@ -2207,32 +2194,32 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                       }, _push3, _parent3, _scopeId2);
                     } else {
                       return [
-                        renderSlot(_ctx.$slots, item.slot ? `${item.slot}-trailing` : "item-trailing", {
+                        vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-trailing` : "item-trailing", {
                           item,
                           active,
                           index,
                           ui: ui.value
                         }, () => [
-                          item.badge || item.badge === 0 ? (openBlock(), createBlock(_sfc_main$a, mergeProps({
+                          item.badge || item.badge === 0 ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a, vueExports.mergeProps({
                             key: 0,
                             color: "neutral",
                             variant: "outline",
-                            size: item.ui?.linkTrailingBadgeSize || unref(props).ui?.linkTrailingBadgeSize || ui.value.linkTrailingBadgeSize()
+                            size: item.ui?.linkTrailingBadgeSize || vueExports.unref(props).ui?.linkTrailingBadgeSize || ui.value.linkTrailingBadgeSize()
                           }, typeof item.badge === "string" || typeof item.badge === "number" ? { label: item.badge } : item.badge, {
                             "data-slot": "linkTrailingBadge",
-                            class: ui.value.linkTrailingBadge({ class: [unref(props).ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })
-                          }), null, 16, ["size", "class"])) : createCommentVNode("", true),
-                          unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || unref(props).orientation === "vertical" && item.children?.length ? (openBlock(), createBlock(_sfc_main$d, {
+                            class: ui.value.linkTrailingBadge({ class: [vueExports.unref(props).ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })
+                          }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true),
+                          vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || vueExports.unref(props).orientation === "vertical" && item.children?.length ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 1,
-                            name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                            name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                             "data-slot": "linkTrailingIcon",
-                            class: ui.value.linkTrailingIcon({ class: [unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
-                          }, null, 8, ["name", "class"])) : item.trailingIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                            class: ui.value.linkTrailingIcon({ class: [vueExports.unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
+                          }, null, 8, ["name", "class"])) : item.trailingIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                             key: 2,
                             name: item.trailingIcon,
                             "data-slot": "linkTrailingIcon",
-                            class: ui.value.linkTrailingIcon({ class: [unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
-                          }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                            class: ui.value.linkTrailingIcon({ class: [vueExports.unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
+                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                         ])
                       ];
                     }
@@ -2245,181 +2232,181 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, item.slot || "item", {
+              vueExports.renderSlot(_ctx.$slots, item.slot || "item", {
                 item,
                 index,
                 active,
                 ui: ui.value
               }, () => [
-                renderSlot(_ctx.$slots, item.slot ? `${item.slot}-leading` : "item-leading", {
+                vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-leading` : "item-leading", {
                   item,
                   active,
                   index,
                   ui: ui.value
                 }, () => [
-                  item.avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                  item.avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                     key: 0,
-                    size: item.ui?.linkLeadingAvatarSize || unref(props).ui?.linkLeadingAvatarSize || ui.value.linkLeadingAvatarSize()
+                    size: item.ui?.linkLeadingAvatarSize || vueExports.unref(props).ui?.linkLeadingAvatarSize || ui.value.linkLeadingAvatarSize()
                   }, item.avatar, {
                     "data-slot": "linkLeadingAvatar",
-                    class: ui.value.linkLeadingAvatar({ class: [unref(props).ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })
-                  }), null, 16, ["size", "class"])) : item.icon && item.chip ? (openBlock(), createBlock(_sfc_main$c, mergeProps({
+                    class: ui.value.linkLeadingAvatar({ class: [vueExports.unref(props).ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })
+                  }), null, 16, ["size", "class"])) : item.icon && item.chip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$c, vueExports.mergeProps({
                     key: 1,
-                    size: item.ui?.linkLeadingChipSize || unref(props).ui?.linkLeadingChipSize || ui.value.linkLeadingChipSize(),
+                    size: item.ui?.linkLeadingChipSize || vueExports.unref(props).ui?.linkLeadingChipSize || ui.value.linkLeadingChipSize(),
                     inset: ""
                   }, typeof item.chip === "object" ? item.chip : {}, { "data-slot": "linkLeadingChip" }), {
-                    default: withCtx(() => [
-                      createVNode(_sfc_main$d, {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_sfc_main$d, {
                         name: item.icon,
                         "data-slot": "linkLeadingIcon",
-                        class: ui.value.linkLeadingIcon({ class: [unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
+                        class: ui.value.linkLeadingIcon({ class: [vueExports.unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
                       }, null, 8, ["name", "class"])
                     ]),
                     _: 2
-                  }, 1040, ["size"])) : item.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                  }, 1040, ["size"])) : item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                     key: 2,
                     name: item.icon,
                     "data-slot": "linkLeadingIcon",
-                    class: ui.value.linkLeadingIcon({ class: [unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
-                  }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                    class: ui.value.linkLeadingIcon({ class: [vueExports.unref(props).ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })
+                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                 ]),
-                unref(get)(item, unref(props).labelKey) || !!slots[item.slot ? `${item.slot}-label` : "item-label"] ? (openBlock(), createBlock("span", {
+                vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots[item.slot ? `${item.slot}-label` : "item-label"] ? (vueExports.openBlock(), vueExports.createBlock("span", {
                   key: 0,
                   "data-slot": "linkLabel",
-                  class: ui.value.linkLabel({ class: [unref(props).ui?.linkLabel, item.ui?.linkLabel] })
+                  class: ui.value.linkLabel({ class: [vueExports.unref(props).ui?.linkLabel, item.ui?.linkLabel] })
                 }, [
-                  renderSlot(_ctx.$slots, item.slot ? `${item.slot}-label` : "item-label", {
+                  vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-label` : "item-label", {
                     item,
                     active,
                     index
                   }, () => [
-                    createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                   ]),
-                  item.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                  item.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                     key: 0,
-                    name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                    name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                     "data-slot": "linkLabelExternalIcon",
-                    class: ui.value.linkLabelExternalIcon({ class: [unref(props).ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })
-                  }, null, 8, ["name", "class"])) : createCommentVNode("", true)
-                ], 2)) : createCommentVNode("", true),
-                item.badge || item.badge === 0 || unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || unref(props).orientation === "vertical" && item.children?.length || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : "item-trailing"] ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed ? unref(AccordionTrigger_default) : "span"), {
+                    class: ui.value.linkLabelExternalIcon({ class: [vueExports.unref(props).ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })
+                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
+                ], 2)) : vueExports.createCommentVNode("", true),
+                item.badge || item.badge === 0 || vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || vueExports.unref(props).orientation === "vertical" && item.children?.length || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : "item-trailing"] ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed ? vueExports.unref(AccordionTrigger_default) : "span"), {
                   key: 1,
-                  as: unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed ? "span" : void 0,
+                  as: vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed ? "span" : void 0,
                   "data-slot": "linkTrailing",
-                  class: ui.value.linkTrailing({ class: [unref(props).ui?.linkTrailing, item.ui?.linkTrailing] }),
+                  class: ui.value.linkTrailing({ class: [vueExports.unref(props).ui?.linkTrailing, item.ui?.linkTrailing] }),
                   onClick: (e) => onLinkTrailingClick(e, item)
                 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, item.slot ? `${item.slot}-trailing` : "item-trailing", {
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-trailing` : "item-trailing", {
                       item,
                       active,
                       index,
                       ui: ui.value
                     }, () => [
-                      item.badge || item.badge === 0 ? (openBlock(), createBlock(_sfc_main$a, mergeProps({
+                      item.badge || item.badge === 0 ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a, vueExports.mergeProps({
                         key: 0,
                         color: "neutral",
                         variant: "outline",
-                        size: item.ui?.linkTrailingBadgeSize || unref(props).ui?.linkTrailingBadgeSize || ui.value.linkTrailingBadgeSize()
+                        size: item.ui?.linkTrailingBadgeSize || vueExports.unref(props).ui?.linkTrailingBadgeSize || ui.value.linkTrailingBadgeSize()
                       }, typeof item.badge === "string" || typeof item.badge === "number" ? { label: item.badge } : item.badge, {
                         "data-slot": "linkTrailingBadge",
-                        class: ui.value.linkTrailingBadge({ class: [unref(props).ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })
-                      }), null, 16, ["size", "class"])) : createCommentVNode("", true),
-                      unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || unref(props).orientation === "vertical" && item.children?.length ? (openBlock(), createBlock(_sfc_main$d, {
+                        class: ui.value.linkTrailingBadge({ class: [vueExports.unref(props).ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })
+                      }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true),
+                      vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) || vueExports.unref(props).orientation === "vertical" && item.children?.length ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                         key: 1,
-                        name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                        name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                         "data-slot": "linkTrailingIcon",
-                        class: ui.value.linkTrailingIcon({ class: [unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
-                      }, null, 8, ["name", "class"])) : item.trailingIcon ? (openBlock(), createBlock(_sfc_main$d, {
+                        class: ui.value.linkTrailingIcon({ class: [vueExports.unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
+                      }, null, 8, ["name", "class"])) : item.trailingIcon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                         key: 2,
                         name: item.trailingIcon,
                         "data-slot": "linkTrailingIcon",
-                        class: ui.value.linkTrailingIcon({ class: [unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
-                      }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                        class: ui.value.linkTrailingIcon({ class: [vueExports.unref(props).ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })
+                      }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                     ])
                   ]),
                   _: 2
-                }, 1032, ["as", "class", "onClick"])) : createCommentVNode("", true)
+                }, 1032, ["as", "class", "onClick"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(DefineItemTemplate), null, {
-        default: withCtx(({ item, index, level = 0, listIndex = 0 }, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DefineItemTemplate), null, {
+        default: vueExports.withCtx(({ item, index, level = 0, listIndex = 0 }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(unref(props).orientation === "vertical" && !unref(props).collapsed ? unref(AccordionItem_default) : unref(NavigationMenuItem_default)), mergeProps({ as: "li" }, unref(props).orientation === "vertical" && !unref(props).collapsed ? { disabled: !!item.disabled } : {}, {
+            ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "vertical" && !vueExports.unref(props).collapsed ? vueExports.unref(AccordionItem_default) : vueExports.unref(NavigationMenuItem_default)), vueExports.mergeProps({ as: "li" }, vueExports.unref(props).orientation === "vertical" && !vueExports.unref(props).collapsed ? { disabled: !!item.disabled } : {}, {
               value: getItemValue(item, index, level, listIndex)
             }), {
-              default: withCtx((_, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  if (unref(props).orientation === "vertical" && item.type === "label" && !unref(props).collapsed) {
-                    _push3(`<div data-slot="label" class="${ssrRenderClass(ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] }))}"${_scopeId2}>`);
-                    _push3(ssrRenderComponent(unref(ReuseLinkTemplate), {
+                  if (vueExports.unref(props).orientation === "vertical" && item.type === "label" && !vueExports.unref(props).collapsed) {
+                    _push3(`<div data-slot="label" class="${ssrRenderClass_1(ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] }))}"${_scopeId2}>`);
+                    _push3(ssrRenderComponent_1(vueExports.unref(ReuseLinkTemplate), {
                       item,
                       index
                     }, null, _parent3, _scopeId2));
                     _push3(`</div>`);
                   } else if (item.type !== "label") {
-                    _push3(ssrRenderComponent(_sfc_main$9$1, mergeProps(unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && item.type === "trigger" ? {} : unref(pickLinkProps)(item), { custom: "" }), {
-                      default: withCtx(({ active, ...slotProps }, _push4, _parent4, _scopeId3) => {
+                    _push3(ssrRenderComponent_1(_sfc_main$9$1, vueExports.mergeProps(vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && item.type === "trigger" ? {} : vueExports.unref(pickLinkProps)(item), { custom: "" }), {
+                      default: vueExports.withCtx(({ active, ...slotProps }, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          ssrRenderVNode(_push4, createVNode(resolveDynamicComponent(unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? unref(NavigationMenuTrigger_default) : unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && !slotProps.href ? unref(AccordionTrigger_default) : unref(NavigationMenuLink_default)), {
+                          ssrRenderVNode(_push4, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? vueExports.unref(NavigationMenuTrigger_default) : vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && !slotProps.href ? vueExports.unref(AccordionTrigger_default) : vueExports.unref(NavigationMenuLink_default)), {
                             "as-child": "",
                             active: active || item.active,
                             disabled: item.disabled,
                             onSelect: item.onSelect
                           }, {
-                            default: withCtx((_2, _push5, _parent5, _scopeId4) => {
+                            default: vueExports.withCtx((_2, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                if (unref(props).orientation === "vertical" && unref(props).collapsed && item.children?.length && (!!unref(props).popover || !!item.popover)) {
-                                  _push5(ssrRenderComponent(_sfc_main$2$2, mergeProps({ ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
-                                    ui: { content: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] }) }
+                                if (vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && item.children?.length && (!!vueExports.unref(props).popover || !!item.popover)) {
+                                  _push5(ssrRenderComponent_1(_sfc_main$2$2, vueExports.mergeProps({ ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
+                                    ui: { content: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] }) }
                                   }), {
-                                    content: withCtx(({ close }, _push6, _parent6, _scopeId5) => {
+                                    content: vueExports.withCtx(({ close }, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        ssrRenderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                                        ssrRenderSlot_1(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                           item,
                                           active: active || item.active,
                                           index,
                                           ui: ui.value,
                                           close
                                         }, () => {
-                                          _push6(`<ul data-slot="childList" class="${ssrRenderClass(ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] }))}"${_scopeId5}><li data-slot="childLabel" class="${ssrRenderClass(ui.value.childLabel({ class: [unref(props).ui?.childLabel, item.ui?.childLabel] }))}"${_scopeId5}>${ssrInterpolate(unref(get)(item, unref(props).labelKey))}</li><!--[-->`);
-                                          ssrRenderList(item.children, (childItem, childIndex) => {
-                                            _push6(`<li data-slot="childItem" class="${ssrRenderClass(ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] }))}"${_scopeId5}>`);
-                                            _push6(ssrRenderComponent(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                              default: withCtx(({ active: childActive, ...childSlotProps }, _push7, _parent7, _scopeId6) => {
+                                          _push6(`<ul data-slot="childList" class="${ssrRenderClass_1(ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] }))}"${_scopeId5}><li data-slot="childLabel" class="${ssrRenderClass_1(ui.value.childLabel({ class: [vueExports.unref(props).ui?.childLabel, item.ui?.childLabel] }))}"${_scopeId5}>${ssrInterpolate_1(vueExports.unref(get)(item, vueExports.unref(props).labelKey))}</li><!--[-->`);
+                                          ssrRenderList_1(item.children, (childItem, childIndex) => {
+                                            _push6(`<li data-slot="childItem" class="${ssrRenderClass_1(ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] }))}"${_scopeId5}>`);
+                                            _push6(ssrRenderComponent_1(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                              default: vueExports.withCtx(({ active: childActive, ...childSlotProps }, _push7, _parent7, _scopeId6) => {
                                                 if (_push7) {
-                                                  _push7(ssrRenderComponent(unref(NavigationMenuLink_default), {
+                                                  _push7(ssrRenderComponent_1(vueExports.unref(NavigationMenuLink_default), {
                                                     "as-child": "",
                                                     active: childActive,
                                                     onSelect: childItem.onSelect
                                                   }, {
-                                                    default: withCtx((_3, _push8, _parent8, _scopeId7) => {
+                                                    default: vueExports.withCtx((_3, _push8, _parent8, _scopeId7) => {
                                                       if (_push8) {
-                                                        _push8(ssrRenderComponent(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                        _push8(ssrRenderComponent_1(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                           "data-slot": "childLink",
-                                                          class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                          class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                         }), {
-                                                          default: withCtx((_4, _push9, _parent9, _scopeId8) => {
+                                                          default: vueExports.withCtx((_4, _push9, _parent9, _scopeId8) => {
                                                             if (_push9) {
                                                               if (childItem.icon) {
-                                                                _push9(ssrRenderComponent(_sfc_main$d, {
+                                                                _push9(ssrRenderComponent_1(_sfc_main$d, {
                                                                   name: childItem.icon,
                                                                   "data-slot": "childLinkIcon",
-                                                                  class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                                  class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
                                                                 }, null, _parent9, _scopeId8));
                                                               } else {
                                                                 _push9(`<!---->`);
                                                               }
-                                                              _push9(`<span data-slot="childLinkLabel" class="${ssrRenderClass(ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive }))}"${_scopeId8}>${ssrInterpolate(unref(get)(childItem, unref(props).labelKey))} `);
-                                                              if (childItem.target === "_blank" && unref(props).externalIcon !== false) {
-                                                                _push9(ssrRenderComponent(_sfc_main$d, {
-                                                                  name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                              _push9(`<span data-slot="childLinkLabel" class="${ssrRenderClass_1(ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive }))}"${_scopeId8}>${ssrInterpolate_1(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey))} `);
+                                                              if (childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false) {
+                                                                _push9(ssrRenderComponent_1(_sfc_main$d, {
+                                                                  name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                                   "data-slot": "childLinkLabelExternalIcon",
-                                                                  class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                                  class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
                                                                 }, null, _parent9, _scopeId8));
                                                               } else {
                                                                 _push9(`<!---->`);
@@ -2427,23 +2414,23 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                                               _push9(`</span>`);
                                                             } else {
                                                               return [
-                                                                childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                                childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                   key: 0,
                                                                   name: childItem.icon,
                                                                   "data-slot": "childLinkIcon",
-                                                                  class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                                }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                                createVNode("span", {
+                                                                  class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                                vueExports.createVNode("span", {
                                                                   "data-slot": "childLinkLabel",
-                                                                  class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                                  class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                                 }, [
-                                                                  createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                                  childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                                  childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                     key: 0,
-                                                                    name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                                    name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                                     "data-slot": "childLinkLabelExternalIcon",
-                                                                    class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                                  }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                                    class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                                 ], 2)
                                                               ];
                                                             }
@@ -2452,28 +2439,28 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                                         }, _parent8, _scopeId7));
                                                       } else {
                                                         return [
-                                                          createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                          vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                             "data-slot": "childLink",
-                                                            class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                            class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                           }), {
-                                                            default: withCtx(() => [
-                                                              childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                            default: vueExports.withCtx(() => [
+                                                              childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                 key: 0,
                                                                 name: childItem.icon,
                                                                 "data-slot": "childLinkIcon",
-                                                                class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                              }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                              createVNode("span", {
+                                                                class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                              }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                              vueExports.createVNode("span", {
                                                                 "data-slot": "childLinkLabel",
-                                                                class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                                class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                               }, [
-                                                                createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                                childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                                childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                   key: 0,
-                                                                  name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                                  name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                                   "data-slot": "childLinkLabelExternalIcon",
-                                                                  class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                                  class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                               ], 2)
                                                             ]),
                                                             _: 2
@@ -2485,34 +2472,34 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                                   }, _parent7, _scopeId6));
                                                 } else {
                                                   return [
-                                                    createVNode(unref(NavigationMenuLink_default), {
+                                                    vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                                       "as-child": "",
                                                       active: childActive,
                                                       onSelect: childItem.onSelect
                                                     }, {
-                                                      default: withCtx(() => [
-                                                        createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                      default: vueExports.withCtx(() => [
+                                                        vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                           "data-slot": "childLink",
-                                                          class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                          class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                         }), {
-                                                          default: withCtx(() => [
-                                                            childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                          default: vueExports.withCtx(() => [
+                                                            childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                               key: 0,
                                                               name: childItem.icon,
                                                               "data-slot": "childLinkIcon",
-                                                              class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                            }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                            createVNode("span", {
+                                                              class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                            }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                            vueExports.createVNode("span", {
                                                               "data-slot": "childLinkLabel",
-                                                              class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                              class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                             }, [
-                                                              createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                              childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                              childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                 key: 0,
-                                                                name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                                name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                                 "data-slot": "childLinkLabelExternalIcon",
-                                                                class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                              }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                                class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                              }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                             ], 2)
                                                           ]),
                                                           _: 2
@@ -2531,57 +2518,57 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                         }, _push6, _parent6, _scopeId5);
                                       } else {
                                         return [
-                                          renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                                          vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                             item,
                                             active: active || item.active,
                                             index,
                                             ui: ui.value,
                                             close
                                           }, () => [
-                                            createVNode("ul", {
+                                            vueExports.createVNode("ul", {
                                               "data-slot": "childList",
-                                              class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                              class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                             }, [
-                                              createVNode("li", {
+                                              vueExports.createVNode("li", {
                                                 "data-slot": "childLabel",
-                                                class: ui.value.childLabel({ class: [unref(props).ui?.childLabel, item.ui?.childLabel] })
-                                              }, toDisplayString(unref(get)(item, unref(props).labelKey)), 3),
-                                              (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                                return openBlock(), createBlock("li", {
+                                                class: ui.value.childLabel({ class: [vueExports.unref(props).ui?.childLabel, item.ui?.childLabel] })
+                                              }, vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 3),
+                                              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                                return vueExports.openBlock(), vueExports.createBlock("li", {
                                                   key: childIndex,
                                                   "data-slot": "childItem",
-                                                  class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                                  class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                                 }, [
-                                                  createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                                    default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                                      createVNode(unref(NavigationMenuLink_default), {
+                                                  vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                                    default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                                      vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                                         "as-child": "",
                                                         active: childActive,
                                                         onSelect: childItem.onSelect
                                                       }, {
-                                                        default: withCtx(() => [
-                                                          createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                        default: vueExports.withCtx(() => [
+                                                          vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                             "data-slot": "childLink",
-                                                            class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                            class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                           }), {
-                                                            default: withCtx(() => [
-                                                              childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                            default: vueExports.withCtx(() => [
+                                                              childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                 key: 0,
                                                                 name: childItem.icon,
                                                                 "data-slot": "childLinkIcon",
-                                                                class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                              }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                              createVNode("span", {
+                                                                class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                              }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                              vueExports.createVNode("span", {
                                                                 "data-slot": "childLinkLabel",
-                                                                class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                                class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                               }, [
-                                                                createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                                childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                                childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                   key: 0,
-                                                                  name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                                  name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                                   "data-slot": "childLinkLabelExternalIcon",
-                                                                  class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                                  class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                               ], 2)
                                                             ]),
                                                             _: 2
@@ -2599,22 +2586,22 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                         ];
                                       }
                                     }),
-                                    default: withCtx((_3, _push6, _parent6, _scopeId5) => {
+                                    default: vueExports.withCtx((_3, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(ssrRenderComponent(_sfc_main$a$1, mergeProps(slotProps, {
+                                        _push6(ssrRenderComponent_1(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                           "data-slot": "link",
-                                          class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                          class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                         }), {
-                                          default: withCtx((_4, _push7, _parent7, _scopeId6) => {
+                                          default: vueExports.withCtx((_4, _push7, _parent7, _scopeId6) => {
                                             if (_push7) {
-                                              _push7(ssrRenderComponent(unref(ReuseLinkTemplate), {
+                                              _push7(ssrRenderComponent_1(vueExports.unref(ReuseLinkTemplate), {
                                                 item,
                                                 active: active || item.active,
                                                 index
                                               }, null, _parent7, _scopeId6));
                                             } else {
                                               return [
-                                                createVNode(unref(ReuseLinkTemplate), {
+                                                vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                                   item,
                                                   active: active || item.active,
                                                   index
@@ -2626,12 +2613,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                         }, _parent6, _scopeId5));
                                       } else {
                                         return [
-                                          createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                                          vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                             "data-slot": "link",
-                                            class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                            class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                           }), {
-                                            default: withCtx(() => [
-                                              createVNode(unref(ReuseLinkTemplate), {
+                                            default: vueExports.withCtx(() => [
+                                              vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                                 item,
                                                 active: active || item.active,
                                                 index
@@ -2644,26 +2631,26 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                     }),
                                     _: 2
                                   }, _parent5, _scopeId4));
-                                } else if (unref(props).orientation === "vertical" && unref(props).collapsed && (!!unref(props).tooltip || !!item.tooltip) || unref(props).orientation === "horizontal" && !!item.tooltip) {
-                                  _push5(ssrRenderComponent(_sfc_main$e, mergeProps({
-                                    text: unref(get)(item, unref(props).labelKey)
+                                } else if (vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && (!!vueExports.unref(props).tooltip || !!item.tooltip) || vueExports.unref(props).orientation === "horizontal" && !!item.tooltip) {
+                                  _push5(ssrRenderComponent_1(_sfc_main$e, vueExports.mergeProps({
+                                    text: vueExports.unref(get)(item, vueExports.unref(props).labelKey)
                                   }, { ...tooltipProps.value, ...typeof item.tooltip === "boolean" ? {} : item.tooltip || {} }), {
-                                    default: withCtx((_3, _push6, _parent6, _scopeId5) => {
+                                    default: vueExports.withCtx((_3, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(ssrRenderComponent(_sfc_main$a$1, mergeProps(slotProps, {
+                                        _push6(ssrRenderComponent_1(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                           "data-slot": "link",
-                                          class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                          class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                         }), {
-                                          default: withCtx((_4, _push7, _parent7, _scopeId6) => {
+                                          default: vueExports.withCtx((_4, _push7, _parent7, _scopeId6) => {
                                             if (_push7) {
-                                              _push7(ssrRenderComponent(unref(ReuseLinkTemplate), {
+                                              _push7(ssrRenderComponent_1(vueExports.unref(ReuseLinkTemplate), {
                                                 item,
                                                 active: active || item.active,
                                                 index
                                               }, null, _parent7, _scopeId6));
                                             } else {
                                               return [
-                                                createVNode(unref(ReuseLinkTemplate), {
+                                                vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                                   item,
                                                   active: active || item.active,
                                                   index
@@ -2675,12 +2662,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                         }, _parent6, _scopeId5));
                                       } else {
                                         return [
-                                          createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                                          vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                             "data-slot": "link",
-                                            class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                            class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                           }), {
-                                            default: withCtx(() => [
-                                              createVNode(unref(ReuseLinkTemplate), {
+                                            default: vueExports.withCtx(() => [
+                                              vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                                 item,
                                                 active: active || item.active,
                                                 index
@@ -2694,20 +2681,20 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                     _: 2
                                   }, _parent5, _scopeId4));
                                 } else {
-                                  _push5(ssrRenderComponent(_sfc_main$a$1, mergeProps(slotProps, {
+                                  _push5(ssrRenderComponent_1(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                     "data-slot": "link",
-                                    class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: unref(props).orientation === "horizontal" || level > 0 })
+                                    class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: vueExports.unref(props).orientation === "horizontal" || level > 0 })
                                   }), {
-                                    default: withCtx((_3, _push6, _parent6, _scopeId5) => {
+                                    default: vueExports.withCtx((_3, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(ssrRenderComponent(unref(ReuseLinkTemplate), {
+                                        _push6(ssrRenderComponent_1(vueExports.unref(ReuseLinkTemplate), {
                                           item,
                                           active: active || item.active,
                                           index
                                         }, null, _parent6, _scopeId5));
                                       } else {
                                         return [
-                                          createVNode(unref(ReuseLinkTemplate), {
+                                          vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                             item,
                                             active: active || item.active,
                                             index
@@ -2720,61 +2707,61 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 }
                               } else {
                                 return [
-                                  unref(props).orientation === "vertical" && unref(props).collapsed && item.children?.length && (!!unref(props).popover || !!item.popover) ? (openBlock(), createBlock(_sfc_main$2$2, mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
-                                    ui: { content: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] }) }
+                                  vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && item.children?.length && (!!vueExports.unref(props).popover || !!item.popover) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$2$2, vueExports.mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
+                                    ui: { content: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] }) }
                                   }), {
-                                    content: withCtx(({ close }) => [
-                                      renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                                    content: vueExports.withCtx(({ close }) => [
+                                      vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                         item,
                                         active: active || item.active,
                                         index,
                                         ui: ui.value,
                                         close
                                       }, () => [
-                                        createVNode("ul", {
+                                        vueExports.createVNode("ul", {
                                           "data-slot": "childList",
-                                          class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                          class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                         }, [
-                                          createVNode("li", {
+                                          vueExports.createVNode("li", {
                                             "data-slot": "childLabel",
-                                            class: ui.value.childLabel({ class: [unref(props).ui?.childLabel, item.ui?.childLabel] })
-                                          }, toDisplayString(unref(get)(item, unref(props).labelKey)), 3),
-                                          (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                            return openBlock(), createBlock("li", {
+                                            class: ui.value.childLabel({ class: [vueExports.unref(props).ui?.childLabel, item.ui?.childLabel] })
+                                          }, vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 3),
+                                          (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                            return vueExports.openBlock(), vueExports.createBlock("li", {
                                               key: childIndex,
                                               "data-slot": "childItem",
-                                              class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                              class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                             }, [
-                                              createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                                default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                                  createVNode(unref(NavigationMenuLink_default), {
+                                              vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                                default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                                  vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                                     "as-child": "",
                                                     active: childActive,
                                                     onSelect: childItem.onSelect
                                                   }, {
-                                                    default: withCtx(() => [
-                                                      createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                    default: vueExports.withCtx(() => [
+                                                      vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                         "data-slot": "childLink",
-                                                        class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                        class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                       }), {
-                                                        default: withCtx(() => [
-                                                          childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                        default: vueExports.withCtx(() => [
+                                                          childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                             key: 0,
                                                             name: childItem.icon,
                                                             "data-slot": "childLinkIcon",
-                                                            class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                          }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                          createVNode("span", {
+                                                            class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                          vueExports.createVNode("span", {
                                                             "data-slot": "childLinkLabel",
-                                                            class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                            class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                           }, [
-                                                            createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                            childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                            childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                               key: 0,
-                                                              name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                              name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                               "data-slot": "childLinkLabelExternalIcon",
-                                                              class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                              class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                            }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                           ], 2)
                                                         ]),
                                                         _: 2
@@ -2790,13 +2777,13 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                         ], 2)
                                       ])
                                     ]),
-                                    default: withCtx(() => [
-                                      createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                         "data-slot": "link",
-                                        class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                        class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                       }), {
-                                        default: withCtx(() => [
-                                          createVNode(unref(ReuseLinkTemplate), {
+                                        default: vueExports.withCtx(() => [
+                                          vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                             item,
                                             active: active || item.active,
                                             index
@@ -2806,17 +2793,17 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                       }, 1040, ["class"])
                                     ]),
                                     _: 2
-                                  }, 1040, ["ui"])) : unref(props).orientation === "vertical" && unref(props).collapsed && (!!unref(props).tooltip || !!item.tooltip) || unref(props).orientation === "horizontal" && !!item.tooltip ? (openBlock(), createBlock(_sfc_main$e, mergeProps({
+                                  }, 1040, ["ui"])) : vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && (!!vueExports.unref(props).tooltip || !!item.tooltip) || vueExports.unref(props).orientation === "horizontal" && !!item.tooltip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$e, vueExports.mergeProps({
                                     key: 1,
-                                    text: unref(get)(item, unref(props).labelKey)
+                                    text: vueExports.unref(get)(item, vueExports.unref(props).labelKey)
                                   }, { ...tooltipProps.value, ...typeof item.tooltip === "boolean" ? {} : item.tooltip || {} }), {
-                                    default: withCtx(() => [
-                                      createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                         "data-slot": "link",
-                                        class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                        class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                       }), {
-                                        default: withCtx(() => [
-                                          createVNode(unref(ReuseLinkTemplate), {
+                                        default: vueExports.withCtx(() => [
+                                          vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                             item,
                                             active: active || item.active,
                                             index
@@ -2826,12 +2813,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                       }, 1040, ["class"])
                                     ]),
                                     _: 2
-                                  }, 1040, ["text"])) : (openBlock(), createBlock(_sfc_main$a$1, mergeProps({ key: 2 }, slotProps, {
+                                  }, 1040, ["text"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a$1, vueExports.mergeProps({ key: 2 }, slotProps, {
                                     "data-slot": "link",
-                                    class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: unref(props).orientation === "horizontal" || level > 0 })
+                                    class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: vueExports.unref(props).orientation === "horizontal" || level > 0 })
                                   }), {
-                                    default: withCtx(() => [
-                                      createVNode(unref(ReuseLinkTemplate), {
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                         item,
                                         active: active || item.active,
                                         index
@@ -2844,93 +2831,93 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                             }),
                             _: 2
                           }), _parent4, _scopeId3);
-                          if (unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"])) {
-                            _push4(ssrRenderComponent(unref(NavigationMenuContent_default), mergeProps(contentProps.value, {
+                          if (vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"])) {
+                            _push4(ssrRenderComponent_1(vueExports.unref(NavigationMenuContent_default), vueExports.mergeProps(contentProps.value, {
                               "data-slot": "content",
-                              class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                              class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                             }), {
-                              default: withCtx((_2, _push5, _parent5, _scopeId4) => {
+                              default: vueExports.withCtx((_2, _push5, _parent5, _scopeId4) => {
                                 if (_push5) {
-                                  ssrRenderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                                  ssrRenderSlot_1(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                     item,
                                     active: active || item.active,
                                     index,
                                     ui: ui.value
                                   }, () => {
-                                    _push5(`<ul data-slot="childList" class="${ssrRenderClass(ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] }))}"${_scopeId4}><!--[-->`);
-                                    ssrRenderList(item.children, (childItem, childIndex) => {
-                                      _push5(`<li data-slot="childItem" class="${ssrRenderClass(ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] }))}"${_scopeId4}>`);
-                                      _push5(ssrRenderComponent(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                        default: withCtx(({ active: childActive, ...childSlotProps }, _push6, _parent6, _scopeId5) => {
+                                    _push5(`<ul data-slot="childList" class="${ssrRenderClass_1(ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] }))}"${_scopeId4}><!--[-->`);
+                                    ssrRenderList_1(item.children, (childItem, childIndex) => {
+                                      _push5(`<li data-slot="childItem" class="${ssrRenderClass_1(ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] }))}"${_scopeId4}>`);
+                                      _push5(ssrRenderComponent_1(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                        default: vueExports.withCtx(({ active: childActive, ...childSlotProps }, _push6, _parent6, _scopeId5) => {
                                           if (_push6) {
-                                            _push6(ssrRenderComponent(unref(NavigationMenuLink_default), {
+                                            _push6(ssrRenderComponent_1(vueExports.unref(NavigationMenuLink_default), {
                                               "as-child": "",
                                               active: childActive,
                                               onSelect: childItem.onSelect
                                             }, {
-                                              default: withCtx((_3, _push7, _parent7, _scopeId6) => {
+                                              default: vueExports.withCtx((_3, _push7, _parent7, _scopeId6) => {
                                                 if (_push7) {
-                                                  _push7(ssrRenderComponent(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                  _push7(ssrRenderComponent_1(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                     "data-slot": "childLink",
-                                                    class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                    class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                   }), {
-                                                    default: withCtx((_4, _push8, _parent8, _scopeId7) => {
+                                                    default: vueExports.withCtx((_4, _push8, _parent8, _scopeId7) => {
                                                       if (_push8) {
                                                         if (childItem.icon) {
-                                                          _push8(ssrRenderComponent(_sfc_main$d, {
+                                                          _push8(ssrRenderComponent_1(_sfc_main$d, {
                                                             name: childItem.icon,
                                                             "data-slot": "childLinkIcon",
-                                                            class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                            class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
                                                           }, null, _parent8, _scopeId7));
                                                         } else {
                                                           _push8(`<!---->`);
                                                         }
-                                                        _push8(`<div data-slot="childLinkWrapper" class="${ssrRenderClass(ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] }))}"${_scopeId7}><p data-slot="childLinkLabel" class="${ssrRenderClass(ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive }))}"${_scopeId7}>${ssrInterpolate(unref(get)(childItem, unref(props).labelKey))} `);
-                                                        if (childItem.target === "_blank" && unref(props).externalIcon !== false) {
-                                                          _push8(ssrRenderComponent(_sfc_main$d, {
-                                                            name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                        _push8(`<div data-slot="childLinkWrapper" class="${ssrRenderClass_1(ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] }))}"${_scopeId7}><p data-slot="childLinkLabel" class="${ssrRenderClass_1(ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive }))}"${_scopeId7}>${ssrInterpolate_1(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey))} `);
+                                                        if (childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false) {
+                                                          _push8(ssrRenderComponent_1(_sfc_main$d, {
+                                                            name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                             "data-slot": "childLinkLabelExternalIcon",
-                                                            class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                            class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
                                                           }, null, _parent8, _scopeId7));
                                                         } else {
                                                           _push8(`<!---->`);
                                                         }
                                                         _push8(`</p>`);
                                                         if (childItem.description) {
-                                                          _push8(`<p data-slot="childLinkDescription" class="${ssrRenderClass(ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive }))}"${_scopeId7}>${ssrInterpolate(childItem.description)}</p>`);
+                                                          _push8(`<p data-slot="childLinkDescription" class="${ssrRenderClass_1(ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive }))}"${_scopeId7}>${ssrInterpolate_1(childItem.description)}</p>`);
                                                         } else {
                                                           _push8(`<!---->`);
                                                         }
                                                         _push8(`</div>`);
                                                       } else {
                                                         return [
-                                                          childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                          childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                             key: 0,
                                                             name: childItem.icon,
                                                             "data-slot": "childLinkIcon",
-                                                            class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                          }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                          createVNode("div", {
+                                                            class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                          vueExports.createVNode("div", {
                                                             "data-slot": "childLinkWrapper",
-                                                            class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                            class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                                           }, [
-                                                            createVNode("p", {
+                                                            vueExports.createVNode("p", {
                                                               "data-slot": "childLinkLabel",
-                                                              class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                              class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                             }, [
-                                                              createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                              childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                              childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                                 key: 0,
-                                                                name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                                name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                                 "data-slot": "childLinkLabelExternalIcon",
-                                                                class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                              }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                                class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                              }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                             ], 2),
-                                                            childItem.description ? (openBlock(), createBlock("p", {
+                                                            childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                               key: 0,
                                                               "data-slot": "childLinkDescription",
-                                                              class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                            }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                              class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                            }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                                           ], 2)
                                                         ];
                                                       }
@@ -2939,38 +2926,38 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                                   }, _parent7, _scopeId6));
                                                 } else {
                                                   return [
-                                                    createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                    vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                       "data-slot": "childLink",
-                                                      class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                      class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                     }), {
-                                                      default: withCtx(() => [
-                                                        childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                      default: vueExports.withCtx(() => [
+                                                        childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                           key: 0,
                                                           name: childItem.icon,
                                                           "data-slot": "childLinkIcon",
-                                                          class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                        }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                        createVNode("div", {
+                                                          class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                        }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                        vueExports.createVNode("div", {
                                                           "data-slot": "childLinkWrapper",
-                                                          class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                          class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                                         }, [
-                                                          createVNode("p", {
+                                                          vueExports.createVNode("p", {
                                                             "data-slot": "childLinkLabel",
-                                                            class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                            class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                           }, [
-                                                            createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                            childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                            childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                               key: 0,
-                                                              name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                              name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                               "data-slot": "childLinkLabelExternalIcon",
-                                                              class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                              class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                            }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                           ], 2),
-                                                          childItem.description ? (openBlock(), createBlock("p", {
+                                                          childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                             key: 0,
                                                             "data-slot": "childLinkDescription",
-                                                            class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                          }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                            class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                          }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                                         ], 2)
                                                       ]),
                                                       _: 2
@@ -2982,44 +2969,44 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                             }, _parent6, _scopeId5));
                                           } else {
                                             return [
-                                              createVNode(unref(NavigationMenuLink_default), {
+                                              vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                                 "as-child": "",
                                                 active: childActive,
                                                 onSelect: childItem.onSelect
                                               }, {
-                                                default: withCtx(() => [
-                                                  createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                default: vueExports.withCtx(() => [
+                                                  vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                     "data-slot": "childLink",
-                                                    class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                    class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                   }), {
-                                                    default: withCtx(() => [
-                                                      childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                    default: vueExports.withCtx(() => [
+                                                      childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                         key: 0,
                                                         name: childItem.icon,
                                                         "data-slot": "childLinkIcon",
-                                                        class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                      }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                      createVNode("div", {
+                                                        class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                      }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                      vueExports.createVNode("div", {
                                                         "data-slot": "childLinkWrapper",
-                                                        class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                        class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                                       }, [
-                                                        createVNode("p", {
+                                                        vueExports.createVNode("p", {
                                                           "data-slot": "childLinkLabel",
-                                                          class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                          class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                         }, [
-                                                          createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                          childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                          childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                             key: 0,
-                                                            name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                            name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                             "data-slot": "childLinkLabelExternalIcon",
-                                                            class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                          }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                            class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                         ], 2),
-                                                        childItem.description ? (openBlock(), createBlock("p", {
+                                                        childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                           key: 0,
                                                           "data-slot": "childLinkDescription",
-                                                          class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                        }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                          class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                        }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                                       ], 2)
                                                     ]),
                                                     _: 2
@@ -3038,62 +3025,62 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                   }, _push5, _parent5, _scopeId4);
                                 } else {
                                   return [
-                                    renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                                    vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                       item,
                                       active: active || item.active,
                                       index,
                                       ui: ui.value
                                     }, () => [
-                                      createVNode("ul", {
+                                      vueExports.createVNode("ul", {
                                         "data-slot": "childList",
-                                        class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                        class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                       }, [
-                                        (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                          return openBlock(), createBlock("li", {
+                                        (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                          return vueExports.openBlock(), vueExports.createBlock("li", {
                                             key: childIndex,
                                             "data-slot": "childItem",
-                                            class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                            class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                           }, [
-                                            createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                              default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                                createVNode(unref(NavigationMenuLink_default), {
+                                            vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                              default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                                vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                                   "as-child": "",
                                                   active: childActive,
                                                   onSelect: childItem.onSelect
                                                 }, {
-                                                  default: withCtx(() => [
-                                                    createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                  default: vueExports.withCtx(() => [
+                                                    vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                       "data-slot": "childLink",
-                                                      class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                      class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                     }), {
-                                                      default: withCtx(() => [
-                                                        childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                      default: vueExports.withCtx(() => [
+                                                        childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                           key: 0,
                                                           name: childItem.icon,
                                                           "data-slot": "childLinkIcon",
-                                                          class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                        }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                        createVNode("div", {
+                                                          class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                        }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                        vueExports.createVNode("div", {
                                                           "data-slot": "childLinkWrapper",
-                                                          class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                          class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                                         }, [
-                                                          createVNode("p", {
+                                                          vueExports.createVNode("p", {
                                                             "data-slot": "childLinkLabel",
-                                                            class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                            class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                           }, [
-                                                            createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                            childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                            childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                               key: 0,
-                                                              name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                              name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                               "data-slot": "childLinkLabelExternalIcon",
-                                                              class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                              class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                            }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                           ], 2),
-                                                          childItem.description ? (openBlock(), createBlock("p", {
+                                                          childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                             key: 0,
                                                             "data-slot": "childLinkDescription",
-                                                            class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                          }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                            class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                          }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                                         ], 2)
                                                       ]),
                                                       _: 2
@@ -3118,68 +3105,68 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                           }
                         } else {
                           return [
-                            (openBlock(), createBlock(resolveDynamicComponent(unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? unref(NavigationMenuTrigger_default) : unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && !slotProps.href ? unref(AccordionTrigger_default) : unref(NavigationMenuLink_default)), {
+                            (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? vueExports.unref(NavigationMenuTrigger_default) : vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && !slotProps.href ? vueExports.unref(AccordionTrigger_default) : vueExports.unref(NavigationMenuLink_default)), {
                               "as-child": "",
                               active: active || item.active,
                               disabled: item.disabled,
                               onSelect: item.onSelect
                             }, {
-                              default: withCtx(() => [
-                                unref(props).orientation === "vertical" && unref(props).collapsed && item.children?.length && (!!unref(props).popover || !!item.popover) ? (openBlock(), createBlock(_sfc_main$2$2, mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
-                                  ui: { content: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] }) }
+                              default: vueExports.withCtx(() => [
+                                vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && item.children?.length && (!!vueExports.unref(props).popover || !!item.popover) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$2$2, vueExports.mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
+                                  ui: { content: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] }) }
                                 }), {
-                                  content: withCtx(({ close }) => [
-                                    renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                                  content: vueExports.withCtx(({ close }) => [
+                                    vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                       item,
                                       active: active || item.active,
                                       index,
                                       ui: ui.value,
                                       close
                                     }, () => [
-                                      createVNode("ul", {
+                                      vueExports.createVNode("ul", {
                                         "data-slot": "childList",
-                                        class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                        class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                       }, [
-                                        createVNode("li", {
+                                        vueExports.createVNode("li", {
                                           "data-slot": "childLabel",
-                                          class: ui.value.childLabel({ class: [unref(props).ui?.childLabel, item.ui?.childLabel] })
-                                        }, toDisplayString(unref(get)(item, unref(props).labelKey)), 3),
-                                        (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                          return openBlock(), createBlock("li", {
+                                          class: ui.value.childLabel({ class: [vueExports.unref(props).ui?.childLabel, item.ui?.childLabel] })
+                                        }, vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 3),
+                                        (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                          return vueExports.openBlock(), vueExports.createBlock("li", {
                                             key: childIndex,
                                             "data-slot": "childItem",
-                                            class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                            class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                           }, [
-                                            createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                              default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                                createVNode(unref(NavigationMenuLink_default), {
+                                            vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                              default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                                vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                                   "as-child": "",
                                                   active: childActive,
                                                   onSelect: childItem.onSelect
                                                 }, {
-                                                  default: withCtx(() => [
-                                                    createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                                  default: vueExports.withCtx(() => [
+                                                    vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                       "data-slot": "childLink",
-                                                      class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                      class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                     }), {
-                                                      default: withCtx(() => [
-                                                        childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                      default: vueExports.withCtx(() => [
+                                                        childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                           key: 0,
                                                           name: childItem.icon,
                                                           "data-slot": "childLinkIcon",
-                                                          class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                        }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                        createVNode("span", {
+                                                          class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                        }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                        vueExports.createVNode("span", {
                                                           "data-slot": "childLinkLabel",
-                                                          class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                          class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                         }, [
-                                                          createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                          childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                          childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                             key: 0,
-                                                            name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                            name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                             "data-slot": "childLinkLabelExternalIcon",
-                                                            class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                          }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                            class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                          }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                         ], 2)
                                                       ]),
                                                       _: 2
@@ -3195,13 +3182,13 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                       ], 2)
                                     ])
                                   ]),
-                                  default: withCtx(() => [
-                                    createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                       "data-slot": "link",
-                                      class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                      class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                     }), {
-                                      default: withCtx(() => [
-                                        createVNode(unref(ReuseLinkTemplate), {
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                           item,
                                           active: active || item.active,
                                           index
@@ -3211,17 +3198,17 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                     }, 1040, ["class"])
                                   ]),
                                   _: 2
-                                }, 1040, ["ui"])) : unref(props).orientation === "vertical" && unref(props).collapsed && (!!unref(props).tooltip || !!item.tooltip) || unref(props).orientation === "horizontal" && !!item.tooltip ? (openBlock(), createBlock(_sfc_main$e, mergeProps({
+                                }, 1040, ["ui"])) : vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && (!!vueExports.unref(props).tooltip || !!item.tooltip) || vueExports.unref(props).orientation === "horizontal" && !!item.tooltip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$e, vueExports.mergeProps({
                                   key: 1,
-                                  text: unref(get)(item, unref(props).labelKey)
+                                  text: vueExports.unref(get)(item, vueExports.unref(props).labelKey)
                                 }, { ...tooltipProps.value, ...typeof item.tooltip === "boolean" ? {} : item.tooltip || {} }), {
-                                  default: withCtx(() => [
-                                    createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                       "data-slot": "link",
-                                      class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                      class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                     }), {
-                                      default: withCtx(() => [
-                                        createVNode(unref(ReuseLinkTemplate), {
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                           item,
                                           active: active || item.active,
                                           index
@@ -3231,12 +3218,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                     }, 1040, ["class"])
                                   ]),
                                   _: 2
-                                }, 1040, ["text"])) : (openBlock(), createBlock(_sfc_main$a$1, mergeProps({ key: 2 }, slotProps, {
+                                }, 1040, ["text"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a$1, vueExports.mergeProps({ key: 2 }, slotProps, {
                                   "data-slot": "link",
-                                  class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: unref(props).orientation === "horizontal" || level > 0 })
+                                  class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: vueExports.unref(props).orientation === "horizontal" || level > 0 })
                                 }), {
-                                  default: withCtx(() => [
-                                    createVNode(unref(ReuseLinkTemplate), {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                       item,
                                       active: active || item.active,
                                       index
@@ -3247,67 +3234,67 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                               ]),
                               _: 2
                             }, 1064, ["active", "disabled", "onSelect"])),
-                            unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? (openBlock(), createBlock(unref(NavigationMenuContent_default), mergeProps({ key: 0 }, contentProps.value, {
+                            vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(NavigationMenuContent_default), vueExports.mergeProps({ key: 0 }, contentProps.value, {
                               "data-slot": "content",
-                              class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                              class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                             }), {
-                              default: withCtx(() => [
-                                renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                              default: vueExports.withCtx(() => [
+                                vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                   item,
                                   active: active || item.active,
                                   index,
                                   ui: ui.value
                                 }, () => [
-                                  createVNode("ul", {
+                                  vueExports.createVNode("ul", {
                                     "data-slot": "childList",
-                                    class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                    class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                   }, [
-                                    (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                      return openBlock(), createBlock("li", {
+                                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                      return vueExports.openBlock(), vueExports.createBlock("li", {
                                         key: childIndex,
                                         "data-slot": "childItem",
-                                        class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                        class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                       }, [
-                                        createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                          default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                            createVNode(unref(NavigationMenuLink_default), {
+                                        vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                          default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                            vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                               "as-child": "",
                                               active: childActive,
                                               onSelect: childItem.onSelect
                                             }, {
-                                              default: withCtx(() => [
-                                                createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                              default: vueExports.withCtx(() => [
+                                                vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                   "data-slot": "childLink",
-                                                  class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                  class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                 }), {
-                                                  default: withCtx(() => [
-                                                    childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                  default: vueExports.withCtx(() => [
+                                                    childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                       key: 0,
                                                       name: childItem.icon,
                                                       "data-slot": "childLinkIcon",
-                                                      class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                    }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                    createVNode("div", {
+                                                      class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                    }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                    vueExports.createVNode("div", {
                                                       "data-slot": "childLinkWrapper",
-                                                      class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                      class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                                     }, [
-                                                      createVNode("p", {
+                                                      vueExports.createVNode("p", {
                                                         "data-slot": "childLinkLabel",
-                                                        class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                        class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                       }, [
-                                                        createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                        childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                        childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                           key: 0,
-                                                          name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                          name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                           "data-slot": "childLinkLabelExternalIcon",
-                                                          class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                        }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                          class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                        }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                       ], 2),
-                                                      childItem.description ? (openBlock(), createBlock("p", {
+                                                      childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                         key: 0,
                                                         "data-slot": "childLinkDescription",
-                                                        class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                      }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                        class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                      }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                                     ], 2)
                                                   ]),
                                                   _: 2
@@ -3324,7 +3311,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 ])
                               ]),
                               _: 2
-                            }, 1040, ["class"])) : createCommentVNode("", true)
+                            }, 1040, ["class"])) : vueExports.createCommentVNode("", true)
                           ];
                         }
                       }),
@@ -3333,47 +3320,47 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   } else {
                     _push3(`<!---->`);
                   }
-                  if (unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed) {
-                    _push3(ssrRenderComponent(unref(AccordionContent_default), {
+                  if (vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed) {
+                    _push3(ssrRenderComponent_1(vueExports.unref(AccordionContent_default), {
                       "data-slot": "content",
-                      class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                      class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                     }, {
-                      default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                      default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(ssrRenderComponent(unref(AccordionRoot_default), mergeProps({
-                            ...unref(accordionProps),
+                          _push4(ssrRenderComponent_1(vueExports.unref(AccordionRoot_default), vueExports.mergeProps({
+                            ...vueExports.unref(accordionProps),
                             defaultValue: getAccordionDefaultValue(item.children, level + 1, listIndex)
                           }, {
                             as: "ul",
                             "data-slot": "childList",
-                            class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                            class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                           }), {
-                            default: withCtx((_3, _push5, _parent5, _scopeId4) => {
+                            default: vueExports.withCtx((_3, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
                                 _push5(`<!--[-->`);
-                                ssrRenderList(item.children, (childItem, childIndex) => {
-                                  _push5(ssrRenderComponent(unref(ReuseItemTemplate), {
+                                ssrRenderList_1(item.children, (childItem, childIndex) => {
+                                  _push5(ssrRenderComponent_1(vueExports.unref(ReuseItemTemplate), {
                                     key: childIndex,
                                     item: childItem,
                                     index: childIndex,
                                     level: level + 1,
                                     "list-index": listIndex,
                                     "data-slot": "childItem",
-                                    class: ui.value.childItem({ class: [unref(props).ui?.childItem, childItem.ui?.childItem] })
+                                    class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, childItem.ui?.childItem] })
                                   }, null, _parent5, _scopeId4));
                                 });
                                 _push5(`<!--]-->`);
                               } else {
                                 return [
-                                  (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                    return openBlock(), createBlock(unref(ReuseItemTemplate), {
+                                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                    return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseItemTemplate), {
                                       key: childIndex,
                                       item: childItem,
                                       index: childIndex,
                                       level: level + 1,
                                       "list-index": listIndex,
                                       "data-slot": "childItem",
-                                      class: ui.value.childItem({ class: [unref(props).ui?.childItem, childItem.ui?.childItem] })
+                                      class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, childItem.ui?.childItem] })
                                     }, null, 8, ["item", "index", "level", "list-index", "class"]);
                                   }), 128))
                                 ];
@@ -3383,24 +3370,24 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                           }, _parent4, _scopeId3));
                         } else {
                           return [
-                            createVNode(unref(AccordionRoot_default), mergeProps({
-                              ...unref(accordionProps),
+                            vueExports.createVNode(vueExports.unref(AccordionRoot_default), vueExports.mergeProps({
+                              ...vueExports.unref(accordionProps),
                               defaultValue: getAccordionDefaultValue(item.children, level + 1, listIndex)
                             }, {
                               as: "ul",
                               "data-slot": "childList",
-                              class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                              class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                             }), {
-                              default: withCtx(() => [
-                                (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                  return openBlock(), createBlock(unref(ReuseItemTemplate), {
+                              default: vueExports.withCtx(() => [
+                                (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                  return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseItemTemplate), {
                                     key: childIndex,
                                     item: childItem,
                                     index: childIndex,
                                     level: level + 1,
                                     "list-index": listIndex,
                                     "data-slot": "childItem",
-                                    class: ui.value.childItem({ class: [unref(props).ui?.childItem, childItem.ui?.childItem] })
+                                    class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, childItem.ui?.childItem] })
                                   }, null, 8, ["item", "index", "level", "list-index", "class"]);
                                 }), 128))
                               ]),
@@ -3416,79 +3403,79 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   }
                 } else {
                   return [
-                    unref(props).orientation === "vertical" && item.type === "label" && !unref(props).collapsed ? (openBlock(), createBlock("div", {
+                    vueExports.unref(props).orientation === "vertical" && item.type === "label" && !vueExports.unref(props).collapsed ? (vueExports.openBlock(), vueExports.createBlock("div", {
                       key: 0,
                       "data-slot": "label",
-                      class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                      class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                     }, [
-                      createVNode(unref(ReuseLinkTemplate), {
+                      vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                         item,
                         index
                       }, null, 8, ["item", "index"])
-                    ], 2)) : item.type !== "label" ? (openBlock(), createBlock(_sfc_main$9$1, mergeProps({ key: 1 }, unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && item.type === "trigger" ? {} : unref(pickLinkProps)(item), { custom: "" }), {
-                      default: withCtx(({ active, ...slotProps }) => [
-                        (openBlock(), createBlock(resolveDynamicComponent(unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? unref(NavigationMenuTrigger_default) : unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && !slotProps.href ? unref(AccordionTrigger_default) : unref(NavigationMenuLink_default)), {
+                    ], 2)) : item.type !== "label" ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$9$1, vueExports.mergeProps({ key: 1 }, vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && item.type === "trigger" ? {} : vueExports.unref(pickLinkProps)(item), { custom: "" }), {
+                      default: vueExports.withCtx(({ active, ...slotProps }) => [
+                        (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? vueExports.unref(NavigationMenuTrigger_default) : vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && !slotProps.href ? vueExports.unref(AccordionTrigger_default) : vueExports.unref(NavigationMenuLink_default)), {
                           "as-child": "",
                           active: active || item.active,
                           disabled: item.disabled,
                           onSelect: item.onSelect
                         }, {
-                          default: withCtx(() => [
-                            unref(props).orientation === "vertical" && unref(props).collapsed && item.children?.length && (!!unref(props).popover || !!item.popover) ? (openBlock(), createBlock(_sfc_main$2$2, mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
-                              ui: { content: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] }) }
+                          default: vueExports.withCtx(() => [
+                            vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && item.children?.length && (!!vueExports.unref(props).popover || !!item.popover) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$2$2, vueExports.mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
+                              ui: { content: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] }) }
                             }), {
-                              content: withCtx(({ close }) => [
-                                renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                              content: vueExports.withCtx(({ close }) => [
+                                vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                   item,
                                   active: active || item.active,
                                   index,
                                   ui: ui.value,
                                   close
                                 }, () => [
-                                  createVNode("ul", {
+                                  vueExports.createVNode("ul", {
                                     "data-slot": "childList",
-                                    class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                    class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                   }, [
-                                    createVNode("li", {
+                                    vueExports.createVNode("li", {
                                       "data-slot": "childLabel",
-                                      class: ui.value.childLabel({ class: [unref(props).ui?.childLabel, item.ui?.childLabel] })
-                                    }, toDisplayString(unref(get)(item, unref(props).labelKey)), 3),
-                                    (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                      return openBlock(), createBlock("li", {
+                                      class: ui.value.childLabel({ class: [vueExports.unref(props).ui?.childLabel, item.ui?.childLabel] })
+                                    }, vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 3),
+                                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                      return vueExports.openBlock(), vueExports.createBlock("li", {
                                         key: childIndex,
                                         "data-slot": "childItem",
-                                        class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                        class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                       }, [
-                                        createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                          default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                            createVNode(unref(NavigationMenuLink_default), {
+                                        vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                          default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                            vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                               "as-child": "",
                                               active: childActive,
                                               onSelect: childItem.onSelect
                                             }, {
-                                              default: withCtx(() => [
-                                                createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                              default: vueExports.withCtx(() => [
+                                                vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                   "data-slot": "childLink",
-                                                  class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                  class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                                 }), {
-                                                  default: withCtx(() => [
-                                                    childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                  default: vueExports.withCtx(() => [
+                                                    childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                       key: 0,
                                                       name: childItem.icon,
                                                       "data-slot": "childLinkIcon",
-                                                      class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                    }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                    createVNode("span", {
+                                                      class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                    }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                    vueExports.createVNode("span", {
                                                       "data-slot": "childLinkLabel",
-                                                      class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                      class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                     }, [
-                                                      createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                      childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                      childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                         key: 0,
-                                                        name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                        name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                         "data-slot": "childLinkLabelExternalIcon",
-                                                        class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                      }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                        class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                      }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                     ], 2)
                                                   ]),
                                                   _: 2
@@ -3504,13 +3491,13 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                   ], 2)
                                 ])
                               ]),
-                              default: withCtx(() => [
-                                createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                              default: vueExports.withCtx(() => [
+                                vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                   "data-slot": "link",
-                                  class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                  class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                 }), {
-                                  default: withCtx(() => [
-                                    createVNode(unref(ReuseLinkTemplate), {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                       item,
                                       active: active || item.active,
                                       index
@@ -3520,17 +3507,17 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 }, 1040, ["class"])
                               ]),
                               _: 2
-                            }, 1040, ["ui"])) : unref(props).orientation === "vertical" && unref(props).collapsed && (!!unref(props).tooltip || !!item.tooltip) || unref(props).orientation === "horizontal" && !!item.tooltip ? (openBlock(), createBlock(_sfc_main$e, mergeProps({
+                            }, 1040, ["ui"])) : vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && (!!vueExports.unref(props).tooltip || !!item.tooltip) || vueExports.unref(props).orientation === "horizontal" && !!item.tooltip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$e, vueExports.mergeProps({
                               key: 1,
-                              text: unref(get)(item, unref(props).labelKey)
+                              text: vueExports.unref(get)(item, vueExports.unref(props).labelKey)
                             }, { ...tooltipProps.value, ...typeof item.tooltip === "boolean" ? {} : item.tooltip || {} }), {
-                              default: withCtx(() => [
-                                createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                              default: vueExports.withCtx(() => [
+                                vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                   "data-slot": "link",
-                                  class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                  class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                                 }), {
-                                  default: withCtx(() => [
-                                    createVNode(unref(ReuseLinkTemplate), {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                       item,
                                       active: active || item.active,
                                       index
@@ -3540,12 +3527,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 }, 1040, ["class"])
                               ]),
                               _: 2
-                            }, 1040, ["text"])) : (openBlock(), createBlock(_sfc_main$a$1, mergeProps({ key: 2 }, slotProps, {
+                            }, 1040, ["text"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a$1, vueExports.mergeProps({ key: 2 }, slotProps, {
                               "data-slot": "link",
-                              class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: unref(props).orientation === "horizontal" || level > 0 })
+                              class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: vueExports.unref(props).orientation === "horizontal" || level > 0 })
                             }), {
-                              default: withCtx(() => [
-                                createVNode(unref(ReuseLinkTemplate), {
+                              default: vueExports.withCtx(() => [
+                                vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                   item,
                                   active: active || item.active,
                                   index
@@ -3556,67 +3543,67 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                           ]),
                           _: 2
                         }, 1064, ["active", "disabled", "onSelect"])),
-                        unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? (openBlock(), createBlock(unref(NavigationMenuContent_default), mergeProps({ key: 0 }, contentProps.value, {
+                        vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(NavigationMenuContent_default), vueExports.mergeProps({ key: 0 }, contentProps.value, {
                           "data-slot": "content",
-                          class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                          class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                         }), {
-                          default: withCtx(() => [
-                            renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                          default: vueExports.withCtx(() => [
+                            vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                               item,
                               active: active || item.active,
                               index,
                               ui: ui.value
                             }, () => [
-                              createVNode("ul", {
+                              vueExports.createVNode("ul", {
                                 "data-slot": "childList",
-                                class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                               }, [
-                                (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                  return openBlock(), createBlock("li", {
+                                (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                  return vueExports.openBlock(), vueExports.createBlock("li", {
                                     key: childIndex,
                                     "data-slot": "childItem",
-                                    class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                    class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                   }, [
-                                    createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                      default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                        createVNode(unref(NavigationMenuLink_default), {
+                                    vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                      default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                        vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                           "as-child": "",
                                           active: childActive,
                                           onSelect: childItem.onSelect
                                         }, {
-                                          default: withCtx(() => [
-                                            createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                               "data-slot": "childLink",
-                                              class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                              class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                             }), {
-                                              default: withCtx(() => [
-                                                childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                              default: vueExports.withCtx(() => [
+                                                childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                   key: 0,
                                                   name: childItem.icon,
                                                   "data-slot": "childLinkIcon",
-                                                  class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                createVNode("div", {
+                                                  class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                vueExports.createVNode("div", {
                                                   "data-slot": "childLinkWrapper",
-                                                  class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                  class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                                 }, [
-                                                  createVNode("p", {
+                                                  vueExports.createVNode("p", {
                                                     "data-slot": "childLinkLabel",
-                                                    class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                    class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                   }, [
-                                                    createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                    childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                    childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                       key: 0,
-                                                      name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                      name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                       "data-slot": "childLinkLabelExternalIcon",
-                                                      class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                    }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                      class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                    }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                   ], 2),
-                                                  childItem.description ? (openBlock(), createBlock("p", {
+                                                  childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                     key: 0,
                                                     "data-slot": "childLinkDescription",
-                                                    class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                  }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                    class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                  }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                                 ], 2)
                                               ]),
                                               _: 2
@@ -3633,34 +3620,34 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                             ])
                           ]),
                           _: 2
-                        }, 1040, ["class"])) : createCommentVNode("", true)
+                        }, 1040, ["class"])) : vueExports.createCommentVNode("", true)
                       ]),
                       _: 2
-                    }, 1040)) : createCommentVNode("", true),
-                    unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed ? (openBlock(), createBlock(unref(AccordionContent_default), {
+                    }, 1040)) : vueExports.createCommentVNode("", true),
+                    vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(AccordionContent_default), {
                       key: 2,
                       "data-slot": "content",
-                      class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                      class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                     }, {
-                      default: withCtx(() => [
-                        createVNode(unref(AccordionRoot_default), mergeProps({
-                          ...unref(accordionProps),
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(vueExports.unref(AccordionRoot_default), vueExports.mergeProps({
+                          ...vueExports.unref(accordionProps),
                           defaultValue: getAccordionDefaultValue(item.children, level + 1, listIndex)
                         }, {
                           as: "ul",
                           "data-slot": "childList",
-                          class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                          class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                         }), {
-                          default: withCtx(() => [
-                            (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                              return openBlock(), createBlock(unref(ReuseItemTemplate), {
+                          default: vueExports.withCtx(() => [
+                            (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                              return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseItemTemplate), {
                                 key: childIndex,
                                 item: childItem,
                                 index: childIndex,
                                 level: level + 1,
                                 "list-index": listIndex,
                                 "data-slot": "childItem",
-                                class: ui.value.childItem({ class: [unref(props).ui?.childItem, childItem.ui?.childItem] })
+                                class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, childItem.ui?.childItem] })
                               }, null, 8, ["item", "index", "level", "list-index", "class"]);
                             }), 128))
                           ]),
@@ -3668,7 +3655,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                         }, 1040, ["class"])
                       ]),
                       _: 2
-                    }, 1032, ["class"])) : createCommentVNode("", true)
+                    }, 1032, ["class"])) : vueExports.createCommentVNode("", true)
                   ];
                 }
               }),
@@ -3676,83 +3663,83 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }), _parent2, _scopeId);
           } else {
             return [
-              (openBlock(), createBlock(resolveDynamicComponent(unref(props).orientation === "vertical" && !unref(props).collapsed ? unref(AccordionItem_default) : unref(NavigationMenuItem_default)), mergeProps({ as: "li" }, unref(props).orientation === "vertical" && !unref(props).collapsed ? { disabled: !!item.disabled } : {}, {
+              (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "vertical" && !vueExports.unref(props).collapsed ? vueExports.unref(AccordionItem_default) : vueExports.unref(NavigationMenuItem_default)), vueExports.mergeProps({ as: "li" }, vueExports.unref(props).orientation === "vertical" && !vueExports.unref(props).collapsed ? { disabled: !!item.disabled } : {}, {
                 value: getItemValue(item, index, level, listIndex)
               }), {
-                default: withCtx(() => [
-                  unref(props).orientation === "vertical" && item.type === "label" && !unref(props).collapsed ? (openBlock(), createBlock("div", {
+                default: vueExports.withCtx(() => [
+                  vueExports.unref(props).orientation === "vertical" && item.type === "label" && !vueExports.unref(props).collapsed ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     "data-slot": "label",
-                    class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label, item.class] })
+                    class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label, item.class] })
                   }, [
-                    createVNode(unref(ReuseLinkTemplate), {
+                    vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                       item,
                       index
                     }, null, 8, ["item", "index"])
-                  ], 2)) : item.type !== "label" ? (openBlock(), createBlock(_sfc_main$9$1, mergeProps({ key: 1 }, unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && item.type === "trigger" ? {} : unref(pickLinkProps)(item), { custom: "" }), {
-                    default: withCtx(({ active, ...slotProps }) => [
-                      (openBlock(), createBlock(resolveDynamicComponent(unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? unref(NavigationMenuTrigger_default) : unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed && !slotProps.href ? unref(AccordionTrigger_default) : unref(NavigationMenuLink_default)), {
+                  ], 2)) : item.type !== "label" ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$9$1, vueExports.mergeProps({ key: 1 }, vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && item.type === "trigger" ? {} : vueExports.unref(pickLinkProps)(item), { custom: "" }), {
+                    default: vueExports.withCtx(({ active, ...slotProps }) => [
+                      (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? vueExports.unref(NavigationMenuTrigger_default) : vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed && !slotProps.href ? vueExports.unref(AccordionTrigger_default) : vueExports.unref(NavigationMenuLink_default)), {
                         "as-child": "",
                         active: active || item.active,
                         disabled: item.disabled,
                         onSelect: item.onSelect
                       }, {
-                        default: withCtx(() => [
-                          unref(props).orientation === "vertical" && unref(props).collapsed && item.children?.length && (!!unref(props).popover || !!item.popover) ? (openBlock(), createBlock(_sfc_main$2$2, mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
-                            ui: { content: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] }) }
+                        default: vueExports.withCtx(() => [
+                          vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && item.children?.length && (!!vueExports.unref(props).popover || !!item.popover) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$2$2, vueExports.mergeProps({ key: 0 }, { ...popoverProps.value, ...typeof item.popover === "boolean" ? {} : item.popover || {} }, {
+                            ui: { content: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] }) }
                           }), {
-                            content: withCtx(({ close }) => [
-                              renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                            content: vueExports.withCtx(({ close }) => [
+                              vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                                 item,
                                 active: active || item.active,
                                 index,
                                 ui: ui.value,
                                 close
                               }, () => [
-                                createVNode("ul", {
+                                vueExports.createVNode("ul", {
                                   "data-slot": "childList",
-                                  class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                                  class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                                 }, [
-                                  createVNode("li", {
+                                  vueExports.createVNode("li", {
                                     "data-slot": "childLabel",
-                                    class: ui.value.childLabel({ class: [unref(props).ui?.childLabel, item.ui?.childLabel] })
-                                  }, toDisplayString(unref(get)(item, unref(props).labelKey)), 3),
-                                  (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                    return openBlock(), createBlock("li", {
+                                    class: ui.value.childLabel({ class: [vueExports.unref(props).ui?.childLabel, item.ui?.childLabel] })
+                                  }, vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 3),
+                                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                    return vueExports.openBlock(), vueExports.createBlock("li", {
                                       key: childIndex,
                                       "data-slot": "childItem",
-                                      class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                      class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                     }, [
-                                      createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                        default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                          createVNode(unref(NavigationMenuLink_default), {
+                                      vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                        default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                          vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                             "as-child": "",
                                             active: childActive,
                                             onSelect: childItem.onSelect
                                           }, {
-                                            default: withCtx(() => [
-                                              createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                            default: vueExports.withCtx(() => [
+                                              vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                                 "data-slot": "childLink",
-                                                class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                                class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                               }), {
-                                                default: withCtx(() => [
-                                                  childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                                default: vueExports.withCtx(() => [
+                                                  childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                     key: 0,
                                                     name: childItem.icon,
                                                     "data-slot": "childLinkIcon",
-                                                    class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                                  }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                                  createVNode("span", {
+                                                    class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                                  vueExports.createVNode("span", {
                                                     "data-slot": "childLinkLabel",
-                                                    class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                    class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                   }, [
-                                                    createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                    childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                    childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                       key: 0,
-                                                      name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                      name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                       "data-slot": "childLinkLabelExternalIcon",
-                                                      class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                    }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                      class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                    }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                   ], 2)
                                                 ]),
                                                 _: 2
@@ -3768,13 +3755,13 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                                 ], 2)
                               ])
                             ]),
-                            default: withCtx(() => [
-                              createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                            default: vueExports.withCtx(() => [
+                              vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                 "data-slot": "link",
-                                class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                               }), {
-                                default: withCtx(() => [
-                                  createVNode(unref(ReuseLinkTemplate), {
+                                default: vueExports.withCtx(() => [
+                                  vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                     item,
                                     active: active || item.active,
                                     index
@@ -3784,17 +3771,17 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                               }, 1040, ["class"])
                             ]),
                             _: 2
-                          }, 1040, ["ui"])) : unref(props).orientation === "vertical" && unref(props).collapsed && (!!unref(props).tooltip || !!item.tooltip) || unref(props).orientation === "horizontal" && !!item.tooltip ? (openBlock(), createBlock(_sfc_main$e, mergeProps({
+                          }, 1040, ["ui"])) : vueExports.unref(props).orientation === "vertical" && vueExports.unref(props).collapsed && (!!vueExports.unref(props).tooltip || !!item.tooltip) || vueExports.unref(props).orientation === "horizontal" && !!item.tooltip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$e, vueExports.mergeProps({
                             key: 1,
-                            text: unref(get)(item, unref(props).labelKey)
+                            text: vueExports.unref(get)(item, vueExports.unref(props).labelKey)
                           }, { ...tooltipProps.value, ...typeof item.tooltip === "boolean" ? {} : item.tooltip || {} }), {
-                            default: withCtx(() => [
-                              createVNode(_sfc_main$a$1, mergeProps(slotProps, {
+                            default: vueExports.withCtx(() => [
+                              vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps(slotProps, {
                                 "data-slot": "link",
-                                class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
+                                class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })
                               }), {
-                                default: withCtx(() => [
-                                  createVNode(unref(ReuseLinkTemplate), {
+                                default: vueExports.withCtx(() => [
+                                  vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                     item,
                                     active: active || item.active,
                                     index
@@ -3804,12 +3791,12 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                               }, 1040, ["class"])
                             ]),
                             _: 2
-                          }, 1040, ["text"])) : (openBlock(), createBlock(_sfc_main$a$1, mergeProps({ key: 2 }, slotProps, {
+                          }, 1040, ["text"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a$1, vueExports.mergeProps({ key: 2 }, slotProps, {
                             "data-slot": "link",
-                            class: ui.value.link({ class: [unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: unref(props).orientation === "horizontal" || level > 0 })
+                            class: ui.value.link({ class: [vueExports.unref(props).ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: vueExports.unref(props).orientation === "horizontal" || level > 0 })
                           }), {
-                            default: withCtx(() => [
-                              createVNode(unref(ReuseLinkTemplate), {
+                            default: vueExports.withCtx(() => [
+                              vueExports.createVNode(vueExports.unref(ReuseLinkTemplate), {
                                 item,
                                 active: active || item.active,
                                 index
@@ -3820,67 +3807,67 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                         ]),
                         _: 2
                       }, 1064, ["active", "disabled", "onSelect"])),
-                      unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? (openBlock(), createBlock(unref(NavigationMenuContent_default), mergeProps({ key: 0 }, contentProps.value, {
+                      vueExports.unref(props).orientation === "horizontal" && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : "item-content"]) ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(NavigationMenuContent_default), vueExports.mergeProps({ key: 0 }, contentProps.value, {
                         "data-slot": "content",
-                        class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                        class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                       }), {
-                        default: withCtx(() => [
-                          renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-content` : "item-content", {
                             item,
                             active: active || item.active,
                             index,
                             ui: ui.value
                           }, () => [
-                            createVNode("ul", {
+                            vueExports.createVNode("ul", {
                               "data-slot": "childList",
-                              class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                              class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                             }, [
-                              (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                                return openBlock(), createBlock("li", {
+                              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                                return vueExports.openBlock(), vueExports.createBlock("li", {
                                   key: childIndex,
                                   "data-slot": "childItem",
-                                  class: ui.value.childItem({ class: [unref(props).ui?.childItem, item.ui?.childItem] })
+                                  class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, item.ui?.childItem] })
                                 }, [
-                                  createVNode(_sfc_main$9$1, mergeProps({ ref_for: true }, unref(pickLinkProps)(childItem), { custom: "" }), {
-                                    default: withCtx(({ active: childActive, ...childSlotProps }) => [
-                                      createVNode(unref(NavigationMenuLink_default), {
+                                  vueExports.createVNode(_sfc_main$9$1, vueExports.mergeProps({ ref_for: true }, vueExports.unref(pickLinkProps)(childItem), { custom: "" }), {
+                                    default: vueExports.withCtx(({ active: childActive, ...childSlotProps }) => [
+                                      vueExports.createVNode(vueExports.unref(NavigationMenuLink_default), {
                                         "as-child": "",
                                         active: childActive,
                                         onSelect: childItem.onSelect
                                       }, {
-                                        default: withCtx(() => [
-                                          createVNode(_sfc_main$a$1, mergeProps({ ref_for: true }, childSlotProps, {
+                                        default: vueExports.withCtx(() => [
+                                          vueExports.createVNode(_sfc_main$a$1, vueExports.mergeProps({ ref_for: true }, childSlotProps, {
                                             "data-slot": "childLink",
-                                            class: ui.value.childLink({ class: [unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
+                                            class: ui.value.childLink({ class: [vueExports.unref(props).ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })
                                           }), {
-                                            default: withCtx(() => [
-                                              childItem.icon ? (openBlock(), createBlock(_sfc_main$d, {
+                                            default: vueExports.withCtx(() => [
+                                              childItem.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                 key: 0,
                                                 name: childItem.icon,
                                                 "data-slot": "childLinkIcon",
-                                                class: ui.value.childLinkIcon({ class: [unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
-                                              }, null, 8, ["name", "class"])) : createCommentVNode("", true),
-                                              createVNode("div", {
+                                                class: ui.value.childLinkIcon({ class: [vueExports.unref(props).ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })
+                                              }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true),
+                                              vueExports.createVNode("div", {
                                                 "data-slot": "childLinkWrapper",
-                                                class: ui.value.childLinkWrapper({ class: [unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
+                                                class: ui.value.childLinkWrapper({ class: [vueExports.unref(props).ui?.childLinkWrapper, item.ui?.childLinkWrapper] })
                                               }, [
-                                                createVNode("p", {
+                                                vueExports.createVNode("p", {
                                                   "data-slot": "childLinkLabel",
-                                                  class: ui.value.childLinkLabel({ class: [unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
+                                                  class: ui.value.childLinkLabel({ class: [vueExports.unref(props).ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })
                                                 }, [
-                                                  createTextVNode(toDisplayString(unref(get)(childItem, unref(props).labelKey)) + " ", 1),
-                                                  childItem.target === "_blank" && unref(props).externalIcon !== false ? (openBlock(), createBlock(_sfc_main$d, {
+                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(childItem, vueExports.unref(props).labelKey)) + " ", 1),
+                                                  childItem.target === "_blank" && vueExports.unref(props).externalIcon !== false ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                                                     key: 0,
-                                                    name: typeof unref(props).externalIcon === "string" ? unref(props).externalIcon : unref(appConfig).ui.icons.external,
+                                                    name: typeof vueExports.unref(props).externalIcon === "string" ? vueExports.unref(props).externalIcon : vueExports.unref(appConfig).ui.icons.external,
                                                     "data-slot": "childLinkLabelExternalIcon",
-                                                    class: ui.value.childLinkLabelExternalIcon({ class: [unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
-                                                  }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                                    class: ui.value.childLinkLabelExternalIcon({ class: [vueExports.unref(props).ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })
+                                                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                                 ], 2),
-                                                childItem.description ? (openBlock(), createBlock("p", {
+                                                childItem.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                                                   key: 0,
                                                   "data-slot": "childLinkDescription",
-                                                  class: ui.value.childLinkDescription({ class: [unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
-                                                }, toDisplayString(childItem.description), 3)) : createCommentVNode("", true)
+                                                  class: ui.value.childLinkDescription({ class: [vueExports.unref(props).ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })
+                                                }, vueExports.toDisplayString(childItem.description), 3)) : vueExports.createCommentVNode("", true)
                                               ], 2)
                                             ]),
                                             _: 2
@@ -3897,34 +3884,34 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                           ])
                         ]),
                         _: 2
-                      }, 1040, ["class"])) : createCommentVNode("", true)
+                      }, 1040, ["class"])) : vueExports.createCommentVNode("", true)
                     ]),
                     _: 2
-                  }, 1040)) : createCommentVNode("", true),
-                  unref(props).orientation === "vertical" && item.children?.length && !unref(props).collapsed ? (openBlock(), createBlock(unref(AccordionContent_default), {
+                  }, 1040)) : vueExports.createCommentVNode("", true),
+                  vueExports.unref(props).orientation === "vertical" && item.children?.length && !vueExports.unref(props).collapsed ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(AccordionContent_default), {
                     key: 2,
                     "data-slot": "content",
-                    class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                    class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                   }, {
-                    default: withCtx(() => [
-                      createVNode(unref(AccordionRoot_default), mergeProps({
-                        ...unref(accordionProps),
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(vueExports.unref(AccordionRoot_default), vueExports.mergeProps({
+                        ...vueExports.unref(accordionProps),
                         defaultValue: getAccordionDefaultValue(item.children, level + 1, listIndex)
                       }, {
                         as: "ul",
                         "data-slot": "childList",
-                        class: ui.value.childList({ class: [unref(props).ui?.childList, item.ui?.childList] })
+                        class: ui.value.childList({ class: [vueExports.unref(props).ui?.childList, item.ui?.childList] })
                       }), {
-                        default: withCtx(() => [
-                          (openBlock(true), createBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                            return openBlock(), createBlock(unref(ReuseItemTemplate), {
+                        default: vueExports.withCtx(() => [
+                          (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(item.children, (childItem, childIndex) => {
+                            return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseItemTemplate), {
                               key: childIndex,
                               item: childItem,
                               index: childIndex,
                               level: level + 1,
                               "list-index": listIndex,
                               "data-slot": "childItem",
-                              class: ui.value.childItem({ class: [unref(props).ui?.childItem, childItem.ui?.childItem] })
+                              class: ui.value.childItem({ class: [vueExports.unref(props).ui?.childItem, childItem.ui?.childItem] })
                             }, null, 8, ["item", "index", "level", "list-index", "class"]);
                           }), 128))
                         ]),
@@ -3932,7 +3919,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                       }, 1040, ["class"])
                     ]),
                     _: 2
-                  }, 1032, ["class"])) : createCommentVNode("", true)
+                  }, 1032, ["class"])) : vueExports.createCommentVNode("", true)
                 ]),
                 _: 2
               }, 1040, ["value"]))
@@ -3941,57 +3928,57 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         }),
         _: 3
       }, _parent));
-      _push(ssrRenderComponent(unref(NavigationMenuRoot_default), mergeProps({
-        ...unref(rootProps),
-        ...unref(props).orientation === "horizontal" ? {
-          modelValue: unref(props).modelValue,
-          defaultValue: unref(props).defaultValue
+      _push(ssrRenderComponent_1(vueExports.unref(NavigationMenuRoot_default), vueExports.mergeProps({
+        ...vueExports.unref(rootProps),
+        ...vueExports.unref(props).orientation === "horizontal" ? {
+          modelValue: vueExports.unref(props).modelValue,
+          defaultValue: vueExports.unref(props).defaultValue
         } : {},
         ..._ctx.$attrs
       }, {
-        "data-collapsed": unref(props).collapsed,
+        "data-collapsed": vueExports.unref(props).collapsed,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "list-leading", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "list-leading", {}, null, _push2, _parent2, _scopeId);
             _push2(`<!--[-->`);
-            ssrRenderList(lists.value, (list, listIndex) => {
+            ssrRenderList_1(lists.value, (list, listIndex) => {
               _push2(`<!--[-->`);
-              ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(unref(props).orientation === "vertical" ? unref(AccordionRoot_default) : unref(NavigationMenuList_default)), mergeProps({ ref_for: true }, unref(props).orientation === "vertical" && !unref(props).collapsed ? {
-                ...unref(accordionProps),
-                modelValue: unref(props).modelValue,
-                defaultValue: unref(props).defaultValue ?? getAccordionDefaultValue(list, 0, listIndex)
+              ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "vertical" ? vueExports.unref(AccordionRoot_default) : vueExports.unref(NavigationMenuList_default)), vueExports.mergeProps({ ref_for: true }, vueExports.unref(props).orientation === "vertical" && !vueExports.unref(props).collapsed ? {
+                ...vueExports.unref(accordionProps),
+                modelValue: vueExports.unref(props).modelValue,
+                defaultValue: vueExports.unref(props).defaultValue ?? getAccordionDefaultValue(list, 0, listIndex)
               } : {}, {
                 as: "ul",
                 "data-slot": "list",
-                class: ui.value.list({ class: unref(props).ui?.list })
+                class: ui.value.list({ class: vueExports.unref(props).ui?.list })
               }), {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(`<!--[-->`);
-                    ssrRenderList(list, (item, index) => {
-                      _push3(ssrRenderComponent(unref(ReuseItemTemplate), {
+                    ssrRenderList_1(list, (item, index) => {
+                      _push3(ssrRenderComponent_1(vueExports.unref(ReuseItemTemplate), {
                         key: `list-${listIndex}-${index}`,
                         item,
                         index,
                         "list-index": listIndex,
                         "data-slot": "item",
-                        class: ui.value.item({ class: [unref(props).ui?.item, item.ui?.item] })
+                        class: ui.value.item({ class: [vueExports.unref(props).ui?.item, item.ui?.item] })
                       }, null, _parent3, _scopeId2));
                     });
                     _push3(`<!--]-->`);
                   } else {
                     return [
-                      (openBlock(true), createBlock(Fragment, null, renderList(list, (item, index) => {
-                        return openBlock(), createBlock(unref(ReuseItemTemplate), {
+                      (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(list, (item, index) => {
+                        return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseItemTemplate), {
                           key: `list-${listIndex}-${index}`,
                           item,
                           index,
                           "list-index": listIndex,
                           "data-slot": "item",
-                          class: ui.value.item({ class: [unref(props).ui?.item, item.ui?.item] })
+                          class: ui.value.item({ class: [vueExports.unref(props).ui?.item, item.ui?.item] })
                         }, null, 8, ["item", "index", "list-index", "class"]);
                       }), 128))
                     ];
@@ -3999,30 +3986,30 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                 }),
                 _: 2
               }), _parent2, _scopeId);
-              if (unref(props).orientation === "vertical" && listIndex < lists.value.length - 1) {
-                _push2(`<div data-slot="separator" class="${ssrRenderClass(ui.value.separator({ class: unref(props).ui?.separator }))}"${_scopeId}></div>`);
+              if (vueExports.unref(props).orientation === "vertical" && listIndex < lists.value.length - 1) {
+                _push2(`<div data-slot="separator" class="${ssrRenderClass_1(ui.value.separator({ class: vueExports.unref(props).ui?.separator }))}"${_scopeId}></div>`);
               } else {
                 _push2(`<!---->`);
               }
               _push2(`<!--]-->`);
             });
             _push2(`<!--]-->`);
-            ssrRenderSlot(_ctx.$slots, "list-trailing", {}, null, _push2, _parent2, _scopeId);
-            if (unref(props).orientation === "horizontal") {
-              _push2(`<div data-slot="viewportWrapper" class="${ssrRenderClass(ui.value.viewportWrapper({ class: unref(props).ui?.viewportWrapper }))}"${_scopeId}>`);
-              if (unref(props).arrow) {
-                _push2(ssrRenderComponent(unref(NavigationMenuIndicator_default), {
+            ssrRenderSlot_1(_ctx.$slots, "list-trailing", {}, null, _push2, _parent2, _scopeId);
+            if (vueExports.unref(props).orientation === "horizontal") {
+              _push2(`<div data-slot="viewportWrapper" class="${ssrRenderClass_1(ui.value.viewportWrapper({ class: vueExports.unref(props).ui?.viewportWrapper }))}"${_scopeId}>`);
+              if (vueExports.unref(props).arrow) {
+                _push2(ssrRenderComponent_1(vueExports.unref(NavigationMenuIndicator_default), {
                   "data-slot": "indicator",
-                  class: ui.value.indicator({ class: unref(props).ui?.indicator })
+                  class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator })
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<div data-slot="arrow" class="${ssrRenderClass(ui.value.arrow({ class: unref(props).ui?.arrow }))}"${_scopeId2}></div>`);
+                      _push3(`<div data-slot="arrow" class="${ssrRenderClass_1(ui.value.arrow({ class: vueExports.unref(props).ui?.arrow }))}"${_scopeId2}></div>`);
                     } else {
                       return [
-                        createVNode("div", {
+                        vueExports.createVNode("div", {
                           "data-slot": "arrow",
-                          class: ui.value.arrow({ class: unref(props).ui?.arrow })
+                          class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
                         }, null, 2)
                       ];
                     }
@@ -4032,9 +4019,9 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               } else {
                 _push2(`<!---->`);
               }
-              _push2(ssrRenderComponent(unref(NavigationMenuViewport_default), {
+              _push2(ssrRenderComponent_1(vueExports.unref(NavigationMenuViewport_default), {
                 "data-slot": "viewport",
-                class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
               }, null, _parent2, _scopeId));
               _push2(`</div>`);
             } else {
@@ -4042,65 +4029,65 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }
           } else {
             return [
-              renderSlot(_ctx.$slots, "list-leading"),
-              (openBlock(true), createBlock(Fragment, null, renderList(lists.value, (list, listIndex) => {
-                return openBlock(), createBlock(Fragment, {
+              vueExports.renderSlot(_ctx.$slots, "list-leading"),
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(lists.value, (list, listIndex) => {
+                return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, {
                   key: `list-${listIndex}`
                 }, [
-                  (openBlock(), createBlock(resolveDynamicComponent(unref(props).orientation === "vertical" ? unref(AccordionRoot_default) : unref(NavigationMenuList_default)), mergeProps({ ref_for: true }, unref(props).orientation === "vertical" && !unref(props).collapsed ? {
-                    ...unref(accordionProps),
-                    modelValue: unref(props).modelValue,
-                    defaultValue: unref(props).defaultValue ?? getAccordionDefaultValue(list, 0, listIndex)
+                  (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).orientation === "vertical" ? vueExports.unref(AccordionRoot_default) : vueExports.unref(NavigationMenuList_default)), vueExports.mergeProps({ ref_for: true }, vueExports.unref(props).orientation === "vertical" && !vueExports.unref(props).collapsed ? {
+                    ...vueExports.unref(accordionProps),
+                    modelValue: vueExports.unref(props).modelValue,
+                    defaultValue: vueExports.unref(props).defaultValue ?? getAccordionDefaultValue(list, 0, listIndex)
                   } : {}, {
                     as: "ul",
                     "data-slot": "list",
-                    class: ui.value.list({ class: unref(props).ui?.list })
+                    class: ui.value.list({ class: vueExports.unref(props).ui?.list })
                   }), {
-                    default: withCtx(() => [
-                      (openBlock(true), createBlock(Fragment, null, renderList(list, (item, index) => {
-                        return openBlock(), createBlock(unref(ReuseItemTemplate), {
+                    default: vueExports.withCtx(() => [
+                      (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(list, (item, index) => {
+                        return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ReuseItemTemplate), {
                           key: `list-${listIndex}-${index}`,
                           item,
                           index,
                           "list-index": listIndex,
                           "data-slot": "item",
-                          class: ui.value.item({ class: [unref(props).ui?.item, item.ui?.item] })
+                          class: ui.value.item({ class: [vueExports.unref(props).ui?.item, item.ui?.item] })
                         }, null, 8, ["item", "index", "list-index", "class"]);
                       }), 128))
                     ]),
                     _: 2
                   }, 1040, ["class"])),
-                  unref(props).orientation === "vertical" && listIndex < lists.value.length - 1 ? (openBlock(), createBlock("div", {
+                  vueExports.unref(props).orientation === "vertical" && listIndex < lists.value.length - 1 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     "data-slot": "separator",
-                    class: ui.value.separator({ class: unref(props).ui?.separator })
-                  }, null, 2)) : createCommentVNode("", true)
+                    class: ui.value.separator({ class: vueExports.unref(props).ui?.separator })
+                  }, null, 2)) : vueExports.createCommentVNode("", true)
                 ], 64);
               }), 128)),
-              renderSlot(_ctx.$slots, "list-trailing"),
-              unref(props).orientation === "horizontal" ? (openBlock(), createBlock("div", {
+              vueExports.renderSlot(_ctx.$slots, "list-trailing"),
+              vueExports.unref(props).orientation === "horizontal" ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "viewportWrapper",
-                class: ui.value.viewportWrapper({ class: unref(props).ui?.viewportWrapper })
+                class: ui.value.viewportWrapper({ class: vueExports.unref(props).ui?.viewportWrapper })
               }, [
-                unref(props).arrow ? (openBlock(), createBlock(unref(NavigationMenuIndicator_default), {
+                vueExports.unref(props).arrow ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(NavigationMenuIndicator_default), {
                   key: 0,
                   "data-slot": "indicator",
-                  class: ui.value.indicator({ class: unref(props).ui?.indicator })
+                  class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator })
                 }, {
-                  default: withCtx(() => [
-                    createVNode("div", {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode("div", {
                       "data-slot": "arrow",
-                      class: ui.value.arrow({ class: unref(props).ui?.arrow })
+                      class: ui.value.arrow({ class: vueExports.unref(props).ui?.arrow })
                     }, null, 2)
                   ]),
                   _: 1
-                }, 8, ["class"])) : createCommentVNode("", true),
-                createVNode(unref(NavigationMenuViewport_default), {
+                }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                vueExports.createVNode(vueExports.unref(NavigationMenuViewport_default), {
                   "data-slot": "viewport",
-                  class: ui.value.viewport({ class: unref(props).ui?.viewport })
+                  class: ui.value.viewport({ class: vueExports.unref(props).ui?.viewport })
                 }, null, 8, ["class"])
-              ], 2)) : createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -4112,7 +4099,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/NavigationMenu.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -4148,7 +4135,7 @@ function convertKeyToCode(key) {
   return specialKeys[key.toLowerCase()] || key;
 }
 function defineShortcuts(config, options = {}) {
-  const chainedInputs = ref([]);
+  const chainedInputs = vueExports.ref([]);
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length);
   };
@@ -4215,7 +4202,7 @@ function defineShortcuts(config, options = {}) {
     }
     debouncedClearChainedInput();
   };
-  const usingInput = computed(() => {
+  const usingInput = vueExports.computed(() => {
     const tagName = activeElement.value?.tagName;
     const contentEditable = activeElement.value?.contentEditable;
     const usingInput2 = !!(tagName === "INPUT" || tagName === "TEXTAREA" || contentEditable === "true" || contentEditable === "plaintext-only");
@@ -4224,8 +4211,8 @@ function defineShortcuts(config, options = {}) {
     }
     return false;
   });
-  const shortcuts = computed(() => {
-    return Object.entries(toValue(config)).map(([key, shortcutConfig]) => {
+  const shortcuts = vueExports.computed(() => {
+    return Object.entries(vueExports.toValue(config)).map(([key, shortcutConfig]) => {
       if (!shortcutConfig) {
         return null;
       }
@@ -4296,7 +4283,7 @@ function defineShortcuts(config, options = {}) {
   });
   return useEventListener("keydown", onKeyDown);
 }
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Ribbon",
   __ssrInlineRender: true,
   async setup(__props) {
@@ -4326,14 +4313,14 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       clear();
       await navigateTo("/");
     }
-    const collectionLinks = computed(
+    const collectionLinks = vueExports.computed(
       () => collections.value.map((c) => ({
         label: c.name,
         icon: getCollectionType(c.type)?.icon ?? "i-lucide-database",
         to: `/admin/collections/${c.id}`
       }))
     );
-    const topLinks = computed(
+    const topLinks = vueExports.computed(
       () => [
         { label: "General", type: "label" },
         { label: "Page builder", icon: "i-lucide-layout-dashboard", to: "/admin" },
@@ -4359,48 +4346,48 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       const _component_UDashboardSidebarCollapse = _sfc_main$3;
       const _component_UNavigationMenu = _sfc_main$2;
       const _component_UColorModeButton = _sfc_main$1$1;
-      _push(ssrRenderComponent(_component_UDashboardSidebar, mergeProps({
-        open: unref(isSidebarOpen),
-        "onUpdate:open": ($event) => isRef(isSidebarOpen) ? isSidebarOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_UDashboardSidebar, vueExports.mergeProps({
+        open: vueExports.unref(isSidebarOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(isSidebarOpen) ? isSidebarOpen.value = $event : null,
         collapsible: "",
         ui: { header: "border-b border-default" }
       }, _attrs), {
-        header: withCtx(({ collapsed }, _push2, _parent2, _scopeId) => {
+        header: vueExports.withCtx(({ collapsed }, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (!collapsed) {
               _push2(`<span class="truncate text-sm font-medium flex-1"${_scopeId}>My Portfolio</span>`);
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(_component_UDashboardSidebarCollapse, {
+            _push2(ssrRenderComponent_1(_component_UDashboardSidebarCollapse, {
               class: collapsed ? "mx-auto" : "ml-auto"
             }, null, _parent2, _scopeId));
           } else {
             return [
-              !collapsed ? (openBlock(), createBlock("span", {
+              !collapsed ? (vueExports.openBlock(), vueExports.createBlock("span", {
                 key: 0,
                 class: "truncate text-sm font-medium flex-1"
-              }, "My Portfolio")) : createCommentVNode("", true),
-              createVNode(_component_UDashboardSidebarCollapse, {
+              }, "My Portfolio")) : vueExports.createCommentVNode("", true),
+              vueExports.createVNode(_component_UDashboardSidebarCollapse, {
                 class: collapsed ? "mx-auto" : "ml-auto"
               }, null, 8, ["class"])
             ];
           }
         }),
-        default: withCtx(({ collapsed }, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx(({ collapsed }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_UNavigationMenu, {
+            _push2(ssrRenderComponent_1(_component_UNavigationMenu, {
               collapsed,
-              items: unref(topLinks),
+              items: vueExports.unref(topLinks),
               orientation: "vertical",
               tooltip: "",
               popover: ""
             }, null, _parent2, _scopeId));
             _push2(`<div class="mt-auto flex flex-col gap-1"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UColorModeButton, {
+            _push2(ssrRenderComponent_1(_component_UColorModeButton, {
               label: collapsed ? void 0 : "Toggle theme"
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UNavigationMenu, {
+            _push2(ssrRenderComponent_1(_component_UNavigationMenu, {
               collapsed,
               items: bottomLinks,
               orientation: "vertical",
@@ -4409,18 +4396,18 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode(_component_UNavigationMenu, {
+              vueExports.createVNode(_component_UNavigationMenu, {
                 collapsed,
-                items: unref(topLinks),
+                items: vueExports.unref(topLinks),
                 orientation: "vertical",
                 tooltip: "",
                 popover: ""
               }, null, 8, ["collapsed", "items"]),
-              createVNode("div", { class: "mt-auto flex flex-col gap-1" }, [
-                createVNode(_component_UColorModeButton, {
+              vueExports.createVNode("div", { class: "mt-auto flex flex-col gap-1" }, [
+                vueExports.createVNode(_component_UColorModeButton, {
                   label: collapsed ? void 0 : "Toggle theme"
                 }, null, 8, ["label"]),
-                createVNode(_component_UNavigationMenu, {
+                vueExports.createVNode(_component_UNavigationMenu, {
                   collapsed,
                   items: bottomLinks,
                   orientation: "vertical",
@@ -4437,7 +4424,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/layout/Ribbon.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -4448,23 +4435,23 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   const _component_UDashboardGroup = _sfc_main$5;
   const _component_ClientOnly = __nuxt_component_2$1;
   const _component_AdminLayoutRibbon = __nuxt_component_3;
-  _push(ssrRenderComponent(_component_UMain, _attrs, {
-    default: withCtx((_, _push2, _parent2, _scopeId) => {
+  _push(ssrRenderComponent_1(_component_UMain, _attrs, {
+    default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(ssrRenderComponent(_component_UDashboardGroup, null, {
-          default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+        _push2(ssrRenderComponent_1(_component_UDashboardGroup, null, {
+          default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
             if (_push3) {
-              _push3(ssrRenderComponent(_component_ClientOnly, null, {}, _parent3, _scopeId2));
-              ssrRenderSlot(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
+              _push3(ssrRenderComponent_1(_component_ClientOnly, null, {}, _parent3, _scopeId2));
+              ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
             } else {
               return [
-                createVNode(_component_ClientOnly, null, {
-                  default: withCtx(() => [
-                    createVNode(_component_AdminLayoutRibbon)
+                vueExports.createVNode(_component_ClientOnly, null, {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode(_component_AdminLayoutRibbon)
                   ]),
                   _: 1
                 }),
-                renderSlot(_ctx.$slots, "default")
+                vueExports.renderSlot(_ctx.$slots, "default")
               ];
             }
           }),
@@ -4472,15 +4459,15 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
         }, _parent2, _scopeId));
       } else {
         return [
-          createVNode(_component_UDashboardGroup, null, {
-            default: withCtx(() => [
-              createVNode(_component_ClientOnly, null, {
-                default: withCtx(() => [
-                  createVNode(_component_AdminLayoutRibbon)
+          vueExports.createVNode(_component_UDashboardGroup, null, {
+            default: vueExports.withCtx(() => [
+              vueExports.createVNode(_component_ClientOnly, null, {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(_component_AdminLayoutRibbon)
                 ]),
                 _: 1
               }),
-              renderSlot(_ctx.$slots, "default")
+              vueExports.renderSlot(_ctx.$slots, "default")
             ]),
             _: 3
           })
@@ -4492,7 +4479,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
 }
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("layouts/admin.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

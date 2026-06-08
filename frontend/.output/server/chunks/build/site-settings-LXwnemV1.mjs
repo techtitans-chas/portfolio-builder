@@ -5,15 +5,12 @@ import { _ as _sfc_main$3 } from './FormField-9wkfNHPa.mjs';
 import { _ as _sfc_main$4 } from './Input-DWHPzDmy.mjs';
 import { _ as _sfc_main$5 } from './Separator-CgixisDT.mjs';
 import { _ as _sfc_main$6 } from './Alert-Nv5RlKkm.mjs';
-import { f as _sfc_main$8 } from './server.mjs';
-import { defineComponent, withAsyncContext, reactive, watch, ref, withCtx, unref, createVNode, createTextVNode, toDisplayString, openBlock, createBlock, createCommentVNode, withModifiers, isRef, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
+import { aO as vueExports, a7 as ssrRenderComponent_1, e as _sfc_main$8, a3 as ssrInterpolate_1, a4 as ssrRenderAttr_1 } from './server.mjs';
 import { u as useCurrentUser } from './useCurrentUser-0x7hmjnh.mjs';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 import { u as useUnsavedChanges } from './useUnsavedChanges-CbDvifmB.mjs';
 import './PageWrapper-dRmsqRwL.mjs';
 import './DashboardSidebarToggle-uAAQWn-6.mjs';
-import '@vueuse/core';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -23,37 +20,28 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 import './Container-CXQFSuFJ.mjs';
 import './MediaGrid-DBtVJH5B.mjs';
 import './PopperArrow-CVyIWJ6M.mjs';
-import '@vueuse/shared';
-import '@floating-ui/vue';
+import '../routes/renderer.mjs';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 import './overlay-BWwBD9XH.mjs';
-import 'aria-hidden';
 import './Modal-D9bZkufO.mjs';
 import './useServerFeatures-DOIxALfL.mjs';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import 'tailwind-variants';
-import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
 
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "site-settings",
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
     const { portfolio, fetch: fetchUser, clear: clearUser } = useCurrentUser();
     const { fetcher } = useApi();
-    [__temp, __restore] = withAsyncContext(() => fetchUser()), await __temp, __restore();
-    const form = reactive({
+    [__temp, __restore] = vueExports.withAsyncContext(() => fetchUser()), await __temp, __restore();
+    const form = vueExports.reactive({
       isPublished: false,
       title: "",
       slug: "",
@@ -64,7 +52,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       logoLight: "",
       logoDark: ""
     });
-    watch(
+    vueExports.watch(
       portfolio,
       (p) => {
         if (!p) return;
@@ -83,12 +71,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { immediate: true }
     );
     const { markSaved } = useUnsavedChanges(form);
-    const successMessage = ref("");
-    const errorMessage = ref("");
-    const saving = ref(false);
-    const ogImagePickerOpen = ref(false);
-    const logoLightPickerOpen = ref(false);
-    const logoDarkPickerOpen = ref(false);
+    const successMessage = vueExports.ref("");
+    const errorMessage = vueExports.ref("");
+    const saving = vueExports.ref(false);
+    const ogImagePickerOpen = vueExports.ref(false);
+    const logoLightPickerOpen = vueExports.ref(false);
+    const logoDarkPickerOpen = vueExports.ref(false);
     async function save() {
       if (!portfolio.value?.id) return;
       saving.value = true;
@@ -138,41 +126,41 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UButton = _sfc_main$8;
       const _component_AdminMediaPickerModal = __nuxt_component_11;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_component_AdminLayoutPageStructure, {
+      _push(ssrRenderComponent_1(_component_AdminLayoutPageStructure, {
         title: "Site settings",
         description: "Configure your portfolio."
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_UForm, {
+            _push2(ssrRenderComponent_1(_component_UForm, {
               class: "max-w-md space-y-4",
               onSubmit: save
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_USwitch, {
-                    modelValue: unref(form).isPublished,
-                    "onUpdate:modelValue": ($event) => unref(form).isPublished = $event,
+                  _push3(ssrRenderComponent_1(_component_USwitch, {
+                    modelValue: vueExports.unref(form).isPublished,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).isPublished = $event,
                     label: "Publish site",
                     description: "Your portfolio will be publicly available."
                   }, null, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "Portfolio title",
                     name: "title"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UInput, {
-                          modelValue: unref(form).title,
-                          "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                        _push4(ssrRenderComponent_1(_component_UInput, {
+                          modelValue: vueExports.unref(form).title,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                           placeholder: "My Portfolio",
                           class: "w-full"
                         }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UInput, {
-                            modelValue: unref(form).title,
-                            "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                          vueExports.createVNode(_component_UInput, {
+                            modelValue: vueExports.unref(form).title,
+                            "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                             placeholder: "My Portfolio",
                             class: "w-full"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -181,25 +169,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "URL",
                     name: "slug"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UInput, {
-                          modelValue: unref(form).slug,
-                          "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                        _push4(ssrRenderComponent_1(_component_UInput, {
+                          modelValue: vueExports.unref(form).slug,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                           placeholder: "my-portfolio",
                           class: "w-full",
                           ui: { base: "pl-21", leading: "pointer-events-none" }
                         }, {
-                          leading: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                          leading: vueExports.withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
                               _push5(`<span class="text-muted text-sm"${_scopeId4}>folio.app/p/</span>`);
                             } else {
                               return [
-                                createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
+                                vueExports.createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
                               ];
                             }
                           }),
@@ -207,15 +195,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         }, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UInput, {
-                            modelValue: unref(form).slug,
-                            "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                          vueExports.createVNode(_component_UInput, {
+                            modelValue: vueExports.unref(form).slug,
+                            "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                             placeholder: "my-portfolio",
                             class: "w-full",
                             ui: { base: "pl-21", leading: "pointer-events-none" }
                           }, {
-                            leading: withCtx(() => [
-                              createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
+                            leading: vueExports.withCtx(() => [
+                              vueExports.createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
                             ]),
                             _: 1
                           }, 8, ["modelValue", "onUpdate:modelValue"])
@@ -224,23 +212,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "Description",
                     name: "description"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UTextarea, {
-                          modelValue: unref(form).description,
-                          "onUpdate:modelValue": ($event) => unref(form).description = $event,
+                        _push4(ssrRenderComponent_1(_component_UTextarea, {
+                          modelValue: vueExports.unref(form).description,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).description = $event,
                           placeholder: "A short description of your portfolio.",
                           class: "w-full"
                         }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UTextarea, {
-                            modelValue: unref(form).description,
-                            "onUpdate:modelValue": ($event) => unref(form).description = $event,
+                          vueExports.createVNode(_component_UTextarea, {
+                            modelValue: vueExports.unref(form).description,
+                            "onUpdate:modelValue": ($event) => vueExports.unref(form).description = $event,
                             placeholder: "A short description of your portfolio.",
                             class: "w-full"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -249,50 +237,50 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent_1(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent3, _scopeId2));
                   _push3(`<h2 class="font-medium mb-2"${_scopeId2}>Logo</h2>`);
-                  _push3(ssrRenderComponent(_component_UAlert, {
+                  _push3(ssrRenderComponent_1(_component_UAlert, {
                     color: "neutral",
                     variant: "subtle",
                     title: "SVG or transparent PNG recommended.",
                     description: "Dark mode falls back to light logo if not set."
                   }, null, _parent3, _scopeId2));
                   _push3(`<div class="grid grid-cols-2 gap-4"${_scopeId2}>`);
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "Light mode",
                     name: "logoLight"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<div class="flex flex-col gap-2 w-full"${_scopeId3}>`);
-                        _push4(ssrRenderComponent(_component_UButton, {
-                          icon: unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
+                        _push4(ssrRenderComponent_1(_component_UButton, {
+                          icon: vueExports.unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
                           color: "neutral",
                           variant: "outline",
                           class: "w-full",
                           onClick: ($event) => logoLightPickerOpen.value = true
                         }, {
-                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                          default: vueExports.withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`${ssrInterpolate(unref(form).logoLight ? "Change logo" : "Choose logo")}`);
+                              _push5(`${ssrInterpolate_1(vueExports.unref(form).logoLight ? "Change logo" : "Choose logo")}`);
                             } else {
                               return [
-                                createTextVNode(toDisplayString(unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
                               ];
                             }
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        if (unref(form).logoLight) {
-                          _push4(`<div class="relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"${_scopeId3}><img${ssrRenderAttr("src", unref(form).logoLight)} alt="" class="max-h-full max-w-full object-contain p-2"${_scopeId3}>`);
-                          _push4(ssrRenderComponent(_component_UButton, {
+                        if (vueExports.unref(form).logoLight) {
+                          _push4(`<div class="relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"${_scopeId3}><img${ssrRenderAttr_1("src", vueExports.unref(form).logoLight)} alt="" class="max-h-full max-w-full object-contain p-2"${_scopeId3}>`);
+                          _push4(ssrRenderComponent_1(_component_UButton, {
                             icon: "i-lucide-x",
                             color: "neutral",
                             variant: "solid",
                             size: "xs",
                             class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                             "aria-label": "Remove light logo",
-                            onClick: ($event) => unref(form).logoLight = ""
+                            onClick: ($event) => vueExports.unref(form).logoLight = ""
                           }, null, _parent4, _scopeId3));
                           _push4(`</div>`);
                         } else {
@@ -301,79 +289,79 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         _push4(`</div>`);
                       } else {
                         return [
-                          createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                            createVNode(_component_UButton, {
-                              icon: unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
+                          vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                            vueExports.createVNode(_component_UButton, {
+                              icon: vueExports.unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
                               color: "neutral",
                               variant: "outline",
                               class: "w-full",
                               onClick: ($event) => logoLightPickerOpen.value = true
                             }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
+                              default: vueExports.withCtx(() => [
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
                               ]),
                               _: 1
                             }, 8, ["icon", "onClick"]),
-                            unref(form).logoLight ? (openBlock(), createBlock("div", {
+                            vueExports.unref(form).logoLight ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               class: "relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"
                             }, [
-                              createVNode("img", {
-                                src: unref(form).logoLight,
+                              vueExports.createVNode("img", {
+                                src: vueExports.unref(form).logoLight,
                                 alt: "",
                                 class: "max-h-full max-w-full object-contain p-2"
                               }, null, 8, ["src"]),
-                              createVNode(_component_UButton, {
+                              vueExports.createVNode(_component_UButton, {
                                 icon: "i-lucide-x",
                                 color: "neutral",
                                 variant: "solid",
                                 size: "xs",
                                 class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                                 "aria-label": "Remove light logo",
-                                onClick: ($event) => unref(form).logoLight = ""
+                                onClick: ($event) => vueExports.unref(form).logoLight = ""
                               }, null, 8, ["onClick"])
-                            ])) : createCommentVNode("", true)
+                            ])) : vueExports.createCommentVNode("", true)
                           ])
                         ];
                       }
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "Dark mode",
                     name: "logoDark"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<div class="flex flex-col gap-2 w-full"${_scopeId3}>`);
-                        if (unref(form).logoDark) {
-                          _push4(`<div class="relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"${_scopeId3}><img${ssrRenderAttr("src", unref(form).logoDark)} alt="" class="max-h-full max-w-full object-contain p-2"${_scopeId3}>`);
-                          _push4(ssrRenderComponent(_component_UButton, {
+                        if (vueExports.unref(form).logoDark) {
+                          _push4(`<div class="relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"${_scopeId3}><img${ssrRenderAttr_1("src", vueExports.unref(form).logoDark)} alt="" class="max-h-full max-w-full object-contain p-2"${_scopeId3}>`);
+                          _push4(ssrRenderComponent_1(_component_UButton, {
                             icon: "i-lucide-x",
                             color: "neutral",
                             variant: "solid",
                             size: "xs",
                             class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                             "aria-label": "Remove dark logo",
-                            onClick: ($event) => unref(form).logoDark = ""
+                            onClick: ($event) => vueExports.unref(form).logoDark = ""
                           }, null, _parent4, _scopeId3));
                           _push4(`</div>`);
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(ssrRenderComponent(_component_UButton, {
-                          icon: unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
+                        _push4(ssrRenderComponent_1(_component_UButton, {
+                          icon: vueExports.unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
                           color: "neutral",
                           variant: "outline",
                           class: "w-full",
                           onClick: ($event) => logoDarkPickerOpen.value = true
                         }, {
-                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                          default: vueExports.withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`${ssrInterpolate(unref(form).logoDark ? "Change logo" : "Choose logo")}`);
+                              _push5(`${ssrInterpolate_1(vueExports.unref(form).logoDark ? "Change logo" : "Choose logo")}`);
                             } else {
                               return [
-                                createTextVNode(toDisplayString(unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
                               ];
                             }
                           }),
@@ -382,35 +370,35 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         _push4(`</div>`);
                       } else {
                         return [
-                          createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                            unref(form).logoDark ? (openBlock(), createBlock("div", {
+                          vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                            vueExports.unref(form).logoDark ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               class: "relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"
                             }, [
-                              createVNode("img", {
-                                src: unref(form).logoDark,
+                              vueExports.createVNode("img", {
+                                src: vueExports.unref(form).logoDark,
                                 alt: "",
                                 class: "max-h-full max-w-full object-contain p-2"
                               }, null, 8, ["src"]),
-                              createVNode(_component_UButton, {
+                              vueExports.createVNode(_component_UButton, {
                                 icon: "i-lucide-x",
                                 color: "neutral",
                                 variant: "solid",
                                 size: "xs",
                                 class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                                 "aria-label": "Remove dark logo",
-                                onClick: ($event) => unref(form).logoDark = ""
+                                onClick: ($event) => vueExports.unref(form).logoDark = ""
                               }, null, 8, ["onClick"])
-                            ])) : createCommentVNode("", true),
-                            createVNode(_component_UButton, {
-                              icon: unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
+                            ])) : vueExports.createCommentVNode("", true),
+                            vueExports.createVNode(_component_UButton, {
+                              icon: vueExports.unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
                               color: "neutral",
                               variant: "outline",
                               class: "w-full",
                               onClick: ($event) => logoDarkPickerOpen.value = true
                             }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
+                              default: vueExports.withCtx(() => [
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
                               ]),
                               _: 1
                             }, 8, ["icon", "onClick"])
@@ -421,25 +409,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     _: 1
                   }, _parent3, _scopeId2));
                   _push3(`</div>`);
-                  _push3(ssrRenderComponent(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent_1(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent3, _scopeId2));
                   _push3(`<h2 class="font-medium mb-2"${_scopeId2}>SEO</h2>`);
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "SEO title",
                     name: "seoTitle"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UInput, {
-                          modelValue: unref(form).seoTitle,
-                          "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                        _push4(ssrRenderComponent_1(_component_UInput, {
+                          modelValue: vueExports.unref(form).seoTitle,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                           placeholder: "SEO title",
                           class: "w-full"
                         }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UInput, {
-                            modelValue: unref(form).seoTitle,
-                            "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                          vueExports.createVNode(_component_UInput, {
+                            modelValue: vueExports.unref(form).seoTitle,
+                            "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                             placeholder: "SEO title",
                             class: "w-full"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -448,23 +436,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "SEO description",
                     name: "seoDescription"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UTextarea, {
-                          modelValue: unref(form).seoDescription,
-                          "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                        _push4(ssrRenderComponent_1(_component_UTextarea, {
+                          modelValue: vueExports.unref(form).seoDescription,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                           placeholder: "SEO description",
                           class: "w-full"
                         }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UTextarea, {
-                            modelValue: unref(form).seoDescription,
-                            "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                          vueExports.createVNode(_component_UTextarea, {
+                            modelValue: vueExports.unref(form).seoDescription,
+                            "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                             placeholder: "SEO description",
                             class: "w-full"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -473,42 +461,42 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "OG image",
                     name: "ogImageUrl",
                     description: "Image shown when your portfolio is shared on social media. Recommended size: 1200×630."
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<div class="flex flex-col gap-2 w-full"${_scopeId3}>`);
-                        if (unref(form).ogImageUrl) {
-                          _push4(`<div class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted w-full"${_scopeId3}><img${ssrRenderAttr("src", unref(form).ogImageUrl)} alt="" class="w-full h-full object-cover"${_scopeId3}>`);
-                          _push4(ssrRenderComponent(_component_UButton, {
+                        if (vueExports.unref(form).ogImageUrl) {
+                          _push4(`<div class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted w-full"${_scopeId3}><img${ssrRenderAttr_1("src", vueExports.unref(form).ogImageUrl)} alt="" class="w-full h-full object-cover"${_scopeId3}>`);
+                          _push4(ssrRenderComponent_1(_component_UButton, {
                             icon: "i-lucide-x",
                             color: "neutral",
                             variant: "solid",
                             size: "xs",
                             class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                             "aria-label": "Remove OG image",
-                            onClick: ($event) => unref(form).ogImageUrl = ""
+                            onClick: ($event) => vueExports.unref(form).ogImageUrl = ""
                           }, null, _parent4, _scopeId3));
                           _push4(`</div>`);
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(ssrRenderComponent(_component_UButton, {
-                          icon: unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
+                        _push4(ssrRenderComponent_1(_component_UButton, {
+                          icon: vueExports.unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
                           color: "neutral",
                           variant: "outline",
                           class: "w-full",
                           onClick: ($event) => ogImagePickerOpen.value = true
                         }, {
-                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                          default: vueExports.withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`${ssrInterpolate(unref(form).ogImageUrl ? "Change image" : "Choose image")}`);
+                              _push5(`${ssrInterpolate_1(vueExports.unref(form).ogImageUrl ? "Change image" : "Choose image")}`);
                             } else {
                               return [
-                                createTextVNode(toDisplayString(unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
                               ];
                             }
                           }),
@@ -517,35 +505,35 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         _push4(`</div>`);
                       } else {
                         return [
-                          createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                            unref(form).ogImageUrl ? (openBlock(), createBlock("div", {
+                          vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                            vueExports.unref(form).ogImageUrl ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               class: "relative rounded-md overflow-hidden border border-default aspect-video bg-muted w-full"
                             }, [
-                              createVNode("img", {
-                                src: unref(form).ogImageUrl,
+                              vueExports.createVNode("img", {
+                                src: vueExports.unref(form).ogImageUrl,
                                 alt: "",
                                 class: "w-full h-full object-cover"
                               }, null, 8, ["src"]),
-                              createVNode(_component_UButton, {
+                              vueExports.createVNode(_component_UButton, {
                                 icon: "i-lucide-x",
                                 color: "neutral",
                                 variant: "solid",
                                 size: "xs",
                                 class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                                 "aria-label": "Remove OG image",
-                                onClick: ($event) => unref(form).ogImageUrl = ""
+                                onClick: ($event) => vueExports.unref(form).ogImageUrl = ""
                               }, null, 8, ["onClick"])
-                            ])) : createCommentVNode("", true),
-                            createVNode(_component_UButton, {
-                              icon: unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
+                            ])) : vueExports.createCommentVNode("", true),
+                            vueExports.createVNode(_component_UButton, {
+                              icon: vueExports.unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
                               color: "neutral",
                               variant: "outline",
                               class: "w-full",
                               onClick: ($event) => ogImagePickerOpen.value = true
                             }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
+                              default: vueExports.withCtx(() => [
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
                               ]),
                               _: 1
                             }, 8, ["icon", "onClick"])
@@ -555,34 +543,34 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  if (unref(successMessage)) {
-                    _push3(ssrRenderComponent(_component_UAlert, {
+                  if (vueExports.unref(successMessage)) {
+                    _push3(ssrRenderComponent_1(_component_UAlert, {
                       color: "success",
                       variant: "soft",
-                      description: unref(successMessage)
+                      description: vueExports.unref(successMessage)
                     }, null, _parent3, _scopeId2));
                   } else {
                     _push3(`<!---->`);
                   }
-                  if (unref(errorMessage)) {
-                    _push3(ssrRenderComponent(_component_UAlert, {
+                  if (vueExports.unref(errorMessage)) {
+                    _push3(ssrRenderComponent_1(_component_UAlert, {
                       color: "error",
                       variant: "soft",
-                      description: unref(errorMessage)
+                      description: vueExports.unref(errorMessage)
                     }, null, _parent3, _scopeId2));
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(ssrRenderComponent(_component_UButton, {
+                  _push3(ssrRenderComponent_1(_component_UButton, {
                     type: "submit",
-                    loading: unref(saving)
+                    loading: vueExports.unref(saving)
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`Save changes`);
                       } else {
                         return [
-                          createTextVNode("Save changes")
+                          vueExports.createTextVNode("Save changes")
                         ];
                       }
                     }),
@@ -590,144 +578,144 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_USwitch, {
-                      modelValue: unref(form).isPublished,
-                      "onUpdate:modelValue": ($event) => unref(form).isPublished = $event,
+                    vueExports.createVNode(_component_USwitch, {
+                      modelValue: vueExports.unref(form).isPublished,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).isPublished = $event,
                       label: "Publish site",
                       description: "Your portfolio will be publicly available."
                     }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Portfolio title",
                       name: "title"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          modelValue: unref(form).title,
-                          "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          modelValue: vueExports.unref(form).title,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                           placeholder: "My Portfolio",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "URL",
                       name: "slug"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          modelValue: unref(form).slug,
-                          "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          modelValue: vueExports.unref(form).slug,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                           placeholder: "my-portfolio",
                           class: "w-full",
                           ui: { base: "pl-21", leading: "pointer-events-none" }
                         }, {
-                          leading: withCtx(() => [
-                            createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
+                          leading: vueExports.withCtx(() => [
+                            vueExports.createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
                           ]),
                           _: 1
                         }, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Description",
                       name: "description"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UTextarea, {
-                          modelValue: unref(form).description,
-                          "onUpdate:modelValue": ($event) => unref(form).description = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UTextarea, {
+                          modelValue: vueExports.unref(form).description,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).description = $event,
                           placeholder: "A short description of your portfolio.",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
-                    createVNode("h2", { class: "font-medium mb-2" }, "Logo"),
-                    createVNode(_component_UAlert, {
+                    vueExports.createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
+                    vueExports.createVNode("h2", { class: "font-medium mb-2" }, "Logo"),
+                    vueExports.createVNode(_component_UAlert, {
                       color: "neutral",
                       variant: "subtle",
                       title: "SVG or transparent PNG recommended.",
                       description: "Dark mode falls back to light logo if not set."
                     }),
-                    createVNode("div", { class: "grid grid-cols-2 gap-4" }, [
-                      createVNode(_component_UFormField, {
+                    vueExports.createVNode("div", { class: "grid grid-cols-2 gap-4" }, [
+                      vueExports.createVNode(_component_UFormField, {
                         label: "Light mode",
                         name: "logoLight"
                       }, {
-                        default: withCtx(() => [
-                          createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                            createVNode(_component_UButton, {
-                              icon: unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                            vueExports.createVNode(_component_UButton, {
+                              icon: vueExports.unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
                               color: "neutral",
                               variant: "outline",
                               class: "w-full",
                               onClick: ($event) => logoLightPickerOpen.value = true
                             }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
+                              default: vueExports.withCtx(() => [
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
                               ]),
                               _: 1
                             }, 8, ["icon", "onClick"]),
-                            unref(form).logoLight ? (openBlock(), createBlock("div", {
+                            vueExports.unref(form).logoLight ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               class: "relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"
                             }, [
-                              createVNode("img", {
-                                src: unref(form).logoLight,
+                              vueExports.createVNode("img", {
+                                src: vueExports.unref(form).logoLight,
                                 alt: "",
                                 class: "max-h-full max-w-full object-contain p-2"
                               }, null, 8, ["src"]),
-                              createVNode(_component_UButton, {
+                              vueExports.createVNode(_component_UButton, {
                                 icon: "i-lucide-x",
                                 color: "neutral",
                                 variant: "solid",
                                 size: "xs",
                                 class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                                 "aria-label": "Remove light logo",
-                                onClick: ($event) => unref(form).logoLight = ""
+                                onClick: ($event) => vueExports.unref(form).logoLight = ""
                               }, null, 8, ["onClick"])
-                            ])) : createCommentVNode("", true)
+                            ])) : vueExports.createCommentVNode("", true)
                           ])
                         ]),
                         _: 1
                       }),
-                      createVNode(_component_UFormField, {
+                      vueExports.createVNode(_component_UFormField, {
                         label: "Dark mode",
                         name: "logoDark"
                       }, {
-                        default: withCtx(() => [
-                          createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                            unref(form).logoDark ? (openBlock(), createBlock("div", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                            vueExports.unref(form).logoDark ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               class: "relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"
                             }, [
-                              createVNode("img", {
-                                src: unref(form).logoDark,
+                              vueExports.createVNode("img", {
+                                src: vueExports.unref(form).logoDark,
                                 alt: "",
                                 class: "max-h-full max-w-full object-contain p-2"
                               }, null, 8, ["src"]),
-                              createVNode(_component_UButton, {
+                              vueExports.createVNode(_component_UButton, {
                                 icon: "i-lucide-x",
                                 color: "neutral",
                                 variant: "solid",
                                 size: "xs",
                                 class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                                 "aria-label": "Remove dark logo",
-                                onClick: ($event) => unref(form).logoDark = ""
+                                onClick: ($event) => vueExports.unref(form).logoDark = ""
                               }, null, 8, ["onClick"])
-                            ])) : createCommentVNode("", true),
-                            createVNode(_component_UButton, {
-                              icon: unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
+                            ])) : vueExports.createCommentVNode("", true),
+                            vueExports.createVNode(_component_UButton, {
+                              icon: vueExports.unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
                               color: "neutral",
                               variant: "outline",
                               class: "w-full",
                               onClick: ($event) => logoDarkPickerOpen.value = true
                             }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
+                              default: vueExports.withCtx(() => [
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
                               ]),
                               _: 1
                             }, 8, ["icon", "onClick"])
@@ -736,71 +724,71 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         _: 1
                       })
                     ]),
-                    createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
-                    createVNode("h2", { class: "font-medium mb-2" }, "SEO"),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
+                    vueExports.createVNode("h2", { class: "font-medium mb-2" }, "SEO"),
+                    vueExports.createVNode(_component_UFormField, {
                       label: "SEO title",
                       name: "seoTitle"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          modelValue: unref(form).seoTitle,
-                          "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          modelValue: vueExports.unref(form).seoTitle,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                           placeholder: "SEO title",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "SEO description",
                       name: "seoDescription"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UTextarea, {
-                          modelValue: unref(form).seoDescription,
-                          "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UTextarea, {
+                          modelValue: vueExports.unref(form).seoDescription,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                           placeholder: "SEO description",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "OG image",
                       name: "ogImageUrl",
                       description: "Image shown when your portfolio is shared on social media. Recommended size: 1200×630."
                     }, {
-                      default: withCtx(() => [
-                        createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                          unref(form).ogImageUrl ? (openBlock(), createBlock("div", {
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                          vueExports.unref(form).ogImageUrl ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 0,
                             class: "relative rounded-md overflow-hidden border border-default aspect-video bg-muted w-full"
                           }, [
-                            createVNode("img", {
-                              src: unref(form).ogImageUrl,
+                            vueExports.createVNode("img", {
+                              src: vueExports.unref(form).ogImageUrl,
                               alt: "",
                               class: "w-full h-full object-cover"
                             }, null, 8, ["src"]),
-                            createVNode(_component_UButton, {
+                            vueExports.createVNode(_component_UButton, {
                               icon: "i-lucide-x",
                               color: "neutral",
                               variant: "solid",
                               size: "xs",
                               class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                               "aria-label": "Remove OG image",
-                              onClick: ($event) => unref(form).ogImageUrl = ""
+                              onClick: ($event) => vueExports.unref(form).ogImageUrl = ""
                             }, null, 8, ["onClick"])
-                          ])) : createCommentVNode("", true),
-                          createVNode(_component_UButton, {
-                            icon: unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
+                          ])) : vueExports.createCommentVNode("", true),
+                          vueExports.createVNode(_component_UButton, {
+                            icon: vueExports.unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
                             color: "neutral",
                             variant: "outline",
                             class: "w-full",
                             onClick: ($event) => ogImagePickerOpen.value = true
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
                             ]),
                             _: 1
                           }, 8, ["icon", "onClick"])
@@ -808,24 +796,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       ]),
                       _: 1
                     }),
-                    unref(successMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                    vueExports.unref(successMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                       key: 0,
                       color: "success",
                       variant: "soft",
-                      description: unref(successMessage)
-                    }, null, 8, ["description"])) : createCommentVNode("", true),
-                    unref(errorMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                      description: vueExports.unref(successMessage)
+                    }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                    vueExports.unref(errorMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                       key: 1,
                       color: "error",
                       variant: "soft",
-                      description: unref(errorMessage)
-                    }, null, 8, ["description"])) : createCommentVNode("", true),
-                    createVNode(_component_UButton, {
+                      description: vueExports.unref(errorMessage)
+                    }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                    vueExports.createVNode(_component_UButton, {
                       type: "submit",
-                      loading: unref(saving)
+                      loading: vueExports.unref(saving)
                     }, {
-                      default: withCtx(() => [
-                        createTextVNode("Save changes")
+                      default: vueExports.withCtx(() => [
+                        vueExports.createTextVNode("Save changes")
                       ]),
                       _: 1
                     }, 8, ["loading"])
@@ -836,149 +824,149 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_component_UForm, {
+              vueExports.createVNode(_component_UForm, {
                 class: "max-w-md space-y-4",
-                onSubmit: withModifiers(save, ["prevent"])
+                onSubmit: vueExports.withModifiers(save, ["prevent"])
               }, {
-                default: withCtx(() => [
-                  createVNode(_component_USwitch, {
-                    modelValue: unref(form).isPublished,
-                    "onUpdate:modelValue": ($event) => unref(form).isPublished = $event,
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(_component_USwitch, {
+                    modelValue: vueExports.unref(form).isPublished,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).isPublished = $event,
                     label: "Publish site",
                     description: "Your portfolio will be publicly available."
                   }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "Portfolio title",
                     name: "title"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(form).title,
-                        "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(form).title,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                         placeholder: "My Portfolio",
                         class: "w-full"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "URL",
                     name: "slug"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(form).slug,
-                        "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(form).slug,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                         placeholder: "my-portfolio",
                         class: "w-full",
                         ui: { base: "pl-21", leading: "pointer-events-none" }
                       }, {
-                        leading: withCtx(() => [
-                          createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
+                        leading: vueExports.withCtx(() => [
+                          vueExports.createVNode("span", { class: "text-muted text-sm" }, "folio.app/p/")
                         ]),
                         _: 1
                       }, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "Description",
                     name: "description"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UTextarea, {
-                        modelValue: unref(form).description,
-                        "onUpdate:modelValue": ($event) => unref(form).description = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UTextarea, {
+                        modelValue: vueExports.unref(form).description,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).description = $event,
                         placeholder: "A short description of your portfolio.",
                         class: "w-full"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
-                  createVNode("h2", { class: "font-medium mb-2" }, "Logo"),
-                  createVNode(_component_UAlert, {
+                  vueExports.createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
+                  vueExports.createVNode("h2", { class: "font-medium mb-2" }, "Logo"),
+                  vueExports.createVNode(_component_UAlert, {
                     color: "neutral",
                     variant: "subtle",
                     title: "SVG or transparent PNG recommended.",
                     description: "Dark mode falls back to light logo if not set."
                   }),
-                  createVNode("div", { class: "grid grid-cols-2 gap-4" }, [
-                    createVNode(_component_UFormField, {
+                  vueExports.createVNode("div", { class: "grid grid-cols-2 gap-4" }, [
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Light mode",
                       name: "logoLight"
                     }, {
-                      default: withCtx(() => [
-                        createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                          createVNode(_component_UButton, {
-                            icon: unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                          vueExports.createVNode(_component_UButton, {
+                            icon: vueExports.unref(form).logoLight ? "i-lucide-image" : "i-lucide-plus",
                             color: "neutral",
                             variant: "outline",
                             class: "w-full",
                             onClick: ($event) => logoLightPickerOpen.value = true
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoLight ? "Change logo" : "Choose logo"), 1)
                             ]),
                             _: 1
                           }, 8, ["icon", "onClick"]),
-                          unref(form).logoLight ? (openBlock(), createBlock("div", {
+                          vueExports.unref(form).logoLight ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 0,
                             class: "relative rounded-md overflow-hidden border border-default bg-white flex items-center justify-center h-20 w-full"
                           }, [
-                            createVNode("img", {
-                              src: unref(form).logoLight,
+                            vueExports.createVNode("img", {
+                              src: vueExports.unref(form).logoLight,
                               alt: "",
                               class: "max-h-full max-w-full object-contain p-2"
                             }, null, 8, ["src"]),
-                            createVNode(_component_UButton, {
+                            vueExports.createVNode(_component_UButton, {
                               icon: "i-lucide-x",
                               color: "neutral",
                               variant: "solid",
                               size: "xs",
                               class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                               "aria-label": "Remove light logo",
-                              onClick: ($event) => unref(form).logoLight = ""
+                              onClick: ($event) => vueExports.unref(form).logoLight = ""
                             }, null, 8, ["onClick"])
-                          ])) : createCommentVNode("", true)
+                          ])) : vueExports.createCommentVNode("", true)
                         ])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Dark mode",
                       name: "logoDark"
                     }, {
-                      default: withCtx(() => [
-                        createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                          unref(form).logoDark ? (openBlock(), createBlock("div", {
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                          vueExports.unref(form).logoDark ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 0,
                             class: "relative rounded-md overflow-hidden border border-default bg-gray-900 flex items-center justify-center h-20 w-full"
                           }, [
-                            createVNode("img", {
-                              src: unref(form).logoDark,
+                            vueExports.createVNode("img", {
+                              src: vueExports.unref(form).logoDark,
                               alt: "",
                               class: "max-h-full max-w-full object-contain p-2"
                             }, null, 8, ["src"]),
-                            createVNode(_component_UButton, {
+                            vueExports.createVNode(_component_UButton, {
                               icon: "i-lucide-x",
                               color: "neutral",
                               variant: "solid",
                               size: "xs",
                               class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                               "aria-label": "Remove dark logo",
-                              onClick: ($event) => unref(form).logoDark = ""
+                              onClick: ($event) => vueExports.unref(form).logoDark = ""
                             }, null, 8, ["onClick"])
-                          ])) : createCommentVNode("", true),
-                          createVNode(_component_UButton, {
-                            icon: unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
+                          ])) : vueExports.createCommentVNode("", true),
+                          vueExports.createVNode(_component_UButton, {
+                            icon: vueExports.unref(form).logoDark ? "i-lucide-image" : "i-lucide-plus",
                             color: "neutral",
                             variant: "outline",
                             class: "w-full",
                             onClick: ($event) => logoDarkPickerOpen.value = true
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).logoDark ? "Change logo" : "Choose logo"), 1)
                             ]),
                             _: 1
                           }, 8, ["icon", "onClick"])
@@ -987,71 +975,71 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       _: 1
                     })
                   ]),
-                  createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
-                  createVNode("h2", { class: "font-medium mb-2" }, "SEO"),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
+                  vueExports.createVNode("h2", { class: "font-medium mb-2" }, "SEO"),
+                  vueExports.createVNode(_component_UFormField, {
                     label: "SEO title",
                     name: "seoTitle"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(form).seoTitle,
-                        "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(form).seoTitle,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                         placeholder: "SEO title",
                         class: "w-full"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "SEO description",
                     name: "seoDescription"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UTextarea, {
-                        modelValue: unref(form).seoDescription,
-                        "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UTextarea, {
+                        modelValue: vueExports.unref(form).seoDescription,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                         placeholder: "SEO description",
                         class: "w-full"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "OG image",
                     name: "ogImageUrl",
                     description: "Image shown when your portfolio is shared on social media. Recommended size: 1200×630."
                   }, {
-                    default: withCtx(() => [
-                      createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
-                        unref(form).ogImageUrl ? (openBlock(), createBlock("div", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("div", { class: "flex flex-col gap-2 w-full" }, [
+                        vueExports.unref(form).ogImageUrl ? (vueExports.openBlock(), vueExports.createBlock("div", {
                           key: 0,
                           class: "relative rounded-md overflow-hidden border border-default aspect-video bg-muted w-full"
                         }, [
-                          createVNode("img", {
-                            src: unref(form).ogImageUrl,
+                          vueExports.createVNode("img", {
+                            src: vueExports.unref(form).ogImageUrl,
                             alt: "",
                             class: "w-full h-full object-cover"
                           }, null, 8, ["src"]),
-                          createVNode(_component_UButton, {
+                          vueExports.createVNode(_component_UButton, {
                             icon: "i-lucide-x",
                             color: "neutral",
                             variant: "solid",
                             size: "xs",
                             class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                             "aria-label": "Remove OG image",
-                            onClick: ($event) => unref(form).ogImageUrl = ""
+                            onClick: ($event) => vueExports.unref(form).ogImageUrl = ""
                           }, null, 8, ["onClick"])
-                        ])) : createCommentVNode("", true),
-                        createVNode(_component_UButton, {
-                          icon: unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
+                        ])) : vueExports.createCommentVNode("", true),
+                        vueExports.createVNode(_component_UButton, {
+                          icon: vueExports.unref(form).ogImageUrl ? "i-lucide-image" : "i-lucide-plus",
                           color: "neutral",
                           variant: "outline",
                           class: "w-full",
                           onClick: ($event) => ogImagePickerOpen.value = true
                         }, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
+                          default: vueExports.withCtx(() => [
+                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).ogImageUrl ? "Change image" : "Choose image"), 1)
                           ]),
                           _: 1
                         }, 8, ["icon", "onClick"])
@@ -1059,24 +1047,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  unref(successMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                  vueExports.unref(successMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                     key: 0,
                     color: "success",
                     variant: "soft",
-                    description: unref(successMessage)
-                  }, null, 8, ["description"])) : createCommentVNode("", true),
-                  unref(errorMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                    description: vueExports.unref(successMessage)
+                  }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                  vueExports.unref(errorMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                     key: 1,
                     color: "error",
                     variant: "soft",
-                    description: unref(errorMessage)
-                  }, null, 8, ["description"])) : createCommentVNode("", true),
-                  createVNode(_component_UButton, {
+                    description: vueExports.unref(errorMessage)
+                  }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode(_component_UButton, {
                     type: "submit",
-                    loading: unref(saving)
+                    loading: vueExports.unref(saving)
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode("Save changes")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode("Save changes")
                     ]),
                     _: 1
                   }, 8, ["loading"])
@@ -1088,26 +1076,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_AdminMediaPickerModal, {
-        open: unref(ogImagePickerOpen),
-        "onUpdate:open": ($event) => isRef(ogImagePickerOpen) ? ogImagePickerOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminMediaPickerModal, {
+        open: vueExports.unref(ogImagePickerOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(ogImagePickerOpen) ? ogImagePickerOpen.value = $event : null,
         "images-only": "",
-        "selected-url": unref(form).ogImageUrl || null,
-        onSelect: (url) => unref(form).ogImageUrl = url
+        "selected-url": vueExports.unref(form).ogImageUrl || null,
+        onSelect: (url) => vueExports.unref(form).ogImageUrl = url
       }, null, _parent));
-      _push(ssrRenderComponent(_component_AdminMediaPickerModal, {
-        open: unref(logoLightPickerOpen),
-        "onUpdate:open": ($event) => isRef(logoLightPickerOpen) ? logoLightPickerOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminMediaPickerModal, {
+        open: vueExports.unref(logoLightPickerOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(logoLightPickerOpen) ? logoLightPickerOpen.value = $event : null,
         "images-only": "",
-        "selected-url": unref(form).logoLight || null,
-        onSelect: (url) => unref(form).logoLight = url
+        "selected-url": vueExports.unref(form).logoLight || null,
+        onSelect: (url) => vueExports.unref(form).logoLight = url
       }, null, _parent));
-      _push(ssrRenderComponent(_component_AdminMediaPickerModal, {
-        open: unref(logoDarkPickerOpen),
-        "onUpdate:open": ($event) => isRef(logoDarkPickerOpen) ? logoDarkPickerOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminMediaPickerModal, {
+        open: vueExports.unref(logoDarkPickerOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(logoDarkPickerOpen) ? logoDarkPickerOpen.value = $event : null,
         "images-only": "",
-        "selected-url": unref(form).logoDark || null,
-        onSelect: (url) => unref(form).logoDark = url
+        "selected-url": vueExports.unref(form).logoDark || null,
+        onSelect: (url) => vueExports.unref(form).logoDark = url
       }, null, _parent));
       _push(`<!--]-->`);
     };
@@ -1115,7 +1103,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/admin/site-settings.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

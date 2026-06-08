@@ -1,18 +1,15 @@
 import { _ as __nuxt_component_0 } from './PageStructure-K8uU1ezD.mjs';
-import { f as _sfc_main$8, e as _sfc_main$d } from './server.mjs';
+import { aO as vueExports, a7 as ssrRenderComponent_1, e as _sfc_main$8, a8 as ssrRenderList_1, j as _sfc_main$d, a3 as ssrInterpolate_1, a6 as ssrRenderClass_1 } from './server.mjs';
 import { _ as _sfc_main$2 } from './Modal-D9bZkufO.mjs';
 import { _ as _sfc_main$3 } from './Badge-C0tQ5UcT.mjs';
 import { _ as _sfc_main$4 } from './Input-DWHPzDmy.mjs';
 import { _ as _sfc_main$5 } from './Alert-Nv5RlKkm.mjs';
-import { defineComponent, ref, withCtx, createTextVNode, unref, createVNode, openBlock, createBlock, Fragment, renderList, toDisplayString, isRef, useModel, computed, watch, mergeProps, createCommentVNode, withKeys, mergeModels, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderClass } from 'vue/server-renderer';
 import { g as getCollectionType, c as collectionTypes } from './collectionTypes-6EiXkZ_r.mjs';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 import { u as useCollections } from './useCollections-Be_EdGTg.mjs';
 import { _ as __nuxt_component_4 } from './ConfirmModal-D6HutMUe.mjs';
 import './PageWrapper-dRmsqRwL.mjs';
 import './DashboardSidebarToggle-uAAQWn-6.mjs';
-import '@vueuse/core';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -22,55 +19,47 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 import './Container-CXQFSuFJ.mjs';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import '@vueuse/shared';
-import 'tailwind-variants';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 import './overlay-BWwBD9XH.mjs';
-import 'aria-hidden';
 
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "AddCollectionModal",
   __ssrInlineRender: true,
   props: {
     "open": { type: Boolean, ...{ default: false } },
     "openModifiers": {}
   },
-  emits: /* @__PURE__ */ mergeModels(["added"], ["update:open"]),
+  emits: /* @__PURE__ */ vueExports.mergeModels(["added"], ["update:open"]),
   setup(__props, { emit: __emit }) {
     const emit = __emit;
-    const open = useModel(__props, "open");
+    const open = vueExports.useModel(__props, "open");
     const { fetcher } = useApi();
     const { collections } = useCollections();
-    const selectedType = ref("");
-    const customName = ref("");
-    const saving = ref(false);
-    const errorMessage = ref("");
-    const selectedTypeDef = computed(() => collectionTypes.find((ct) => ct.type === selectedType.value));
-    const alreadyHasType = computed(() => collections.value.some((c) => c.type === selectedType.value));
-    const existingNames = computed(() => collections.value.map((c) => c.name.trim().toLowerCase()));
-    const nameToSubmit = computed(() => {
+    const selectedType = vueExports.ref("");
+    const customName = vueExports.ref("");
+    const saving = vueExports.ref(false);
+    const errorMessage = vueExports.ref("");
+    const selectedTypeDef = vueExports.computed(() => collectionTypes.find((ct) => ct.type === selectedType.value));
+    const alreadyHasType = vueExports.computed(() => collections.value.some((c) => c.type === selectedType.value));
+    const existingNames = vueExports.computed(() => collections.value.map((c) => c.name.trim().toLowerCase()));
+    const nameToSubmit = vueExports.computed(() => {
       if (!alreadyHasType.value) return selectedTypeDef.value?.label ?? "";
       return customName.value.trim();
     });
-    const nameError = computed(() => {
+    const nameError = vueExports.computed(() => {
       if (!alreadyHasType.value || !customName.value.trim()) return "";
       if (existingNames.value.includes(customName.value.trim().toLowerCase())) {
         return "A collection with this name already exists.";
       }
       return "";
     });
-    const canSubmit = computed(() => {
+    const canSubmit = vueExports.computed(() => {
       if (!selectedType.value) return false;
       if (alreadyHasType.value && !customName.value.trim()) return false;
       if (nameError.value) return false;
@@ -81,10 +70,10 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       customName.value = "";
       errorMessage.value = "";
     }
-    watch(open, (val) => {
+    vueExports.watch(open, (val) => {
       if (val) reset();
     });
-    watch(selectedType, () => {
+    vueExports.watch(selectedType, () => {
       customName.value = "";
       errorMessage.value = "";
     });
@@ -113,36 +102,36 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       const _component_UInput = _sfc_main$4;
       const _component_UAlert = _sfc_main$5;
       const _component_UButton = _sfc_main$8;
-      _push(ssrRenderComponent(_component_UModal, mergeProps({
+      _push(ssrRenderComponent_1(_component_UModal, vueExports.mergeProps({
         open: open.value,
         "onUpdate:open": ($event) => open.value = $event,
         title: "Add collection"
       }, _attrs), {
-        body: withCtx((_, _push2, _parent2, _scopeId) => {
+        body: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="space-y-4"${_scopeId}><p class="text-sm text-muted"${_scopeId}> Choose a collection type to add to your portfolio. Once added, the associated blocks will become available in the page builder. </p><div class="grid grid-cols-1 gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList(unref(collectionTypes), (ct) => {
-              _push2(`<button type="button" class="${ssrRenderClass([
-                unref(selectedType) === ct.type ? "border-primary bg-primary/5" : "border-default hover:bg-muted/30",
+            ssrRenderList_1(vueExports.unref(collectionTypes), (ct) => {
+              _push2(`<button type="button" class="${ssrRenderClass_1([
+                vueExports.unref(selectedType) === ct.type ? "border-primary bg-primary/5" : "border-default hover:bg-muted/30",
                 "flex items-center gap-3 px-4 py-3 rounded-lg border transition-colors text-left"
               ])}"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: ct.icon,
                 class: "size-5 shrink-0"
               }, null, _parent2, _scopeId));
-              _push2(`<div class="flex-1 min-w-0"${_scopeId}><div class="flex items-center gap-2"${_scopeId}><p class="font-medium text-sm"${_scopeId}>${ssrInterpolate(ct.label)}</p>`);
-              if (unref(collections).some((c) => c.type === ct.type)) {
-                _push2(ssrRenderComponent(_component_UBadge, {
+              _push2(`<div class="flex-1 min-w-0"${_scopeId}><div class="flex items-center gap-2"${_scopeId}><p class="font-medium text-sm"${_scopeId}>${ssrInterpolate_1(ct.label)}</p>`);
+              if (vueExports.unref(collections).some((c) => c.type === ct.type)) {
+                _push2(ssrRenderComponent_1(_component_UBadge, {
                   variant: "soft",
                   size: "xs",
                   color: "neutral"
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
                       _push3(` added `);
                     } else {
                       return [
-                        createTextVNode(" added ")
+                        vueExports.createTextVNode(" added ")
                       ];
                     }
                   }),
@@ -152,18 +141,18 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               _push2(`</div><div class="flex items-center gap-1 mt-1 flex-wrap"${_scopeId}><span class="text-xs text-muted"${_scopeId}>Blocks:</span><!--[-->`);
-              ssrRenderList(ct.allowedBlocks, (block) => {
-                _push2(ssrRenderComponent(_component_UBadge, {
+              ssrRenderList_1(ct.allowedBlocks, (block) => {
+                _push2(ssrRenderComponent_1(_component_UBadge, {
                   key: block,
                   variant: "soft",
                   size: "sm"
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`${ssrInterpolate(block)}`);
+                      _push3(`${ssrInterpolate_1(block)}`);
                     } else {
                       return [
-                        createTextVNode(toDisplayString(block), 1)
+                        vueExports.createTextVNode(vueExports.toDisplayString(block), 1)
                       ];
                     }
                   }),
@@ -173,17 +162,17 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
               _push2(`<!--]--></div></div></button>`);
             });
             _push2(`<!--]--></div>`);
-            if (unref(alreadyHasType)) {
-              _push2(`<div class="space-y-1"${_scopeId}><p class="text-sm font-medium"${_scopeId}>Collection name</p><p class="text-xs text-muted"${_scopeId}> You already have a ${ssrInterpolate(unref(selectedTypeDef)?.label)} collection. Give this one a unique name. </p>`);
-              _push2(ssrRenderComponent(_component_UInput, {
-                modelValue: unref(customName),
-                "onUpdate:modelValue": ($event) => isRef(customName) ? customName.value = $event : null,
+            if (vueExports.unref(alreadyHasType)) {
+              _push2(`<div class="space-y-1"${_scopeId}><p class="text-sm font-medium"${_scopeId}>Collection name</p><p class="text-xs text-muted"${_scopeId}> You already have a ${ssrInterpolate_1(vueExports.unref(selectedTypeDef)?.label)} collection. Give this one a unique name. </p>`);
+              _push2(ssrRenderComponent_1(_component_UInput, {
+                modelValue: vueExports.unref(customName),
+                "onUpdate:modelValue": ($event) => vueExports.isRef(customName) ? customName.value = $event : null,
                 placeholder: `e.g. Articles, Blog posts…`,
                 autofocus: "",
                 onKeydown: add
               }, null, _parent2, _scopeId));
-              if (unref(nameError)) {
-                _push2(`<p class="text-xs text-error"${_scopeId}>${ssrInterpolate(unref(nameError))}</p>`);
+              if (vueExports.unref(nameError)) {
+                _push2(`<p class="text-xs text-error"${_scopeId}>${ssrInterpolate_1(vueExports.unref(nameError))}</p>`);
               } else {
                 _push2(`<!---->`);
               }
@@ -191,11 +180,11 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            if (unref(errorMessage)) {
-              _push2(ssrRenderComponent(_component_UAlert, {
+            if (vueExports.unref(errorMessage)) {
+              _push2(ssrRenderComponent_1(_component_UAlert, {
                 color: "error",
                 variant: "soft",
-                description: unref(errorMessage)
+                description: vueExports.unref(errorMessage)
               }, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
@@ -203,48 +192,48 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "space-y-4" }, [
-                createVNode("p", { class: "text-sm text-muted" }, " Choose a collection type to add to your portfolio. Once added, the associated blocks will become available in the page builder. "),
-                createVNode("div", { class: "grid grid-cols-1 gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(collectionTypes), (ct) => {
-                    return openBlock(), createBlock("button", {
+              vueExports.createVNode("div", { class: "space-y-4" }, [
+                vueExports.createVNode("p", { class: "text-sm text-muted" }, " Choose a collection type to add to your portfolio. Once added, the associated blocks will become available in the page builder. "),
+                vueExports.createVNode("div", { class: "grid grid-cols-1 gap-2" }, [
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(collectionTypes), (ct) => {
+                    return vueExports.openBlock(), vueExports.createBlock("button", {
                       key: ct.type,
                       type: "button",
                       class: [
                         "flex items-center gap-3 px-4 py-3 rounded-lg border transition-colors text-left",
-                        unref(selectedType) === ct.type ? "border-primary bg-primary/5" : "border-default hover:bg-muted/30"
+                        vueExports.unref(selectedType) === ct.type ? "border-primary bg-primary/5" : "border-default hover:bg-muted/30"
                       ],
                       onClick: ($event) => selectedType.value = ct.type
                     }, [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: ct.icon,
                         class: "size-5 shrink-0"
                       }, null, 8, ["name"]),
-                      createVNode("div", { class: "flex-1 min-w-0" }, [
-                        createVNode("div", { class: "flex items-center gap-2" }, [
-                          createVNode("p", { class: "font-medium text-sm" }, toDisplayString(ct.label), 1),
-                          unref(collections).some((c) => c.type === ct.type) ? (openBlock(), createBlock(_component_UBadge, {
+                      vueExports.createVNode("div", { class: "flex-1 min-w-0" }, [
+                        vueExports.createVNode("div", { class: "flex items-center gap-2" }, [
+                          vueExports.createVNode("p", { class: "font-medium text-sm" }, vueExports.toDisplayString(ct.label), 1),
+                          vueExports.unref(collections).some((c) => c.type === ct.type) ? (vueExports.openBlock(), vueExports.createBlock(_component_UBadge, {
                             key: 0,
                             variant: "soft",
                             size: "xs",
                             color: "neutral"
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(" added ")
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(" added ")
                             ]),
                             _: 1
-                          })) : createCommentVNode("", true)
+                          })) : vueExports.createCommentVNode("", true)
                         ]),
-                        createVNode("div", { class: "flex items-center gap-1 mt-1 flex-wrap" }, [
-                          createVNode("span", { class: "text-xs text-muted" }, "Blocks:"),
-                          (openBlock(true), createBlock(Fragment, null, renderList(ct.allowedBlocks, (block) => {
-                            return openBlock(), createBlock(_component_UBadge, {
+                        vueExports.createVNode("div", { class: "flex items-center gap-1 mt-1 flex-wrap" }, [
+                          vueExports.createVNode("span", { class: "text-xs text-muted" }, "Blocks:"),
+                          (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(ct.allowedBlocks, (block) => {
+                            return vueExports.openBlock(), vueExports.createBlock(_component_UBadge, {
                               key: block,
                               variant: "soft",
                               size: "sm"
                             }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(block), 1)
+                              default: vueExports.withCtx(() => [
+                                vueExports.createTextVNode(vueExports.toDisplayString(block), 1)
                               ]),
                               _: 2
                             }, 1024);
@@ -254,63 +243,63 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                     ], 10, ["onClick"]);
                   }), 128))
                 ]),
-                unref(alreadyHasType) ? (openBlock(), createBlock("div", {
+                vueExports.unref(alreadyHasType) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   class: "space-y-1"
                 }, [
-                  createVNode("p", { class: "text-sm font-medium" }, "Collection name"),
-                  createVNode("p", { class: "text-xs text-muted" }, " You already have a " + toDisplayString(unref(selectedTypeDef)?.label) + " collection. Give this one a unique name. ", 1),
-                  createVNode(_component_UInput, {
-                    modelValue: unref(customName),
-                    "onUpdate:modelValue": ($event) => isRef(customName) ? customName.value = $event : null,
+                  vueExports.createVNode("p", { class: "text-sm font-medium" }, "Collection name"),
+                  vueExports.createVNode("p", { class: "text-xs text-muted" }, " You already have a " + vueExports.toDisplayString(vueExports.unref(selectedTypeDef)?.label) + " collection. Give this one a unique name. ", 1),
+                  vueExports.createVNode(_component_UInput, {
+                    modelValue: vueExports.unref(customName),
+                    "onUpdate:modelValue": ($event) => vueExports.isRef(customName) ? customName.value = $event : null,
                     placeholder: `e.g. Articles, Blog posts…`,
                     autofocus: "",
-                    onKeydown: withKeys(add, ["enter"])
+                    onKeydown: vueExports.withKeys(add, ["enter"])
                   }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                  unref(nameError) ? (openBlock(), createBlock("p", {
+                  vueExports.unref(nameError) ? (vueExports.openBlock(), vueExports.createBlock("p", {
                     key: 0,
                     class: "text-xs text-error"
-                  }, toDisplayString(unref(nameError)), 1)) : createCommentVNode("", true)
-                ])) : createCommentVNode("", true),
-                unref(errorMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                  }, vueExports.toDisplayString(vueExports.unref(nameError)), 1)) : vueExports.createCommentVNode("", true)
+                ])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(errorMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                   key: 1,
                   color: "error",
                   variant: "soft",
-                  description: unref(errorMessage)
-                }, null, 8, ["description"])) : createCommentVNode("", true)
+                  description: vueExports.unref(errorMessage)
+                }, null, 8, ["description"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
         }),
-        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+        footer: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex justify-end gap-2 w-full"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               variant: "ghost",
               onClick: ($event) => open.value = false
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Cancel`);
                 } else {
                   return [
-                    createTextVNode("Cancel")
+                    vueExports.createTextVNode("Cancel")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UButton, {
-              loading: unref(saving),
-              disabled: !unref(canSubmit),
+            _push2(ssrRenderComponent_1(_component_UButton, {
+              loading: vueExports.unref(saving),
+              disabled: !vueExports.unref(canSubmit),
               onClick: add
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Add collection`);
                 } else {
                   return [
-                    createTextVNode("Add collection")
+                    vueExports.createTextVNode("Add collection")
                   ];
                 }
               }),
@@ -319,23 +308,23 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "flex justify-end gap-2 w-full" }, [
-                createVNode(_component_UButton, {
+              vueExports.createVNode("div", { class: "flex justify-end gap-2 w-full" }, [
+                vueExports.createVNode(_component_UButton, {
                   variant: "ghost",
                   onClick: ($event) => open.value = false
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode("Cancel")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode("Cancel")
                   ]),
                   _: 1
                 }, 8, ["onClick"]),
-                createVNode(_component_UButton, {
-                  loading: unref(saving),
-                  disabled: !unref(canSubmit),
+                vueExports.createVNode(_component_UButton, {
+                  loading: vueExports.unref(saving),
+                  disabled: !vueExports.unref(canSubmit),
                   onClick: add
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode("Add collection")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode("Add collection")
                   ]),
                   _: 1
                 }, 8, ["loading", "disabled"])
@@ -350,22 +339,22 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/collections/AddCollectionModal.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const __nuxt_component_3 = Object.assign(_sfc_main$1, { __name: "AdminCollectionsAddCollectionModal" });
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   setup(__props) {
     const { fetcher } = useApi();
     const { collections } = useCollections();
-    const addModalOpen = ref(false);
-    const deleteModalOpen = ref(false);
-    const collectionToDelete = ref(null);
-    const deleting = ref(false);
-    const deleteError = ref("");
+    const addModalOpen = vueExports.ref(false);
+    const deleteModalOpen = vueExports.ref(false);
+    const collectionToDelete = vueExports.ref(null);
+    const deleting = vueExports.ref(false);
+    const deleteError = vueExports.ref("");
     function onAdded(collection) {
       collections.value.push(collection);
     }
@@ -399,57 +388,57 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_AdminCollectionsAddCollectionModal = __nuxt_component_3;
       const _component_AdminConfirmModal = __nuxt_component_4;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_component_AdminLayoutPageStructure, {
+      _push(ssrRenderComponent_1(_component_AdminLayoutPageStructure, {
         title: "Collections",
         description: "Manage your content collections. Adding a collection unlocks the associated blocks in the page builder."
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="max-w-lg grid gap-4"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               "trailing-icon": "i-lucide-plus",
               class: "w-full flex justify-center",
               onClick: ($event) => addModalOpen.value = true
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Add collection`);
                 } else {
                   return [
-                    createTextVNode("Add collection")
+                    vueExports.createTextVNode("Add collection")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
-            if (!unref(collections).length) {
+            if (!vueExports.unref(collections).length) {
               _push2(`<div class="py-12 text-center text-muted text-sm"${_scopeId}> No collections yet. Add one to get started. </div>`);
             } else {
               _push2(`<div class="divide-y divide-default border border-default rounded-md"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(collections), (collection) => {
+              ssrRenderList_1(vueExports.unref(collections), (collection) => {
                 _push2(`<div class="flex items-center gap-3 px-4 py-3 hover:bg-muted/20 transition-colors"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
-                  name: unref(getCollectionType)(collection.type)?.icon ?? "i-lucide-database",
+                _push2(ssrRenderComponent_1(_component_UIcon, {
+                  name: vueExports.unref(getCollectionType)(collection.type)?.icon ?? "i-lucide-database",
                   class: "size-4 shrink-0 text-muted-foreground"
                 }, null, _parent2, _scopeId));
-                _push2(`<div class="flex-1 min-w-0"${_scopeId}><p class="font-medium truncate"${_scopeId}>${ssrInterpolate(collection.name)}</p><p class="text-xs text-muted"${_scopeId}>${ssrInterpolate(collection.type)}</p></div><div class="flex items-center gap-1 shrink-0"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UButton, {
+                _push2(`<div class="flex-1 min-w-0"${_scopeId}><p class="font-medium truncate"${_scopeId}>${ssrInterpolate_1(collection.name)}</p><p class="text-xs text-muted"${_scopeId}>${ssrInterpolate_1(collection.type)}</p></div><div class="flex items-center gap-1 shrink-0"${_scopeId}>`);
+                _push2(ssrRenderComponent_1(_component_UButton, {
                   size: "xs",
                   variant: "ghost",
                   to: `/admin/collections/${collection.id}`
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
                       _push3(` Manage items `);
                     } else {
                       return [
-                        createTextVNode(" Manage items ")
+                        vueExports.createTextVNode(" Manage items ")
                       ];
                     }
                   }),
                   _: 2
                 }, _parent2, _scopeId));
-                _push2(ssrRenderComponent(_component_UButton, {
+                _push2(ssrRenderComponent_1(_component_UButton, {
                   icon: "i-lucide-trash-2",
                   size: "xs",
                   variant: "ghost",
@@ -464,49 +453,49 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "max-w-lg grid gap-4" }, [
-                createVNode(_component_UButton, {
+              vueExports.createVNode("div", { class: "max-w-lg grid gap-4" }, [
+                vueExports.createVNode(_component_UButton, {
                   "trailing-icon": "i-lucide-plus",
                   class: "w-full flex justify-center",
                   onClick: ($event) => addModalOpen.value = true
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode("Add collection")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode("Add collection")
                   ]),
                   _: 1
                 }, 8, ["onClick"]),
-                !unref(collections).length ? (openBlock(), createBlock("div", {
+                !vueExports.unref(collections).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   class: "py-12 text-center text-muted text-sm"
-                }, " No collections yet. Add one to get started. ")) : (openBlock(), createBlock("div", {
+                }, " No collections yet. Add one to get started. ")) : (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 1,
                   class: "divide-y divide-default border border-default rounded-md"
                 }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(collections), (collection) => {
-                    return openBlock(), createBlock("div", {
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(collections), (collection) => {
+                    return vueExports.openBlock(), vueExports.createBlock("div", {
                       key: collection.id,
                       class: "flex items-center gap-3 px-4 py-3 hover:bg-muted/20 transition-colors"
                     }, [
-                      createVNode(_component_UIcon, {
-                        name: unref(getCollectionType)(collection.type)?.icon ?? "i-lucide-database",
+                      vueExports.createVNode(_component_UIcon, {
+                        name: vueExports.unref(getCollectionType)(collection.type)?.icon ?? "i-lucide-database",
                         class: "size-4 shrink-0 text-muted-foreground"
                       }, null, 8, ["name"]),
-                      createVNode("div", { class: "flex-1 min-w-0" }, [
-                        createVNode("p", { class: "font-medium truncate" }, toDisplayString(collection.name), 1),
-                        createVNode("p", { class: "text-xs text-muted" }, toDisplayString(collection.type), 1)
+                      vueExports.createVNode("div", { class: "flex-1 min-w-0" }, [
+                        vueExports.createVNode("p", { class: "font-medium truncate" }, vueExports.toDisplayString(collection.name), 1),
+                        vueExports.createVNode("p", { class: "text-xs text-muted" }, vueExports.toDisplayString(collection.type), 1)
                       ]),
-                      createVNode("div", { class: "flex items-center gap-1 shrink-0" }, [
-                        createVNode(_component_UButton, {
+                      vueExports.createVNode("div", { class: "flex items-center gap-1 shrink-0" }, [
+                        vueExports.createVNode(_component_UButton, {
                           size: "xs",
                           variant: "ghost",
                           to: `/admin/collections/${collection.id}`
                         }, {
-                          default: withCtx(() => [
-                            createTextVNode(" Manage items ")
+                          default: vueExports.withCtx(() => [
+                            vueExports.createTextVNode(" Manage items ")
                           ]),
                           _: 1
                         }, 8, ["to"]),
-                        createVNode(_component_UButton, {
+                        vueExports.createVNode(_component_UButton, {
                           icon: "i-lucide-trash-2",
                           size: "xs",
                           variant: "ghost",
@@ -524,19 +513,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_AdminCollectionsAddCollectionModal, {
-        open: unref(addModalOpen),
-        "onUpdate:open": ($event) => isRef(addModalOpen) ? addModalOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminCollectionsAddCollectionModal, {
+        open: vueExports.unref(addModalOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(addModalOpen) ? addModalOpen.value = $event : null,
         onAdded
       }, null, _parent));
-      _push(ssrRenderComponent(_component_AdminConfirmModal, {
-        open: unref(deleteModalOpen),
-        "onUpdate:open": ($event) => isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminConfirmModal, {
+        open: vueExports.unref(deleteModalOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
         title: "Delete collection",
-        description: `Delete "${unref(collectionToDelete)?.name}"? All items in this collection will be permanently removed.`,
+        description: `Delete "${vueExports.unref(collectionToDelete)?.name}"? All items in this collection will be permanently removed.`,
         "confirm-label": "Delete",
-        loading: unref(deleting),
-        "error-message": unref(deleteError),
+        loading: vueExports.unref(deleting),
+        "error-message": vueExports.unref(deleteError),
         onConfirm: confirmDelete,
         onCancel: ($event) => deleteModalOpen.value = false
       }, null, _parent));
@@ -546,7 +535,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/admin/collections/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

@@ -7,7 +7,9 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 
 const sitemap_xml = defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");

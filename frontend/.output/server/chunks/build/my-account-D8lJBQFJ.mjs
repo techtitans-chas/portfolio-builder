@@ -1,10 +1,8 @@
 import { _ as __nuxt_component_0 } from './PageStructure-K8uU1ezD.mjs';
-import { e as _sfc_main$d, f as _sfc_main$8, K as navigateTo } from './server.mjs';
+import { aO as vueExports, a7 as ssrRenderComponent_1, a4 as ssrRenderAttr_1, j as _sfc_main$d, e as _sfc_main$8, U as navigateTo, a8 as ssrRenderList_1, a6 as ssrRenderClass_1, a2 as ssrIncludeBooleanAttr } from './server.mjs';
 import { _ as _sfc_main$9 } from './Modal-D9bZkufO.mjs';
 import { _ as _sfc_main$7 } from './Separator-CgixisDT.mjs';
 import { _ as _sfc_main$6 } from './Alert-Nv5RlKkm.mjs';
-import { defineComponent, withAsyncContext, reactive, watch, ref, computed, mergeProps, withCtx, unref, createTextVNode, isRef, createVNode, openBlock, createBlock, createCommentVNode, withModifiers, useModel, Fragment, renderList, mergeModels, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrIncludeBooleanAttr } from 'vue/server-renderer';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 import { _ as _sfc_main$3 } from './Form-JEaegfpv.mjs';
 import { _ as _sfc_main$4 } from './FormField-9wkfNHPa.mjs';
@@ -14,7 +12,6 @@ import { u as useUnsavedChanges } from './useUnsavedChanges-CbDvifmB.mjs';
 import { u as useServerFeatures } from './useServerFeatures-DOIxALfL.mjs';
 import './PageWrapper-dRmsqRwL.mjs';
 import './DashboardSidebarToggle-uAAQWn-6.mjs';
-import '@vueuse/core';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -24,22 +21,14 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 import './Container-CXQFSuFJ.mjs';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import '@vueuse/shared';
-import 'tailwind-variants';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 import './overlay-BWwBD9XH.mjs';
-import 'aria-hidden';
 
 const AVATAR_MAX_FILE_SIZE = 10 * 1024 * 1024;
 const AVATAR_ALLOWED_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp"];
@@ -53,11 +42,11 @@ const DEFAULT_AVATARS = [
 ];
 function useAvatarUpload(options = {}) {
   const { fetcher, apiBase } = useApi();
-  const uploading = ref(false);
-  const error = ref("");
-  const success = ref("");
-  const showDefaultPicker = ref(false);
-  const fileInput = ref(null);
+  const uploading = vueExports.ref(false);
+  const error = vueExports.ref("");
+  const success = vueExports.ref("");
+  const showDefaultPicker = vueExports.ref(false);
+  const fileInput = vueExports.ref(null);
   function clearMessages() {
     error.value = "";
     success.value = "";
@@ -138,21 +127,21 @@ function useAvatarUpload(options = {}) {
     selectDefault
   };
 }
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+const _sfc_main$2 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "AvatarModal",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     currentImage: {},
     storageEnabled: { type: Boolean }
   }, {
     "open": { type: Boolean, ...{ default: false } },
     "openModifiers": {}
   }),
-  emits: /* @__PURE__ */ mergeModels(["success"], ["update:open"]),
+  emits: /* @__PURE__ */ vueExports.mergeModels(["success"], ["update:open"]),
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit = __emit;
-    const open = useModel(__props, "open");
+    const open = vueExports.useModel(__props, "open");
     const {
       uploading,
       error: avatarError,
@@ -174,73 +163,73 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       const _component_UButton = _sfc_main$8;
       const _component_USeparator = _sfc_main$7;
       const _component_UAlert = _sfc_main$6;
-      _push(ssrRenderComponent(_component_UModal, mergeProps({
+      _push(ssrRenderComponent_1(_component_UModal, vueExports.mergeProps({
         open: open.value,
         "onUpdate:open": ($event) => open.value = $event,
         title: "Change Avatar",
         description: "Upload your own image or pick a default avatar."
       }, _attrs), {
-        body: withCtx((_, _push2, _parent2, _scopeId) => {
+        body: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="space-y-5"${_scopeId}>`);
             if (props.storageEnabled) {
-              _push2(`<!--[--><input type="file"${ssrRenderAttr("accept", unref(allowedTypes))} class="hidden"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UButton, {
+              _push2(`<!--[--><input type="file"${ssrRenderAttr_1("accept", vueExports.unref(allowedTypes))} class="hidden"${_scopeId}>`);
+              _push2(ssrRenderComponent_1(_component_UButton, {
                 variant: "outline",
                 class: "w-full justify-center",
-                loading: unref(uploading),
-                disabled: unref(uploading),
+                loading: vueExports.unref(uploading),
+                disabled: vueExports.unref(uploading),
                 icon: "i-lucide-upload",
-                onClick: unref(openFilePicker)
+                onClick: vueExports.unref(openFilePicker)
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(` Upload image `);
                   } else {
                     return [
-                      createTextVNode(" Upload image ")
+                      vueExports.createTextVNode(" Upload image ")
                     ];
                   }
                 }),
                 _: 1
               }, _parent2, _scopeId));
               _push2(`<p class="text-xs text-muted text-center"${_scopeId}>JPG, PNG, GIF or WebP · max 10 MB</p>`);
-              _push2(ssrRenderComponent(_component_USeparator, { label: "or choose a default" }, null, _parent2, _scopeId));
+              _push2(ssrRenderComponent_1(_component_USeparator, { label: "or choose a default" }, null, _parent2, _scopeId));
               _push2(`<!--]-->`);
             } else {
               _push2(`<!--[-->`);
-              _push2(ssrRenderComponent(_component_UAlert, {
+              _push2(ssrRenderComponent_1(_component_UAlert, {
                 color: "warning",
                 variant: "soft",
                 icon: "i-lucide-cloud-off",
                 title: "Custom uploads unavailable",
                 description: "File storage is not configured on this server. You can still pick a default avatar below."
               }, null, _parent2, _scopeId));
-              _push2(ssrRenderComponent(_component_USeparator, { label: "choose a default" }, null, _parent2, _scopeId));
+              _push2(ssrRenderComponent_1(_component_USeparator, { label: "choose a default" }, null, _parent2, _scopeId));
               _push2(`<!--]-->`);
             }
             _push2(`<div class="grid grid-cols-6 gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList(unref(defaultAvatars), (path) => {
-              _push2(`<button type="button" class="${ssrRenderClass([
+            ssrRenderList_1(vueExports.unref(defaultAvatars), (path) => {
+              _push2(`<button type="button" class="${ssrRenderClass_1([
                 props.currentImage === path ? "border-primary" : "border-transparent hover:border-muted-foreground",
                 "w-full aspect-square rounded-full overflow-hidden border-2 transition-colors focus:outline-none"
-              ])}"${ssrIncludeBooleanAttr(unref(uploading)) ? " disabled" : ""}${ssrRenderAttr("aria-label", `Select default avatar`)}${_scopeId}><img${ssrRenderAttr("src", path)} alt="" class="w-full h-full object-cover"${_scopeId}></button>`);
+              ])}"${ssrIncludeBooleanAttr(vueExports.unref(uploading)) ? " disabled" : ""}${ssrRenderAttr_1("aria-label", `Select default avatar`)}${_scopeId}><img${ssrRenderAttr_1("src", path)} alt="" class="w-full h-full object-cover"${_scopeId}></button>`);
             });
             _push2(`<!--]--></div>`);
-            if (unref(avatarSuccess)) {
-              _push2(ssrRenderComponent(_component_UAlert, {
+            if (vueExports.unref(avatarSuccess)) {
+              _push2(ssrRenderComponent_1(_component_UAlert, {
                 color: "success",
                 variant: "soft",
-                description: unref(avatarSuccess)
+                description: vueExports.unref(avatarSuccess)
               }, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
             }
-            if (unref(avatarError)) {
-              _push2(ssrRenderComponent(_component_UAlert, {
+            if (vueExports.unref(avatarError)) {
+              _push2(ssrRenderComponent_1(_component_UAlert, {
                 color: "error",
                 variant: "soft",
-                description: unref(avatarError)
+                description: vueExports.unref(avatarError)
               }, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
@@ -248,55 +237,55 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "space-y-5" }, [
-                props.storageEnabled ? (openBlock(), createBlock(Fragment, { key: 0 }, [
-                  createVNode("input", {
+              vueExports.createVNode("div", { class: "space-y-5" }, [
+                props.storageEnabled ? (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 0 }, [
+                  vueExports.createVNode("input", {
                     ref_key: "fileInput",
                     ref: fileInput,
                     type: "file",
-                    accept: unref(allowedTypes),
+                    accept: vueExports.unref(allowedTypes),
                     class: "hidden",
-                    onChange: unref(onFileInputChange)
+                    onChange: vueExports.unref(onFileInputChange)
                   }, null, 40, ["accept", "onChange"]),
-                  createVNode(_component_UButton, {
+                  vueExports.createVNode(_component_UButton, {
                     variant: "outline",
                     class: "w-full justify-center",
-                    loading: unref(uploading),
-                    disabled: unref(uploading),
+                    loading: vueExports.unref(uploading),
+                    disabled: vueExports.unref(uploading),
                     icon: "i-lucide-upload",
-                    onClick: unref(openFilePicker)
+                    onClick: vueExports.unref(openFilePicker)
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode(" Upload image ")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode(" Upload image ")
                     ]),
                     _: 1
                   }, 8, ["loading", "disabled", "onClick"]),
-                  createVNode("p", { class: "text-xs text-muted text-center" }, "JPG, PNG, GIF or WebP · max 10 MB"),
-                  createVNode(_component_USeparator, { label: "or choose a default" })
-                ], 64)) : (openBlock(), createBlock(Fragment, { key: 1 }, [
-                  createVNode(_component_UAlert, {
+                  vueExports.createVNode("p", { class: "text-xs text-muted text-center" }, "JPG, PNG, GIF or WebP · max 10 MB"),
+                  vueExports.createVNode(_component_USeparator, { label: "or choose a default" })
+                ], 64)) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 1 }, [
+                  vueExports.createVNode(_component_UAlert, {
                     color: "warning",
                     variant: "soft",
                     icon: "i-lucide-cloud-off",
                     title: "Custom uploads unavailable",
                     description: "File storage is not configured on this server. You can still pick a default avatar below."
                   }),
-                  createVNode(_component_USeparator, { label: "choose a default" })
+                  vueExports.createVNode(_component_USeparator, { label: "choose a default" })
                 ], 64)),
-                createVNode("div", { class: "grid grid-cols-6 gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(defaultAvatars), (path) => {
-                    return openBlock(), createBlock("button", {
+                vueExports.createVNode("div", { class: "grid grid-cols-6 gap-2" }, [
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(defaultAvatars), (path) => {
+                    return vueExports.openBlock(), vueExports.createBlock("button", {
                       key: path,
                       type: "button",
                       class: [
                         "w-full aspect-square rounded-full overflow-hidden border-2 transition-colors focus:outline-none",
                         props.currentImage === path ? "border-primary" : "border-transparent hover:border-muted-foreground"
                       ],
-                      disabled: unref(uploading),
+                      disabled: vueExports.unref(uploading),
                       "aria-label": `Select default avatar`,
-                      onClick: ($event) => unref(selectDefault)(path)
+                      onClick: ($event) => vueExports.unref(selectDefault)(path)
                     }, [
-                      createVNode("img", {
+                      vueExports.createVNode("img", {
                         src: path,
                         alt: "",
                         class: "w-full h-full object-cover"
@@ -304,18 +293,18 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
                     ], 10, ["disabled", "onClick"]);
                   }), 128))
                 ]),
-                unref(avatarSuccess) ? (openBlock(), createBlock(_component_UAlert, {
+                vueExports.unref(avatarSuccess) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                   key: 2,
                   color: "success",
                   variant: "soft",
-                  description: unref(avatarSuccess)
-                }, null, 8, ["description"])) : createCommentVNode("", true),
-                unref(avatarError) ? (openBlock(), createBlock(_component_UAlert, {
+                  description: vueExports.unref(avatarSuccess)
+                }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(avatarError) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                   key: 3,
                   color: "error",
                   variant: "soft",
-                  description: unref(avatarError)
-                }, null, 8, ["description"])) : createCommentVNode("", true)
+                  description: vueExports.unref(avatarError)
+                }, null, 8, ["description"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
@@ -327,30 +316,30 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/AvatarModal.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const __nuxt_component_3 = Object.assign(_sfc_main$2, { __name: "AdminAvatarModal" });
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DeleteAccountModal",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     userEmail: {}
   }, {
     "open": { type: Boolean, ...{ default: false } },
     "openModifiers": {}
   }),
-  emits: /* @__PURE__ */ mergeModels(["confirm", "cancel"], ["update:open"]),
+  emits: /* @__PURE__ */ vueExports.mergeModels(["confirm", "cancel"], ["update:open"]),
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit = __emit;
-    const open = useModel(__props, "open");
-    const emailInput = ref("");
-    const emailMatches = computed(
+    const open = vueExports.useModel(__props, "open");
+    const emailInput = vueExports.ref("");
+    const emailMatches = vueExports.computed(
       () => emailInput.value.trim().toLowerCase() === props.userEmail.toLowerCase()
     );
-    watch(open, (isOpen) => {
+    vueExports.watch(open, (isOpen) => {
       if (!isOpen) emailInput.value = "";
     });
     return (_ctx, _push, _parent, _attrs) => {
@@ -359,30 +348,30 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       const _component_UFormField = _sfc_main$4;
       const _component_UInput = _sfc_main$5;
       const _component_UButton = _sfc_main$8;
-      _push(ssrRenderComponent(_component_UModal, mergeProps({
+      _push(ssrRenderComponent_1(_component_UModal, vueExports.mergeProps({
         open: open.value,
         "onUpdate:open": ($event) => open.value = $event,
         title: "Delete account",
         description: "This action is permanent and cannot be undone. All your data — portfolio, pages, blocks, collections, and media — will be deleted immediately."
       }, _attrs), {
-        body: withCtx((_, _push2, _parent2, _scopeId) => {
+        body: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="space-y-4"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UAlert, {
+            _push2(ssrRenderComponent_1(_component_UAlert, {
               color: "error",
               variant: "soft",
               icon: "i-lucide-triangle-alert",
               description: "Your account and all associated data will be permanently deleted. You will be logged out immediately."
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: `Type your email address to confirm: ${__props.userEmail}`,
               name: "email-confirm"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UInput, {
-                    modelValue: unref(emailInput),
-                    "onUpdate:modelValue": ($event) => isRef(emailInput) ? emailInput.value = $event : null,
+                  _push3(ssrRenderComponent_1(_component_UInput, {
+                    modelValue: vueExports.unref(emailInput),
+                    "onUpdate:modelValue": ($event) => vueExports.isRef(emailInput) ? emailInput.value = $event : null,
                     type: "email",
                     placeholder: "Enter your email address",
                     class: "w-full",
@@ -390,9 +379,9 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UInput, {
-                      modelValue: unref(emailInput),
-                      "onUpdate:modelValue": ($event) => isRef(emailInput) ? emailInput.value = $event : null,
+                    vueExports.createVNode(_component_UInput, {
+                      modelValue: vueExports.unref(emailInput),
+                      "onUpdate:modelValue": ($event) => vueExports.isRef(emailInput) ? emailInput.value = $event : null,
                       type: "email",
                       placeholder: "Enter your email address",
                       class: "w-full",
@@ -406,21 +395,21 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "space-y-4" }, [
-                createVNode(_component_UAlert, {
+              vueExports.createVNode("div", { class: "space-y-4" }, [
+                vueExports.createVNode(_component_UAlert, {
                   color: "error",
                   variant: "soft",
                   icon: "i-lucide-triangle-alert",
                   description: "Your account and all associated data will be permanently deleted. You will be logged out immediately."
                 }),
-                createVNode(_component_UFormField, {
+                vueExports.createVNode(_component_UFormField, {
                   label: `Type your email address to confirm: ${__props.userEmail}`,
                   name: "email-confirm"
                 }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UInput, {
-                      modelValue: unref(emailInput),
-                      "onUpdate:modelValue": ($event) => isRef(emailInput) ? emailInput.value = $event : null,
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode(_component_UInput, {
+                      modelValue: vueExports.unref(emailInput),
+                      "onUpdate:modelValue": ($event) => vueExports.isRef(emailInput) ? emailInput.value = $event : null,
                       type: "email",
                       placeholder: "Enter your email address",
                       class: "w-full",
@@ -433,38 +422,38 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+        footer: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex justify-end gap-2 w-full"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               variant: "ghost",
               onClick: ($event) => {
                 emit("cancel");
                 open.value = false;
               }
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(` Cancel `);
                 } else {
                   return [
-                    createTextVNode(" Cancel ")
+                    vueExports.createTextVNode(" Cancel ")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               color: "error",
-              disabled: !unref(emailMatches),
+              disabled: !vueExports.unref(emailMatches),
               onClick: ($event) => emit("confirm")
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(` Delete my account `);
                 } else {
                   return [
-                    createTextVNode(" Delete my account ")
+                    vueExports.createTextVNode(" Delete my account ")
                   ];
                 }
               }),
@@ -473,26 +462,26 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "flex justify-end gap-2 w-full" }, [
-                createVNode(_component_UButton, {
+              vueExports.createVNode("div", { class: "flex justify-end gap-2 w-full" }, [
+                vueExports.createVNode(_component_UButton, {
                   variant: "ghost",
                   onClick: ($event) => {
                     emit("cancel");
                     open.value = false;
                   }
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode(" Cancel ")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode(" Cancel ")
                   ]),
                   _: 1
                 }, 8, ["onClick"]),
-                createVNode(_component_UButton, {
+                vueExports.createVNode(_component_UButton, {
                   color: "error",
-                  disabled: !unref(emailMatches),
+                  disabled: !vueExports.unref(emailMatches),
                   onClick: ($event) => emit("confirm")
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode(" Delete my account ")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode(" Delete my account ")
                   ]),
                   _: 1
                 }, 8, ["disabled", "onClick"])
@@ -507,21 +496,21 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/DeleteAccountModal.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const __nuxt_component_9 = Object.assign(_sfc_main$1, { __name: "AdminDeleteAccountModal" });
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "my-account",
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
     const { user, fetch: fetchUser } = useCurrentUser();
     const { fetcher } = useApi();
-    [__temp, __restore] = withAsyncContext(() => fetchUser()), await __temp, __restore();
-    const form = reactive({ name: "" });
-    watch(
+    [__temp, __restore] = vueExports.withAsyncContext(() => fetchUser()), await __temp, __restore();
+    const form = vueExports.reactive({ name: "" });
+    vueExports.watch(
       user,
       (u) => {
         if (u) form.name = u.name ?? "";
@@ -529,9 +518,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { immediate: true }
     );
     const { markSaved } = useUnsavedChanges(form);
-    const successMessage = ref("");
-    const errorMessage = ref("");
-    const saving = ref(false);
+    const successMessage = vueExports.ref("");
+    const errorMessage = vueExports.ref("");
+    const saving = vueExports.ref(false);
     async function save() {
       successMessage.value = "";
       errorMessage.value = "";
@@ -553,16 +542,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         saving.value = false;
       }
     }
-    const avatarModalOpen = ref(false);
-    const displayedImage = computed(() => user.value?.image ?? null);
+    const avatarModalOpen = vueExports.ref(false);
+    const displayedImage = vueExports.computed(() => user.value?.image ?? null);
     function onAvatarSuccess(imageUrl) {
       if (user.value) user.value.image = imageUrl;
     }
     const { features, fetchFeatures } = useServerFeatures();
-    [__temp, __restore] = withAsyncContext(() => fetchFeatures()), await __temp, __restore();
-    const deleteModalOpen = ref(false);
-    const deleting = ref(false);
-    const deleteError = ref("");
+    [__temp, __restore] = vueExports.withAsyncContext(() => fetchFeatures()), await __temp, __restore();
+    const deleteModalOpen = vueExports.ref(false);
+    const deleting = vueExports.ref(false);
+    const deleteError = vueExports.ref("");
     async function confirmDeleteAccount() {
       deleting.value = true;
       deleteError.value = "";
@@ -590,69 +579,69 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UAlert = _sfc_main$6;
       const _component_USeparator = _sfc_main$7;
       const _component_AdminDeleteAccountModal = __nuxt_component_9;
-      _push(ssrRenderComponent(_component_AdminLayoutPageStructure, mergeProps({
+      _push(ssrRenderComponent_1(_component_AdminLayoutPageStructure, vueExports.mergeProps({
         title: "My Account",
         description: "Configure settings for your user account."
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="max-w-md"${_scopeId}><div class="flex items-center gap-4 mb-8"${_scopeId}><div class="w-20 h-20 rounded-full overflow-hidden bg-muted border border-muted flex items-center justify-center shrink-0"${_scopeId}>`);
-            if (unref(displayedImage)) {
-              _push2(`<img${ssrRenderAttr("src", unref(displayedImage))} alt="Profile image" class="w-full h-full object-cover"${_scopeId}>`);
+            if (vueExports.unref(displayedImage)) {
+              _push2(`<img${ssrRenderAttr_1("src", vueExports.unref(displayedImage))} alt="Profile image" class="w-full h-full object-cover"${_scopeId}>`);
             } else {
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-user",
                 class: "w-8 h-8 text-muted-foreground"
               }, null, _parent2, _scopeId));
             }
             _push2(`</div><div${_scopeId}><p class="font-medium"${_scopeId}>Profile Image</p><p class="text-sm text-muted mb-2"${_scopeId}>JPG, PNG, GIF or WebP · max 10 MB</p>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               size: "sm",
               variant: "outline",
               icon: "i-lucide-pencil",
               onClick: ($event) => avatarModalOpen.value = true
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(` Change avatar `);
                 } else {
                   return [
-                    createTextVNode(" Change avatar ")
+                    vueExports.createTextVNode(" Change avatar ")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
             _push2(`</div></div>`);
-            _push2(ssrRenderComponent(_component_AdminAvatarModal, {
-              open: unref(avatarModalOpen),
-              "onUpdate:open": ($event) => isRef(avatarModalOpen) ? avatarModalOpen.value = $event : null,
-              "current-image": unref(displayedImage),
-              "storage-enabled": unref(features).storage,
+            _push2(ssrRenderComponent_1(_component_AdminAvatarModal, {
+              open: vueExports.unref(avatarModalOpen),
+              "onUpdate:open": ($event) => vueExports.isRef(avatarModalOpen) ? avatarModalOpen.value = $event : null,
+              "current-image": vueExports.unref(displayedImage),
+              "storage-enabled": vueExports.unref(features).storage,
               onSuccess: onAvatarSuccess
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UForm, {
+            _push2(ssrRenderComponent_1(_component_UForm, {
               class: "max-w-md space-y-4",
               onSubmit: save
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "Email",
                     name: "email"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UInput, {
-                          "model-value": unref(user)?.email,
+                        _push4(ssrRenderComponent_1(_component_UInput, {
+                          "model-value": vueExports.unref(user)?.email,
                           type: "email",
                           disabled: "",
                           class: "w-full"
                         }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UInput, {
-                            "model-value": unref(user)?.email,
+                          vueExports.createVNode(_component_UInput, {
+                            "model-value": vueExports.unref(user)?.email,
                             type: "email",
                             disabled: "",
                             class: "w-full"
@@ -662,23 +651,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(ssrRenderComponent(_component_UFormField, {
+                  _push3(ssrRenderComponent_1(_component_UFormField, {
                     label: "Name",
                     name: "name"
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_component_UInput, {
-                          modelValue: unref(form).name,
-                          "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                        _push4(ssrRenderComponent_1(_component_UInput, {
+                          modelValue: vueExports.unref(form).name,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).name = $event,
                           placeholder: "Your name",
                           class: "w-full"
                         }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_component_UInput, {
-                            modelValue: unref(form).name,
-                            "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                          vueExports.createVNode(_component_UInput, {
+                            modelValue: vueExports.unref(form).name,
+                            "onUpdate:modelValue": ($event) => vueExports.unref(form).name = $event,
                             placeholder: "Your name",
                             class: "w-full"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -687,34 +676,34 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  if (unref(successMessage)) {
-                    _push3(ssrRenderComponent(_component_UAlert, {
+                  if (vueExports.unref(successMessage)) {
+                    _push3(ssrRenderComponent_1(_component_UAlert, {
                       color: "success",
                       variant: "soft",
-                      description: unref(successMessage)
+                      description: vueExports.unref(successMessage)
                     }, null, _parent3, _scopeId2));
                   } else {
                     _push3(`<!---->`);
                   }
-                  if (unref(errorMessage)) {
-                    _push3(ssrRenderComponent(_component_UAlert, {
+                  if (vueExports.unref(errorMessage)) {
+                    _push3(ssrRenderComponent_1(_component_UAlert, {
                       color: "error",
                       variant: "soft",
-                      description: unref(errorMessage)
+                      description: vueExports.unref(errorMessage)
                     }, null, _parent3, _scopeId2));
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(ssrRenderComponent(_component_UButton, {
+                  _push3(ssrRenderComponent_1(_component_UButton, {
                     type: "submit",
-                    loading: unref(saving)
+                    loading: vueExports.unref(saving)
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(` Save changes `);
                       } else {
                         return [
-                          createTextVNode(" Save changes ")
+                          vueExports.createTextVNode(" Save changes ")
                         ];
                       }
                     }),
@@ -722,13 +711,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Email",
                       name: "email"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          "model-value": unref(user)?.email,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          "model-value": vueExports.unref(user)?.email,
                           type: "email",
                           disabled: "",
                           class: "w-full"
@@ -736,38 +725,38 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Name",
                       name: "name"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          modelValue: unref(form).name,
-                          "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          modelValue: vueExports.unref(form).name,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).name = $event,
                           placeholder: "Your name",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    unref(successMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                    vueExports.unref(successMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                       key: 0,
                       color: "success",
                       variant: "soft",
-                      description: unref(successMessage)
-                    }, null, 8, ["description"])) : createCommentVNode("", true),
-                    unref(errorMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                      description: vueExports.unref(successMessage)
+                    }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                    vueExports.unref(errorMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                       key: 1,
                       color: "error",
                       variant: "soft",
-                      description: unref(errorMessage)
-                    }, null, 8, ["description"])) : createCommentVNode("", true),
-                    createVNode(_component_UButton, {
+                      description: vueExports.unref(errorMessage)
+                    }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                    vueExports.createVNode(_component_UButton, {
                       type: "submit",
-                      loading: unref(saving)
+                      loading: vueExports.unref(saving)
                     }, {
-                      default: withCtx(() => [
-                        createTextVNode(" Save changes ")
+                      default: vueExports.withCtx(() => [
+                        vueExports.createTextVNode(" Save changes ")
                       ]),
                       _: 1
                     }, 8, ["loading"])
@@ -776,111 +765,111 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent_1(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent2, _scopeId));
             _push2(`<div class="max-w-m"${_scopeId}><h2 class="font-medium mb-1"${_scopeId}>Password</h2><p class="text-muted text-sm mb-3"${_scopeId}>Send a password reset link to your email address.</p>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               to: "/reset-password",
               variant: "outline"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Reset password`);
                 } else {
                   return [
-                    createTextVNode("Reset password")
+                    vueExports.createTextVNode("Reset password")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
             _push2(`</div>`);
-            _push2(ssrRenderComponent(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent_1(_component_USeparator, { class: "mt-8 mb-6" }, null, _parent2, _scopeId));
             _push2(`<div class="max-w-md"${_scopeId}><h2 class="font-medium mb-1 text-red-600 dark:text-red-400"${_scopeId}>Danger zone</h2><p class="text-muted text-sm mb-3"${_scopeId}> Permanently delete your account and all associated data. This cannot be undone. </p>`);
-            if (unref(deleteError)) {
-              _push2(ssrRenderComponent(_component_UAlert, {
+            if (vueExports.unref(deleteError)) {
+              _push2(ssrRenderComponent_1(_component_UAlert, {
                 color: "error",
                 variant: "soft",
-                description: unref(deleteError),
+                description: vueExports.unref(deleteError),
                 class: "mb-3"
               }, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               color: "error",
               variant: "outline",
               onClick: ($event) => deleteModalOpen.value = true
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(` Delete account `);
                 } else {
                   return [
-                    createTextVNode(" Delete account ")
+                    vueExports.createTextVNode(" Delete account ")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_AdminDeleteAccountModal, {
-              open: unref(deleteModalOpen),
-              "onUpdate:open": ($event) => isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
-              "user-email": unref(user)?.email ?? "",
+            _push2(ssrRenderComponent_1(_component_AdminDeleteAccountModal, {
+              open: vueExports.unref(deleteModalOpen),
+              "onUpdate:open": ($event) => vueExports.isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
+              "user-email": vueExports.unref(user)?.email ?? "",
               onConfirm: confirmDeleteAccount,
               onCancel: ($event) => deleteError.value = ""
             }, null, _parent2, _scopeId));
             _push2(`</div></div>`);
           } else {
             return [
-              createVNode("div", { class: "max-w-md" }, [
-                createVNode("div", { class: "flex items-center gap-4 mb-8" }, [
-                  createVNode("div", { class: "w-20 h-20 rounded-full overflow-hidden bg-muted border border-muted flex items-center justify-center shrink-0" }, [
-                    unref(displayedImage) ? (openBlock(), createBlock("img", {
+              vueExports.createVNode("div", { class: "max-w-md" }, [
+                vueExports.createVNode("div", { class: "flex items-center gap-4 mb-8" }, [
+                  vueExports.createVNode("div", { class: "w-20 h-20 rounded-full overflow-hidden bg-muted border border-muted flex items-center justify-center shrink-0" }, [
+                    vueExports.unref(displayedImage) ? (vueExports.openBlock(), vueExports.createBlock("img", {
                       key: 0,
-                      src: unref(displayedImage),
+                      src: vueExports.unref(displayedImage),
                       alt: "Profile image",
                       class: "w-full h-full object-cover"
-                    }, null, 8, ["src"])) : (openBlock(), createBlock(_component_UIcon, {
+                    }, null, 8, ["src"])) : (vueExports.openBlock(), vueExports.createBlock(_component_UIcon, {
                       key: 1,
                       name: "i-lucide-user",
                       class: "w-8 h-8 text-muted-foreground"
                     }))
                   ]),
-                  createVNode("div", null, [
-                    createVNode("p", { class: "font-medium" }, "Profile Image"),
-                    createVNode("p", { class: "text-sm text-muted mb-2" }, "JPG, PNG, GIF or WebP · max 10 MB"),
-                    createVNode(_component_UButton, {
+                  vueExports.createVNode("div", null, [
+                    vueExports.createVNode("p", { class: "font-medium" }, "Profile Image"),
+                    vueExports.createVNode("p", { class: "text-sm text-muted mb-2" }, "JPG, PNG, GIF or WebP · max 10 MB"),
+                    vueExports.createVNode(_component_UButton, {
                       size: "sm",
                       variant: "outline",
                       icon: "i-lucide-pencil",
                       onClick: ($event) => avatarModalOpen.value = true
                     }, {
-                      default: withCtx(() => [
-                        createTextVNode(" Change avatar ")
+                      default: vueExports.withCtx(() => [
+                        vueExports.createTextVNode(" Change avatar ")
                       ]),
                       _: 1
                     }, 8, ["onClick"])
                   ])
                 ]),
-                createVNode(_component_AdminAvatarModal, {
-                  open: unref(avatarModalOpen),
-                  "onUpdate:open": ($event) => isRef(avatarModalOpen) ? avatarModalOpen.value = $event : null,
-                  "current-image": unref(displayedImage),
-                  "storage-enabled": unref(features).storage,
+                vueExports.createVNode(_component_AdminAvatarModal, {
+                  open: vueExports.unref(avatarModalOpen),
+                  "onUpdate:open": ($event) => vueExports.isRef(avatarModalOpen) ? avatarModalOpen.value = $event : null,
+                  "current-image": vueExports.unref(displayedImage),
+                  "storage-enabled": vueExports.unref(features).storage,
                   onSuccess: onAvatarSuccess
                 }, null, 8, ["open", "onUpdate:open", "current-image", "storage-enabled"]),
-                createVNode(_component_UForm, {
+                vueExports.createVNode(_component_UForm, {
                   class: "max-w-md space-y-4",
-                  onSubmit: withModifiers(save, ["prevent"])
+                  onSubmit: vueExports.withModifiers(save, ["prevent"])
                 }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UFormField, {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Email",
                       name: "email"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          "model-value": unref(user)?.email,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          "model-value": vueExports.unref(user)?.email,
                           type: "email",
                           disabled: "",
                           class: "w-full"
@@ -888,83 +877,83 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "Name",
                       name: "name"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          modelValue: unref(form).name,
-                          "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          modelValue: vueExports.unref(form).name,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).name = $event,
                           placeholder: "Your name",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    unref(successMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                    vueExports.unref(successMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                       key: 0,
                       color: "success",
                       variant: "soft",
-                      description: unref(successMessage)
-                    }, null, 8, ["description"])) : createCommentVNode("", true),
-                    unref(errorMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                      description: vueExports.unref(successMessage)
+                    }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                    vueExports.unref(errorMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                       key: 1,
                       color: "error",
                       variant: "soft",
-                      description: unref(errorMessage)
-                    }, null, 8, ["description"])) : createCommentVNode("", true),
-                    createVNode(_component_UButton, {
+                      description: vueExports.unref(errorMessage)
+                    }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                    vueExports.createVNode(_component_UButton, {
                       type: "submit",
-                      loading: unref(saving)
+                      loading: vueExports.unref(saving)
                     }, {
-                      default: withCtx(() => [
-                        createTextVNode(" Save changes ")
+                      default: vueExports.withCtx(() => [
+                        vueExports.createTextVNode(" Save changes ")
                       ]),
                       _: 1
                     }, 8, ["loading"])
                   ]),
                   _: 1
                 }),
-                createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
-                createVNode("div", { class: "max-w-m" }, [
-                  createVNode("h2", { class: "font-medium mb-1" }, "Password"),
-                  createVNode("p", { class: "text-muted text-sm mb-3" }, "Send a password reset link to your email address."),
-                  createVNode(_component_UButton, {
+                vueExports.createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
+                vueExports.createVNode("div", { class: "max-w-m" }, [
+                  vueExports.createVNode("h2", { class: "font-medium mb-1" }, "Password"),
+                  vueExports.createVNode("p", { class: "text-muted text-sm mb-3" }, "Send a password reset link to your email address."),
+                  vueExports.createVNode(_component_UButton, {
                     to: "/reset-password",
                     variant: "outline"
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode("Reset password")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode("Reset password")
                     ]),
                     _: 1
                   })
                 ]),
-                createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
-                createVNode("div", { class: "max-w-md" }, [
-                  createVNode("h2", { class: "font-medium mb-1 text-red-600 dark:text-red-400" }, "Danger zone"),
-                  createVNode("p", { class: "text-muted text-sm mb-3" }, " Permanently delete your account and all associated data. This cannot be undone. "),
-                  unref(deleteError) ? (openBlock(), createBlock(_component_UAlert, {
+                vueExports.createVNode(_component_USeparator, { class: "mt-8 mb-6" }),
+                vueExports.createVNode("div", { class: "max-w-md" }, [
+                  vueExports.createVNode("h2", { class: "font-medium mb-1 text-red-600 dark:text-red-400" }, "Danger zone"),
+                  vueExports.createVNode("p", { class: "text-muted text-sm mb-3" }, " Permanently delete your account and all associated data. This cannot be undone. "),
+                  vueExports.unref(deleteError) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                     key: 0,
                     color: "error",
                     variant: "soft",
-                    description: unref(deleteError),
+                    description: vueExports.unref(deleteError),
                     class: "mb-3"
-                  }, null, 8, ["description"])) : createCommentVNode("", true),
-                  createVNode(_component_UButton, {
+                  }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode(_component_UButton, {
                     color: "error",
                     variant: "outline",
                     onClick: ($event) => deleteModalOpen.value = true
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode(" Delete account ")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode(" Delete account ")
                     ]),
                     _: 1
                   }, 8, ["onClick"]),
-                  createVNode(_component_AdminDeleteAccountModal, {
-                    open: unref(deleteModalOpen),
-                    "onUpdate:open": ($event) => isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
-                    "user-email": unref(user)?.email ?? "",
+                  vueExports.createVNode(_component_AdminDeleteAccountModal, {
+                    open: vueExports.unref(deleteModalOpen),
+                    "onUpdate:open": ($event) => vueExports.isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
+                    "user-email": vueExports.unref(user)?.email ?? "",
                     onConfirm: confirmDeleteAccount,
                     onCancel: ($event) => deleteError.value = ""
                   }, null, 8, ["open", "onUpdate:open", "user-email", "onCancel"])
@@ -980,7 +969,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/admin/my-account.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

@@ -1,14 +1,13 @@
 import { p as portfolioSlugKey, d as usePortfolio, _ as __nuxt_component_0 } from './usePortfolio-CUdxQeA9.mjs';
 import { _ as __nuxt_component_3 } from './Renderer-BaU1WY6M.mjs';
-import { defineComponent, provide, withAsyncContext, computed, mergeProps, unref, withCtx, openBlock, createBlock, Fragment, renderList, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderList } from 'vue/server-renderer';
-import { a8 as useRoute, O as useAsyncData, l as createError, aa as useSeoMeta, a1 as useHead } from './server.mjs';
+import { aO as vueExports, aG as useRoute, ak as useAsyncData, m as createError, aI as useSeoMeta, ax as useHead, a7 as ssrRenderComponent_1, a8 as ssrRenderList_1 } from './server.mjs';
 import { u as usePageBlocks, a as useRequestURL } from './url-kg4mDMg0.mjs';
 import './Main-CoIIuktv.mjs';
 import './overlay-BWwBD9XH.mjs';
-import '@vueuse/core';
-import 'aria-hidden';
-import '@vueuse/shared';
+import './usePrefix-DEbZTxVe.mjs';
+import '../_/shared.cjs.prod.mjs';
+import '../_/index.mjs';
+import '../routes/renderer.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -18,28 +17,14 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
-import './usePrefix-DEbZTxVe.mjs';
-import 'sortablejs';
-import '@tiptap/vue-3';
-import '@tiptap/starter-kit';
-import '@tiptap/extension-text-align';
-import '@tiptap/extension-placeholder';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
+import 'node:stream';
 import './collectionTypes-6EiXkZ_r.mjs';
 import './Separator-CgixisDT.mjs';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import 'tailwind-variants';
-import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
 
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "[page]",
   __ssrInlineRender: true,
   async setup(__props) {
@@ -47,7 +32,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const route = useRoute();
     const slug = route.params.slug;
     const pageSlug = route.params.page;
-    provide(portfolioSlugKey, slug);
+    vueExports.provide(portfolioSlugKey, slug);
     const {
       portfolioMode,
       cssVars,
@@ -59,7 +44,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       logoLight,
       logoDark
     } = usePortfolio(slug);
-    const [{ data: portfolioAwaitedData, error: portfolioAwaitedError }, { data: pagesAwaitedData }] = ([__temp, __restore] = withAsyncContext(() => Promise.all([
+    const [{ data: portfolioAwaitedData, error: portfolioAwaitedError }, { data: pagesAwaitedData }] = ([__temp, __restore] = vueExports.withAsyncContext(() => Promise.all([
       useAsyncData(
         `portfolio-${slug}`,
         () => $fetch(`/api/portfolios/${slug}`, { baseURL })
@@ -70,10 +55,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       )
     ])), __temp = await __temp, __restore(), __temp);
     const { contentBlocks } = usePageBlocks(slug, pageSlug);
-    const headerContent = computed(
+    const headerContent = vueExports.computed(
       () => headerBlock.value?.content
     );
-    const footerContent = computed(
+    const footerContent = vueExports.computed(
       () => footerBlock.value?.content
     );
     const canonicalUrl = `${useRequestURL().origin}/p/${slug}/${pageSlug}`;
@@ -100,23 +85,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       const _component_PortfolioLayout = __nuxt_component_0;
       const _component_BlocksRenderer = __nuxt_component_3;
-      _push(ssrRenderComponent(_component_PortfolioLayout, mergeProps({
-        "css-vars": unref(cssVars),
-        "portfolio-mode": unref(portfolioMode),
-        "site-name": unref(p).title || unref(p).slug || "",
-        "home-url": `/p/${unref(slug)}`,
-        "nav-links": unref(navLinks),
-        "header-content": unref(headerContent),
-        "footer-content": unref(footerContent),
-        "google-fonts-url": unref(googleFontsUrl),
-        "logo-url": unref(logoLight),
-        "logo-url-dark": unref(logoDark)
+      _push(ssrRenderComponent_1(_component_PortfolioLayout, vueExports.mergeProps({
+        "css-vars": vueExports.unref(cssVars),
+        "portfolio-mode": vueExports.unref(portfolioMode),
+        "site-name": vueExports.unref(p).title || vueExports.unref(p).slug || "",
+        "home-url": `/p/${vueExports.unref(slug)}`,
+        "nav-links": vueExports.unref(navLinks),
+        "header-content": vueExports.unref(headerContent),
+        "footer-content": vueExports.unref(footerContent),
+        "google-fonts-url": vueExports.unref(googleFontsUrl),
+        "logo-url": vueExports.unref(logoLight),
+        "logo-url-dark": vueExports.unref(logoDark)
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<!--[-->`);
-            ssrRenderList(unref(contentBlocks), (block) => {
-              _push2(ssrRenderComponent(_component_BlocksRenderer, {
+            ssrRenderList_1(vueExports.unref(contentBlocks), (block) => {
+              _push2(ssrRenderComponent_1(_component_BlocksRenderer, {
                 key: block.id,
                 block
               }, null, _parent2, _scopeId));
@@ -124,8 +109,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`<!--]-->`);
           } else {
             return [
-              (openBlock(true), createBlock(Fragment, null, renderList(unref(contentBlocks), (block) => {
-                return openBlock(), createBlock(_component_BlocksRenderer, {
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(contentBlocks), (block) => {
+                return vueExports.openBlock(), vueExports.createBlock(_component_BlocksRenderer, {
                   key: block.id,
                   block
                 }, null, 8, ["block"]);
@@ -140,7 +125,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/p/[slug]/[page].vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

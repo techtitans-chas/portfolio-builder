@@ -1,7 +1,4 @@
-import { computed, useId, useTemplateRef, inject, provide, ref, reactive, readonly, createVNode, resolveDynamicComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext } from 'vue';
-import { ssrRenderVNode, ssrRenderSlot } from 'vue/server-renderer';
-import { useEventBus } from '@vueuse/core';
-import { U as useComponentProps, N as useAppConfig, M as tv, o as formBusInjectionKey, u as formStateInjectionKey, p as formErrorsInjectionKey, r as formInputsInjectionKey, s as formLoadingInjectionKey, t as formOptionsInjectionKey } from './server.mjs';
+import { an as useComponentProps, aj as useAppConfig, aO as vueExports, ag as tv, u as formBusInjectionKey, B as formStateInjectionKey, v as formErrorsInjectionKey, x as formInputsInjectionKey, y as formLoadingInjectionKey, z as formOptionsInjectionKey, ac as ssrRenderVNode, a9 as ssrRenderSlot_1, aq as useEventBus } from './server.mjs';
 
 function isSuperStructSchema(schema) {
   return "schema" in schema && typeof schema.coercer === "function" && typeof schema.validator === "function" && typeof schema.refiner === "function";
@@ -119,38 +116,38 @@ const _sfc_main = {
     const emits = __emit;
     const props = useComponentProps("form", _props);
     const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.form || {} }));
-    const formId = props.id ?? useId();
-    const formRef = useTemplateRef("formRef");
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.form || {} }));
+    const formId = props.id ?? vueExports.useId();
+    const formRef = vueExports.useTemplateRef("formRef");
     const bus = useEventBus(`form-${formId}`);
-    const parentBus = props.nested === true && inject(
+    const parentBus = props.nested === true && vueExports.inject(
       formBusInjectionKey,
       void 0
     );
-    const parentState = props.nested === true ? inject(formStateInjectionKey, void 0) : void 0;
-    const state = computed(() => {
+    const parentState = props.nested === true ? vueExports.inject(formStateInjectionKey, void 0) : void 0;
+    const state = vueExports.computed(() => {
       if (parentState?.value) {
         return props.name ? getAtPath(parentState.value, props.name) : parentState.value;
       }
       return props.state;
     });
-    provide(formBusInjectionKey, bus);
-    provide(formStateInjectionKey, state);
-    const nestedForms = ref(/* @__PURE__ */ new Map());
-    const errors = ref([]);
-    provide(formErrorsInjectionKey, errors);
-    const inputs = ref({});
-    provide(formInputsInjectionKey, inputs);
-    const dirtyFields = reactive(/* @__PURE__ */ new Set());
-    const touchedFields = reactive(/* @__PURE__ */ new Set());
-    const blurredFields = reactive(/* @__PURE__ */ new Set());
+    vueExports.provide(formBusInjectionKey, bus);
+    vueExports.provide(formStateInjectionKey, state);
+    const nestedForms = vueExports.ref(/* @__PURE__ */ new Map());
+    const errors = vueExports.ref([]);
+    vueExports.provide(formErrorsInjectionKey, errors);
+    const inputs = vueExports.ref({});
+    vueExports.provide(formInputsInjectionKey, inputs);
+    const dirtyFields = vueExports.reactive(/* @__PURE__ */ new Set());
+    const touchedFields = vueExports.reactive(/* @__PURE__ */ new Set());
+    const blurredFields = vueExports.reactive(/* @__PURE__ */ new Set());
     function resolveErrorIds(errs) {
       return errs.map((err) => ({
         ...err,
         id: err?.name ? inputs.value[err.name]?.id : void 0
       }));
     }
-    const transformedState = ref(null);
+    const transformedState = vueExports.ref(null);
     async function getErrors() {
       let errs = props.validate ? await props.validate(state.value) ?? [] : [];
       if (props.schema) {
@@ -198,8 +195,8 @@ const _sfc_main = {
       }
       return state.value;
     }
-    const loading = ref(false);
-    provide(formLoadingInjectionKey, readonly(loading));
+    const loading = vueExports.ref(false);
+    vueExports.provide(formLoadingInjectionKey, vueExports.readonly(loading));
     async function onSubmitWrapper(payload) {
       loading.value = !!props.loadingAuto;
       const event = payload;
@@ -220,8 +217,8 @@ const _sfc_main = {
         loading.value = false;
       }
     }
-    const disabled = computed(() => props.disabled || loading.value);
-    provide(formOptionsInjectionKey, computed(() => ({
+    const disabled = vueExports.computed(() => props.disabled || loading.value);
+    vueExports.provide(formOptionsInjectionKey, vueExports.computed(() => ({
       disabled: disabled.value,
       validateOnInputDelay: props.validateOnInputDelay
     })));
@@ -330,29 +327,29 @@ const _sfc_main = {
       },
       disabled,
       loading,
-      dirty: computed(() => !!dirtyFields.size),
-      dirtyFields: readonly(dirtyFields),
-      blurredFields: readonly(blurredFields),
-      touchedFields: readonly(touchedFields)
+      dirty: vueExports.computed(() => !!dirtyFields.size),
+      dirtyFields: vueExports.readonly(dirtyFields),
+      blurredFields: vueExports.readonly(blurredFields),
+      touchedFields: vueExports.readonly(touchedFields)
     };
     __expose(api);
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(parentBus) ? "div" : "form"), mergeProps({
-        id: unref(formId),
+      ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(parentBus) ? "div" : "form"), vueExports.mergeProps({
+        id: vueExports.unref(formId),
         ref_key: "formRef",
         ref: formRef,
-        class: ui.value({ class: [unref(props).ui?.base, unref(props).class] }),
+        class: ui.value({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] }),
         onSubmit: onSubmitWrapper
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {
+            ssrRenderSlot_1(_ctx.$slots, "default", {
               errors: errors.value,
               loading: loading.value
             }, null, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "default", {
+              vueExports.renderSlot(_ctx.$slots, "default", {
                 errors: errors.value,
                 loading: loading.value
               })
@@ -366,7 +363,7 @@ const _sfc_main = {
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Form.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

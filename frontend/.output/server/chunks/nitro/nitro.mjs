@@ -3,10 +3,12 @@ import https, { Server } from 'node:https';
 import { EventEmitter } from 'node:events';
 import { Buffer as Buffer$1 } from 'node:buffer';
 import { promises, existsSync } from 'node:fs';
-import { resolve as resolve$1, dirname as dirname$1, join } from 'node:path';
+import { resolve as resolve$1, dirname as dirname$1, join, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { consola } from 'consola';
+import { formatWithOptions } from 'node:util';
+import g$2 from 'node:process';
+import * as tty from 'node:tty';
 
 const suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
 const suspectConstructorRx = /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/;
@@ -822,7 +824,7 @@ function _routerNodeToTable(initialPath, initialNode) {
   return table;
 }
 
-function isPlainObject(value) {
+function isPlainObject$2(value) {
   if (value === null || typeof value !== "object") {
     return false;
   }
@@ -839,9 +841,9 @@ function isPlainObject(value) {
   return true;
 }
 
-function _defu(baseObject, defaults, namespace = ".", merger) {
-  if (!isPlainObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
+function _defu$1(baseObject, defaults, namespace = ".", merger) {
+  if (!isPlainObject$2(defaults)) {
+    return _defu$1(baseObject, {}, namespace, merger);
   }
   const object = { ...defaults };
   for (const key of Object.keys(baseObject)) {
@@ -857,8 +859,8 @@ function _defu(baseObject, defaults, namespace = ".", merger) {
     }
     if (Array.isArray(value) && Array.isArray(object[key])) {
       object[key] = [...value, ...object[key]];
-    } else if (isPlainObject(value) && isPlainObject(object[key])) {
-      object[key] = _defu(
+    } else if (isPlainObject$2(value) && isPlainObject$2(object[key])) {
+      object[key] = _defu$1(
         value,
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
@@ -870,21 +872,21 @@ function _defu(baseObject, defaults, namespace = ".", merger) {
   }
   return object;
 }
-function createDefu(merger) {
+function createDefu$1(merger) {
   return (...arguments_) => (
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {})
+    arguments_.reduce((p, c) => _defu$1(p, c, "", merger), {})
   );
 }
-const defu = createDefu();
-const defuFn = createDefu((object, key, currentValue) => {
+const defu$1 = createDefu$1();
+const defuFn = createDefu$1((object, key, currentValue) => {
   if (object[key] !== void 0 && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
   }
 });
 
-function o(n){throw new Error(`${n} is not implemented yet!`)}let i$1 = class i extends EventEmitter{__unenv__={};readableEncoding=null;readableEnded=true;readableFlowing=false;readableHighWaterMark=0;readableLength=0;readableObjectMode=false;readableAborted=false;readableDidRead=false;closed=false;errored=null;readable=false;destroyed=false;static from(e,t){return new i(t)}constructor(e){super();}_read(e){}read(e){}setEncoding(e){return this}pause(){return this}resume(){return this}isPaused(){return  true}unpipe(e){return this}unshift(e,t){}wrap(e){return this}push(e,t){return  false}_destroy(e,t){this.removeAllListeners();}destroy(e){return this.destroyed=true,this._destroy(e),this}pipe(e,t){return {}}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return this.destroy(),Promise.resolve()}async*[Symbol.asyncIterator](){throw o("Readable.asyncIterator")}iterator(e){throw o("Readable.iterator")}map(e,t){throw o("Readable.map")}filter(e,t){throw o("Readable.filter")}forEach(e,t){throw o("Readable.forEach")}reduce(e,t,r){throw o("Readable.reduce")}find(e,t){throw o("Readable.find")}findIndex(e,t){throw o("Readable.findIndex")}some(e,t){throw o("Readable.some")}toArray(e){throw o("Readable.toArray")}every(e,t){throw o("Readable.every")}flatMap(e,t){throw o("Readable.flatMap")}drop(e,t){throw o("Readable.drop")}take(e,t){throw o("Readable.take")}asIndexedPairs(e){throw o("Readable.asIndexedPairs")}};let l$1 = class l extends EventEmitter{__unenv__={};writable=true;writableEnded=false;writableFinished=false;writableHighWaterMark=0;writableLength=0;writableObjectMode=false;writableCorked=0;closed=false;errored=null;writableNeedDrain=false;writableAborted=false;destroyed=false;_data;_encoding="utf8";constructor(e){super();}pipe(e,t){return {}}_write(e,t,r){if(this.writableEnded){r&&r();return}if(this._data===void 0)this._data=e;else {const s=typeof this._data=="string"?Buffer$1.from(this._data,this._encoding||t||"utf8"):this._data,a=typeof e=="string"?Buffer$1.from(e,t||this._encoding||"utf8"):e;this._data=Buffer$1.concat([s,a]);}this._encoding=t,r&&r();}_writev(e,t){}_destroy(e,t){}_final(e){}write(e,t,r){const s=typeof t=="string"?this._encoding:"utf8",a=typeof t=="function"?t:typeof r=="function"?r:void 0;return this._write(e,s,a),true}setDefaultEncoding(e){return this}end(e,t,r){const s=typeof e=="function"?e:typeof t=="function"?t:typeof r=="function"?r:void 0;if(this.writableEnded)return s&&s(),this;const a=e===s?void 0:e;if(a){const u=t===s?void 0:t;this.write(a,u,s);}return this.writableEnded=true,this.writableFinished=true,this.emit("close"),this.emit("finish"),this}cork(){}uncork(){}destroy(e){return this.destroyed=true,delete this._data,this.removeAllListeners(),this}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return Promise.resolve()}};const c$1=class c{allowHalfOpen=true;_destroy;constructor(e=new i$1,t=new l$1){Object.assign(this,e),Object.assign(this,t),this._destroy=m(e._destroy,t._destroy);}};function _(){return Object.assign(c$1.prototype,i$1.prototype),Object.assign(c$1.prototype,l$1.prototype),c$1}function m(...n){return function(...e){for(const t of n)t(...e);}}const g=_();class A extends g{__unenv__={};bufferSize=0;bytesRead=0;bytesWritten=0;connecting=false;destroyed=false;pending=false;localAddress="";localPort=0;remoteAddress="";remoteFamily="";remotePort=0;autoSelectFamilyAttemptedAddresses=[];readyState="readOnly";constructor(e){super();}write(e,t,r){return  false}connect(e,t,r){return this}end(e,t,r){return this}setEncoding(e){return this}pause(){return this}resume(){return this}setTimeout(e,t){return this}setNoDelay(e){return this}setKeepAlive(e,t){return this}address(){return {}}unref(){return this}ref(){return this}destroySoon(){this.destroy();}resetAndDestroy(){const e=new Error("ERR_SOCKET_CLOSED");return e.code="ERR_SOCKET_CLOSED",this.destroy(e),this}}class y extends i$1{aborted=false;httpVersion="1.1";httpVersionMajor=1;httpVersionMinor=1;complete=true;connection;socket;headers={};trailers={};method="GET";url="/";statusCode=200;statusMessage="";closed=false;errored=null;readable=false;constructor(e){super(),this.socket=this.connection=e||new A;}get rawHeaders(){const e=this.headers,t=[];for(const r in e)if(Array.isArray(e[r]))for(const s of e[r])t.push(r,s);else t.push(r,e[r]);return t}get rawTrailers(){return []}setTimeout(e,t){return this}get headersDistinct(){return p(this.headers)}get trailersDistinct(){return p(this.trailers)}}function p(n){const e={};for(const[t,r]of Object.entries(n))t&&(e[t]=(Array.isArray(r)?r:[r]).filter(Boolean));return e}class w extends l$1{statusCode=200;statusMessage="";upgrading=false;chunkedEncoding=false;shouldKeepAlive=false;useChunkedEncodingByDefault=false;sendDate=false;finished=false;headersSent=false;strictContentLength=false;connection=null;socket=null;req;_headers={};constructor(e){super(),this.req=e;}assignSocket(e){e._httpMessage=this,this.socket=e,this.connection=e,this.emit("socket",e),this._flush();}_flush(){this.flushHeaders();}detachSocket(e){}writeContinue(e){}writeHead(e,t,r){e&&(this.statusCode=e),typeof t=="string"&&(this.statusMessage=t,t=void 0);const s=r||t;if(s&&!Array.isArray(s))for(const a in s)this.setHeader(a,s[a]);return this.headersSent=true,this}writeProcessing(){}setTimeout(e,t){return this}appendHeader(e,t){e=e.toLowerCase();const r=this._headers[e],s=[...Array.isArray(r)?r:[r],...Array.isArray(t)?t:[t]].filter(Boolean);return this._headers[e]=s.length>1?s:s[0],this}setHeader(e,t){return this._headers[e.toLowerCase()]=t,this}setHeaders(e){for(const[t,r]of Object.entries(e))this.setHeader(t,r);return this}getHeader(e){return this._headers[e.toLowerCase()]}getHeaders(){return this._headers}getHeaderNames(){return Object.keys(this._headers)}hasHeader(e){return e.toLowerCase()in this._headers}removeHeader(e){delete this._headers[e.toLowerCase()];}addTrailers(e){}flushHeaders(){}writeEarlyHints(e,t){typeof t=="function"&&t();}}const E=(()=>{const n=function(){};return n.prototype=Object.create(null),n})();function R(n={}){const e=new E,t=Array.isArray(n)||H(n)?n:Object.entries(n);for(const[r,s]of t)if(s){if(e[r]===void 0){e[r]=s;continue}e[r]=[...Array.isArray(e[r])?e[r]:[e[r]],...Array.isArray(s)?s:[s]];}return e}function H(n){return typeof n?.entries=="function"}function v(n={}){if(n instanceof Headers)return n;const e=new Headers;for(const[t,r]of Object.entries(n))if(r!==void 0){if(Array.isArray(r)){for(const s of r)e.append(t,String(s));continue}e.set(t,String(r));}return e}const S=new Set([101,204,205,304]);async function b(n,e){const t=new y,r=new w(t);t.url=e.url?.toString()||"/";let s;if(!t.url.startsWith("/")){const d=new URL(t.url);s=d.host,t.url=d.pathname+d.search+d.hash;}t.method=e.method||"GET",t.headers=R(e.headers||{}),t.headers.host||(t.headers.host=e.host||s||"localhost"),t.connection.encrypted=t.connection.encrypted||e.protocol==="https",t.body=e.body||null,t.__unenv__=e.context,await n(t,r);let a=r._data;(S.has(r.statusCode)||t.method.toUpperCase()==="HEAD")&&(a=null,delete r._headers["content-length"]);const u={status:r.statusCode,statusText:r.statusMessage,headers:r._headers,body:a};return t.destroy(),r.destroy(),u}async function C(n,e,t={}){try{const r=await b(n,{url:e,...t});return new Response(r.body,{status:r.status,statusText:r.statusText,headers:v(r.headers)})}catch(r){return new Response(r.toString(),{status:Number.parseInt(r.statusCode||r.code)||500,statusText:r.statusText})}}
+function o$1(n){throw new Error(`${n} is not implemented yet!`)}let i$2 = class i extends EventEmitter{__unenv__={};readableEncoding=null;readableEnded=true;readableFlowing=false;readableHighWaterMark=0;readableLength=0;readableObjectMode=false;readableAborted=false;readableDidRead=false;closed=false;errored=null;readable=false;destroyed=false;static from(e,t){return new i(t)}constructor(e){super();}_read(e){}read(e){}setEncoding(e){return this}pause(){return this}resume(){return this}isPaused(){return  true}unpipe(e){return this}unshift(e,t){}wrap(e){return this}push(e,t){return  false}_destroy(e,t){this.removeAllListeners();}destroy(e){return this.destroyed=true,this._destroy(e),this}pipe(e,t){return {}}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return this.destroy(),Promise.resolve()}async*[Symbol.asyncIterator](){throw o$1("Readable.asyncIterator")}iterator(e){throw o$1("Readable.iterator")}map(e,t){throw o$1("Readable.map")}filter(e,t){throw o$1("Readable.filter")}forEach(e,t){throw o$1("Readable.forEach")}reduce(e,t,r){throw o$1("Readable.reduce")}find(e,t){throw o$1("Readable.find")}findIndex(e,t){throw o$1("Readable.findIndex")}some(e,t){throw o$1("Readable.some")}toArray(e){throw o$1("Readable.toArray")}every(e,t){throw o$1("Readable.every")}flatMap(e,t){throw o$1("Readable.flatMap")}drop(e,t){throw o$1("Readable.drop")}take(e,t){throw o$1("Readable.take")}asIndexedPairs(e){throw o$1("Readable.asIndexedPairs")}};let l$2 = class l extends EventEmitter{__unenv__={};writable=true;writableEnded=false;writableFinished=false;writableHighWaterMark=0;writableLength=0;writableObjectMode=false;writableCorked=0;closed=false;errored=null;writableNeedDrain=false;writableAborted=false;destroyed=false;_data;_encoding="utf8";constructor(e){super();}pipe(e,t){return {}}_write(e,t,r){if(this.writableEnded){r&&r();return}if(this._data===void 0)this._data=e;else {const s=typeof this._data=="string"?Buffer$1.from(this._data,this._encoding||t||"utf8"):this._data,a=typeof e=="string"?Buffer$1.from(e,t||this._encoding||"utf8"):e;this._data=Buffer$1.concat([s,a]);}this._encoding=t,r&&r();}_writev(e,t){}_destroy(e,t){}_final(e){}write(e,t,r){const s=typeof t=="string"?this._encoding:"utf8",a=typeof t=="function"?t:typeof r=="function"?r:void 0;return this._write(e,s,a),true}setDefaultEncoding(e){return this}end(e,t,r){const s=typeof e=="function"?e:typeof t=="function"?t:typeof r=="function"?r:void 0;if(this.writableEnded)return s&&s(),this;const a=e===s?void 0:e;if(a){const u=t===s?void 0:t;this.write(a,u,s);}return this.writableEnded=true,this.writableFinished=true,this.emit("close"),this.emit("finish"),this}cork(){}uncork(){}destroy(e){return this.destroyed=true,delete this._data,this.removeAllListeners(),this}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return Promise.resolve()}};const c$2=class c{allowHalfOpen=true;_destroy;constructor(e=new i$2,t=new l$2){Object.assign(this,e),Object.assign(this,t),this._destroy=m(e._destroy,t._destroy);}};function _$1(){return Object.assign(c$2.prototype,i$2.prototype),Object.assign(c$2.prototype,l$2.prototype),c$2}function m(...n){return function(...e){for(const t of n)t(...e);}}const g$1=_$1();let A$1 = class A extends g$1{__unenv__={};bufferSize=0;bytesRead=0;bytesWritten=0;connecting=false;destroyed=false;pending=false;localAddress="";localPort=0;remoteAddress="";remoteFamily="";remotePort=0;autoSelectFamilyAttemptedAddresses=[];readyState="readOnly";constructor(e){super();}write(e,t,r){return  false}connect(e,t,r){return this}end(e,t,r){return this}setEncoding(e){return this}pause(){return this}resume(){return this}setTimeout(e,t){return this}setNoDelay(e){return this}setKeepAlive(e,t){return this}address(){return {}}unref(){return this}ref(){return this}destroySoon(){this.destroy();}resetAndDestroy(){const e=new Error("ERR_SOCKET_CLOSED");return e.code="ERR_SOCKET_CLOSED",this.destroy(e),this}};let y$1 = class y extends i$2{aborted=false;httpVersion="1.1";httpVersionMajor=1;httpVersionMinor=1;complete=true;connection;socket;headers={};trailers={};method="GET";url="/";statusCode=200;statusMessage="";closed=false;errored=null;readable=false;constructor(e){super(),this.socket=this.connection=e||new A$1;}get rawHeaders(){const e=this.headers,t=[];for(const r in e)if(Array.isArray(e[r]))for(const s of e[r])t.push(r,s);else t.push(r,e[r]);return t}get rawTrailers(){return []}setTimeout(e,t){return this}get headersDistinct(){return p(this.headers)}get trailersDistinct(){return p(this.trailers)}};function p(n){const e={};for(const[t,r]of Object.entries(n))t&&(e[t]=(Array.isArray(r)?r:[r]).filter(Boolean));return e}class w extends l$2{statusCode=200;statusMessage="";upgrading=false;chunkedEncoding=false;shouldKeepAlive=false;useChunkedEncodingByDefault=false;sendDate=false;finished=false;headersSent=false;strictContentLength=false;connection=null;socket=null;req;_headers={};constructor(e){super(),this.req=e;}assignSocket(e){e._httpMessage=this,this.socket=e,this.connection=e,this.emit("socket",e),this._flush();}_flush(){this.flushHeaders();}detachSocket(e){}writeContinue(e){}writeHead(e,t,r){e&&(this.statusCode=e),typeof t=="string"&&(this.statusMessage=t,t=void 0);const s=r||t;if(s&&!Array.isArray(s))for(const a in s)this.setHeader(a,s[a]);return this.headersSent=true,this}writeProcessing(){}setTimeout(e,t){return this}appendHeader(e,t){e=e.toLowerCase();const r=this._headers[e],s=[...Array.isArray(r)?r:[r],...Array.isArray(t)?t:[t]].filter(Boolean);return this._headers[e]=s.length>1?s:s[0],this}setHeader(e,t){return this._headers[e.toLowerCase()]=t,this}setHeaders(e){for(const[t,r]of Object.entries(e))this.setHeader(t,r);return this}getHeader(e){return this._headers[e.toLowerCase()]}getHeaders(){return this._headers}getHeaderNames(){return Object.keys(this._headers)}hasHeader(e){return e.toLowerCase()in this._headers}removeHeader(e){delete this._headers[e.toLowerCase()];}addTrailers(e){}flushHeaders(){}writeEarlyHints(e,t){typeof t=="function"&&t();}}const E=(()=>{const n=function(){};return n.prototype=Object.create(null),n})();function R$1(n={}){const e=new E,t=Array.isArray(n)||H(n)?n:Object.entries(n);for(const[r,s]of t)if(s){if(e[r]===void 0){e[r]=s;continue}e[r]=[...Array.isArray(e[r])?e[r]:[e[r]],...Array.isArray(s)?s:[s]];}return e}function H(n){return typeof n?.entries=="function"}function v(n={}){if(n instanceof Headers)return n;const e=new Headers;for(const[t,r]of Object.entries(n))if(r!==void 0){if(Array.isArray(r)){for(const s of r)e.append(t,String(s));continue}e.set(t,String(r));}return e}const S$1=new Set([101,204,205,304]);async function b$1(n,e){const t=new y$1,r=new w(t);t.url=e.url?.toString()||"/";let s;if(!t.url.startsWith("/")){const d=new URL(t.url);s=d.host,t.url=d.pathname+d.search+d.hash;}t.method=e.method||"GET",t.headers=R$1(e.headers||{}),t.headers.host||(t.headers.host=e.host||s||"localhost"),t.connection.encrypted=t.connection.encrypted||e.protocol==="https",t.body=e.body||null,t.__unenv__=e.context,await n(t,r);let a=r._data;(S$1.has(r.statusCode)||t.method.toUpperCase()==="HEAD")&&(a=null,delete r._headers["content-length"]);const u={status:r.statusCode,statusText:r.statusMessage,headers:r._headers,body:a};return t.destroy(),r.destroy(),u}async function C$1(n,e,t={}){try{const r=await b$1(n,{url:e,...t});return new Response(r.body,{status:r.status,statusText:r.statusText,headers:v(r.headers)})}catch(r){return new Response(r.toString(),{status:Number.parseInt(r.statusCode||r.code)||500,statusText:r.statusText})}}
 
 function hasProp(obj, prop) {
   try {
@@ -2429,7 +2431,7 @@ function createHooks() {
   return new Hookable();
 }
 
-const s$1=globalThis.Headers,i=globalThis.AbortController,l=globalThis.fetch||(()=>{throw new Error("[node-fetch-native] Failed to fetch: `globalThis.fetch` is not available!")});
+const s$2=globalThis.Headers,i$1=globalThis.AbortController,l$1=globalThis.fetch||(()=>{throw new Error("[node-fetch-native] Failed to fetch: `globalThis.fetch` is not available!")});
 
 class FetchError extends Error {
   constructor(message, opts) {
@@ -2779,7 +2781,7 @@ function createFetch(globalOptions = {}) {
 function createNodeFetch() {
   const useKeepAlive = JSON.parse(process.env.FETCH_KEEP_ALIVE || "false");
   if (!useKeepAlive) {
-    return l;
+    return l$1;
   }
   const agentOptions = { keepAlive: true };
   const httpAgent = new http.Agent(agentOptions);
@@ -2790,12 +2792,12 @@ function createNodeFetch() {
     }
   };
   return function nodeFetchWithKeepAlive(input, init) {
-    return l(input, { ...nodeFetchOptions, ...init });
+    return l$1(input, { ...nodeFetchOptions, ...init });
   };
 }
 const fetch$1 = globalThis.fetch ? (...args) => globalThis.fetch(...args) : createNodeFetch();
-const Headers$1 = globalThis.Headers || s$1;
-const AbortController = globalThis.AbortController || i;
+const Headers$1 = globalThis.Headers || s$2;
+const AbortController = globalThis.AbortController || i$1;
 const ofetch = createFetch({ fetch: fetch$1, Headers: Headers$1, AbortController });
 const $fetch$1 = ofetch;
 
@@ -3583,7 +3585,7 @@ function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
 }
 
-function serialize$1(o){return typeof o=="string"?`'${o}'`:new c().serialize(o)}const c=/*@__PURE__*/function(){class o{#t=new Map;compare(t,r){const e=typeof t,n=typeof r;return e==="string"&&n==="string"?t.localeCompare(r):e==="number"&&n==="number"?t-r:String.prototype.localeCompare.call(this.serialize(t,true),this.serialize(r,true))}serialize(t,r){if(t===null)return "null";switch(typeof t){case "string":return r?t:`'${t}'`;case "bigint":return `${t}n`;case "object":return this.$object(t);case "function":return this.$function(t)}return String(t)}serializeObject(t){const r=Object.prototype.toString.call(t);if(r!=="[object Object]")return this.serializeBuiltInType(r.length<10?`unknown:${r}`:r.slice(8,-1),t);const e=t.constructor,n=e===Object||e===void 0?"":e.name;if(n!==""&&globalThis[n]===e)return this.serializeBuiltInType(n,t);if(typeof t.toJSON=="function"){const i=t.toJSON();return n+(i!==null&&typeof i=="object"?this.$object(i):`(${this.serialize(i)})`)}return this.serializeObjectEntries(n,Object.entries(t))}serializeBuiltInType(t,r){const e=this["$"+t];if(e)return e.call(this,r);if(typeof r?.entries=="function")return this.serializeObjectEntries(t,r.entries());throw new Error(`Cannot serialize ${t}`)}serializeObjectEntries(t,r){const e=Array.from(r).sort((i,a)=>this.compare(i[0],a[0]));let n=`${t}{`;for(let i=0;i<e.length;i++){const[a,l]=e[i];n+=`${this.serialize(a,true)}:${this.serialize(l)}`,i<e.length-1&&(n+=",");}return n+"}"}$object(t){let r=this.#t.get(t);return r===void 0&&(this.#t.set(t,`#${this.#t.size}`),r=this.serializeObject(t),this.#t.set(t,r)),r}$function(t){const r=Function.prototype.toString.call(t);return r.slice(-15)==="[native code] }"?`${t.name||""}()[native]`:`${t.name}(${t.length})${r.replace(/\s*\n\s*/g,"")}`}$Array(t){let r="[";for(let e=0;e<t.length;e++)r+=this.serialize(t[e]),e<t.length-1&&(r+=",");return r+"]"}$Date(t){try{return `Date(${t.toISOString()})`}catch{return "Date(null)"}}$ArrayBuffer(t){return `ArrayBuffer[${new Uint8Array(t).join(",")}]`}$Set(t){return `Set${this.$Array(Array.from(t).sort((r,e)=>this.compare(r,e)))}`}$Map(t){return this.serializeObjectEntries("Map",t.entries())}}for(const s of ["Error","RegExp","URL"])o.prototype["$"+s]=function(t){return `${s}(${t})`};for(const s of ["Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Uint16Array","Int32Array","Uint32Array","Float32Array","Float64Array"])o.prototype["$"+s]=function(t){return `${s}[${t.join(",")}]`};for(const s of ["BigInt64Array","BigUint64Array"])o.prototype["$"+s]=function(t){return `${s}[${t.join("n,")}${t.length>0?"n":""}]`};return o}();
+function serialize$1(o){return typeof o=="string"?`'${o}'`:new c$1().serialize(o)}const c$1=/*@__PURE__*/function(){class o{#t=new Map;compare(t,r){const e=typeof t,n=typeof r;return e==="string"&&n==="string"?t.localeCompare(r):e==="number"&&n==="number"?t-r:String.prototype.localeCompare.call(this.serialize(t,true),this.serialize(r,true))}serialize(t,r){if(t===null)return "null";switch(typeof t){case "string":return r?t:`'${t}'`;case "bigint":return `${t}n`;case "object":return this.$object(t);case "function":return this.$function(t)}return String(t)}serializeObject(t){const r=Object.prototype.toString.call(t);if(r!=="[object Object]")return this.serializeBuiltInType(r.length<10?`unknown:${r}`:r.slice(8,-1),t);const e=t.constructor,n=e===Object||e===void 0?"":e.name;if(n!==""&&globalThis[n]===e)return this.serializeBuiltInType(n,t);if(typeof t.toJSON=="function"){const i=t.toJSON();return n+(i!==null&&typeof i=="object"?this.$object(i):`(${this.serialize(i)})`)}return this.serializeObjectEntries(n,Object.entries(t))}serializeBuiltInType(t,r){const e=this["$"+t];if(e)return e.call(this,r);if(typeof r?.entries=="function")return this.serializeObjectEntries(t,r.entries());throw new Error(`Cannot serialize ${t}`)}serializeObjectEntries(t,r){const e=Array.from(r).sort((i,a)=>this.compare(i[0],a[0]));let n=`${t}{`;for(let i=0;i<e.length;i++){const[a,l]=e[i];n+=`${this.serialize(a,true)}:${this.serialize(l)}`,i<e.length-1&&(n+=",");}return n+"}"}$object(t){let r=this.#t.get(t);return r===void 0&&(this.#t.set(t,`#${this.#t.size}`),r=this.serializeObject(t),this.#t.set(t,r)),r}$function(t){const r=Function.prototype.toString.call(t);return r.slice(-15)==="[native code] }"?`${t.name||""}()[native]`:`${t.name}(${t.length})${r.replace(/\s*\n\s*/g,"")}`}$Array(t){let r="[";for(let e=0;e<t.length;e++)r+=this.serialize(t[e]),e<t.length-1&&(r+=",");return r+"]"}$Date(t){try{return `Date(${t.toISOString()})`}catch{return "Date(null)"}}$ArrayBuffer(t){return `ArrayBuffer[${new Uint8Array(t).join(",")}]`}$Set(t){return `Set${this.$Array(Array.from(t).sort((r,e)=>this.compare(r,e)))}`}$Map(t){return this.serializeObjectEntries("Map",t.entries())}}for(const s of ["Error","RegExp","URL"])o.prototype["$"+s]=function(t){return `${s}(${t})`};for(const s of ["Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Uint16Array","Int32Array","Uint32Array","Float32Array","Float64Array"])o.prototype["$"+s]=function(t){return `${s}[${t.join(",")}]`};for(const s of ["BigInt64Array","BigUint64Array"])o.prototype["$"+s]=function(t){return `${s}[${t.join("n,")}${t.length>0?"n":""}]`};return o}();
 
 function isEqual(object1, object2) {
   if (object1 === object2) {
@@ -3595,7 +3597,7 @@ function isEqual(object1, object2) {
   return false;
 }
 
-const e=globalThis.process?.getBuiltinModule?.("crypto")?.hash,r="sha256",s="base64url";function digest(t){if(e)return e(r,t,s);const o=createHash(r).update(t);return globalThis.process?.versions?.webcontainer?o.digest().toString(s):o.digest(s)}
+const e=globalThis.process?.getBuiltinModule?.("crypto")?.hash,r$1="sha256",s$1="base64url";function digest(t){if(e)return e(r$1,t,s$1);const o=createHash(r$1).update(t);return globalThis.process?.versions?.webcontainer?o.digest().toString(s$1):o.digest(s$1)}
 
 function hash$1(input) {
   return digest(serialize$1(input));
@@ -4610,7 +4612,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "665e843c-330a-4313-98f7-ee4bbdd80282",
+    "buildId": "0692cecc-f9eb-44e4-84e5-84a3dc5b7d9c",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4902,7 +4904,7 @@ function getRouteRules(event) {
   return event.context._nitro.routeRules;
 }
 function getRouteRulesForPath(path) {
-  return defu({}, ..._routeRulesMatcher.matchAll(path).reverse());
+  return defu$1({}, ..._routeRulesMatcher.matchAll(path).reverse());
 }
 
 function _captureError(error, type) {
@@ -5115,810 +5117,810 @@ const plugins = [
 ];
 
 const assets = {
-  "/.DS_Store": {
-    "type": "text/plain; charset=utf-8",
-    "etag": "\"1804-s1EJve+YDJT2W54AFpIAKZBbBb8\"",
-    "mtime": "2026-06-08T14:54:24.011Z",
-    "size": 6148,
-    "path": "../public/.DS_Store"
-  },
   "/_payload.json": {
     "type": "application/json;charset=utf-8",
-    "etag": "\"45-3HyP9o0HX2sB3bH8f0ow3LhT/00\"",
-    "mtime": "2026-06-08T14:54:23.030Z",
+    "etag": "\"45-oQFoktvPOCZlee42iJ7z9W2Mr0Q\"",
+    "mtime": "2026-06-08T14:57:27.275Z",
     "size": 69,
     "path": "../public/_payload.json"
-  },
-  "/index.html": {
-    "type": "text/html;charset=utf-8",
-    "etag": "\"9079-vGIAuWzFsfkyRnDYZN4NsPjSu7U\"",
-    "mtime": "2026-06-08T14:54:23.028Z",
-    "size": 36985,
-    "path": "../public/index.html"
-  },
-  "/favicon.ico": {
-    "type": "image/vnd.microsoft.icon",
-    "etag": "\"10be-n8egyE9tcb7sKGr/pYCaQ4uWqxI\"",
-    "mtime": "2026-06-08T14:54:24.011Z",
-    "size": 4286,
-    "path": "../public/favicon.ico"
-  },
-  "/_fonts/57NSSoFy1VLVs2gqly8Ls9awBnZMFyXGrefpmqvdqmc-zJfbBtpgM4cDmcXBsqZNW79_kFnlpPd62b48glgdydA.woff2": {
-    "type": "font/woff2",
-    "etag": "\"4b5c-TAo9mx7r3xQs52+HbHcHJ52z8Qo\"",
-    "mtime": "2026-06-08T14:54:23.526Z",
-    "size": 19292,
-    "path": "../public/_fonts/57NSSoFy1VLVs2gqly8Ls9awBnZMFyXGrefpmqvdqmc-zJfbBtpgM4cDmcXBsqZNW79_kFnlpPd62b48glgdydA.woff2"
-  },
-  "/_fonts/8VR2wSMN-3U4NbWAVYXlkRV6hA0jFBXP-0RtL3X7fko-x2gYI4qfmkRdxyQQUPaBZdZdgl1TeVrquF_TxHeM4lM.woff2": {
-    "type": "font/woff2",
-    "etag": "\"212c-FshXJibFzNhd2HEIMP8C3JR5PYg\"",
-    "mtime": "2026-06-08T14:54:23.527Z",
-    "size": 8492,
-    "path": "../public/_fonts/8VR2wSMN-3U4NbWAVYXlkRV6hA0jFBXP-0RtL3X7fko-x2gYI4qfmkRdxyQQUPaBZdZdgl1TeVrquF_TxHeM4lM.woff2"
-  },
-  "/_fonts/GsKUclqeNLJ96g5AU593ug6yanivOiwjW_7zESNPChw-jHA4tBeM1bjF7LATGUpfBuSTyomIFrWBTzjF7txVYfg.woff2": {
-    "type": "font/woff2",
-    "etag": "\"680c-mJtsV33lkTAKSmfq5k3lKHSllcU\"",
-    "mtime": "2026-06-08T14:54:23.527Z",
-    "size": 26636,
-    "path": "../public/_fonts/GsKUclqeNLJ96g5AU593ug6yanivOiwjW_7zESNPChw-jHA4tBeM1bjF7LATGUpfBuSTyomIFrWBTzjF7txVYfg.woff2"
-  },
-  "/_fonts/Ld1FnTo3yTIwDyGfTQ5-Fws9AWsCbKfMvgxduXr7JcY-W25bL8NF1fjpLRSOgJb7RoZPHqGQNwMTM7S9tHVoxx8.woff2": {
-    "type": "font/woff2",
-    "etag": "\"6ec4-8OoFFPZKF1grqmfGVjh5JDE6DOU\"",
-    "mtime": "2026-06-08T14:54:23.527Z",
-    "size": 28356,
-    "path": "../public/_fonts/Ld1FnTo3yTIwDyGfTQ5-Fws9AWsCbKfMvgxduXr7JcY-W25bL8NF1fjpLRSOgJb7RoZPHqGQNwMTM7S9tHVoxx8.woff2"
-  },
-  "/_fonts/NdzqRASp2bovDUhQT1IRE_EMqKJ2KYQdTCfFcBvL8yw-KhwZiS86o3fErOe5GGMExHUemmI_dBfaEFxjISZrBd0.woff2": {
-    "type": "font/woff2",
-    "etag": "\"1d98-cDZfMibtk4T04FTTAmlfhWDpkN0\"",
-    "mtime": "2026-06-08T14:54:23.527Z",
-    "size": 7576,
-    "path": "../public/_fonts/NdzqRASp2bovDUhQT1IRE_EMqKJ2KYQdTCfFcBvL8yw-KhwZiS86o3fErOe5GGMExHUemmI_dBfaEFxjISZrBd0.woff2"
-  },
-  "/_nuxt/2X2kqm0F.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1b6-527CVVta8sz1XEOLSM6fiAFRvoI\"",
-    "mtime": "2026-06-08T14:54:23.958Z",
-    "size": 438,
-    "path": "../public/_nuxt/2X2kqm0F.js"
-  },
-  "/_fonts/iTkrULNFJJkTvihIg1Vqi5IODRH_9btXCioVF5l98I8-AndUyau2HR2felA_ra8V2mutQgschhasE5FD1dXGJX8.woff2": {
-    "type": "font/woff2",
-    "etag": "\"47c4-5xyngHnzzhetUee74tMx9OTgqNQ\"",
-    "mtime": "2026-06-08T14:54:23.528Z",
-    "size": 18372,
-    "path": "../public/_fonts/iTkrULNFJJkTvihIg1Vqi5IODRH_9btXCioVF5l98I8-AndUyau2HR2felA_ra8V2mutQgschhasE5FD1dXGJX8.woff2"
-  },
-  "/_nuxt/2Y13XK9t.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"118-GdXGRQxwTkvo4z/jQCkUrKZ5j+U\"",
-    "mtime": "2026-06-08T14:54:23.958Z",
-    "size": 280,
-    "path": "../public/_nuxt/2Y13XK9t.js"
-  },
-  "/_nuxt/B8UI5rzU.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"887-KiFNWz6rnyI4+8O6I7RwRkRumnY\"",
-    "mtime": "2026-06-08T14:54:23.958Z",
-    "size": 2183,
-    "path": "../public/_nuxt/B8UI5rzU.js"
-  },
-  "/_nuxt/B2TdpgmZ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"193d-hH29XO3r3r3k7EAt6kgi7SZuYUE\"",
-    "mtime": "2026-06-08T14:54:23.958Z",
-    "size": 6461,
-    "path": "../public/_nuxt/B2TdpgmZ.js"
-  },
-  "/_nuxt/B9U6kpLf.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"139e-sGva/5bPvgcqyV05eH2sQAHgKEE\"",
-    "mtime": "2026-06-08T14:54:23.959Z",
-    "size": 5022,
-    "path": "../public/_nuxt/B9U6kpLf.js"
-  },
-  "/_nuxt/BHkmktHk.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"438-2/ovl6s/znaiouRqtKzbOd3kjuU\"",
-    "mtime": "2026-06-08T14:54:23.958Z",
-    "size": 1080,
-    "path": "../public/_nuxt/BHkmktHk.js"
-  },
-  "/_nuxt/BMT_jvUt.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"8d-c+76CxqmOowRlHDzU4mDDDQzB5Q\"",
-    "mtime": "2026-06-08T14:54:23.959Z",
-    "size": 141,
-    "path": "../public/_nuxt/BMT_jvUt.js"
-  },
-  "/_nuxt/BMqczL8O.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1b43-P2I7vF8MqxHrFJQOY9NmUt4hMP0\"",
-    "mtime": "2026-06-08T14:54:23.959Z",
-    "size": 6979,
-    "path": "../public/_nuxt/BMqczL8O.js"
-  },
-  "/_nuxt/BOslmtQG.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"122f-uJ9o7ufC8xIk/bWLNnNhxPBRrIs\"",
-    "mtime": "2026-06-08T14:54:23.959Z",
-    "size": 4655,
-    "path": "../public/_nuxt/BOslmtQG.js"
-  },
-  "/_nuxt/BQJIcF5j.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"237-LhBMp6wLg2I/r4t7XdoJyJDEYFM\"",
-    "mtime": "2026-06-08T14:54:23.959Z",
-    "size": 567,
-    "path": "../public/_nuxt/BQJIcF5j.js"
-  },
-  "/_nuxt/BUauTFAm.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"551-RXKWv08gYCqeKrgVDfijox1XFtM\"",
-    "mtime": "2026-06-08T14:54:23.960Z",
-    "size": 1361,
-    "path": "../public/_nuxt/BUauTFAm.js"
-  },
-  "/_nuxt/BUMrDjd1.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"dd-q3hJ9iTFjv/4KHFmBmFFe66zAxQ\"",
-    "mtime": "2026-06-08T14:54:23.960Z",
-    "size": 221,
-    "path": "../public/_nuxt/BUMrDjd1.js"
-  },
-  "/_nuxt/BRGXvQID.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"169a-PZbPUJoyLgI96M2ezWzoXl55n0k\"",
-    "mtime": "2026-06-08T14:54:23.960Z",
-    "size": 5786,
-    "path": "../public/_nuxt/BRGXvQID.js"
-  },
-  "/_nuxt/BQ2-zdpn.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"58549-jQJ10BJ+FIRgfLw2Jg9LBBABwMI\"",
-    "mtime": "2026-06-08T14:54:23.961Z",
-    "size": 361801,
-    "path": "../public/_nuxt/BQ2-zdpn.js"
-  },
-  "/_nuxt/BUsRsfpZ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"5e18b-Q1o+8Xd4teIgyGjnk0/8wSCgCZQ\"",
-    "mtime": "2026-06-08T14:54:23.962Z",
-    "size": 385419,
-    "path": "../public/_nuxt/BUsRsfpZ.js"
-  },
-  "/_nuxt/BpX9m-8G.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"d7e-bxberR+MbPv/P7cndO+aUJi5VXQ\"",
-    "mtime": "2026-06-08T14:54:23.963Z",
-    "size": 3454,
-    "path": "../public/_nuxt/BpX9m-8G.js"
-  },
-  "/_nuxt/BabXxzmq.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1048-FliA8hIAC2Pm8mkkt2jbirOMyZ8\"",
-    "mtime": "2026-06-08T14:54:23.961Z",
-    "size": 4168,
-    "path": "../public/_nuxt/BabXxzmq.js"
-  },
-  "/_nuxt/Bj7PQpD2.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"16272-FSRifLqrsR0g+Z8tPT+l0QgRQMQ\"",
-    "mtime": "2026-06-08T14:54:23.963Z",
-    "size": 90738,
-    "path": "../public/_nuxt/Bj7PQpD2.js"
-  },
-  "/_nuxt/BsHXF4Kx.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"769-7SOBusZFI7oObY91b8vpDoegGpI\"",
-    "mtime": "2026-06-08T14:54:23.963Z",
-    "size": 1897,
-    "path": "../public/_nuxt/BsHXF4Kx.js"
-  },
-  "/_nuxt/B_NmpxcO.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"14b3f-kcw8NO59qQgxux3UzIJtgxpd8ko\"",
-    "mtime": "2026-06-08T14:54:23.961Z",
-    "size": 84799,
-    "path": "../public/_nuxt/B_NmpxcO.js"
-  },
-  "/_nuxt/CDZPAGi6.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1997-7cNRbV+LFwBifwrY+QtguFdnFng\"",
-    "mtime": "2026-06-08T14:54:23.964Z",
-    "size": 6551,
-    "path": "../public/_nuxt/CDZPAGi6.js"
-  },
-  "/_nuxt/C6x6n8ON.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ed53-N+rfMdLRjq14ipdNRj9BjYJs6+M\"",
-    "mtime": "2026-06-08T14:54:23.965Z",
-    "size": 60755,
-    "path": "../public/_nuxt/C6x6n8ON.js"
-  },
-  "/_nuxt/CDdiXXJw.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2d5-zwjdeBm7htXwRlQCYLLo1A/apb8\"",
-    "mtime": "2026-06-08T14:54:23.964Z",
-    "size": 725,
-    "path": "../public/_nuxt/CDdiXXJw.js"
-  },
-  "/_nuxt/CL9tAmow.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"58c4-ql6AqUURot3OZfYnlWTkKOSlr3A\"",
-    "mtime": "2026-06-08T14:54:23.965Z",
-    "size": 22724,
-    "path": "../public/_nuxt/CL9tAmow.js"
-  },
-  "/_nuxt/CR74B1Q1.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"8de-xLpV/lsp7hNe1f2vFUUV4FDUR2I\"",
-    "mtime": "2026-06-08T14:54:23.965Z",
-    "size": 2270,
-    "path": "../public/_nuxt/CR74B1Q1.js"
-  },
-  "/_nuxt/Cg61SuRw.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"8d5-JcjxdfsZlq/p6DcwSeFCYHBYVO8\"",
-    "mtime": "2026-06-08T14:54:23.966Z",
-    "size": 2261,
-    "path": "../public/_nuxt/Cg61SuRw.js"
-  },
-  "/_nuxt/CaX6Zs0o.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"40-5dA4LdjhjGAETTKeFpET6yZxBUQ\"",
-    "mtime": "2026-06-08T14:54:23.965Z",
-    "size": 64,
-    "path": "../public/_nuxt/CaX6Zs0o.js"
-  },
-  "/_nuxt/BzsZNTYi.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"44d4-0Jl3S8BEvWZvBN19O1ukSTYTROI\"",
-    "mtime": "2026-06-08T14:54:23.964Z",
-    "size": 17620,
-    "path": "../public/_nuxt/BzsZNTYi.js"
-  },
-  "/_nuxt/CqPt2dyN.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"433e-aN4TPh6Qa8c60jHmcjY7athpXDg\"",
-    "mtime": "2026-06-08T14:54:23.968Z",
-    "size": 17214,
-    "path": "../public/_nuxt/CqPt2dyN.js"
-  },
-  "/_nuxt/Cm3lh0RE.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"738c-QyYGFtMGx+Y0mKlC0EjKQqii3Lc\"",
-    "mtime": "2026-06-08T14:54:23.966Z",
-    "size": 29580,
-    "path": "../public/_nuxt/Cm3lh0RE.js"
-  },
-  "/_nuxt/Cw6Dy5rA.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1535-NZP6nh/sgfFVJL9dljKRHpvtOrg\"",
-    "mtime": "2026-06-08T14:54:23.967Z",
-    "size": 5429,
-    "path": "../public/_nuxt/Cw6Dy5rA.js"
-  },
-  "/_nuxt/D2IcuKli.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"9b7-ZMZz3bOCIQgs0VnjQfxF4c6NmE0\"",
-    "mtime": "2026-06-08T14:54:23.966Z",
-    "size": 2487,
-    "path": "../public/_nuxt/D2IcuKli.js"
-  },
-  "/_nuxt/D6gyf3sW.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"113f-Z7/QHxY3Es3vypumS7lS79OWKoo\"",
-    "mtime": "2026-06-08T14:54:23.968Z",
-    "size": 4415,
-    "path": "../public/_nuxt/D6gyf3sW.js"
-  },
-  "/_nuxt/DIubM375.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1c5-r1GMkbdwBsEJcAP7IED6LbZS2b0\"",
-    "mtime": "2026-06-08T14:54:23.969Z",
-    "size": 453,
-    "path": "../public/_nuxt/DIubM375.js"
-  },
-  "/_nuxt/DJ4Vy7tI.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"7ee-UmaR/mw5jqUKw5kRTy4D5Lt7O8w\"",
-    "mtime": "2026-06-08T14:54:23.969Z",
-    "size": 2030,
-    "path": "../public/_nuxt/DJ4Vy7tI.js"
-  },
-  "/_nuxt/DCHWF6_d.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"300b-dGRe6yWTKY7yqZQzN5w8oni9XqE\"",
-    "mtime": "2026-06-08T14:54:23.968Z",
-    "size": 12299,
-    "path": "../public/_nuxt/DCHWF6_d.js"
-  },
-  "/_nuxt/DJem8N99.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"a3ae-Hws9K0NsIUTFib9y02Ro3oB/Bcw\"",
-    "mtime": "2026-06-08T14:54:23.969Z",
-    "size": 41902,
-    "path": "../public/_nuxt/DJem8N99.js"
-  },
-  "/_nuxt/DFmyTvWU.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2139-Xcq1FOpHfoiy/BTElA1E0D3duq8\"",
-    "mtime": "2026-06-08T14:54:23.968Z",
-    "size": 8505,
-    "path": "../public/_nuxt/DFmyTvWU.js"
-  },
-  "/_nuxt/DMiIM75A.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"213e-XO+UaSOsAf7SOnwAhkJav5nc0lo\"",
-    "mtime": "2026-06-08T14:54:23.969Z",
-    "size": 8510,
-    "path": "../public/_nuxt/DMiIM75A.js"
-  },
-  "/_nuxt/DLLbymtO.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1845-APi516mvq7WdkOeT6k2Nl3EBti4\"",
-    "mtime": "2026-06-08T14:54:23.969Z",
-    "size": 6213,
-    "path": "../public/_nuxt/DLLbymtO.js"
-  },
-  "/_nuxt/DPTrSJJM.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"3759-2uaVph3oeAke5aDsFDD3sfa8FRU\"",
-    "mtime": "2026-06-08T14:54:23.970Z",
-    "size": 14169,
-    "path": "../public/_nuxt/DPTrSJJM.js"
-  },
-  "/_nuxt/DQ4mKc2G.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"22aa-4xYePPx+EDQ8hweuQysNvIoke3o\"",
-    "mtime": "2026-06-08T14:54:23.970Z",
-    "size": 8874,
-    "path": "../public/_nuxt/DQ4mKc2G.js"
-  },
-  "/_nuxt/Dbtye4eS.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"187-rjZG88LYWh9ccup8oTKrLigax+U\"",
-    "mtime": "2026-06-08T14:54:23.970Z",
-    "size": 391,
-    "path": "../public/_nuxt/Dbtye4eS.js"
-  },
-  "/_nuxt/DfnxvzM5.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ea2-iIFVv1iUQmEMLuxc5oJTSTMD92o\"",
-    "mtime": "2026-06-08T14:54:23.971Z",
-    "size": 3746,
-    "path": "../public/_nuxt/DfnxvzM5.js"
-  },
-  "/_nuxt/DY2BDRAI.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"156cd-lGHhMWh4aVwEui5ybAyfuQKaHt8\"",
-    "mtime": "2026-06-08T14:54:23.971Z",
-    "size": 87757,
-    "path": "../public/_nuxt/DY2BDRAI.js"
-  },
-  "/_nuxt/DnyD6fiC.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"51d3-ivbbgceynlE4tc+SSk9L0zrhQG0\"",
-    "mtime": "2026-06-08T14:54:23.970Z",
-    "size": 20947,
-    "path": "../public/_nuxt/DnyD6fiC.js"
-  },
-  "/_nuxt/Dp1x_9hY.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"7ba9-3jmT5BWrbE6XVVOB8Cqk9fNUN/w\"",
-    "mtime": "2026-06-08T14:54:23.970Z",
-    "size": 31657,
-    "path": "../public/_nuxt/Dp1x_9hY.js"
-  },
-  "/_nuxt/DwcIzUqU.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2779-QbpK5g8SyH7n8WEVgSLbOCiTjd8\"",
-    "mtime": "2026-06-08T14:54:23.971Z",
-    "size": 10105,
-    "path": "../public/_nuxt/DwcIzUqU.js"
-  },
-  "/_nuxt/DxvOWyPB.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"d219-ASOz/molhtOWdpbGiCn1ncM94cE\"",
-    "mtime": "2026-06-08T14:54:23.972Z",
-    "size": 53785,
-    "path": "../public/_nuxt/DxvOWyPB.js"
-  },
-  "/_nuxt/Renderer.DZgPqdk7.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"ab-utHoZXlpc/7FbA4xxMBf7Ro7TrA\"",
-    "mtime": "2026-06-08T14:54:23.971Z",
-    "size": 171,
-    "path": "../public/_nuxt/Renderer.DZgPqdk7.css"
-  },
-  "/_nuxt/L0xhnvZX.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"13fb-ZlURBwxSqTKo4Z0iUPlWCZ8/6BI\"",
-    "mtime": "2026-06-08T14:54:23.971Z",
-    "size": 5115,
-    "path": "../public/_nuxt/L0xhnvZX.js"
-  },
-  "/_nuxt/S7ujwSpS.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1dbe-z8bitaHBtsqlKarHYn6EKN3B93Q\"",
-    "mtime": "2026-06-08T14:54:23.972Z",
-    "size": 7614,
-    "path": "../public/_nuxt/S7ujwSpS.js"
-  },
-  "/_nuxt/WGFeAjnM.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"4e2-8H+fHhBzTsVXmOiOS23AM5Bcs7E\"",
-    "mtime": "2026-06-08T14:54:23.972Z",
-    "size": 1250,
-    "path": "../public/_nuxt/WGFeAjnM.js"
-  },
-  "/_nuxt/_id_.CyumQwkQ.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"ab-i5+QUpYEqlTwbvyC7BI3ppa4IDg\"",
-    "mtime": "2026-06-08T14:54:23.973Z",
-    "size": 171,
-    "path": "../public/_nuxt/_id_.CyumQwkQ.css"
-  },
-  "/_nuxt/aAzUrijH.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"208-r7/kJ0nQZiKleP8FkeIKMaAKADc\"",
-    "mtime": "2026-06-08T14:54:23.973Z",
-    "size": 520,
-    "path": "../public/_nuxt/aAzUrijH.js"
-  },
-  "/_nuxt/U-dsADPD.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"c66a-rCh7jsSk2z0Q6YgYYW2jNH8ZnoU\"",
-    "mtime": "2026-06-08T14:54:23.972Z",
-    "size": 50794,
-    "path": "../public/_nuxt/U-dsADPD.js"
-  },
-  "/_nuxt/error-404.Br8vP6gm.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"97e-Oulz2hlNaqNjUcnxEU2WUzOYxww\"",
-    "mtime": "2026-06-08T14:54:23.973Z",
-    "size": 2430,
-    "path": "../public/_nuxt/error-404.Br8vP6gm.css"
-  },
-  "/_nuxt/error-500.-nE85j94.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"773-0BgmFgYb7qzMppNJQJK3UGmdDzU\"",
-    "mtime": "2026-06-08T14:54:23.973Z",
-    "size": 1907,
-    "path": "../public/_nuxt/error-500.-nE85j94.css"
-  },
-  "/_nuxt/hE75PxnU.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"b356-dTCOW7Gg6y2qgFOcaOS4FtcojoA\"",
-    "mtime": "2026-06-08T14:54:23.974Z",
-    "size": 45910,
-    "path": "../public/_nuxt/hE75PxnU.js"
-  },
-  "/_nuxt/index.BRIAzSex.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"d5-R++91RRtFWP82Z3P0Vl0Rm4U7Hc\"",
-    "mtime": "2026-06-08T14:54:23.973Z",
-    "size": 213,
-    "path": "../public/_nuxt/index.BRIAzSex.css"
-  },
-  "/_nuxt/entry.Cwy6778D.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"320ad-BkX/LlVCLNGC2yUMAXCcdfrbysI\"",
-    "mtime": "2026-06-08T14:54:23.975Z",
-    "size": 204973,
-    "path": "../public/_nuxt/entry.Cwy6778D.css"
-  },
-  "/_nuxt/index.BraN-yNk.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"2d3-xxXs7/owyhv7vRFbI/xgekFfXVo\"",
-    "mtime": "2026-06-08T14:54:23.974Z",
-    "size": 723,
-    "path": "../public/_nuxt/index.BraN-yNk.css"
-  },
-  "/_nuxt/kbYn6C7K.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"a7-QALMsu3b4mGuplrqDHwejfXrRdc\"",
-    "mtime": "2026-06-08T14:54:23.974Z",
-    "size": 167,
-    "path": "../public/_nuxt/kbYn6C7K.js"
-  },
-  "/_nuxt/pMdxwLDN.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"21b-wn89YVTqC4LK1wQw+/cv5lCBKNI\"",
-    "mtime": "2026-06-08T14:54:23.975Z",
-    "size": 539,
-    "path": "../public/_nuxt/pMdxwLDN.js"
-  },
-  "/_nuxt/swiqgT0M.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1e9-lltHNZ2o0y82nnbDuy59GQxPVd4\"",
-    "mtime": "2026-06-08T14:54:23.975Z",
-    "size": 489,
-    "path": "../public/_nuxt/swiqgT0M.js"
-  },
-  "/_nuxt/usePortfolio.eG9He0RH.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"b1-S1WTw3IjC/1rht+a+mUmVRvSASs\"",
-    "mtime": "2026-06-08T14:54:23.975Z",
-    "size": 177,
-    "path": "../public/_nuxt/usePortfolio.eG9He0RH.css"
-  },
-  "/_nuxt/xHgIHflG.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"b68-AHQujQupbBcWwxzSMpLqEP23nig\"",
-    "mtime": "2026-06-08T14:54:23.975Z",
-    "size": 2920,
-    "path": "../public/_nuxt/xHgIHflG.js"
-  },
-  "/_nuxt/yn2nC43A.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1622-nJ54lQuDbhRDYf0TGGG0JDAobSU\"",
-    "mtime": "2026-06-08T14:54:23.976Z",
-    "size": 5666,
-    "path": "../public/_nuxt/yn2nC43A.js"
-  },
-  "/media/.DS_Store": {
-    "type": "text/plain; charset=utf-8",
-    "etag": "\"2804-qfSh6C7g78UJxsLA26f14HVQEHE\"",
-    "mtime": "2026-06-08T14:54:23.989Z",
-    "size": 10244,
-    "path": "../public/media/.DS_Store"
-  },
-  "/media/acekreations-background-1462755.webp": {
-    "type": "image/webp",
-    "etag": "\"22e36-riss7zjAosHASZ3fg/gqpjzeyb4\"",
-    "mtime": "2026-06-08T14:54:23.992Z",
-    "size": 142902,
-    "path": "../public/media/acekreations-background-1462755.webp"
-  },
-  "/media/annomaria-abstract-7310307.webp": {
-    "type": "image/webp",
-    "etag": "\"20974-+Mq5UsGnyAi77t5OLRriKrj6n+I\"",
-    "mtime": "2026-06-08T14:54:23.993Z",
-    "size": 133492,
-    "path": "../public/media/annomaria-abstract-7310307.webp"
-  },
-  "/media/barbaraalane-texture-1668079.webp": {
-    "type": "image/webp",
-    "etag": "\"1d15c-qQ+2TyDahga8welTwMMPfA1VQoI\"",
-    "mtime": "2026-06-08T14:54:23.993Z",
-    "size": 119132,
-    "path": "../public/media/barbaraalane-texture-1668079.webp"
-  },
-  "/media/flutie8211-sunset-10308969.webp": {
-    "type": "image/webp",
-    "etag": "\"14f88-038XlSWk7nWX5AXONHS6h9KA244\"",
-    "mtime": "2026-06-08T14:54:23.994Z",
-    "size": 85896,
-    "path": "../public/media/flutie8211-sunset-10308969.webp"
-  },
-  "/media/colrizeboks-leaves-7910755.webp": {
-    "type": "image/webp",
-    "etag": "\"427f2-yHE/Y/NfT1LeFv8pdaAP/zKd80w\"",
-    "mtime": "2026-06-08T14:54:23.994Z",
-    "size": 272370,
-    "path": "../public/media/colrizeboks-leaves-7910755.webp"
-  },
-  "/media/manifest.json": {
-    "type": "application/json",
-    "etag": "\"11e1-/H54auf0PLa+ADUl02yCmkqZPWI\"",
-    "mtime": "2026-06-08T14:54:23.996Z",
-    "size": 4577,
-    "path": "../public/media/manifest.json"
-  },
-  "/media/flutie8211-sky-7232494.webp": {
-    "type": "image/webp",
-    "etag": "\"2e3f2-in3Yjv6tTf85dQoG2nlfIEgJqJI\"",
-    "mtime": "2026-06-08T14:54:23.995Z",
-    "size": 189426,
-    "path": "../public/media/flutie8211-sky-7232494.webp"
-  },
-  "/media/lyubmalee-flowers-7230812.webp": {
-    "type": "image/webp",
-    "etag": "\"163d8-Y9byQXEbYzLCP6G6S6ob/5VMNNs\"",
-    "mtime": "2026-06-08T14:54:23.997Z",
-    "size": 91096,
-    "path": "../public/media/lyubmalee-flowers-7230812.webp"
-  },
-  "/media/missperfectkaos-flowers-8511539.webp": {
-    "type": "image/webp",
-    "etag": "\"2313c-XaA7G/ZZJ6DXbAEJCQYUQkvvnxI\"",
-    "mtime": "2026-06-08T14:54:24.000Z",
-    "size": 143676,
-    "path": "../public/media/missperfectkaos-flowers-8511539.webp"
-  },
-  "/media/pfefferminza_viktualia-flower-9173953.webp": {
-    "type": "image/webp",
-    "etag": "\"1ac34-vTLswze/Rny6aR6ddplvhJmtorg\"",
-    "mtime": "2026-06-08T14:54:24.001Z",
-    "size": 109620,
-    "path": "../public/media/pfefferminza_viktualia-flower-9173953.webp"
-  },
-  "/media/pfefferminza_viktualia-flower-9173950.webp": {
-    "type": "image/webp",
-    "etag": "\"28ef2-2S+Hx+JjXe6Q3tNSuh8Xk6QCF/w\"",
-    "mtime": "2026-06-08T14:54:24.000Z",
-    "size": 167666,
-    "path": "../public/media/pfefferminza_viktualia-flower-9173950.webp"
-  },
-  "/media/placeholder-cover.svg": {
-    "type": "image/svg+xml",
-    "etag": "\"2d3-2d0niAfnuYnMoV5J/l4Y+ESrFyY\"",
-    "mtime": "2026-06-08T14:54:24.000Z",
-    "size": 723,
-    "path": "../public/media/placeholder-cover.svg"
-  },
-  "/media/pfefferminza_viktualia-flower-9311569.webp": {
-    "type": "image/webp",
-    "etag": "\"1f9e4-qxs3knFn1r2xOYS3Yco5H8tHLLQ\"",
-    "mtime": "2026-06-08T14:54:24.000Z",
-    "size": 129508,
-    "path": "../public/media/pfefferminza_viktualia-flower-9311569.webp"
-  },
-  "/media/placeholder-hero.svg": {
-    "type": "image/svg+xml",
-    "etag": "\"486-twRixv82tAS3jRY6RzQ+UhKbr7U\"",
-    "mtime": "2026-06-08T14:54:24.000Z",
-    "size": 1158,
-    "path": "../public/media/placeholder-hero.svg"
-  },
-  "/media/placeholder-project.svg": {
-    "type": "image/svg+xml",
-    "etag": "\"4cd-OBbcP0jHm21PT3EGSv2TlqnNgM0\"",
-    "mtime": "2026-06-08T14:54:24.001Z",
-    "size": 1229,
-    "path": "../public/media/placeholder-project.svg"
-  },
-  "/media/pfefferminza_viktualia-flower-9327880.webp": {
-    "type": "image/webp",
-    "etag": "\"1c0ba-k2wXtDf37p030k8Lv7NFGPb9U+A\"",
-    "mtime": "2026-06-08T14:54:24.000Z",
-    "size": 114874,
-    "path": "../public/media/pfefferminza_viktualia-flower-9327880.webp"
-  },
-  "/media/placidplace-space-7273891.webp": {
-    "type": "image/webp",
-    "etag": "\"3da3e-3MGR72IC4gmEGvrQs4dyAHyS4c8\"",
-    "mtime": "2026-06-08T14:54:24.002Z",
-    "size": 252478,
-    "path": "../public/media/placidplace-space-7273891.webp"
-  },
-  "/media/sylvie_sheng-background-1311251.webp": {
-    "type": "image/webp",
-    "etag": "\"67dc-UguSolV4KFDyUXIyrjI0vrbSduE\"",
-    "mtime": "2026-06-08T14:54:24.001Z",
-    "size": 26588,
-    "path": "../public/media/sylvie_sheng-background-1311251.webp"
-  },
-  "/media/thedigitalartist-network-5656534.webp": {
-    "type": "image/webp",
-    "etag": "\"f030-8Mzcz6aQc713ozLC87HDZ4QxGWY\"",
-    "mtime": "2026-06-08T14:54:24.003Z",
-    "size": 61488,
-    "path": "../public/media/thedigitalartist-network-5656534.webp"
-  },
-  "/media/schueler-design-background-1404310.webp": {
-    "type": "image/webp",
-    "etag": "\"5fdc6-dnS0Ulg64dkNDZA4kOzNjgHemlU\"",
-    "mtime": "2026-06-08T14:54:24.003Z",
-    "size": 392646,
-    "path": "../public/media/schueler-design-background-1404310.webp"
-  },
-  "/media/tommyvideo-abstract-5719221.webp": {
-    "type": "image/webp",
-    "etag": "\"1aa0a-PTkJ9QhsR9F+jPtJ241PGsA45FU\"",
-    "mtime": "2026-06-08T14:54:24.005Z",
-    "size": 109066,
-    "path": "../public/media/tommyvideo-abstract-5719221.webp"
-  },
-  "/media/visaxslr-background-7520075.webp": {
-    "type": "image/webp",
-    "etag": "\"4508-O6DrWbGQNwkAf4+aj5IYCyAUOaE\"",
-    "mtime": "2026-06-08T14:54:24.006Z",
-    "size": 17672,
-    "path": "../public/media/visaxslr-background-7520075.webp"
-  },
-  "/media/tylijura-sparkle-10229779.webp": {
-    "type": "image/webp",
-    "etag": "\"24b52-IwUS2rqSvUF9BrvYCVTuQIIJbxA\"",
-    "mtime": "2026-06-08T14:54:24.006Z",
-    "size": 150354,
-    "path": "../public/media/tylijura-sparkle-10229779.webp"
-  },
-  "/media/visaxslr-colored-7292420.webp": {
-    "type": "image/webp",
-    "etag": "\"5500-CooSgRJfvTBPmNJSAHkpDsVrtI4\"",
-    "mtime": "2026-06-08T14:54:24.003Z",
-    "size": 21760,
-    "path": "../public/media/visaxslr-colored-7292420.webp"
-  },
-  "/media/visaxslr-colorful-7957401.webp": {
-    "type": "image/webp",
-    "etag": "\"3db6-+dqcCM19wpJcb3iqCCyWZ3OvpKw\"",
-    "mtime": "2026-06-08T14:54:24.004Z",
-    "size": 15798,
-    "path": "../public/media/visaxslr-colorful-7957401.webp"
-  },
-  "/media/visaxslr-gradient-7966115.webp": {
-    "type": "image/webp",
-    "etag": "\"4574-s1hHeIRci1y+ZZjU8o7Vkdsd/u0\"",
-    "mtime": "2026-06-08T14:54:24.006Z",
-    "size": 17780,
-    "path": "../public/media/visaxslr-gradient-7966115.webp"
-  },
-  "/media/visaxslr-design-7968252.webp": {
-    "type": "image/webp",
-    "etag": "\"2bd8a-IAXUR0ifhlY4uXU+fwBm0SBVzuc\"",
-    "mtime": "2026-06-08T14:54:24.008Z",
-    "size": 179594,
-    "path": "../public/media/visaxslr-design-7968252.webp"
   },
   "/avatars/avatar-1.webp": {
     "type": "image/webp",
     "etag": "\"1414-SDJZqnt1Q+eOu1hA9wBett+0duM\"",
-    "mtime": "2026-06-08T14:54:23.989Z",
+    "mtime": "2026-06-08T14:57:27.492Z",
     "size": 5140,
     "path": "../public/avatars/avatar-1.webp"
   },
-  "/media/visaxslr-mosaic-8156855.webp": {
-    "type": "image/webp",
-    "etag": "\"287c4-hBCvXxwguLXyAF91rMYaR98+eSc\"",
-    "mtime": "2026-06-08T14:54:24.008Z",
-    "size": 165828,
-    "path": "../public/media/visaxslr-mosaic-8156855.webp"
+  "/favicon.ico": {
+    "type": "image/vnd.microsoft.icon",
+    "etag": "\"10be-n8egyE9tcb7sKGr/pYCaQ4uWqxI\"",
+    "mtime": "2026-06-08T14:57:27.528Z",
+    "size": 4286,
+    "path": "../public/favicon.ico"
+  },
+  "/.DS_Store": {
+    "type": "text/plain; charset=utf-8",
+    "etag": "\"1804-s1EJve+YDJT2W54AFpIAKZBbBb8\"",
+    "mtime": "2026-06-08T14:57:27.528Z",
+    "size": 6148,
+    "path": "../public/.DS_Store"
   },
   "/avatars/avatar-2.webp": {
     "type": "image/webp",
     "etag": "\"148a-ItX15WlDoHal+ayGZe9FrVMrlVE\"",
-    "mtime": "2026-06-08T14:54:23.990Z",
+    "mtime": "2026-06-08T14:57:27.514Z",
     "size": 5258,
     "path": "../public/avatars/avatar-2.webp"
-  },
-  "/avatars/avatar-3.webp": {
-    "type": "image/webp",
-    "etag": "\"f9c-a7iyuzol9vQDPVUNTJPcTs91+wY\"",
-    "mtime": "2026-06-08T14:54:23.990Z",
-    "size": 3996,
-    "path": "../public/avatars/avatar-3.webp"
   },
   "/avatars/avatar-4.webp": {
     "type": "image/webp",
     "etag": "\"19b6-MLfOFgPQxZp14LhK04Xo9sc5r8E\"",
-    "mtime": "2026-06-08T14:54:23.990Z",
+    "mtime": "2026-06-08T14:57:27.514Z",
     "size": 6582,
     "path": "../public/avatars/avatar-4.webp"
+  },
+  "/index.html": {
+    "type": "text/html;charset=utf-8",
+    "etag": "\"9079-kl4QKW6/oa2YoFESUl/UtXNAnK8\"",
+    "mtime": "2026-06-08T14:57:27.273Z",
+    "size": 36985,
+    "path": "../public/index.html"
+  },
+  "/avatars/avatar-3.webp": {
+    "type": "image/webp",
+    "etag": "\"f9c-a7iyuzol9vQDPVUNTJPcTs91+wY\"",
+    "mtime": "2026-06-08T14:57:27.515Z",
+    "size": 3996,
+    "path": "../public/avatars/avatar-3.webp"
   },
   "/avatars/avatar-5.webp": {
     "type": "image/webp",
     "etag": "\"161a-7lsyqpuCBvGwPF4JoXE8jY3XlK4\"",
-    "mtime": "2026-06-08T14:54:23.991Z",
+    "mtime": "2026-06-08T14:57:27.517Z",
     "size": 5658,
     "path": "../public/avatars/avatar-5.webp"
   },
   "/avatars/avatar-6.webp": {
     "type": "image/webp",
     "etag": "\"1254-zg/aEdLxIBsFbM14a916jixj1/I\"",
-    "mtime": "2026-06-08T14:54:23.991Z",
+    "mtime": "2026-06-08T14:57:27.516Z",
     "size": 4692,
     "path": "../public/avatars/avatar-6.webp"
   },
+  "/_fonts/57NSSoFy1VLVs2gqly8Ls9awBnZMFyXGrefpmqvdqmc-zJfbBtpgM4cDmcXBsqZNW79_kFnlpPd62b48glgdydA.woff2": {
+    "type": "font/woff2",
+    "etag": "\"4b5c-TAo9mx7r3xQs52+HbHcHJ52z8Qo\"",
+    "mtime": "2026-06-08T14:57:27.324Z",
+    "size": 19292,
+    "path": "../public/_fonts/57NSSoFy1VLVs2gqly8Ls9awBnZMFyXGrefpmqvdqmc-zJfbBtpgM4cDmcXBsqZNW79_kFnlpPd62b48glgdydA.woff2"
+  },
+  "/_fonts/8VR2wSMN-3U4NbWAVYXlkRV6hA0jFBXP-0RtL3X7fko-x2gYI4qfmkRdxyQQUPaBZdZdgl1TeVrquF_TxHeM4lM.woff2": {
+    "type": "font/woff2",
+    "etag": "\"212c-FshXJibFzNhd2HEIMP8C3JR5PYg\"",
+    "mtime": "2026-06-08T14:57:27.325Z",
+    "size": 8492,
+    "path": "../public/_fonts/8VR2wSMN-3U4NbWAVYXlkRV6hA0jFBXP-0RtL3X7fko-x2gYI4qfmkRdxyQQUPaBZdZdgl1TeVrquF_TxHeM4lM.woff2"
+  },
+  "/_fonts/GsKUclqeNLJ96g5AU593ug6yanivOiwjW_7zESNPChw-jHA4tBeM1bjF7LATGUpfBuSTyomIFrWBTzjF7txVYfg.woff2": {
+    "type": "font/woff2",
+    "etag": "\"680c-mJtsV33lkTAKSmfq5k3lKHSllcU\"",
+    "mtime": "2026-06-08T14:57:27.325Z",
+    "size": 26636,
+    "path": "../public/_fonts/GsKUclqeNLJ96g5AU593ug6yanivOiwjW_7zESNPChw-jHA4tBeM1bjF7LATGUpfBuSTyomIFrWBTzjF7txVYfg.woff2"
+  },
+  "/_fonts/NdzqRASp2bovDUhQT1IRE_EMqKJ2KYQdTCfFcBvL8yw-KhwZiS86o3fErOe5GGMExHUemmI_dBfaEFxjISZrBd0.woff2": {
+    "type": "font/woff2",
+    "etag": "\"1d98-cDZfMibtk4T04FTTAmlfhWDpkN0\"",
+    "mtime": "2026-06-08T14:57:27.324Z",
+    "size": 7576,
+    "path": "../public/_fonts/NdzqRASp2bovDUhQT1IRE_EMqKJ2KYQdTCfFcBvL8yw-KhwZiS86o3fErOe5GGMExHUemmI_dBfaEFxjISZrBd0.woff2"
+  },
+  "/_fonts/Ld1FnTo3yTIwDyGfTQ5-Fws9AWsCbKfMvgxduXr7JcY-W25bL8NF1fjpLRSOgJb7RoZPHqGQNwMTM7S9tHVoxx8.woff2": {
+    "type": "font/woff2",
+    "etag": "\"6ec4-8OoFFPZKF1grqmfGVjh5JDE6DOU\"",
+    "mtime": "2026-06-08T14:57:27.324Z",
+    "size": 28356,
+    "path": "../public/_fonts/Ld1FnTo3yTIwDyGfTQ5-Fws9AWsCbKfMvgxduXr7JcY-W25bL8NF1fjpLRSOgJb7RoZPHqGQNwMTM7S9tHVoxx8.woff2"
+  },
+  "/_fonts/iTkrULNFJJkTvihIg1Vqi5IODRH_9btXCioVF5l98I8-AndUyau2HR2felA_ra8V2mutQgschhasE5FD1dXGJX8.woff2": {
+    "type": "font/woff2",
+    "etag": "\"47c4-5xyngHnzzhetUee74tMx9OTgqNQ\"",
+    "mtime": "2026-06-08T14:57:27.324Z",
+    "size": 18372,
+    "path": "../public/_fonts/iTkrULNFJJkTvihIg1Vqi5IODRH_9btXCioVF5l98I8-AndUyau2HR2felA_ra8V2mutQgschhasE5FD1dXGJX8.woff2"
+  },
+  "/media/.DS_Store": {
+    "type": "text/plain; charset=utf-8",
+    "etag": "\"2804-qfSh6C7g78UJxsLA26f14HVQEHE\"",
+    "mtime": "2026-06-08T14:57:27.492Z",
+    "size": 10244,
+    "path": "../public/media/.DS_Store"
+  },
+  "/media/annomaria-abstract-7310307.webp": {
+    "type": "image/webp",
+    "etag": "\"20974-+Mq5UsGnyAi77t5OLRriKrj6n+I\"",
+    "mtime": "2026-06-08T14:57:27.494Z",
+    "size": 133492,
+    "path": "../public/media/annomaria-abstract-7310307.webp"
+  },
+  "/media/acekreations-background-1462755.webp": {
+    "type": "image/webp",
+    "etag": "\"22e36-riss7zjAosHASZ3fg/gqpjzeyb4\"",
+    "mtime": "2026-06-08T14:57:27.495Z",
+    "size": 142902,
+    "path": "../public/media/acekreations-background-1462755.webp"
+  },
+  "/media/barbaraalane-texture-1668079.webp": {
+    "type": "image/webp",
+    "etag": "\"1d15c-qQ+2TyDahga8welTwMMPfA1VQoI\"",
+    "mtime": "2026-06-08T14:57:27.495Z",
+    "size": 119132,
+    "path": "../public/media/barbaraalane-texture-1668079.webp"
+  },
+  "/media/manifest.json": {
+    "type": "application/json",
+    "etag": "\"11e1-/H54auf0PLa+ADUl02yCmkqZPWI\"",
+    "mtime": "2026-06-08T14:57:27.497Z",
+    "size": 4577,
+    "path": "../public/media/manifest.json"
+  },
+  "/media/flutie8211-sunset-10308969.webp": {
+    "type": "image/webp",
+    "etag": "\"14f88-038XlSWk7nWX5AXONHS6h9KA244\"",
+    "mtime": "2026-06-08T14:57:27.497Z",
+    "size": 85896,
+    "path": "../public/media/flutie8211-sunset-10308969.webp"
+  },
+  "/media/flutie8211-sky-7232494.webp": {
+    "type": "image/webp",
+    "etag": "\"2e3f2-in3Yjv6tTf85dQoG2nlfIEgJqJI\"",
+    "mtime": "2026-06-08T14:57:27.496Z",
+    "size": 189426,
+    "path": "../public/media/flutie8211-sky-7232494.webp"
+  },
+  "/media/lyubmalee-flowers-7230812.webp": {
+    "type": "image/webp",
+    "etag": "\"163d8-Y9byQXEbYzLCP6G6S6ob/5VMNNs\"",
+    "mtime": "2026-06-08T14:57:27.498Z",
+    "size": 91096,
+    "path": "../public/media/lyubmalee-flowers-7230812.webp"
+  },
+  "/media/colrizeboks-leaves-7910755.webp": {
+    "type": "image/webp",
+    "etag": "\"427f2-yHE/Y/NfT1LeFv8pdaAP/zKd80w\"",
+    "mtime": "2026-06-08T14:57:27.496Z",
+    "size": 272370,
+    "path": "../public/media/colrizeboks-leaves-7910755.webp"
+  },
+  "/media/missperfectkaos-flowers-8511539.webp": {
+    "type": "image/webp",
+    "etag": "\"2313c-XaA7G/ZZJ6DXbAEJCQYUQkvvnxI\"",
+    "mtime": "2026-06-08T14:57:27.497Z",
+    "size": 143676,
+    "path": "../public/media/missperfectkaos-flowers-8511539.webp"
+  },
+  "/media/pfefferminza_viktualia-flower-9173953.webp": {
+    "type": "image/webp",
+    "etag": "\"1ac34-vTLswze/Rny6aR6ddplvhJmtorg\"",
+    "mtime": "2026-06-08T14:57:27.500Z",
+    "size": 109620,
+    "path": "../public/media/pfefferminza_viktualia-flower-9173953.webp"
+  },
+  "/media/pfefferminza_viktualia-flower-9173950.webp": {
+    "type": "image/webp",
+    "etag": "\"28ef2-2S+Hx+JjXe6Q3tNSuh8Xk6QCF/w\"",
+    "mtime": "2026-06-08T14:57:27.499Z",
+    "size": 167666,
+    "path": "../public/media/pfefferminza_viktualia-flower-9173950.webp"
+  },
+  "/media/pfefferminza_viktualia-flower-9311569.webp": {
+    "type": "image/webp",
+    "etag": "\"1f9e4-qxs3knFn1r2xOYS3Yco5H8tHLLQ\"",
+    "mtime": "2026-06-08T14:57:27.499Z",
+    "size": 129508,
+    "path": "../public/media/pfefferminza_viktualia-flower-9311569.webp"
+  },
+  "/media/pfefferminza_viktualia-flower-9327880.webp": {
+    "type": "image/webp",
+    "etag": "\"1c0ba-k2wXtDf37p030k8Lv7NFGPb9U+A\"",
+    "mtime": "2026-06-08T14:57:27.500Z",
+    "size": 114874,
+    "path": "../public/media/pfefferminza_viktualia-flower-9327880.webp"
+  },
+  "/media/placeholder-hero.svg": {
+    "type": "image/svg+xml",
+    "etag": "\"486-twRixv82tAS3jRY6RzQ+UhKbr7U\"",
+    "mtime": "2026-06-08T14:57:27.500Z",
+    "size": 1158,
+    "path": "../public/media/placeholder-hero.svg"
+  },
+  "/media/placeholder-cover.svg": {
+    "type": "image/svg+xml",
+    "etag": "\"2d3-2d0niAfnuYnMoV5J/l4Y+ESrFyY\"",
+    "mtime": "2026-06-08T14:57:27.500Z",
+    "size": 723,
+    "path": "../public/media/placeholder-cover.svg"
+  },
+  "/media/placeholder-project.svg": {
+    "type": "image/svg+xml",
+    "etag": "\"4cd-OBbcP0jHm21PT3EGSv2TlqnNgM0\"",
+    "mtime": "2026-06-08T14:57:27.501Z",
+    "size": 1229,
+    "path": "../public/media/placeholder-project.svg"
+  },
+  "/media/placidplace-space-7273891.webp": {
+    "type": "image/webp",
+    "etag": "\"3da3e-3MGR72IC4gmEGvrQs4dyAHyS4c8\"",
+    "mtime": "2026-06-08T14:57:27.504Z",
+    "size": 252478,
+    "path": "../public/media/placidplace-space-7273891.webp"
+  },
+  "/media/sylvie_sheng-background-1311251.webp": {
+    "type": "image/webp",
+    "etag": "\"67dc-UguSolV4KFDyUXIyrjI0vrbSduE\"",
+    "mtime": "2026-06-08T14:57:27.502Z",
+    "size": 26588,
+    "path": "../public/media/sylvie_sheng-background-1311251.webp"
+  },
+  "/media/thedigitalartist-network-5656534.webp": {
+    "type": "image/webp",
+    "etag": "\"f030-8Mzcz6aQc713ozLC87HDZ4QxGWY\"",
+    "mtime": "2026-06-08T14:57:27.509Z",
+    "size": 61488,
+    "path": "../public/media/thedigitalartist-network-5656534.webp"
+  },
+  "/media/schueler-design-background-1404310.webp": {
+    "type": "image/webp",
+    "etag": "\"5fdc6-dnS0Ulg64dkNDZA4kOzNjgHemlU\"",
+    "mtime": "2026-06-08T14:57:27.510Z",
+    "size": 392646,
+    "path": "../public/media/schueler-design-background-1404310.webp"
+  },
+  "/media/tylijura-sparkle-10229779.webp": {
+    "type": "image/webp",
+    "etag": "\"24b52-IwUS2rqSvUF9BrvYCVTuQIIJbxA\"",
+    "mtime": "2026-06-08T14:57:27.510Z",
+    "size": 150354,
+    "path": "../public/media/tylijura-sparkle-10229779.webp"
+  },
+  "/media/visaxslr-colored-7292420.webp": {
+    "type": "image/webp",
+    "etag": "\"5500-CooSgRJfvTBPmNJSAHkpDsVrtI4\"",
+    "mtime": "2026-06-08T14:57:27.512Z",
+    "size": 21760,
+    "path": "../public/media/visaxslr-colored-7292420.webp"
+  },
+  "/media/visaxslr-background-7520075.webp": {
+    "type": "image/webp",
+    "etag": "\"4508-O6DrWbGQNwkAf4+aj5IYCyAUOaE\"",
+    "mtime": "2026-06-08T14:57:27.513Z",
+    "size": 17672,
+    "path": "../public/media/visaxslr-background-7520075.webp"
+  },
+  "/media/visaxslr-colorful-7957401.webp": {
+    "type": "image/webp",
+    "etag": "\"3db6-+dqcCM19wpJcb3iqCCyWZ3OvpKw\"",
+    "mtime": "2026-06-08T14:57:27.512Z",
+    "size": 15798,
+    "path": "../public/media/visaxslr-colorful-7957401.webp"
+  },
+  "/media/tommyvideo-abstract-5719221.webp": {
+    "type": "image/webp",
+    "etag": "\"1aa0a-PTkJ9QhsR9F+jPtJ241PGsA45FU\"",
+    "mtime": "2026-06-08T14:57:27.508Z",
+    "size": 109066,
+    "path": "../public/media/tommyvideo-abstract-5719221.webp"
+  },
+  "/media/visaxslr-gradient-7966115.webp": {
+    "type": "image/webp",
+    "etag": "\"4574-s1hHeIRci1y+ZZjU8o7Vkdsd/u0\"",
+    "mtime": "2026-06-08T14:57:27.514Z",
+    "size": 17780,
+    "path": "../public/media/visaxslr-gradient-7966115.webp"
+  },
+  "/media/visaxslr-design-7968252.webp": {
+    "type": "image/webp",
+    "etag": "\"2bd8a-IAXUR0ifhlY4uXU+fwBm0SBVzuc\"",
+    "mtime": "2026-06-08T14:57:27.516Z",
+    "size": 179594,
+    "path": "../public/media/visaxslr-design-7968252.webp"
+  },
+  "/media/visaxslr-mosaic-8156855.webp": {
+    "type": "image/webp",
+    "etag": "\"287c4-hBCvXxwguLXyAF91rMYaR98+eSc\"",
+    "mtime": "2026-06-08T14:57:27.515Z",
+    "size": 165828,
+    "path": "../public/media/visaxslr-mosaic-8156855.webp"
+  },
+  "/_nuxt/2X2kqm0F.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1b6-527CVVta8sz1XEOLSM6fiAFRvoI\"",
+    "mtime": "2026-06-08T14:57:27.335Z",
+    "size": 438,
+    "path": "../public/_nuxt/2X2kqm0F.js"
+  },
+  "/_nuxt/2Y13XK9t.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"118-GdXGRQxwTkvo4z/jQCkUrKZ5j+U\"",
+    "mtime": "2026-06-08T14:57:27.335Z",
+    "size": 280,
+    "path": "../public/_nuxt/2Y13XK9t.js"
+  },
+  "/_nuxt/B2TdpgmZ.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"193d-hH29XO3r3r3k7EAt6kgi7SZuYUE\"",
+    "mtime": "2026-06-08T14:57:27.336Z",
+    "size": 6461,
+    "path": "../public/_nuxt/B2TdpgmZ.js"
+  },
+  "/_nuxt/B8UI5rzU.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"887-KiFNWz6rnyI4+8O6I7RwRkRumnY\"",
+    "mtime": "2026-06-08T14:57:27.336Z",
+    "size": 2183,
+    "path": "../public/_nuxt/B8UI5rzU.js"
+  },
+  "/_nuxt/B9U6kpLf.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"139e-sGva/5bPvgcqyV05eH2sQAHgKEE\"",
+    "mtime": "2026-06-08T14:57:27.336Z",
+    "size": 5022,
+    "path": "../public/_nuxt/B9U6kpLf.js"
+  },
+  "/_nuxt/BHkmktHk.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"438-2/ovl6s/znaiouRqtKzbOd3kjuU\"",
+    "mtime": "2026-06-08T14:57:27.336Z",
+    "size": 1080,
+    "path": "../public/_nuxt/BHkmktHk.js"
+  },
+  "/_nuxt/BOslmtQG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"122f-uJ9o7ufC8xIk/bWLNnNhxPBRrIs\"",
+    "mtime": "2026-06-08T14:57:27.337Z",
+    "size": 4655,
+    "path": "../public/_nuxt/BOslmtQG.js"
+  },
+  "/_nuxt/BMT_jvUt.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"8d-c+76CxqmOowRlHDzU4mDDDQzB5Q\"",
+    "mtime": "2026-06-08T14:57:27.336Z",
+    "size": 141,
+    "path": "../public/_nuxt/BMT_jvUt.js"
+  },
+  "/_nuxt/BMqczL8O.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1b43-P2I7vF8MqxHrFJQOY9NmUt4hMP0\"",
+    "mtime": "2026-06-08T14:57:27.336Z",
+    "size": 6979,
+    "path": "../public/_nuxt/BMqczL8O.js"
+  },
+  "/_nuxt/BQJIcF5j.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"237-LhBMp6wLg2I/r4t7XdoJyJDEYFM\"",
+    "mtime": "2026-06-08T14:57:27.337Z",
+    "size": 567,
+    "path": "../public/_nuxt/BQJIcF5j.js"
+  },
+  "/_nuxt/BRGXvQID.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"169a-PZbPUJoyLgI96M2ezWzoXl55n0k\"",
+    "mtime": "2026-06-08T14:57:27.337Z",
+    "size": 5786,
+    "path": "../public/_nuxt/BRGXvQID.js"
+  },
+  "/_nuxt/BUMrDjd1.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"dd-q3hJ9iTFjv/4KHFmBmFFe66zAxQ\"",
+    "mtime": "2026-06-08T14:57:27.340Z",
+    "size": 221,
+    "path": "../public/_nuxt/BUMrDjd1.js"
+  },
+  "/_nuxt/BUauTFAm.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"551-RXKWv08gYCqeKrgVDfijox1XFtM\"",
+    "mtime": "2026-06-08T14:57:27.340Z",
+    "size": 1361,
+    "path": "../public/_nuxt/BUauTFAm.js"
+  },
+  "/_nuxt/BabXxzmq.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1048-FliA8hIAC2Pm8mkkt2jbirOMyZ8\"",
+    "mtime": "2026-06-08T14:57:27.341Z",
+    "size": 4168,
+    "path": "../public/_nuxt/BabXxzmq.js"
+  },
+  "/_nuxt/B_NmpxcO.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"14b3f-kcw8NO59qQgxux3UzIJtgxpd8ko\"",
+    "mtime": "2026-06-08T14:57:27.343Z",
+    "size": 84799,
+    "path": "../public/_nuxt/B_NmpxcO.js"
+  },
+  "/_nuxt/Bj7PQpD2.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"16272-FSRifLqrsR0g+Z8tPT+l0QgRQMQ\"",
+    "mtime": "2026-06-08T14:57:27.345Z",
+    "size": 90738,
+    "path": "../public/_nuxt/Bj7PQpD2.js"
+  },
+  "/_nuxt/BpX9m-8G.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"d7e-bxberR+MbPv/P7cndO+aUJi5VXQ\"",
+    "mtime": "2026-06-08T14:57:27.341Z",
+    "size": 3454,
+    "path": "../public/_nuxt/BpX9m-8G.js"
+  },
+  "/_nuxt/BsHXF4Kx.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"769-7SOBusZFI7oObY91b8vpDoegGpI\"",
+    "mtime": "2026-06-08T14:57:27.342Z",
+    "size": 1897,
+    "path": "../public/_nuxt/BsHXF4Kx.js"
+  },
+  "/_nuxt/BzsZNTYi.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"44d4-0Jl3S8BEvWZvBN19O1ukSTYTROI\"",
+    "mtime": "2026-06-08T14:57:27.342Z",
+    "size": 17620,
+    "path": "../public/_nuxt/BzsZNTYi.js"
+  },
+  "/_nuxt/CDZPAGi6.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1997-7cNRbV+LFwBifwrY+QtguFdnFng\"",
+    "mtime": "2026-06-08T14:57:27.343Z",
+    "size": 6551,
+    "path": "../public/_nuxt/CDZPAGi6.js"
+  },
+  "/_nuxt/CDdiXXJw.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2d5-zwjdeBm7htXwRlQCYLLo1A/apb8\"",
+    "mtime": "2026-06-08T14:57:27.344Z",
+    "size": 725,
+    "path": "../public/_nuxt/CDdiXXJw.js"
+  },
+  "/_nuxt/C6x6n8ON.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"ed53-N+rfMdLRjq14ipdNRj9BjYJs6+M\"",
+    "mtime": "2026-06-08T14:57:27.345Z",
+    "size": 60755,
+    "path": "../public/_nuxt/C6x6n8ON.js"
+  },
+  "/_nuxt/CR74B1Q1.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"8de-xLpV/lsp7hNe1f2vFUUV4FDUR2I\"",
+    "mtime": "2026-06-08T14:57:27.344Z",
+    "size": 2270,
+    "path": "../public/_nuxt/CR74B1Q1.js"
+  },
+  "/_nuxt/CL9tAmow.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"58c4-ql6AqUURot3OZfYnlWTkKOSlr3A\"",
+    "mtime": "2026-06-08T14:57:27.344Z",
+    "size": 22724,
+    "path": "../public/_nuxt/CL9tAmow.js"
+  },
+  "/_nuxt/CaX6Zs0o.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"40-5dA4LdjhjGAETTKeFpET6yZxBUQ\"",
+    "mtime": "2026-06-08T14:57:27.345Z",
+    "size": 64,
+    "path": "../public/_nuxt/CaX6Zs0o.js"
+  },
+  "/_nuxt/Cg61SuRw.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"8d5-JcjxdfsZlq/p6DcwSeFCYHBYVO8\"",
+    "mtime": "2026-06-08T14:57:27.345Z",
+    "size": 2261,
+    "path": "../public/_nuxt/Cg61SuRw.js"
+  },
+  "/_nuxt/BQ2-zdpn.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"58549-jQJ10BJ+FIRgfLw2Jg9LBBABwMI\"",
+    "mtime": "2026-06-08T14:57:27.338Z",
+    "size": 361801,
+    "path": "../public/_nuxt/BQ2-zdpn.js"
+  },
+  "/_nuxt/BUsRsfpZ.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"5e18b-Q1o+8Xd4teIgyGjnk0/8wSCgCZQ\"",
+    "mtime": "2026-06-08T14:57:27.338Z",
+    "size": 385419,
+    "path": "../public/_nuxt/BUsRsfpZ.js"
+  },
+  "/_nuxt/Cm3lh0RE.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"738c-QyYGFtMGx+Y0mKlC0EjKQqii3Lc\"",
+    "mtime": "2026-06-08T14:57:27.346Z",
+    "size": 29580,
+    "path": "../public/_nuxt/Cm3lh0RE.js"
+  },
+  "/_nuxt/CqPt2dyN.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"433e-aN4TPh6Qa8c60jHmcjY7athpXDg\"",
+    "mtime": "2026-06-08T14:57:27.345Z",
+    "size": 17214,
+    "path": "../public/_nuxt/CqPt2dyN.js"
+  },
+  "/_nuxt/Cw6Dy5rA.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1535-NZP6nh/sgfFVJL9dljKRHpvtOrg\"",
+    "mtime": "2026-06-08T14:57:27.346Z",
+    "size": 5429,
+    "path": "../public/_nuxt/Cw6Dy5rA.js"
+  },
+  "/_nuxt/D2IcuKli.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"9b7-ZMZz3bOCIQgs0VnjQfxF4c6NmE0\"",
+    "mtime": "2026-06-08T14:57:27.346Z",
+    "size": 2487,
+    "path": "../public/_nuxt/D2IcuKli.js"
+  },
+  "/_nuxt/DJ4Vy7tI.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"7ee-UmaR/mw5jqUKw5kRTy4D5Lt7O8w\"",
+    "mtime": "2026-06-08T14:57:27.347Z",
+    "size": 2030,
+    "path": "../public/_nuxt/DJ4Vy7tI.js"
+  },
+  "/_nuxt/D6gyf3sW.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"113f-Z7/QHxY3Es3vypumS7lS79OWKoo\"",
+    "mtime": "2026-06-08T14:57:27.346Z",
+    "size": 4415,
+    "path": "../public/_nuxt/D6gyf3sW.js"
+  },
+  "/_nuxt/DCHWF6_d.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"300b-dGRe6yWTKY7yqZQzN5w8oni9XqE\"",
+    "mtime": "2026-06-08T14:57:27.346Z",
+    "size": 12299,
+    "path": "../public/_nuxt/DCHWF6_d.js"
+  },
+  "/_nuxt/DJem8N99.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"a3ae-Hws9K0NsIUTFib9y02Ro3oB/Bcw\"",
+    "mtime": "2026-06-08T14:57:27.348Z",
+    "size": 41902,
+    "path": "../public/_nuxt/DJem8N99.js"
+  },
+  "/_nuxt/DFmyTvWU.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2139-Xcq1FOpHfoiy/BTElA1E0D3duq8\"",
+    "mtime": "2026-06-08T14:57:27.347Z",
+    "size": 8505,
+    "path": "../public/_nuxt/DFmyTvWU.js"
+  },
+  "/_nuxt/DQ4mKc2G.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"22aa-4xYePPx+EDQ8hweuQysNvIoke3o\"",
+    "mtime": "2026-06-08T14:57:27.348Z",
+    "size": 8874,
+    "path": "../public/_nuxt/DQ4mKc2G.js"
+  },
+  "/_nuxt/DMiIM75A.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"213e-XO+UaSOsAf7SOnwAhkJav5nc0lo\"",
+    "mtime": "2026-06-08T14:57:27.347Z",
+    "size": 8510,
+    "path": "../public/_nuxt/DMiIM75A.js"
+  },
+  "/_nuxt/Dbtye4eS.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"187-rjZG88LYWh9ccup8oTKrLigax+U\"",
+    "mtime": "2026-06-08T14:57:27.348Z",
+    "size": 391,
+    "path": "../public/_nuxt/Dbtye4eS.js"
+  },
+  "/_nuxt/DPTrSJJM.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"3759-2uaVph3oeAke5aDsFDD3sfa8FRU\"",
+    "mtime": "2026-06-08T14:57:27.348Z",
+    "size": 14169,
+    "path": "../public/_nuxt/DPTrSJJM.js"
+  },
+  "/_nuxt/DY2BDRAI.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"156cd-lGHhMWh4aVwEui5ybAyfuQKaHt8\"",
+    "mtime": "2026-06-08T14:57:27.349Z",
+    "size": 87757,
+    "path": "../public/_nuxt/DY2BDRAI.js"
+  },
+  "/_nuxt/DIubM375.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1c5-r1GMkbdwBsEJcAP7IED6LbZS2b0\"",
+    "mtime": "2026-06-08T14:57:27.346Z",
+    "size": 453,
+    "path": "../public/_nuxt/DIubM375.js"
+  },
+  "/_nuxt/DfnxvzM5.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"ea2-iIFVv1iUQmEMLuxc5oJTSTMD92o\"",
+    "mtime": "2026-06-08T14:57:27.348Z",
+    "size": 3746,
+    "path": "../public/_nuxt/DfnxvzM5.js"
+  },
+  "/_nuxt/DLLbymtO.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1845-APi516mvq7WdkOeT6k2Nl3EBti4\"",
+    "mtime": "2026-06-08T14:57:27.347Z",
+    "size": 6213,
+    "path": "../public/_nuxt/DLLbymtO.js"
+  },
+  "/_nuxt/Dp1x_9hY.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"7ba9-3jmT5BWrbE6XVVOB8Cqk9fNUN/w\"",
+    "mtime": "2026-06-08T14:57:27.349Z",
+    "size": 31657,
+    "path": "../public/_nuxt/Dp1x_9hY.js"
+  },
+  "/_nuxt/DnyD6fiC.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"51d3-ivbbgceynlE4tc+SSk9L0zrhQG0\"",
+    "mtime": "2026-06-08T14:57:27.349Z",
+    "size": 20947,
+    "path": "../public/_nuxt/DnyD6fiC.js"
+  },
+  "/_nuxt/DwcIzUqU.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2779-QbpK5g8SyH7n8WEVgSLbOCiTjd8\"",
+    "mtime": "2026-06-08T14:57:27.349Z",
+    "size": 10105,
+    "path": "../public/_nuxt/DwcIzUqU.js"
+  },
+  "/_nuxt/DxvOWyPB.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"d219-ASOz/molhtOWdpbGiCn1ncM94cE\"",
+    "mtime": "2026-06-08T14:57:27.351Z",
+    "size": 53785,
+    "path": "../public/_nuxt/DxvOWyPB.js"
+  },
+  "/_nuxt/Renderer.DZgPqdk7.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"ab-utHoZXlpc/7FbA4xxMBf7Ro7TrA\"",
+    "mtime": "2026-06-08T14:57:27.350Z",
+    "size": 171,
+    "path": "../public/_nuxt/Renderer.DZgPqdk7.css"
+  },
+  "/_nuxt/S7ujwSpS.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1dbe-z8bitaHBtsqlKarHYn6EKN3B93Q\"",
+    "mtime": "2026-06-08T14:57:27.350Z",
+    "size": 7614,
+    "path": "../public/_nuxt/S7ujwSpS.js"
+  },
+  "/_nuxt/U-dsADPD.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"c66a-rCh7jsSk2z0Q6YgYYW2jNH8ZnoU\"",
+    "mtime": "2026-06-08T14:57:27.352Z",
+    "size": 50794,
+    "path": "../public/_nuxt/U-dsADPD.js"
+  },
+  "/_nuxt/L0xhnvZX.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"13fb-ZlURBwxSqTKo4Z0iUPlWCZ8/6BI\"",
+    "mtime": "2026-06-08T14:57:27.350Z",
+    "size": 5115,
+    "path": "../public/_nuxt/L0xhnvZX.js"
+  },
+  "/_nuxt/WGFeAjnM.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"4e2-8H+fHhBzTsVXmOiOS23AM5Bcs7E\"",
+    "mtime": "2026-06-08T14:57:27.351Z",
+    "size": 1250,
+    "path": "../public/_nuxt/WGFeAjnM.js"
+  },
+  "/_nuxt/_id_.CyumQwkQ.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"ab-i5+QUpYEqlTwbvyC7BI3ppa4IDg\"",
+    "mtime": "2026-06-08T14:57:27.351Z",
+    "size": 171,
+    "path": "../public/_nuxt/_id_.CyumQwkQ.css"
+  },
+  "/_nuxt/aAzUrijH.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"208-r7/kJ0nQZiKleP8FkeIKMaAKADc\"",
+    "mtime": "2026-06-08T14:57:27.351Z",
+    "size": 520,
+    "path": "../public/_nuxt/aAzUrijH.js"
+  },
+  "/_nuxt/error-404.Br8vP6gm.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"97e-Oulz2hlNaqNjUcnxEU2WUzOYxww\"",
+    "mtime": "2026-06-08T14:57:27.352Z",
+    "size": 2430,
+    "path": "../public/_nuxt/error-404.Br8vP6gm.css"
+  },
+  "/_nuxt/error-500.-nE85j94.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"773-0BgmFgYb7qzMppNJQJK3UGmdDzU\"",
+    "mtime": "2026-06-08T14:57:27.352Z",
+    "size": 1907,
+    "path": "../public/_nuxt/error-500.-nE85j94.css"
+  },
+  "/_nuxt/index.BRIAzSex.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"d5-R++91RRtFWP82Z3P0Vl0Rm4U7Hc\"",
+    "mtime": "2026-06-08T14:57:27.354Z",
+    "size": 213,
+    "path": "../public/_nuxt/index.BRIAzSex.css"
+  },
+  "/_nuxt/index.BraN-yNk.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"2d3-xxXs7/owyhv7vRFbI/xgekFfXVo\"",
+    "mtime": "2026-06-08T14:57:27.354Z",
+    "size": 723,
+    "path": "../public/_nuxt/index.BraN-yNk.css"
+  },
+  "/_nuxt/kbYn6C7K.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"a7-QALMsu3b4mGuplrqDHwejfXrRdc\"",
+    "mtime": "2026-06-08T14:57:27.354Z",
+    "size": 167,
+    "path": "../public/_nuxt/kbYn6C7K.js"
+  },
+  "/_nuxt/swiqgT0M.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1e9-lltHNZ2o0y82nnbDuy59GQxPVd4\"",
+    "mtime": "2026-06-08T14:57:27.354Z",
+    "size": 489,
+    "path": "../public/_nuxt/swiqgT0M.js"
+  },
+  "/_nuxt/usePortfolio.eG9He0RH.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"b1-S1WTw3IjC/1rht+a+mUmVRvSASs\"",
+    "mtime": "2026-06-08T14:57:27.355Z",
+    "size": 177,
+    "path": "../public/_nuxt/usePortfolio.eG9He0RH.css"
+  },
+  "/_nuxt/pMdxwLDN.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"21b-wn89YVTqC4LK1wQw+/cv5lCBKNI\"",
+    "mtime": "2026-06-08T14:57:27.355Z",
+    "size": 539,
+    "path": "../public/_nuxt/pMdxwLDN.js"
+  },
+  "/_nuxt/entry.Cwy6778D.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"320ad-BkX/LlVCLNGC2yUMAXCcdfrbysI\"",
+    "mtime": "2026-06-08T14:57:27.354Z",
+    "size": 204973,
+    "path": "../public/_nuxt/entry.Cwy6778D.css"
+  },
+  "/_nuxt/hE75PxnU.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"b356-dTCOW7Gg6y2qgFOcaOS4FtcojoA\"",
+    "mtime": "2026-06-08T14:57:27.354Z",
+    "size": 45910,
+    "path": "../public/_nuxt/hE75PxnU.js"
+  },
+  "/_nuxt/xHgIHflG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"b68-AHQujQupbBcWwxzSMpLqEP23nig\"",
+    "mtime": "2026-06-08T14:57:27.355Z",
+    "size": 2920,
+    "path": "../public/_nuxt/xHgIHflG.js"
+  },
   "/_nuxt/builds/latest.json": {
     "type": "application/json",
-    "etag": "\"47-xem3qtwdBFswZcZEzyxDcCZTo+k\"",
-    "mtime": "2026-06-08T14:54:23.435Z",
+    "etag": "\"47-uLrdsR0A61G+ZViDjQax+VDpBPU\"",
+    "mtime": "2026-06-08T14:57:27.322Z",
     "size": 71,
     "path": "../public/_nuxt/builds/latest.json"
   },
-  "/_nuxt/builds/meta/665e843c-330a-4313-98f7-ee4bbdd80282.json": {
+  "/_nuxt/builds/meta/0692cecc-f9eb-44e4-84e5-84a3dc5b7d9c.json": {
     "type": "application/json",
-    "etag": "\"5b-dPm2mmC9UEhljx6cG4vQ6BNEaYo\"",
-    "mtime": "2026-06-08T14:54:23.341Z",
+    "etag": "\"5b-L7vFf9wDWMSseRmRRWIHifpQcj8\"",
+    "mtime": "2026-06-08T14:57:27.319Z",
     "size": 91,
-    "path": "../public/_nuxt/builds/meta/665e843c-330a-4313-98f7-ee4bbdd80282.json"
+    "path": "../public/_nuxt/builds/meta/0692cecc-f9eb-44e4-84e5-84a3dc5b7d9c.json"
+  },
+  "/_nuxt/yn2nC43A.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1622-nJ54lQuDbhRDYf0TGGG0JDAobSU\"",
+    "mtime": "2026-06-08T14:57:27.355Z",
+    "size": 5666,
+    "path": "../public/_nuxt/yn2nC43A.js"
   }
 };
 
@@ -6557,6 +6559,1453 @@ function getIconCSS(icon, options = {}) {
 	}], newOptions.format);
 }
 
+const LogLevels = {
+  fatal: 0,
+  error: 0,
+  warn: 1,
+  log: 2,
+  info: 3,
+  success: 3,
+  fail: 3,
+  debug: 4,
+  trace: 5,
+  verbose: Number.POSITIVE_INFINITY
+};
+const LogTypes = {
+  // Silent
+  silent: {
+    level: -1
+  },
+  // Level 0
+  fatal: {
+    level: LogLevels.fatal
+  },
+  error: {
+    level: LogLevels.error
+  },
+  // Level 1
+  warn: {
+    level: LogLevels.warn
+  },
+  // Level 2
+  log: {
+    level: LogLevels.log
+  },
+  // Level 3
+  info: {
+    level: LogLevels.info
+  },
+  success: {
+    level: LogLevels.success
+  },
+  fail: {
+    level: LogLevels.fail
+  },
+  ready: {
+    level: LogLevels.info
+  },
+  start: {
+    level: LogLevels.info
+  },
+  box: {
+    level: LogLevels.info
+  },
+  // Level 4
+  debug: {
+    level: LogLevels.debug
+  },
+  // Level 5
+  trace: {
+    level: LogLevels.trace
+  },
+  // Verbose
+  verbose: {
+    level: LogLevels.verbose
+  }
+};
+
+function isPlainObject$1(value) {
+  if (value === null || typeof value !== "object") {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype !== null && prototype !== Object.prototype && Object.getPrototypeOf(prototype) !== null) {
+    return false;
+  }
+  if (Symbol.iterator in value) {
+    return false;
+  }
+  if (Symbol.toStringTag in value) {
+    return Object.prototype.toString.call(value) === "[object Module]";
+  }
+  return true;
+}
+
+function _defu(baseObject, defaults, namespace = ".", merger) {
+  if (!isPlainObject$1(defaults)) {
+    return _defu(baseObject, {}, namespace);
+  }
+  const object = Object.assign({}, defaults);
+  for (const key in baseObject) {
+    if (key === "__proto__" || key === "constructor") {
+      continue;
+    }
+    const value = baseObject[key];
+    if (value === null || value === void 0) {
+      continue;
+    }
+    if (Array.isArray(value) && Array.isArray(object[key])) {
+      object[key] = [...value, ...object[key]];
+    } else if (isPlainObject$1(value) && isPlainObject$1(object[key])) {
+      object[key] = _defu(
+        value,
+        object[key],
+        (namespace ? `${namespace}.` : "") + key.toString());
+    } else {
+      object[key] = value;
+    }
+  }
+  return object;
+}
+function createDefu(merger) {
+  return (...arguments_) => (
+    // eslint-disable-next-line unicorn/no-array-reduce
+    arguments_.reduce((p, c) => _defu(p, c, ""), {})
+  );
+}
+const defu = createDefu();
+
+function isPlainObject(obj) {
+  return Object.prototype.toString.call(obj) === "[object Object]";
+}
+function isLogObj(arg) {
+  if (!isPlainObject(arg)) {
+    return false;
+  }
+  if (!arg.message && !arg.args) {
+    return false;
+  }
+  if (arg.stack) {
+    return false;
+  }
+  return true;
+}
+
+let paused = false;
+const queue = [];
+class Consola {
+  options;
+  _lastLog;
+  _mockFn;
+  /**
+   * Creates an instance of Consola with specified options or defaults.
+   *
+   * @param {Partial<ConsolaOptions>} [options={}] - Configuration options for the Consola instance.
+   */
+  constructor(options = {}) {
+    const types = options.types || LogTypes;
+    this.options = defu(
+      {
+        ...options,
+        defaults: { ...options.defaults },
+        level: _normalizeLogLevel(options.level, types),
+        reporters: [...options.reporters || []]
+      },
+      {
+        types: LogTypes,
+        throttle: 1e3,
+        throttleMin: 5,
+        formatOptions: {
+          date: true,
+          colors: false,
+          compact: true
+        }
+      }
+    );
+    for (const type in types) {
+      const defaults = {
+        type,
+        ...this.options.defaults,
+        ...types[type]
+      };
+      this[type] = this._wrapLogFn(defaults);
+      this[type].raw = this._wrapLogFn(
+        defaults,
+        true
+      );
+    }
+    if (this.options.mockFn) {
+      this.mockTypes();
+    }
+    this._lastLog = {};
+  }
+  /**
+   * Gets the current log level of the Consola instance.
+   *
+   * @returns {number} The current log level.
+   */
+  get level() {
+    return this.options.level;
+  }
+  /**
+   * Sets the minimum log level that will be output by the instance.
+   *
+   * @param {number} level - The new log level to set.
+   */
+  set level(level) {
+    this.options.level = _normalizeLogLevel(
+      level,
+      this.options.types,
+      this.options.level
+    );
+  }
+  /**
+   * Displays a prompt to the user and returns the response.
+   * Throw an error if `prompt` is not supported by the current configuration.
+   *
+   * @template T
+   * @param {string} message - The message to display in the prompt.
+   * @param {T} [opts] - Optional options for the prompt. See {@link PromptOptions}.
+   * @returns {promise<T>} A promise that infer with the prompt options. See {@link PromptOptions}.
+   */
+  prompt(message, opts) {
+    if (!this.options.prompt) {
+      throw new Error("prompt is not supported!");
+    }
+    return this.options.prompt(message, opts);
+  }
+  /**
+   * Creates a new instance of Consola, inheriting options from the current instance, with possible overrides.
+   *
+   * @param {Partial<ConsolaOptions>} options - Optional overrides for the new instance. See {@link ConsolaOptions}.
+   * @returns {ConsolaInstance} A new Consola instance. See {@link ConsolaInstance}.
+   */
+  create(options) {
+    const instance = new Consola({
+      ...this.options,
+      ...options
+    });
+    if (this._mockFn) {
+      instance.mockTypes(this._mockFn);
+    }
+    return instance;
+  }
+  /**
+   * Creates a new Consola instance with the specified default log object properties.
+   *
+   * @param {InputLogObject} defaults - Default properties to include in any log from the new instance. See {@link InputLogObject}.
+   * @returns {ConsolaInstance} A new Consola instance. See {@link ConsolaInstance}.
+   */
+  withDefaults(defaults) {
+    return this.create({
+      ...this.options,
+      defaults: {
+        ...this.options.defaults,
+        ...defaults
+      }
+    });
+  }
+  /**
+   * Creates a new Consola instance with a specified tag, which will be included in every log.
+   *
+   * @param {string} tag - The tag to include in each log of the new instance.
+   * @returns {ConsolaInstance} A new Consola instance. See {@link ConsolaInstance}.
+   */
+  withTag(tag) {
+    return this.withDefaults({
+      tag: this.options.defaults.tag ? this.options.defaults.tag + ":" + tag : tag
+    });
+  }
+  /**
+   * Adds a custom reporter to the Consola instance.
+   * Reporters will be called for each log message, depending on their implementation and log level.
+   *
+   * @param {ConsolaReporter} reporter - The reporter to add. See {@link ConsolaReporter}.
+   * @returns {Consola} The current Consola instance.
+   */
+  addReporter(reporter) {
+    this.options.reporters.push(reporter);
+    return this;
+  }
+  /**
+   * Removes a custom reporter from the Consola instance.
+   * If no reporter is specified, all reporters will be removed.
+   *
+   * @param {ConsolaReporter} reporter - The reporter to remove. See {@link ConsolaReporter}.
+   * @returns {Consola} The current Consola instance.
+   */
+  removeReporter(reporter) {
+    if (reporter) {
+      const i = this.options.reporters.indexOf(reporter);
+      if (i !== -1) {
+        return this.options.reporters.splice(i, 1);
+      }
+    } else {
+      this.options.reporters.splice(0);
+    }
+    return this;
+  }
+  /**
+   * Replaces all reporters of the Consola instance with the specified array of reporters.
+   *
+   * @param {ConsolaReporter[]} reporters - The new reporters to set. See {@link ConsolaReporter}.
+   * @returns {Consola} The current Consola instance.
+   */
+  setReporters(reporters) {
+    this.options.reporters = Array.isArray(reporters) ? reporters : [reporters];
+    return this;
+  }
+  wrapAll() {
+    this.wrapConsole();
+    this.wrapStd();
+  }
+  restoreAll() {
+    this.restoreConsole();
+    this.restoreStd();
+  }
+  /**
+   * Overrides console methods with Consola logging methods for consistent logging.
+   */
+  wrapConsole() {
+    for (const type in this.options.types) {
+      if (!console["__" + type]) {
+        console["__" + type] = console[type];
+      }
+      console[type] = this[type].raw;
+    }
+  }
+  /**
+   * Restores the original console methods, removing Consola overrides.
+   */
+  restoreConsole() {
+    for (const type in this.options.types) {
+      if (console["__" + type]) {
+        console[type] = console["__" + type];
+        delete console["__" + type];
+      }
+    }
+  }
+  /**
+   * Overrides standard output and error streams to redirect them through Consola.
+   */
+  wrapStd() {
+    this._wrapStream(this.options.stdout, "log");
+    this._wrapStream(this.options.stderr, "log");
+  }
+  _wrapStream(stream, type) {
+    if (!stream) {
+      return;
+    }
+    if (!stream.__write) {
+      stream.__write = stream.write;
+    }
+    stream.write = (data) => {
+      this[type].raw(String(data).trim());
+    };
+  }
+  /**
+   * Restores the original standard output and error streams, removing the Consola redirection.
+   */
+  restoreStd() {
+    this._restoreStream(this.options.stdout);
+    this._restoreStream(this.options.stderr);
+  }
+  _restoreStream(stream) {
+    if (!stream) {
+      return;
+    }
+    if (stream.__write) {
+      stream.write = stream.__write;
+      delete stream.__write;
+    }
+  }
+  /**
+   * Pauses logging, queues incoming logs until resumed.
+   */
+  pauseLogs() {
+    paused = true;
+  }
+  /**
+   * Resumes logging, processing any queued logs.
+   */
+  resumeLogs() {
+    paused = false;
+    const _queue = queue.splice(0);
+    for (const item of _queue) {
+      item[0]._logFn(item[1], item[2]);
+    }
+  }
+  /**
+   * Replaces logging methods with mocks if a mock function is provided.
+   *
+   * @param {ConsolaOptions["mockFn"]} mockFn - The function to use for mocking logging methods. See {@link ConsolaOptions["mockFn"]}.
+   */
+  mockTypes(mockFn) {
+    const _mockFn = mockFn || this.options.mockFn;
+    this._mockFn = _mockFn;
+    if (typeof _mockFn !== "function") {
+      return;
+    }
+    for (const type in this.options.types) {
+      this[type] = _mockFn(type, this.options.types[type]) || this[type];
+      this[type].raw = this[type];
+    }
+  }
+  _wrapLogFn(defaults, isRaw) {
+    return (...args) => {
+      if (paused) {
+        queue.push([this, defaults, args, isRaw]);
+        return;
+      }
+      return this._logFn(defaults, args, isRaw);
+    };
+  }
+  _logFn(defaults, args, isRaw) {
+    if ((defaults.level || 0) > this.level) {
+      return false;
+    }
+    const logObj = {
+      date: /* @__PURE__ */ new Date(),
+      args: [],
+      ...defaults,
+      level: _normalizeLogLevel(defaults.level, this.options.types)
+    };
+    if (!isRaw && args.length === 1 && isLogObj(args[0])) {
+      Object.assign(logObj, args[0]);
+    } else {
+      logObj.args = [...args];
+    }
+    if (logObj.message) {
+      logObj.args.unshift(logObj.message);
+      delete logObj.message;
+    }
+    if (logObj.additional) {
+      if (!Array.isArray(logObj.additional)) {
+        logObj.additional = logObj.additional.split("\n");
+      }
+      logObj.args.push("\n" + logObj.additional.join("\n"));
+      delete logObj.additional;
+    }
+    logObj.type = typeof logObj.type === "string" ? logObj.type.toLowerCase() : "log";
+    logObj.tag = typeof logObj.tag === "string" ? logObj.tag : "";
+    const resolveLog = (newLog = false) => {
+      const repeated = (this._lastLog.count || 0) - this.options.throttleMin;
+      if (this._lastLog.object && repeated > 0) {
+        const args2 = [...this._lastLog.object.args];
+        if (repeated > 1) {
+          args2.push(`(repeated ${repeated} times)`);
+        }
+        this._log({ ...this._lastLog.object, args: args2 });
+        this._lastLog.count = 1;
+      }
+      if (newLog) {
+        this._lastLog.object = logObj;
+        this._log(logObj);
+      }
+    };
+    clearTimeout(this._lastLog.timeout);
+    const diffTime = this._lastLog.time && logObj.date ? logObj.date.getTime() - this._lastLog.time.getTime() : 0;
+    this._lastLog.time = logObj.date;
+    if (diffTime < this.options.throttle) {
+      try {
+        const serializedLog = JSON.stringify([
+          logObj.type,
+          logObj.tag,
+          logObj.args
+        ]);
+        const isSameLog = this._lastLog.serialized === serializedLog;
+        this._lastLog.serialized = serializedLog;
+        if (isSameLog) {
+          this._lastLog.count = (this._lastLog.count || 0) + 1;
+          if (this._lastLog.count > this.options.throttleMin) {
+            this._lastLog.timeout = setTimeout(
+              resolveLog,
+              this.options.throttle
+            );
+            return;
+          }
+        }
+      } catch {
+      }
+    }
+    resolveLog(true);
+  }
+  _log(logObj) {
+    for (const reporter of this.options.reporters) {
+      reporter.log(logObj, {
+        options: this.options
+      });
+    }
+  }
+}
+function _normalizeLogLevel(input, types = {}, defaultLevel = 3) {
+  if (input === void 0) {
+    return defaultLevel;
+  }
+  if (typeof input === "number") {
+    return input;
+  }
+  if (types[input] && types[input].level !== void 0) {
+    return types[input].level;
+  }
+  return defaultLevel;
+}
+Consola.prototype.add = Consola.prototype.addReporter;
+Consola.prototype.remove = Consola.prototype.removeReporter;
+Consola.prototype.clear = Consola.prototype.removeReporter;
+Consola.prototype.withScope = Consola.prototype.withTag;
+Consola.prototype.mock = Consola.prototype.mockTypes;
+Consola.prototype.pause = Consola.prototype.pauseLogs;
+Consola.prototype.resume = Consola.prototype.resumeLogs;
+function createConsola$1(options = {}) {
+  return new Consola(options);
+}
+
+function parseStack(stack, message) {
+  const cwd = process.cwd() + sep;
+  const lines = stack.split("\n").splice(message.split("\n").length).map((l) => l.trim().replace("file://", "").replace(cwd, ""));
+  return lines;
+}
+
+function writeStream(data, stream) {
+  const write = stream.__write || stream.write;
+  return write.call(stream, data);
+}
+
+const bracket = (x) => x ? `[${x}]` : "";
+class BasicReporter {
+  formatStack(stack, message, opts) {
+    const indent = "  ".repeat((opts?.errorLevel || 0) + 1);
+    return indent + parseStack(stack, message).join(`
+${indent}`);
+  }
+  formatError(err, opts) {
+    const message = err.message ?? formatWithOptions(opts, err);
+    const stack = err.stack ? this.formatStack(err.stack, message, opts) : "";
+    const level = opts?.errorLevel || 0;
+    const causedPrefix = level > 0 ? `${"  ".repeat(level)}[cause]: ` : "";
+    const causedError = err.cause ? "\n\n" + this.formatError(err.cause, { ...opts, errorLevel: level + 1 }) : "";
+    return causedPrefix + message + "\n" + stack + causedError;
+  }
+  formatArgs(args, opts) {
+    const _args = args.map((arg) => {
+      if (arg && typeof arg.stack === "string") {
+        return this.formatError(arg, opts);
+      }
+      return arg;
+    });
+    return formatWithOptions(opts, ..._args);
+  }
+  formatDate(date, opts) {
+    return opts.date ? date.toLocaleTimeString() : "";
+  }
+  filterAndJoin(arr) {
+    return arr.filter(Boolean).join(" ");
+  }
+  formatLogObj(logObj, opts) {
+    const message = this.formatArgs(logObj.args, opts);
+    if (logObj.type === "box") {
+      return "\n" + [
+        bracket(logObj.tag),
+        logObj.title && logObj.title,
+        ...message.split("\n")
+      ].filter(Boolean).map((l) => " > " + l).join("\n") + "\n";
+    }
+    return this.filterAndJoin([
+      bracket(logObj.type),
+      bracket(logObj.tag),
+      message
+    ]);
+  }
+  log(logObj, ctx) {
+    const line = this.formatLogObj(logObj, {
+      columns: ctx.options.stdout.columns || 0,
+      ...ctx.options.formatOptions
+    });
+    return writeStream(
+      line + "\n",
+      logObj.level < 2 ? ctx.options.stderr || process.stderr : ctx.options.stdout || process.stdout
+    );
+  }
+}
+
+const {
+  env = {},
+  argv = [],
+  platform = ""
+} = typeof process === "undefined" ? {} : process;
+const isDisabled = "NO_COLOR" in env || argv.includes("--no-color");
+const isForced = "FORCE_COLOR" in env || argv.includes("--color");
+const isWindows = platform === "win32";
+const isDumbTerminal = env.TERM === "dumb";
+const isCompatibleTerminal = tty && tty.isatty && tty.isatty(1) && env.TERM && !isDumbTerminal;
+const isCI = "CI" in env && ("GITHUB_ACTIONS" in env || "GITLAB_CI" in env || "CIRCLECI" in env);
+const isColorSupported = !isDisabled && (isForced || isWindows && !isDumbTerminal || isCompatibleTerminal || isCI);
+function replaceClose(index, string, close, replace, head = string.slice(0, Math.max(0, index)) + replace, tail = string.slice(Math.max(0, index + close.length)), next = tail.indexOf(close)) {
+  return head + (next < 0 ? tail : replaceClose(next, tail, close, replace));
+}
+function clearBleed(index, string, open, close, replace) {
+  return index < 0 ? open + string + close : open + replaceClose(index, string, close, replace) + close;
+}
+function filterEmpty(open, close, replace = open, at = open.length + 1) {
+  return (string) => string || !(string === "" || string === void 0) ? clearBleed(
+    ("" + string).indexOf(close, at),
+    string,
+    open,
+    close,
+    replace
+  ) : "";
+}
+function init(open, close, replace) {
+  return filterEmpty(`\x1B[${open}m`, `\x1B[${close}m`, replace);
+}
+const colorDefs = {
+  reset: init(0, 0),
+  bold: init(1, 22, "\x1B[22m\x1B[1m"),
+  dim: init(2, 22, "\x1B[22m\x1B[2m"),
+  italic: init(3, 23),
+  underline: init(4, 24),
+  inverse: init(7, 27),
+  hidden: init(8, 28),
+  strikethrough: init(9, 29),
+  black: init(30, 39),
+  red: init(31, 39),
+  green: init(32, 39),
+  yellow: init(33, 39),
+  blue: init(34, 39),
+  magenta: init(35, 39),
+  cyan: init(36, 39),
+  white: init(37, 39),
+  gray: init(90, 39),
+  bgBlack: init(40, 49),
+  bgRed: init(41, 49),
+  bgGreen: init(42, 49),
+  bgYellow: init(43, 49),
+  bgBlue: init(44, 49),
+  bgMagenta: init(45, 49),
+  bgCyan: init(46, 49),
+  bgWhite: init(47, 49),
+  blackBright: init(90, 39),
+  redBright: init(91, 39),
+  greenBright: init(92, 39),
+  yellowBright: init(93, 39),
+  blueBright: init(94, 39),
+  magentaBright: init(95, 39),
+  cyanBright: init(96, 39),
+  whiteBright: init(97, 39),
+  bgBlackBright: init(100, 49),
+  bgRedBright: init(101, 49),
+  bgGreenBright: init(102, 49),
+  bgYellowBright: init(103, 49),
+  bgBlueBright: init(104, 49),
+  bgMagentaBright: init(105, 49),
+  bgCyanBright: init(106, 49),
+  bgWhiteBright: init(107, 49)
+};
+function createColors(useColor = isColorSupported) {
+  return useColor ? colorDefs : Object.fromEntries(Object.keys(colorDefs).map((key) => [key, String]));
+}
+const colors = createColors();
+function getColor$1(color, fallback = "reset") {
+  return colors[color] || colors[fallback];
+}
+
+const ansiRegex$1 = [
+  String.raw`[\u001B\u009B][[\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\d\/#&.:=?%@~_]+)*|[a-zA-Z\d]+(?:;[-a-zA-Z\d\/#&.:=?%@~_]*)*)?\u0007)`,
+  String.raw`(?:(?:\d{1,4}(?:;\d{0,4})*)?[\dA-PR-TZcf-nq-uy=><~]))`
+].join("|");
+function stripAnsi$1(text) {
+  return text.replace(new RegExp(ansiRegex$1, "g"), "");
+}
+
+const boxStylePresets = {
+  solid: {
+    tl: "\u250C",
+    tr: "\u2510",
+    bl: "\u2514",
+    br: "\u2518",
+    h: "\u2500",
+    v: "\u2502"
+  },
+  double: {
+    tl: "\u2554",
+    tr: "\u2557",
+    bl: "\u255A",
+    br: "\u255D",
+    h: "\u2550",
+    v: "\u2551"
+  },
+  doubleSingle: {
+    tl: "\u2553",
+    tr: "\u2556",
+    bl: "\u2559",
+    br: "\u255C",
+    h: "\u2500",
+    v: "\u2551"
+  },
+  doubleSingleRounded: {
+    tl: "\u256D",
+    tr: "\u256E",
+    bl: "\u2570",
+    br: "\u256F",
+    h: "\u2500",
+    v: "\u2551"
+  },
+  singleThick: {
+    tl: "\u250F",
+    tr: "\u2513",
+    bl: "\u2517",
+    br: "\u251B",
+    h: "\u2501",
+    v: "\u2503"
+  },
+  singleDouble: {
+    tl: "\u2552",
+    tr: "\u2555",
+    bl: "\u2558",
+    br: "\u255B",
+    h: "\u2550",
+    v: "\u2502"
+  },
+  singleDoubleRounded: {
+    tl: "\u256D",
+    tr: "\u256E",
+    bl: "\u2570",
+    br: "\u256F",
+    h: "\u2550",
+    v: "\u2502"
+  },
+  rounded: {
+    tl: "\u256D",
+    tr: "\u256E",
+    bl: "\u2570",
+    br: "\u256F",
+    h: "\u2500",
+    v: "\u2502"
+  }
+};
+const defaultStyle = {
+  borderColor: "white",
+  borderStyle: "rounded",
+  valign: "center",
+  padding: 2,
+  marginLeft: 1,
+  marginTop: 1,
+  marginBottom: 1
+};
+function box(text, _opts = {}) {
+  const opts = {
+    ..._opts,
+    style: {
+      ...defaultStyle,
+      ..._opts.style
+    }
+  };
+  const textLines = text.split("\n");
+  const boxLines = [];
+  const _color = getColor$1(opts.style.borderColor);
+  const borderStyle = {
+    ...typeof opts.style.borderStyle === "string" ? boxStylePresets[opts.style.borderStyle] || boxStylePresets.solid : opts.style.borderStyle
+  };
+  if (_color) {
+    for (const key in borderStyle) {
+      borderStyle[key] = _color(
+        borderStyle[key]
+      );
+    }
+  }
+  const paddingOffset = opts.style.padding % 2 === 0 ? opts.style.padding : opts.style.padding + 1;
+  const height = textLines.length + paddingOffset;
+  const width = Math.max(
+    ...textLines.map((line) => stripAnsi$1(line).length),
+    opts.title ? stripAnsi$1(opts.title).length : 0
+  ) + paddingOffset;
+  const widthOffset = width + paddingOffset;
+  const leftSpace = opts.style.marginLeft > 0 ? " ".repeat(opts.style.marginLeft) : "";
+  if (opts.style.marginTop > 0) {
+    boxLines.push("".repeat(opts.style.marginTop));
+  }
+  if (opts.title) {
+    const title = _color ? _color(opts.title) : opts.title;
+    const left = borderStyle.h.repeat(
+      Math.floor((width - stripAnsi$1(opts.title).length) / 2)
+    );
+    const right = borderStyle.h.repeat(
+      width - stripAnsi$1(opts.title).length - stripAnsi$1(left).length + paddingOffset
+    );
+    boxLines.push(
+      `${leftSpace}${borderStyle.tl}${left}${title}${right}${borderStyle.tr}`
+    );
+  } else {
+    boxLines.push(
+      `${leftSpace}${borderStyle.tl}${borderStyle.h.repeat(widthOffset)}${borderStyle.tr}`
+    );
+  }
+  const valignOffset = opts.style.valign === "center" ? Math.floor((height - textLines.length) / 2) : opts.style.valign === "top" ? height - textLines.length - paddingOffset : height - textLines.length;
+  for (let i = 0; i < height; i++) {
+    if (i < valignOffset || i >= valignOffset + textLines.length) {
+      boxLines.push(
+        `${leftSpace}${borderStyle.v}${" ".repeat(widthOffset)}${borderStyle.v}`
+      );
+    } else {
+      const line = textLines[i - valignOffset];
+      const left = " ".repeat(paddingOffset);
+      const right = " ".repeat(width - stripAnsi$1(line).length);
+      boxLines.push(
+        `${leftSpace}${borderStyle.v}${left}${line}${right}${borderStyle.v}`
+      );
+    }
+  }
+  boxLines.push(
+    `${leftSpace}${borderStyle.bl}${borderStyle.h.repeat(widthOffset)}${borderStyle.br}`
+  );
+  if (opts.style.marginBottom > 0) {
+    boxLines.push("".repeat(opts.style.marginBottom));
+  }
+  return boxLines.join("\n");
+}
+
+const r=Object.create(null),i=e=>globalThis.process?.env||globalThis._importMeta_.env||globalThis.Deno?.env.toObject()||globalThis.__env__||(e?r:globalThis),o=new Proxy(r,{get(e,s){return i()[s]??r[s]},has(e,s){const E=i();return s in E||s in r},set(e,s,E){const B=i(true);return B[s]=E,true},deleteProperty(e,s){if(!s)return  false;const E=i(true);return delete E[s],true},ownKeys(){const e=i(true);return Object.keys(e)}}),t=typeof process<"u"&&process.env&&"production"||"",f=[["APPVEYOR"],["AWS_AMPLIFY","AWS_APP_ID",{ci:true}],["AZURE_PIPELINES","SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"],["AZURE_STATIC","INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN"],["APPCIRCLE","AC_APPCIRCLE"],["BAMBOO","bamboo_planKey"],["BITBUCKET","BITBUCKET_COMMIT"],["BITRISE","BITRISE_IO"],["BUDDY","BUDDY_WORKSPACE_ID"],["BUILDKITE"],["CIRCLE","CIRCLECI"],["CIRRUS","CIRRUS_CI"],["CLOUDFLARE_PAGES","CF_PAGES",{ci:true}],["CODEBUILD","CODEBUILD_BUILD_ARN"],["CODEFRESH","CF_BUILD_ID"],["DRONE"],["DRONE","DRONE_BUILD_EVENT"],["DSARI"],["GITHUB_ACTIONS"],["GITLAB","GITLAB_CI"],["GITLAB","CI_MERGE_REQUEST_ID"],["GOCD","GO_PIPELINE_LABEL"],["LAYERCI"],["HUDSON","HUDSON_URL"],["JENKINS","JENKINS_URL"],["MAGNUM"],["NETLIFY"],["NETLIFY","NETLIFY_LOCAL",{ci:false}],["NEVERCODE"],["RENDER"],["SAIL","SAILCI"],["SEMAPHORE"],["SCREWDRIVER"],["SHIPPABLE"],["SOLANO","TDDIUM"],["STRIDER"],["TEAMCITY","TEAMCITY_VERSION"],["TRAVIS"],["VERCEL","NOW_BUILDER"],["VERCEL","VERCEL",{ci:false}],["VERCEL","VERCEL_ENV",{ci:false}],["APPCENTER","APPCENTER_BUILD_ID"],["CODESANDBOX","CODESANDBOX_SSE",{ci:false}],["CODESANDBOX","CODESANDBOX_HOST",{ci:false}],["STACKBLITZ"],["STORMKIT"],["CLEAVR"],["ZEABUR"],["CODESPHERE","CODESPHERE_APP_ID",{ci:true}],["RAILWAY","RAILWAY_PROJECT_ID"],["RAILWAY","RAILWAY_SERVICE_ID"],["DENO-DEPLOY","DENO_DEPLOYMENT_ID"],["FIREBASE_APP_HOSTING","FIREBASE_APP_HOSTING",{ci:true}]];function b(){if(globalThis.process?.env)for(const e of f){const s=e[1]||e[0];if(globalThis.process?.env[s])return {name:e[0].toLowerCase(),...e[2]}}return globalThis.process?.env?.SHELL==="/bin/jsh"&&globalThis.process?.versions?.webcontainer?{name:"stackblitz",ci:false}:{name:"",ci:false}}const l=b();l.name;function n(e){return e?e!=="false":false}const I=globalThis.process?.platform||"",T=n(o.CI)||l.ci!==false,a=n(globalThis.process?.stdout&&globalThis.process?.stdout.isTTY),g=n(o.DEBUG),R=t==="test"||n(o.TEST);n(o.MINIMAL)||T||R||!a;const A=/^win/i.test(I);!n(o.NO_COLOR)&&(n(o.FORCE_COLOR)||(a||A)&&o.TERM!=="dumb"||T);const C=(globalThis.process?.versions?.node||"").replace(/^v/,"")||null;Number(C?.split(".")[0])||null;const y=globalThis.process||Object.create(null),_={versions:{}};new Proxy(y,{get(e,s){if(s==="env")return o;if(s in e)return e[s];if(s in _)return _[s]}});const c=globalThis.process?.release?.name==="node",O=!!globalThis.Bun||!!globalThis.process?.versions?.bun,D=!!globalThis.Deno,L=!!globalThis.fastly,S=!!globalThis.Netlify,u=!!globalThis.EdgeRuntime,N=globalThis.navigator?.userAgent==="Cloudflare-Workers",F=[[S,"netlify"],[u,"edge-light"],[N,"workerd"],[L,"fastly"],[D,"deno"],[O,"bun"],[c,"node"]];function G(){const e=F.find(s=>s[0]);if(e)return {name:e[1]}}const P=G();P?.name||"";
+
+function ansiRegex({onlyFirst = false} = {}) {
+	// Valid string terminator sequences are BEL, ESC\, and 0x9c
+	const ST = '(?:\\u0007|\\u001B\\u005C|\\u009C)';
+	const pattern = [
+		`[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?${ST})`,
+		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]))',
+	].join('|');
+
+	return new RegExp(pattern, onlyFirst ? undefined : 'g');
+}
+
+const regex = ansiRegex();
+
+function stripAnsi(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
+	}
+
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(regex, '');
+}
+
+// Generated code.
+
+function isAmbiguous(x) {
+	return x === 0xA1
+		|| x === 0xA4
+		|| x === 0xA7
+		|| x === 0xA8
+		|| x === 0xAA
+		|| x === 0xAD
+		|| x === 0xAE
+		|| x >= 0xB0 && x <= 0xB4
+		|| x >= 0xB6 && x <= 0xBA
+		|| x >= 0xBC && x <= 0xBF
+		|| x === 0xC6
+		|| x === 0xD0
+		|| x === 0xD7
+		|| x === 0xD8
+		|| x >= 0xDE && x <= 0xE1
+		|| x === 0xE6
+		|| x >= 0xE8 && x <= 0xEA
+		|| x === 0xEC
+		|| x === 0xED
+		|| x === 0xF0
+		|| x === 0xF2
+		|| x === 0xF3
+		|| x >= 0xF7 && x <= 0xFA
+		|| x === 0xFC
+		|| x === 0xFE
+		|| x === 0x101
+		|| x === 0x111
+		|| x === 0x113
+		|| x === 0x11B
+		|| x === 0x126
+		|| x === 0x127
+		|| x === 0x12B
+		|| x >= 0x131 && x <= 0x133
+		|| x === 0x138
+		|| x >= 0x13F && x <= 0x142
+		|| x === 0x144
+		|| x >= 0x148 && x <= 0x14B
+		|| x === 0x14D
+		|| x === 0x152
+		|| x === 0x153
+		|| x === 0x166
+		|| x === 0x167
+		|| x === 0x16B
+		|| x === 0x1CE
+		|| x === 0x1D0
+		|| x === 0x1D2
+		|| x === 0x1D4
+		|| x === 0x1D6
+		|| x === 0x1D8
+		|| x === 0x1DA
+		|| x === 0x1DC
+		|| x === 0x251
+		|| x === 0x261
+		|| x === 0x2C4
+		|| x === 0x2C7
+		|| x >= 0x2C9 && x <= 0x2CB
+		|| x === 0x2CD
+		|| x === 0x2D0
+		|| x >= 0x2D8 && x <= 0x2DB
+		|| x === 0x2DD
+		|| x === 0x2DF
+		|| x >= 0x300 && x <= 0x36F
+		|| x >= 0x391 && x <= 0x3A1
+		|| x >= 0x3A3 && x <= 0x3A9
+		|| x >= 0x3B1 && x <= 0x3C1
+		|| x >= 0x3C3 && x <= 0x3C9
+		|| x === 0x401
+		|| x >= 0x410 && x <= 0x44F
+		|| x === 0x451
+		|| x === 0x2010
+		|| x >= 0x2013 && x <= 0x2016
+		|| x === 0x2018
+		|| x === 0x2019
+		|| x === 0x201C
+		|| x === 0x201D
+		|| x >= 0x2020 && x <= 0x2022
+		|| x >= 0x2024 && x <= 0x2027
+		|| x === 0x2030
+		|| x === 0x2032
+		|| x === 0x2033
+		|| x === 0x2035
+		|| x === 0x203B
+		|| x === 0x203E
+		|| x === 0x2074
+		|| x === 0x207F
+		|| x >= 0x2081 && x <= 0x2084
+		|| x === 0x20AC
+		|| x === 0x2103
+		|| x === 0x2105
+		|| x === 0x2109
+		|| x === 0x2113
+		|| x === 0x2116
+		|| x === 0x2121
+		|| x === 0x2122
+		|| x === 0x2126
+		|| x === 0x212B
+		|| x === 0x2153
+		|| x === 0x2154
+		|| x >= 0x215B && x <= 0x215E
+		|| x >= 0x2160 && x <= 0x216B
+		|| x >= 0x2170 && x <= 0x2179
+		|| x === 0x2189
+		|| x >= 0x2190 && x <= 0x2199
+		|| x === 0x21B8
+		|| x === 0x21B9
+		|| x === 0x21D2
+		|| x === 0x21D4
+		|| x === 0x21E7
+		|| x === 0x2200
+		|| x === 0x2202
+		|| x === 0x2203
+		|| x === 0x2207
+		|| x === 0x2208
+		|| x === 0x220B
+		|| x === 0x220F
+		|| x === 0x2211
+		|| x === 0x2215
+		|| x === 0x221A
+		|| x >= 0x221D && x <= 0x2220
+		|| x === 0x2223
+		|| x === 0x2225
+		|| x >= 0x2227 && x <= 0x222C
+		|| x === 0x222E
+		|| x >= 0x2234 && x <= 0x2237
+		|| x === 0x223C
+		|| x === 0x223D
+		|| x === 0x2248
+		|| x === 0x224C
+		|| x === 0x2252
+		|| x === 0x2260
+		|| x === 0x2261
+		|| x >= 0x2264 && x <= 0x2267
+		|| x === 0x226A
+		|| x === 0x226B
+		|| x === 0x226E
+		|| x === 0x226F
+		|| x === 0x2282
+		|| x === 0x2283
+		|| x === 0x2286
+		|| x === 0x2287
+		|| x === 0x2295
+		|| x === 0x2299
+		|| x === 0x22A5
+		|| x === 0x22BF
+		|| x === 0x2312
+		|| x >= 0x2460 && x <= 0x24E9
+		|| x >= 0x24EB && x <= 0x254B
+		|| x >= 0x2550 && x <= 0x2573
+		|| x >= 0x2580 && x <= 0x258F
+		|| x >= 0x2592 && x <= 0x2595
+		|| x === 0x25A0
+		|| x === 0x25A1
+		|| x >= 0x25A3 && x <= 0x25A9
+		|| x === 0x25B2
+		|| x === 0x25B3
+		|| x === 0x25B6
+		|| x === 0x25B7
+		|| x === 0x25BC
+		|| x === 0x25BD
+		|| x === 0x25C0
+		|| x === 0x25C1
+		|| x >= 0x25C6 && x <= 0x25C8
+		|| x === 0x25CB
+		|| x >= 0x25CE && x <= 0x25D1
+		|| x >= 0x25E2 && x <= 0x25E5
+		|| x === 0x25EF
+		|| x === 0x2605
+		|| x === 0x2606
+		|| x === 0x2609
+		|| x === 0x260E
+		|| x === 0x260F
+		|| x === 0x261C
+		|| x === 0x261E
+		|| x === 0x2640
+		|| x === 0x2642
+		|| x === 0x2660
+		|| x === 0x2661
+		|| x >= 0x2663 && x <= 0x2665
+		|| x >= 0x2667 && x <= 0x266A
+		|| x === 0x266C
+		|| x === 0x266D
+		|| x === 0x266F
+		|| x === 0x269E
+		|| x === 0x269F
+		|| x === 0x26BF
+		|| x >= 0x26C6 && x <= 0x26CD
+		|| x >= 0x26CF && x <= 0x26D3
+		|| x >= 0x26D5 && x <= 0x26E1
+		|| x === 0x26E3
+		|| x === 0x26E8
+		|| x === 0x26E9
+		|| x >= 0x26EB && x <= 0x26F1
+		|| x === 0x26F4
+		|| x >= 0x26F6 && x <= 0x26F9
+		|| x === 0x26FB
+		|| x === 0x26FC
+		|| x === 0x26FE
+		|| x === 0x26FF
+		|| x === 0x273D
+		|| x >= 0x2776 && x <= 0x277F
+		|| x >= 0x2B56 && x <= 0x2B59
+		|| x >= 0x3248 && x <= 0x324F
+		|| x >= 0xE000 && x <= 0xF8FF
+		|| x >= 0xFE00 && x <= 0xFE0F
+		|| x === 0xFFFD
+		|| x >= 0x1F100 && x <= 0x1F10A
+		|| x >= 0x1F110 && x <= 0x1F12D
+		|| x >= 0x1F130 && x <= 0x1F169
+		|| x >= 0x1F170 && x <= 0x1F18D
+		|| x === 0x1F18F
+		|| x === 0x1F190
+		|| x >= 0x1F19B && x <= 0x1F1AC
+		|| x >= 0xE0100 && x <= 0xE01EF
+		|| x >= 0xF0000 && x <= 0xFFFFD
+		|| x >= 0x100000 && x <= 0x10FFFD;
+}
+
+function isFullWidth(x) {
+	return x === 0x3000
+		|| x >= 0xFF01 && x <= 0xFF60
+		|| x >= 0xFFE0 && x <= 0xFFE6;
+}
+
+function isWide(x) {
+	return x >= 0x1100 && x <= 0x115F
+		|| x === 0x231A
+		|| x === 0x231B
+		|| x === 0x2329
+		|| x === 0x232A
+		|| x >= 0x23E9 && x <= 0x23EC
+		|| x === 0x23F0
+		|| x === 0x23F3
+		|| x === 0x25FD
+		|| x === 0x25FE
+		|| x === 0x2614
+		|| x === 0x2615
+		|| x >= 0x2630 && x <= 0x2637
+		|| x >= 0x2648 && x <= 0x2653
+		|| x === 0x267F
+		|| x >= 0x268A && x <= 0x268F
+		|| x === 0x2693
+		|| x === 0x26A1
+		|| x === 0x26AA
+		|| x === 0x26AB
+		|| x === 0x26BD
+		|| x === 0x26BE
+		|| x === 0x26C4
+		|| x === 0x26C5
+		|| x === 0x26CE
+		|| x === 0x26D4
+		|| x === 0x26EA
+		|| x === 0x26F2
+		|| x === 0x26F3
+		|| x === 0x26F5
+		|| x === 0x26FA
+		|| x === 0x26FD
+		|| x === 0x2705
+		|| x === 0x270A
+		|| x === 0x270B
+		|| x === 0x2728
+		|| x === 0x274C
+		|| x === 0x274E
+		|| x >= 0x2753 && x <= 0x2755
+		|| x === 0x2757
+		|| x >= 0x2795 && x <= 0x2797
+		|| x === 0x27B0
+		|| x === 0x27BF
+		|| x === 0x2B1B
+		|| x === 0x2B1C
+		|| x === 0x2B50
+		|| x === 0x2B55
+		|| x >= 0x2E80 && x <= 0x2E99
+		|| x >= 0x2E9B && x <= 0x2EF3
+		|| x >= 0x2F00 && x <= 0x2FD5
+		|| x >= 0x2FF0 && x <= 0x2FFF
+		|| x >= 0x3001 && x <= 0x303E
+		|| x >= 0x3041 && x <= 0x3096
+		|| x >= 0x3099 && x <= 0x30FF
+		|| x >= 0x3105 && x <= 0x312F
+		|| x >= 0x3131 && x <= 0x318E
+		|| x >= 0x3190 && x <= 0x31E5
+		|| x >= 0x31EF && x <= 0x321E
+		|| x >= 0x3220 && x <= 0x3247
+		|| x >= 0x3250 && x <= 0xA48C
+		|| x >= 0xA490 && x <= 0xA4C6
+		|| x >= 0xA960 && x <= 0xA97C
+		|| x >= 0xAC00 && x <= 0xD7A3
+		|| x >= 0xF900 && x <= 0xFAFF
+		|| x >= 0xFE10 && x <= 0xFE19
+		|| x >= 0xFE30 && x <= 0xFE52
+		|| x >= 0xFE54 && x <= 0xFE66
+		|| x >= 0xFE68 && x <= 0xFE6B
+		|| x >= 0x16FE0 && x <= 0x16FE4
+		|| x === 0x16FF0
+		|| x === 0x16FF1
+		|| x >= 0x17000 && x <= 0x187F7
+		|| x >= 0x18800 && x <= 0x18CD5
+		|| x >= 0x18CFF && x <= 0x18D08
+		|| x >= 0x1AFF0 && x <= 0x1AFF3
+		|| x >= 0x1AFF5 && x <= 0x1AFFB
+		|| x === 0x1AFFD
+		|| x === 0x1AFFE
+		|| x >= 0x1B000 && x <= 0x1B122
+		|| x === 0x1B132
+		|| x >= 0x1B150 && x <= 0x1B152
+		|| x === 0x1B155
+		|| x >= 0x1B164 && x <= 0x1B167
+		|| x >= 0x1B170 && x <= 0x1B2FB
+		|| x >= 0x1D300 && x <= 0x1D356
+		|| x >= 0x1D360 && x <= 0x1D376
+		|| x === 0x1F004
+		|| x === 0x1F0CF
+		|| x === 0x1F18E
+		|| x >= 0x1F191 && x <= 0x1F19A
+		|| x >= 0x1F200 && x <= 0x1F202
+		|| x >= 0x1F210 && x <= 0x1F23B
+		|| x >= 0x1F240 && x <= 0x1F248
+		|| x === 0x1F250
+		|| x === 0x1F251
+		|| x >= 0x1F260 && x <= 0x1F265
+		|| x >= 0x1F300 && x <= 0x1F320
+		|| x >= 0x1F32D && x <= 0x1F335
+		|| x >= 0x1F337 && x <= 0x1F37C
+		|| x >= 0x1F37E && x <= 0x1F393
+		|| x >= 0x1F3A0 && x <= 0x1F3CA
+		|| x >= 0x1F3CF && x <= 0x1F3D3
+		|| x >= 0x1F3E0 && x <= 0x1F3F0
+		|| x === 0x1F3F4
+		|| x >= 0x1F3F8 && x <= 0x1F43E
+		|| x === 0x1F440
+		|| x >= 0x1F442 && x <= 0x1F4FC
+		|| x >= 0x1F4FF && x <= 0x1F53D
+		|| x >= 0x1F54B && x <= 0x1F54E
+		|| x >= 0x1F550 && x <= 0x1F567
+		|| x === 0x1F57A
+		|| x === 0x1F595
+		|| x === 0x1F596
+		|| x === 0x1F5A4
+		|| x >= 0x1F5FB && x <= 0x1F64F
+		|| x >= 0x1F680 && x <= 0x1F6C5
+		|| x === 0x1F6CC
+		|| x >= 0x1F6D0 && x <= 0x1F6D2
+		|| x >= 0x1F6D5 && x <= 0x1F6D7
+		|| x >= 0x1F6DC && x <= 0x1F6DF
+		|| x === 0x1F6EB
+		|| x === 0x1F6EC
+		|| x >= 0x1F6F4 && x <= 0x1F6FC
+		|| x >= 0x1F7E0 && x <= 0x1F7EB
+		|| x === 0x1F7F0
+		|| x >= 0x1F90C && x <= 0x1F93A
+		|| x >= 0x1F93C && x <= 0x1F945
+		|| x >= 0x1F947 && x <= 0x1F9FF
+		|| x >= 0x1FA70 && x <= 0x1FA7C
+		|| x >= 0x1FA80 && x <= 0x1FA89
+		|| x >= 0x1FA8F && x <= 0x1FAC6
+		|| x >= 0x1FACE && x <= 0x1FADC
+		|| x >= 0x1FADF && x <= 0x1FAE9
+		|| x >= 0x1FAF0 && x <= 0x1FAF8
+		|| x >= 0x20000 && x <= 0x2FFFD
+		|| x >= 0x30000 && x <= 0x3FFFD;
+}
+
+function validate(codePoint) {
+	if (!Number.isSafeInteger(codePoint)) {
+		throw new TypeError(`Expected a code point, got \`${typeof codePoint}\`.`);
+	}
+}
+
+function eastAsianWidth(codePoint, {ambiguousAsWide = false} = {}) {
+	validate(codePoint);
+
+	if (
+		isFullWidth(codePoint)
+		|| isWide(codePoint)
+		|| (ambiguousAsWide && isAmbiguous(codePoint))
+	) {
+		return 2;
+	}
+
+	return 1;
+}
+
+const emojiRegex = () => {
+	// https://mths.be/emoji
+	return /[#*0-9]\uFE0F?\u20E3|[\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23ED-\u23EF\u23F1\u23F2\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB\u25FC\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692\u2694-\u2697\u2699\u269B\u269C\u26A0\u26A7\u26AA\u26B0\u26B1\u26BD\u26BE\u26C4\u26C8\u26CF\u26D1\u26E9\u26F0-\u26F5\u26F7\u26F8\u26FA\u2702\u2708\u2709\u270F\u2712\u2714\u2716\u271D\u2721\u2733\u2734\u2744\u2747\u2757\u2763\u27A1\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B55\u3030\u303D\u3297\u3299]\uFE0F?|[\u261D\u270C\u270D](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\u270A\u270B](?:\uD83C[\uDFFB-\uDFFF])?|[\u23E9-\u23EC\u23F0\u23F3\u25FD\u2693\u26A1\u26AB\u26C5\u26CE\u26D4\u26EA\u26FD\u2705\u2728\u274C\u274E\u2753-\u2755\u2795-\u2797\u27B0\u27BF\u2B50]|\u26D3\uFE0F?(?:\u200D\uD83D\uDCA5)?|\u26F9(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\u2764\uFE0F?(?:\u200D(?:\uD83D\uDD25|\uD83E\uDE79))?|\uD83C(?:[\uDC04\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37\uDF21\uDF24-\uDF2C\uDF36\uDF7D\uDF96\uDF97\uDF99-\uDF9B\uDF9E\uDF9F\uDFCD\uDFCE\uDFD4-\uDFDF\uDFF5\uDFF7]\uFE0F?|[\uDF85\uDFC2\uDFC7](?:\uD83C[\uDFFB-\uDFFF])?|[\uDFC4\uDFCA](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDFCB\uDFCC](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDCCF\uDD8E\uDD91-\uDD9A\uDE01\uDE1A\uDE2F\uDE32-\uDE36\uDE38-\uDE3A\uDE50\uDE51\uDF00-\uDF20\uDF2D-\uDF35\uDF37-\uDF43\uDF45-\uDF4A\uDF4C-\uDF7C\uDF7E-\uDF84\uDF86-\uDF93\uDFA0-\uDFC1\uDFC5\uDFC6\uDFC8\uDFC9\uDFCF-\uDFD3\uDFE0-\uDFF0\uDFF8-\uDFFF]|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|\uDF44(?:\u200D\uD83D\uDFEB)?|\uDF4B(?:\u200D\uD83D\uDFE9)?|\uDFC3(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDFF3\uFE0F?(?:\u200D(?:\u26A7\uFE0F?|\uD83C\uDF08))?|\uDFF4(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67|\uDC73\uDB40\uDC63\uDB40\uDC74|\uDC77\uDB40\uDC6C\uDB40\uDC73)\uDB40\uDC7F)?)|\uD83D(?:[\uDC3F\uDCFD\uDD49\uDD4A\uDD6F\uDD70\uDD73\uDD76-\uDD79\uDD87\uDD8A-\uDD8D\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA\uDECB\uDECD-\uDECF\uDEE0-\uDEE5\uDEE9\uDEF0\uDEF3]\uFE0F?|[\uDC42\uDC43\uDC46-\uDC50\uDC66\uDC67\uDC6B-\uDC6D\uDC72\uDC74-\uDC76\uDC78\uDC7C\uDC83\uDC85\uDC8F\uDC91\uDCAA\uDD7A\uDD95\uDD96\uDE4C\uDE4F\uDEC0\uDECC](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC6E\uDC70\uDC71\uDC73\uDC77\uDC81\uDC82\uDC86\uDC87\uDE45-\uDE47\uDE4B\uDE4D\uDE4E\uDEA3\uDEB4\uDEB5](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD74\uDD90](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\uDC00-\uDC07\uDC09-\uDC14\uDC16-\uDC25\uDC27-\uDC3A\uDC3C-\uDC3E\uDC40\uDC44\uDC45\uDC51-\uDC65\uDC6A\uDC79-\uDC7B\uDC7D-\uDC80\uDC84\uDC88-\uDC8E\uDC90\uDC92-\uDCA9\uDCAB-\uDCFC\uDCFF-\uDD3D\uDD4B-\uDD4E\uDD50-\uDD67\uDDA4\uDDFB-\uDE2D\uDE2F-\uDE34\uDE37-\uDE41\uDE43\uDE44\uDE48-\uDE4A\uDE80-\uDEA2\uDEA4-\uDEB3\uDEB7-\uDEBF\uDEC1-\uDEC5\uDED0-\uDED2\uDED5-\uDED7\uDEDC-\uDEDF\uDEEB\uDEEC\uDEF4-\uDEFC\uDFE0-\uDFEB\uDFF0]|\uDC08(?:\u200D\u2B1B)?|\uDC15(?:\u200D\uD83E\uDDBA)?|\uDC26(?:\u200D(?:\u2B1B|\uD83D\uDD25))?|\uDC3B(?:\u200D\u2744\uFE0F?)?|\uDC41\uFE0F?(?:\u200D\uD83D\uDDE8\uFE0F?)?|\uDC68(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDC68\uDC69]\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE])))?))?|\uDC69(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?[\uDC68\uDC69]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?))|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFE])))?))?|\uDC6F(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDD75(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDE2E(?:\u200D\uD83D\uDCA8)?|\uDE35(?:\u200D\uD83D\uDCAB)?|\uDE36(?:\u200D\uD83C\uDF2B\uFE0F?)?|\uDE42(?:\u200D[\u2194\u2195]\uFE0F?)?|\uDEB6(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?)|\uD83E(?:[\uDD0C\uDD0F\uDD18-\uDD1F\uDD30-\uDD34\uDD36\uDD77\uDDB5\uDDB6\uDDBB\uDDD2\uDDD3\uDDD5\uDEC3-\uDEC5\uDEF0\uDEF2-\uDEF8](?:\uD83C[\uDFFB-\uDFFF])?|[\uDD26\uDD35\uDD37-\uDD39\uDD3D\uDD3E\uDDB8\uDDB9\uDDCD\uDDCF\uDDD4\uDDD6-\uDDDD](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDDDE\uDDDF](?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD0D\uDD0E\uDD10-\uDD17\uDD20-\uDD25\uDD27-\uDD2F\uDD3A\uDD3F-\uDD45\uDD47-\uDD76\uDD78-\uDDB4\uDDB7\uDDBA\uDDBC-\uDDCC\uDDD0\uDDE0-\uDDFF\uDE70-\uDE7C\uDE80-\uDE89\uDE8F-\uDEC2\uDEC6\uDECE-\uDEDC\uDEDF-\uDEE9]|\uDD3C(?:\u200D[\u2640\u2642]\uFE0F?|\uD83C[\uDFFB-\uDFFF])?|\uDDCE(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDDD1(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83E\uDDD1|\uDDD1\u200D\uD83E\uDDD2(?:\u200D\uD83E\uDDD2)?|\uDDD2(?:\u200D\uD83E\uDDD2)?))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF])))?))?|\uDEF1(?:\uD83C(?:\uDFFB(?:\u200D\uD83E\uDEF2\uD83C[\uDFFC-\uDFFF])?|\uDFFC(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFD-\uDFFF])?|\uDFFD(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])?|\uDFFE(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFD\uDFFF])?|\uDFFF(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFE])?))?)/g;
+};
+
+const segmenter = globalThis.Intl?.Segmenter ? new Intl.Segmenter() : { segment: (str) => str.split('') };
+
+const defaultIgnorableCodePointRegex = /^\p{Default_Ignorable_Code_Point}$/u;
+
+function stringWidth$1(string, options = {}) {
+	if (typeof string !== 'string' || string.length === 0) {
+		return 0;
+	}
+
+	const {
+		ambiguousIsNarrow = true,
+		countAnsiEscapeCodes = false,
+	} = options;
+
+	if (!countAnsiEscapeCodes) {
+		string = stripAnsi(string);
+	}
+
+	if (string.length === 0) {
+		return 0;
+	}
+
+	let width = 0;
+	const eastAsianWidthOptions = {ambiguousAsWide: !ambiguousIsNarrow};
+
+	for (const {segment: character} of segmenter.segment(string)) {
+		const codePoint = character.codePointAt(0);
+
+		// Ignore control characters
+		if (codePoint <= 0x1F || (codePoint >= 0x7F && codePoint <= 0x9F)) {
+			continue;
+		}
+
+		// Ignore zero-width characters
+		if (
+			(codePoint >= 0x20_0B && codePoint <= 0x20_0F) // Zero-width space, non-joiner, joiner, left-to-right mark, right-to-left mark
+			|| codePoint === 0xFE_FF // Zero-width no-break space
+		) {
+			continue;
+		}
+
+		// Ignore combining characters
+		if (
+			(codePoint >= 0x3_00 && codePoint <= 0x3_6F) // Combining diacritical marks
+			|| (codePoint >= 0x1A_B0 && codePoint <= 0x1A_FF) // Combining diacritical marks extended
+			|| (codePoint >= 0x1D_C0 && codePoint <= 0x1D_FF) // Combining diacritical marks supplement
+			|| (codePoint >= 0x20_D0 && codePoint <= 0x20_FF) // Combining diacritical marks for symbols
+			|| (codePoint >= 0xFE_20 && codePoint <= 0xFE_2F) // Combining half marks
+		) {
+			continue;
+		}
+
+		// Ignore surrogate pairs
+		if (codePoint >= 0xD8_00 && codePoint <= 0xDF_FF) {
+			continue;
+		}
+
+		// Ignore variation selectors
+		if (codePoint >= 0xFE_00 && codePoint <= 0xFE_0F) {
+			continue;
+		}
+
+		// This covers some of the above cases, but we still keep them for performance reasons.
+		if (defaultIgnorableCodePointRegex.test(character)) {
+			continue;
+		}
+
+		// TODO: Use `/\p{RGI_Emoji}/v` when targeting Node.js 20.
+		if (emojiRegex().test(character)) {
+			width += 2;
+			continue;
+		}
+
+		width += eastAsianWidth(codePoint, eastAsianWidthOptions);
+	}
+
+	return width;
+}
+
+function isUnicodeSupported() {
+	const {env} = g$2;
+	const {TERM, TERM_PROGRAM} = env;
+
+	if (g$2.platform !== 'win32') {
+		return TERM !== 'linux'; // Linux console (kernel)
+	}
+
+	return Boolean(env.WT_SESSION) // Windows Terminal
+		|| Boolean(env.TERMINUS_SUBLIME) // Terminus (<0.2.27)
+		|| env.ConEmuTask === '{cmd::Cmder}' // ConEmu and cmder
+		|| TERM_PROGRAM === 'Terminus-Sublime'
+		|| TERM_PROGRAM === 'vscode'
+		|| TERM === 'xterm-256color'
+		|| TERM === 'alacritty'
+		|| TERM === 'rxvt-unicode'
+		|| TERM === 'rxvt-unicode-256color'
+		|| env.TERMINAL_EMULATOR === 'JetBrains-JediTerm';
+}
+
+const TYPE_COLOR_MAP = {
+  info: "cyan",
+  fail: "red",
+  success: "green",
+  ready: "green",
+  start: "magenta"
+};
+const LEVEL_COLOR_MAP = {
+  0: "red",
+  1: "yellow"
+};
+const unicode = isUnicodeSupported();
+const s = (c, fallback) => unicode ? c : fallback;
+const TYPE_ICONS = {
+  error: s("\u2716", "\xD7"),
+  fatal: s("\u2716", "\xD7"),
+  ready: s("\u2714", "\u221A"),
+  warn: s("\u26A0", "\u203C"),
+  info: s("\u2139", "i"),
+  success: s("\u2714", "\u221A"),
+  debug: s("\u2699", "D"),
+  trace: s("\u2192", "\u2192"),
+  fail: s("\u2716", "\xD7"),
+  start: s("\u25D0", "o"),
+  log: ""
+};
+function stringWidth(str) {
+  const hasICU = typeof Intl === "object";
+  if (!hasICU || !Intl.Segmenter) {
+    return stripAnsi$1(str).length;
+  }
+  return stringWidth$1(str);
+}
+class FancyReporter extends BasicReporter {
+  formatStack(stack, message, opts) {
+    const indent = "  ".repeat((opts?.errorLevel || 0) + 1);
+    return `
+${indent}` + parseStack(stack, message).map(
+      (line) => "  " + line.replace(/^at +/, (m) => colors.gray(m)).replace(/\((.+)\)/, (_, m) => `(${colors.cyan(m)})`)
+    ).join(`
+${indent}`);
+  }
+  formatType(logObj, isBadge, opts) {
+    const typeColor = TYPE_COLOR_MAP[logObj.type] || LEVEL_COLOR_MAP[logObj.level] || "gray";
+    if (isBadge) {
+      return getBgColor(typeColor)(
+        colors.black(` ${logObj.type.toUpperCase()} `)
+      );
+    }
+    const _type = typeof TYPE_ICONS[logObj.type] === "string" ? TYPE_ICONS[logObj.type] : logObj.icon || logObj.type;
+    return _type ? getColor(typeColor)(_type) : "";
+  }
+  formatLogObj(logObj, opts) {
+    const [message, ...additional] = this.formatArgs(logObj.args, opts).split(
+      "\n"
+    );
+    if (logObj.type === "box") {
+      return box(
+        characterFormat(
+          message + (additional.length > 0 ? "\n" + additional.join("\n") : "")
+        ),
+        {
+          title: logObj.title ? characterFormat(logObj.title) : void 0,
+          style: logObj.style
+        }
+      );
+    }
+    const date = this.formatDate(logObj.date, opts);
+    const coloredDate = date && colors.gray(date);
+    const isBadge = logObj.badge ?? logObj.level < 2;
+    const type = this.formatType(logObj, isBadge, opts);
+    const tag = logObj.tag ? colors.gray(logObj.tag) : "";
+    let line;
+    const left = this.filterAndJoin([type, characterFormat(message)]);
+    const right = this.filterAndJoin(opts.columns ? [tag, coloredDate] : [tag]);
+    const space = (opts.columns || 0) - stringWidth(left) - stringWidth(right) - 2;
+    line = space > 0 && (opts.columns || 0) >= 80 ? left + " ".repeat(space) + right : (right ? `${colors.gray(`[${right}]`)} ` : "") + left;
+    line += characterFormat(
+      additional.length > 0 ? "\n" + additional.join("\n") : ""
+    );
+    if (logObj.type === "trace") {
+      const _err = new Error("Trace: " + logObj.message);
+      line += this.formatStack(_err.stack || "", _err.message);
+    }
+    return isBadge ? "\n" + line + "\n" : line;
+  }
+}
+function characterFormat(str) {
+  return str.replace(/`([^`]+)`/gm, (_, m) => colors.cyan(m)).replace(/\s+_([^_]+)_\s+/gm, (_, m) => ` ${colors.underline(m)} `);
+}
+function getColor(color = "white") {
+  return colors[color] || colors.white;
+}
+function getBgColor(color = "bgWhite") {
+  return colors[`bg${color[0].toUpperCase()}${color.slice(1)}`] || colors.bgWhite;
+}
+
+function createConsola(options = {}) {
+  let level = _getDefaultLogLevel();
+  if (process.env.CONSOLA_LEVEL) {
+    level = Number.parseInt(process.env.CONSOLA_LEVEL) ?? level;
+  }
+  const consola2 = createConsola$1({
+    level,
+    defaults: { level },
+    stdout: process.stdout,
+    stderr: process.stderr,
+    prompt: (...args) => import('../_/prompt.mjs').then((m) => m.prompt(...args)),
+    reporters: options.reporters || [
+      options.fancy ?? !(T || R) ? new FancyReporter() : new BasicReporter()
+    ],
+    ...options
+  });
+  return consola2;
+}
+function _getDefaultLogLevel() {
+  if (g) {
+    return LogLevels.debug;
+  }
+  if (R) {
+    return LogLevels.warn;
+  }
+  return LogLevels.info;
+}
+const consola = createConsola();
+
 function defineRenderHandler(render) {
   const runtimeConfig = useRuntimeConfig();
   return eventHandler(async (event) => {
@@ -6756,7 +8205,7 @@ function createNitroApp() {
     preemptive: true
   });
   const nodeHandler = toNodeListener(h3App);
-  const localCall = (aRequest) => b(
+  const localCall = (aRequest) => b$1(
     nodeHandler,
     aRequest
   );
@@ -6764,7 +8213,7 @@ function createNitroApp() {
     if (!input.toString().startsWith("/")) {
       return globalThis.fetch(input, init);
     }
-    return C(
+    return C$1(
       nodeHandler,
       input,
       init
@@ -7097,5 +8546,5 @@ trapUnhandledNodeErrors();
 setupGracefulShutdown(listener, nitroApp);
 const nodeServer = {};
 
-export { $fetch$1 as $, joinURL as A, klona as B, nodeServer as C, parseQuery as D, parseURL as E, publicAssetsURL as F, sanitizeStatusCode as G, serialize$1 as H, setCookie as I, setResponseHeader as J, useNitroApp as K, useRuntimeConfig as L, withQuery as M, withTrailingSlash as N, withoutTrailingSlash as O, buildAssetsURL as a, baseURL as b, createError$1 as c, decodePath as d, defineEventHandler as e, defineRenderHandler as f, defu as g, defuFn as h, deleteCookie as i, destr as j, encodePath as k, executeAsync as l, getContext as m, getCookie as n, getIconCSS as o, getQuery as p, getRequestHeader as q, getRequestHeaders as r, getRequestURL as s, getResponseStatus as t, getResponseStatusText as u, getRouteRules as v, getRouterParam as w, hasProtocol as x, isEqual as y, isScriptProtocol as z };
+export { $fetch$1 as $, joinURL as A, klona as B, nodeServer as C, parseQuery as D, parseURL as E, publicAssetsURL as F, sanitizeStatusCode as G, serialize$1 as H, setCookie as I, setResponseHeader as J, useNitroApp as K, useRuntimeConfig as L, withLeadingSlash as M, withQuery as N, withTrailingSlash as O, withoutTrailingSlash as P, buildAssetsURL as a, baseURL as b, createError$1 as c, decodePath as d, defineEventHandler as e, defineRenderHandler as f, defu$1 as g, defuFn as h, deleteCookie as i, destr as j, encodePath as k, executeAsync as l, getContext as m, getCookie as n, getIconCSS as o, getQuery as p, getRequestHeader as q, getRequestHeaders as r, getRequestURL as s, getResponseStatus as t, getResponseStatusText as u, getRouteRules as v, getRouterParam as w, hasProtocol as x, isEqual as y, isScriptProtocol as z };
 //# sourceMappingURL=nitro.mjs.map

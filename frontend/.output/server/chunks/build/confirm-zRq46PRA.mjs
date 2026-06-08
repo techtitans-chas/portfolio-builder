@@ -1,11 +1,9 @@
 import { _ as __nuxt_component_0 } from './AppLogo-0DVehps_.mjs';
-import { a8 as useRoute, e as _sfc_main$d, f as _sfc_main$8 } from './server.mjs';
+import { aO as vueExports, aG as useRoute, a5 as ssrRenderAttrs_1, a7 as ssrRenderComponent_1, j as _sfc_main$d, e as _sfc_main$8 } from './server.mjs';
 import { _ as _sfc_main$1 } from './Card-uQKN-I-u.mjs';
 import { _ as _sfc_main$2 } from './FormField-9wkfNHPa.mjs';
 import { _ as _sfc_main$3 } from './Input-DWHPzDmy.mjs';
 import { _ as _sfc_main$4 } from './Alert-Nv5RlKkm.mjs';
-import { defineComponent, computed, ref, mergeProps, unref, withCtx, createTextVNode, isRef, createVNode, withModifiers, openBlock, createBlock, createCommentVNode, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderComponent } from 'vue/server-renderer';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -16,33 +14,25 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
-import 'vue-router';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import '@vueuse/core';
-import '@vueuse/shared';
-import 'tailwind-variants';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
 
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "confirm",
   __ssrInlineRender: true,
   setup(__props) {
     const route = useRoute();
     const { fetcher } = useApi();
-    const token = computed(() => route.query.token);
-    const newPassword = ref("");
-    const showPassword = ref(false);
-    const isLoading = ref(false);
-    const error = ref(null);
-    const success = ref(false);
+    const token = vueExports.computed(() => route.query.token);
+    const newPassword = vueExports.ref("");
+    const showPassword = vueExports.ref(false);
+    const isLoading = vueExports.ref(false);
+    const error = vueExports.ref(null);
+    const success = vueExports.ref(false);
     async function onSubmit() {
       if (!token.value) {
         error.value = "Invalid or missing reset token. Please request a new reset link.";
@@ -70,26 +60,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UFormField = _sfc_main$2;
       const _component_UInput = _sfc_main$3;
       const _component_UAlert = _sfc_main$4;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex min-h-screen items-center justify-center px-4 py-12" }, _attrs))}><div class="w-full max-w-md"><div class="mb-8 text-center">`);
-      _push(ssrRenderComponent(_component_AppLogo, { class: "mx-auto mb-4 h-10 w-auto" }, null, _parent));
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({ class: "flex min-h-screen items-center justify-center px-4 py-12" }, _attrs))}><div class="w-full max-w-md"><div class="mb-8 text-center">`);
+      _push(ssrRenderComponent_1(_component_AppLogo, { class: "mx-auto mb-4 h-10 w-auto" }, null, _parent));
       _push(`<h1 class="text-2xl font-bold">Choose a new password</h1></div>`);
-      if (unref(success)) {
+      if (vueExports.unref(success)) {
         _push(`<div class="text-center">`);
-        _push(ssrRenderComponent(_component_UIcon, {
+        _push(ssrRenderComponent_1(_component_UIcon, {
           name: "i-lucide-circle-check",
           class: "text-primary mx-auto mb-4 h-12 w-12"
         }, null, _parent));
         _push(`<h2 class="mb-2 text-xl font-bold">Password updated!</h2><p class="text-muted mb-8 text-sm">You can now sign in with your new password.</p>`);
-        _push(ssrRenderComponent(_component_UButton, {
+        _push(ssrRenderComponent_1(_component_UButton, {
           to: "/login",
           class: "w-full justify-center"
         }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`Sign in`);
             } else {
               return [
-                createTextVNode("Sign in")
+                vueExports.createTextVNode("Sign in")
               ];
             }
           }),
@@ -97,42 +87,42 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }, _parent));
         _push(`</div>`);
       } else {
-        _push(ssrRenderComponent(_component_UCard, null, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+        _push(ssrRenderComponent_1(_component_UCard, null, {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`<form class="space-y-4"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UFormField, {
+              _push2(ssrRenderComponent_1(_component_UFormField, {
                 label: "New password",
                 name: "newPassword"
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(ssrRenderComponent(_component_UInput, {
-                      modelValue: unref(newPassword),
-                      "onUpdate:modelValue": ($event) => isRef(newPassword) ? newPassword.value = $event : null,
-                      type: unref(showPassword) ? "text" : "password",
+                    _push3(ssrRenderComponent_1(_component_UInput, {
+                      modelValue: vueExports.unref(newPassword),
+                      "onUpdate:modelValue": ($event) => vueExports.isRef(newPassword) ? newPassword.value = $event : null,
+                      type: vueExports.unref(showPassword) ? "text" : "password",
                       placeholder: "Your new password",
                       autocomplete: "new-password",
                       required: "",
                       class: "w-full"
                     }, {
-                      trailing: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      trailing: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(ssrRenderComponent(_component_UButton, {
+                          _push4(ssrRenderComponent_1(_component_UButton, {
                             variant: "ghost",
                             size: "sm",
-                            icon: unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
-                            "aria-label": unref(showPassword) ? "Hide password" : "Show password",
-                            onClick: ($event) => showPassword.value = !unref(showPassword)
+                            icon: vueExports.unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
+                            "aria-label": vueExports.unref(showPassword) ? "Hide password" : "Show password",
+                            onClick: ($event) => showPassword.value = !vueExports.unref(showPassword)
                           }, null, _parent4, _scopeId3));
                         } else {
                           return [
-                            createVNode(_component_UButton, {
+                            vueExports.createVNode(_component_UButton, {
                               variant: "ghost",
                               size: "sm",
-                              icon: unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
-                              "aria-label": unref(showPassword) ? "Hide password" : "Show password",
-                              onClick: ($event) => showPassword.value = !unref(showPassword)
+                              icon: vueExports.unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
+                              "aria-label": vueExports.unref(showPassword) ? "Hide password" : "Show password",
+                              onClick: ($event) => showPassword.value = !vueExports.unref(showPassword)
                             }, null, 8, ["icon", "aria-label", "onClick"])
                           ];
                         }
@@ -141,22 +131,22 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }, _parent3, _scopeId2));
                   } else {
                     return [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(newPassword),
-                        "onUpdate:modelValue": ($event) => isRef(newPassword) ? newPassword.value = $event : null,
-                        type: unref(showPassword) ? "text" : "password",
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(newPassword),
+                        "onUpdate:modelValue": ($event) => vueExports.isRef(newPassword) ? newPassword.value = $event : null,
+                        type: vueExports.unref(showPassword) ? "text" : "password",
                         placeholder: "Your new password",
                         autocomplete: "new-password",
                         required: "",
                         class: "w-full"
                       }, {
-                        trailing: withCtx(() => [
-                          createVNode(_component_UButton, {
+                        trailing: vueExports.withCtx(() => [
+                          vueExports.createVNode(_component_UButton, {
                             variant: "ghost",
                             size: "sm",
-                            icon: unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
-                            "aria-label": unref(showPassword) ? "Hide password" : "Show password",
-                            onClick: ($event) => showPassword.value = !unref(showPassword)
+                            icon: vueExports.unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
+                            "aria-label": vueExports.unref(showPassword) ? "Hide password" : "Show password",
+                            onClick: ($event) => showPassword.value = !vueExports.unref(showPassword)
                           }, null, 8, ["icon", "aria-label", "onClick"])
                         ]),
                         _: 1
@@ -166,25 +156,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 }),
                 _: 1
               }, _parent2, _scopeId));
-              if (unref(error)) {
-                _push2(ssrRenderComponent(_component_UAlert, {
+              if (vueExports.unref(error)) {
+                _push2(ssrRenderComponent_1(_component_UAlert, {
                   color: "error",
-                  description: unref(error)
+                  description: vueExports.unref(error)
                 }, null, _parent2, _scopeId));
               } else {
                 _push2(`<!---->`);
               }
-              _push2(ssrRenderComponent(_component_UButton, {
+              _push2(ssrRenderComponent_1(_component_UButton, {
                 type: "submit",
                 class: "w-full justify-center",
-                loading: unref(isLoading)
+                loading: vueExports.unref(isLoading)
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(` Set new password `);
                   } else {
                     return [
-                      createTextVNode(" Set new password ")
+                      vueExports.createTextVNode(" Set new password ")
                     ];
                   }
                 }),
@@ -193,31 +183,31 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               _push2(`</form>`);
             } else {
               return [
-                createVNode("form", {
+                vueExports.createVNode("form", {
                   class: "space-y-4",
-                  onSubmit: withModifiers(onSubmit, ["prevent"])
+                  onSubmit: vueExports.withModifiers(onSubmit, ["prevent"])
                 }, [
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "New password",
                     name: "newPassword"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(newPassword),
-                        "onUpdate:modelValue": ($event) => isRef(newPassword) ? newPassword.value = $event : null,
-                        type: unref(showPassword) ? "text" : "password",
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(newPassword),
+                        "onUpdate:modelValue": ($event) => vueExports.isRef(newPassword) ? newPassword.value = $event : null,
+                        type: vueExports.unref(showPassword) ? "text" : "password",
                         placeholder: "Your new password",
                         autocomplete: "new-password",
                         required: "",
                         class: "w-full"
                       }, {
-                        trailing: withCtx(() => [
-                          createVNode(_component_UButton, {
+                        trailing: vueExports.withCtx(() => [
+                          vueExports.createVNode(_component_UButton, {
                             variant: "ghost",
                             size: "sm",
-                            icon: unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
-                            "aria-label": unref(showPassword) ? "Hide password" : "Show password",
-                            onClick: ($event) => showPassword.value = !unref(showPassword)
+                            icon: vueExports.unref(showPassword) ? "i-lucide-eye-off" : "i-lucide-eye",
+                            "aria-label": vueExports.unref(showPassword) ? "Hide password" : "Show password",
+                            onClick: ($event) => showPassword.value = !vueExports.unref(showPassword)
                           }, null, 8, ["icon", "aria-label", "onClick"])
                         ]),
                         _: 1
@@ -225,18 +215,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  unref(error) ? (openBlock(), createBlock(_component_UAlert, {
+                  vueExports.unref(error) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                     key: 0,
                     color: "error",
-                    description: unref(error)
-                  }, null, 8, ["description"])) : createCommentVNode("", true),
-                  createVNode(_component_UButton, {
+                    description: vueExports.unref(error)
+                  }, null, 8, ["description"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode(_component_UButton, {
                     type: "submit",
                     class: "w-full justify-center",
-                    loading: unref(isLoading)
+                    loading: vueExports.unref(isLoading)
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode(" Set new password ")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode(" Set new password ")
                     ]),
                     _: 1
                   }, 8, ["loading"])
@@ -253,7 +243,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/reset-password/confirm.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

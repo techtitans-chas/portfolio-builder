@@ -1,12 +1,11 @@
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
-import { ab as useState } from './server.mjs';
-import { ref, computed } from 'vue';
+import { aJ as useState, aO as vueExports } from './server.mjs';
 
 function useCollections() {
   const { fetcher } = useApi();
   const collections = useState("user-collections", () => []);
-  const loading = ref(false);
-  const fetchError = ref("");
+  const loading = vueExports.ref(false);
+  const fetchError = vueExports.ref("");
   async function fetchCollections() {
     loading.value = true;
     fetchError.value = "";
@@ -19,7 +18,7 @@ function useCollections() {
       loading.value = false;
     }
   }
-  const activeCollectionTypes = computed(() => new Set(collections.value.map((c) => c.type)));
+  const activeCollectionTypes = vueExports.computed(() => new Set(collections.value.map((c) => c.type)));
   return {
     collections,
     loading,

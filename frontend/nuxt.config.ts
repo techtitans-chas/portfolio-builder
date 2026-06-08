@@ -31,11 +31,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    bundledStorage: [],
-    experimental: {},
-    externals: {
-      inline: ['@iconify/utils'],
-    },
+    noExternals: true,
   },
 
   routeRules: {

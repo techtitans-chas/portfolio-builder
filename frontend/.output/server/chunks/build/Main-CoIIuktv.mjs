@@ -1,8 +1,5 @@
-import { computed, unref, mergeProps, withCtx, renderSlot, createVNode, useSlots, toRef, toHandlers, createTextVNode, toDisplayString, openBlock, createBlock, createCommentVNode, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderSlot, ssrInterpolate, ssrRenderClass } from 'vue/server-renderer';
 import { p as pointerDownOutside, e as DialogRoot_default, g as DialogTrigger_default, d as DialogPortal_default, c as DialogOverlay_default, a as DialogContent_default, f as DialogTitle_default, b as DialogDescription_default, D as DialogClose_default } from './overlay-BWwBD9XH.mjs';
-import { U as useComponentProps, N as useAppConfig, M as tv, b as Primitive, a2 as useLocale, $ as useForwardProps, f as _sfc_main$8, e as _sfc_main$d, a4 as usePortal, F as FieldGroupReset, V as VisuallyHidden_default, ab as useState } from './server.mjs';
-import { reactiveOmit, reactivePick } from '@vueuse/core';
+import { an as useComponentProps, aj as useAppConfig, aO as vueExports, ag as tv, a7 as ssrRenderComponent_1, b as Primitive, a9 as ssrRenderSlot_1, ay as useLocale, av as useForwardProps, Z as reactiveOmit, e as _sfc_main$8, j as _sfc_main$d, $ as reactivePick, aB as usePortal, F as FieldGroupReset, V as VisuallyHidden_default, a3 as ssrInterpolate_1, a6 as ssrRenderClass_1, aJ as useState } from './server.mjs';
 import { u as usePrefix } from './usePrefix-DEbZTxVe.mjs';
 
 const theme$1 = {
@@ -155,14 +152,14 @@ const _sfc_main$2 = {
   setup(__props, { emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("slideover", _props);
     const { t } = useLocale();
     const appConfig = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "open", "defaultOpen", "modal"), emits);
-    const portalProps = usePortal(toRef(() => props.portal));
-    const contentProps = toRef(() => props.content);
-    const contentEvents = computed(() => {
+    const portalProps = usePortal(vueExports.toRef(() => props.portal));
+    const contentProps = vueExports.toRef(() => props.content);
+    const contentEvents = vueExports.computed(() => {
       if (!props.dismissible) {
         const events = ["interactOutside", "escapeKeyDown"];
         return events.reduce((acc, curr) => {
@@ -177,26 +174,26 @@ const _sfc_main$2 = {
         pointerDownOutside
       };
     });
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.slideover || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.slideover || {} })({
       transition: props.transition,
       side: props.side,
       inset: props.inset
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(DialogRoot_default), mergeProps(unref(rootProps), _attrs), {
-        default: withCtx(({ open, close }, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(DialogRoot_default), vueExports.mergeProps(vueExports.unref(rootProps), _attrs), {
+        default: vueExports.withCtx(({ open, close }, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (!!slots.default) {
-              _push2(ssrRenderComponent(unref(DialogTrigger_default), {
+              _push2(ssrRenderComponent_1(vueExports.unref(DialogTrigger_default), {
                 "as-child": "",
-                class: unref(props).class
+                class: vueExports.unref(props).class
               }, {
-                default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    ssrRenderSlot(_ctx.$slots, "default", { open }, null, _push3, _parent3, _scopeId2);
+                    ssrRenderSlot_1(_ctx.$slots, "default", { open }, null, _push3, _parent3, _scopeId2);
                   } else {
                     return [
-                      renderSlot(_ctx.$slots, "default", { open })
+                      vueExports.renderSlot(_ctx.$slots, "default", { open })
                     ];
                   }
                 }),
@@ -205,47 +202,47 @@ const _sfc_main$2 = {
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(unref(DialogPortal_default), unref(portalProps), {
-              default: withCtx((_, _push3, _parent3, _scopeId2) => {
+            _push2(ssrRenderComponent_1(vueExports.unref(DialogPortal_default), vueExports.unref(portalProps), {
+              default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(FieldGroupReset), null, {
-                    default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                  _push3(ssrRenderComponent_1(vueExports.unref(FieldGroupReset), null, {
+                    default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        if (unref(props).overlay) {
-                          _push4(ssrRenderComponent(unref(DialogOverlay_default), {
+                        if (vueExports.unref(props).overlay) {
+                          _push4(ssrRenderComponent_1(vueExports.unref(DialogOverlay_default), {
                             "data-slot": "overlay",
-                            class: ui.value.overlay({ class: unref(props).ui?.overlay })
+                            class: ui.value.overlay({ class: vueExports.unref(props).ui?.overlay })
                           }, null, _parent4, _scopeId3));
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(ssrRenderComponent(unref(DialogContent_default), mergeProps({
-                          "data-side": unref(props).side,
+                        _push4(ssrRenderComponent_1(vueExports.unref(DialogContent_default), vueExports.mergeProps({
+                          "data-side": vueExports.unref(props).side,
                           "data-slot": "content",
-                          class: ui.value.content({ class: [!slots.default && unref(props).class, unref(props).ui?.content] })
+                          class: ui.value.content({ class: [!slots.default && vueExports.unref(props).class, vueExports.unref(props).ui?.content] })
                         }, contentProps.value, {
                           onAfterEnter: ($event) => emits("after:enter"),
                           onAfterLeave: ($event) => emits("after:leave")
-                        }, toHandlers(contentEvents.value)), {
-                          default: withCtx((_3, _push5, _parent5, _scopeId4) => {
+                        }, vueExports.toHandlers(contentEvents.value)), {
+                          default: vueExports.withCtx((_3, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              if (!unref(props).title && !slots.title || !unref(props).description && !slots.description || !!slots.content) {
-                                _push5(ssrRenderComponent(unref(VisuallyHidden_default), null, {
-                                  default: withCtx((_4, _push6, _parent6, _scopeId5) => {
+                              if (!vueExports.unref(props).title && !slots.title || !vueExports.unref(props).description && !slots.description || !!slots.content) {
+                                _push5(ssrRenderComponent_1(vueExports.unref(VisuallyHidden_default), null, {
+                                  default: vueExports.withCtx((_4, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      if (!unref(props).title && !slots.title) {
-                                        _push6(ssrRenderComponent(unref(DialogTitle_default), null, null, _parent6, _scopeId5));
+                                      if (!vueExports.unref(props).title && !slots.title) {
+                                        _push6(ssrRenderComponent_1(vueExports.unref(DialogTitle_default), null, null, _parent6, _scopeId5));
                                       } else if (!!slots.content) {
-                                        _push6(ssrRenderComponent(unref(DialogTitle_default), null, {
-                                          default: withCtx((_5, _push7, _parent7, _scopeId6) => {
+                                        _push6(ssrRenderComponent_1(vueExports.unref(DialogTitle_default), null, {
+                                          default: vueExports.withCtx((_5, _push7, _parent7, _scopeId6) => {
                                             if (_push7) {
-                                              ssrRenderSlot(_ctx.$slots, "title", {}, () => {
-                                                _push7(`${ssrInterpolate(unref(props).title)}`);
+                                              ssrRenderSlot_1(_ctx.$slots, "title", {}, () => {
+                                                _push7(`${ssrInterpolate_1(vueExports.unref(props).title)}`);
                                               }, _push7, _parent7, _scopeId6);
                                             } else {
                                               return [
-                                                renderSlot(_ctx.$slots, "title", {}, () => [
-                                                  createTextVNode(toDisplayString(unref(props).title), 1)
+                                                vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                                 ])
                                               ];
                                             }
@@ -255,19 +252,19 @@ const _sfc_main$2 = {
                                       } else {
                                         _push6(`<!---->`);
                                       }
-                                      if (!unref(props).description && !slots.description) {
-                                        _push6(ssrRenderComponent(unref(DialogDescription_default), null, null, _parent6, _scopeId5));
+                                      if (!vueExports.unref(props).description && !slots.description) {
+                                        _push6(ssrRenderComponent_1(vueExports.unref(DialogDescription_default), null, null, _parent6, _scopeId5));
                                       } else if (!!slots.content) {
-                                        _push6(ssrRenderComponent(unref(DialogDescription_default), null, {
-                                          default: withCtx((_5, _push7, _parent7, _scopeId6) => {
+                                        _push6(ssrRenderComponent_1(vueExports.unref(DialogDescription_default), null, {
+                                          default: vueExports.withCtx((_5, _push7, _parent7, _scopeId6) => {
                                             if (_push7) {
-                                              ssrRenderSlot(_ctx.$slots, "description", {}, () => {
-                                                _push7(`${ssrInterpolate(unref(props).description)}`);
+                                              ssrRenderSlot_1(_ctx.$slots, "description", {}, () => {
+                                                _push7(`${ssrInterpolate_1(vueExports.unref(props).description)}`);
                                               }, _push7, _parent7, _scopeId6);
                                             } else {
                                               return [
-                                                renderSlot(_ctx.$slots, "description", {}, () => [
-                                                  createTextVNode(toDisplayString(unref(props).description), 1)
+                                                vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                                 ])
                                               ];
                                             }
@@ -279,22 +276,22 @@ const _sfc_main$2 = {
                                       }
                                     } else {
                                       return [
-                                        !unref(props).title && !slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 1 }, {
-                                          default: withCtx(() => [
-                                            renderSlot(_ctx.$slots, "title", {}, () => [
-                                              createTextVNode(toDisplayString(unref(props).title), 1)
+                                        !vueExports.unref(props).title && !slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 1 }, {
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                             ])
                                           ]),
                                           _: 3
-                                        })) : createCommentVNode("", true),
-                                        !unref(props).description && !slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 3 }, {
-                                          default: withCtx(() => [
-                                            renderSlot(_ctx.$slots, "description", {}, () => [
-                                              createTextVNode(toDisplayString(unref(props).description), 1)
+                                        })) : vueExports.createCommentVNode("", true),
+                                        !vueExports.unref(props).description && !slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 3 }, {
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                             ])
                                           ]),
                                           _: 3
-                                        })) : createCommentVNode("", true)
+                                        })) : vueExports.createCommentVNode("", true)
                                       ];
                                     }
                                   }),
@@ -303,26 +300,26 @@ const _sfc_main$2 = {
                               } else {
                                 _push5(`<!---->`);
                               }
-                              ssrRenderSlot(_ctx.$slots, "content", { close }, () => {
-                                if (!!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description) || (unref(props).close || !!slots.close)) {
-                                  _push5(`<div data-slot="header" class="${ssrRenderClass(ui.value.header({ class: unref(props).ui?.header }))}"${_scopeId4}>`);
-                                  ssrRenderSlot(_ctx.$slots, "header", { close }, () => {
-                                    if (unref(props).title || !!slots.title || unref(props).description || !!slots.description) {
-                                      _push5(`<div data-slot="wrapper" class="${ssrRenderClass(ui.value.wrapper({ class: unref(props).ui?.wrapper }))}"${_scopeId4}>`);
-                                      if (unref(props).title || !!slots.title) {
-                                        _push5(ssrRenderComponent(unref(DialogTitle_default), {
+                              ssrRenderSlot_1(_ctx.$slots, "content", { close }, () => {
+                                if (!!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description) || (vueExports.unref(props).close || !!slots.close)) {
+                                  _push5(`<div data-slot="header" class="${ssrRenderClass_1(ui.value.header({ class: vueExports.unref(props).ui?.header }))}"${_scopeId4}>`);
+                                  ssrRenderSlot_1(_ctx.$slots, "header", { close }, () => {
+                                    if (vueExports.unref(props).title || !!slots.title || vueExports.unref(props).description || !!slots.description) {
+                                      _push5(`<div data-slot="wrapper" class="${ssrRenderClass_1(ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper }))}"${_scopeId4}>`);
+                                      if (vueExports.unref(props).title || !!slots.title) {
+                                        _push5(ssrRenderComponent_1(vueExports.unref(DialogTitle_default), {
                                           "data-slot": "title",
-                                          class: ui.value.title({ class: unref(props).ui?.title })
+                                          class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                                         }, {
-                                          default: withCtx((_4, _push6, _parent6, _scopeId5) => {
+                                          default: vueExports.withCtx((_4, _push6, _parent6, _scopeId5) => {
                                             if (_push6) {
-                                              ssrRenderSlot(_ctx.$slots, "title", {}, () => {
-                                                _push6(`${ssrInterpolate(unref(props).title)}`);
+                                              ssrRenderSlot_1(_ctx.$slots, "title", {}, () => {
+                                                _push6(`${ssrInterpolate_1(vueExports.unref(props).title)}`);
                                               }, _push6, _parent6, _scopeId5);
                                             } else {
                                               return [
-                                                renderSlot(_ctx.$slots, "title", {}, () => [
-                                                  createTextVNode(toDisplayString(unref(props).title), 1)
+                                                vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                                 ])
                                               ];
                                             }
@@ -332,20 +329,20 @@ const _sfc_main$2 = {
                                       } else {
                                         _push5(`<!---->`);
                                       }
-                                      if (unref(props).description || !!slots.description) {
-                                        _push5(ssrRenderComponent(unref(DialogDescription_default), {
+                                      if (vueExports.unref(props).description || !!slots.description) {
+                                        _push5(ssrRenderComponent_1(vueExports.unref(DialogDescription_default), {
                                           "data-slot": "description",
-                                          class: ui.value.description({ class: unref(props).ui?.description })
+                                          class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                                         }, {
-                                          default: withCtx((_4, _push6, _parent6, _scopeId5) => {
+                                          default: vueExports.withCtx((_4, _push6, _parent6, _scopeId5) => {
                                             if (_push6) {
-                                              ssrRenderSlot(_ctx.$slots, "description", {}, () => {
-                                                _push6(`${ssrInterpolate(unref(props).description)}`);
+                                              ssrRenderSlot_1(_ctx.$slots, "description", {}, () => {
+                                                _push6(`${ssrInterpolate_1(vueExports.unref(props).description)}`);
                                               }, _push6, _parent6, _scopeId5);
                                             } else {
                                               return [
-                                                renderSlot(_ctx.$slots, "description", {}, () => [
-                                                  createTextVNode(toDisplayString(unref(props).description), 1)
+                                                vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                                 ])
                                               ];
                                             }
@@ -359,21 +356,21 @@ const _sfc_main$2 = {
                                     } else {
                                       _push5(`<!---->`);
                                     }
-                                    ssrRenderSlot(_ctx.$slots, "actions", {}, null, _push5, _parent5, _scopeId4);
-                                    if (unref(props).close || !!slots.close) {
-                                      _push5(ssrRenderComponent(unref(DialogClose_default), { "as-child": "" }, {
-                                        default: withCtx((_4, _push6, _parent6, _scopeId5) => {
+                                    ssrRenderSlot_1(_ctx.$slots, "actions", {}, null, _push5, _parent5, _scopeId4);
+                                    if (vueExports.unref(props).close || !!slots.close) {
+                                      _push5(ssrRenderComponent_1(vueExports.unref(DialogClose_default), { "as-child": "" }, {
+                                        default: vueExports.withCtx((_4, _push6, _parent6, _scopeId5) => {
                                           if (_push6) {
-                                            ssrRenderSlot(_ctx.$slots, "close", { ui: ui.value }, () => {
-                                              if (unref(props).close) {
-                                                _push6(ssrRenderComponent(_sfc_main$8, mergeProps({
-                                                  icon: unref(props).closeIcon || unref(appConfig).ui.icons.close,
+                                            ssrRenderSlot_1(_ctx.$slots, "close", { ui: ui.value }, () => {
+                                              if (vueExports.unref(props).close) {
+                                                _push6(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
+                                                  icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig).ui.icons.close,
                                                   color: "neutral",
                                                   variant: "ghost",
-                                                  "aria-label": unref(t)("slideover.close")
-                                                }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                                                  "aria-label": vueExports.unref(t)("slideover.close")
+                                                }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                                                   "data-slot": "close",
-                                                  class: ui.value.close({ class: unref(props).ui?.close })
+                                                  class: ui.value.close({ class: vueExports.unref(props).ui?.close })
                                                 }), null, _parent6, _scopeId5));
                                               } else {
                                                 _push6(`<!---->`);
@@ -381,17 +378,17 @@ const _sfc_main$2 = {
                                             }, _push6, _parent6, _scopeId5);
                                           } else {
                                             return [
-                                              renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                                                unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                                              vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                                                vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                                                   key: 0,
-                                                  icon: unref(props).closeIcon || unref(appConfig).ui.icons.close,
+                                                  icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig).ui.icons.close,
                                                   color: "neutral",
                                                   variant: "ghost",
-                                                  "aria-label": unref(t)("slideover.close")
-                                                }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                                                  "aria-label": vueExports.unref(t)("slideover.close")
+                                                }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                                                   "data-slot": "close",
-                                                  class: ui.value.close({ class: unref(props).ui?.close })
-                                                }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                                                  class: ui.value.close({ class: vueExports.unref(props).ui?.close })
+                                                }), null, 16, ["icon", "aria-label", "class"])) : vueExports.createCommentVNode("", true)
                                               ])
                                             ];
                                           }
@@ -406,12 +403,12 @@ const _sfc_main$2 = {
                                 } else {
                                   _push5(`<!---->`);
                                 }
-                                _push5(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: unref(props).ui?.body }))}"${_scopeId4}>`);
-                                ssrRenderSlot(_ctx.$slots, "body", { close }, null, _push5, _parent5, _scopeId4);
+                                _push5(`<div data-slot="body" class="${ssrRenderClass_1(ui.value.body({ class: vueExports.unref(props).ui?.body }))}"${_scopeId4}>`);
+                                ssrRenderSlot_1(_ctx.$slots, "body", { close }, null, _push5, _parent5, _scopeId4);
                                 _push5(`</div>`);
                                 if (!!slots.footer) {
-                                  _push5(`<div data-slot="footer" class="${ssrRenderClass(ui.value.footer({ class: unref(props).ui?.footer }))}"${_scopeId4}>`);
-                                  ssrRenderSlot(_ctx.$slots, "footer", { close }, null, _push5, _parent5, _scopeId4);
+                                  _push5(`<div data-slot="footer" class="${ssrRenderClass_1(ui.value.footer({ class: vueExports.unref(props).ui?.footer }))}"${_scopeId4}>`);
+                                  ssrRenderSlot_1(_ctx.$slots, "footer", { close }, null, _push5, _parent5, _scopeId4);
                                   _push5(`</div>`);
                                 } else {
                                   _push5(`<!---->`);
@@ -419,100 +416,100 @@ const _sfc_main$2 = {
                               }, _push5, _parent5, _scopeId4);
                             } else {
                               return [
-                                !unref(props).title && !slots.title || !unref(props).description && !slots.description || !!slots.content ? (openBlock(), createBlock(unref(VisuallyHidden_default), { key: 0 }, {
-                                  default: withCtx(() => [
-                                    !unref(props).title && !slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 1 }, {
-                                      default: withCtx(() => [
-                                        renderSlot(_ctx.$slots, "title", {}, () => [
-                                          createTextVNode(toDisplayString(unref(props).title), 1)
+                                !vueExports.unref(props).title && !slots.title || !vueExports.unref(props).description && !slots.description || !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), { key: 0 }, {
+                                  default: vueExports.withCtx(() => [
+                                    !vueExports.unref(props).title && !slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 1 }, {
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                         ])
                                       ]),
                                       _: 3
-                                    })) : createCommentVNode("", true),
-                                    !unref(props).description && !slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 3 }, {
-                                      default: withCtx(() => [
-                                        renderSlot(_ctx.$slots, "description", {}, () => [
-                                          createTextVNode(toDisplayString(unref(props).description), 1)
+                                    })) : vueExports.createCommentVNode("", true),
+                                    !vueExports.unref(props).description && !slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 3 }, {
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                         ])
                                       ]),
                                       _: 3
-                                    })) : createCommentVNode("", true)
+                                    })) : vueExports.createCommentVNode("", true)
                                   ]),
                                   _: 3
-                                })) : createCommentVNode("", true),
-                                renderSlot(_ctx.$slots, "content", { close }, () => [
-                                  !!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description) || (unref(props).close || !!slots.close) ? (openBlock(), createBlock("div", {
+                                })) : vueExports.createCommentVNode("", true),
+                                vueExports.renderSlot(_ctx.$slots, "content", { close }, () => [
+                                  !!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description) || (vueExports.unref(props).close || !!slots.close) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                     key: 0,
                                     "data-slot": "header",
-                                    class: ui.value.header({ class: unref(props).ui?.header })
+                                    class: ui.value.header({ class: vueExports.unref(props).ui?.header })
                                   }, [
-                                    renderSlot(_ctx.$slots, "header", { close }, () => [
-                                      unref(props).title || !!slots.title || unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                                    vueExports.renderSlot(_ctx.$slots, "header", { close }, () => [
+                                      vueExports.unref(props).title || !!slots.title || vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                         key: 0,
                                         "data-slot": "wrapper",
-                                        class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                                        class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
                                       }, [
-                                        unref(props).title || !!slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), {
+                                        vueExports.unref(props).title || !!slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), {
                                           key: 0,
                                           "data-slot": "title",
-                                          class: ui.value.title({ class: unref(props).ui?.title })
+                                          class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                                         }, {
-                                          default: withCtx(() => [
-                                            renderSlot(_ctx.$slots, "title", {}, () => [
-                                              createTextVNode(toDisplayString(unref(props).title), 1)
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                             ])
                                           ]),
                                           _: 3
-                                        }, 8, ["class"])) : createCommentVNode("", true),
-                                        unref(props).description || !!slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), {
+                                        }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                                        vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), {
                                           key: 1,
                                           "data-slot": "description",
-                                          class: ui.value.description({ class: unref(props).ui?.description })
+                                          class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                                         }, {
-                                          default: withCtx(() => [
-                                            renderSlot(_ctx.$slots, "description", {}, () => [
-                                              createTextVNode(toDisplayString(unref(props).description), 1)
+                                          default: vueExports.withCtx(() => [
+                                            vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                              vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                             ])
                                           ]),
                                           _: 3
-                                        }, 8, ["class"])) : createCommentVNode("", true)
-                                      ], 2)) : createCommentVNode("", true),
-                                      renderSlot(_ctx.$slots, "actions"),
-                                      unref(props).close || !!slots.close ? (openBlock(), createBlock(unref(DialogClose_default), {
+                                        }, 8, ["class"])) : vueExports.createCommentVNode("", true)
+                                      ], 2)) : vueExports.createCommentVNode("", true),
+                                      vueExports.renderSlot(_ctx.$slots, "actions"),
+                                      vueExports.unref(props).close || !!slots.close ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogClose_default), {
                                         key: 1,
                                         "as-child": ""
                                       }, {
-                                        default: withCtx(() => [
-                                          renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                                            unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                                        default: vueExports.withCtx(() => [
+                                          vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                                            vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                                               key: 0,
-                                              icon: unref(props).closeIcon || unref(appConfig).ui.icons.close,
+                                              icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig).ui.icons.close,
                                               color: "neutral",
                                               variant: "ghost",
-                                              "aria-label": unref(t)("slideover.close")
-                                            }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                                              "aria-label": vueExports.unref(t)("slideover.close")
+                                            }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                                               "data-slot": "close",
-                                              class: ui.value.close({ class: unref(props).ui?.close })
-                                            }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                                              class: ui.value.close({ class: vueExports.unref(props).ui?.close })
+                                            }), null, 16, ["icon", "aria-label", "class"])) : vueExports.createCommentVNode("", true)
                                           ])
                                         ]),
                                         _: 2
-                                      }, 1024)) : createCommentVNode("", true)
+                                      }, 1024)) : vueExports.createCommentVNode("", true)
                                     ])
-                                  ], 2)) : createCommentVNode("", true),
-                                  createVNode("div", {
+                                  ], 2)) : vueExports.createCommentVNode("", true),
+                                  vueExports.createVNode("div", {
                                     "data-slot": "body",
-                                    class: ui.value.body({ class: unref(props).ui?.body })
+                                    class: ui.value.body({ class: vueExports.unref(props).ui?.body })
                                   }, [
-                                    renderSlot(_ctx.$slots, "body", { close })
+                                    vueExports.renderSlot(_ctx.$slots, "body", { close })
                                   ], 2),
-                                  !!slots.footer ? (openBlock(), createBlock("div", {
+                                  !!slots.footer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                     key: 1,
                                     "data-slot": "footer",
-                                    class: ui.value.footer({ class: unref(props).ui?.footer })
+                                    class: ui.value.footer({ class: vueExports.unref(props).ui?.footer })
                                   }, [
-                                    renderSlot(_ctx.$slots, "footer", { close })
-                                  ], 2)) : createCommentVNode("", true)
+                                    vueExports.renderSlot(_ctx.$slots, "footer", { close })
+                                  ], 2)) : vueExports.createCommentVNode("", true)
                                 ])
                               ];
                             }
@@ -521,114 +518,114 @@ const _sfc_main$2 = {
                         }, _parent4, _scopeId3));
                       } else {
                         return [
-                          unref(props).overlay ? (openBlock(), createBlock(unref(DialogOverlay_default), {
+                          vueExports.unref(props).overlay ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogOverlay_default), {
                             key: 0,
                             "data-slot": "overlay",
-                            class: ui.value.overlay({ class: unref(props).ui?.overlay })
-                          }, null, 8, ["class"])) : createCommentVNode("", true),
-                          createVNode(unref(DialogContent_default), mergeProps({
-                            "data-side": unref(props).side,
+                            class: ui.value.overlay({ class: vueExports.unref(props).ui?.overlay })
+                          }, null, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                          vueExports.createVNode(vueExports.unref(DialogContent_default), vueExports.mergeProps({
+                            "data-side": vueExports.unref(props).side,
                             "data-slot": "content",
-                            class: ui.value.content({ class: [!slots.default && unref(props).class, unref(props).ui?.content] })
+                            class: ui.value.content({ class: [!slots.default && vueExports.unref(props).class, vueExports.unref(props).ui?.content] })
                           }, contentProps.value, {
                             onAfterEnter: ($event) => emits("after:enter"),
                             onAfterLeave: ($event) => emits("after:leave")
-                          }, toHandlers(contentEvents.value)), {
-                            default: withCtx(() => [
-                              !unref(props).title && !slots.title || !unref(props).description && !slots.description || !!slots.content ? (openBlock(), createBlock(unref(VisuallyHidden_default), { key: 0 }, {
-                                default: withCtx(() => [
-                                  !unref(props).title && !slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 1 }, {
-                                    default: withCtx(() => [
-                                      renderSlot(_ctx.$slots, "title", {}, () => [
-                                        createTextVNode(toDisplayString(unref(props).title), 1)
+                          }, vueExports.toHandlers(contentEvents.value)), {
+                            default: vueExports.withCtx(() => [
+                              !vueExports.unref(props).title && !slots.title || !vueExports.unref(props).description && !slots.description || !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), { key: 0 }, {
+                                default: vueExports.withCtx(() => [
+                                  !vueExports.unref(props).title && !slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 1 }, {
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                       ])
                                     ]),
                                     _: 3
-                                  })) : createCommentVNode("", true),
-                                  !unref(props).description && !slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 3 }, {
-                                    default: withCtx(() => [
-                                      renderSlot(_ctx.$slots, "description", {}, () => [
-                                        createTextVNode(toDisplayString(unref(props).description), 1)
+                                  })) : vueExports.createCommentVNode("", true),
+                                  !vueExports.unref(props).description && !slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 3 }, {
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                       ])
                                     ]),
                                     _: 3
-                                  })) : createCommentVNode("", true)
+                                  })) : vueExports.createCommentVNode("", true)
                                 ]),
                                 _: 3
-                              })) : createCommentVNode("", true),
-                              renderSlot(_ctx.$slots, "content", { close }, () => [
-                                !!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description) || (unref(props).close || !!slots.close) ? (openBlock(), createBlock("div", {
+                              })) : vueExports.createCommentVNode("", true),
+                              vueExports.renderSlot(_ctx.$slots, "content", { close }, () => [
+                                !!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description) || (vueExports.unref(props).close || !!slots.close) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                   key: 0,
                                   "data-slot": "header",
-                                  class: ui.value.header({ class: unref(props).ui?.header })
+                                  class: ui.value.header({ class: vueExports.unref(props).ui?.header })
                                 }, [
-                                  renderSlot(_ctx.$slots, "header", { close }, () => [
-                                    unref(props).title || !!slots.title || unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                                  vueExports.renderSlot(_ctx.$slots, "header", { close }, () => [
+                                    vueExports.unref(props).title || !!slots.title || vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                       key: 0,
                                       "data-slot": "wrapper",
-                                      class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                                      class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
                                     }, [
-                                      unref(props).title || !!slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), {
+                                      vueExports.unref(props).title || !!slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), {
                                         key: 0,
                                         "data-slot": "title",
-                                        class: ui.value.title({ class: unref(props).ui?.title })
+                                        class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                                       }, {
-                                        default: withCtx(() => [
-                                          renderSlot(_ctx.$slots, "title", {}, () => [
-                                            createTextVNode(toDisplayString(unref(props).title), 1)
+                                        default: vueExports.withCtx(() => [
+                                          vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                           ])
                                         ]),
                                         _: 3
-                                      }, 8, ["class"])) : createCommentVNode("", true),
-                                      unref(props).description || !!slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), {
+                                      }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                                      vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), {
                                         key: 1,
                                         "data-slot": "description",
-                                        class: ui.value.description({ class: unref(props).ui?.description })
+                                        class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                                       }, {
-                                        default: withCtx(() => [
-                                          renderSlot(_ctx.$slots, "description", {}, () => [
-                                            createTextVNode(toDisplayString(unref(props).description), 1)
+                                        default: vueExports.withCtx(() => [
+                                          vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                           ])
                                         ]),
                                         _: 3
-                                      }, 8, ["class"])) : createCommentVNode("", true)
-                                    ], 2)) : createCommentVNode("", true),
-                                    renderSlot(_ctx.$slots, "actions"),
-                                    unref(props).close || !!slots.close ? (openBlock(), createBlock(unref(DialogClose_default), {
+                                      }, 8, ["class"])) : vueExports.createCommentVNode("", true)
+                                    ], 2)) : vueExports.createCommentVNode("", true),
+                                    vueExports.renderSlot(_ctx.$slots, "actions"),
+                                    vueExports.unref(props).close || !!slots.close ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogClose_default), {
                                       key: 1,
                                       "as-child": ""
                                     }, {
-                                      default: withCtx(() => [
-                                        renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                                          unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                                          vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                                             key: 0,
-                                            icon: unref(props).closeIcon || unref(appConfig).ui.icons.close,
+                                            icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig).ui.icons.close,
                                             color: "neutral",
                                             variant: "ghost",
-                                            "aria-label": unref(t)("slideover.close")
-                                          }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                                            "aria-label": vueExports.unref(t)("slideover.close")
+                                          }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                                             "data-slot": "close",
-                                            class: ui.value.close({ class: unref(props).ui?.close })
-                                          }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                                            class: ui.value.close({ class: vueExports.unref(props).ui?.close })
+                                          }), null, 16, ["icon", "aria-label", "class"])) : vueExports.createCommentVNode("", true)
                                         ])
                                       ]),
                                       _: 2
-                                    }, 1024)) : createCommentVNode("", true)
+                                    }, 1024)) : vueExports.createCommentVNode("", true)
                                   ])
-                                ], 2)) : createCommentVNode("", true),
-                                createVNode("div", {
+                                ], 2)) : vueExports.createCommentVNode("", true),
+                                vueExports.createVNode("div", {
                                   "data-slot": "body",
-                                  class: ui.value.body({ class: unref(props).ui?.body })
+                                  class: ui.value.body({ class: vueExports.unref(props).ui?.body })
                                 }, [
-                                  renderSlot(_ctx.$slots, "body", { close })
+                                  vueExports.renderSlot(_ctx.$slots, "body", { close })
                                 ], 2),
-                                !!slots.footer ? (openBlock(), createBlock("div", {
+                                !!slots.footer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                   key: 1,
                                   "data-slot": "footer",
-                                  class: ui.value.footer({ class: unref(props).ui?.footer })
+                                  class: ui.value.footer({ class: vueExports.unref(props).ui?.footer })
                                 }, [
-                                  renderSlot(_ctx.$slots, "footer", { close })
-                                ], 2)) : createCommentVNode("", true)
+                                  vueExports.renderSlot(_ctx.$slots, "footer", { close })
+                                ], 2)) : vueExports.createCommentVNode("", true)
                               ])
                             ]),
                             _: 2
@@ -640,116 +637,116 @@ const _sfc_main$2 = {
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(FieldGroupReset), null, {
-                      default: withCtx(() => [
-                        unref(props).overlay ? (openBlock(), createBlock(unref(DialogOverlay_default), {
+                    vueExports.createVNode(vueExports.unref(FieldGroupReset), null, {
+                      default: vueExports.withCtx(() => [
+                        vueExports.unref(props).overlay ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogOverlay_default), {
                           key: 0,
                           "data-slot": "overlay",
-                          class: ui.value.overlay({ class: unref(props).ui?.overlay })
-                        }, null, 8, ["class"])) : createCommentVNode("", true),
-                        createVNode(unref(DialogContent_default), mergeProps({
-                          "data-side": unref(props).side,
+                          class: ui.value.overlay({ class: vueExports.unref(props).ui?.overlay })
+                        }, null, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                        vueExports.createVNode(vueExports.unref(DialogContent_default), vueExports.mergeProps({
+                          "data-side": vueExports.unref(props).side,
                           "data-slot": "content",
-                          class: ui.value.content({ class: [!slots.default && unref(props).class, unref(props).ui?.content] })
+                          class: ui.value.content({ class: [!slots.default && vueExports.unref(props).class, vueExports.unref(props).ui?.content] })
                         }, contentProps.value, {
                           onAfterEnter: ($event) => emits("after:enter"),
                           onAfterLeave: ($event) => emits("after:leave")
-                        }, toHandlers(contentEvents.value)), {
-                          default: withCtx(() => [
-                            !unref(props).title && !slots.title || !unref(props).description && !slots.description || !!slots.content ? (openBlock(), createBlock(unref(VisuallyHidden_default), { key: 0 }, {
-                              default: withCtx(() => [
-                                !unref(props).title && !slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 1 }, {
-                                  default: withCtx(() => [
-                                    renderSlot(_ctx.$slots, "title", {}, () => [
-                                      createTextVNode(toDisplayString(unref(props).title), 1)
+                        }, vueExports.toHandlers(contentEvents.value)), {
+                          default: vueExports.withCtx(() => [
+                            !vueExports.unref(props).title && !slots.title || !vueExports.unref(props).description && !slots.description || !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), { key: 0 }, {
+                              default: vueExports.withCtx(() => [
+                                !vueExports.unref(props).title && !slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 1 }, {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                     ])
                                   ]),
                                   _: 3
-                                })) : createCommentVNode("", true),
-                                !unref(props).description && !slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 3 }, {
-                                  default: withCtx(() => [
-                                    renderSlot(_ctx.$slots, "description", {}, () => [
-                                      createTextVNode(toDisplayString(unref(props).description), 1)
+                                })) : vueExports.createCommentVNode("", true),
+                                !vueExports.unref(props).description && !slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 3 }, {
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                     ])
                                   ]),
                                   _: 3
-                                })) : createCommentVNode("", true)
+                                })) : vueExports.createCommentVNode("", true)
                               ]),
                               _: 3
-                            })) : createCommentVNode("", true),
-                            renderSlot(_ctx.$slots, "content", { close }, () => [
-                              !!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description) || (unref(props).close || !!slots.close) ? (openBlock(), createBlock("div", {
+                            })) : vueExports.createCommentVNode("", true),
+                            vueExports.renderSlot(_ctx.$slots, "content", { close }, () => [
+                              !!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description) || (vueExports.unref(props).close || !!slots.close) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                 key: 0,
                                 "data-slot": "header",
-                                class: ui.value.header({ class: unref(props).ui?.header })
+                                class: ui.value.header({ class: vueExports.unref(props).ui?.header })
                               }, [
-                                renderSlot(_ctx.$slots, "header", { close }, () => [
-                                  unref(props).title || !!slots.title || unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                                vueExports.renderSlot(_ctx.$slots, "header", { close }, () => [
+                                  vueExports.unref(props).title || !!slots.title || vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                     key: 0,
                                     "data-slot": "wrapper",
-                                    class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                                    class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
                                   }, [
-                                    unref(props).title || !!slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), {
+                                    vueExports.unref(props).title || !!slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), {
                                       key: 0,
                                       "data-slot": "title",
-                                      class: ui.value.title({ class: unref(props).ui?.title })
+                                      class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                                     }, {
-                                      default: withCtx(() => [
-                                        renderSlot(_ctx.$slots, "title", {}, () => [
-                                          createTextVNode(toDisplayString(unref(props).title), 1)
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                         ])
                                       ]),
                                       _: 3
-                                    }, 8, ["class"])) : createCommentVNode("", true),
-                                    unref(props).description || !!slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), {
+                                    }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                                    vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), {
                                       key: 1,
                                       "data-slot": "description",
-                                      class: ui.value.description({ class: unref(props).ui?.description })
+                                      class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                                     }, {
-                                      default: withCtx(() => [
-                                        renderSlot(_ctx.$slots, "description", {}, () => [
-                                          createTextVNode(toDisplayString(unref(props).description), 1)
+                                      default: vueExports.withCtx(() => [
+                                        vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                         ])
                                       ]),
                                       _: 3
-                                    }, 8, ["class"])) : createCommentVNode("", true)
-                                  ], 2)) : createCommentVNode("", true),
-                                  renderSlot(_ctx.$slots, "actions"),
-                                  unref(props).close || !!slots.close ? (openBlock(), createBlock(unref(DialogClose_default), {
+                                    }, 8, ["class"])) : vueExports.createCommentVNode("", true)
+                                  ], 2)) : vueExports.createCommentVNode("", true),
+                                  vueExports.renderSlot(_ctx.$slots, "actions"),
+                                  vueExports.unref(props).close || !!slots.close ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogClose_default), {
                                     key: 1,
                                     "as-child": ""
                                   }, {
-                                    default: withCtx(() => [
-                                      renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                                        unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                                        vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                                           key: 0,
-                                          icon: unref(props).closeIcon || unref(appConfig).ui.icons.close,
+                                          icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig).ui.icons.close,
                                           color: "neutral",
                                           variant: "ghost",
-                                          "aria-label": unref(t)("slideover.close")
-                                        }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                                          "aria-label": vueExports.unref(t)("slideover.close")
+                                        }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                                           "data-slot": "close",
-                                          class: ui.value.close({ class: unref(props).ui?.close })
-                                        }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                                          class: ui.value.close({ class: vueExports.unref(props).ui?.close })
+                                        }), null, 16, ["icon", "aria-label", "class"])) : vueExports.createCommentVNode("", true)
                                       ])
                                     ]),
                                     _: 2
-                                  }, 1024)) : createCommentVNode("", true)
+                                  }, 1024)) : vueExports.createCommentVNode("", true)
                                 ])
-                              ], 2)) : createCommentVNode("", true),
-                              createVNode("div", {
+                              ], 2)) : vueExports.createCommentVNode("", true),
+                              vueExports.createVNode("div", {
                                 "data-slot": "body",
-                                class: ui.value.body({ class: unref(props).ui?.body })
+                                class: ui.value.body({ class: vueExports.unref(props).ui?.body })
                               }, [
-                                renderSlot(_ctx.$slots, "body", { close })
+                                vueExports.renderSlot(_ctx.$slots, "body", { close })
                               ], 2),
-                              !!slots.footer ? (openBlock(), createBlock("div", {
+                              !!slots.footer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                 key: 1,
                                 "data-slot": "footer",
-                                class: ui.value.footer({ class: unref(props).ui?.footer })
+                                class: ui.value.footer({ class: vueExports.unref(props).ui?.footer })
                               }, [
-                                renderSlot(_ctx.$slots, "footer", { close })
-                              ], 2)) : createCommentVNode("", true)
+                                vueExports.renderSlot(_ctx.$slots, "footer", { close })
+                              ], 2)) : vueExports.createCommentVNode("", true)
                             ])
                           ]),
                           _: 2
@@ -764,128 +761,128 @@ const _sfc_main$2 = {
             }, _parent2, _scopeId));
           } else {
             return [
-              !!slots.default ? (openBlock(), createBlock(unref(DialogTrigger_default), {
+              !!slots.default ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTrigger_default), {
                 key: 0,
                 "as-child": "",
-                class: unref(props).class
+                class: vueExports.unref(props).class
               }, {
-                default: withCtx(() => [
-                  renderSlot(_ctx.$slots, "default", { open })
+                default: vueExports.withCtx(() => [
+                  vueExports.renderSlot(_ctx.$slots, "default", { open })
                 ]),
                 _: 2
-              }, 1032, ["class"])) : createCommentVNode("", true),
-              createVNode(unref(DialogPortal_default), unref(portalProps), {
-                default: withCtx(() => [
-                  createVNode(unref(FieldGroupReset), null, {
-                    default: withCtx(() => [
-                      unref(props).overlay ? (openBlock(), createBlock(unref(DialogOverlay_default), {
+              }, 1032, ["class"])) : vueExports.createCommentVNode("", true),
+              vueExports.createVNode(vueExports.unref(DialogPortal_default), vueExports.unref(portalProps), {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(vueExports.unref(FieldGroupReset), null, {
+                    default: vueExports.withCtx(() => [
+                      vueExports.unref(props).overlay ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogOverlay_default), {
                         key: 0,
                         "data-slot": "overlay",
-                        class: ui.value.overlay({ class: unref(props).ui?.overlay })
-                      }, null, 8, ["class"])) : createCommentVNode("", true),
-                      createVNode(unref(DialogContent_default), mergeProps({
-                        "data-side": unref(props).side,
+                        class: ui.value.overlay({ class: vueExports.unref(props).ui?.overlay })
+                      }, null, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                      vueExports.createVNode(vueExports.unref(DialogContent_default), vueExports.mergeProps({
+                        "data-side": vueExports.unref(props).side,
                         "data-slot": "content",
-                        class: ui.value.content({ class: [!slots.default && unref(props).class, unref(props).ui?.content] })
+                        class: ui.value.content({ class: [!slots.default && vueExports.unref(props).class, vueExports.unref(props).ui?.content] })
                       }, contentProps.value, {
                         onAfterEnter: ($event) => emits("after:enter"),
                         onAfterLeave: ($event) => emits("after:leave")
-                      }, toHandlers(contentEvents.value)), {
-                        default: withCtx(() => [
-                          !unref(props).title && !slots.title || !unref(props).description && !slots.description || !!slots.content ? (openBlock(), createBlock(unref(VisuallyHidden_default), { key: 0 }, {
-                            default: withCtx(() => [
-                              !unref(props).title && !slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogTitle_default), { key: 1 }, {
-                                default: withCtx(() => [
-                                  renderSlot(_ctx.$slots, "title", {}, () => [
-                                    createTextVNode(toDisplayString(unref(props).title), 1)
+                      }, vueExports.toHandlers(contentEvents.value)), {
+                        default: vueExports.withCtx(() => [
+                          !vueExports.unref(props).title && !slots.title || !vueExports.unref(props).description && !slots.description || !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), { key: 0 }, {
+                            default: vueExports.withCtx(() => [
+                              !vueExports.unref(props).title && !slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 0 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), { key: 1 }, {
+                                default: vueExports.withCtx(() => [
+                                  vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                   ])
                                 ]),
                                 _: 3
-                              })) : createCommentVNode("", true),
-                              !unref(props).description && !slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (openBlock(), createBlock(unref(DialogDescription_default), { key: 3 }, {
-                                default: withCtx(() => [
-                                  renderSlot(_ctx.$slots, "description", {}, () => [
-                                    createTextVNode(toDisplayString(unref(props).description), 1)
+                              })) : vueExports.createCommentVNode("", true),
+                              !vueExports.unref(props).description && !slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 2 })) : !!slots.content ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), { key: 3 }, {
+                                default: vueExports.withCtx(() => [
+                                  vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                   ])
                                 ]),
                                 _: 3
-                              })) : createCommentVNode("", true)
+                              })) : vueExports.createCommentVNode("", true)
                             ]),
                             _: 3
-                          })) : createCommentVNode("", true),
-                          renderSlot(_ctx.$slots, "content", { close }, () => [
-                            !!slots.header || (unref(props).title || !!slots.title) || (unref(props).description || !!slots.description) || (unref(props).close || !!slots.close) ? (openBlock(), createBlock("div", {
+                          })) : vueExports.createCommentVNode("", true),
+                          vueExports.renderSlot(_ctx.$slots, "content", { close }, () => [
+                            !!slots.header || (vueExports.unref(props).title || !!slots.title) || (vueExports.unref(props).description || !!slots.description) || (vueExports.unref(props).close || !!slots.close) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               "data-slot": "header",
-                              class: ui.value.header({ class: unref(props).ui?.header })
+                              class: ui.value.header({ class: vueExports.unref(props).ui?.header })
                             }, [
-                              renderSlot(_ctx.$slots, "header", { close }, () => [
-                                unref(props).title || !!slots.title || unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                              vueExports.renderSlot(_ctx.$slots, "header", { close }, () => [
+                                vueExports.unref(props).title || !!slots.title || vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                   key: 0,
                                   "data-slot": "wrapper",
-                                  class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                                  class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
                                 }, [
-                                  unref(props).title || !!slots.title ? (openBlock(), createBlock(unref(DialogTitle_default), {
+                                  vueExports.unref(props).title || !!slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogTitle_default), {
                                     key: 0,
                                     "data-slot": "title",
-                                    class: ui.value.title({ class: unref(props).ui?.title })
+                                    class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                                   }, {
-                                    default: withCtx(() => [
-                                      renderSlot(_ctx.$slots, "title", {}, () => [
-                                        createTextVNode(toDisplayString(unref(props).title), 1)
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                                       ])
                                     ]),
                                     _: 3
-                                  }, 8, ["class"])) : createCommentVNode("", true),
-                                  unref(props).description || !!slots.description ? (openBlock(), createBlock(unref(DialogDescription_default), {
+                                  }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                                  vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogDescription_default), {
                                     key: 1,
                                     "data-slot": "description",
-                                    class: ui.value.description({ class: unref(props).ui?.description })
+                                    class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                                   }, {
-                                    default: withCtx(() => [
-                                      renderSlot(_ctx.$slots, "description", {}, () => [
-                                        createTextVNode(toDisplayString(unref(props).description), 1)
+                                    default: vueExports.withCtx(() => [
+                                      vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                                       ])
                                     ]),
                                     _: 3
-                                  }, 8, ["class"])) : createCommentVNode("", true)
-                                ], 2)) : createCommentVNode("", true),
-                                renderSlot(_ctx.$slots, "actions"),
-                                unref(props).close || !!slots.close ? (openBlock(), createBlock(unref(DialogClose_default), {
+                                  }, 8, ["class"])) : vueExports.createCommentVNode("", true)
+                                ], 2)) : vueExports.createCommentVNode("", true),
+                                vueExports.renderSlot(_ctx.$slots, "actions"),
+                                vueExports.unref(props).close || !!slots.close ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DialogClose_default), {
                                   key: 1,
                                   "as-child": ""
                                 }, {
-                                  default: withCtx(() => [
-                                    renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                                      unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                                  default: vueExports.withCtx(() => [
+                                    vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                                      vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                                         key: 0,
-                                        icon: unref(props).closeIcon || unref(appConfig).ui.icons.close,
+                                        icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig).ui.icons.close,
                                         color: "neutral",
                                         variant: "ghost",
-                                        "aria-label": unref(t)("slideover.close")
-                                      }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                                        "aria-label": vueExports.unref(t)("slideover.close")
+                                      }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                                         "data-slot": "close",
-                                        class: ui.value.close({ class: unref(props).ui?.close })
-                                      }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                                        class: ui.value.close({ class: vueExports.unref(props).ui?.close })
+                                      }), null, 16, ["icon", "aria-label", "class"])) : vueExports.createCommentVNode("", true)
                                     ])
                                   ]),
                                   _: 2
-                                }, 1024)) : createCommentVNode("", true)
+                                }, 1024)) : vueExports.createCommentVNode("", true)
                               ])
-                            ], 2)) : createCommentVNode("", true),
-                            createVNode("div", {
+                            ], 2)) : vueExports.createCommentVNode("", true),
+                            vueExports.createVNode("div", {
                               "data-slot": "body",
-                              class: ui.value.body({ class: unref(props).ui?.body })
+                              class: ui.value.body({ class: vueExports.unref(props).ui?.body })
                             }, [
-                              renderSlot(_ctx.$slots, "body", { close })
+                              vueExports.renderSlot(_ctx.$slots, "body", { close })
                             ], 2),
-                            !!slots.footer ? (openBlock(), createBlock("div", {
+                            !!slots.footer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 1,
                               "data-slot": "footer",
-                              class: ui.value.footer({ class: unref(props).ui?.footer })
+                              class: ui.value.footer({ class: vueExports.unref(props).ui?.footer })
                             }, [
-                              renderSlot(_ctx.$slots, "footer", { close })
-                            ], 2)) : createCommentVNode("", true)
+                              vueExports.renderSlot(_ctx.$slots, "footer", { close })
+                            ], 2)) : vueExports.createCommentVNode("", true)
                           ])
                         ]),
                         _: 2
@@ -906,7 +903,7 @@ const _sfc_main$2 = {
 };
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Slideover.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -951,7 +948,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const appConfig = useAppConfig();
     const prefix = usePrefix();
     const buttonProps = useForwardProps(reactiveOmit(props, "icon"));
-    const isDark = computed({
+    const isDark = vueExports.computed({
       get() {
         return colorMode.value === "dark";
       },
@@ -960,32 +957,32 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$8, mergeProps({
-        ...unref(buttonProps),
-        "aria-label": isDark.value ? unref(t)("colorMode.switchToLight") : unref(t)("colorMode.switchToDark"),
+      _push(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
+        ...vueExports.unref(buttonProps),
+        "aria-label": isDark.value ? vueExports.unref(t)("colorMode.switchToLight") : vueExports.unref(t)("colorMode.switchToDark"),
         ..._ctx.$attrs
       }, {
         onClick: ($event) => isDark.value = !isDark.value
       }, _attrs), {
-        leading: withCtx(({ ui }, _push2, _parent2, _scopeId) => {
+        leading: vueExports.withCtx(({ ui }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_sfc_main$d, {
-              class: ui.leadingIcon({ class: [unref(props).ui?.leadingIcon, unref(prefix)("hidden dark:inline-block")] }),
-              name: unref(appConfig).ui.icons.dark
+            _push2(ssrRenderComponent_1(_sfc_main$d, {
+              class: ui.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, vueExports.unref(prefix)("hidden dark:inline-block")] }),
+              name: vueExports.unref(appConfig).ui.icons.dark
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_sfc_main$d, {
-              class: ui.leadingIcon({ class: [unref(props).ui?.leadingIcon, unref(prefix)("dark:hidden")] }),
-              name: unref(appConfig).ui.icons.light
+            _push2(ssrRenderComponent_1(_sfc_main$d, {
+              class: ui.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, vueExports.unref(prefix)("dark:hidden")] }),
+              name: vueExports.unref(appConfig).ui.icons.light
             }, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_sfc_main$d, {
-                class: ui.leadingIcon({ class: [unref(props).ui?.leadingIcon, unref(prefix)("hidden dark:inline-block")] }),
-                name: unref(appConfig).ui.icons.dark
+              vueExports.createVNode(_sfc_main$d, {
+                class: ui.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, vueExports.unref(prefix)("hidden dark:inline-block")] }),
+                name: vueExports.unref(appConfig).ui.icons.dark
               }, null, 8, ["class", "name"]),
-              createVNode(_sfc_main$d, {
-                class: ui.leadingIcon({ class: [unref(props).ui?.leadingIcon, unref(prefix)("dark:hidden")] }),
-                name: unref(appConfig).ui.icons.light
+              vueExports.createVNode(_sfc_main$d, {
+                class: ui.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, vueExports.unref(prefix)("dark:hidden")] }),
+                name: vueExports.unref(appConfig).ui.icons.light
               }, null, 8, ["class", "name"])
             ];
           }
@@ -997,7 +994,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -1016,18 +1013,18 @@ const _sfc_main = {
     const _props = __props;
     const props = useComponentProps("main", _props);
     const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.main || {} }));
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.main || {} }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
-        class: ui.value({ class: [unref(props).ui?.base, unref(props).class] })
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
+        class: ui.value({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "default")
+              vueExports.renderSlot(_ctx.$slots, "default")
             ];
           }
         }),
@@ -1038,7 +1035,7 @@ const _sfc_main = {
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Main.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

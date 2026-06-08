@@ -1,200 +1,5926 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { computed, isRef, defineComponent, provide, toRefs, ref, getCurrentInstance, h, inject, toValue, Comment, mergeProps, cloneVNode, unref, openBlock, createBlock, Teleport, renderSlot, createCommentVNode, withCtx, toHandlerKey, camelize, toRef, hasInjectionContext, shallowRef, createElementBlock, createVNode, resolveDynamicComponent, useSlots, toDisplayString, watch, useModel, createTextVNode, mergeModels, nextTick, Fragment, watchEffect, markRaw, resolveComponent, onServerPrefetch, defineAsyncComponent, useSSRContext, shallowReactive, Suspense, createApp, renderList, useId, onErrorCaptured, reactive, effectScope, useTemplateRef, withModifiers, normalizeProps, guardReactiveProps, normalizeStyle, getCurrentScope, onScopeDispose, isReadonly, isShallow, isReactive, toRaw } from 'vue';
-import { H as serialize, x as hasProtocol, z as isScriptProtocol, A as joinURL, B as klona, g as defu, r as getRequestHeaders, c as createError$1, M as withQuery, G as sanitizeStatusCode, E as parseURL, k as encodePath, d as decodePath, h as defuFn, D as parseQuery, y as isEqual, m as getContext, o as getIconCSS, N as withTrailingSlash, O as withoutTrailingSlash, $ as $fetch$1, b as baseURL, l as executeAsync } from '../nitro/nitro.mjs';
-import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
-import { Icon, getIcon, loadIcon as loadIcon$1, _api, addAPIProvider, setCustomIconsLoader } from '@iconify/vue';
-import colors from 'tailwindcss/colors';
-import { debounce } from 'perfect-debounce';
-import { ssrRenderComponent, ssrRenderVNode, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderList, ssrRenderSuspense, ssrRenderStyle } from 'vue/server-renderer';
-import { reactivePick, unrefElement, useMounted, useDebounceFn, reactiveOmit, defaultWindow, onKeyStroke, useVModel, createSharedComposable, useRafFn } from '@vueuse/core';
-import { isClient, useTimeoutFn, useTimeout } from '@vueuse/shared';
-import { createTV } from 'tailwind-variants';
-import { u as useHead$1, a as useSeoMeta$1, h as headSymbol } from '../routes/renderer.mjs';
-import 'node:http';
-import 'node:https';
-import 'node:events';
-import 'node:buffer';
-import 'node:fs';
-import 'node:path';
-import 'node:crypto';
-import 'node:url';
-import 'consola';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { H as serialize, x as hasProtocol, z as isScriptProtocol, A as joinURL, B as klona, g as defu, r as getRequestHeaders, c as createError$1, N as withQuery, G as sanitizeStatusCode, E as parseURL$1, k as encodePath$1, d as decodePath, h as defuFn, D as parseQuery$1, y as isEqual$1, m as getContext, o as getIconCSS, O as withTrailingSlash, P as withoutTrailingSlash, $ as $fetch$1, b as baseURL, l as executeAsync } from '../nitro/nitro.mjs';
+import { e as runtimeDom_cjs_prod, c as compilerDom_cjs_prod, g as vueExports$1, a as compilerSsr_cjs, d as require$$3, u as useHead$1, f as useSeoMeta$1, h as headSymbol, b as createHooks } from '../routes/renderer.mjs';
+import { s as shared_cjs_prod, a as getDefaultExportFromNamespaceIfNotNamed } from '../_/shared.cjs.prod.mjs';
 
-function flatHooks(configHooks, hooks = {}, parentName) {
-	for (const key in configHooks) {
-		const subHook = configHooks[key];
-		const name = parentName ? `${parentName}:${key}` : key;
-		if (typeof subHook === "object" && subHook !== null) flatHooks(subHook, hooks, name);
-		else if (typeof subHook === "function") hooks[name] = subHook;
-	}
-	return hooks;
+function _mergeNamespaces(n, m) {
+  for (var i = 0; i < m.length; i++) {
+    const e = m[i];
+    if (typeof e !== 'string' && !Array.isArray(e)) { for (const k in e) {
+      if (k !== 'default' && !(k in n)) {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        if (d) {
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: function () { return e[k]; }
+          });
+        }
+      }
+    } }
+  }
+  return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: 'Module' }));
 }
-const createTask = /* @__PURE__ */ (() => {
-	if (console.createTask) return console.createTask;
-	const defaultTask = { run: (fn) => fn() };
-	return () => defaultTask;
-})();
-function callHooks(hooks, args, startIndex, task) {
-	for (let i = startIndex; i < hooks.length; i += 1) try {
-		const result = task ? task.run(() => hooks[i](...args)) : hooks[i](...args);
-		if (result && typeof result.then === "function") return Promise.resolve(result).then(() => callHooks(hooks, args, i + 1, task));
-	} catch (error) {
+
+var vue$1 = {exports: {}};
+
+var vue_cjs_prod = {};
+
+/**
+* vue v3.5.34
+* (c) 2018-present Yuxi (Evan) You and Vue contributors
+* @license MIT
+**/
+
+(function (exports) {
+
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+	var compilerDom = compilerDom_cjs_prod;
+	var runtimeDom = runtimeDom_cjs_prod;
+	var shared = shared_cjs_prod;
+
+	function _interopNamespaceDefault(e) {
+	  var n = Object.create(null);
+	  if (e) {
+	    for (var k in e) {
+	      n[k] = e[k];
+	    }
+	  }
+	  n.default = e;
+	  return Object.freeze(n);
+	}
+
+	var runtimeDom__namespace = /*#__PURE__*/_interopNamespaceDefault(runtimeDom);
+
+	const compileCache = /* @__PURE__ */ Object.create(null);
+	function compileToFunction(template, options) {
+	  if (!shared.isString(template)) {
+	    if (template.nodeType) {
+	      template = template.innerHTML;
+	    } else {
+	      return shared.NOOP;
+	    }
+	  }
+	  const key = shared.genCacheKey(template, options);
+	  const cached = compileCache[key];
+	  if (cached) {
+	    return cached;
+	  }
+	  if (template[0] === "#") {
+	    const el = document.querySelector(template);
+	    template = el ? el.innerHTML : ``;
+	  }
+	  const opts = shared.extend(
+	    {
+	      hoistStatic: true,
+	      onError: void 0,
+	      onWarn: shared.NOOP
+	    },
+	    options
+	  );
+	  if (!opts.isCustomElement && typeof customElements !== "undefined") {
+	    opts.isCustomElement = (tag) => !!customElements.get(tag);
+	  }
+	  const { code } = compilerDom.compile(template, opts);
+	  const render = new Function("Vue", code)(runtimeDom__namespace);
+	  render._rc = true;
+	  return compileCache[key] = render;
+	}
+	runtimeDom.registerRuntimeCompiler(compileToFunction);
+
+	exports.compile = compileToFunction;
+	Object.keys(runtimeDom).forEach(function (k) {
+	  if (k !== 'default' && !Object.prototype.hasOwnProperty.call(exports, k)) exports[k] = runtimeDom[k];
+	}); 
+} (vue_cjs_prod));
+
+{
+  vue$1.exports = vue_cjs_prod;
+}
+
+var vueExports = vue$1.exports;
+
+const vue = /*#__PURE__*/_mergeNamespaces({
+  __proto__: null
+}, [vueExports]);
+
+/*!
+ * vue-router v5.0.7
+ * (c) 2026 Eduardo San Martin Morote
+ * @license MIT
+ */
+
+//#region src/utils/env.ts
+const isBrowser = typeof document !== "undefined";
+/**
+* Allows differentiating lazy components from functional components and vue-class-component
+* @internal
+*
+* @param component
+*/
+function isRouteComponent(component) {
+	return typeof component === "object" || "displayName" in component || "props" in component || "__vccOpts" in component;
+}
+function isESModule(obj) {
+	return obj.__esModule || obj[Symbol.toStringTag] === "Module" || obj.default && isRouteComponent(obj.default);
+}
+const assign = Object.assign;
+function applyToParams(fn, params) {
+	const newParams = {};
+	for (const key in params) {
+		const value = params[key];
+		newParams[key] = isArray(value) ? value.map(fn) : fn(value);
+	}
+	return newParams;
+}
+const noop$1 = () => {};
+/**
+* Typesafe alternative to Array.isArray
+* https://github.com/microsoft/TypeScript/pull/48228
+*
+* @internal
+*/
+const isArray = Array.isArray;
+function mergeOptions(defaults, partialOptions) {
+	const options = {};
+	for (const key in defaults) options[key] = key in partialOptions ? partialOptions[key] : defaults[key];
+	return options;
+}
+
+//#endregion
+//#region src/errors.ts
+/**
+* Flags so we can combine them when checking for multiple errors. This is the internal version of
+* {@link NavigationFailureType}.
+*
+* @internal
+*/
+let ErrorTypes = /* @__PURE__ */ function(ErrorTypes) {
+	ErrorTypes[ErrorTypes["MATCHER_NOT_FOUND"] = 1] = "MATCHER_NOT_FOUND";
+	ErrorTypes[ErrorTypes["NAVIGATION_GUARD_REDIRECT"] = 2] = "NAVIGATION_GUARD_REDIRECT";
+	ErrorTypes[ErrorTypes["NAVIGATION_ABORTED"] = 4] = "NAVIGATION_ABORTED";
+	ErrorTypes[ErrorTypes["NAVIGATION_CANCELLED"] = 8] = "NAVIGATION_CANCELLED";
+	ErrorTypes[ErrorTypes["NAVIGATION_DUPLICATED"] = 16] = "NAVIGATION_DUPLICATED";
+	return ErrorTypes;
+}({});
+const NavigationFailureSymbol = Symbol("");
+({
+	[ErrorTypes.MATCHER_NOT_FOUND]({ location, currentLocation }) {
+		return `No match for\n ${JSON.stringify(location)}${currentLocation ? "\nwhile being at\n" + JSON.stringify(currentLocation) : ""}`;
+	},
+	[ErrorTypes.NAVIGATION_GUARD_REDIRECT]({ from, to }) {
+		return `Redirected from "${from.fullPath}" to "${stringifyRoute(to)}" via a navigation guard.`;
+	},
+	[ErrorTypes.NAVIGATION_ABORTED]({ from, to }) {
+		return `Navigation aborted from "${from.fullPath}" to "${to.fullPath}" via a navigation guard.`;
+	},
+	[ErrorTypes.NAVIGATION_CANCELLED]({ from, to }) {
+		return `Navigation cancelled from "${from.fullPath}" to "${to.fullPath}" with a new navigation.`;
+	},
+	[ErrorTypes.NAVIGATION_DUPLICATED]({ from, to: _to }) {
+		return `Avoided redundant navigation to current location: "${from.fullPath}".`;
+	}
+});
+/**
+* Creates a typed NavigationFailure object.
+* @internal
+* @param type - NavigationFailureType
+* @param params - { from, to }
+*/
+function createRouterError(type, params) {
+	return assign(/* @__PURE__ */ new Error(), {
+		type,
+		[NavigationFailureSymbol]: true
+	}, params);
+}
+function isNavigationFailure(error, type) {
+	return error instanceof Error && NavigationFailureSymbol in error && (type == null || !!(error.type & type));
+}
+const propertiesToLog = [
+	"params",
+	"query",
+	"hash"
+];
+function stringifyRoute(to) {
+	if (typeof to === "string") return to;
+	if (to.path != null) return to.path;
+	const location = {};
+	for (const key of propertiesToLog) if (key in to) location[key] = to[key];
+	return JSON.stringify(location, null, 2);
+}
+
+//#endregion
+//#region src/injectionSymbols.ts
+/**
+* RouteRecord being rendered by the closest ancestor Router View. Used for
+* `onBeforeRouteUpdate` and `onBeforeRouteLeave`. rvlm stands for Router View
+* Location Matched
+*
+* @internal
+*/
+const matchedRouteKey = Symbol("");
+/**
+* Allows overriding the router view depth to control which component in
+* `matched` is rendered. rvd stands for Router View Depth
+*
+* @internal
+*/
+const viewDepthKey = Symbol("");
+/**
+* Allows overriding the router instance returned by `useRouter` in tests. r
+* stands for router
+*
+* @internal
+*/
+const routerKey = Symbol("");
+/**
+* Allows overriding the current route returned by `useRoute` in tests. rl
+* stands for route location
+*
+* @internal
+*/
+const routeLocationKey = Symbol("");
+/**
+* Allows overriding the current route used by router-view. Internally this is
+* used when the `route` prop is passed.
+*
+* @internal
+*/
+const routerViewLocationKey = Symbol("");
+/**
+* Returns the current route location. Equivalent to using `$route` inside
+* templates.
+*/
+function useRoute$1(_name) {
+	return vueExports$1.inject(routeLocationKey);
+}
+
+/*!
+ * vue-router v5.0.7
+ * (c) 2026 Eduardo San Martin Morote
+ * @license MIT
+ */
+
+//#endregion
+//#region src/encoding.ts
+/**
+* Encoding Rules (␣ = Space)
+* - Path: ␣ " < > # ? { }
+* - Query: ␣ " < > # & =
+* - Hash: ␣ " < > `
+*
+* On top of that, the RFC3986 (https://tools.ietf.org/html/rfc3986#section-2.2)
+* defines some extra characters to be encoded. Most browsers do not encode them
+* in encodeURI https://github.com/whatwg/url/issues/369, so it may be safer to
+* also encode `!'()*`. Leaving un-encoded only ASCII alphanumeric(`a-zA-Z0-9`)
+* plus `-._~`. This extra safety should be applied to query by patching the
+* string returned by encodeURIComponent encodeURI also encodes `[\]^`. `\`
+* should be encoded to avoid ambiguity. Browsers (IE, FF, C) transform a `\`
+* into a `/` if directly typed in. The _backtick_ (`````) should also be
+* encoded everywhere because some browsers like FF encode it when directly
+* written while others don't. Safari and IE don't encode ``"<>{}``` in hash.
+*/
+const HASH_RE = /#/g;
+const AMPERSAND_RE = /&/g;
+const SLASH_RE = /\//g;
+const EQUAL_RE = /=/g;
+const IM_RE = /\?/g;
+const PLUS_RE = /\+/g;
+/**
+* NOTE: It's not clear to me if we should encode the + symbol in queries, it
+* seems to be less flexible than not doing so and I can't find out the legacy
+* systems requiring this for regular requests like text/html. In the standard,
+* the encoding of the plus character is only mentioned for
+* application/x-www-form-urlencoded
+* (https://url.spec.whatwg.org/#urlencoded-parsing) and most browsers seems lo
+* leave the plus character as is in queries. To be more flexible, we allow the
+* plus character on the query, but it can also be manually encoded by the user.
+*
+* Resources:
+* - https://url.spec.whatwg.org/#urlencoded-parsing
+* - https://stackoverflow.com/questions/1634271/url-encoding-the-space-character-or-20
+*/
+const ENC_BRACKET_OPEN_RE = /%5B/g;
+const ENC_BRACKET_CLOSE_RE = /%5D/g;
+const ENC_CARET_RE = /%5E/g;
+const ENC_BACKTICK_RE = /%60/g;
+const ENC_CURLY_OPEN_RE = /%7B/g;
+const ENC_PIPE_RE = /%7C/g;
+const ENC_CURLY_CLOSE_RE = /%7D/g;
+const ENC_SPACE_RE = /%20/g;
+/**
+* Encode characters that need to be encoded on the path, search and hash
+* sections of the URL.
+*
+* @internal
+* @param text - string to encode
+* @returns encoded string
+*/
+function commonEncode(text) {
+	return text == null ? "" : encodeURI("" + text).replace(ENC_PIPE_RE, "|").replace(ENC_BRACKET_OPEN_RE, "[").replace(ENC_BRACKET_CLOSE_RE, "]");
+}
+/**
+* Encode characters that need to be encoded on the hash section of the URL.
+*
+* @param text - string to encode
+* @returns encoded string
+*/
+function encodeHash(text) {
+	return commonEncode(text).replace(ENC_CURLY_OPEN_RE, "{").replace(ENC_CURLY_CLOSE_RE, "}").replace(ENC_CARET_RE, "^");
+}
+/**
+* Encode characters that need to be encoded query values on the query
+* section of the URL.
+*
+* @param text - string to encode
+* @returns encoded string
+*/
+function encodeQueryValue(text) {
+	return commonEncode(text).replace(PLUS_RE, "%2B").replace(ENC_SPACE_RE, "+").replace(HASH_RE, "%23").replace(AMPERSAND_RE, "%26").replace(ENC_BACKTICK_RE, "`").replace(ENC_CURLY_OPEN_RE, "{").replace(ENC_CURLY_CLOSE_RE, "}").replace(ENC_CARET_RE, "^");
+}
+/**
+* Like `encodeQueryValue` but also encodes the `=` character.
+*
+* @param text - string to encode
+*/
+function encodeQueryKey(text) {
+	return encodeQueryValue(text).replace(EQUAL_RE, "%3D");
+}
+/**
+* Encode characters that need to be encoded on the path section of the URL.
+*
+* @param text - string to encode
+* @returns encoded string
+*/
+function encodePath(text) {
+	return commonEncode(text).replace(HASH_RE, "%23").replace(IM_RE, "%3F");
+}
+/**
+* Encode characters that need to be encoded on the path section of the URL as a
+* param. This function encodes everything {@link encodePath} does plus the
+* slash (`/`) character. If `text` is `null` or `undefined`, returns an empty
+* string instead.
+*
+* @param text - string to encode
+* @returns encoded string
+*/
+function encodeParam(text) {
+	return encodePath(text).replace(SLASH_RE, "%2F");
+}
+function decode(text) {
+	if (text == null) return null;
+	try {
+		return decodeURIComponent("" + text);
+	} catch {
+	}
+	return "" + text;
+}
+
+//#endregion
+//#region src/location.ts
+const TRAILING_SLASH_RE = /\/$/;
+const removeTrailingSlash = (path) => path.replace(TRAILING_SLASH_RE, "");
+/**
+* Transforms a URI into a normalized history location
+*
+* @param parseQuery
+* @param location - URI to normalize
+* @param currentLocation - current absolute location. Allows resolving relative
+* paths. Must start with `/`. Defaults to `/`
+* @returns a normalized history location
+*/
+function parseURL(parseQuery, location, currentLocation = "/") {
+	let path, query = {}, searchString = "", hash = "";
+	const hashPos = location.indexOf("#");
+	let searchPos = location.indexOf("?");
+	searchPos = hashPos >= 0 && searchPos > hashPos ? -1 : searchPos;
+	if (searchPos >= 0) {
+		path = location.slice(0, searchPos);
+		searchString = location.slice(searchPos, hashPos > 0 ? hashPos : location.length);
+		query = parseQuery(searchString.slice(1));
+	}
+	if (hashPos >= 0) {
+		path = path || location.slice(0, hashPos);
+		hash = location.slice(hashPos, location.length);
+	}
+	path = resolveRelativePath(path != null ? path : location, currentLocation);
+	return {
+		fullPath: path + searchString + hash,
+		path,
+		query,
+		hash: decode(hash)
+	};
+}
+/**
+* Stringifies a URL object
+*
+* @param stringifyQuery
+* @param location
+*/
+function stringifyURL(stringifyQuery, location) {
+	const query = location.query ? stringifyQuery(location.query) : "";
+	return location.path + (query && "?") + query + (location.hash || "");
+}
+/**
+* Checks if two RouteLocation are equal. This means that both locations are
+* pointing towards the same {@link RouteRecord} and that all `params`, `query`
+* parameters and `hash` are the same
+*
+* @param stringifyQuery - A function that takes a query object of type LocationQueryRaw and returns a string representation of it.
+* @param a - first {@link RouteLocation}
+* @param b - second {@link RouteLocation}
+*/
+function isSameRouteLocation(stringifyQuery, a, b) {
+	const aLastIndex = a.matched.length - 1;
+	const bLastIndex = b.matched.length - 1;
+	return aLastIndex > -1 && aLastIndex === bLastIndex && isSameRouteRecord(a.matched[aLastIndex], b.matched[bLastIndex]) && isSameRouteLocationParams(a.params, b.params) && stringifyQuery(a.query) === stringifyQuery(b.query) && a.hash === b.hash;
+}
+/**
+* Check if two `RouteRecords` are equal. Takes into account aliases: they are
+* considered equal to the `RouteRecord` they are aliasing.
+*
+* @param a - first {@link RouteRecord}
+* @param b - second {@link RouteRecord}
+*/
+function isSameRouteRecord(a, b) {
+	return (a.aliasOf || a) === (b.aliasOf || b);
+}
+function isSameRouteLocationParams(a, b) {
+	if (Object.keys(a).length !== Object.keys(b).length) return false;
+	for (var key in a) if (!isSameRouteLocationParamsValue(a[key], b[key])) return false;
+	return true;
+}
+function isSameRouteLocationParamsValue(a, b) {
+	return isArray(a) ? isEquivalentArray(a, b) : isArray(b) ? isEquivalentArray(b, a) : (a && a.valueOf()) === (b && b.valueOf());
+}
+/**
+* Check if two arrays are the same or if an array with one single entry is the
+* same as another primitive value. Used to check query and parameters
+*
+* @param a - array of values
+* @param b - array of values or a single value
+*/
+function isEquivalentArray(a, b) {
+	return isArray(b) ? a.length === b.length && a.every((value, i) => value === b[i]) : a.length === 1 && a[0] === b;
+}
+/**
+* Resolves a relative path that starts with `.`.
+*
+* @param to - path location we are resolving
+* @param from - currentLocation.path, should start with `/`
+*/
+function resolveRelativePath(to, from) {
+	if (to.startsWith("/")) return to;
+	if (!to) return from;
+	const fromSegments = from.split("/");
+	const toSegments = to.split("/");
+	const lastToSegment = toSegments[toSegments.length - 1];
+	if (lastToSegment === ".." || lastToSegment === ".") toSegments.push("");
+	let position = fromSegments.length - 1;
+	let toPosition;
+	let segment;
+	for (toPosition = 0; toPosition < toSegments.length; toPosition++) {
+		segment = toSegments[toPosition];
+		if (segment === ".") continue;
+		if (segment === "..") {
+			if (position > 1) position--;
+		} else break;
+	}
+	return fromSegments.slice(0, position).join("/") + "/" + toSegments.slice(toPosition).join("/");
+}
+/**
+* Initial route location where the router is. Can be used in navigation guards
+* to differentiate the initial navigation.
+*
+* @example
+* ```js
+* import { START_LOCATION } from 'vue-router'
+*
+* router.beforeEach((to, from) => {
+*   if (from === START_LOCATION) {
+*     // initial navigation
+*   }
+* })
+* ```
+*/
+const START_LOCATION_NORMALIZED = {
+	path: "/",
+	name: void 0,
+	params: {},
+	query: {},
+	hash: "",
+	fullPath: "/",
+	matched: [],
+	meta: {},
+	redirectedFrom: void 0
+};
+
+//#endregion
+//#region src/history/common.ts
+let NavigationType = /* @__PURE__ */ function(NavigationType) {
+	NavigationType["pop"] = "pop";
+	NavigationType["push"] = "push";
+	return NavigationType;
+}({});
+let NavigationDirection = /* @__PURE__ */ function(NavigationDirection) {
+	NavigationDirection["back"] = "back";
+	NavigationDirection["forward"] = "forward";
+	NavigationDirection["unknown"] = "";
+	return NavigationDirection;
+}({});
+/**
+* Starting location for Histories
+*/
+const START = "";
+/**
+* Normalizes a base by removing any trailing slash and reading the base tag if
+* present.
+*
+* @param base - base to normalize
+*/
+function normalizeBase(base) {
+	if (!base) if (isBrowser) {
+		const baseEl = document.querySelector("base");
+		base = baseEl && baseEl.getAttribute("href") || "/";
+		base = base.replace(/^\w+:\/\/[^/]+/, "");
+	} else base = "/";
+	if (base[0] !== "/" && base[0] !== "#") base = "/" + base;
+	return removeTrailingSlash(base);
+}
+const BEFORE_HASH_RE = /^[^#]+#/;
+function createHref(base, location) {
+	return base.replace(BEFORE_HASH_RE, "#") + location;
+}
+
+//#endregion
+//#region src/scrollBehavior.ts
+function getElementPosition(el, offset) {
+	const docRect = document.documentElement.getBoundingClientRect();
+	const elRect = el.getBoundingClientRect();
+	return {
+		behavior: offset.behavior,
+		left: elRect.left - docRect.left - (offset.left || 0),
+		top: elRect.top - docRect.top - (offset.top || 0)
+	};
+}
+const computeScrollPosition = () => ({
+	left: window.scrollX,
+	top: window.scrollY
+});
+function scrollToPosition(position) {
+	let scrollToOptions;
+	if ("el" in position) {
+		const positionEl = position.el;
+		const isIdSelector = typeof positionEl === "string" && positionEl.startsWith("#");
+		const el = typeof positionEl === "string" ? isIdSelector ? document.getElementById(positionEl.slice(1)) : document.querySelector(positionEl) : positionEl;
+		if (!el) {
+			return;
+		}
+		scrollToOptions = getElementPosition(el, position);
+	} else scrollToOptions = position;
+	if ("scrollBehavior" in document.documentElement.style) window.scrollTo(scrollToOptions);
+	else window.scrollTo(scrollToOptions.left != null ? scrollToOptions.left : window.scrollX, scrollToOptions.top != null ? scrollToOptions.top : window.scrollY);
+}
+function getScrollKey(path, delta) {
+	return (history.state ? history.state.position - delta : -1) + path;
+}
+const scrollPositions = /* @__PURE__ */ new Map();
+function saveScrollPosition(key, scrollPosition) {
+	scrollPositions.set(key, scrollPosition);
+}
+function getSavedScrollPosition(key) {
+	const scroll = scrollPositions.get(key);
+	scrollPositions.delete(key);
+	return scroll;
+}
+/**
+* ScrollBehavior instance used by the router to compute and restore the scroll
+* position when navigating.
+*/
+
+//#endregion
+//#region src/types/typeGuards.ts
+function isRouteLocation(route) {
+	return typeof route === "string" || route && typeof route === "object";
+}
+function isRouteName(name) {
+	return typeof name === "string" || typeof name === "symbol";
+}
+
+//#endregion
+//#region src/query.ts
+/**
+* Transforms a queryString into a {@link LocationQuery} object. Accept both, a
+* version with the leading `?` and without Should work as URLSearchParams
+
+* @internal
+*
+* @param search - search string to parse
+* @returns a query object
+*/
+function parseQuery(search) {
+	const query = {};
+	if (search === "" || search === "?") return query;
+	const searchParams = (search[0] === "?" ? search.slice(1) : search).split("&");
+	for (let i = 0; i < searchParams.length; ++i) {
+		const searchParam = searchParams[i].replace(PLUS_RE, " ");
+		const eqPos = searchParam.indexOf("=");
+		const key = decode(eqPos < 0 ? searchParam : searchParam.slice(0, eqPos));
+		const value = eqPos < 0 ? null : decode(searchParam.slice(eqPos + 1));
+		if (key in query) {
+			let currentValue = query[key];
+			if (!isArray(currentValue)) currentValue = query[key] = [currentValue];
+			currentValue.push(value);
+		} else query[key] = value;
+	}
+	return query;
+}
+/**
+* Stringifies a {@link LocationQueryRaw} object. Like `URLSearchParams`, it
+* doesn't prepend a `?`
+*
+* @internal
+*
+* @param query - query object to stringify
+* @returns string version of the query without the leading `?`
+*/
+function stringifyQuery(query) {
+	let search = "";
+	for (let key in query) {
+		const value = query[key];
+		key = encodeQueryKey(key);
+		if (value == null) {
+			if (value !== void 0) search += (search.length ? "&" : "") + key;
+			continue;
+		}
+		(isArray(value) ? value.map((v) => v && encodeQueryValue(v)) : [value && encodeQueryValue(value)]).forEach((value) => {
+			if (value !== void 0) {
+				search += (search.length ? "&" : "") + key;
+				if (value != null) search += "=" + value;
+			}
+		});
+	}
+	return search;
+}
+/**
+* Transforms a {@link LocationQueryRaw} into a {@link LocationQuery} by casting
+* numbers into strings, removing keys with an undefined value and replacing
+* undefined with null in arrays
+*
+* @param query - query object to normalize
+* @returns a normalized query object
+*/
+function normalizeQuery(query) {
+	const normalizedQuery = {};
+	for (const key in query) {
+		const value = query[key];
+		if (value !== void 0) normalizedQuery[key] = isArray(value) ? value.map((v) => v == null ? null : "" + v) : value == null ? value : "" + value;
+	}
+	return normalizedQuery;
+}
+
+//#endregion
+//#region src/utils/callbacks.ts
+/**
+* Create a list of callbacks that can be reset. Used to create before and after navigation guards list
+*/
+function useCallbacks() {
+	let handlers = [];
+	function add(handler) {
+		handlers.push(handler);
+		return () => {
+			const i = handlers.indexOf(handler);
+			if (i > -1) handlers.splice(i, 1);
+		};
+	}
+	function reset() {
+		handlers = [];
+	}
+	return {
+		add,
+		list: () => handlers.slice(),
+		reset
+	};
+}
+
+//#endregion
+//#region src/navigationGuards.ts
+function registerGuard(activeRecordRef, name, guard) {
+	const record = activeRecordRef.value;
+	if (!record) {
+		return;
+	}
+	let currentRecord = record;
+	const removeFromList = () => {
+		currentRecord[name].delete(guard);
+	};
+	vueExports$1.onUnmounted(removeFromList);
+	vueExports$1.onDeactivated(removeFromList);
+	vueExports$1.onActivated(() => {
+		const newRecord = activeRecordRef.value;
+		if (newRecord) currentRecord = newRecord;
+		currentRecord[name].add(guard);
+	});
+	currentRecord[name].add(guard);
+}
+/**
+* Add a navigation guard that triggers whenever the component for the current
+* location is about to be left. Similar to {@link beforeRouteLeave} but can be
+* used in any component. The guard is removed when the component is unmounted.
+*
+* @param leaveGuard - {@link NavigationGuard}
+*/
+function onBeforeRouteLeave(leaveGuard) {
+	registerGuard(vueExports$1.inject(matchedRouteKey, {}), "leaveGuards", leaveGuard);
+}
+function guardToPromiseFn(guard, to, from, record, name, runWithContext = (fn) => fn()) {
+	const enterCallbackArray = record && (record.enterCallbacks[name] = record.enterCallbacks[name] || []);
+	return () => new Promise((resolve, reject) => {
+		const next = (valid) => {
+			if (valid === false) reject(createRouterError(ErrorTypes.NAVIGATION_ABORTED, {
+				from,
+				to
+			}));
+			else if (valid instanceof Error) reject(valid);
+			else if (isRouteLocation(valid)) reject(createRouterError(ErrorTypes.NAVIGATION_GUARD_REDIRECT, {
+				from: to,
+				to: valid
+			}));
+			else {
+				if (enterCallbackArray && record.enterCallbacks[name] === enterCallbackArray && typeof valid === "function") enterCallbackArray.push(valid);
+				resolve();
+			}
+		};
+		const guardReturn = runWithContext(() => guard.call(record && record.instances[name], to, from, next));
+		let guardCall = Promise.resolve(guardReturn);
+		if (guard.length < 3) guardCall = guardCall.then(next);
+		guardCall.catch((err) => reject(err));
+	});
+}
+function extractComponentsGuards(matched, guardType, to, from, runWithContext = (fn) => fn()) {
+	const guards = [];
+	for (const record of matched) {
+		for (const name in record.components) {
+			let rawComponent = record.components[name];
+			if (guardType !== "beforeRouteEnter" && !record.instances[name]) continue;
+			if (isRouteComponent(rawComponent)) {
+				const guard = (rawComponent.__vccOpts || rawComponent)[guardType];
+				guard && guards.push(guardToPromiseFn(guard, to, from, record, name, runWithContext));
+			} else {
+				let componentPromise = rawComponent();
+				guards.push(() => componentPromise.then((resolved) => {
+					if (!resolved) throw new Error(`Couldn't resolve component "${name}" at "${record.path}"`);
+					const resolvedComponent = isESModule(resolved) ? resolved.default : resolved;
+					record.mods[name] = resolved;
+					record.components[name] = resolvedComponent;
+					const guard = (resolvedComponent.__vccOpts || resolvedComponent)[guardType];
+					return guard && guardToPromiseFn(guard, to, from, record, name, runWithContext)();
+				}));
+			}
+		}
+	}
+	return guards;
+}
+/**
+* Split the leaving, updating, and entering records.
+* @internal
+*
+* @param  to - Location we are navigating to
+* @param from - Location we are navigating from
+*/
+function extractChangingRecords(to, from) {
+	const leavingRecords = [];
+	const updatingRecords = [];
+	const enteringRecords = [];
+	const len = Math.max(from.matched.length, to.matched.length);
+	for (let i = 0; i < len; i++) {
+		const recordFrom = from.matched[i];
+		if (recordFrom) if (to.matched.find((record) => isSameRouteRecord(record, recordFrom))) updatingRecords.push(recordFrom);
+		else leavingRecords.push(recordFrom);
+		const recordTo = to.matched[i];
+		if (recordTo) {
+			if (!from.matched.find((record) => isSameRouteRecord(record, recordTo))) enteringRecords.push(recordTo);
+		}
+	}
+	return [
+		leavingRecords,
+		updatingRecords,
+		enteringRecords
+	];
+}
+
+/*!
+ * vue-router v5.0.7
+ * (c) 2026 Eduardo San Martin Morote
+ * @license MIT
+ */
+
+//#endregion
+//#region src/history/memory.ts
+/**
+* Creates an in-memory based history. The main purpose of this history is to handle SSR. It starts in a special location that is nowhere.
+* It's up to the user to replace that location with the starter location by either calling `router.push` or `router.replace`.
+*
+* @param base - Base applied to all urls, defaults to '/'
+* @returns a history object that can be passed to the router constructor
+*/
+function createMemoryHistory(base = "") {
+	let listeners = [];
+	let queue = [[START, {}]];
+	let position = 0;
+	base = normalizeBase(base);
+	function setLocation(location, state = {}) {
+		position++;
+		if (position !== queue.length) queue.splice(position);
+		queue.push([location, state]);
+	}
+	function triggerListeners(to, from, { direction, delta }) {
+		const info = {
+			direction,
+			delta,
+			type: NavigationType.pop
+		};
+		for (const callback of listeners) callback(to, from, info);
+	}
+	const routerHistory = {
+		location: START,
+		state: {},
+		base,
+		createHref: createHref.bind(null, base),
+		replace(to, state) {
+			queue.splice(position--, 1);
+			setLocation(to, state);
+		},
+		push(to, state) {
+			setLocation(to, state);
+		},
+		listen(callback) {
+			listeners.push(callback);
+			return () => {
+				const index = listeners.indexOf(callback);
+				if (index > -1) listeners.splice(index, 1);
+			};
+		},
+		destroy() {
+			listeners = [];
+			queue = [[START, {}]];
+			position = 0;
+		},
+		go(delta, shouldTrigger = true) {
+			const from = this.location;
+			const direction = delta < 0 ? NavigationDirection.back : NavigationDirection.forward;
+			position = Math.max(0, Math.min(position + delta, queue.length - 1));
+			if (shouldTrigger) triggerListeners(this.location, from, {
+				direction,
+				delta
+			});
+		}
+	};
+	Object.defineProperty(routerHistory, "location", {
+		enumerable: true,
+		get: () => queue[position][0]
+	});
+	Object.defineProperty(routerHistory, "state", {
+		enumerable: true,
+		get: () => queue[position][1]
+	});
+	return routerHistory;
+}
+
+//#endregion
+//#region src/matcher/pathTokenizer.ts
+let TokenType = /* @__PURE__ */ function(TokenType) {
+	TokenType[TokenType["Static"] = 0] = "Static";
+	TokenType[TokenType["Param"] = 1] = "Param";
+	TokenType[TokenType["Group"] = 2] = "Group";
+	return TokenType;
+}({});
+var TokenizerState = /* @__PURE__ */ function(TokenizerState) {
+	TokenizerState[TokenizerState["Static"] = 0] = "Static";
+	TokenizerState[TokenizerState["Param"] = 1] = "Param";
+	TokenizerState[TokenizerState["ParamRegExp"] = 2] = "ParamRegExp";
+	TokenizerState[TokenizerState["ParamRegExpEnd"] = 3] = "ParamRegExpEnd";
+	TokenizerState[TokenizerState["EscapeNext"] = 4] = "EscapeNext";
+	return TokenizerState;
+}(TokenizerState || {});
+const ROOT_TOKEN = {
+	type: TokenType.Static,
+	value: ""
+};
+const VALID_PARAM_RE = /[a-zA-Z0-9_]/;
+function tokenizePath(path) {
+	if (!path) return [[]];
+	if (path === "/") return [[ROOT_TOKEN]];
+	if (!path.startsWith("/")) throw new Error(`Invalid path "${path}"`);
+	function crash(message) {
+		throw new Error(`ERR (${state})/"${buffer}": ${message}`);
+	}
+	let state = TokenizerState.Static;
+	let previousState = state;
+	const tokens = [];
+	let segment;
+	function finalizeSegment() {
+		if (segment) tokens.push(segment);
+		segment = [];
+	}
+	let i = 0;
+	let char;
+	let buffer = "";
+	let customRe = "";
+	function consumeBuffer() {
+		if (!buffer) return;
+		if (state === TokenizerState.Static) segment.push({
+			type: TokenType.Static,
+			value: buffer
+		});
+		else if (state === TokenizerState.Param || state === TokenizerState.ParamRegExp || state === TokenizerState.ParamRegExpEnd) {
+			if (segment.length > 1 && (char === "*" || char === "+")) crash(`A repeatable param (${buffer}) must be alone in its segment. eg: '/:ids+.`);
+			segment.push({
+				type: TokenType.Param,
+				value: buffer,
+				regexp: customRe,
+				repeatable: char === "*" || char === "+",
+				optional: char === "*" || char === "?"
+			});
+		} else crash("Invalid state to consume buffer");
+		buffer = "";
+	}
+	function addCharToBuffer() {
+		buffer += char;
+	}
+	while (i < path.length) {
+		char = path[i++];
+		switch (state) {
+			case TokenizerState.Static:
+				if (char === "\\") {
+					previousState = state;
+					state = TokenizerState.EscapeNext;
+				} else if (char === "/") {
+					if (buffer) consumeBuffer();
+					finalizeSegment();
+				} else if (char === ":") {
+					consumeBuffer();
+					state = TokenizerState.Param;
+				} else addCharToBuffer();
+				break;
+			case TokenizerState.EscapeNext:
+				addCharToBuffer();
+				state = previousState;
+				break;
+			case TokenizerState.Param:
+				if (char === "(") state = TokenizerState.ParamRegExp;
+				else if (VALID_PARAM_RE.test(char)) addCharToBuffer();
+				else {
+					consumeBuffer();
+					state = TokenizerState.Static;
+					if (char !== "*" && char !== "?" && char !== "+") i--;
+				}
+				break;
+			case TokenizerState.ParamRegExp:
+				if (char === ")") if (customRe[customRe.length - 1] == "\\") customRe = customRe.slice(0, -1) + char;
+				else state = TokenizerState.ParamRegExpEnd;
+				else customRe += char;
+				break;
+			case TokenizerState.ParamRegExpEnd:
+				consumeBuffer();
+				state = TokenizerState.Static;
+				if (char !== "*" && char !== "?" && char !== "+") i--;
+				customRe = "";
+				break;
+			default:
+				crash("Unknown state");
+				break;
+		}
+	}
+	if (state === TokenizerState.ParamRegExp) crash(`Unfinished custom RegExp for param "${buffer}"`);
+	consumeBuffer();
+	finalizeSegment();
+	return tokens;
+}
+
+//#endregion
+//#region src/matcher/pathParserRanker.ts
+const BASE_PARAM_PATTERN = "[^/]+?";
+const BASE_PATH_PARSER_OPTIONS = {
+	sensitive: false,
+	strict: false,
+	start: true,
+	end: true
+};
+var PathScore = /* @__PURE__ */ function(PathScore) {
+	PathScore[PathScore["_multiplier"] = 10] = "_multiplier";
+	PathScore[PathScore["Root"] = 90] = "Root";
+	PathScore[PathScore["Segment"] = 40] = "Segment";
+	PathScore[PathScore["SubSegment"] = 30] = "SubSegment";
+	PathScore[PathScore["Static"] = 40] = "Static";
+	PathScore[PathScore["Dynamic"] = 20] = "Dynamic";
+	PathScore[PathScore["BonusCustomRegExp"] = 10] = "BonusCustomRegExp";
+	PathScore[PathScore["BonusWildcard"] = -50] = "BonusWildcard";
+	PathScore[PathScore["BonusRepeatable"] = -20] = "BonusRepeatable";
+	PathScore[PathScore["BonusOptional"] = -8] = "BonusOptional";
+	PathScore[PathScore["BonusStrict"] = .7000000000000001] = "BonusStrict";
+	PathScore[PathScore["BonusCaseSensitive"] = .25] = "BonusCaseSensitive";
+	return PathScore;
+}(PathScore || {});
+const REGEX_CHARS_RE = /[.+*?^${}()[\]/\\]/g;
+/**
+* Creates a path parser from an array of Segments (a segment is an array of Tokens)
+*
+* @param segments - array of segments returned by tokenizePath
+* @param extraOptions - optional options for the regexp
+* @returns a PathParser
+*/
+function tokensToParser(segments, extraOptions) {
+	const options = assign({}, BASE_PATH_PARSER_OPTIONS, extraOptions);
+	const score = [];
+	let pattern = options.start ? "^" : "";
+	const keys = [];
+	for (const segment of segments) {
+		const segmentScores = segment.length ? [] : [PathScore.Root];
+		if (options.strict && !segment.length) pattern += "/";
+		for (let tokenIndex = 0; tokenIndex < segment.length; tokenIndex++) {
+			const token = segment[tokenIndex];
+			let subSegmentScore = PathScore.Segment + (options.sensitive ? PathScore.BonusCaseSensitive : 0);
+			if (token.type === TokenType.Static) {
+				if (!tokenIndex) pattern += "/";
+				pattern += token.value.replace(REGEX_CHARS_RE, "\\$&");
+				subSegmentScore += PathScore.Static;
+			} else if (token.type === TokenType.Param) {
+				const { value, repeatable, optional, regexp } = token;
+				keys.push({
+					name: value,
+					repeatable,
+					optional
+				});
+				const re = regexp ? regexp : BASE_PARAM_PATTERN;
+				if (re !== BASE_PARAM_PATTERN) {
+					subSegmentScore += PathScore.BonusCustomRegExp;
+					try {
+						new RegExp(`(${re})`);
+					} catch (err) {
+						throw new Error(`Invalid custom RegExp for param "${value}" (${re}): ` + err.message);
+					}
+				}
+				let subPattern = repeatable ? `((?:${re})(?:/(?:${re}))*)` : `(${re})`;
+				if (!tokenIndex) subPattern = optional && segment.length < 2 ? `(?:/${subPattern})` : "/" + subPattern;
+				if (optional) subPattern += "?";
+				pattern += subPattern;
+				subSegmentScore += PathScore.Dynamic;
+				if (optional) subSegmentScore += PathScore.BonusOptional;
+				if (repeatable) subSegmentScore += PathScore.BonusRepeatable;
+				if (re === ".*") subSegmentScore += PathScore.BonusWildcard;
+			}
+			segmentScores.push(subSegmentScore);
+		}
+		score.push(segmentScores);
+	}
+	if (options.strict && options.end) {
+		const i = score.length - 1;
+		score[i][score[i].length - 1] += PathScore.BonusStrict;
+	}
+	if (!options.strict) pattern += "/?";
+	if (options.end) pattern += "$";
+	else if (options.strict && !pattern.endsWith("/")) pattern += "(?:/|$)";
+	const re = new RegExp(pattern, options.sensitive ? "" : "i");
+	function parse(path) {
+		const match = path.match(re);
+		const params = {};
+		if (!match) return null;
+		for (let i = 1; i < match.length; i++) {
+			const value = match[i] || "";
+			const key = keys[i - 1];
+			params[key.name] = value && key.repeatable ? value.split("/") : value;
+		}
+		return params;
+	}
+	function stringify(params) {
+		let path = "";
+		let avoidDuplicatedSlash = false;
+		for (const segment of segments) {
+			if (!avoidDuplicatedSlash || !path.endsWith("/")) path += "/";
+			avoidDuplicatedSlash = false;
+			for (const token of segment) if (token.type === TokenType.Static) path += token.value;
+			else if (token.type === TokenType.Param) {
+				const { value, repeatable, optional } = token;
+				const param = value in params ? params[value] : "";
+				if (isArray(param) && !repeatable) throw new Error(`Provided param "${value}" is an array but it is not repeatable (* or + modifiers)`);
+				const text = isArray(param) ? param.join("/") : param;
+				if (!text) if (optional) {
+					if (segment.length < 2) if (path.endsWith("/")) path = path.slice(0, -1);
+					else avoidDuplicatedSlash = true;
+				} else throw new Error(`Missing required param "${value}"`);
+				path += text;
+			}
+		}
+		return path || "/";
+	}
+	return {
+		re,
+		score,
+		keys,
+		parse,
+		stringify
+	};
+}
+/**
+* Compares an array of numbers as used in PathParser.score and returns a
+* number. This function can be used to `sort` an array
+*
+* @param a - first array of numbers
+* @param b - second array of numbers
+* @returns 0 if both are equal, < 0 if a should be sorted first, > 0 if b
+* should be sorted first
+*/
+function compareScoreArray(a, b) {
+	let i = 0;
+	while (i < a.length && i < b.length) {
+		const diff = b[i] - a[i];
+		if (diff) return diff;
+		i++;
+	}
+	if (a.length < b.length) return a.length === 1 && a[0] === PathScore.Static + PathScore.Segment ? -1 : 1;
+	else if (a.length > b.length) return b.length === 1 && b[0] === PathScore.Static + PathScore.Segment ? 1 : -1;
+	return 0;
+}
+/**
+* Compare function that can be used with `sort` to sort an array of PathParser
+*
+* @param a - first PathParser
+* @param b - second PathParser
+* @returns 0 if both are equal, < 0 if a should be sorted first, > 0 if b
+*/
+function comparePathParserScore(a, b) {
+	let i = 0;
+	const aScore = a.score;
+	const bScore = b.score;
+	while (i < aScore.length && i < bScore.length) {
+		const comp = compareScoreArray(aScore[i], bScore[i]);
+		if (comp) return comp;
+		i++;
+	}
+	if (Math.abs(bScore.length - aScore.length) === 1) {
+		if (isLastScoreNegative(aScore)) return 1;
+		if (isLastScoreNegative(bScore)) return -1;
+	}
+	return bScore.length - aScore.length;
+}
+/**
+* This allows detecting splats at the end of a path: /home/:id(.*)*
+*
+* @param score - score to check
+* @returns true if the last entry is negative
+*/
+function isLastScoreNegative(score) {
+	const last = score[score.length - 1];
+	return score.length > 0 && last[last.length - 1] < 0;
+}
+const PATH_PARSER_OPTIONS_DEFAULTS = {
+	strict: false,
+	end: true,
+	sensitive: false
+};
+
+//#endregion
+//#region src/matcher/pathMatcher.ts
+function createRouteRecordMatcher(record, parent, options) {
+	const parser = tokensToParser(tokenizePath(record.path), options);
+	const matcher = assign(parser, {
+		record,
+		parent,
+		children: [],
+		alias: []
+	});
+	if (parent) {
+		if (!matcher.record.aliasOf === !parent.record.aliasOf) parent.children.push(matcher);
+	}
+	return matcher;
+}
+
+//#endregion
+//#region src/matcher/index.ts
+/**
+* Creates a Router Matcher.
+*
+* @internal
+* @param routes - array of initial routes
+* @param globalOptions - global route options
+*/
+function createRouterMatcher(routes, globalOptions) {
+	const matchers = [];
+	const matcherMap = /* @__PURE__ */ new Map();
+	globalOptions = mergeOptions(PATH_PARSER_OPTIONS_DEFAULTS, globalOptions);
+	function getRecordMatcher(name) {
+		return matcherMap.get(name);
+	}
+	function addRoute(record, parent, originalRecord) {
+		const isRootAdd = !originalRecord;
+		const mainNormalizedRecord = normalizeRouteRecord(record);
+		mainNormalizedRecord.aliasOf = originalRecord && originalRecord.record;
+		const options = mergeOptions(globalOptions, record);
+		const normalizedRecords = [mainNormalizedRecord];
+		if ("alias" in record) {
+			const aliases = typeof record.alias === "string" ? [record.alias] : record.alias;
+			for (const alias of aliases) normalizedRecords.push(normalizeRouteRecord(assign({}, mainNormalizedRecord, {
+				components: originalRecord ? originalRecord.record.components : mainNormalizedRecord.components,
+				path: alias,
+				aliasOf: originalRecord ? originalRecord.record : mainNormalizedRecord
+			})));
+		}
+		let matcher;
+		let originalMatcher;
+		for (const normalizedRecord of normalizedRecords) {
+			const { path } = normalizedRecord;
+			if (parent && path[0] !== "/") {
+				const parentPath = parent.record.path;
+				const connectingSlash = parentPath[parentPath.length - 1] === "/" ? "" : "/";
+				normalizedRecord.path = parent.record.path + (path && connectingSlash + path);
+			}
+			matcher = createRouteRecordMatcher(normalizedRecord, parent, options);
+			if (originalRecord) {
+				originalRecord.alias.push(matcher);
+			} else {
+				originalMatcher = originalMatcher || matcher;
+				if (originalMatcher !== matcher) originalMatcher.alias.push(matcher);
+				if (isRootAdd && record.name && !isAliasRecord(matcher)) {
+					removeRoute(record.name);
+				}
+			}
+			if (isMatchable(matcher)) insertMatcher(matcher);
+			if (mainNormalizedRecord.children) {
+				const children = mainNormalizedRecord.children;
+				for (let i = 0; i < children.length; i++) addRoute(children[i], matcher, originalRecord && originalRecord.children[i]);
+			}
+			originalRecord = originalRecord || matcher;
+		}
+		return originalMatcher ? () => {
+			removeRoute(originalMatcher);
+		} : noop$1;
+	}
+	function removeRoute(matcherRef) {
+		if (isRouteName(matcherRef)) {
+			const matcher = matcherMap.get(matcherRef);
+			if (matcher) {
+				matcherMap.delete(matcherRef);
+				matchers.splice(matchers.indexOf(matcher), 1);
+				matcher.children.forEach(removeRoute);
+				matcher.alias.forEach(removeRoute);
+			}
+		} else {
+			const index = matchers.indexOf(matcherRef);
+			if (index > -1) {
+				matchers.splice(index, 1);
+				if (matcherRef.record.name) matcherMap.delete(matcherRef.record.name);
+				matcherRef.children.forEach(removeRoute);
+				matcherRef.alias.forEach(removeRoute);
+			}
+		}
+	}
+	function getRoutes() {
+		return matchers;
+	}
+	function insertMatcher(matcher) {
+		const index = findInsertionIndex(matcher, matchers);
+		matchers.splice(index, 0, matcher);
+		if (matcher.record.name && !isAliasRecord(matcher)) matcherMap.set(matcher.record.name, matcher);
+	}
+	function resolve(location, currentLocation) {
+		let matcher;
+		let params = {};
+		let path;
+		let name;
+		if ("name" in location && location.name) {
+			matcher = matcherMap.get(location.name);
+			if (!matcher) throw createRouterError(ErrorTypes.MATCHER_NOT_FOUND, { location });
+			name = matcher.record.name;
+			params = assign(pickParams(currentLocation.params, matcher.keys.filter((k) => !k.optional).concat(matcher.parent ? matcher.parent.keys.filter((k) => k.optional) : []).map((k) => k.name)), location.params && pickParams(location.params, matcher.keys.map((k) => k.name)));
+			path = matcher.stringify(params);
+		} else if (location.path != null) {
+			path = location.path;
+			matcher = matchers.find((m) => m.re.test(path));
+			if (matcher) {
+				params = matcher.parse(path);
+				name = matcher.record.name;
+				matcher.keys.forEach((key) => {
+					if (key.optional && !params[key.name]) delete params[key.name];
+				});
+			}
+		} else {
+			matcher = currentLocation.name ? matcherMap.get(currentLocation.name) : matchers.find((m) => m.re.test(currentLocation.path));
+			if (!matcher) throw createRouterError(ErrorTypes.MATCHER_NOT_FOUND, {
+				location,
+				currentLocation
+			});
+			name = matcher.record.name;
+			params = assign({}, currentLocation.params, location.params);
+			path = matcher.stringify(params);
+		}
+		const matched = [];
+		let parentMatcher = matcher;
+		while (parentMatcher) {
+			matched.unshift(parentMatcher.record);
+			parentMatcher = parentMatcher.parent;
+		}
+		return {
+			name,
+			path,
+			params,
+			matched,
+			meta: mergeMetaFields(matched)
+		};
+	}
+	routes.forEach((route) => addRoute(route));
+	function clearRoutes() {
+		matchers.length = 0;
+		matcherMap.clear();
+	}
+	return {
+		addRoute,
+		resolve,
+		removeRoute,
+		clearRoutes,
+		getRoutes,
+		getRecordMatcher
+	};
+}
+/**
+* Picks an object param to contain only specified keys.
+*
+* @param params - params object to pick from
+* @param keys - keys to pick
+*/
+function pickParams(params, keys) {
+	const newParams = {};
+	for (const key of keys) if (key in params) newParams[key] = params[key];
+	return newParams;
+}
+/**
+* Normalizes a RouteRecordRaw. Creates a copy
+*
+* @param record
+* @returns the normalized version
+*/
+function normalizeRouteRecord(record) {
+	const normalized = {
+		path: record.path,
+		redirect: record.redirect,
+		name: record.name,
+		meta: record.meta || {},
+		aliasOf: record.aliasOf,
+		beforeEnter: record.beforeEnter,
+		props: normalizeRecordProps(record),
+		children: record.children || [],
+		instances: {},
+		leaveGuards: /* @__PURE__ */ new Set(),
+		updateGuards: /* @__PURE__ */ new Set(),
+		enterCallbacks: {},
+		components: "components" in record ? record.components || null : record.component && { default: record.component }
+	};
+	Object.defineProperty(normalized, "mods", { value: {} });
+	return normalized;
+}
+/**
+* Normalize the optional `props` in a record to always be an object similar to
+* components. Also accept a boolean for components.
+* @param record
+*/
+function normalizeRecordProps(record) {
+	const propsObject = {};
+	const props = record.props || false;
+	if ("component" in record) propsObject.default = props;
+	else for (const name in record.components) propsObject[name] = typeof props === "object" ? props[name] : props;
+	return propsObject;
+}
+/**
+* Checks if a record or any of its parent is an alias
+* @param record
+*/
+function isAliasRecord(record) {
+	while (record) {
+		if (record.record.aliasOf) return true;
+		record = record.parent;
+	}
+	return false;
+}
+/**
+* Merge meta fields of an array of records
+*
+* @param matched - array of matched records
+*/
+function mergeMetaFields(matched) {
+	return matched.reduce((meta, record) => assign(meta, record.meta), {});
+}
+/**
+* Performs a binary search to find the correct insertion index for a new matcher.
+*
+* Matchers are primarily sorted by their score. If scores are tied then we also consider parent/child relationships,
+* with descendants coming before ancestors. If there's still a tie, new routes are inserted after existing routes.
+*
+* @param matcher - new matcher to be inserted
+* @param matchers - existing matchers
+*/
+function findInsertionIndex(matcher, matchers) {
+	let lower = 0;
+	let upper = matchers.length;
+	while (lower !== upper) {
+		const mid = lower + upper >> 1;
+		if (comparePathParserScore(matcher, matchers[mid]) < 0) upper = mid;
+		else lower = mid + 1;
+	}
+	const insertionAncestor = getInsertionAncestor(matcher);
+	if (insertionAncestor) {
+		upper = matchers.lastIndexOf(insertionAncestor, upper - 1);
+	}
+	return upper;
+}
+function getInsertionAncestor(matcher) {
+	let ancestor = matcher;
+	while (ancestor = ancestor.parent) if (isMatchable(ancestor) && comparePathParserScore(matcher, ancestor) === 0) return ancestor;
+}
+/**
+* Checks if a matcher can be reachable. This means if it's possible to reach it as a route. For example, routes without
+* a component, or name, or redirect, are just used to group other routes.
+* @param matcher
+* @param matcher.record record of the matcher
+* @returns
+*/
+function isMatchable({ record }) {
+	return !!(record.name || record.components && Object.keys(record.components).length || record.redirect);
+}
+
+//#endregion
+//#region src/RouterLink.ts
+/**
+* Returns the internal behavior of a {@link RouterLink} without the rendering part.
+*
+* @param props - a `to` location and an optional `replace` flag
+*/
+function useLink(props) {
+	const router = vueExports$1.inject(routerKey);
+	const currentRoute = vueExports$1.inject(routeLocationKey);
+	const route = vueExports$1.computed(() => {
+		const to = vueExports$1.unref(props.to);
+		return router.resolve(to);
+	});
+	const activeRecordIndex = vueExports$1.computed(() => {
+		const { matched } = route.value;
+		const { length } = matched;
+		const routeMatched = matched[length - 1];
+		const currentMatched = currentRoute.matched;
+		if (!routeMatched || !currentMatched.length) return -1;
+		const index = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
+		if (index > -1) return index;
+		const parentRecordPath = getOriginalPath(matched[length - 2]);
+		return length > 1 && getOriginalPath(routeMatched) === parentRecordPath && currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index;
+	});
+	const isActive = vueExports$1.computed(() => activeRecordIndex.value > -1 && includesParams(currentRoute.params, route.value.params));
+	const isExactActive = vueExports$1.computed(() => activeRecordIndex.value > -1 && activeRecordIndex.value === currentRoute.matched.length - 1 && isSameRouteLocationParams(currentRoute.params, route.value.params));
+	function navigate(e = {}) {
+		if (guardEvent(e)) {
+			const p = router[vueExports$1.unref(props.replace) ? "replace" : "push"](vueExports$1.unref(props.to)).catch(noop$1);
+			if (props.viewTransition && typeof document !== "undefined" && "startViewTransition" in document) document.startViewTransition(() => p);
+			return p;
+		}
+		return Promise.resolve();
+	}
+	/**
+	* NOTE: update {@link _RouterLinkI}'s `$slots` type when updating this
+	*/
+	return {
+		route,
+		href: vueExports$1.computed(() => route.value.href),
+		isActive,
+		isExactActive,
+		navigate
+	};
+}
+function preferSingleVNode(vnodes) {
+	return vnodes.length === 1 ? vnodes[0] : vnodes;
+}
+const RouterLinkImpl = /* @__PURE__ */ vueExports$1.defineComponent({
+	name: "RouterLink",
+	compatConfig: { MODE: 3 },
+	props: {
+		to: {
+			type: [String, Object],
+			required: true
+		},
+		replace: Boolean,
+		activeClass: String,
+		exactActiveClass: String,
+		custom: Boolean,
+		ariaCurrentValue: {
+			type: String,
+			default: "page"
+		},
+		viewTransition: Boolean
+	},
+	useLink,
+	setup(props, { slots }) {
+		const link = vueExports$1.reactive(useLink(props));
+		const { options } = vueExports$1.inject(routerKey);
+		const elClass = vueExports$1.computed(() => ({
+			[getLinkClass(props.activeClass, options.linkActiveClass, "router-link-active")]: link.isActive,
+			[getLinkClass(props.exactActiveClass, options.linkExactActiveClass, "router-link-exact-active")]: link.isExactActive
+		}));
+		return () => {
+			const children = slots.default && preferSingleVNode(slots.default(link));
+			return props.custom ? children : vueExports$1.h("a", {
+				"aria-current": link.isExactActive ? props.ariaCurrentValue : null,
+				href: link.href,
+				onClick: link.navigate,
+				class: elClass.value
+			}, children);
+		};
+	}
+});
+/**
+* Component to render a link that triggers a navigation on click.
+*/
+const RouterLink = RouterLinkImpl;
+function guardEvent(e) {
+	if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) return;
+	if (e.defaultPrevented) return;
+	if (e.button !== void 0 && e.button !== 0) return;
+	if (e.currentTarget && e.currentTarget.getAttribute) {
+		const target = e.currentTarget.getAttribute("target");
+		if (/\b_blank\b/i.test(target)) return;
+	}
+	if (e.preventDefault) e.preventDefault();
+	return true;
+}
+function includesParams(outer, inner) {
+	for (const key in inner) {
+		const innerValue = inner[key];
+		const outerValue = outer[key];
+		if (typeof innerValue === "string") {
+			if (innerValue !== outerValue) return false;
+		} else if (!isArray(outerValue) || outerValue.length !== innerValue.length || innerValue.some((value, i) => value.valueOf() !== outerValue[i].valueOf())) return false;
+	}
+	return true;
+}
+/**
+* Get the original path value of a record by following its aliasOf
+* @param record
+*/
+function getOriginalPath(record) {
+	return record ? record.aliasOf ? record.aliasOf.path : record.path : "";
+}
+/**
+* Utility class to get the active class based on defaults.
+* @param propClass
+* @param globalClass
+* @param defaultClass
+*/
+const getLinkClass = (propClass, globalClass, defaultClass) => propClass != null ? propClass : globalClass != null ? globalClass : defaultClass;
+
+//#endregion
+//#region src/RouterView.ts
+const RouterViewImpl = /* @__PURE__ */ vueExports$1.defineComponent({
+	name: "RouterView",
+	inheritAttrs: false,
+	props: {
+		name: {
+			type: String,
+			default: "default"
+		},
+		route: Object
+	},
+	compatConfig: { MODE: 3 },
+	setup(props, { attrs, slots }) {
+		const injectedRoute = vueExports$1.inject(routerViewLocationKey);
+		const routeToDisplay = vueExports$1.computed(() => props.route || injectedRoute.value);
+		const injectedDepth = vueExports$1.inject(viewDepthKey, 0);
+		const depth = vueExports$1.computed(() => {
+			let initialDepth = vueExports$1.unref(injectedDepth);
+			const { matched } = routeToDisplay.value;
+			let matchedRoute;
+			while ((matchedRoute = matched[initialDepth]) && !matchedRoute.components) initialDepth++;
+			return initialDepth;
+		});
+		const matchedRouteRef = vueExports$1.computed(() => routeToDisplay.value.matched[depth.value]);
+		vueExports$1.provide(viewDepthKey, vueExports$1.computed(() => depth.value + 1));
+		vueExports$1.provide(matchedRouteKey, matchedRouteRef);
+		vueExports$1.provide(routerViewLocationKey, routeToDisplay);
+		const viewRef = vueExports$1.ref();
+		vueExports$1.watch(() => [
+			viewRef.value,
+			matchedRouteRef.value,
+			props.name
+		], ([instance, to, name], [oldInstance, from, _oldName]) => {
+			if (to) {
+				to.instances[name] = instance;
+				if (from && from !== to && instance && instance === oldInstance) {
+					if (!to.leaveGuards.size) to.leaveGuards = from.leaveGuards;
+					if (!to.updateGuards.size) to.updateGuards = from.updateGuards;
+				}
+			}
+			if (instance && to && (!from || !isSameRouteRecord(to, from) || !oldInstance)) (to.enterCallbacks[name] || []).forEach((callback) => callback(instance));
+		}, { flush: "post" });
+		return () => {
+			const route = routeToDisplay.value;
+			const currentName = props.name;
+			const matchedRoute = matchedRouteRef.value;
+			const ViewComponent = matchedRoute && matchedRoute.components[currentName];
+			if (!ViewComponent) return normalizeSlot$1(slots.default, {
+				Component: ViewComponent,
+				route
+			});
+			const routePropsOption = matchedRoute.props[currentName];
+			const routeProps = routePropsOption ? routePropsOption === true ? route.params : typeof routePropsOption === "function" ? routePropsOption(route) : routePropsOption : null;
+			const onVnodeUnmounted = (vnode) => {
+				if (vnode.component.isUnmounted) matchedRoute.instances[currentName] = null;
+			};
+			const component = vueExports$1.h(ViewComponent, assign({}, routeProps, attrs, {
+				onVnodeUnmounted,
+				ref: viewRef
+			}));
+			return normalizeSlot$1(slots.default, {
+				Component: component,
+				route
+			}) || component;
+		};
+	}
+});
+function normalizeSlot$1(slot, data) {
+	if (!slot) return null;
+	const slotContent = slot(data);
+	return slotContent.length === 1 ? slotContent[0] : slotContent;
+}
+/**
+* Component to display the current route the user is at.
+*/
+const RouterView = RouterViewImpl;
+
+//#endregion
+//#region src/router.ts
+/**
+* Creates a Router instance that can be used by a Vue app.
+*
+* @param options - {@link RouterOptions}
+*/
+function createRouter(options) {
+	const matcher = createRouterMatcher(options.routes, options);
+	const parseQuery$1 = options.parseQuery || parseQuery;
+	const stringifyQuery$1 = options.stringifyQuery || stringifyQuery;
+	const routerHistory = options.history;
+	const beforeGuards = useCallbacks();
+	const beforeResolveGuards = useCallbacks();
+	const afterGuards = useCallbacks();
+	const currentRoute = vueExports$1.shallowRef(START_LOCATION_NORMALIZED);
+	let pendingLocation = START_LOCATION_NORMALIZED;
+	if (isBrowser && options.scrollBehavior && "scrollRestoration" in history) history.scrollRestoration = "manual";
+	const normalizeParams = applyToParams.bind(null, (paramValue) => "" + paramValue);
+	const encodeParams = applyToParams.bind(null, encodeParam);
+	const decodeParams = applyToParams.bind(null, decode);
+	function addRoute(parentOrRoute, route) {
+		let parent;
+		let record;
+		if (isRouteName(parentOrRoute)) {
+			parent = matcher.getRecordMatcher(parentOrRoute);
+			record = route;
+		} else record = parentOrRoute;
+		return matcher.addRoute(record, parent);
+	}
+	function removeRoute(name) {
+		const recordMatcher = matcher.getRecordMatcher(name);
+		if (recordMatcher) matcher.removeRoute(recordMatcher);
+	}
+	function getRoutes() {
+		return matcher.getRoutes().map((routeMatcher) => routeMatcher.record);
+	}
+	function hasRoute(name) {
+		return !!matcher.getRecordMatcher(name);
+	}
+	function resolve(rawLocation, currentLocation) {
+		currentLocation = assign({}, currentLocation || currentRoute.value);
+		if (typeof rawLocation === "string") {
+			const locationNormalized = parseURL(parseQuery$1, rawLocation, currentLocation.path);
+			const matchedRoute = matcher.resolve({ path: locationNormalized.path }, currentLocation);
+			const href = routerHistory.createHref(locationNormalized.fullPath);
+			return assign(locationNormalized, matchedRoute, {
+				params: decodeParams(matchedRoute.params),
+				redirectedFrom: void 0,
+				href
+			});
+		}
+		let matcherLocation;
+		if (rawLocation.path != null) {
+			matcherLocation = assign({}, rawLocation, { path: parseURL(parseQuery$1, rawLocation.path, currentLocation.path).path });
+		} else {
+			const targetParams = assign({}, rawLocation.params);
+			for (const key in targetParams) if (targetParams[key] == null) delete targetParams[key];
+			matcherLocation = assign({}, rawLocation, { params: encodeParams(targetParams) });
+			currentLocation.params = encodeParams(currentLocation.params);
+		}
+		const matchedRoute = matcher.resolve(matcherLocation, currentLocation);
+		const hash = rawLocation.hash || "";
+		matchedRoute.params = normalizeParams(decodeParams(matchedRoute.params));
+		const fullPath = stringifyURL(stringifyQuery$1, assign({}, rawLocation, {
+			hash: encodeHash(hash),
+			path: matchedRoute.path
+		}));
+		const href = routerHistory.createHref(fullPath);
+		return assign({
+			fullPath,
+			hash,
+			query: stringifyQuery$1 === stringifyQuery ? normalizeQuery(rawLocation.query) : rawLocation.query || {}
+		}, matchedRoute, {
+			redirectedFrom: void 0,
+			href
+		});
+	}
+	function locationAsObject(to) {
+		return typeof to === "string" ? parseURL(parseQuery$1, to, currentRoute.value.path) : assign({}, to);
+	}
+	function checkCanceledNavigation(to, from) {
+		if (pendingLocation !== to) return createRouterError(ErrorTypes.NAVIGATION_CANCELLED, {
+			from,
+			to
+		});
+	}
+	function push(to) {
+		return pushWithRedirect(to);
+	}
+	function replace(to) {
+		return push(assign(locationAsObject(to), { replace: true }));
+	}
+	function handleRedirectRecord(to, from) {
+		const lastMatched = to.matched[to.matched.length - 1];
+		if (lastMatched && lastMatched.redirect) {
+			const { redirect } = lastMatched;
+			let newTargetLocation = typeof redirect === "function" ? redirect(to, from) : redirect;
+			if (typeof newTargetLocation === "string") {
+				newTargetLocation = newTargetLocation.includes("?") || newTargetLocation.includes("#") ? newTargetLocation = locationAsObject(newTargetLocation) : { path: newTargetLocation };
+				newTargetLocation.params = {};
+			}
+			return assign({
+				query: to.query,
+				hash: to.hash,
+				params: newTargetLocation.path != null ? {} : to.params
+			}, newTargetLocation);
+		}
+	}
+	function pushWithRedirect(to, redirectedFrom) {
+		const targetLocation = pendingLocation = resolve(to);
+		const from = currentRoute.value;
+		const data = to.state;
+		const force = to.force;
+		const replace = to.replace === true;
+		const shouldRedirect = handleRedirectRecord(targetLocation, from);
+		if (shouldRedirect) return pushWithRedirect(assign(locationAsObject(shouldRedirect), {
+			state: typeof shouldRedirect === "object" ? assign({}, data, shouldRedirect.state) : data,
+			force,
+			replace
+		}), redirectedFrom || targetLocation);
+		const toLocation = targetLocation;
+		toLocation.redirectedFrom = redirectedFrom;
+		let failure;
+		if (!force && isSameRouteLocation(stringifyQuery$1, from, targetLocation)) {
+			failure = createRouterError(ErrorTypes.NAVIGATION_DUPLICATED, {
+				to: toLocation,
+				from
+			});
+			handleScroll(from, from, true, false);
+		}
+		return (failure ? Promise.resolve(failure) : navigate(toLocation, from)).catch((error) => isNavigationFailure(error) ? isNavigationFailure(error, ErrorTypes.NAVIGATION_GUARD_REDIRECT) ? error : markAsReady(error) : triggerError(error, toLocation, from)).then((failure) => {
+			if (failure) {
+				if (isNavigationFailure(failure, ErrorTypes.NAVIGATION_GUARD_REDIRECT)) {
+					return pushWithRedirect(assign({ replace }, locationAsObject(failure.to), {
+						state: typeof failure.to === "object" ? assign({}, data, failure.to.state) : data,
+						force
+					}), redirectedFrom || toLocation);
+				}
+			} else failure = finalizeNavigation(toLocation, from, true, replace, data);
+			triggerAfterEach(toLocation, from, failure);
+			return failure;
+		});
+	}
+	/**
+	* Helper to reject and skip all navigation guards if a new navigation happened
+	* @param to
+	* @param from
+	*/
+	function checkCanceledNavigationAndReject(to, from) {
+		const error = checkCanceledNavigation(to, from);
+		return error ? Promise.reject(error) : Promise.resolve();
+	}
+	function runWithContext(fn) {
+		const app = installedApps.values().next().value;
+		return app && typeof app.runWithContext === "function" ? app.runWithContext(fn) : fn();
+	}
+	function navigate(to, from) {
+		let guards;
+		const [leavingRecords, updatingRecords, enteringRecords] = extractChangingRecords(to, from);
+		guards = extractComponentsGuards(leavingRecords.reverse(), "beforeRouteLeave", to, from);
+		for (const record of leavingRecords) record.leaveGuards.forEach((guard) => {
+			guards.push(guardToPromiseFn(guard, to, from));
+		});
+		const canceledNavigationCheck = checkCanceledNavigationAndReject.bind(null, to, from);
+		guards.push(canceledNavigationCheck);
+		return runGuardQueue(guards).then(() => {
+			guards = [];
+			for (const guard of beforeGuards.list()) guards.push(guardToPromiseFn(guard, to, from));
+			guards.push(canceledNavigationCheck);
+			return runGuardQueue(guards);
+		}).then(() => {
+			guards = extractComponentsGuards(updatingRecords, "beforeRouteUpdate", to, from);
+			for (const record of updatingRecords) record.updateGuards.forEach((guard) => {
+				guards.push(guardToPromiseFn(guard, to, from));
+			});
+			guards.push(canceledNavigationCheck);
+			return runGuardQueue(guards);
+		}).then(() => {
+			guards = [];
+			for (const record of enteringRecords) if (record.beforeEnter) if (isArray(record.beforeEnter)) for (const beforeEnter of record.beforeEnter) guards.push(guardToPromiseFn(beforeEnter, to, from));
+			else guards.push(guardToPromiseFn(record.beforeEnter, to, from));
+			guards.push(canceledNavigationCheck);
+			return runGuardQueue(guards);
+		}).then(() => {
+			to.matched.forEach((record) => record.enterCallbacks = {});
+			guards = extractComponentsGuards(enteringRecords, "beforeRouteEnter", to, from, runWithContext);
+			guards.push(canceledNavigationCheck);
+			return runGuardQueue(guards);
+		}).then(() => {
+			guards = [];
+			for (const guard of beforeResolveGuards.list()) guards.push(guardToPromiseFn(guard, to, from));
+			guards.push(canceledNavigationCheck);
+			return runGuardQueue(guards);
+		}).catch((err) => isNavigationFailure(err, ErrorTypes.NAVIGATION_CANCELLED) ? err : Promise.reject(err));
+	}
+	function triggerAfterEach(to, from, failure) {
+		afterGuards.list().forEach((guard) => runWithContext(() => guard(to, from, failure)));
+	}
+	/**
+	* - Cleans up any navigation guards
+	* - Changes the url if necessary
+	* - Calls the scrollBehavior
+	*/
+	function finalizeNavigation(toLocation, from, isPush, replace, data) {
+		const error = checkCanceledNavigation(toLocation, from);
+		if (error) return error;
+		const isFirstNavigation = from === START_LOCATION_NORMALIZED;
+		const state = !isBrowser ? {} : history.state;
+		if (isPush) if (replace || isFirstNavigation) routerHistory.replace(toLocation.fullPath, assign({ scroll: isFirstNavigation && state && state.scroll }, data));
+		else routerHistory.push(toLocation.fullPath, data);
+		currentRoute.value = toLocation;
+		handleScroll(toLocation, from, isPush, isFirstNavigation);
+		markAsReady();
+	}
+	let removeHistoryListener;
+	function setupListeners() {
+		if (removeHistoryListener) return;
+		removeHistoryListener = routerHistory.listen((to, _from, info) => {
+			if (!router.listening) return;
+			const toLocation = resolve(to);
+			const shouldRedirect = handleRedirectRecord(toLocation, router.currentRoute.value);
+			if (shouldRedirect) {
+				pushWithRedirect(assign(shouldRedirect, {
+					replace: true,
+					force: true
+				}), toLocation).catch(noop$1);
+				return;
+			}
+			pendingLocation = toLocation;
+			const from = currentRoute.value;
+			if (isBrowser) saveScrollPosition(getScrollKey(from.fullPath, info.delta), computeScrollPosition());
+			navigate(toLocation, from).catch((error) => {
+				if (isNavigationFailure(error, ErrorTypes.NAVIGATION_ABORTED | ErrorTypes.NAVIGATION_CANCELLED)) return error;
+				if (isNavigationFailure(error, ErrorTypes.NAVIGATION_GUARD_REDIRECT)) {
+					pushWithRedirect(assign(locationAsObject(error.to), { force: true }), toLocation).then((failure) => {
+						if (isNavigationFailure(failure, ErrorTypes.NAVIGATION_ABORTED | ErrorTypes.NAVIGATION_DUPLICATED) && !info.delta && info.type === NavigationType.pop) routerHistory.go(-1, false);
+					}).catch(noop$1);
+					return Promise.reject();
+				}
+				if (info.delta) routerHistory.go(-info.delta, false);
+				return triggerError(error, toLocation, from);
+			}).then((failure) => {
+				failure = failure || finalizeNavigation(toLocation, from, false);
+				if (failure) {
+					if (info.delta && !isNavigationFailure(failure, ErrorTypes.NAVIGATION_CANCELLED)) routerHistory.go(-info.delta, false);
+					else if (info.type === NavigationType.pop && isNavigationFailure(failure, ErrorTypes.NAVIGATION_ABORTED | ErrorTypes.NAVIGATION_DUPLICATED)) routerHistory.go(-1, false);
+				}
+				triggerAfterEach(toLocation, from, failure);
+			}).catch(noop$1);
+		});
+	}
+	let readyHandlers = useCallbacks();
+	let errorListeners = useCallbacks();
+	let ready;
+	/**
+	* Trigger errorListeners added via onError and throws the error as well
+	*
+	* @param error - error to throw
+	* @param to - location we were navigating to when the error happened
+	* @param from - location we were navigating from when the error happened
+	* @returns the error as a rejected promise
+	*/
+	function triggerError(error, to, from) {
+		markAsReady(error);
+		const list = errorListeners.list();
+		if (list.length) list.forEach((handler) => handler(error, to, from));
+		else {
+			console.error(error);
+		}
 		return Promise.reject(error);
 	}
-}
-function serialTaskCaller(hooks, args, name) {
-	if (hooks.length > 0) return callHooks(hooks, args, 0, createTask(name));
-}
-function parallelTaskCaller(hooks, args, name) {
-	if (hooks.length > 0) {
-		const task = createTask(name);
-		return Promise.all(hooks.map((hook) => task.run(() => hook(...args))));
-	}
-}
-function callEachWith(callbacks, arg0) {
-	for (const callback of [...callbacks]) callback(arg0);
-}
-var Hookable = class {
-	_hooks;
-	_before;
-	_after;
-	_deprecatedHooks;
-	_deprecatedMessages;
-	constructor() {
-		this._hooks = {};
-		this._before = void 0;
-		this._after = void 0;
-		this._deprecatedMessages = void 0;
-		this._deprecatedHooks = {};
-		this.hook = this.hook.bind(this);
-		this.callHook = this.callHook.bind(this);
-		this.callHookWith = this.callHookWith.bind(this);
-	}
-	hook(name, function_, options = {}) {
-		if (!name || typeof function_ !== "function") return () => {};
-		const originalName = name;
-		let dep;
-		while (this._deprecatedHooks[name]) {
-			dep = this._deprecatedHooks[name];
-			name = dep.to;
-		}
-		if (dep && !options.allowDeprecated) {
-			let message = dep.message;
-			if (!message) message = `${originalName} hook has been deprecated` + (dep.to ? `, please use ${dep.to}` : "");
-			if (!this._deprecatedMessages) this._deprecatedMessages = /* @__PURE__ */ new Set();
-			if (!this._deprecatedMessages.has(message)) {
-				console.warn(message);
-				this._deprecatedMessages.add(message);
-			}
-		}
-		if (!function_.name) try {
-			Object.defineProperty(function_, "name", {
-				get: () => "_" + name.replace(/\W+/g, "_") + "_hook_cb",
-				configurable: true
-			});
-		} catch {}
-		this._hooks[name] = this._hooks[name] || [];
-		this._hooks[name].push(function_);
-		return () => {
-			if (function_) {
-				this.removeHook(name, function_);
-				function_ = void 0;
-			}
-		};
-	}
-	hookOnce(name, function_) {
-		let _unreg;
-		let _function = (...arguments_) => {
-			if (typeof _unreg === "function") _unreg();
-			_unreg = void 0;
-			_function = void 0;
-			return function_(...arguments_);
-		};
-		_unreg = this.hook(name, _function);
-		return _unreg;
-	}
-	removeHook(name, function_) {
-		const hooks = this._hooks[name];
-		if (hooks) {
-			const index = hooks.indexOf(function_);
-			if (index !== -1) hooks.splice(index, 1);
-			if (hooks.length === 0) this._hooks[name] = void 0;
-		}
-	}
-	clearHook(name) {
-		this._hooks[name] = void 0;
-	}
-	deprecateHook(name, deprecated) {
-		this._deprecatedHooks[name] = typeof deprecated === "string" ? { to: deprecated } : deprecated;
-		const _hooks = this._hooks[name] || [];
-		this._hooks[name] = void 0;
-		for (const hook of _hooks) this.hook(name, hook);
-	}
-	deprecateHooks(deprecatedHooks) {
-		for (const name in deprecatedHooks) this.deprecateHook(name, deprecatedHooks[name]);
-	}
-	addHooks(configHooks) {
-		const hooks = flatHooks(configHooks);
-		const removeFns = Object.keys(hooks).map((key) => this.hook(key, hooks[key]));
-		return () => {
-			for (const unreg of removeFns) unreg();
-			removeFns.length = 0;
-		};
-	}
-	removeHooks(configHooks) {
-		const hooks = flatHooks(configHooks);
-		for (const key in hooks) this.removeHook(key, hooks[key]);
-	}
-	removeAllHooks() {
-		this._hooks = {};
-	}
-	callHook(name, ...args) {
-		return this.callHookWith(serialTaskCaller, name, args);
-	}
-	callHookParallel(name, ...args) {
-		return this.callHookWith(parallelTaskCaller, name, args);
-	}
-	callHookWith(caller, name, args) {
-		const event = this._before || this._after ? {
-			name,
-			args,
-			context: {}
-		} : void 0;
-		if (this._before) callEachWith(this._before, event);
-		const result = caller(this._hooks[name] ? [...this._hooks[name]] : [], args, name);
-		if (result instanceof Promise) return result.finally(() => {
-			if (this._after && event) callEachWith(this._after, event);
+	function isReady() {
+		if (ready && currentRoute.value !== START_LOCATION_NORMALIZED) return Promise.resolve();
+		return new Promise((resolve, reject) => {
+			readyHandlers.add([resolve, reject]);
 		});
-		if (this._after && event) callEachWith(this._after, event);
-		return result;
 	}
-	beforeEach(function_) {
-		this._before = this._before || [];
-		this._before.push(function_);
-		return () => {
-			if (this._before !== void 0) {
-				const index = this._before.indexOf(function_);
-				if (index !== -1) this._before.splice(index, 1);
+	function markAsReady(err) {
+		if (!ready) {
+			ready = !err;
+			setupListeners();
+			readyHandlers.list().forEach(([resolve, reject]) => err ? reject(err) : resolve());
+			readyHandlers.reset();
+		}
+		return err;
+	}
+	function handleScroll(to, from, isPush, isFirstNavigation) {
+		const { scrollBehavior } = options;
+		if (!isBrowser || !scrollBehavior) return Promise.resolve();
+		const scrollPosition = !isPush && getSavedScrollPosition(getScrollKey(to.fullPath, 0)) || (isFirstNavigation || !isPush) && history.state && history.state.scroll || null;
+		return vueExports$1.nextTick().then(() => scrollBehavior(to, from, scrollPosition)).then((position) => position && scrollToPosition(position)).catch((err) => triggerError(err, to, from));
+	}
+	const go = (delta) => routerHistory.go(delta);
+	let started;
+	const installedApps = /* @__PURE__ */ new Set();
+	const router = {
+		currentRoute,
+		listening: true,
+		addRoute,
+		removeRoute,
+		clearRoutes: matcher.clearRoutes,
+		hasRoute,
+		getRoutes,
+		resolve,
+		options,
+		push,
+		replace,
+		go,
+		back: () => go(-1),
+		forward: () => go(1),
+		beforeEach: beforeGuards.add,
+		beforeResolve: beforeResolveGuards.add,
+		afterEach: afterGuards.add,
+		onError: errorListeners.add,
+		isReady,
+		install(app) {
+			app.component("RouterLink", RouterLink);
+			app.component("RouterView", RouterView);
+			app.config.globalProperties.$router = router;
+			Object.defineProperty(app.config.globalProperties, "$route", {
+				enumerable: true,
+				get: () => vueExports$1.unref(currentRoute)
+			});
+			if (isBrowser && !started && currentRoute.value === START_LOCATION_NORMALIZED) {
+				started = true;
+				push(routerHistory.location).catch((err) => {
+				});
 			}
+			const reactiveRoute = {};
+			for (const key in START_LOCATION_NORMALIZED) Object.defineProperty(reactiveRoute, key, {
+				get: () => currentRoute.value[key],
+				enumerable: true
+			});
+			app.provide(routerKey, router);
+			app.provide(routeLocationKey, vueExports$1.shallowReactive(reactiveRoute));
+			app.provide(routerViewLocationKey, currentRoute);
+			const unmountApp = app.unmount;
+			installedApps.add(app);
+			app.unmount = function() {
+				installedApps.delete(app);
+				if (installedApps.size < 1) {
+					pendingLocation = START_LOCATION_NORMALIZED;
+					removeHistoryListener && removeHistoryListener();
+					removeHistoryListener = null;
+					currentRoute.value = START_LOCATION_NORMALIZED;
+					started = false;
+					ready = false;
+				}
+				unmountApp();
+			};
+		}
+	};
+	function runGuardQueue(guards) {
+		return guards.reduce((promise, guard) => promise.then(() => runWithContext(guard)), Promise.resolve());
+	}
+	return router;
+}
+
+/**
+* Expression to test part of icon name.
+*
+* Used when loading icons from Iconify API due to project naming convension.
+* Ignored when using custom icon sets - convension does not apply.
+*/
+const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+/**
+* Convert string icon name to IconifyIconName object.
+*/
+const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
+	const colonSeparated = value.split(":");
+	if (value.slice(0, 1) === "@") {
+		if (colonSeparated.length < 2 || colonSeparated.length > 3) return null;
+		provider = colonSeparated.shift().slice(1);
+	}
+	if (colonSeparated.length > 3 || !colonSeparated.length) return null;
+	if (colonSeparated.length > 1) {
+		const name = colonSeparated.pop();
+		const prefix = colonSeparated.pop();
+		const result = {
+			provider: colonSeparated.length > 0 ? colonSeparated[0] : provider,
+			prefix,
+			name
+		};
+		return validate && !validateIconName(result) ? null : result;
+	}
+	const name = colonSeparated[0];
+	const dashSeparated = name.split("-");
+	if (dashSeparated.length > 1) {
+		const result = {
+			provider,
+			prefix: dashSeparated.shift(),
+			name: dashSeparated.join("-")
+		};
+		return validate && !validateIconName(result) ? null : result;
+	}
+	if (allowSimpleName && provider === "") {
+		const result = {
+			provider,
+			prefix: "",
+			name
+		};
+		return validate && !validateIconName(result, allowSimpleName) ? null : result;
+	}
+	return null;
+};
+/**
+* Check if icon is valid.
+*
+* This function is not part of stringToIcon because validation is not needed for most code.
+*/
+const validateIconName = (icon, allowSimpleName) => {
+	if (!icon) return false;
+	return !!((allowSimpleName && icon.prefix === "" || !!icon.prefix) && !!icon.name);
+};
+
+/**
+* Resolve icon set icons
+*
+* Returns parent icon for each icon
+*/
+function getIconsTree(data, names) {
+	const icons = data.icons;
+	const aliases = data.aliases || Object.create(null);
+	const resolved = Object.create(null);
+	function resolve(name) {
+		if (icons[name]) return resolved[name] = [];
+		if (!(name in resolved)) {
+			resolved[name] = null;
+			const parent = aliases[name] && aliases[name].parent;
+			const value = parent && resolve(parent);
+			if (value) resolved[name] = [parent].concat(value);
+		}
+		return resolved[name];
+	}
+	(Object.keys(icons).concat(Object.keys(aliases))).forEach(resolve);
+	return resolved;
+}
+
+/** Default values for dimensions */
+const defaultIconDimensions = Object.freeze({
+	left: 0,
+	top: 0,
+	width: 16,
+	height: 16
+});
+/** Default values for transformations */
+const defaultIconTransformations = Object.freeze({
+	rotate: 0,
+	vFlip: false,
+	hFlip: false
+});
+/** Default values for all optional IconifyIcon properties */
+const defaultIconProps = Object.freeze({
+	...defaultIconDimensions,
+	...defaultIconTransformations
+});
+/** Default values for all properties used in ExtendedIconifyIcon */
+const defaultExtendedIconProps = Object.freeze({
+	...defaultIconProps,
+	body: "",
+	hidden: false
+});
+
+/**
+* Merge transformations
+*/
+function mergeIconTransformations(obj1, obj2) {
+	const result = {};
+	if (!obj1.hFlip !== !obj2.hFlip) result.hFlip = true;
+	if (!obj1.vFlip !== !obj2.vFlip) result.vFlip = true;
+	const rotate = ((obj1.rotate || 0) + (obj2.rotate || 0)) % 4;
+	if (rotate) result.rotate = rotate;
+	return result;
+}
+
+/**
+* Merge icon and alias
+*
+* Can also be used to merge default values and icon
+*/
+function mergeIconData(parent, child) {
+	const result = mergeIconTransformations(parent, child);
+	for (const key in defaultExtendedIconProps) if (key in defaultIconTransformations) {
+		if (key in parent && !(key in result)) result[key] = defaultIconTransformations[key];
+	} else if (key in child) result[key] = child[key];
+	else if (key in parent) result[key] = parent[key];
+	return result;
+}
+
+/**
+* Get icon data, using prepared aliases tree
+*/
+function internalGetIconData(data, name, tree) {
+	const icons = data.icons;
+	const aliases = data.aliases || Object.create(null);
+	let currentProps = {};
+	function parse(name) {
+		currentProps = mergeIconData(icons[name] || aliases[name], currentProps);
+	}
+	parse(name);
+	tree.forEach(parse);
+	return mergeIconData(data, currentProps);
+}
+
+/**
+* Extract icons from an icon set
+*
+* Returns list of icons that were found in icon set
+*/
+function parseIconSet(data, callback) {
+	const names = [];
+	if (typeof data !== "object" || typeof data.icons !== "object") return names;
+	if (data.not_found instanceof Array) data.not_found.forEach((name) => {
+		callback(name, null);
+		names.push(name);
+	});
+	const tree = getIconsTree(data);
+	for (const name in tree) {
+		const item = tree[name];
+		if (item) {
+			callback(name, internalGetIconData(data, name, item));
+			names.push(name);
+		}
+	}
+	return names;
+}
+
+/**
+* Optional properties
+*/
+const optionalPropertyDefaults = {
+	provider: "",
+	aliases: {},
+	not_found: {},
+	...defaultIconDimensions
+};
+/**
+* Check props
+*/
+function checkOptionalProps(item, defaults) {
+	for (const prop in defaults) if (prop in item && typeof item[prop] !== typeof defaults[prop]) return false;
+	return true;
+}
+/**
+* Validate icon set, return it as IconifyJSON on success, null on failure
+*
+* Unlike validateIconSet(), this function is very basic.
+* It does not throw exceptions, it does not check metadata, it does not fix stuff.
+*/
+function quicklyValidateIconSet(obj) {
+	if (typeof obj !== "object" || obj === null) return null;
+	const data = obj;
+	if (typeof data.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") return null;
+	if (!checkOptionalProps(obj, optionalPropertyDefaults)) return null;
+	const icons = data.icons;
+	for (const name in icons) {
+		const icon = icons[name];
+		if (!name || typeof icon.body !== "string" || !checkOptionalProps(icon, defaultExtendedIconProps)) return null;
+	}
+	const aliases = data.aliases || Object.create(null);
+	for (const name in aliases) {
+		const icon = aliases[name];
+		const parent = icon.parent;
+		if (!name || typeof parent !== "string" || !icons[parent] && !aliases[parent] || !checkOptionalProps(icon, defaultExtendedIconProps)) return null;
+	}
+	return data;
+}
+
+/**
+* Storage by provider and prefix
+*/
+const dataStorage = Object.create(null);
+/**
+* Create new storage
+*/
+function newStorage(provider, prefix) {
+	return {
+		provider,
+		prefix,
+		icons: Object.create(null),
+		missing: /* @__PURE__ */ new Set()
+	};
+}
+/**
+* Get storage for provider and prefix
+*/
+function getStorage(provider, prefix) {
+	const providerStorage = dataStorage[provider] || (dataStorage[provider] = Object.create(null));
+	return providerStorage[prefix] || (providerStorage[prefix] = newStorage(provider, prefix));
+}
+/**
+* Add icon set to storage
+*
+* Returns array of added icons
+*/
+function addIconSet(storage, data) {
+	if (!quicklyValidateIconSet(data)) return [];
+	return parseIconSet(data, (name, icon) => {
+		if (icon) storage.icons[name] = icon;
+		else storage.missing.add(name);
+	});
+}
+
+/**
+* Allow storing icons without provider or prefix, making it possible to store icons like "home"
+*/
+let simpleNames = false;
+function allowSimpleNames(allow) {
+	if (typeof allow === "boolean") simpleNames = allow;
+	return simpleNames;
+}
+/**
+* Get icon data
+*
+* Returns:
+* - IconifyIcon on success, object directly from storage so don't modify it
+* - null if icon is marked as missing (returned in `not_found` property from API, so don't bother sending API requests)
+* - undefined if icon is missing in storage
+*/
+function getIconData(name) {
+	const icon = typeof name === "string" ? stringToIcon(name, true, simpleNames) : name;
+	if (icon) {
+		const storage = getStorage(icon.provider, icon.prefix);
+		const iconName = icon.name;
+		return storage.icons[iconName] || (storage.missing.has(iconName) ? null : void 0);
+	}
+}
+/**
+* Get full icon
+*/
+function getIcon(name) {
+	const result = getIconData(name);
+	return result ? {
+		...defaultIconProps,
+		...result
+	} : result;
+}
+
+/**
+* Default icon customisations values
+*/
+const defaultIconSizeCustomisations = Object.freeze({
+	width: null,
+	height: null
+});
+const defaultIconCustomisations = Object.freeze({
+	...defaultIconSizeCustomisations,
+	...defaultIconTransformations
+});
+
+/**
+* Regular expressions for calculating dimensions
+*/
+const unitsSplit = /(-?[0-9.]*[0-9]+[0-9.]*)/g;
+const unitsTest = /^-?[0-9.]*[0-9]+[0-9.]*$/g;
+function calculateSize(size, ratio, precision) {
+	if (ratio === 1) return size;
+	precision = precision || 100;
+	if (typeof size === "number") return Math.ceil(size * ratio * precision) / precision;
+	if (typeof size !== "string") return size;
+	const oldParts = size.split(unitsSplit);
+	if (oldParts === null || !oldParts.length) return size;
+	const newParts = [];
+	let code = oldParts.shift();
+	let isNumber = unitsTest.test(code);
+	while (true) {
+		if (isNumber) {
+			const num = parseFloat(code);
+			if (isNaN(num)) newParts.push(code);
+			else newParts.push(Math.ceil(num * ratio * precision) / precision);
+		} else newParts.push(code);
+		code = oldParts.shift();
+		if (code === void 0) return newParts.join("");
+		isNumber = !isNumber;
+	}
+}
+
+function splitSVGDefs(content, tag = "defs") {
+	let defs = "";
+	const index = content.indexOf("<" + tag);
+	while (index >= 0) {
+		const start = content.indexOf(">", index);
+		const end = content.indexOf("</" + tag);
+		if (start === -1 || end === -1) break;
+		const endEnd = content.indexOf(">", end);
+		if (endEnd === -1) break;
+		defs += content.slice(start + 1, end).trim();
+		content = content.slice(0, index).trim() + content.slice(endEnd + 1);
+	}
+	return {
+		defs,
+		content
+	};
+}
+/**
+* Merge defs and content
+*/
+function mergeDefsAndContent(defs, content) {
+	return defs ? "<defs>" + defs + "</defs>" + content : content;
+}
+/**
+* Wrap SVG content, without wrapping definitions
+*/
+function wrapSVGContent(body, start, end) {
+	const split = splitSVGDefs(body);
+	return mergeDefsAndContent(split.defs, start + split.content + end);
+}
+
+/**
+* Check if value should be unset. Allows multiple keywords
+*/
+const isUnsetKeyword = (value) => value === "unset" || value === "undefined" || value === "none";
+/**
+* Get SVG attributes and content from icon + customisations
+*
+* Does not generate style to make it compatible with frameworks that use objects for style, such as React.
+* Instead, it generates 'inline' value. If true, rendering engine should add verticalAlign: -0.125em to icon.
+*
+* Customisations should be normalised by platform specific parser.
+* Result should be converted to <svg> by platform specific parser.
+* Use replaceIDs to generate unique IDs for body.
+*/
+function iconToSVG(icon, customisations) {
+	const fullIcon = {
+		...defaultIconProps,
+		...icon
+	};
+	const fullCustomisations = {
+		...defaultIconCustomisations,
+		...customisations
+	};
+	const box = {
+		left: fullIcon.left,
+		top: fullIcon.top,
+		width: fullIcon.width,
+		height: fullIcon.height
+	};
+	let body = fullIcon.body;
+	[fullIcon, fullCustomisations].forEach((props) => {
+		const transformations = [];
+		const hFlip = props.hFlip;
+		const vFlip = props.vFlip;
+		let rotation = props.rotate;
+		if (hFlip) if (vFlip) rotation += 2;
+		else {
+			transformations.push("translate(" + (box.width + box.left).toString() + " " + (0 - box.top).toString() + ")");
+			transformations.push("scale(-1 1)");
+			box.top = box.left = 0;
+		}
+		else if (vFlip) {
+			transformations.push("translate(" + (0 - box.left).toString() + " " + (box.height + box.top).toString() + ")");
+			transformations.push("scale(1 -1)");
+			box.top = box.left = 0;
+		}
+		let tempValue;
+		if (rotation < 0) rotation -= Math.floor(rotation / 4) * 4;
+		rotation = rotation % 4;
+		switch (rotation) {
+			case 1:
+				tempValue = box.height / 2 + box.top;
+				transformations.unshift("rotate(90 " + tempValue.toString() + " " + tempValue.toString() + ")");
+				break;
+			case 2:
+				transformations.unshift("rotate(180 " + (box.width / 2 + box.left).toString() + " " + (box.height / 2 + box.top).toString() + ")");
+				break;
+			case 3:
+				tempValue = box.width / 2 + box.left;
+				transformations.unshift("rotate(-90 " + tempValue.toString() + " " + tempValue.toString() + ")");
+				break;
+		}
+		if (rotation % 2 === 1) {
+			if (box.left !== box.top) {
+				tempValue = box.left;
+				box.left = box.top;
+				box.top = tempValue;
+			}
+			if (box.width !== box.height) {
+				tempValue = box.width;
+				box.width = box.height;
+				box.height = tempValue;
+			}
+		}
+		if (transformations.length) body = wrapSVGContent(body, "<g transform=\"" + transformations.join(" ") + "\">", "</g>");
+	});
+	const customisationsWidth = fullCustomisations.width;
+	const customisationsHeight = fullCustomisations.height;
+	const boxWidth = box.width;
+	const boxHeight = box.height;
+	let width;
+	let height;
+	if (customisationsWidth === null) {
+		height = customisationsHeight === null ? "1em" : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
+		width = calculateSize(height, boxWidth / boxHeight);
+	} else {
+		width = customisationsWidth === "auto" ? boxWidth : customisationsWidth;
+		height = customisationsHeight === null ? calculateSize(width, boxHeight / boxWidth) : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
+	}
+	const attributes = {};
+	const setAttr = (prop, value) => {
+		if (!isUnsetKeyword(value)) attributes[prop] = value.toString();
+	};
+	setAttr("width", width);
+	setAttr("height", height);
+	const viewBox = [
+		box.left,
+		box.top,
+		boxWidth,
+		boxHeight
+	];
+	attributes.viewBox = viewBox.join(" ");
+	return {
+		attributes,
+		viewBox,
+		body
+	};
+}
+
+/**
+* Regular expression for finding ids
+*/
+const regex = /\sid="(\S+)"/g;
+/**
+* Counters
+*/
+const counters = /* @__PURE__ */ new Map();
+/**
+* Get unique new ID
+*/
+function nextID(id) {
+	id = id.replace(/[0-9]+$/, "") || "a";
+	const count = counters.get(id) || 0;
+	counters.set(id, count + 1);
+	return count ? `${id}${count}` : id;
+}
+/**
+* Replace IDs in SVG output with unique IDs
+*/
+function replaceIDs(body) {
+	const ids = [];
+	let match;
+	while (match = regex.exec(body)) ids.push(match[1]);
+	if (!ids.length) return body;
+	const suffix = "suffix" + (Math.random() * 16777216 | Date.now()).toString(16);
+	ids.forEach((id) => {
+		const newID = nextID(id);
+		const escapedID = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		body = body.replace(new RegExp("([#;\"])(" + escapedID + ")([\")]|\\.[a-z])", "g"), "$1" + newID + suffix + "$3");
+	});
+	body = body.replace(new RegExp(suffix, "g"), "");
+	return body;
+}
+
+/**
+* Local storate types and entries
+*/
+const storage = Object.create(null);
+/**
+* Set API module
+*/
+function setAPIModule(provider, item) {
+	storage[provider] = item;
+}
+/**
+* Get API module
+*/
+function getAPIModule(provider) {
+	return storage[provider] || storage[""];
+}
+
+/**
+* Create full API configuration from partial data
+*/
+function createAPIConfig(source) {
+	let resources;
+	if (typeof source.resources === "string") resources = [source.resources];
+	else {
+		resources = source.resources;
+		if (!(resources instanceof Array) || !resources.length) return null;
+	}
+	return {
+		resources,
+		path: source.path || "/",
+		maxURL: source.maxURL || 500,
+		rotate: source.rotate || 750,
+		timeout: source.timeout || 5e3,
+		random: source.random === true,
+		index: source.index || 0,
+		dataAfterTimeout: source.dataAfterTimeout !== false
+	};
+}
+/**
+* Local storage
+*/
+const configStorage = Object.create(null);
+/**
+* Redundancy for API servers.
+*
+* API should have very high uptime because of implemented redundancy at server level, but
+* sometimes bad things happen. On internet 100% uptime is not possible.
+*
+* There could be routing problems. Server might go down for whatever reason, but it takes
+* few minutes to detect that downtime, so during those few minutes API might not be accessible.
+*
+* This script has some redundancy to mitigate possible network issues.
+*
+* If one host cannot be reached in 'rotate' (750 by default) ms, script will try to retrieve
+* data from different host. Hosts have different configurations, pointing to different
+* API servers hosted at different providers.
+*/
+const fallBackAPISources = ["https://api.simplesvg.com", "https://api.unisvg.com"];
+const fallBackAPI = [];
+while (fallBackAPISources.length > 0) if (fallBackAPISources.length === 1) fallBackAPI.push(fallBackAPISources.shift());
+else if (Math.random() > .5) fallBackAPI.push(fallBackAPISources.shift());
+else fallBackAPI.push(fallBackAPISources.pop());
+configStorage[""] = createAPIConfig({ resources: ["https://api.iconify.design"].concat(fallBackAPI) });
+/**
+* Add custom config for provider
+*/
+function addAPIProvider(provider, customConfig) {
+	const config = createAPIConfig(customConfig);
+	if (config === null) return false;
+	configStorage[provider] = config;
+	return true;
+}
+/**
+* Get API configuration
+*/
+function getAPIConfig(provider) {
+	return configStorage[provider];
+}
+/**
+* List API providers
+*/
+function listAPIProviders() {
+	return Object.keys(configStorage);
+}
+
+const detectFetch = () => {
+	let callback;
+	try {
+		callback = fetch;
+		if (typeof callback === "function") return callback;
+	} catch (err) {}
+};
+/**
+* Fetch function
+*/
+let fetchModule = detectFetch();
+/**
+* Set custom fetch() function
+*/
+function setFetch(fetch) {
+	fetchModule = fetch;
+}
+/**
+* Get fetch() function. Used by Icon Finder Core
+*/
+function getFetch() {
+	return fetchModule;
+}
+/**
+* Calculate maximum icons list length for prefix
+*/
+function calculateMaxLength(provider, prefix) {
+	const config = getAPIConfig(provider);
+	if (!config) return 0;
+	let result;
+	if (!config.maxURL) result = 0;
+	else {
+		let maxHostLength = 0;
+		config.resources.forEach((item) => {
+			maxHostLength = Math.max(maxHostLength, item.length);
+		});
+		const url = prefix + ".json?icons=";
+		result = config.maxURL - maxHostLength - config.path.length - url.length;
+	}
+	return result;
+}
+/**
+* Should query be aborted, based on last HTTP status
+*/
+function shouldAbort(status) {
+	return status === 404;
+}
+/**
+* Prepare params
+*/
+const prepare = (provider, prefix, icons) => {
+	const results = [];
+	const maxLength = calculateMaxLength(provider, prefix);
+	const type = "icons";
+	let item = {
+		type,
+		provider,
+		prefix,
+		icons: []
+	};
+	let length = 0;
+	icons.forEach((name, index) => {
+		length += name.length + 1;
+		if (length >= maxLength && index > 0) {
+			results.push(item);
+			item = {
+				type,
+				provider,
+				prefix,
+				icons: []
+			};
+			length = name.length;
+		}
+		item.icons.push(name);
+	});
+	results.push(item);
+	return results;
+};
+/**
+* Get path
+*/
+function getPath(provider) {
+	if (typeof provider === "string") {
+		const config = getAPIConfig(provider);
+		if (config) return config.path;
+	}
+	return "/";
+}
+/**
+* Load icons
+*/
+const send = (host, params, callback) => {
+	if (!fetchModule) {
+		callback("abort", 424);
+		return;
+	}
+	let path = getPath(params.provider);
+	switch (params.type) {
+		case "icons": {
+			const prefix = params.prefix;
+			const iconsList = params.icons.join(",");
+			const urlParams = new URLSearchParams({ icons: iconsList });
+			path += prefix + ".json?" + urlParams.toString();
+			break;
+		}
+		case "custom": {
+			const uri = params.uri;
+			path += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
+			break;
+		}
+		default:
+			callback("abort", 400);
+			return;
+	}
+	let defaultError = 503;
+	fetchModule(host + path).then((response) => {
+		const status = response.status;
+		if (status !== 200) {
+			setTimeout(() => {
+				callback(shouldAbort(status) ? "abort" : "next", status);
+			});
+			return;
+		}
+		defaultError = 501;
+		return response.json();
+	}).then((data) => {
+		if (typeof data !== "object" || data === null) {
+			setTimeout(() => {
+				if (data === 404) callback("abort", data);
+				else callback("next", defaultError);
+			});
+			return;
+		}
+		setTimeout(() => {
+			callback("success", data);
+		});
+	}).catch(() => {
+		callback("next", defaultError);
+	});
+};
+/**
+* Export module
+*/
+const fetchAPIModule = {
+	prepare,
+	send
+};
+
+/**
+* Remove callback
+*/
+function removeCallback(storages, id) {
+	storages.forEach((storage) => {
+		const items = storage.loaderCallbacks;
+		if (items) storage.loaderCallbacks = items.filter((row) => row.id !== id);
+	});
+}
+/**
+* Update all callbacks for provider and prefix
+*/
+function updateCallbacks(storage) {
+	if (!storage.pendingCallbacksFlag) {
+		storage.pendingCallbacksFlag = true;
+		setTimeout(() => {
+			storage.pendingCallbacksFlag = false;
+			const items = storage.loaderCallbacks ? storage.loaderCallbacks.slice(0) : [];
+			if (!items.length) return;
+			let hasPending = false;
+			const provider = storage.provider;
+			const prefix = storage.prefix;
+			items.forEach((item) => {
+				const icons = item.icons;
+				const oldLength = icons.pending.length;
+				icons.pending = icons.pending.filter((icon) => {
+					if (icon.prefix !== prefix) return true;
+					const name = icon.name;
+					if (storage.icons[name]) icons.loaded.push({
+						provider,
+						prefix,
+						name
+					});
+					else if (storage.missing.has(name)) icons.missing.push({
+						provider,
+						prefix,
+						name
+					});
+					else {
+						hasPending = true;
+						return true;
+					}
+					return false;
+				});
+				if (icons.pending.length !== oldLength) {
+					if (!hasPending) removeCallback([storage], item.id);
+					item.callback(icons.loaded.slice(0), icons.missing.slice(0), icons.pending.slice(0), item.abort);
+				}
+			});
+		});
+	}
+}
+/**
+* Unique id counter for callbacks
+*/
+let idCounter = 0;
+/**
+* Add callback
+*/
+function storeCallback(callback, icons, pendingSources) {
+	const id = idCounter++;
+	const abort = removeCallback.bind(null, pendingSources, id);
+	if (!icons.pending.length) return abort;
+	const item = {
+		id,
+		icons,
+		callback,
+		abort
+	};
+	pendingSources.forEach((storage) => {
+		(storage.loaderCallbacks || (storage.loaderCallbacks = [])).push(item);
+	});
+	return abort;
+}
+
+/**
+* Check if icons have been loaded
+*/
+function sortIcons(icons) {
+	const result = {
+		loaded: [],
+		missing: [],
+		pending: []
+	};
+	const storage = Object.create(null);
+	icons.sort((a, b) => {
+		if (a.provider !== b.provider) return a.provider.localeCompare(b.provider);
+		if (a.prefix !== b.prefix) return a.prefix.localeCompare(b.prefix);
+		return a.name.localeCompare(b.name);
+	});
+	let lastIcon = {
+		provider: "",
+		prefix: "",
+		name: ""
+	};
+	icons.forEach((icon) => {
+		if (lastIcon.name === icon.name && lastIcon.prefix === icon.prefix && lastIcon.provider === icon.provider) return;
+		lastIcon = icon;
+		const provider = icon.provider;
+		const prefix = icon.prefix;
+		const name = icon.name;
+		const providerStorage = storage[provider] || (storage[provider] = Object.create(null));
+		const localStorage = providerStorage[prefix] || (providerStorage[prefix] = getStorage(provider, prefix));
+		let list;
+		if (name in localStorage.icons) list = result.loaded;
+		else if (prefix === "" || localStorage.missing.has(name)) list = result.missing;
+		else list = result.pending;
+		const item = {
+			provider,
+			prefix,
+			name
+		};
+		list.push(item);
+	});
+	return result;
+}
+
+/**
+* Convert icons list from string/icon mix to icons and validate them
+*/
+function listToIcons(list, validate = true, simpleNames = false) {
+	const result = [];
+	list.forEach((item) => {
+		const icon = typeof item === "string" ? stringToIcon(item, validate, simpleNames) : item;
+		if (icon) result.push(icon);
+	});
+	return result;
+}
+
+/**
+* Default RedundancyConfig for API calls
+*/
+const defaultConfig$1 = {
+	resources: [],
+	index: 0,
+	timeout: 2e3,
+	rotate: 750,
+	random: false,
+	dataAfterTimeout: false
+};
+/**
+* Send query
+*/
+function sendQuery(config, payload, query, done) {
+	const resourcesCount = config.resources.length;
+	const startIndex = config.random ? Math.floor(Math.random() * resourcesCount) : config.index;
+	let resources;
+	if (config.random) {
+		let list = config.resources.slice(0);
+		resources = [];
+		while (list.length > 1) {
+			const nextIndex = Math.floor(Math.random() * list.length);
+			resources.push(list[nextIndex]);
+			list = list.slice(0, nextIndex).concat(list.slice(nextIndex + 1));
+		}
+		resources = resources.concat(list);
+	} else resources = config.resources.slice(startIndex).concat(config.resources.slice(0, startIndex));
+	const startTime = Date.now();
+	let status = "pending";
+	let queriesSent = 0;
+	let lastError;
+	let timer = null;
+	let queue = [];
+	let doneCallbacks = [];
+	if (typeof done === "function") doneCallbacks.push(done);
+	/**
+	* Reset timer
+	*/
+	function resetTimer() {
+		if (timer) {
+			clearTimeout(timer);
+			timer = null;
+		}
+	}
+	/**
+	* Abort everything
+	*/
+	function abort() {
+		if (status === "pending") status = "aborted";
+		resetTimer();
+		queue.forEach((item) => {
+			if (item.status === "pending") item.status = "aborted";
+		});
+		queue = [];
+	}
+	/**
+	* Add / replace callback to call when execution is complete.
+	* This can be used to abort pending query implementations when query is complete or aborted.
+	*/
+	function subscribe(callback, overwrite) {
+		if (overwrite) doneCallbacks = [];
+		if (typeof callback === "function") doneCallbacks.push(callback);
+	}
+	/**
+	* Get query status
+	*/
+	function getQueryStatus() {
+		return {
+			startTime,
+			payload,
+			status,
+			queriesSent,
+			queriesPending: queue.length,
+			subscribe,
+			abort
 		};
 	}
-	afterEach(function_) {
-		this._after = this._after || [];
-		this._after.push(function_);
-		return () => {
-			if (this._after !== void 0) {
-				const index = this._after.indexOf(function_);
-				if (index !== -1) this._after.splice(index, 1);
+	/**
+	* Fail query
+	*/
+	function failQuery() {
+		status = "failed";
+		doneCallbacks.forEach((callback) => {
+			callback(void 0, lastError);
+		});
+	}
+	/**
+	* Clear queue
+	*/
+	function clearQueue() {
+		queue.forEach((item) => {
+			if (item.status === "pending") item.status = "aborted";
+		});
+		queue = [];
+	}
+	/**
+	* Got response from module
+	*/
+	function moduleResponse(item, response, data) {
+		const isError = response !== "success";
+		queue = queue.filter((queued) => queued !== item);
+		switch (status) {
+			case "pending": break;
+			case "failed":
+				if (isError || !config.dataAfterTimeout) return;
+				break;
+			default: return;
+		}
+		if (response === "abort") {
+			lastError = data;
+			failQuery();
+			return;
+		}
+		if (isError) {
+			lastError = data;
+			if (!queue.length) if (!resources.length) failQuery();
+			else execNext();
+			return;
+		}
+		resetTimer();
+		clearQueue();
+		if (!config.random) {
+			const index = config.resources.indexOf(item.resource);
+			if (index !== -1 && index !== config.index) config.index = index;
+		}
+		status = "completed";
+		doneCallbacks.forEach((callback) => {
+			callback(data);
+		});
+	}
+	/**
+	* Execute next query
+	*/
+	function execNext() {
+		if (status !== "pending") return;
+		resetTimer();
+		const resource = resources.shift();
+		if (resource === void 0) {
+			if (queue.length) {
+				timer = setTimeout(() => {
+					resetTimer();
+					if (status === "pending") {
+						clearQueue();
+						failQuery();
+					}
+				}, config.timeout);
+				return;
+			}
+			failQuery();
+			return;
+		}
+		const item = {
+			status: "pending",
+			resource,
+			callback: (status, data) => {
+				moduleResponse(item, status, data);
 			}
 		};
+		queue.push(item);
+		queriesSent++;
+		timer = setTimeout(execNext, config.rotate);
+		query(resource, payload, item.callback);
+	}
+	setTimeout(execNext);
+	return getQueryStatus;
+}
+/**
+* Redundancy instance
+*/
+function initRedundancy(cfg) {
+	const config = {
+		...defaultConfig$1,
+		...cfg
+	};
+	let queries = [];
+	/**
+	* Remove aborted and completed queries
+	*/
+	function cleanup() {
+		queries = queries.filter((item) => item().status === "pending");
+	}
+	/**
+	* Send query
+	*/
+	function query(payload, queryCallback, doneCallback) {
+		const query = sendQuery(config, payload, queryCallback, (data, error) => {
+			cleanup();
+			if (doneCallback) doneCallback(data, error);
+		});
+		queries.push(query);
+		return query;
+	}
+	/**
+	* Find instance
+	*/
+	function find(callback) {
+		return queries.find((value) => {
+			return callback(value);
+		}) || null;
+	}
+	return {
+		query,
+		find,
+		setIndex: (index) => {
+			config.index = index;
+		},
+		getIndex: () => config.index,
+		cleanup
+	};
+}
+
+function emptyCallback$1() {}
+const redundancyCache = Object.create(null);
+/**
+* Get Redundancy instance for provider
+*/
+function getRedundancyCache(provider) {
+	if (!redundancyCache[provider]) {
+		const config = getAPIConfig(provider);
+		if (!config) return;
+		redundancyCache[provider] = {
+			config,
+			redundancy: initRedundancy(config)
+		};
+	}
+	return redundancyCache[provider];
+}
+/**
+* Send API query
+*/
+function sendAPIQuery(target, query, callback) {
+	let redundancy;
+	let send;
+	if (typeof target === "string") {
+		const api = getAPIModule(target);
+		if (!api) {
+			callback(void 0, 424);
+			return emptyCallback$1;
+		}
+		send = api.send;
+		const cached = getRedundancyCache(target);
+		if (cached) redundancy = cached.redundancy;
+	} else {
+		const config = createAPIConfig(target);
+		if (config) {
+			redundancy = initRedundancy(config);
+			const api = getAPIModule(target.resources ? target.resources[0] : "");
+			if (api) send = api.send;
+		}
+	}
+	if (!redundancy || !send) {
+		callback(void 0, 424);
+		return emptyCallback$1;
+	}
+	return redundancy.query(query, send, callback)().abort;
+}
+
+function emptyCallback() {}
+/**
+* Function called when new icons have been loaded
+*/
+function loadedNewIcons(storage) {
+	if (!storage.iconsLoaderFlag) {
+		storage.iconsLoaderFlag = true;
+		setTimeout(() => {
+			storage.iconsLoaderFlag = false;
+			updateCallbacks(storage);
+		});
+	}
+}
+/**
+* Check icon names for API
+*/
+function checkIconNamesForAPI(icons) {
+	const valid = [];
+	const invalid = [];
+	icons.forEach((name) => {
+		(name.match(matchIconName) ? valid : invalid).push(name);
+	});
+	return {
+		valid,
+		invalid
+	};
+}
+/**
+* Parse loader response
+*/
+function parseLoaderResponse(storage, icons, data) {
+	function checkMissing() {
+		const pending = storage.pendingIcons;
+		icons.forEach((name) => {
+			if (pending) pending.delete(name);
+			if (!storage.icons[name]) storage.missing.add(name);
+		});
+	}
+	if (data && typeof data === "object") try {
+		if (!addIconSet(storage, data).length) {
+			checkMissing();
+			return;
+		}
+	} catch (err) {
+		console.error(err);
+	}
+	checkMissing();
+	loadedNewIcons(storage);
+}
+/**
+* Handle response that can be async
+*/
+function parsePossiblyAsyncResponse(response, callback) {
+	if (response instanceof Promise) response.then((data) => {
+		callback(data);
+	}).catch(() => {
+		callback(null);
+	});
+	else callback(response);
+}
+/**
+* Load icons
+*/
+function loadNewIcons(storage, icons) {
+	if (!storage.iconsToLoad) storage.iconsToLoad = icons;
+	else storage.iconsToLoad = storage.iconsToLoad.concat(icons).sort();
+	if (!storage.iconsQueueFlag) {
+		storage.iconsQueueFlag = true;
+		setTimeout(() => {
+			storage.iconsQueueFlag = false;
+			const { provider, prefix } = storage;
+			const icons = storage.iconsToLoad;
+			delete storage.iconsToLoad;
+			if (!icons || !icons.length) return;
+			const customIconLoader = storage.loadIcon;
+			if (storage.loadIcons && (icons.length > 1 || !customIconLoader)) {
+				parsePossiblyAsyncResponse(storage.loadIcons(icons, prefix, provider), (data) => {
+					parseLoaderResponse(storage, icons, data);
+				});
+				return;
+			}
+			if (customIconLoader) {
+				icons.forEach((name) => {
+					parsePossiblyAsyncResponse(customIconLoader(name, prefix, provider), (data) => {
+						parseLoaderResponse(storage, [name], data ? {
+							prefix,
+							icons: { [name]: data }
+						} : null);
+					});
+				});
+				return;
+			}
+			const { valid, invalid } = checkIconNamesForAPI(icons);
+			if (invalid.length) parseLoaderResponse(storage, invalid, null);
+			if (!valid.length) return;
+			const api = prefix.match(matchIconName) ? getAPIModule(provider) : null;
+			if (!api) {
+				parseLoaderResponse(storage, valid, null);
+				return;
+			}
+			api.prepare(provider, prefix, valid).forEach((item) => {
+				sendAPIQuery(provider, item, (data) => {
+					parseLoaderResponse(storage, item.icons, data);
+				});
+			});
+		});
+	}
+}
+/**
+* Load icons
+*/
+const loadIcons = (icons, callback) => {
+	const sortedIcons = sortIcons(listToIcons(icons, true, allowSimpleNames()));
+	if (!sortedIcons.pending.length) {
+		let callCallback = true;
+		if (callback) setTimeout(() => {
+			if (callCallback) callback(sortedIcons.loaded, sortedIcons.missing, sortedIcons.pending, emptyCallback);
+		});
+		return () => {
+			callCallback = false;
+		};
+	}
+	const newIcons = Object.create(null);
+	const sources = [];
+	let lastProvider, lastPrefix;
+	sortedIcons.pending.forEach((icon) => {
+		const { provider, prefix } = icon;
+		if (prefix === lastPrefix && provider === lastProvider) return;
+		lastProvider = provider;
+		lastPrefix = prefix;
+		sources.push(getStorage(provider, prefix));
+		const providerNewIcons = newIcons[provider] || (newIcons[provider] = Object.create(null));
+		if (!providerNewIcons[prefix]) providerNewIcons[prefix] = [];
+	});
+	sortedIcons.pending.forEach((icon) => {
+		const { provider, prefix, name } = icon;
+		const storage = getStorage(provider, prefix);
+		const pendingQueue = storage.pendingIcons || (storage.pendingIcons = /* @__PURE__ */ new Set());
+		if (!pendingQueue.has(name)) {
+			pendingQueue.add(name);
+			newIcons[provider][prefix].push(name);
+		}
+	});
+	sources.forEach((storage) => {
+		const list = newIcons[storage.provider][storage.prefix];
+		if (list.length) loadNewIcons(storage, list);
+	});
+	return callback ? storeCallback(callback, sortedIcons, sources) : emptyCallback;
+};
+/**
+* Load one icon using Promise
+*/
+const loadIcon$1 = (icon) => {
+	return new Promise((fulfill, reject) => {
+		const iconObj = typeof icon === "string" ? stringToIcon(icon, true) : icon;
+		if (!iconObj) {
+			reject(icon);
+			return;
+		}
+		loadIcons([iconObj || icon], (loaded) => {
+			if (loaded.length && iconObj) {
+				const data = getIconData(iconObj);
+				if (data) {
+					fulfill({
+						...defaultIconProps,
+						...data
+					});
+					return;
+				}
+			}
+			reject(icon);
+		});
+	});
+};
+
+/**
+* Set custom loader for multiple icons
+*/
+function setCustomIconsLoader(loader, prefix, provider) {
+	getStorage("", prefix).loadIcons = loader;
+}
+
+/**
+* Convert IconifyIconCustomisations to FullIconCustomisations, checking value types
+*/
+function mergeCustomisations(defaults, item) {
+	const result = { ...defaults };
+	for (const key in item) {
+		const value = item[key];
+		const valueType = typeof value;
+		if (key in defaultIconSizeCustomisations) {
+			if (value === null || value && (valueType === "string" || valueType === "number")) result[key] = value;
+		} else if (valueType === typeof result[key]) result[key] = key === "rotate" ? value % 4 : value;
+	}
+	return result;
+}
+
+const separator = /[\s,]+/;
+/**
+* Apply "flip" string to icon customisations
+*/
+function flipFromString(custom, flip) {
+	flip.split(separator).forEach((str) => {
+		switch (str.trim()) {
+			case "horizontal":
+				custom.hFlip = true;
+				break;
+			case "vertical":
+				custom.vFlip = true;
+				break;
+		}
+	});
+}
+
+/**
+* Get rotation value
+*/
+function rotateFromString(value, defaultValue = 0) {
+	const units = value.replace(/^-?[0-9.]*/, "");
+	function cleanup(value) {
+		while (value < 0) value += 4;
+		return value % 4;
+	}
+	if (units === "") {
+		const num = parseInt(value);
+		return isNaN(num) ? 0 : cleanup(num);
+	} else if (units !== value) {
+		let split = 0;
+		switch (units) {
+			case "%":
+				split = 25;
+				break;
+			case "deg": split = 90;
+		}
+		if (split) {
+			let num = parseFloat(value.slice(0, value.length - units.length));
+			if (isNaN(num)) return 0;
+			num = num / split;
+			return num % 1 === 0 ? cleanup(num) : 0;
+		}
+	}
+	return defaultValue;
+}
+
+/**
+* Generate <svg>
+*/
+function iconToHTML(body, attributes) {
+	let renderAttribsHTML = body.indexOf("xlink:") === -1 ? "" : " xmlns:xlink=\"http://www.w3.org/1999/xlink\"";
+	for (const attr in attributes) renderAttribsHTML += " " + attr + "=\"" + attributes[attr] + "\"";
+	return "<svg xmlns=\"http://www.w3.org/2000/svg\"" + renderAttribsHTML + ">" + body + "</svg>";
+}
+
+/**
+* Encode SVG for use in url()
+*
+* Short alternative to encodeURIComponent() that encodes only stuff used in SVG, generating
+* smaller code.
+*/
+function encodeSVGforURL(svg) {
+	return svg.replace(/"/g, "'").replace(/%/g, "%25").replace(/#/g, "%23").replace(/</g, "%3C").replace(/>/g, "%3E").replace(/\s+/g, " ");
+}
+/**
+* Generate data: URL from SVG
+*/
+function svgToData(svg) {
+	return "data:image/svg+xml," + encodeSVGforURL(svg);
+}
+/**
+* Generate url() from SVG
+*/
+function svgToURL(svg) {
+	return "url(\"" + svgToData(svg) + "\")";
+}
+
+const defaultExtendedIconCustomisations = {
+    ...defaultIconCustomisations,
+    inline: false,
+};
+
+/**
+ * Default SVG attributes
+ */
+const svgDefaults = {
+    'xmlns': 'http://www.w3.org/2000/svg',
+    'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+    'aria-hidden': true,
+    'role': 'img',
+};
+/**
+ * Style modes
+ */
+const commonProps = {
+    display: 'inline-block',
+};
+const monotoneProps = {
+    backgroundColor: 'currentColor',
+};
+const coloredProps = {
+    backgroundColor: 'transparent',
+};
+// Dynamically add common props to variables above
+const propsToAdd = {
+    Image: 'var(--svg)',
+    Repeat: 'no-repeat',
+    Size: '100% 100%',
+};
+const propsToAddTo = {
+    webkitMask: monotoneProps,
+    mask: monotoneProps,
+    background: coloredProps,
+};
+for (const prefix in propsToAddTo) {
+    const list = propsToAddTo[prefix];
+    for (const prop in propsToAdd) {
+        list[prefix + prop] = propsToAdd[prop];
+    }
+}
+/**
+ * Aliases for customisations.
+ * In Vue 'v-' properties are reserved, so v-flip must be renamed
+ */
+const customisationAliases = {};
+['horizontal', 'vertical'].forEach((prefix) => {
+    const attr = prefix.slice(0, 1) + 'Flip';
+    // vertical-flip
+    customisationAliases[prefix + '-flip'] = attr;
+    // v-flip
+    customisationAliases[prefix.slice(0, 1) + '-flip'] = attr;
+    // verticalFlip
+    customisationAliases[prefix + 'Flip'] = attr;
+});
+/**
+ * Fix size: add 'px' to numbers
+ */
+function fixSize(value) {
+    return value + (value.match(/^[-0-9.]+$/) ? 'px' : '');
+}
+/**
+ * Render icon
+ */
+const render = (
+// Icon must be validated before calling this function
+icon, 
+// Partial properties
+props) => {
+    // Split properties
+    const customisations = mergeCustomisations(defaultExtendedIconCustomisations, props);
+    const componentProps = { ...svgDefaults };
+    // Check mode
+    const mode = props.mode || 'svg';
+    // Copy style
+    const style = {};
+    const propsStyle = props.style;
+    const customStyle = typeof propsStyle === 'object' && !(propsStyle instanceof Array)
+        ? propsStyle
+        : {};
+    // Get element properties
+    for (let key in props) {
+        const value = props[key];
+        if (value === void 0) {
+            continue;
+        }
+        switch (key) {
+            // Properties to ignore
+            case 'icon':
+            case 'style':
+            case 'onLoad':
+            case 'mode':
+            case 'ssr':
+            case 'customise':
+                break;
+            // Boolean attributes
+            case 'inline':
+            case 'hFlip':
+            case 'vFlip':
+                customisations[key] =
+                    value === true || value === 'true' || value === 1;
+                break;
+            // Flip as string: 'horizontal,vertical'
+            case 'flip':
+                if (typeof value === 'string') {
+                    flipFromString(customisations, value);
+                }
+                break;
+            // Color: override style
+            case 'color':
+                style.color = value;
+                break;
+            // Rotation as string
+            case 'rotate':
+                if (typeof value === 'string') {
+                    customisations[key] = rotateFromString(value);
+                }
+                else if (typeof value === 'number') {
+                    customisations[key] = value;
+                }
+                break;
+            // Remove aria-hidden
+            case 'ariaHidden':
+            case 'aria-hidden':
+                // Vue transforms 'aria-hidden' property to 'ariaHidden'
+                if (value !== true && value !== 'true') {
+                    delete componentProps['aria-hidden'];
+                }
+                break;
+            default: {
+                const alias = customisationAliases[key];
+                if (alias) {
+                    // Aliases for boolean customisations
+                    if (value === true || value === 'true' || value === 1) {
+                        customisations[alias] = true;
+                    }
+                }
+                else if (defaultExtendedIconCustomisations[key] === void 0) {
+                    // Copy missing property if it does not exist in customisations
+                    componentProps[key] = value;
+                }
+            }
+        }
+    }
+    // Generate icon
+    const item = iconToSVG(icon, customisations);
+    const renderAttribs = item.attributes;
+    // Inline display
+    if (customisations.inline) {
+        style.verticalAlign = '-0.125em';
+    }
+    if (mode === 'svg') {
+        // Add style
+        componentProps.style = {
+            ...style,
+            ...customStyle,
+        };
+        // Add icon stuff
+        Object.assign(componentProps, renderAttribs);
+        // Add innerHTML and style to props
+        componentProps['innerHTML'] = replaceIDs(item.body);
+        // Render icon
+        return vueExports$1.h('svg', componentProps);
+    }
+    // Render <span> with style
+    const { body, width, height } = icon;
+    const useMask = mode === 'mask' ||
+        (mode === 'bg' ? false : body.indexOf('currentColor') !== -1);
+    // Generate SVG
+    const html = iconToHTML(body, {
+        ...renderAttribs,
+        width: width + '',
+        height: height + '',
+    });
+    // Generate style
+    componentProps.style = {
+        ...style,
+        '--svg': svgToURL(html),
+        'width': fixSize(renderAttribs.width),
+        'height': fixSize(renderAttribs.height),
+        ...commonProps,
+        ...(useMask ? monotoneProps : coloredProps),
+        ...customStyle,
+    };
+    return vueExports$1.h('span', componentProps);
+};
+
+/**
+ * Initialise stuff
+ */
+// Enable short names
+allowSimpleNames(true);
+// Set API module
+setAPIModule('', fetchAPIModule);
+/**
+ * Empty icon data, rendered when icon is not available
+ */
+const emptyIcon = {
+    ...defaultIconProps,
+    body: '',
+};
+/**
+ * Component
+ */
+const Icon = vueExports$1.defineComponent((props, { emit }) => {
+    const loader = vueExports$1.ref(null);
+    function abortLoading() {
+        if (loader.value) {
+            loader.value.abort?.();
+            loader.value = null;
+        }
+    }
+    // Render state
+    const rendering = vueExports$1.ref(!!props.ssr);
+    const lastRenderedIconName = vueExports$1.ref('');
+    const iconData = vueExports$1.shallowRef(null);
+    // Update icon data
+    function getIcon() {
+        const icon = props.icon;
+        // Icon is an object
+        if (typeof icon === 'object' &&
+            icon !== null &&
+            typeof icon.body === 'string') {
+            lastRenderedIconName.value = '';
+            return {
+                data: icon,
+            };
+        }
+        // Check for valid icon name
+        let iconName;
+        if (typeof icon !== 'string' ||
+            (iconName = stringToIcon(icon, false, true)) === null) {
+            return null;
+        }
+        // Load icon
+        let data = getIconData(iconName);
+        if (!data) {
+            // Icon data is not available
+            const oldState = loader.value;
+            if (!oldState || oldState.name !== icon) {
+                // Icon name does not match old loader state
+                if (data === null) {
+                    // Failed to load
+                    loader.value = {
+                        name: icon,
+                    };
+                }
+                else {
+                    loader.value = {
+                        name: icon,
+                        abort: loadIcons([iconName], updateIconData),
+                    };
+                }
+            }
+            return null;
+        }
+        // Icon data is available
+        abortLoading();
+        if (lastRenderedIconName.value !== icon) {
+            lastRenderedIconName.value = icon;
+            // Emit on next tick because render will be called on next tick
+            vueExports$1.nextTick(() => {
+                emit('load', icon);
+            });
+        }
+        // Customise icon
+        const customise = props.customise;
+        if (customise) {
+            // Clone data and customise it
+            data = Object.assign({}, data);
+            const customised = customise(data.body, iconName.name, iconName.prefix, iconName.provider);
+            if (typeof customised === 'string') {
+                data.body = customised;
+            }
+        }
+        // Add classes
+        const classes = ['iconify'];
+        if (iconName.prefix !== '') {
+            classes.push('iconify--' + iconName.prefix);
+        }
+        if (iconName.provider !== '') {
+            classes.push('iconify--' + iconName.provider);
+        }
+        return { data, classes };
+    }
+    function updateIconData() {
+        const icon = getIcon();
+        if (!icon) {
+            iconData.value = null;
+        }
+        else if (icon.data !== iconData.value?.data) {
+            iconData.value = icon;
+        }
+    }
+    // Set icon data
+    if (rendering.value) {
+        updateIconData();
+    }
+    else {
+        vueExports$1.onMounted(() => {
+            rendering.value = true;
+            updateIconData();
+        });
+    }
+    vueExports$1.watch(() => props.icon, updateIconData);
+    // Abort loading on unmount
+    vueExports$1.onUnmounted(abortLoading);
+    // Render function
+    return () => {
+        // Get icon data
+        const icon = iconData.value;
+        if (!icon) {
+            // Icon is not available
+            return render(emptyIcon, props);
+        }
+        // Add classes
+        let newProps = props;
+        if (icon.classes) {
+            newProps = {
+                ...props,
+                class: icon.classes.join(' '),
+            };
+        }
+        // Render icon
+        return render({
+            ...defaultIconProps,
+            ...icon.data,
+        }, newProps);
+    };
+}, {
+    props: [
+        // Icon and render mode
+        'icon',
+        'mode',
+        'ssr',
+        // Layout and style
+        'width',
+        'height',
+        'style',
+        'color',
+        'inline',
+        // Transformations
+        'rotate',
+        'hFlip',
+        'horizontalFlip',
+        'vFlip',
+        'verticalFlip',
+        'flip',
+        // Misc
+        'id',
+        'ariaHidden',
+        'customise',
+        'title',
+    ],
+    emits: ['load'],
+});
+/**
+ * Internal API
+ */
+const _api = {
+    getAPIConfig,
+    setAPIModule,
+    sendAPIQuery,
+    setFetch,
+    getFetch,
+    listAPIProviders,
+};
+
+var l={inherit:"inherit",current:"currentcolor",transparent:"transparent",black:"#000",white:"#fff",slate:{50:"oklch(98.4% 0.003 247.858)",100:"oklch(96.8% 0.007 247.896)",200:"oklch(92.9% 0.013 255.508)",300:"oklch(86.9% 0.022 252.894)",400:"oklch(70.4% 0.04 256.788)",500:"oklch(55.4% 0.046 257.417)",600:"oklch(44.6% 0.043 257.281)",700:"oklch(37.2% 0.044 257.287)",800:"oklch(27.9% 0.041 260.031)",900:"oklch(20.8% 0.042 265.755)",950:"oklch(12.9% 0.042 264.695)"},gray:{50:"oklch(98.5% 0.002 247.839)",100:"oklch(96.7% 0.003 264.542)",200:"oklch(92.8% 0.006 264.531)",300:"oklch(87.2% 0.01 258.338)",400:"oklch(70.7% 0.022 261.325)",500:"oklch(55.1% 0.027 264.364)",600:"oklch(44.6% 0.03 256.802)",700:"oklch(37.3% 0.034 259.733)",800:"oklch(27.8% 0.033 256.848)",900:"oklch(21% 0.034 264.665)",950:"oklch(13% 0.028 261.692)"},zinc:{50:"oklch(98.5% 0 0)",100:"oklch(96.7% 0.001 286.375)",200:"oklch(92% 0.004 286.32)",300:"oklch(87.1% 0.006 286.286)",400:"oklch(70.5% 0.015 286.067)",500:"oklch(55.2% 0.016 285.938)",600:"oklch(44.2% 0.017 285.786)",700:"oklch(37% 0.013 285.805)",800:"oklch(27.4% 0.006 286.033)",900:"oklch(21% 0.006 285.885)",950:"oklch(14.1% 0.005 285.823)"},neutral:{50:"oklch(98.5% 0 0)",100:"oklch(97% 0 0)",200:"oklch(92.2% 0 0)",300:"oklch(87% 0 0)",400:"oklch(70.8% 0 0)",500:"oklch(55.6% 0 0)",600:"oklch(43.9% 0 0)",700:"oklch(37.1% 0 0)",800:"oklch(26.9% 0 0)",900:"oklch(20.5% 0 0)",950:"oklch(14.5% 0 0)"},stone:{50:"oklch(98.5% 0.001 106.423)",100:"oklch(97% 0.001 106.424)",200:"oklch(92.3% 0.003 48.717)",300:"oklch(86.9% 0.005 56.366)",400:"oklch(70.9% 0.01 56.259)",500:"oklch(55.3% 0.013 58.071)",600:"oklch(44.4% 0.011 73.639)",700:"oklch(37.4% 0.01 67.558)",800:"oklch(26.8% 0.007 34.298)",900:"oklch(21.6% 0.006 56.043)",950:"oklch(14.7% 0.004 49.25)"},mauve:{50:"oklch(98.5% 0 0)",100:"oklch(96% 0.003 325.6)",200:"oklch(92.2% 0.005 325.62)",300:"oklch(86.5% 0.012 325.68)",400:"oklch(71.1% 0.019 323.02)",500:"oklch(54.2% 0.034 322.5)",600:"oklch(43.5% 0.029 321.78)",700:"oklch(36.4% 0.029 323.89)",800:"oklch(26.3% 0.024 320.12)",900:"oklch(21.2% 0.019 322.12)",950:"oklch(14.5% 0.008 326)"},olive:{50:"oklch(98.8% 0.003 106.5)",100:"oklch(96.6% 0.005 106.5)",200:"oklch(93% 0.007 106.5)",300:"oklch(88% 0.011 106.6)",400:"oklch(73.7% 0.021 106.9)",500:"oklch(58% 0.031 107.3)",600:"oklch(46.6% 0.025 107.3)",700:"oklch(39.4% 0.023 107.4)",800:"oklch(28.6% 0.016 107.4)",900:"oklch(22.8% 0.013 107.4)",950:"oklch(15.3% 0.006 107.1)"},mist:{50:"oklch(98.7% 0.002 197.1)",100:"oklch(96.3% 0.002 197.1)",200:"oklch(92.5% 0.005 214.3)",300:"oklch(87.2% 0.007 219.6)",400:"oklch(72.3% 0.014 214.4)",500:"oklch(56% 0.021 213.5)",600:"oklch(45% 0.017 213.2)",700:"oklch(37.8% 0.015 216)",800:"oklch(27.5% 0.011 216.9)",900:"oklch(21.8% 0.008 223.9)",950:"oklch(14.8% 0.004 228.8)"},taupe:{50:"oklch(98.6% 0.002 67.8)",100:"oklch(96% 0.002 17.2)",200:"oklch(92.2% 0.005 34.3)",300:"oklch(86.8% 0.007 39.5)",400:"oklch(71.4% 0.014 41.2)",500:"oklch(54.7% 0.021 43.1)",600:"oklch(43.8% 0.017 39.3)",700:"oklch(36.7% 0.016 35.7)",800:"oklch(26.8% 0.011 36.5)",900:"oklch(21.4% 0.009 43.1)",950:"oklch(14.7% 0.004 49.3)"},red:{50:"oklch(97.1% 0.013 17.38)",100:"oklch(93.6% 0.032 17.717)",200:"oklch(88.5% 0.062 18.334)",300:"oklch(80.8% 0.114 19.571)",400:"oklch(70.4% 0.191 22.216)",500:"oklch(63.7% 0.237 25.331)",600:"oklch(57.7% 0.245 27.325)",700:"oklch(50.5% 0.213 27.518)",800:"oklch(44.4% 0.177 26.899)",900:"oklch(39.6% 0.141 25.723)",950:"oklch(25.8% 0.092 26.042)"},orange:{50:"oklch(98% 0.016 73.684)",100:"oklch(95.4% 0.038 75.164)",200:"oklch(90.1% 0.076 70.697)",300:"oklch(83.7% 0.128 66.29)",400:"oklch(75% 0.183 55.934)",500:"oklch(70.5% 0.213 47.604)",600:"oklch(64.6% 0.222 41.116)",700:"oklch(55.3% 0.195 38.402)",800:"oklch(47% 0.157 37.304)",900:"oklch(40.8% 0.123 38.172)",950:"oklch(26.6% 0.079 36.259)"},amber:{50:"oklch(98.7% 0.022 95.277)",100:"oklch(96.2% 0.059 95.617)",200:"oklch(92.4% 0.12 95.746)",300:"oklch(87.9% 0.169 91.605)",400:"oklch(82.8% 0.189 84.429)",500:"oklch(76.9% 0.188 70.08)",600:"oklch(66.6% 0.179 58.318)",700:"oklch(55.5% 0.163 48.998)",800:"oklch(47.3% 0.137 46.201)",900:"oklch(41.4% 0.112 45.904)",950:"oklch(27.9% 0.077 45.635)"},yellow:{50:"oklch(98.7% 0.026 102.212)",100:"oklch(97.3% 0.071 103.193)",200:"oklch(94.5% 0.129 101.54)",300:"oklch(90.5% 0.182 98.111)",400:"oklch(85.2% 0.199 91.936)",500:"oklch(79.5% 0.184 86.047)",600:"oklch(68.1% 0.162 75.834)",700:"oklch(55.4% 0.135 66.442)",800:"oklch(47.6% 0.114 61.907)",900:"oklch(42.1% 0.095 57.708)",950:"oklch(28.6% 0.066 53.813)"},lime:{50:"oklch(98.6% 0.031 120.757)",100:"oklch(96.7% 0.067 122.328)",200:"oklch(93.8% 0.127 124.321)",300:"oklch(89.7% 0.196 126.665)",400:"oklch(84.1% 0.238 128.85)",500:"oklch(76.8% 0.233 130.85)",600:"oklch(64.8% 0.2 131.684)",700:"oklch(53.2% 0.157 131.589)",800:"oklch(45.3% 0.124 130.933)",900:"oklch(40.5% 0.101 131.063)",950:"oklch(27.4% 0.072 132.109)"},green:{50:"oklch(98.2% 0.018 155.826)",100:"oklch(96.2% 0.044 156.743)",200:"oklch(92.5% 0.084 155.995)",300:"oklch(87.1% 0.15 154.449)",400:"oklch(79.2% 0.209 151.711)",500:"oklch(72.3% 0.219 149.579)",600:"oklch(62.7% 0.194 149.214)",700:"oklch(52.7% 0.154 150.069)",800:"oklch(44.8% 0.119 151.328)",900:"oklch(39.3% 0.095 152.535)",950:"oklch(26.6% 0.065 152.934)"},emerald:{50:"oklch(97.9% 0.021 166.113)",100:"oklch(95% 0.052 163.051)",200:"oklch(90.5% 0.093 164.15)",300:"oklch(84.5% 0.143 164.978)",400:"oklch(76.5% 0.177 163.223)",500:"oklch(69.6% 0.17 162.48)",600:"oklch(59.6% 0.145 163.225)",700:"oklch(50.8% 0.118 165.612)",800:"oklch(43.2% 0.095 166.913)",900:"oklch(37.8% 0.077 168.94)",950:"oklch(26.2% 0.051 172.552)"},teal:{50:"oklch(98.4% 0.014 180.72)",100:"oklch(95.3% 0.051 180.801)",200:"oklch(91% 0.096 180.426)",300:"oklch(85.5% 0.138 181.071)",400:"oklch(77.7% 0.152 181.912)",500:"oklch(70.4% 0.14 182.503)",600:"oklch(60% 0.118 184.704)",700:"oklch(51.1% 0.096 186.391)",800:"oklch(43.7% 0.078 188.216)",900:"oklch(38.6% 0.063 188.416)",950:"oklch(27.7% 0.046 192.524)"},cyan:{50:"oklch(98.4% 0.019 200.873)",100:"oklch(95.6% 0.045 203.388)",200:"oklch(91.7% 0.08 205.041)",300:"oklch(86.5% 0.127 207.078)",400:"oklch(78.9% 0.154 211.53)",500:"oklch(71.5% 0.143 215.221)",600:"oklch(60.9% 0.126 221.723)",700:"oklch(52% 0.105 223.128)",800:"oklch(45% 0.085 224.283)",900:"oklch(39.8% 0.07 227.392)",950:"oklch(30.2% 0.056 229.695)"},sky:{50:"oklch(97.7% 0.013 236.62)",100:"oklch(95.1% 0.026 236.824)",200:"oklch(90.1% 0.058 230.902)",300:"oklch(82.8% 0.111 230.318)",400:"oklch(74.6% 0.16 232.661)",500:"oklch(68.5% 0.169 237.323)",600:"oklch(58.8% 0.158 241.966)",700:"oklch(50% 0.134 242.749)",800:"oklch(44.3% 0.11 240.79)",900:"oklch(39.1% 0.09 240.876)",950:"oklch(29.3% 0.066 243.157)"},blue:{50:"oklch(97% 0.014 254.604)",100:"oklch(93.2% 0.032 255.585)",200:"oklch(88.2% 0.059 254.128)",300:"oklch(80.9% 0.105 251.813)",400:"oklch(70.7% 0.165 254.624)",500:"oklch(62.3% 0.214 259.815)",600:"oklch(54.6% 0.245 262.881)",700:"oklch(48.8% 0.243 264.376)",800:"oklch(42.4% 0.199 265.638)",900:"oklch(37.9% 0.146 265.522)",950:"oklch(28.2% 0.091 267.935)"},indigo:{50:"oklch(96.2% 0.018 272.314)",100:"oklch(93% 0.034 272.788)",200:"oklch(87% 0.065 274.039)",300:"oklch(78.5% 0.115 274.713)",400:"oklch(67.3% 0.182 276.935)",500:"oklch(58.5% 0.233 277.117)",600:"oklch(51.1% 0.262 276.966)",700:"oklch(45.7% 0.24 277.023)",800:"oklch(39.8% 0.195 277.366)",900:"oklch(35.9% 0.144 278.697)",950:"oklch(25.7% 0.09 281.288)"},violet:{50:"oklch(96.9% 0.016 293.756)",100:"oklch(94.3% 0.029 294.588)",200:"oklch(89.4% 0.057 293.283)",300:"oklch(81.1% 0.111 293.571)",400:"oklch(70.2% 0.183 293.541)",500:"oklch(60.6% 0.25 292.717)",600:"oklch(54.1% 0.281 293.009)",700:"oklch(49.1% 0.27 292.581)",800:"oklch(43.2% 0.232 292.759)",900:"oklch(38% 0.189 293.745)",950:"oklch(28.3% 0.141 291.089)"},purple:{50:"oklch(97.7% 0.014 308.299)",100:"oklch(94.6% 0.033 307.174)",200:"oklch(90.2% 0.063 306.703)",300:"oklch(82.7% 0.119 306.383)",400:"oklch(71.4% 0.203 305.504)",500:"oklch(62.7% 0.265 303.9)",600:"oklch(55.8% 0.288 302.321)",700:"oklch(49.6% 0.265 301.924)",800:"oklch(43.8% 0.218 303.724)",900:"oklch(38.1% 0.176 304.987)",950:"oklch(29.1% 0.149 302.717)"},fuchsia:{50:"oklch(97.7% 0.017 320.058)",100:"oklch(95.2% 0.037 318.852)",200:"oklch(90.3% 0.076 319.62)",300:"oklch(83.3% 0.145 321.434)",400:"oklch(74% 0.238 322.16)",500:"oklch(66.7% 0.295 322.15)",600:"oklch(59.1% 0.293 322.896)",700:"oklch(51.8% 0.253 323.949)",800:"oklch(45.2% 0.211 324.591)",900:"oklch(40.1% 0.17 325.612)",950:"oklch(29.3% 0.136 325.661)"},pink:{50:"oklch(97.1% 0.014 343.198)",100:"oklch(94.8% 0.028 342.258)",200:"oklch(89.9% 0.061 343.231)",300:"oklch(82.3% 0.12 346.018)",400:"oklch(71.8% 0.202 349.761)",500:"oklch(65.6% 0.241 354.308)",600:"oklch(59.2% 0.249 0.584)",700:"oklch(52.5% 0.223 3.958)",800:"oklch(45.9% 0.187 3.815)",900:"oklch(40.8% 0.153 2.432)",950:"oklch(28.4% 0.109 3.907)"},rose:{50:"oklch(96.9% 0.015 12.422)",100:"oklch(94.1% 0.03 12.58)",200:"oklch(89.2% 0.058 10.001)",300:"oklch(81% 0.117 11.638)",400:"oklch(71.2% 0.194 13.428)",500:"oklch(64.5% 0.246 16.439)",600:"oklch(58.6% 0.253 17.585)",700:"oklch(51.4% 0.222 16.935)",800:"oklch(45.5% 0.188 13.697)",900:"oklch(41% 0.159 10.272)",950:"oklch(27.1% 0.105 12.094)"}};
+
+//#region src/index.ts
+const DEBOUNCE_DEFAULTS = { trailing: true };
+/**
+Debounce functions
+@param fn - Promise-returning/async function to debounce.
+@param wait - Milliseconds to wait before calling `fn`. Default value is 25ms
+@returns A function that delays calling `fn` until after `wait` milliseconds have elapsed since the last time it was called.
+@example
+```
+import { debounce } from 'perfect-debounce';
+const expensiveCall = async input => input;
+const debouncedFn = debounce(expensiveCall, 200);
+for (const number of [1, 2, 3]) {
+console.log(await debouncedFn(number));
+}
+//=> 1
+//=> 2
+//=> 3
+```
+*/
+function debounce(fn, wait = 25, options = {}) {
+	options = {
+		...DEBOUNCE_DEFAULTS,
+		...options
+	};
+	if (!Number.isFinite(wait)) throw new TypeError("Expected `wait` to be a finite number");
+	let leadingValue;
+	let timeout;
+	let resolveList = [];
+	let currentPromise;
+	let trailingArgs;
+	const applyFn = (_this, args) => {
+		currentPromise = _applyPromised(fn, _this, args);
+		currentPromise.finally(() => {
+			currentPromise = null;
+			if (options.trailing && trailingArgs && !timeout) {
+				const promise = applyFn(_this, trailingArgs);
+				trailingArgs = null;
+				return promise;
+			}
+		});
+		return currentPromise;
+	};
+	const debounced = function(...args) {
+		if (options.trailing) trailingArgs = args;
+		if (currentPromise) return currentPromise;
+		return new Promise((resolve) => {
+			const shouldCallNow = !timeout && options.leading;
+			clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				timeout = null;
+				const promise = options.leading ? leadingValue : applyFn(this, args);
+				trailingArgs = null;
+				for (const _resolve of resolveList) _resolve(promise);
+				resolveList = [];
+			}, wait);
+			if (shouldCallNow) {
+				leadingValue = applyFn(this, args);
+				resolve(leadingValue);
+			} else resolveList.push(resolve);
+		});
+	};
+	const _clearTimeout = (timer) => {
+		if (timer) {
+			clearTimeout(timer);
+			timeout = null;
+		}
+	};
+	debounced.isPending = () => !!timeout;
+	debounced.cancel = () => {
+		_clearTimeout(timeout);
+		resolveList = [];
+		trailingArgs = null;
+	};
+	debounced.flush = () => {
+		_clearTimeout(timeout);
+		if (!trailingArgs || currentPromise) return;
+		const args = trailingArgs;
+		trailingArgs = null;
+		return applyFn(this, args);
+	};
+	return debounced;
+}
+async function _applyPromised(fn, _this, args) {
+	return await fn.apply(_this, args);
+}
+
+var serverRenderer_cjs_prod = {};
+
+const require$$0 = /*@__PURE__*/getDefaultExportFromNamespaceIfNotNamed(vue);
+
+/**
+* @vue/server-renderer v3.5.34
+* (c) 2018-present Yuxi (Evan) You and Vue contributors
+* @license MIT
+**/
+
+Object.defineProperty(serverRenderer_cjs_prod, '__esModule', { value: true });
+
+var Vue = require$$0;
+var shared = shared_cjs_prod;
+var compilerSsr = compilerSsr_cjs;
+
+function _interopNamespaceDefault$1(e) {
+  var n = Object.create(null);
+  if (e) {
+    for (var k in e) {
+      n[k] = e[k];
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+
+var Vue__namespace = /*#__PURE__*/_interopNamespaceDefault$1(Vue);
+
+const shouldIgnoreProp = /* @__PURE__ */ shared.makeMap(
+  `,key,ref,innerHTML,textContent,ref_key,ref_for`
+);
+function ssrRenderAttrs(props, tag) {
+  let ret = "";
+  for (let key in props) {
+    if (shouldIgnoreProp(key) || shared.isOn(key) || tag === "textarea" && key === "value" || // force as property (not rendered in SSR)
+    key.startsWith(".")) {
+      continue;
+    }
+    const value = props[key];
+    if (key.startsWith("^")) key = key.slice(1);
+    if (key === "class") {
+      ret += ` class="${ssrRenderClass(value)}"`;
+    } else if (key === "style") {
+      ret += ` style="${ssrRenderStyle(value)}"`;
+    } else if (key === "className") {
+      if (value != null) {
+        ret += ` class="${shared.escapeHtml(String(value))}"`;
+      }
+    } else {
+      ret += ssrRenderDynamicAttr(key, value, tag);
+    }
+  }
+  return ret;
+}
+function ssrRenderDynamicAttr(key, value, tag) {
+  if (!shared.isRenderableAttrValue(value)) {
+    return ``;
+  }
+  const attrKey = tag && (tag.indexOf("-") > 0 || shared.isSVGTag(tag)) ? key : shared.propsToAttrMap[key] || key.toLowerCase();
+  if (shared.isBooleanAttr(attrKey)) {
+    return shared.includeBooleanAttr(value) ? ` ${attrKey}` : ``;
+  } else if (shared.isSSRSafeAttrName(attrKey)) {
+    return value === "" ? ` ${attrKey}` : ` ${attrKey}="${shared.escapeHtml(value)}"`;
+  } else {
+    console.warn(
+      `[@vue/server-renderer] Skipped rendering unsafe attribute name: ${attrKey}`
+    );
+    return ``;
+  }
+}
+function ssrRenderAttr(key, value) {
+  if (!shared.isRenderableAttrValue(value)) {
+    return ``;
+  }
+  return ` ${key}="${shared.escapeHtml(value)}"`;
+}
+function ssrRenderClass(raw) {
+  return shared.escapeHtml(shared.normalizeClass(raw));
+}
+function ssrRenderStyle(raw) {
+  if (!raw) {
+    return "";
+  }
+  if (shared.isString(raw)) {
+    return shared.escapeHtml(raw);
+  }
+  const styles = shared.normalizeStyle(ssrResetCssVars(raw));
+  return shared.escapeHtml(shared.stringifyStyle(styles));
+}
+function ssrResetCssVars(raw) {
+  if (!shared.isArray(raw) && shared.isObject(raw)) {
+    const res = {};
+    for (const key in raw) {
+      if (key.startsWith(":--")) {
+        res[key.slice(1)] = shared.normalizeCssVarValue(raw[key]);
+      } else {
+        res[key] = raw[key];
+      }
+    }
+    return res;
+  }
+  return raw;
+}
+
+function ssrRenderComponent(comp, props = null, children = null, parentComponent = null, slotScopeId) {
+  return renderComponentVNode(
+    Vue.createVNode(comp, props, children),
+    parentComponent,
+    slotScopeId
+  );
+}
+
+const { ensureValidVNode } = Vue.ssrUtils;
+function ssrRenderSlot(slots, slotName, slotProps, fallbackRenderFn, push, parentComponent, slotScopeId) {
+  push(`<!--[-->`);
+  ssrRenderSlotInner(
+    slots,
+    slotName,
+    slotProps,
+    fallbackRenderFn,
+    push,
+    parentComponent,
+    slotScopeId
+  );
+  push(`<!--]-->`);
+}
+function ssrRenderSlotInner(slots, slotName, slotProps, fallbackRenderFn, push, parentComponent, slotScopeId, transition) {
+  const slotFn = slots[slotName];
+  if (slotFn) {
+    const slotBuffer = [];
+    const bufferedPush = (item) => {
+      slotBuffer.push(item);
+    };
+    const ret = slotFn(
+      slotProps,
+      bufferedPush,
+      parentComponent,
+      slotScopeId ? " " + slotScopeId : ""
+    );
+    if (shared.isArray(ret)) {
+      const validSlotContent = ensureValidVNode(ret);
+      if (validSlotContent) {
+        renderVNodeChildren(
+          push,
+          validSlotContent,
+          parentComponent,
+          slotScopeId
+        );
+      } else if (fallbackRenderFn) {
+        fallbackRenderFn();
+      } else if (transition) {
+        push(`<!---->`);
+      }
+    } else {
+      let isEmptySlot = true;
+      if (transition) {
+        isEmptySlot = false;
+      } else {
+        for (let i = 0; i < slotBuffer.length; i++) {
+          if (!isComment(slotBuffer[i])) {
+            isEmptySlot = false;
+            break;
+          }
+        }
+      }
+      if (isEmptySlot) {
+        if (fallbackRenderFn) {
+          fallbackRenderFn();
+        }
+      } else {
+        let start = 0;
+        let end = slotBuffer.length;
+        if (transition && slotBuffer[0] === "<!--[-->" && slotBuffer[end - 1] === "<!--]-->") {
+          start++;
+          end--;
+        }
+        if (start < end) {
+          for (let i = start; i < end; i++) {
+            push(slotBuffer[i]);
+          }
+        } else if (transition) {
+          push(`<!---->`);
+        }
+      }
+    }
+  } else if (fallbackRenderFn) {
+    fallbackRenderFn();
+  } else if (transition) {
+    push(`<!---->`);
+  }
+}
+const commentTestRE = /^<!--[\s\S]*-->$/;
+const commentRE = /<!--[^]*?-->/gm;
+function isComment(item) {
+  if (typeof item !== "string" || !commentTestRE.test(item)) return false;
+  if (item.length <= 8) return true;
+  return !item.replace(commentRE, "").trim();
+}
+
+function ssrRenderTeleport(parentPush, contentRenderFn, target, disabled, parentComponent) {
+  parentPush("<!--teleport start-->");
+  const context = parentComponent.appContext.provides[Vue.ssrContextKey];
+  const teleportBuffers = context.__teleportBuffers || (context.__teleportBuffers = {});
+  const targetBuffer = teleportBuffers[target] || (teleportBuffers[target] = []);
+  const bufferIndex = targetBuffer.length;
+  let teleportContent;
+  if (disabled) {
+    contentRenderFn(parentPush);
+    teleportContent = `<!--teleport start anchor--><!--teleport anchor-->`;
+  } else {
+    const { getBuffer, push } = createBuffer();
+    push(`<!--teleport start anchor-->`);
+    contentRenderFn(push);
+    push(`<!--teleport anchor-->`);
+    teleportContent = getBuffer();
+  }
+  targetBuffer.splice(bufferIndex, 0, teleportContent);
+  parentPush("<!--teleport end-->");
+}
+
+function ssrInterpolate(value) {
+  return shared.escapeHtml(shared.toDisplayString(value));
+}
+
+function ssrRenderList(source, renderItem) {
+  if (shared.isArray(source) || shared.isString(source)) {
+    for (let i = 0, l = source.length; i < l; i++) {
+      renderItem(source[i], i);
+    }
+  } else if (typeof source === "number") {
+    for (let i = 0; i < source; i++) {
+      renderItem(i + 1, i);
+    }
+  } else if (shared.isObject(source)) {
+    if (source[Symbol.iterator]) {
+      const arr = Array.from(source);
+      for (let i = 0, l = arr.length; i < l; i++) {
+        renderItem(arr[i], i);
+      }
+    } else {
+      const keys = Object.keys(source);
+      for (let i = 0, l = keys.length; i < l; i++) {
+        const key = keys[i];
+        renderItem(source[key], key, i);
+      }
+    }
+  }
+}
+
+async function ssrRenderSuspense(push, { default: renderContent }) {
+  if (renderContent) {
+    renderContent();
+  } else {
+    push(`<!---->`);
+  }
+}
+
+function ssrGetDirectiveProps(instance, dir, value, arg, modifiers = {}) {
+  if (typeof dir !== "function" && dir.getSSRProps) {
+    return dir.getSSRProps(
+      {
+        dir,
+        instance: Vue.ssrUtils.getComponentPublicInstance(instance.$),
+        value,
+        oldValue: void 0,
+        arg,
+        modifiers
+      },
+      null
+    ) || {};
+  }
+  return {};
+}
+
+const ssrLooseEqual = shared.looseEqual;
+function ssrLooseContain(arr, value) {
+  return shared.looseIndexOf(arr, value) > -1;
+}
+function ssrRenderDynamicModel(type, model, value) {
+  switch (type) {
+    case "radio":
+      return shared.looseEqual(model, value) ? " checked" : "";
+    case "checkbox":
+      return (shared.isArray(model) ? ssrLooseContain(model, value) : model) ? " checked" : "";
+    default:
+      return ssrRenderAttr("value", model);
+  }
+}
+function ssrGetDynamicModelProps(existingProps = {}, model) {
+  const { type, value } = existingProps;
+  switch (type) {
+    case "radio":
+      return shared.looseEqual(model, value) ? { checked: true } : null;
+    case "checkbox":
+      return (shared.isArray(model) ? ssrLooseContain(model, value) : model) ? { checked: true } : null;
+    default:
+      return { value: model };
+  }
+}
+
+var helpers = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  ssrGetDirectiveProps: ssrGetDirectiveProps,
+  ssrGetDynamicModelProps: ssrGetDynamicModelProps,
+  ssrIncludeBooleanAttr: shared.includeBooleanAttr,
+  ssrInterpolate: ssrInterpolate,
+  ssrLooseContain: ssrLooseContain,
+  ssrLooseEqual: ssrLooseEqual,
+  ssrRenderAttr: ssrRenderAttr,
+  ssrRenderAttrs: ssrRenderAttrs,
+  ssrRenderClass: ssrRenderClass,
+  ssrRenderComponent: ssrRenderComponent,
+  ssrRenderDynamicAttr: ssrRenderDynamicAttr,
+  ssrRenderDynamicModel: ssrRenderDynamicModel,
+  ssrRenderList: ssrRenderList,
+  ssrRenderSlot: ssrRenderSlot,
+  ssrRenderSlotInner: ssrRenderSlotInner,
+  ssrRenderStyle: ssrRenderStyle,
+  ssrRenderSuspense: ssrRenderSuspense,
+  ssrRenderTeleport: ssrRenderTeleport,
+  ssrRenderVNode: renderVNode
+});
+
+const compileCache = /* @__PURE__ */ Object.create(null);
+function ssrCompile(template, instance) {
+  const Component = instance.type;
+  const { isCustomElement, compilerOptions } = instance.appContext.config;
+  const { delimiters, compilerOptions: componentCompilerOptions } = Component;
+  const finalCompilerOptions = shared.extend(
+    shared.extend(
+      {
+        isCustomElement,
+        delimiters
+      },
+      compilerOptions
+    ),
+    componentCompilerOptions
+  );
+  finalCompilerOptions.isCustomElement = finalCompilerOptions.isCustomElement || shared.NO;
+  finalCompilerOptions.isNativeTag = finalCompilerOptions.isNativeTag || shared.NO;
+  const cacheKey = JSON.stringify(
+    {
+      template,
+      compilerOptions: finalCompilerOptions
+    },
+    (key, value) => {
+      return shared.isFunction(value) ? value.toString() : value;
+    }
+  );
+  const cached = compileCache[cacheKey];
+  if (cached) {
+    return cached;
+  }
+  finalCompilerOptions.onError = (err) => {
+    {
+      throw err;
+    }
+  };
+  const { code } = compilerSsr.compile(template, finalCompilerOptions);
+  const requireMap = {
+    vue: Vue__namespace,
+    "vue/server-renderer": helpers
+  };
+  const fakeRequire = (id) => requireMap[id];
+  return compileCache[cacheKey] = Function("require", code)(fakeRequire);
+}
+
+const {
+  createComponentInstance,
+  setCurrentRenderingInstance,
+  setupComponent,
+  renderComponentRoot,
+  normalizeVNode,
+  pushWarningContext,
+  popWarningContext
+} = Vue.ssrUtils;
+function createBuffer() {
+  let appendable = false;
+  const buffer = [];
+  return {
+    getBuffer() {
+      return buffer;
+    },
+    push(item) {
+      const isStringItem = shared.isString(item);
+      if (appendable && isStringItem) {
+        buffer[buffer.length - 1] += item;
+        return;
+      }
+      buffer.push(item);
+      appendable = isStringItem;
+      if (shared.isPromise(item) || shared.isArray(item) && item.hasAsync) {
+        buffer.hasAsync = true;
+      }
+    }
+  };
+}
+function renderComponentVNode(vnode, parentComponent = null, slotScopeId) {
+  const instance = vnode.component = createComponentInstance(
+    vnode,
+    parentComponent,
+    null
+  );
+  const res = setupComponent(
+    instance,
+    true
+    /* isSSR */
+  );
+  const hasAsyncSetup = shared.isPromise(res);
+  let prefetches = instance.sp;
+  if (hasAsyncSetup || prefetches) {
+    const p = Promise.resolve(res).then(() => {
+      if (hasAsyncSetup) prefetches = instance.sp;
+      if (prefetches) {
+        return Promise.all(
+          prefetches.map((prefetch) => prefetch.call(instance.proxy))
+        );
+      }
+    }).catch(shared.NOOP);
+    return p.then(() => renderComponentSubTree(instance, slotScopeId));
+  } else {
+    return renderComponentSubTree(instance, slotScopeId);
+  }
+}
+function renderComponentSubTree(instance, slotScopeId) {
+  const comp = instance.type;
+  const { getBuffer, push } = createBuffer();
+  if (shared.isFunction(comp)) {
+    let root = renderComponentRoot(instance);
+    if (!comp.props) {
+      for (const key in instance.attrs) {
+        if (key.startsWith(`data-v-`)) {
+          (root.props || (root.props = {}))[key] = ``;
+        }
+      }
+    }
+    renderVNode(push, instance.subTree = root, instance, slotScopeId);
+  } else {
+    if ((!instance.render || instance.render === shared.NOOP) && !instance.ssrRender && !comp.ssrRender && shared.isString(comp.template)) {
+      comp.ssrRender = ssrCompile(comp.template, instance);
+    }
+    const ssrRender = instance.ssrRender || comp.ssrRender;
+    if (ssrRender) {
+      let attrs = instance.inheritAttrs !== false ? instance.attrs : void 0;
+      let hasCloned = false;
+      let cur = instance;
+      while (true) {
+        const scopeId = cur.vnode.scopeId;
+        if (scopeId) {
+          if (!hasCloned) {
+            attrs = { ...attrs };
+            hasCloned = true;
+          }
+          attrs[scopeId] = "";
+        }
+        const parent = cur.parent;
+        if (parent && parent.subTree && parent.subTree === cur.vnode) {
+          cur = parent;
+        } else {
+          break;
+        }
+      }
+      if (slotScopeId) {
+        if (!hasCloned) attrs = { ...attrs };
+        const slotScopeIdList = slotScopeId.trim().split(" ");
+        for (let i = 0; i < slotScopeIdList.length; i++) {
+          attrs[slotScopeIdList[i]] = "";
+        }
+      }
+      const prev = setCurrentRenderingInstance(instance);
+      try {
+        ssrRender(
+          instance.proxy,
+          push,
+          instance,
+          attrs,
+          // compiler-optimized bindings
+          instance.props,
+          instance.setupState,
+          instance.data,
+          instance.ctx
+        );
+      } finally {
+        setCurrentRenderingInstance(prev);
+      }
+    } else if (instance.render && instance.render !== shared.NOOP) {
+      renderVNode(
+        push,
+        instance.subTree = renderComponentRoot(instance),
+        instance,
+        slotScopeId
+      );
+    } else {
+      const componentName = comp.name || comp.__file || `<Anonymous>`;
+      Vue.warn(`Component ${componentName} is missing template or render function.`);
+      push(`<!---->`);
+    }
+  }
+  return getBuffer();
+}
+function renderVNode(push, vnode, parentComponent, slotScopeId) {
+  const { type, shapeFlag, children, dirs, props } = vnode;
+  if (dirs) {
+    vnode.props = applySSRDirectives(vnode, props, dirs);
+  }
+  switch (type) {
+    case Vue.Text:
+      push(shared.escapeHtml(children));
+      break;
+    case Vue.Comment:
+      push(
+        children ? `<!--${shared.escapeHtmlComment(children)}-->` : `<!---->`
+      );
+      break;
+    case Vue.Static:
+      push(children);
+      break;
+    case Vue.Fragment:
+      if (vnode.slotScopeIds) {
+        slotScopeId = (slotScopeId ? slotScopeId + " " : "") + vnode.slotScopeIds.join(" ");
+      }
+      push(`<!--[-->`);
+      renderVNodeChildren(
+        push,
+        children,
+        parentComponent,
+        slotScopeId
+      );
+      push(`<!--]-->`);
+      break;
+    default:
+      if (shapeFlag & 1) {
+        renderElementVNode(push, vnode, parentComponent, slotScopeId);
+      } else if (shapeFlag & 6) {
+        push(renderComponentVNode(vnode, parentComponent, slotScopeId));
+      } else if (shapeFlag & 64) {
+        renderTeleportVNode(push, vnode, parentComponent, slotScopeId);
+      } else if (shapeFlag & 128) {
+        renderVNode(push, vnode.ssContent, parentComponent, slotScopeId);
+      } else {
+        Vue.warn(
+          "[@vue/server-renderer] Invalid VNode type:",
+          type,
+          `(${typeof type})`
+        );
+      }
+  }
+}
+function renderVNodeChildren(push, children, parentComponent, slotScopeId) {
+  for (let i = 0; i < children.length; i++) {
+    renderVNode(push, normalizeVNode(children[i]), parentComponent, slotScopeId);
+  }
+}
+function renderElementVNode(push, vnode, parentComponent, slotScopeId) {
+  const tag = vnode.type;
+  let { props, children, shapeFlag, scopeId } = vnode;
+  let openTag = `<${tag}`;
+  if (props) {
+    openTag += ssrRenderAttrs(props, tag);
+  }
+  if (scopeId) {
+    openTag += ` ${scopeId}`;
+  }
+  let curParent = parentComponent;
+  let curVnode = vnode;
+  while (curParent && curVnode === curParent.subTree) {
+    curVnode = curParent.vnode;
+    if (curVnode.scopeId) {
+      openTag += ` ${curVnode.scopeId}`;
+    }
+    curParent = curParent.parent;
+  }
+  if (slotScopeId) {
+    openTag += ` ${slotScopeId}`;
+  }
+  push(openTag + `>`);
+  if (!shared.isVoidTag(tag)) {
+    let hasChildrenOverride = false;
+    if (props) {
+      if (props.innerHTML) {
+        hasChildrenOverride = true;
+        push(props.innerHTML);
+      } else if (props.textContent) {
+        hasChildrenOverride = true;
+        push(shared.escapeHtml(props.textContent));
+      } else if (tag === "textarea" && props.value) {
+        hasChildrenOverride = true;
+        push(shared.escapeHtml(props.value));
+      }
+    }
+    if (!hasChildrenOverride) {
+      if (shapeFlag & 8) {
+        push(shared.escapeHtml(children));
+      } else if (shapeFlag & 16) {
+        renderVNodeChildren(
+          push,
+          children,
+          parentComponent,
+          slotScopeId
+        );
+      }
+    }
+    push(`</${tag}>`);
+  }
+}
+function applySSRDirectives(vnode, rawProps, dirs) {
+  const toMerge = [];
+  for (let i = 0; i < dirs.length; i++) {
+    const binding = dirs[i];
+    const {
+      dir: { getSSRProps }
+    } = binding;
+    if (getSSRProps) {
+      const props = getSSRProps(binding, vnode);
+      if (props) toMerge.push(props);
+    }
+  }
+  return Vue.mergeProps(rawProps || {}, ...toMerge);
+}
+function renderTeleportVNode(push, vnode, parentComponent, slotScopeId) {
+  const target = vnode.props && vnode.props.to;
+  const disabled = vnode.props && vnode.props.disabled;
+  if (!target) {
+    if (!disabled) {
+      Vue.warn(`[@vue/server-renderer] Teleport is missing target prop.`);
+    }
+    return [];
+  }
+  if (!shared.isString(target)) {
+    Vue.warn(
+      `[@vue/server-renderer] Teleport target must be a query selector string.`
+    );
+    return [];
+  }
+  ssrRenderTeleport(
+    push,
+    (push2) => {
+      renderVNodeChildren(
+        push2,
+        vnode.children,
+        parentComponent,
+        slotScopeId
+      );
+    },
+    target,
+    disabled || disabled === "",
+    parentComponent
+  );
+}
+
+const { isVNode: isVNode$1 } = Vue.ssrUtils;
+function nestedUnrollBuffer(buffer, parentRet, startIndex) {
+  if (!buffer.hasAsync) {
+    return parentRet + unrollBufferSync$1(buffer);
+  }
+  let ret = parentRet;
+  for (let i = startIndex; i < buffer.length; i += 1) {
+    const item = buffer[i];
+    if (shared.isString(item)) {
+      ret += item;
+      continue;
+    }
+    if (shared.isPromise(item)) {
+      return item.then((nestedItem) => {
+        buffer[i] = nestedItem;
+        return nestedUnrollBuffer(buffer, ret, i);
+      });
+    }
+    const result = nestedUnrollBuffer(item, ret, 0);
+    if (shared.isPromise(result)) {
+      return result.then((nestedItem) => {
+        buffer[i] = nestedItem;
+        return nestedUnrollBuffer(buffer, "", i);
+      });
+    }
+    ret = result;
+  }
+  return ret;
+}
+function unrollBuffer$1(buffer) {
+  return nestedUnrollBuffer(buffer, "", 0);
+}
+function unrollBufferSync$1(buffer) {
+  let ret = "";
+  for (let i = 0; i < buffer.length; i++) {
+    let item = buffer[i];
+    if (shared.isString(item)) {
+      ret += item;
+    } else {
+      ret += unrollBufferSync$1(item);
+    }
+  }
+  return ret;
+}
+async function renderToString(input, context = {}) {
+  if (isVNode$1(input)) {
+    return renderToString(Vue.createApp({ render: () => input }), context);
+  }
+  const vnode = Vue.createVNode(input._component, input._props);
+  vnode.appContext = input._context;
+  input.provide(Vue.ssrContextKey, context);
+  const buffer = await renderComponentVNode(vnode);
+  const result = await unrollBuffer$1(buffer);
+  await resolveTeleports(context);
+  if (context.__watcherHandles) {
+    for (const unwatch of context.__watcherHandles) {
+      unwatch();
+    }
+  }
+  return result;
+}
+async function resolveTeleports(context) {
+  if (context.__teleportBuffers) {
+    context.teleports = context.teleports || {};
+    for (const key in context.__teleportBuffers) {
+      context.teleports[key] = await unrollBuffer$1(
+        await Promise.all([context.__teleportBuffers[key]])
+      );
+    }
+  }
+}
+
+const { isVNode } = Vue.ssrUtils;
+async function unrollBuffer(buffer, stream) {
+  if (buffer.hasAsync) {
+    for (let i = 0; i < buffer.length; i++) {
+      let item = buffer[i];
+      if (shared.isPromise(item)) {
+        item = await item;
+      }
+      if (shared.isString(item)) {
+        stream.push(item);
+      } else {
+        await unrollBuffer(item, stream);
+      }
+    }
+  } else {
+    unrollBufferSync(buffer, stream);
+  }
+}
+function unrollBufferSync(buffer, stream) {
+  for (let i = 0; i < buffer.length; i++) {
+    let item = buffer[i];
+    if (shared.isString(item)) {
+      stream.push(item);
+    } else {
+      unrollBufferSync(item, stream);
+    }
+  }
+}
+function renderToSimpleStream(input, context, stream) {
+  if (isVNode(input)) {
+    return renderToSimpleStream(
+      Vue.createApp({ render: () => input }),
+      context,
+      stream
+    );
+  }
+  const vnode = Vue.createVNode(input._component, input._props);
+  vnode.appContext = input._context;
+  input.provide(Vue.ssrContextKey, context);
+  Promise.resolve(renderComponentVNode(vnode)).then((buffer) => unrollBuffer(buffer, stream)).then(() => resolveTeleports(context)).then(() => {
+    if (context.__watcherHandles) {
+      for (const unwatch of context.__watcherHandles) {
+        unwatch();
+      }
+    }
+  }).then(() => stream.push(null)).catch((error) => {
+    stream.destroy(error);
+  });
+  return stream;
+}
+function renderToStream(input, context = {}) {
+  console.warn(
+    `[@vue/server-renderer] renderToStream is deprecated - use renderToNodeStream instead.`
+  );
+  return renderToNodeStream(input, context);
+}
+function renderToNodeStream(input, context = {}) {
+  const stream = new (require$$3).Readable({ read() {
+  } }) ;
+  if (!stream) {
+    throw new Error(
+      `ESM build of renderToStream() does not support renderToNodeStream(). Use pipeToNodeWritable() with an existing Node.js Writable stream instance instead.`
+    );
+  }
+  return renderToSimpleStream(input, context, stream);
+}
+function pipeToNodeWritable(input, context = {}, writable) {
+  renderToSimpleStream(input, context, {
+    push(content) {
+      if (content != null) {
+        writable.write(content);
+      } else {
+        writable.end();
+      }
+    },
+    destroy(err) {
+      writable.destroy(err);
+    }
+  });
+}
+function renderToWebStream(input, context = {}) {
+  if (typeof ReadableStream !== "function") {
+    throw new Error(
+      `ReadableStream constructor is not available in the global scope. If the target environment does support web streams, consider using pipeToWebWritable() with an existing WritableStream instance instead.`
+    );
+  }
+  const encoder = new TextEncoder();
+  let cancelled = false;
+  return new ReadableStream({
+    start(controller) {
+      renderToSimpleStream(input, context, {
+        push(content) {
+          if (cancelled) return;
+          if (content != null) {
+            controller.enqueue(encoder.encode(content));
+          } else {
+            controller.close();
+          }
+        },
+        destroy(err) {
+          controller.error(err);
+        }
+      });
+    },
+    cancel() {
+      cancelled = true;
+    }
+  });
+}
+function pipeToWebWritable(input, context = {}, writable) {
+  const writer = writable.getWriter();
+  const encoder = new TextEncoder();
+  let hasReady = false;
+  try {
+    hasReady = shared.isPromise(writer.ready);
+  } catch (e) {
+  }
+  renderToSimpleStream(input, context, {
+    async push(content) {
+      if (hasReady) {
+        await writer.ready;
+      }
+      if (content != null) {
+        return writer.write(encoder.encode(content));
+      } else {
+        return writer.close();
+      }
+    },
+    destroy(err) {
+      console.log(err);
+      writer.close();
+    }
+  });
+}
+
+Vue.initDirectivesForSSR();
+
+var ssrIncludeBooleanAttr = serverRenderer_cjs_prod.ssrIncludeBooleanAttr = shared.includeBooleanAttr;
+serverRenderer_cjs_prod.pipeToNodeWritable = pipeToNodeWritable;
+serverRenderer_cjs_prod.pipeToWebWritable = pipeToWebWritable;
+serverRenderer_cjs_prod.renderToNodeStream = renderToNodeStream;
+serverRenderer_cjs_prod.renderToSimpleStream = renderToSimpleStream;
+serverRenderer_cjs_prod.renderToStream = renderToStream;
+serverRenderer_cjs_prod.renderToString = renderToString;
+serverRenderer_cjs_prod.renderToWebStream = renderToWebStream;
+serverRenderer_cjs_prod.ssrGetDirectiveProps = ssrGetDirectiveProps;
+serverRenderer_cjs_prod.ssrGetDynamicModelProps = ssrGetDynamicModelProps;
+var ssrInterpolate_1 = serverRenderer_cjs_prod.ssrInterpolate = ssrInterpolate;
+serverRenderer_cjs_prod.ssrLooseContain = ssrLooseContain;
+serverRenderer_cjs_prod.ssrLooseEqual = ssrLooseEqual;
+var ssrRenderAttr_1 = serverRenderer_cjs_prod.ssrRenderAttr = ssrRenderAttr;
+var ssrRenderAttrs_1 = serverRenderer_cjs_prod.ssrRenderAttrs = ssrRenderAttrs;
+var ssrRenderClass_1 = serverRenderer_cjs_prod.ssrRenderClass = ssrRenderClass;
+var ssrRenderComponent_1 = serverRenderer_cjs_prod.ssrRenderComponent = ssrRenderComponent;
+serverRenderer_cjs_prod.ssrRenderDynamicAttr = ssrRenderDynamicAttr;
+serverRenderer_cjs_prod.ssrRenderDynamicModel = ssrRenderDynamicModel;
+var ssrRenderList_1 = serverRenderer_cjs_prod.ssrRenderList = ssrRenderList;
+var ssrRenderSlot_1 = serverRenderer_cjs_prod.ssrRenderSlot = ssrRenderSlot;
+serverRenderer_cjs_prod.ssrRenderSlotInner = ssrRenderSlotInner;
+var ssrRenderStyle_1 = serverRenderer_cjs_prod.ssrRenderStyle = ssrRenderStyle;
+var ssrRenderSuspense_1 = serverRenderer_cjs_prod.ssrRenderSuspense = ssrRenderSuspense;
+var ssrRenderTeleport_1 = serverRenderer_cjs_prod.ssrRenderTeleport = ssrRenderTeleport;
+var ssrRenderVNode = serverRenderer_cjs_prod.ssrRenderVNode = renderVNode;
+
+//#region computedEager/index.ts
+/**
+*
+* @deprecated This function will be removed in future version.
+*
+* Note: If you are using Vue 3.4+, you can straight use computed instead.
+* Because in Vue 3.4+, if computed new value does not change,
+* computed, effect, watch, watchEffect, render dependencies will not be triggered.
+* refer: https://github.com/vuejs/core/pull/5912
+*
+* @param fn effect function
+* @param options WatchOptionsBase
+* @returns readonly shallowRef
+*/
+function computedEager(fn, options) {
+	var _options$flush;
+	const result = vueExports$1.shallowRef();
+	vueExports$1.watchEffect(() => {
+		result.value = fn();
+	}, {
+		...options,
+		flush: (_options$flush = options === null || options === void 0 ? void 0 : options.flush) !== null && _options$flush !== void 0 ? _options$flush : "sync"
+	});
+	return vueExports$1.readonly(result);
+}
+//#endregion
+//#region tryOnScopeDispose/index.ts
+/**
+* Call onScopeDispose() if it's inside an effect scope lifecycle, if not, do nothing
+*
+* @param fn
+*/
+function tryOnScopeDispose(fn, failSilently) {
+	if (vueExports$1.getCurrentScope()) {
+		vueExports$1.onScopeDispose(fn, failSilently);
+		return true;
+	}
+	return false;
+}
+//#endregion
+//#region createEventHook/index.ts
+/**
+* Utility for creating event hooks
+*
+* @see https://vueuse.org/createEventHook
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function createEventHook() {
+	const fns = /* @__PURE__ */ new Set();
+	const off = (fn) => {
+		fns.delete(fn);
+	};
+	const clear = () => {
+		fns.clear();
+	};
+	const on = (fn) => {
+		fns.add(fn);
+		const offFn = () => off(fn);
+		tryOnScopeDispose(offFn);
+		return { off: offFn };
+	};
+	const trigger = (...args) => {
+		return Promise.all(Array.from(fns).map((fn) => fn(...args)));
+	};
+	return {
+		on,
+		off,
+		trigger,
+		clear
+	};
+}
+//#endregion
+//#region createGlobalState/index.ts
+/**
+* Keep states in the global scope to be reusable across Vue instances.
+*
+* @see https://vueuse.org/createGlobalState
+* @param stateFactory A factory function to create the state
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function createGlobalState(stateFactory) {
+	let initialized = false;
+	let state;
+	const scope = vueExports$1.effectScope(true);
+	return ((...args) => {
+		if (!initialized) {
+			state = scope.run(() => stateFactory(...args));
+			initialized = true;
+		}
+		return state;
+	});
+}
+//#endregion
+//#region utils/is.ts
+const isClient = "undefined" !== "undefined";
+typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+const isDef = (val) => typeof val !== "undefined";
+const notNullish = (val) => val != null;
+const toString = Object.prototype.toString;
+const isObject = (val) => toString.call(val) === "[object Object]";
+const noop = () => {};
+//#endregion
+//#region toRef/index.ts
+function toRef(...args) {
+	if (args.length !== 1) return vueExports$1.toRef(...args);
+	const r = args[0];
+	return typeof r === "function" ? vueExports$1.readonly(vueExports$1.customRef(() => ({
+		get: r,
+		set: noop
+	}))) : vueExports$1.ref(r);
+}
+//#endregion
+//#region utils/filters.ts
+/**
+* @internal
+*/
+function createFilterWrapper(filter, fn) {
+	function wrapper(...args) {
+		return new Promise((resolve, reject) => {
+			Promise.resolve(filter(() => fn.apply(this, args), {
+				fn,
+				thisArg: this,
+				args
+			})).then(resolve).catch(reject);
+		});
+	}
+	return wrapper;
+}
+const bypassFilter = (invoke) => {
+	return invoke();
+};
+/**
+* Create an EventFilter that debounce the events
+*/
+function debounceFilter(ms, options = {}) {
+	let timer;
+	let maxTimer;
+	let lastRejector = noop;
+	const _clearTimeout = (timer) => {
+		clearTimeout(timer);
+		lastRejector();
+		lastRejector = noop;
+	};
+	let lastInvoker;
+	const filter = (invoke) => {
+		const duration = vueExports$1.toValue(ms);
+		const maxDuration = vueExports$1.toValue(options.maxWait);
+		if (timer) _clearTimeout(timer);
+		if (duration <= 0 || maxDuration !== void 0 && maxDuration <= 0) {
+			if (maxTimer) {
+				_clearTimeout(maxTimer);
+				maxTimer = void 0;
+			}
+			return Promise.resolve(invoke());
+		}
+		return new Promise((resolve, reject) => {
+			lastRejector = options.rejectOnCancel ? reject : resolve;
+			lastInvoker = invoke;
+			if (maxDuration && !maxTimer) maxTimer = setTimeout(() => {
+				if (timer) _clearTimeout(timer);
+				maxTimer = void 0;
+				resolve(lastInvoker());
+			}, maxDuration);
+			timer = setTimeout(() => {
+				if (maxTimer) _clearTimeout(maxTimer);
+				maxTimer = void 0;
+				resolve(invoke());
+			}, duration);
+		});
+	};
+	return filter;
+}
+/**
+* EventFilter that gives extra controls to pause and resume the filter
+*
+* @param extendFilter  Extra filter to apply when the PausableFilter is active, default to none
+* @param options Options to configure the filter
+*/
+function pausableFilter(extendFilter = bypassFilter, options = {}) {
+	const { initialState = "active" } = options;
+	const isActive = toRef(initialState === "active");
+	function pause() {
+		isActive.value = false;
+	}
+	function resume() {
+		isActive.value = true;
+	}
+	const eventFilter = (...args) => {
+		if (isActive.value) extendFilter(...args);
+	};
+	return {
+		isActive: vueExports$1.shallowReadonly(isActive),
+		pause,
+		resume,
+		eventFilter
+	};
+}
+function toArray$2(value) {
+	return Array.isArray(value) ? value : [value];
+}
+//#endregion
+//#region utils/port.ts
+function cacheStringFunction(fn) {
+	const cache = Object.create(null);
+	return ((str) => {
+		return cache[str] || (cache[str] = fn(str));
+	});
+}
+const camelizeRE = /-(\w)/g;
+const camelize = cacheStringFunction((str) => {
+	return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
+});
+//#endregion
+//#region utils/vue.ts
+function getLifeCycleTarget(target) {
+	return vueExports$1.getCurrentInstance();
+}
+//#endregion
+//#region createSharedComposable/index.ts
+/**
+* Make a composable function usable with multiple Vue instances.
+*
+* @see https://vueuse.org/createSharedComposable
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function createSharedComposable(composable) {
+	return composable;
+}
+//#endregion
+//#region makeDestructurable/index.ts
+/* @__NO_SIDE_EFFECTS__ */
+function makeDestructurable(obj, arr) {
+	if (typeof Symbol !== "undefined") {
+		const clone = { ...obj };
+		Object.defineProperty(clone, Symbol.iterator, {
+			enumerable: false,
+			value() {
+				let index = 0;
+				return { next: () => ({
+					value: arr[index++],
+					done: index > arr.length
+				}) };
+			}
+		});
+		return clone;
+	} else return Object.assign([...arr], obj);
+}
+//#endregion
+//#region toReactive/index.ts
+/**
+* Converts ref to reactive.
+*
+* @see https://vueuse.org/toReactive
+* @param objectRef A ref of object
+*/
+function toReactive(objectRef) {
+	if (!vueExports$1.isRef(objectRef)) return vueExports$1.reactive(objectRef);
+	return vueExports$1.reactive(new Proxy({}, {
+		get(_, p, receiver) {
+			return vueExports$1.unref(Reflect.get(objectRef.value, p, receiver));
+		},
+		set(_, p, value) {
+			if (vueExports$1.isRef(objectRef.value[p]) && !vueExports$1.isRef(value)) objectRef.value[p].value = value;
+			else objectRef.value[p] = value;
+			return true;
+		},
+		deleteProperty(_, p) {
+			return Reflect.deleteProperty(objectRef.value, p);
+		},
+		has(_, p) {
+			return Reflect.has(objectRef.value, p);
+		},
+		ownKeys() {
+			return Object.keys(objectRef.value);
+		},
+		getOwnPropertyDescriptor() {
+			return {
+				enumerable: true,
+				configurable: true
+			};
+		}
+	}));
+}
+//#endregion
+//#region reactiveComputed/index.ts
+/**
+* Computed reactive object.
+*/
+function reactiveComputed(fn) {
+	return toReactive(vueExports$1.computed(fn));
+}
+//#endregion
+//#region reactiveOmit/index.ts
+/**
+* Reactively omit fields from a reactive object
+*
+* @see https://vueuse.org/reactiveOmit
+*/
+function reactiveOmit(obj, ...keys) {
+	const flatKeys = keys.flat();
+	const predicate = flatKeys[0];
+	return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(vueExports$1.toRefs(obj)).filter(([k, v]) => !predicate(vueExports$1.toValue(v), k))) : Object.fromEntries(Object.entries(vueExports$1.toRefs(obj)).filter((e) => !flatKeys.includes(e[0]))));
+}
+//#endregion
+//#region reactivePick/index.ts
+/**
+* Reactively pick fields from a reactive object
+*
+* @see https://vueuse.org/reactivePick
+*/
+function reactivePick(obj, ...keys) {
+	const flatKeys = keys.flat();
+	const predicate = flatKeys[0];
+	return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(vueExports$1.toRefs(obj)).filter(([k, v]) => predicate(vueExports$1.toValue(v), k))) : Object.fromEntries(flatKeys.map((k) => [k, toRef(obj, k)])));
+}
+//#endregion
+//#region refAutoReset/index.ts
+/**
+* Create a ref which will be reset to the default value after some time.
+*
+* @see https://vueuse.org/refAutoReset
+* @param defaultValue The value which will be set.
+* @param afterMs      A zero-or-greater delay in milliseconds.
+*/
+function refAutoReset(defaultValue, afterMs = 1e4) {
+	return vueExports$1.customRef((track, trigger) => {
+		let value = vueExports$1.toValue(defaultValue);
+		let timer;
+		const resetAfter = () => setTimeout(() => {
+			value = vueExports$1.toValue(defaultValue);
+			trigger();
+		}, vueExports$1.toValue(afterMs));
+		tryOnScopeDispose(() => {
+			clearTimeout(timer);
+		});
+		return {
+			get() {
+				track();
+				return value;
+			},
+			set(newValue) {
+				value = newValue;
+				trigger();
+				clearTimeout(timer);
+				timer = resetAfter();
+			}
+		};
+	});
+}
+//#endregion
+//#region useDebounceFn/index.ts
+/**
+* Debounce execution of a function.
+*
+* @see https://vueuse.org/useDebounceFn
+* @param  fn          A function to be executed after delay milliseconds debounced.
+* @param  ms          A zero-or-greater delay in milliseconds. For event callbacks, values around 100 or 250 (or even higher) are most useful.
+* @param  options     Options
+*
+* @return A new, debounce, function.
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function useDebounceFn(fn, ms = 200, options = {}) {
+	return createFilterWrapper(debounceFilter(ms, options), fn);
+}
+//#endregion
+//#region watchWithFilter/index.ts
+function watchWithFilter(source, cb, options = {}) {
+	const { eventFilter = bypassFilter, ...watchOptions } = options;
+	return vueExports$1.watch(source, createFilterWrapper(eventFilter, cb), watchOptions);
+}
+//#endregion
+//#region watchPausable/index.ts
+/** @deprecated Use Vue's built-in `watch` instead. This function will be removed in future version. */
+function watchPausable(source, cb, options = {}) {
+	const { eventFilter: filter, initialState = "active", ...watchOptions } = options;
+	const { eventFilter, pause, resume, isActive } = pausableFilter(filter, { initialState });
+	return {
+		stop: watchWithFilter(source, cb, {
+			...watchOptions,
+			eventFilter
+		}),
+		pause,
+		resume,
+		isActive
+	};
+}
+//#endregion
+//#region syncRef/index.ts
+/**
+* Two-way refs synchronization.
+* From the set theory perspective to restrict the option's type
+* Check in the following order:
+* 1. L = R
+* 2. L ∩ R ≠ ∅
+* 3. L ⊆ R
+* 4. L ∩ R = ∅
+*/
+function syncRef(left, right, ...[options]) {
+	const { flush = "sync", deep = false, immediate = true, direction = "both", transform = {} } = options || {};
+	const watchers = [];
+	const transformLTR = "ltr" in transform && transform.ltr || ((v) => v);
+	const transformRTL = "rtl" in transform && transform.rtl || ((v) => v);
+	if (direction === "both" || direction === "ltr") watchers.push(watchPausable(left, (newValue) => {
+		watchers.forEach((w) => w.pause());
+		right.value = transformLTR(newValue);
+		watchers.forEach((w) => w.resume());
+	}, {
+		flush,
+		deep,
+		immediate
+	}));
+	if (direction === "both" || direction === "rtl") watchers.push(watchPausable(right, (newValue) => {
+		watchers.forEach((w) => w.pause());
+		left.value = transformRTL(newValue);
+		watchers.forEach((w) => w.resume());
+	}, {
+		flush,
+		deep,
+		immediate
+	}));
+	const stop = () => {
+		watchers.forEach((w) => w.stop());
+	};
+	return stop;
+}
+//#endregion
+//#region tryOnBeforeUnmount/index.ts
+/**
+* Call onBeforeUnmount() if it's inside a component lifecycle, if not, do nothing
+*
+* @param fn
+* @param target
+*/
+function tryOnBeforeUnmount(fn, target) {
+	if (getLifeCycleTarget()) vueExports$1.onBeforeUnmount(fn, target);
+}
+//#endregion
+//#region tryOnMounted/index.ts
+/**
+* Call onMounted() if it's inside a component lifecycle, if not, just call the function
+*
+* @param fn
+* @param sync if set to false, it will run in the nextTick() of Vue
+* @param target
+*/
+function tryOnMounted(fn, sync = true, target) {
+	if (getLifeCycleTarget()) vueExports$1.onMounted(fn, target);
+	else if (sync) fn();
+	else vueExports$1.nextTick(fn);
+}
+//#endregion
+//#region useTimeoutFn/index.ts
+/**
+* Wrapper for `setTimeout` with controls.
+*
+* @param cb
+* @param interval
+* @param options
+*/
+function useTimeoutFn(cb, interval, options = {}) {
+	const { immediate = true, immediateCallback = false } = options;
+	const isPending = vueExports$1.shallowRef(false);
+	let timer;
+	function clear() {
+		if (timer) {
+			clearTimeout(timer);
+			timer = void 0;
+		}
+	}
+	function stop() {
+		isPending.value = false;
+		clear();
+	}
+	function start(...args) {
+		if (immediateCallback) cb();
+		clear();
+		isPending.value = true;
+		timer = setTimeout(() => {
+			isPending.value = false;
+			timer = void 0;
+			cb(...args);
+		}, vueExports$1.toValue(interval));
+	}
+	if (immediate) {
+		isPending.value = true;
+	}
+	tryOnScopeDispose(stop);
+	return {
+		isPending: vueExports$1.shallowReadonly(isPending),
+		start,
+		stop
+	};
+}
+//#endregion
+//#region useTimeout/index.ts
+function useTimeout(interval = 1e3, options = {}) {
+	const { controls: exposeControls = false, callback } = options;
+	const controls = useTimeoutFn(callback !== null && callback !== void 0 ? callback : noop, interval, options);
+	const ready = vueExports$1.computed(() => !controls.isPending.value);
+	if (exposeControls) return {
+		ready,
+		...controls
+	};
+	else return ready;
+}
+//#endregion
+//#region watchImmediate/index.ts
+/**
+* Shorthand for watching value with {immediate: true}
+*
+* @see https://vueuse.org/watchImmediate
+*/
+function watchImmediate(source, cb, options) {
+	return vueExports$1.watch(source, cb, {
+		...options,
+		immediate: true
+	});
+}
+
+//#endregion
+//#region createReusableTemplate/index.ts
+/**
+* This function creates `define` and `reuse` components in pair,
+* It also allow to pass a generic to bind with type.
+*
+* @see https://vueuse.org/createReusableTemplate
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function createReusableTemplate(options = {}) {
+	const { inheritAttrs = true, name = "ReusableTemplate" } = options;
+	const render = vueExports$1.shallowRef();
+	const define = vueExports$1.defineComponent({
+		name: `${name}.define`,
+		setup(_, { slots }) {
+			return () => {
+				render.value = slots.default;
+			};
+		}
+	});
+	const reuse = vueExports$1.defineComponent({
+		inheritAttrs,
+		name: `${name}.reuse`,
+		props: options.props,
+		setup(props, { attrs, slots }) {
+			return () => {
+				var _render$value;
+				if (!render.value && true) throw new Error("[VueUse] Failed to find the definition of reusable template");
+				const vnode = (_render$value = render.value) === null || _render$value === void 0 ? void 0 : _render$value.call(render, {
+					...options.props == null ? keysToCamelKebabCase(attrs) : props,
+					$slots: slots
+				});
+				return inheritAttrs && (vnode === null || vnode === void 0 ? void 0 : vnode.length) === 1 ? vnode[0] : vnode;
+			};
+		}
+	});
+	return makeDestructurable({
+		define,
+		reuse
+	}, [define, reuse]);
+}
+function keysToCamelKebabCase(obj) {
+	const newObj = {};
+	for (const key in obj) newObj[camelize(key)] = obj[key];
+	return newObj;
+}
+//#endregion
+//#region _configurable.ts
+const defaultWindow = void 0;
+//#endregion
+//#region unrefElement/index.ts
+/**
+* Get the dom element of a ref of element or Vue component instance
+*
+* @param elRef
+*/
+function unrefElement(elRef) {
+	var _$el;
+	const plain = vueExports$1.toValue(elRef);
+	return (_$el = plain === null || plain === void 0 ? void 0 : plain.$el) !== null && _$el !== void 0 ? _$el : plain;
+}
+//#endregion
+//#region useEventListener/index.ts
+function useEventListener(...args) {
+	const register = (el, event, listener, options) => {
+		el.addEventListener(event, listener, options);
+		return () => el.removeEventListener(event, listener, options);
+	};
+	const firstParamTargets = vueExports$1.computed(() => {
+		const test = toArray$2(vueExports$1.toValue(args[0])).filter((e) => e != null);
+		return test.every((e) => typeof e !== "string") ? test : void 0;
+	});
+	return watchImmediate(() => {
+		var _firstParamTargets$va, _firstParamTargets$va2;
+		return [
+			(_firstParamTargets$va = (_firstParamTargets$va2 = firstParamTargets.value) === null || _firstParamTargets$va2 === void 0 ? void 0 : _firstParamTargets$va2.map((e) => unrefElement(e))) !== null && _firstParamTargets$va !== void 0 ? _firstParamTargets$va : [defaultWindow].filter((e) => e != null),
+			toArray$2(vueExports$1.toValue(firstParamTargets.value ? args[1] : args[0])),
+			toArray$2(vueExports$1.unref(firstParamTargets.value ? args[2] : args[1])),
+			vueExports$1.toValue(firstParamTargets.value ? args[3] : args[2])
+		];
+	}, ([raw_targets, raw_events, raw_listeners, raw_options], _, onCleanup) => {
+		if (!(raw_targets === null || raw_targets === void 0 ? void 0 : raw_targets.length) || !(raw_events === null || raw_events === void 0 ? void 0 : raw_events.length) || !(raw_listeners === null || raw_listeners === void 0 ? void 0 : raw_listeners.length)) return;
+		const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+		const cleanups = raw_targets.flatMap((el) => raw_events.flatMap((event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))));
+		onCleanup(() => {
+			cleanups.forEach((fn) => fn());
+		});
+	}, { flush: "post" });
+}
+//#endregion
+//#region useMounted/index.ts
+/**
+* Mounted state in ref.
+*
+* @see https://vueuse.org/useMounted
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function useMounted() {
+	const isMounted = vueExports$1.shallowRef(false);
+	const instance = vueExports$1.getCurrentInstance();
+	if (instance) vueExports$1.onMounted(() => {
+		isMounted.value = true;
+	}, instance);
+	return isMounted;
+}
+//#endregion
+//#region useSupported/index.ts
+/* @__NO_SIDE_EFFECTS__ */
+function useSupported(callback) {
+	const isMounted = useMounted();
+	return vueExports$1.computed(() => {
+		isMounted.value;
+		return Boolean(callback());
+	});
+}
+//#endregion
+//#region useMutationObserver/index.ts
+/**
+* Watch for changes being made to the DOM tree.
+*
+* @see https://vueuse.org/useMutationObserver
+* @see https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver MutationObserver MDN
+* @param target
+* @param callback
+* @param options
+*/
+function useMutationObserver(target, callback, options = {}) {
+	const { window = defaultWindow, ...mutationOptions } = options;
+	let observer;
+	const isSupported = /* @__PURE__ */ useSupported(() => window && "MutationObserver" in window);
+	const cleanup = () => {
+		if (observer) {
+			observer.disconnect();
+			observer = void 0;
+		}
+	};
+	const stopWatch = vueExports$1.watch(vueExports$1.computed(() => {
+		const items = toArray$2(vueExports$1.toValue(target)).map(unrefElement).filter(notNullish);
+		return new Set(items);
+	}), (newTargets) => {
+		cleanup();
+		if (isSupported.value && newTargets.size) {
+			observer = new MutationObserver(callback);
+			newTargets.forEach((el) => observer.observe(el, mutationOptions));
+		}
+	}, {
+		immediate: true,
+		flush: "post"
+	});
+	const takeRecords = () => {
+		return observer === null || observer === void 0 ? void 0 : observer.takeRecords();
+	};
+	const stop = () => {
+		stopWatch();
+		cleanup();
+	};
+	tryOnScopeDispose(stop);
+	return {
+		isSupported,
+		stop,
+		takeRecords
+	};
+}
+//#endregion
+//#region onElementRemoval/index.ts
+/**
+* Fires when the element or any element containing it is removed.
+*
+* @param target
+* @param callback
+* @param options
+*/
+function onElementRemoval(target, callback, options = {}) {
+	const { window = defaultWindow, document = window === null || window === void 0 ? void 0 : window.document, flush = "sync" } = options;
+	if (!window || !document) return noop;
+	let stopFn;
+	const cleanupAndUpdate = (fn) => {
+		stopFn === null || stopFn === void 0 || stopFn();
+		stopFn = fn;
+	};
+	const stopWatch = vueExports$1.watchEffect(() => {
+		const el = unrefElement(target);
+		if (el) {
+			const { stop } = useMutationObserver(document, (mutationsList) => {
+				if (mutationsList.map((mutation) => [...mutation.removedNodes]).flat().some((node) => node === el || node.contains(el))) callback(mutationsList);
+			}, {
+				window,
+				childList: true,
+				subtree: true
+			});
+			cleanupAndUpdate(stop);
+		}
+	}, { flush });
+	const stopHandle = () => {
+		stopWatch();
+		cleanupAndUpdate();
+	};
+	tryOnScopeDispose(stopHandle);
+	return stopHandle;
+}
+//#endregion
+//#region onKeyStroke/index.ts
+function createKeyPredicate(keyFilter) {
+	if (typeof keyFilter === "function") return keyFilter;
+	else if (typeof keyFilter === "string") return (event) => event.key === keyFilter;
+	else if (Array.isArray(keyFilter)) return (event) => keyFilter.includes(event.key);
+	return () => true;
+}
+function onKeyStroke(...args) {
+	let key;
+	let handler;
+	let options = {};
+	if (args.length === 3) {
+		key = args[0];
+		handler = args[1];
+		options = args[2];
+	} else if (args.length === 2) if (typeof args[1] === "object") {
+		key = true;
+		handler = args[0];
+		options = args[1];
+	} else {
+		key = args[0];
+		handler = args[1];
+	}
+	else {
+		key = true;
+		handler = args[0];
+	}
+	const { target = defaultWindow, eventName = "keydown", passive = false, dedupe = false } = options;
+	const predicate = createKeyPredicate(key);
+	const listener = (e) => {
+		if (e.repeat && vueExports$1.toValue(dedupe)) return;
+		if (predicate(e)) handler(e);
+	};
+	return useEventListener(target, eventName, listener, passive);
+}
+//#endregion
+//#region useActiveElement/index.ts
+/**
+* Reactive `document.activeElement`
+*
+* @see https://vueuse.org/useActiveElement
+* @param options
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function useActiveElement(options = {}) {
+	var _options$document;
+	const { window = defaultWindow, deep = true, triggerOnRemoval = false } = options;
+	const document = (_options$document = options.document) !== null && _options$document !== void 0 ? _options$document : window === null || window === void 0 ? void 0 : window.document;
+	const getDeepActiveElement = () => {
+		let element = document === null || document === void 0 ? void 0 : document.activeElement;
+		if (deep) {
+			var _element$shadowRoot;
+			while (element === null || element === void 0 ? void 0 : element.shadowRoot) element = element === null || element === void 0 || (_element$shadowRoot = element.shadowRoot) === null || _element$shadowRoot === void 0 ? void 0 : _element$shadowRoot.activeElement;
+		}
+		return element;
+	};
+	const activeElement = vueExports$1.shallowRef();
+	const trigger = () => {
+		activeElement.value = getDeepActiveElement();
+	};
+	if (window) {
+		const listenerOptions = {
+			capture: true,
+			passive: true
+		};
+		useEventListener(window, "blur", (event) => {
+			if (event.relatedTarget !== null) return;
+			trigger();
+		}, listenerOptions);
+		useEventListener(window, "focus", trigger, listenerOptions);
+	}
+	if (triggerOnRemoval) onElementRemoval(activeElement, trigger, { document });
+	trigger();
+	return activeElement;
+}
+//#endregion
+//#region useRafFn/index.ts
+/**
+* Call function on every `requestAnimationFrame`. With controls of pausing and resuming.
+*
+* @see https://vueuse.org/useRafFn
+* @param fn
+* @param options
+*/
+function useRafFn(fn, options = {}) {
+	const { immediate = true, fpsLimit = null, window = defaultWindow, once = false } = options;
+	const isActive = vueExports$1.shallowRef(false);
+	const intervalLimit = vueExports$1.computed(() => {
+		const limit = vueExports$1.toValue(fpsLimit);
+		return limit ? 1e3 / limit : null;
+	});
+	let previousFrameTimestamp = 0;
+	let rafId = null;
+	function loop(timestamp) {
+		if (!isActive.value || !window) return;
+		if (!previousFrameTimestamp) previousFrameTimestamp = timestamp;
+		const delta = timestamp - previousFrameTimestamp;
+		if (intervalLimit.value && delta < intervalLimit.value) {
+			rafId = window.requestAnimationFrame(loop);
+			return;
+		}
+		previousFrameTimestamp = timestamp;
+		fn({
+			delta,
+			timestamp
+		});
+		if (once) {
+			isActive.value = false;
+			rafId = null;
+			return;
+		}
+		rafId = window.requestAnimationFrame(loop);
+	}
+	function resume() {
+		if (!isActive.value && window) {
+			isActive.value = true;
+			previousFrameTimestamp = 0;
+			rafId = window.requestAnimationFrame(loop);
+		}
+	}
+	function pause() {
+		isActive.value = false;
+		if (rafId != null && window) {
+			window.cancelAnimationFrame(rafId);
+			rafId = null;
+		}
+	}
+	if (immediate) resume();
+	tryOnScopeDispose(pause);
+	return {
+		isActive: vueExports$1.shallowReadonly(isActive),
+		pause,
+		resume
+	};
+}
+//#endregion
+//#region useCloned/index.ts
+function cloneFnJSON(source) {
+	return JSON.parse(JSON.stringify(source));
+}
+//#endregion
+//#region ssr-handlers.ts
+const _global = typeof globalThis !== "undefined" ? globalThis : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+const globalKey = "__vueuse_ssr_handlers__";
+const handlers = /* @__PURE__ */ getHandlers();
+function getHandlers() {
+	if (!(globalKey in _global)) _global[globalKey] = _global[globalKey] || {};
+	return _global[globalKey];
+}
+function getSSRHandler(key, fallback) {
+	return handlers[key] || fallback;
+}
+//#endregion
+//#region useStorage/guess.ts
+function guessSerializerType(rawInit) {
+	return rawInit == null ? "any" : rawInit instanceof Set ? "set" : rawInit instanceof Map ? "map" : rawInit instanceof Date ? "date" : typeof rawInit === "boolean" ? "boolean" : typeof rawInit === "string" ? "string" : typeof rawInit === "object" ? "object" : !Number.isNaN(rawInit) ? "number" : "any";
+}
+//#endregion
+//#region useStorage/index.ts
+const StorageSerializers = {
+	boolean: {
+		read: (v) => v === "true",
+		write: (v) => String(v)
+	},
+	object: {
+		read: (v) => JSON.parse(v),
+		write: (v) => JSON.stringify(v)
+	},
+	number: {
+		read: (v) => Number.parseFloat(v),
+		write: (v) => String(v)
+	},
+	any: {
+		read: (v) => v,
+		write: (v) => String(v)
+	},
+	string: {
+		read: (v) => v,
+		write: (v) => String(v)
+	},
+	map: {
+		read: (v) => new Map(JSON.parse(v)),
+		write: (v) => JSON.stringify(Array.from(v.entries()))
+	},
+	set: {
+		read: (v) => new Set(JSON.parse(v)),
+		write: (v) => JSON.stringify(Array.from(v))
+	},
+	date: {
+		read: (v) => new Date(v),
+		write: (v) => v.toISOString()
 	}
 };
-function createHooks() {
-	return new Hookable();
+const customStorageEventName = "vueuse-storage";
+/**
+* Reactive LocalStorage/SessionStorage.
+*
+* @see https://vueuse.org/useStorage
+*/
+function useStorage(key, defaults, storage, options = {}) {
+	var _options$serializer;
+	const { flush = "pre", deep = true, listenToStorageChanges = true, writeDefaults = true, mergeDefaults = false, shallow, window = defaultWindow, eventFilter, onError = (e) => {
+		console.error(e);
+	}, initOnMounted } = options;
+	const data = (shallow ? vueExports$1.shallowRef : vueExports$1.ref)(typeof defaults === "function" ? defaults() : defaults);
+	const keyComputed = vueExports$1.computed(() => vueExports$1.toValue(key));
+	if (!storage) try {
+		storage = getSSRHandler("getDefaultStorage", () => defaultWindow === null || defaultWindow === void 0 ? void 0 : defaultWindow.localStorage)();
+	} catch (e) {
+		onError(e);
+	}
+	if (!storage) return data;
+	const rawInit = vueExports$1.toValue(defaults);
+	const type = guessSerializerType(rawInit);
+	const serializer = (_options$serializer = options.serializer) !== null && _options$serializer !== void 0 ? _options$serializer : StorageSerializers[type];
+	const { pause: pauseWatch, resume: resumeWatch } = watchPausable(data, (newValue) => write(newValue), {
+		flush,
+		deep,
+		eventFilter
+	});
+	vueExports$1.watch(keyComputed, () => update(), { flush });
+	let firstMounted = false;
+	const onStorageEvent = (ev) => {
+		if (initOnMounted && !firstMounted) return;
+		update(ev);
+	};
+	const onStorageCustomEvent = (ev) => {
+		if (initOnMounted && !firstMounted) return;
+		updateFromCustomEvent(ev);
+	};
+	/**
+	* The custom event is needed for same-document syncing when using custom
+	* storage backends, but it doesn't work across different documents.
+	*
+	* TODO: Consider implementing a BroadcastChannel-based solution that fixes this.
+	*/
+	if (window && listenToStorageChanges) if (storage instanceof Storage) useEventListener(window, "storage", onStorageEvent, { passive: true });
+	else useEventListener(window, customStorageEventName, onStorageCustomEvent);
+	if (initOnMounted) tryOnMounted(() => {
+		firstMounted = true;
+		update();
+	});
+	else update();
+	function dispatchWriteEvent(oldValue, newValue) {
+		if (window) {
+			const payload = {
+				key: keyComputed.value,
+				oldValue,
+				newValue,
+				storageArea: storage
+			};
+			window.dispatchEvent(storage instanceof Storage ? new StorageEvent("storage", payload) : new CustomEvent(customStorageEventName, { detail: payload }));
+		}
+	}
+	function write(v) {
+		try {
+			const oldValue = storage.getItem(keyComputed.value);
+			if (v == null) {
+				dispatchWriteEvent(oldValue, null);
+				storage.removeItem(keyComputed.value);
+			} else {
+				const serialized = serializer.write(v);
+				if (oldValue !== serialized) {
+					storage.setItem(keyComputed.value, serialized);
+					dispatchWriteEvent(oldValue, serialized);
+				}
+			}
+		} catch (e) {
+			onError(e);
+		}
+	}
+	function read(event) {
+		const rawValue = event ? event.newValue : storage.getItem(keyComputed.value);
+		if (rawValue == null) {
+			if (writeDefaults && rawInit != null) storage.setItem(keyComputed.value, serializer.write(rawInit));
+			return rawInit;
+		} else if (!event && mergeDefaults) {
+			const value = serializer.read(rawValue);
+			if (typeof mergeDefaults === "function") return mergeDefaults(value, rawInit);
+			else if (type === "object" && !Array.isArray(value)) return {
+				...rawInit,
+				...value
+			};
+			return value;
+		} else if (typeof rawValue !== "string") return rawValue;
+		else return serializer.read(rawValue);
+	}
+	function update(event) {
+		if (event && event.storageArea !== storage) return;
+		if (event && event.key == null) {
+			data.value = rawInit;
+			return;
+		}
+		if (event && event.key !== keyComputed.value) return;
+		pauseWatch();
+		try {
+			const serializedData = serializer.write(data.value);
+			if (event === void 0 || (event === null || event === void 0 ? void 0 : event.newValue) !== serializedData) data.value = read(event);
+		} catch (e) {
+			onError(e);
+		} finally {
+			if (event) vueExports$1.nextTick(resumeWatch);
+			else resumeWatch();
+		}
+	}
+	function updateFromCustomEvent(event) {
+		update(event.detail);
+	}
+	return data;
+}
+//#endregion
+//#region useResizeObserver/index.ts
+/**
+* Reports changes to the dimensions of an Element's content or the border-box
+*
+* @see https://vueuse.org/useResizeObserver
+* @param target
+* @param callback
+* @param options
+*/
+function useResizeObserver(target, callback, options = {}) {
+	const { window = defaultWindow, ...observerOptions } = options;
+	let observer;
+	const isSupported = /* @__PURE__ */ useSupported(() => window && "ResizeObserver" in window);
+	const cleanup = () => {
+		if (observer) {
+			observer.disconnect();
+			observer = void 0;
+		}
+	};
+	const stopWatch = vueExports$1.watch(vueExports$1.computed(() => {
+		const _targets = vueExports$1.toValue(target);
+		return Array.isArray(_targets) ? _targets.map((el) => unrefElement(el)) : [unrefElement(_targets)];
+	}), (els) => {
+		cleanup();
+		if (isSupported.value && window) {
+			observer = new ResizeObserver(callback);
+			for (const _el of els) if (_el) observer.observe(_el, observerOptions);
+		}
+	}, {
+		immediate: true,
+		flush: "post"
+	});
+	const stop = () => {
+		cleanup();
+		stopWatch();
+	};
+	tryOnScopeDispose(stop);
+	return {
+		isSupported,
+		stop
+	};
+}
+//#endregion
+//#region useEventBus/internal.ts
+
+const events = /* @__PURE__ */ new Map();
+//#endregion
+//#region useEventBus/index.ts
+/* @__NO_SIDE_EFFECTS__ */
+function useEventBus(key) {
+	const scope = vueExports$1.getCurrentScope();
+	function on(listener) {
+		var _scope$cleanups;
+		const listeners = events.get(key) || /* @__PURE__ */ new Set();
+		listeners.add(listener);
+		events.set(key, listeners);
+		const _off = () => off(listener);
+		scope === null || scope === void 0 || (_scope$cleanups = scope.cleanups) === null || _scope$cleanups === void 0 || _scope$cleanups.push(_off);
+		return _off;
+	}
+	function once(listener) {
+		function _listener(...args) {
+			off(_listener);
+			listener(...args);
+		}
+		return on(_listener);
+	}
+	function off(listener) {
+		const listeners = events.get(key);
+		if (!listeners) return;
+		listeners.delete(listener);
+		if (!listeners.size) reset();
+	}
+	function reset() {
+		events.delete(key);
+	}
+	function emit(event, payload) {
+		var _events$get;
+		(_events$get = events.get(key)) === null || _events$get === void 0 || _events$get.forEach((v) => v(event, payload));
+	}
+	return {
+		on,
+		once,
+		off,
+		emit,
+		reset
+	};
+}
+//#endregion
+//#region useVModel/index.ts
+/**
+* Shorthand for v-model binding, props + emit -> ref
+*
+* @see https://vueuse.org/useVModel
+* @param props
+* @param key (default 'modelValue')
+* @param emit
+* @param options
+*
+* @__NO_SIDE_EFFECTS__
+*/
+function useVModel(props, key, emit, options = {}) {
+	var _vm$$emit, _vm$proxy;
+	const { clone = false, passive = false, eventName, deep = false, defaultValue, shouldEmit } = options;
+	const vm = vueExports$1.getCurrentInstance();
+	const _emit = emit || (vm === null || vm === void 0 ? void 0 : vm.emit) || (vm === null || vm === void 0 || (_vm$$emit = vm.$emit) === null || _vm$$emit === void 0 ? void 0 : _vm$$emit.bind(vm)) || (vm === null || vm === void 0 || (_vm$proxy = vm.proxy) === null || _vm$proxy === void 0 || (_vm$proxy = _vm$proxy.$emit) === null || _vm$proxy === void 0 ? void 0 : _vm$proxy.bind(vm === null || vm === void 0 ? void 0 : vm.proxy));
+	let event = eventName;
+	if (!key) key = "modelValue";
+	event = event || `update:${key.toString()}`;
+	const cloneFn = (val) => !clone ? val : typeof clone === "function" ? clone(val) : cloneFnJSON(val);
+	const getValue = () => isDef(props[key]) ? cloneFn(props[key]) : defaultValue;
+	const triggerEmit = (value) => {
+		if (shouldEmit) {
+			if (shouldEmit(value)) _emit(event, value);
+		} else _emit(event, value);
+	};
+	if (passive) {
+		const proxy = vueExports$1.ref(getValue());
+		let isUpdating = false;
+		vueExports$1.watch(() => props[key], (v) => {
+			if (!isUpdating) {
+				isUpdating = true;
+				proxy.value = cloneFn(v);
+				vueExports$1.nextTick(() => isUpdating = false);
+			}
+		});
+		vueExports$1.watch(proxy, (v) => {
+			if (!isUpdating && (v !== props[key] || deep)) triggerEmit(v);
+		}, { deep });
+		return proxy;
+	} else return vueExports$1.computed({
+		get() {
+			return getValue();
+		},
+		set(value) {
+			triggerEmit(value);
+		}
+	});
 }
 
 function diff(obj1, obj2) {
@@ -285,6 +6011,3739 @@ class DiffHashedObject {
   }
 }
 
+// src/utils.js
+var SPACE_REGEX = /\s+/g;
+var removeExtraSpaces = (str) => {
+  if (typeof str !== "string" || !str) return str;
+  return str.replace(SPACE_REGEX, " ").trim();
+};
+var cx = (...classnames) => {
+  const classList = [];
+  const buildClassString = (input) => {
+    if (!input && input !== 0 && input !== 0n) return;
+    if (Array.isArray(input)) {
+      for (let i = 0, len = input.length; i < len; i++) buildClassString(input[i]);
+      return;
+    }
+    const type = typeof input;
+    if (type === "string" || type === "number" || type === "bigint") {
+      if (type === "number" && input !== input) return;
+      classList.push(String(input));
+    } else if (type === "object") {
+      const keys = Object.keys(input);
+      for (let i = 0, len = keys.length; i < len; i++) {
+        const key = keys[i];
+        if (input[key]) classList.push(key);
+      }
+    }
+  };
+  for (let i = 0, len = classnames.length; i < len; i++) {
+    const c = classnames[i];
+    if (c !== null && c !== void 0) buildClassString(c);
+  }
+  return classList.length > 0 ? removeExtraSpaces(classList.join(" ")) : void 0;
+};
+var falsyToString = (value) => value === false ? "false" : value === true ? "true" : value === 0 ? "0" : value;
+var isEmptyObject = (obj) => {
+  if (!obj || typeof obj !== "object") return true;
+  for (const _ in obj) return false;
+  return true;
+};
+var isEqual = (obj1, obj2) => {
+  if (obj1 === obj2) return true;
+  if (!obj1 || !obj2) return false;
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  if (keys1.length !== keys2.length) return false;
+  for (let i = 0; i < keys1.length; i++) {
+    const key = keys1[i];
+    if (!keys2.includes(key)) return false;
+    if (obj1[key] !== obj2[key]) return false;
+  }
+  return true;
+};
+var joinObjects = (obj1, obj2) => {
+  for (const key in obj2) {
+    if (Object.prototype.hasOwnProperty.call(obj2, key)) {
+      const val2 = obj2[key];
+      if (key in obj1) {
+        obj1[key] = cx(obj1[key], val2);
+      } else {
+        obj1[key] = val2;
+      }
+    }
+  }
+  return obj1;
+};
+var flat = (arr, target) => {
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i];
+    if (Array.isArray(el)) flat(el, target);
+    else if (el) target.push(el);
+  }
+};
+var flatMergeArrays = (...arrays) => {
+  const result = [];
+  flat(arrays, result);
+  const filtered = [];
+  for (let i = 0; i < result.length; i++) {
+    if (result[i]) filtered.push(result[i]);
+  }
+  return filtered;
+};
+var mergeObjects = (obj1, obj2) => {
+  const result = {};
+  for (const key in obj1) {
+    const val1 = obj1[key];
+    if (key in obj2) {
+      const val2 = obj2[key];
+      if (Array.isArray(val1) || Array.isArray(val2)) {
+        result[key] = flatMergeArrays(val2, val1);
+      } else if (typeof val1 === "object" && typeof val2 === "object" && val1 && val2) {
+        result[key] = mergeObjects(val1, val2);
+      } else {
+        result[key] = val2 + " " + val1;
+      }
+    } else {
+      result[key] = val1;
+    }
+  }
+  for (const key in obj2) {
+    if (!(key in obj1)) {
+      result[key] = obj2[key];
+    }
+  }
+  return result;
+};
+
+// src/config.js
+var defaultConfig = {
+  twMerge: true,
+  twMergeConfig: {}
+};
+
+// src/state.js
+function createState() {
+  let cachedTwMerge = null;
+  let cachedTwMergeConfig = {};
+  let didTwMergeConfigChange = false;
+  return {
+    get cachedTwMerge() {
+      return cachedTwMerge;
+    },
+    set cachedTwMerge(value) {
+      cachedTwMerge = value;
+    },
+    get cachedTwMergeConfig() {
+      return cachedTwMergeConfig;
+    },
+    set cachedTwMergeConfig(value) {
+      cachedTwMergeConfig = value;
+    },
+    get didTwMergeConfigChange() {
+      return didTwMergeConfigChange;
+    },
+    set didTwMergeConfigChange(value) {
+      didTwMergeConfigChange = value;
+    },
+    reset() {
+      cachedTwMerge = null;
+      cachedTwMergeConfig = {};
+      didTwMergeConfigChange = false;
+    }
+  };
+}
+var state = createState();
+
+// src/core.js
+var getTailwindVariants = (cn) => {
+  const tv = (options, configProp) => {
+    const {
+      extend = null,
+      slots: slotProps = {},
+      variants: variantsProps = {},
+      compoundVariants: compoundVariantsProps = [],
+      compoundSlots = [],
+      defaultVariants: defaultVariantsProps = {}
+    } = options;
+    const config = { ...defaultConfig, ...configProp };
+    const base = extend?.base ? cx(extend.base, options?.base) : options?.base;
+    const variants = extend?.variants && !isEmptyObject(extend.variants) ? mergeObjects(variantsProps, extend.variants) : variantsProps;
+    const defaultVariants = extend?.defaultVariants && !isEmptyObject(extend.defaultVariants) ? { ...extend.defaultVariants, ...defaultVariantsProps } : defaultVariantsProps;
+    if (!isEmptyObject(config.twMergeConfig) && !isEqual(config.twMergeConfig, state.cachedTwMergeConfig)) {
+      state.didTwMergeConfigChange = true;
+      state.cachedTwMergeConfig = config.twMergeConfig;
+    }
+    const isExtendedSlotsEmpty = isEmptyObject(extend?.slots);
+    const componentSlots = !isEmptyObject(slotProps) ? {
+      // add "base" to the slots object
+      base: cx(options?.base, isExtendedSlotsEmpty && extend?.base),
+      ...slotProps
+    } : {};
+    const slots = isExtendedSlotsEmpty ? componentSlots : joinObjects(
+      { ...extend?.slots },
+      isEmptyObject(componentSlots) ? { base: options?.base } : componentSlots
+    );
+    const compoundVariants = isEmptyObject(extend?.compoundVariants) ? compoundVariantsProps : flatMergeArrays(extend?.compoundVariants, compoundVariantsProps);
+    const component = (props) => {
+      if (isEmptyObject(variants) && isEmptyObject(slotProps) && isExtendedSlotsEmpty) {
+        return cn(base, props?.class, props?.className)(config);
+      }
+      if (compoundVariants && !Array.isArray(compoundVariants)) {
+        throw new TypeError(
+          `The "compoundVariants" prop must be an array. Received: ${typeof compoundVariants}`
+        );
+      }
+      if (compoundSlots && !Array.isArray(compoundSlots)) {
+        throw new TypeError(
+          `The "compoundSlots" prop must be an array. Received: ${typeof compoundSlots}`
+        );
+      }
+      const getVariantValue = (variant, vrs = variants, _slotKey = null, slotProps2 = null) => {
+        const variantObj = vrs[variant];
+        if (!variantObj || isEmptyObject(variantObj)) {
+          return null;
+        }
+        const variantProp = slotProps2?.[variant] ?? props?.[variant];
+        if (variantProp === null) return null;
+        const variantKey = falsyToString(variantProp);
+        if (typeof variantKey === "object") {
+          return null;
+        }
+        const defaultVariantProp = defaultVariants?.[variant];
+        const key = variantKey != null ? variantKey : falsyToString(defaultVariantProp);
+        const value = variantObj[key || "false"];
+        return value;
+      };
+      const getVariantClassNames = () => {
+        if (!variants) return null;
+        const keys = Object.keys(variants);
+        const result = [];
+        for (let i = 0; i < keys.length; i++) {
+          const value = getVariantValue(keys[i], variants);
+          if (value) result.push(value);
+        }
+        return result;
+      };
+      const getVariantClassNamesBySlotKey = (slotKey, slotProps2) => {
+        if (!variants || typeof variants !== "object") return null;
+        const result = [];
+        for (const variant in variants) {
+          const variantValue = getVariantValue(variant, variants, slotKey, slotProps2);
+          const value = slotKey === "base" && typeof variantValue === "string" ? variantValue : variantValue && variantValue[slotKey];
+          if (value) result.push(value);
+        }
+        return result;
+      };
+      const propsWithoutUndefined = {};
+      for (const prop in props) {
+        const value = props[prop];
+        if (value !== void 0) propsWithoutUndefined[prop] = value;
+      }
+      const getCompleteProps = (key, slotProps2) => {
+        const initialProp = typeof props?.[key] === "object" ? {
+          [key]: props[key]?.initial
+        } : {};
+        return {
+          ...defaultVariants,
+          ...propsWithoutUndefined,
+          ...initialProp,
+          ...slotProps2
+        };
+      };
+      const getCompoundVariantsValue = (cv = [], slotProps2) => {
+        const result = [];
+        const cvLength = cv.length;
+        for (let i = 0; i < cvLength; i++) {
+          const { class: tvClass, className: tvClassName, ...compoundVariantOptions } = cv[i];
+          let isValid = true;
+          const completeProps = getCompleteProps(null, slotProps2);
+          for (const key in compoundVariantOptions) {
+            const value = compoundVariantOptions[key];
+            const completePropsValue = completeProps[key];
+            if (Array.isArray(value)) {
+              if (!value.includes(completePropsValue)) {
+                isValid = false;
+                break;
+              }
+            } else {
+              if ((value == null || value === false) && (completePropsValue == null || completePropsValue === false))
+                continue;
+              if (completePropsValue !== value) {
+                isValid = false;
+                break;
+              }
+            }
+          }
+          if (isValid) {
+            if (tvClass) result.push(tvClass);
+            if (tvClassName) result.push(tvClassName);
+          }
+        }
+        return result;
+      };
+      const getCompoundVariantClassNamesBySlot = (slotProps2) => {
+        const compoundClassNames = getCompoundVariantsValue(compoundVariants, slotProps2);
+        if (!Array.isArray(compoundClassNames)) return compoundClassNames;
+        const result = {};
+        const cnFn = cn;
+        for (let i = 0; i < compoundClassNames.length; i++) {
+          const className = compoundClassNames[i];
+          if (typeof className === "string") {
+            result.base = cnFn(result.base, className)(config);
+          } else if (typeof className === "object") {
+            for (const slot in className) {
+              result[slot] = cnFn(result[slot], className[slot])(config);
+            }
+          }
+        }
+        return result;
+      };
+      const getCompoundSlotClassNameBySlot = (slotProps2) => {
+        if (compoundSlots.length < 1) return null;
+        const result = {};
+        const completeProps = getCompleteProps(null, slotProps2);
+        for (let i = 0; i < compoundSlots.length; i++) {
+          const {
+            slots: slots2 = [],
+            class: slotClass,
+            className: slotClassName,
+            ...slotVariants
+          } = compoundSlots[i];
+          if (!isEmptyObject(slotVariants)) {
+            let isValid = true;
+            for (const key in slotVariants) {
+              const completePropsValue = completeProps[key];
+              const slotVariantValue = slotVariants[key];
+              if (completePropsValue === void 0 || (Array.isArray(slotVariantValue) ? !slotVariantValue.includes(completePropsValue) : slotVariantValue !== completePropsValue)) {
+                isValid = false;
+                break;
+              }
+            }
+            if (!isValid) continue;
+          }
+          for (let j = 0; j < slots2.length; j++) {
+            const slotName = slots2[j];
+            if (!result[slotName]) result[slotName] = [];
+            result[slotName].push([slotClass, slotClassName]);
+          }
+        }
+        return result;
+      };
+      if (!isEmptyObject(slotProps) || !isExtendedSlotsEmpty) {
+        const slotsFns = {};
+        if (typeof slots === "object" && !isEmptyObject(slots)) {
+          const cnFn = cn;
+          for (const slotKey in slots) {
+            slotsFns[slotKey] = (slotProps2) => {
+              const compoundVariantClasses = getCompoundVariantClassNamesBySlot(slotProps2);
+              const compoundSlotClasses = getCompoundSlotClassNameBySlot(slotProps2);
+              return cnFn(
+                slots[slotKey],
+                getVariantClassNamesBySlotKey(slotKey, slotProps2),
+                compoundVariantClasses ? compoundVariantClasses[slotKey] : void 0,
+                compoundSlotClasses ? compoundSlotClasses[slotKey] : void 0,
+                slotProps2?.class,
+                slotProps2?.className
+              )(config);
+            };
+          }
+        }
+        return slotsFns;
+      }
+      return cn(
+        base,
+        getVariantClassNames(),
+        getCompoundVariantsValue(compoundVariants),
+        props?.class,
+        props?.className
+      )(config);
+    };
+    const getVariantKeys = () => {
+      if (!variants || typeof variants !== "object") return;
+      return Object.keys(variants);
+    };
+    component.variantKeys = getVariantKeys();
+    component.extend = extend;
+    component.base = base;
+    component.slots = slots;
+    component.variants = variants;
+    component.defaultVariants = defaultVariants;
+    component.compoundSlots = compoundSlots;
+    component.compoundVariants = compoundVariants;
+    return component;
+  };
+  const createTV = (configProp) => {
+    return (options, config) => tv(options, config ? mergeObjects(configProp, config) : configProp);
+  };
+  return {
+    tv,
+    createTV
+  };
+};
+
+/**
+ * Concatenates two arrays faster than the array spread operator.
+ */
+const concatArrays = (array1, array2) => {
+  // Pre-allocate for better V8 optimization
+  const combinedArray = new Array(array1.length + array2.length);
+  for (let i = 0; i < array1.length; i++) {
+    combinedArray[i] = array1[i];
+  }
+  for (let i = 0; i < array2.length; i++) {
+    combinedArray[array1.length + i] = array2[i];
+  }
+  return combinedArray;
+};
+
+// Factory function ensures consistent object shapes
+const createClassValidatorObject = (classGroupId, validator) => ({
+  classGroupId,
+  validator
+});
+// Factory ensures consistent ClassPartObject shape
+const createClassPartObject = (nextPart = new Map(), validators = null, classGroupId) => ({
+  nextPart,
+  validators,
+  classGroupId
+});
+const CLASS_PART_SEPARATOR = '-';
+const EMPTY_CONFLICTS = [];
+// I use two dots here because one dot is used as prefix for class groups in plugins
+const ARBITRARY_PROPERTY_PREFIX = 'arbitrary..';
+const createClassGroupUtils = config => {
+  const classMap = createClassMap(config);
+  const {
+    conflictingClassGroups,
+    conflictingClassGroupModifiers
+  } = config;
+  const getClassGroupId = className => {
+    if (className.startsWith('[') && className.endsWith(']')) {
+      return getGroupIdForArbitraryProperty(className);
+    }
+    const classParts = className.split(CLASS_PART_SEPARATOR);
+    // Classes like `-inset-1` produce an empty string as first classPart. We assume that classes for negative values are used correctly and skip it.
+    const startIndex = classParts[0] === '' && classParts.length > 1 ? 1 : 0;
+    return getGroupRecursive(classParts, startIndex, classMap);
+  };
+  const getConflictingClassGroupIds = (classGroupId, hasPostfixModifier) => {
+    if (hasPostfixModifier) {
+      const modifierConflicts = conflictingClassGroupModifiers[classGroupId];
+      const baseConflicts = conflictingClassGroups[classGroupId];
+      if (modifierConflicts) {
+        if (baseConflicts) {
+          // Merge base conflicts with modifier conflicts
+          return concatArrays(baseConflicts, modifierConflicts);
+        }
+        // Only modifier conflicts
+        return modifierConflicts;
+      }
+      // Fall back to without postfix if no modifier conflicts
+      return baseConflicts || EMPTY_CONFLICTS;
+    }
+    return conflictingClassGroups[classGroupId] || EMPTY_CONFLICTS;
+  };
+  return {
+    getClassGroupId,
+    getConflictingClassGroupIds
+  };
+};
+const getGroupRecursive = (classParts, startIndex, classPartObject) => {
+  const classPathsLength = classParts.length - startIndex;
+  if (classPathsLength === 0) {
+    return classPartObject.classGroupId;
+  }
+  const currentClassPart = classParts[startIndex];
+  const nextClassPartObject = classPartObject.nextPart.get(currentClassPart);
+  if (nextClassPartObject) {
+    const result = getGroupRecursive(classParts, startIndex + 1, nextClassPartObject);
+    if (result) return result;
+  }
+  const validators = classPartObject.validators;
+  if (validators === null) {
+    return undefined;
+  }
+  // Build classRest string efficiently by joining from startIndex onwards
+  const classRest = startIndex === 0 ? classParts.join(CLASS_PART_SEPARATOR) : classParts.slice(startIndex).join(CLASS_PART_SEPARATOR);
+  const validatorsLength = validators.length;
+  for (let i = 0; i < validatorsLength; i++) {
+    const validatorObj = validators[i];
+    if (validatorObj.validator(classRest)) {
+      return validatorObj.classGroupId;
+    }
+  }
+  return undefined;
+};
+/**
+ * Get the class group ID for an arbitrary property.
+ *
+ * @param className - The class name to get the group ID for. Is expected to be string starting with `[` and ending with `]`.
+ */
+const getGroupIdForArbitraryProperty = className => className.slice(1, -1).indexOf(':') === -1 ? undefined : (() => {
+  const content = className.slice(1, -1);
+  const colonIndex = content.indexOf(':');
+  const property = content.slice(0, colonIndex);
+  return property ? ARBITRARY_PROPERTY_PREFIX + property : undefined;
+})();
+/**
+ * Exported for testing only
+ */
+const createClassMap = config => {
+  const {
+    theme,
+    classGroups
+  } = config;
+  return processClassGroups(classGroups, theme);
+};
+// Split into separate functions to maintain monomorphic call sites
+const processClassGroups = (classGroups, theme) => {
+  const classMap = createClassPartObject();
+  for (const classGroupId in classGroups) {
+    const group = classGroups[classGroupId];
+    processClassesRecursively(group, classMap, classGroupId, theme);
+  }
+  return classMap;
+};
+const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme) => {
+  const len = classGroup.length;
+  for (let i = 0; i < len; i++) {
+    const classDefinition = classGroup[i];
+    processClassDefinition(classDefinition, classPartObject, classGroupId, theme);
+  }
+};
+// Split into separate functions for each type to maintain monomorphic call sites
+const processClassDefinition = (classDefinition, classPartObject, classGroupId, theme) => {
+  if (typeof classDefinition === 'string') {
+    processStringDefinition(classDefinition, classPartObject, classGroupId);
+    return;
+  }
+  if (typeof classDefinition === 'function') {
+    processFunctionDefinition(classDefinition, classPartObject, classGroupId, theme);
+    return;
+  }
+  processObjectDefinition(classDefinition, classPartObject, classGroupId, theme);
+};
+const processStringDefinition = (classDefinition, classPartObject, classGroupId) => {
+  const classPartObjectToEdit = classDefinition === '' ? classPartObject : getPart(classPartObject, classDefinition);
+  classPartObjectToEdit.classGroupId = classGroupId;
+};
+const processFunctionDefinition = (classDefinition, classPartObject, classGroupId, theme) => {
+  if (isThemeGetter(classDefinition)) {
+    processClassesRecursively(classDefinition(theme), classPartObject, classGroupId, theme);
+    return;
+  }
+  if (classPartObject.validators === null) {
+    classPartObject.validators = [];
+  }
+  classPartObject.validators.push(createClassValidatorObject(classGroupId, classDefinition));
+};
+const processObjectDefinition = (classDefinition, classPartObject, classGroupId, theme) => {
+  const entries = Object.entries(classDefinition);
+  const len = entries.length;
+  for (let i = 0; i < len; i++) {
+    const [key, value] = entries[i];
+    processClassesRecursively(value, getPart(classPartObject, key), classGroupId, theme);
+  }
+};
+const getPart = (classPartObject, path) => {
+  let current = classPartObject;
+  const parts = path.split(CLASS_PART_SEPARATOR);
+  const len = parts.length;
+  for (let i = 0; i < len; i++) {
+    const part = parts[i];
+    let next = current.nextPart.get(part);
+    if (!next) {
+      next = createClassPartObject();
+      current.nextPart.set(part, next);
+    }
+    current = next;
+  }
+  return current;
+};
+// Type guard maintains monomorphic check
+const isThemeGetter = func => 'isThemeGetter' in func && func.isThemeGetter === true;
+
+// LRU cache implementation using plain objects for simplicity
+const createLruCache = maxCacheSize => {
+  if (maxCacheSize < 1) {
+    return {
+      get: () => undefined,
+      set: () => {}
+    };
+  }
+  let cacheSize = 0;
+  let cache = Object.create(null);
+  let previousCache = Object.create(null);
+  const update = (key, value) => {
+    cache[key] = value;
+    cacheSize++;
+    if (cacheSize > maxCacheSize) {
+      cacheSize = 0;
+      previousCache = cache;
+      cache = Object.create(null);
+    }
+  };
+  return {
+    get(key) {
+      let value = cache[key];
+      if (value !== undefined) {
+        return value;
+      }
+      if ((value = previousCache[key]) !== undefined) {
+        update(key, value);
+        return value;
+      }
+    },
+    set(key, value) {
+      if (key in cache) {
+        cache[key] = value;
+      } else {
+        update(key, value);
+      }
+    }
+  };
+};
+const IMPORTANT_MODIFIER = '!';
+const MODIFIER_SEPARATOR = ':';
+const EMPTY_MODIFIERS = [];
+// Pre-allocated result object shape for consistency
+const createResultObject = (modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition, isExternal) => ({
+  modifiers,
+  hasImportantModifier,
+  baseClassName,
+  maybePostfixModifierPosition,
+  isExternal
+});
+const createParseClassName = config => {
+  const {
+    prefix,
+    experimentalParseClassName
+  } = config;
+  /**
+   * Parse class name into parts.
+   *
+   * Inspired by `splitAtTopLevelOnly` used in Tailwind CSS
+   * @see https://github.com/tailwindlabs/tailwindcss/blob/v3.2.2/src/util/splitAtTopLevelOnly.js
+   */
+  let parseClassName = className => {
+    // Use simple array with push for better performance
+    const modifiers = [];
+    let bracketDepth = 0;
+    let parenDepth = 0;
+    let modifierStart = 0;
+    let postfixModifierPosition;
+    const len = className.length;
+    for (let index = 0; index < len; index++) {
+      const currentCharacter = className[index];
+      if (bracketDepth === 0 && parenDepth === 0) {
+        if (currentCharacter === MODIFIER_SEPARATOR) {
+          modifiers.push(className.slice(modifierStart, index));
+          modifierStart = index + 1;
+          continue;
+        }
+        if (currentCharacter === '/') {
+          postfixModifierPosition = index;
+          continue;
+        }
+      }
+      if (currentCharacter === '[') bracketDepth++;else if (currentCharacter === ']') bracketDepth--;else if (currentCharacter === '(') parenDepth++;else if (currentCharacter === ')') parenDepth--;
+    }
+    const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.slice(modifierStart);
+    // Inline important modifier check
+    let baseClassName = baseClassNameWithImportantModifier;
+    let hasImportantModifier = false;
+    if (baseClassNameWithImportantModifier.endsWith(IMPORTANT_MODIFIER)) {
+      baseClassName = baseClassNameWithImportantModifier.slice(0, -1);
+      hasImportantModifier = true;
+    } else if (
+    /**
+     * In Tailwind CSS v3 the important modifier was at the start of the base class name. This is still supported for legacy reasons.
+     * @see https://github.com/dcastil/tailwind-merge/issues/513#issuecomment-2614029864
+     */
+    baseClassNameWithImportantModifier.startsWith(IMPORTANT_MODIFIER)) {
+      baseClassName = baseClassNameWithImportantModifier.slice(1);
+      hasImportantModifier = true;
+    }
+    const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : undefined;
+    return createResultObject(modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition);
+  };
+  if (prefix) {
+    const fullPrefix = prefix + MODIFIER_SEPARATOR;
+    const parseClassNameOriginal = parseClassName;
+    parseClassName = className => className.startsWith(fullPrefix) ? parseClassNameOriginal(className.slice(fullPrefix.length)) : createResultObject(EMPTY_MODIFIERS, false, className, undefined, true);
+  }
+  if (experimentalParseClassName) {
+    const parseClassNameOriginal = parseClassName;
+    parseClassName = className => experimentalParseClassName({
+      className,
+      parseClassName: parseClassNameOriginal
+    });
+  }
+  return parseClassName;
+};
+
+/**
+ * Sorts modifiers according to following schema:
+ * - Predefined modifiers are sorted alphabetically
+ * - When an arbitrary variant appears, it must be preserved which modifiers are before and after it
+ */
+const createSortModifiers = config => {
+  // Pre-compute weights for all known modifiers for O(1) comparison
+  const modifierWeights = new Map();
+  // Assign weights to sensitive modifiers (highest priority, but preserve order)
+  config.orderSensitiveModifiers.forEach((mod, index) => {
+    modifierWeights.set(mod, 1000000 + index); // High weights for sensitive mods
+  });
+  return modifiers => {
+    const result = [];
+    let currentSegment = [];
+    // Process modifiers in one pass
+    for (let i = 0; i < modifiers.length; i++) {
+      const modifier = modifiers[i];
+      // Check if modifier is sensitive (starts with '[' or in orderSensitiveModifiers)
+      const isArbitrary = modifier[0] === '[';
+      const isOrderSensitive = modifierWeights.has(modifier);
+      if (isArbitrary || isOrderSensitive) {
+        // Sort and flush current segment alphabetically
+        if (currentSegment.length > 0) {
+          currentSegment.sort();
+          result.push(...currentSegment);
+          currentSegment = [];
+        }
+        result.push(modifier);
+      } else {
+        // Regular modifier - add to current segment for batch sorting
+        currentSegment.push(modifier);
+      }
+    }
+    // Sort and add any remaining segment items
+    if (currentSegment.length > 0) {
+      currentSegment.sort();
+      result.push(...currentSegment);
+    }
+    return result;
+  };
+};
+const createConfigUtils = config => ({
+  cache: createLruCache(config.cacheSize),
+  parseClassName: createParseClassName(config),
+  sortModifiers: createSortModifiers(config),
+  postfixLookupClassGroupIds: createPostfixLookupClassGroupIds(config),
+  ...createClassGroupUtils(config)
+});
+const createPostfixLookupClassGroupIds = config => {
+  const lookup = Object.create(null);
+  const classGroupIds = config.postfixLookupClassGroups;
+  if (classGroupIds) {
+    for (let i = 0; i < classGroupIds.length; i++) {
+      lookup[classGroupIds[i]] = true;
+    }
+  }
+  return lookup;
+};
+const SPLIT_CLASSES_REGEX = /\s+/;
+const mergeClassList = (classList, configUtils) => {
+  const {
+    parseClassName,
+    getClassGroupId,
+    getConflictingClassGroupIds,
+    sortModifiers,
+    postfixLookupClassGroupIds
+  } = configUtils;
+  /**
+   * Set of classGroupIds in following format:
+   * `{importantModifier}{variantModifiers}{classGroupId}`
+   * @example 'float'
+   * @example 'hover:focus:bg-color'
+   * @example 'md:!pr'
+   */
+  const classGroupsInConflict = [];
+  const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
+  let result = '';
+  for (let index = classNames.length - 1; index >= 0; index -= 1) {
+    const originalClassName = classNames[index];
+    const {
+      isExternal,
+      modifiers,
+      hasImportantModifier,
+      baseClassName,
+      maybePostfixModifierPosition
+    } = parseClassName(originalClassName);
+    if (isExternal) {
+      result = originalClassName + (result.length > 0 ? ' ' + result : result);
+      continue;
+    }
+    let hasPostfixModifier = !!maybePostfixModifierPosition;
+    let classGroupId;
+    if (hasPostfixModifier) {
+      const baseClassNameWithoutPostfix = baseClassName.substring(0, maybePostfixModifierPosition);
+      classGroupId = getClassGroupId(baseClassNameWithoutPostfix);
+      const classGroupIdWithPostfix = classGroupId && postfixLookupClassGroupIds[classGroupId] ? getClassGroupId(baseClassName) : undefined;
+      if (classGroupIdWithPostfix && classGroupIdWithPostfix !== classGroupId) {
+        classGroupId = classGroupIdWithPostfix;
+        hasPostfixModifier = false;
+      }
+    } else {
+      classGroupId = getClassGroupId(baseClassName);
+    }
+    if (!classGroupId) {
+      if (!hasPostfixModifier) {
+        // Not a Tailwind class
+        result = originalClassName + (result.length > 0 ? ' ' + result : result);
+        continue;
+      }
+      classGroupId = getClassGroupId(baseClassName);
+      if (!classGroupId) {
+        // Not a Tailwind class
+        result = originalClassName + (result.length > 0 ? ' ' + result : result);
+        continue;
+      }
+      hasPostfixModifier = false;
+    }
+    // Fast path: skip sorting for empty or single modifier
+    const variantModifier = modifiers.length === 0 ? '' : modifiers.length === 1 ? modifiers[0] : sortModifiers(modifiers).join(':');
+    const modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;
+    const classId = modifierId + classGroupId;
+    if (classGroupsInConflict.indexOf(classId) > -1) {
+      // Tailwind class omitted due to conflict
+      continue;
+    }
+    classGroupsInConflict.push(classId);
+    const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
+    for (let i = 0; i < conflictGroups.length; ++i) {
+      const group = conflictGroups[i];
+      classGroupsInConflict.push(modifierId + group);
+    }
+    // Tailwind class not in conflict
+    result = originalClassName + (result.length > 0 ? ' ' + result : result);
+  }
+  return result;
+};
+
+/**
+ * The code in this file is copied from https://github.com/lukeed/clsx and modified to suit the needs of tailwind-merge better.
+ *
+ * Specifically:
+ * - Runtime code from https://github.com/lukeed/clsx/blob/v1.2.1/src/index.js
+ * - TypeScript types from https://github.com/lukeed/clsx/blob/v1.2.1/clsx.d.ts
+ *
+ * Original code has MIT license: Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (lukeed.com)
+ */
+const twJoin = (...classLists) => {
+  let index = 0;
+  let argument;
+  let resolvedValue;
+  let string = '';
+  while (index < classLists.length) {
+    if (argument = classLists[index++]) {
+      if (resolvedValue = toValue(argument)) {
+        string && (string += ' ');
+        string += resolvedValue;
+      }
+    }
+  }
+  return string;
+};
+const toValue = mix => {
+  // Fast path for strings
+  if (typeof mix === 'string') {
+    return mix;
+  }
+  let resolvedValue;
+  let string = '';
+  for (let k = 0; k < mix.length; k++) {
+    if (mix[k]) {
+      if (resolvedValue = toValue(mix[k])) {
+        string && (string += ' ');
+        string += resolvedValue;
+      }
+    }
+  }
+  return string;
+};
+const createTailwindMerge = (createConfigFirst, ...createConfigRest) => {
+  let configUtils;
+  let cacheGet;
+  let cacheSet;
+  let functionToCall;
+  const initTailwindMerge = classList => {
+    const config = createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst());
+    configUtils = createConfigUtils(config);
+    cacheGet = configUtils.cache.get;
+    cacheSet = configUtils.cache.set;
+    functionToCall = tailwindMerge;
+    return tailwindMerge(classList);
+  };
+  const tailwindMerge = classList => {
+    const cachedResult = cacheGet(classList);
+    if (cachedResult) {
+      return cachedResult;
+    }
+    const result = mergeClassList(classList, configUtils);
+    cacheSet(classList, result);
+    return result;
+  };
+  functionToCall = initTailwindMerge;
+  return (...args) => functionToCall(twJoin(...args));
+};
+const fallbackThemeArr = [];
+const fromTheme = key => {
+  const themeGetter = theme => theme[key] || fallbackThemeArr;
+  themeGetter.isThemeGetter = true;
+  return themeGetter;
+};
+const arbitraryValueRegex = /^\[(?:(\w[\w-]*):)?(.+)\]$/i;
+const arbitraryVariableRegex = /^\((?:(\w[\w-]*):)?(.+)\)$/i;
+const fractionRegex = /^\d+(?:\.\d+)?\/\d+(?:\.\d+)?$/;
+const tshirtUnitRegex = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/;
+const lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/;
+const colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/;
+// Shadow always begins with x and y offset separated by underscore optionally prepended by inset
+const shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
+const imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
+const isFraction = value => fractionRegex.test(value);
+const isNumber$1 = value => !!value && !Number.isNaN(Number(value));
+const isInteger = value => !!value && Number.isInteger(Number(value));
+const isPercent = value => value.endsWith('%') && isNumber$1(value.slice(0, -1));
+const isTshirtSize = value => tshirtUnitRegex.test(value);
+const isAny = () => true;
+const isLengthOnly = value =>
+// `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
+// For example, `hsl(0 0% 0%)` would be classified as a length without this check.
+// I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
+lengthUnitRegex.test(value) && !colorFunctionRegex.test(value);
+const isNever = () => false;
+const isShadow = value => shadowRegex.test(value);
+const isImage = value => imageRegex.test(value);
+const isAnyNonArbitrary = value => !isArbitraryValue(value) && !isArbitraryVariable(value);
+const isNamedContainerQuery = value => value.startsWith('@container') && (value[10] === '/' && value[11] !== undefined || value[11] === 's' && value[16] !== undefined && value.startsWith('-size/', 10) || value[11] === 'n' && value[18] !== undefined && value.startsWith('-normal/', 10));
+const isArbitrarySize = value => getIsArbitraryValue(value, isLabelSize, isNever);
+const isArbitraryValue = value => arbitraryValueRegex.test(value);
+const isArbitraryLength = value => getIsArbitraryValue(value, isLabelLength, isLengthOnly);
+const isArbitraryNumber = value => getIsArbitraryValue(value, isLabelNumber, isNumber$1);
+const isArbitraryWeight = value => getIsArbitraryValue(value, isLabelWeight, isAny);
+const isArbitraryFamilyName = value => getIsArbitraryValue(value, isLabelFamilyName, isNever);
+const isArbitraryPosition = value => getIsArbitraryValue(value, isLabelPosition, isNever);
+const isArbitraryImage = value => getIsArbitraryValue(value, isLabelImage, isImage);
+const isArbitraryShadow = value => getIsArbitraryValue(value, isLabelShadow, isShadow);
+const isArbitraryVariable = value => arbitraryVariableRegex.test(value);
+const isArbitraryVariableLength = value => getIsArbitraryVariable(value, isLabelLength);
+const isArbitraryVariableFamilyName = value => getIsArbitraryVariable(value, isLabelFamilyName);
+const isArbitraryVariablePosition = value => getIsArbitraryVariable(value, isLabelPosition);
+const isArbitraryVariableSize = value => getIsArbitraryVariable(value, isLabelSize);
+const isArbitraryVariableImage = value => getIsArbitraryVariable(value, isLabelImage);
+const isArbitraryVariableShadow = value => getIsArbitraryVariable(value, isLabelShadow, true);
+const isArbitraryVariableWeight = value => getIsArbitraryVariable(value, isLabelWeight, true);
+// Helpers
+const getIsArbitraryValue = (value, testLabel, testValue) => {
+  const result = arbitraryValueRegex.exec(value);
+  if (result) {
+    if (result[1]) {
+      return testLabel(result[1]);
+    }
+    return testValue(result[2]);
+  }
+  return false;
+};
+const getIsArbitraryVariable = (value, testLabel, shouldMatchNoLabel = false) => {
+  const result = arbitraryVariableRegex.exec(value);
+  if (result) {
+    if (result[1]) {
+      return testLabel(result[1]);
+    }
+    return shouldMatchNoLabel;
+  }
+  return false;
+};
+// Labels
+const isLabelPosition = label => label === 'position' || label === 'percentage';
+const isLabelImage = label => label === 'image' || label === 'url';
+const isLabelSize = label => label === 'length' || label === 'size' || label === 'bg-size';
+const isLabelLength = label => label === 'length';
+const isLabelNumber = label => label === 'number';
+const isLabelFamilyName = label => label === 'family-name';
+const isLabelWeight = label => label === 'number' || label === 'weight';
+const isLabelShadow = label => label === 'shadow';
+const getDefaultConfig = () => {
+  /**
+   * Theme getters for theme variable namespaces
+   * @see https://tailwindcss.com/docs/theme#theme-variable-namespaces
+   */
+  /***/
+  const themeColor = fromTheme('color');
+  const themeFont = fromTheme('font');
+  const themeText = fromTheme('text');
+  const themeFontWeight = fromTheme('font-weight');
+  const themeTracking = fromTheme('tracking');
+  const themeLeading = fromTheme('leading');
+  const themeBreakpoint = fromTheme('breakpoint');
+  const themeContainer = fromTheme('container');
+  const themeSpacing = fromTheme('spacing');
+  const themeRadius = fromTheme('radius');
+  const themeShadow = fromTheme('shadow');
+  const themeInsetShadow = fromTheme('inset-shadow');
+  const themeTextShadow = fromTheme('text-shadow');
+  const themeDropShadow = fromTheme('drop-shadow');
+  const themeBlur = fromTheme('blur');
+  const themePerspective = fromTheme('perspective');
+  const themeAspect = fromTheme('aspect');
+  const themeEase = fromTheme('ease');
+  const themeAnimate = fromTheme('animate');
+  /**
+   * Helpers to avoid repeating the same scales
+   *
+   * We use functions that create a new array every time they're called instead of static arrays.
+   * This ensures that users who modify any scale by mutating the array (e.g. with `array.push(element)`) don't accidentally mutate arrays in other parts of the config.
+   */
+  /***/
+  const scaleBreak = () => ['auto', 'avoid', 'all', 'avoid-page', 'page', 'left', 'right', 'column'];
+  const scalePosition = () => ['center', 'top', 'bottom', 'left', 'right', 'top-left',
+  // Deprecated since Tailwind CSS v4.1.0, see https://github.com/tailwindlabs/tailwindcss/pull/17378
+  'left-top', 'top-right',
+  // Deprecated since Tailwind CSS v4.1.0, see https://github.com/tailwindlabs/tailwindcss/pull/17378
+  'right-top', 'bottom-right',
+  // Deprecated since Tailwind CSS v4.1.0, see https://github.com/tailwindlabs/tailwindcss/pull/17378
+  'right-bottom', 'bottom-left',
+  // Deprecated since Tailwind CSS v4.1.0, see https://github.com/tailwindlabs/tailwindcss/pull/17378
+  'left-bottom'];
+  const scalePositionWithArbitrary = () => [...scalePosition(), isArbitraryVariable, isArbitraryValue];
+  const scaleOverflow = () => ['auto', 'hidden', 'clip', 'visible', 'scroll'];
+  const scaleOverscroll = () => ['auto', 'contain', 'none'];
+  const scaleUnambiguousSpacing = () => [isArbitraryVariable, isArbitraryValue, themeSpacing];
+  const scaleInset = () => [isFraction, 'full', 'auto', ...scaleUnambiguousSpacing()];
+  const scaleGridTemplateColsRows = () => [isInteger, 'none', 'subgrid', isArbitraryVariable, isArbitraryValue];
+  const scaleGridColRowStartAndEnd = () => ['auto', {
+    span: ['full', isInteger, isArbitraryVariable, isArbitraryValue]
+  }, isInteger, isArbitraryVariable, isArbitraryValue];
+  const scaleGridColRowStartOrEnd = () => [isInteger, 'auto', isArbitraryVariable, isArbitraryValue];
+  const scaleGridAutoColsRows = () => ['auto', 'min', 'max', 'fr', isArbitraryVariable, isArbitraryValue];
+  const scaleAlignPrimaryAxis = () => ['start', 'end', 'center', 'between', 'around', 'evenly', 'stretch', 'baseline', 'center-safe', 'end-safe'];
+  const scaleAlignSecondaryAxis = () => ['start', 'end', 'center', 'stretch', 'center-safe', 'end-safe'];
+  const scaleMargin = () => ['auto', ...scaleUnambiguousSpacing()];
+  const scaleSizing = () => [isFraction, 'auto', 'full', 'dvw', 'dvh', 'lvw', 'lvh', 'svw', 'svh', 'min', 'max', 'fit', ...scaleUnambiguousSpacing()];
+  const scaleSizingInline = () => [isFraction, 'screen', 'full', 'dvw', 'lvw', 'svw', 'min', 'max', 'fit', ...scaleUnambiguousSpacing()];
+  const scaleSizingBlock = () => [isFraction, 'screen', 'full', 'lh', 'dvh', 'lvh', 'svh', 'min', 'max', 'fit', ...scaleUnambiguousSpacing()];
+  const scaleColor = () => [themeColor, isArbitraryVariable, isArbitraryValue];
+  const scaleBgPosition = () => [...scalePosition(), isArbitraryVariablePosition, isArbitraryPosition, {
+    position: [isArbitraryVariable, isArbitraryValue]
+  }];
+  const scaleBgRepeat = () => ['no-repeat', {
+    repeat: ['', 'x', 'y', 'space', 'round']
+  }];
+  const scaleBgSize = () => ['auto', 'cover', 'contain', isArbitraryVariableSize, isArbitrarySize, {
+    size: [isArbitraryVariable, isArbitraryValue]
+  }];
+  const scaleGradientStopPosition = () => [isPercent, isArbitraryVariableLength, isArbitraryLength];
+  const scaleRadius = () => [
+  // Deprecated since Tailwind CSS v4.0.0
+  '', 'none', 'full', themeRadius, isArbitraryVariable, isArbitraryValue];
+  const scaleBorderWidth = () => ['', isNumber$1, isArbitraryVariableLength, isArbitraryLength];
+  const scaleLineStyle = () => ['solid', 'dashed', 'dotted', 'double'];
+  const scaleBlendMode = () => ['normal', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity'];
+  const scaleMaskImagePosition = () => [isNumber$1, isPercent, isArbitraryVariablePosition, isArbitraryPosition];
+  const scaleBlur = () => [
+  // Deprecated since Tailwind CSS v4.0.0
+  '', 'none', themeBlur, isArbitraryVariable, isArbitraryValue];
+  const scaleRotate = () => ['none', isNumber$1, isArbitraryVariable, isArbitraryValue];
+  const scaleScale = () => ['none', isNumber$1, isArbitraryVariable, isArbitraryValue];
+  const scaleSkew = () => [isNumber$1, isArbitraryVariable, isArbitraryValue];
+  const scaleTranslate = () => [isFraction, 'full', ...scaleUnambiguousSpacing()];
+  return {
+    cacheSize: 500,
+    theme: {
+      animate: ['spin', 'ping', 'pulse', 'bounce'],
+      aspect: ['video'],
+      blur: [isTshirtSize],
+      breakpoint: [isTshirtSize],
+      color: [isAny],
+      container: [isTshirtSize],
+      'drop-shadow': [isTshirtSize],
+      ease: ['in', 'out', 'in-out'],
+      font: [isAnyNonArbitrary],
+      'font-weight': ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
+      'inset-shadow': [isTshirtSize],
+      leading: ['none', 'tight', 'snug', 'normal', 'relaxed', 'loose'],
+      perspective: ['dramatic', 'near', 'normal', 'midrange', 'distant', 'none'],
+      radius: [isTshirtSize],
+      shadow: [isTshirtSize],
+      spacing: ['px', isNumber$1],
+      text: [isTshirtSize],
+      'text-shadow': [isTshirtSize],
+      tracking: ['tighter', 'tight', 'normal', 'wide', 'wider', 'widest']
+    },
+    classGroups: {
+      // --------------
+      // --- Layout ---
+      // --------------
+      /**
+       * Aspect Ratio
+       * @see https://tailwindcss.com/docs/aspect-ratio
+       */
+      aspect: [{
+        aspect: ['auto', 'square', isFraction, isArbitraryValue, isArbitraryVariable, themeAspect]
+      }],
+      /**
+       * Container
+       * @see https://tailwindcss.com/docs/container
+       * @deprecated since Tailwind CSS v4.0.0
+       */
+      container: ['container'],
+      /**
+       * Container Type
+       * @see https://tailwindcss.com/docs/responsive-design#container-queries
+       */
+      'container-type': [{
+        '@container': ['', 'normal', 'size', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Container Name
+       * @see https://tailwindcss.com/docs/responsive-design#named-containers
+       */
+      'container-named': [isNamedContainerQuery],
+      /**
+       * Columns
+       * @see https://tailwindcss.com/docs/columns
+       */
+      columns: [{
+        columns: [isNumber$1, isArbitraryValue, isArbitraryVariable, themeContainer]
+      }],
+      /**
+       * Break After
+       * @see https://tailwindcss.com/docs/break-after
+       */
+      'break-after': [{
+        'break-after': scaleBreak()
+      }],
+      /**
+       * Break Before
+       * @see https://tailwindcss.com/docs/break-before
+       */
+      'break-before': [{
+        'break-before': scaleBreak()
+      }],
+      /**
+       * Break Inside
+       * @see https://tailwindcss.com/docs/break-inside
+       */
+      'break-inside': [{
+        'break-inside': ['auto', 'avoid', 'avoid-page', 'avoid-column']
+      }],
+      /**
+       * Box Decoration Break
+       * @see https://tailwindcss.com/docs/box-decoration-break
+       */
+      'box-decoration': [{
+        'box-decoration': ['slice', 'clone']
+      }],
+      /**
+       * Box Sizing
+       * @see https://tailwindcss.com/docs/box-sizing
+       */
+      box: [{
+        box: ['border', 'content']
+      }],
+      /**
+       * Display
+       * @see https://tailwindcss.com/docs/display
+       */
+      display: ['block', 'inline-block', 'inline', 'flex', 'inline-flex', 'table', 'inline-table', 'table-caption', 'table-cell', 'table-column', 'table-column-group', 'table-footer-group', 'table-header-group', 'table-row-group', 'table-row', 'flow-root', 'grid', 'inline-grid', 'contents', 'list-item', 'hidden'],
+      /**
+       * Screen Reader Only
+       * @see https://tailwindcss.com/docs/display#screen-reader-only
+       */
+      sr: ['sr-only', 'not-sr-only'],
+      /**
+       * Floats
+       * @see https://tailwindcss.com/docs/float
+       */
+      float: [{
+        float: ['right', 'left', 'none', 'start', 'end']
+      }],
+      /**
+       * Clear
+       * @see https://tailwindcss.com/docs/clear
+       */
+      clear: [{
+        clear: ['left', 'right', 'both', 'none', 'start', 'end']
+      }],
+      /**
+       * Isolation
+       * @see https://tailwindcss.com/docs/isolation
+       */
+      isolation: ['isolate', 'isolation-auto'],
+      /**
+       * Object Fit
+       * @see https://tailwindcss.com/docs/object-fit
+       */
+      'object-fit': [{
+        object: ['contain', 'cover', 'fill', 'none', 'scale-down']
+      }],
+      /**
+       * Object Position
+       * @see https://tailwindcss.com/docs/object-position
+       */
+      'object-position': [{
+        object: scalePositionWithArbitrary()
+      }],
+      /**
+       * Overflow
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      overflow: [{
+        overflow: scaleOverflow()
+      }],
+      /**
+       * Overflow X
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      'overflow-x': [{
+        'overflow-x': scaleOverflow()
+      }],
+      /**
+       * Overflow Y
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      'overflow-y': [{
+        'overflow-y': scaleOverflow()
+      }],
+      /**
+       * Overscroll Behavior
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      overscroll: [{
+        overscroll: scaleOverscroll()
+      }],
+      /**
+       * Overscroll Behavior X
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      'overscroll-x': [{
+        'overscroll-x': scaleOverscroll()
+      }],
+      /**
+       * Overscroll Behavior Y
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      'overscroll-y': [{
+        'overscroll-y': scaleOverscroll()
+      }],
+      /**
+       * Position
+       * @see https://tailwindcss.com/docs/position
+       */
+      position: ['static', 'fixed', 'absolute', 'relative', 'sticky'],
+      /**
+       * Inset
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      inset: [{
+        inset: scaleInset()
+      }],
+      /**
+       * Inset Inline
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      'inset-x': [{
+        'inset-x': scaleInset()
+      }],
+      /**
+       * Inset Block
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      'inset-y': [{
+        'inset-y': scaleInset()
+      }],
+      /**
+       * Inset Inline Start
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       * @todo class group will be renamed to `inset-s` in next major release
+       */
+      start: [{
+        'inset-s': scaleInset(),
+        /**
+         * @deprecated since Tailwind CSS v4.2.0 in favor of `inset-s-*` utilities.
+         * @see https://github.com/tailwindlabs/tailwindcss/pull/19613
+         */
+        start: scaleInset()
+      }],
+      /**
+       * Inset Inline End
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       * @todo class group will be renamed to `inset-e` in next major release
+       */
+      end: [{
+        'inset-e': scaleInset(),
+        /**
+         * @deprecated since Tailwind CSS v4.2.0 in favor of `inset-e-*` utilities.
+         * @see https://github.com/tailwindlabs/tailwindcss/pull/19613
+         */
+        end: scaleInset()
+      }],
+      /**
+       * Inset Block Start
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      'inset-bs': [{
+        'inset-bs': scaleInset()
+      }],
+      /**
+       * Inset Block End
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      'inset-be': [{
+        'inset-be': scaleInset()
+      }],
+      /**
+       * Top
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      top: [{
+        top: scaleInset()
+      }],
+      /**
+       * Right
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      right: [{
+        right: scaleInset()
+      }],
+      /**
+       * Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      bottom: [{
+        bottom: scaleInset()
+      }],
+      /**
+       * Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      left: [{
+        left: scaleInset()
+      }],
+      /**
+       * Visibility
+       * @see https://tailwindcss.com/docs/visibility
+       */
+      visibility: ['visible', 'invisible', 'collapse'],
+      /**
+       * Z-Index
+       * @see https://tailwindcss.com/docs/z-index
+       */
+      z: [{
+        z: [isInteger, 'auto', isArbitraryVariable, isArbitraryValue]
+      }],
+      // ------------------------
+      // --- Flexbox and Grid ---
+      // ------------------------
+      /**
+       * Flex Basis
+       * @see https://tailwindcss.com/docs/flex-basis
+       */
+      basis: [{
+        basis: [isFraction, 'full', 'auto', themeContainer, ...scaleUnambiguousSpacing()]
+      }],
+      /**
+       * Flex Direction
+       * @see https://tailwindcss.com/docs/flex-direction
+       */
+      'flex-direction': [{
+        flex: ['row', 'row-reverse', 'col', 'col-reverse']
+      }],
+      /**
+       * Flex Wrap
+       * @see https://tailwindcss.com/docs/flex-wrap
+       */
+      'flex-wrap': [{
+        flex: ['nowrap', 'wrap', 'wrap-reverse']
+      }],
+      /**
+       * Flex
+       * @see https://tailwindcss.com/docs/flex
+       */
+      flex: [{
+        flex: [isNumber$1, isFraction, 'auto', 'initial', 'none', isArbitraryValue]
+      }],
+      /**
+       * Flex Grow
+       * @see https://tailwindcss.com/docs/flex-grow
+       */
+      grow: [{
+        grow: ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Flex Shrink
+       * @see https://tailwindcss.com/docs/flex-shrink
+       */
+      shrink: [{
+        shrink: ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Order
+       * @see https://tailwindcss.com/docs/order
+       */
+      order: [{
+        order: [isInteger, 'first', 'last', 'none', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Grid Template Columns
+       * @see https://tailwindcss.com/docs/grid-template-columns
+       */
+      'grid-cols': [{
+        'grid-cols': scaleGridTemplateColsRows()
+      }],
+      /**
+       * Grid Column Start / End
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      'col-start-end': [{
+        col: scaleGridColRowStartAndEnd()
+      }],
+      /**
+       * Grid Column Start
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      'col-start': [{
+        'col-start': scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Column End
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      'col-end': [{
+        'col-end': scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Template Rows
+       * @see https://tailwindcss.com/docs/grid-template-rows
+       */
+      'grid-rows': [{
+        'grid-rows': scaleGridTemplateColsRows()
+      }],
+      /**
+       * Grid Row Start / End
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      'row-start-end': [{
+        row: scaleGridColRowStartAndEnd()
+      }],
+      /**
+       * Grid Row Start
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      'row-start': [{
+        'row-start': scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Row End
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      'row-end': [{
+        'row-end': scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Auto Flow
+       * @see https://tailwindcss.com/docs/grid-auto-flow
+       */
+      'grid-flow': [{
+        'grid-flow': ['row', 'col', 'dense', 'row-dense', 'col-dense']
+      }],
+      /**
+       * Grid Auto Columns
+       * @see https://tailwindcss.com/docs/grid-auto-columns
+       */
+      'auto-cols': [{
+        'auto-cols': scaleGridAutoColsRows()
+      }],
+      /**
+       * Grid Auto Rows
+       * @see https://tailwindcss.com/docs/grid-auto-rows
+       */
+      'auto-rows': [{
+        'auto-rows': scaleGridAutoColsRows()
+      }],
+      /**
+       * Gap
+       * @see https://tailwindcss.com/docs/gap
+       */
+      gap: [{
+        gap: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Gap X
+       * @see https://tailwindcss.com/docs/gap
+       */
+      'gap-x': [{
+        'gap-x': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Gap Y
+       * @see https://tailwindcss.com/docs/gap
+       */
+      'gap-y': [{
+        'gap-y': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Justify Content
+       * @see https://tailwindcss.com/docs/justify-content
+       */
+      'justify-content': [{
+        justify: [...scaleAlignPrimaryAxis(), 'normal']
+      }],
+      /**
+       * Justify Items
+       * @see https://tailwindcss.com/docs/justify-items
+       */
+      'justify-items': [{
+        'justify-items': [...scaleAlignSecondaryAxis(), 'normal']
+      }],
+      /**
+       * Justify Self
+       * @see https://tailwindcss.com/docs/justify-self
+       */
+      'justify-self': [{
+        'justify-self': ['auto', ...scaleAlignSecondaryAxis()]
+      }],
+      /**
+       * Align Content
+       * @see https://tailwindcss.com/docs/align-content
+       */
+      'align-content': [{
+        content: ['normal', ...scaleAlignPrimaryAxis()]
+      }],
+      /**
+       * Align Items
+       * @see https://tailwindcss.com/docs/align-items
+       */
+      'align-items': [{
+        items: [...scaleAlignSecondaryAxis(), {
+          baseline: ['', 'last']
+        }]
+      }],
+      /**
+       * Align Self
+       * @see https://tailwindcss.com/docs/align-self
+       */
+      'align-self': [{
+        self: ['auto', ...scaleAlignSecondaryAxis(), {
+          baseline: ['', 'last']
+        }]
+      }],
+      /**
+       * Place Content
+       * @see https://tailwindcss.com/docs/place-content
+       */
+      'place-content': [{
+        'place-content': scaleAlignPrimaryAxis()
+      }],
+      /**
+       * Place Items
+       * @see https://tailwindcss.com/docs/place-items
+       */
+      'place-items': [{
+        'place-items': [...scaleAlignSecondaryAxis(), 'baseline']
+      }],
+      /**
+       * Place Self
+       * @see https://tailwindcss.com/docs/place-self
+       */
+      'place-self': [{
+        'place-self': ['auto', ...scaleAlignSecondaryAxis()]
+      }],
+      // Spacing
+      /**
+       * Padding
+       * @see https://tailwindcss.com/docs/padding
+       */
+      p: [{
+        p: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Inline
+       * @see https://tailwindcss.com/docs/padding
+       */
+      px: [{
+        px: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Block
+       * @see https://tailwindcss.com/docs/padding
+       */
+      py: [{
+        py: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Inline Start
+       * @see https://tailwindcss.com/docs/padding
+       */
+      ps: [{
+        ps: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Inline End
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pe: [{
+        pe: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Block Start
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pbs: [{
+        pbs: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Block End
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pbe: [{
+        pbe: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Top
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pt: [{
+        pt: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Right
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pr: [{
+        pr: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Bottom
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pb: [{
+        pb: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Left
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pl: [{
+        pl: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Margin
+       * @see https://tailwindcss.com/docs/margin
+       */
+      m: [{
+        m: scaleMargin()
+      }],
+      /**
+       * Margin Inline
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mx: [{
+        mx: scaleMargin()
+      }],
+      /**
+       * Margin Block
+       * @see https://tailwindcss.com/docs/margin
+       */
+      my: [{
+        my: scaleMargin()
+      }],
+      /**
+       * Margin Inline Start
+       * @see https://tailwindcss.com/docs/margin
+       */
+      ms: [{
+        ms: scaleMargin()
+      }],
+      /**
+       * Margin Inline End
+       * @see https://tailwindcss.com/docs/margin
+       */
+      me: [{
+        me: scaleMargin()
+      }],
+      /**
+       * Margin Block Start
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mbs: [{
+        mbs: scaleMargin()
+      }],
+      /**
+       * Margin Block End
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mbe: [{
+        mbe: scaleMargin()
+      }],
+      /**
+       * Margin Top
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mt: [{
+        mt: scaleMargin()
+      }],
+      /**
+       * Margin Right
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mr: [{
+        mr: scaleMargin()
+      }],
+      /**
+       * Margin Bottom
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mb: [{
+        mb: scaleMargin()
+      }],
+      /**
+       * Margin Left
+       * @see https://tailwindcss.com/docs/margin
+       */
+      ml: [{
+        ml: scaleMargin()
+      }],
+      /**
+       * Space Between X
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      'space-x': [{
+        'space-x': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Space Between X Reverse
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      'space-x-reverse': ['space-x-reverse'],
+      /**
+       * Space Between Y
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      'space-y': [{
+        'space-y': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Space Between Y Reverse
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      'space-y-reverse': ['space-y-reverse'],
+      // --------------
+      // --- Sizing ---
+      // --------------
+      /**
+       * Size
+       * @see https://tailwindcss.com/docs/width#setting-both-width-and-height
+       */
+      size: [{
+        size: scaleSizing()
+      }],
+      /**
+       * Inline Size
+       * @see https://tailwindcss.com/docs/width
+       */
+      'inline-size': [{
+        inline: ['auto', ...scaleSizingInline()]
+      }],
+      /**
+       * Min-Inline Size
+       * @see https://tailwindcss.com/docs/min-width
+       */
+      'min-inline-size': [{
+        'min-inline': ['auto', ...scaleSizingInline()]
+      }],
+      /**
+       * Max-Inline Size
+       * @see https://tailwindcss.com/docs/max-width
+       */
+      'max-inline-size': [{
+        'max-inline': ['none', ...scaleSizingInline()]
+      }],
+      /**
+       * Block Size
+       * @see https://tailwindcss.com/docs/height
+       */
+      'block-size': [{
+        block: ['auto', ...scaleSizingBlock()]
+      }],
+      /**
+       * Min-Block Size
+       * @see https://tailwindcss.com/docs/min-height
+       */
+      'min-block-size': [{
+        'min-block': ['auto', ...scaleSizingBlock()]
+      }],
+      /**
+       * Max-Block Size
+       * @see https://tailwindcss.com/docs/max-height
+       */
+      'max-block-size': [{
+        'max-block': ['none', ...scaleSizingBlock()]
+      }],
+      /**
+       * Width
+       * @see https://tailwindcss.com/docs/width
+       */
+      w: [{
+        w: [themeContainer, 'screen', ...scaleSizing()]
+      }],
+      /**
+       * Min-Width
+       * @see https://tailwindcss.com/docs/min-width
+       */
+      'min-w': [{
+        'min-w': [themeContainer, 'screen', /** Deprecated. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+        'none', ...scaleSizing()]
+      }],
+      /**
+       * Max-Width
+       * @see https://tailwindcss.com/docs/max-width
+       */
+      'max-w': [{
+        'max-w': [themeContainer, 'screen', 'none', /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+        'prose', /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+        {
+          screen: [themeBreakpoint]
+        }, ...scaleSizing()]
+      }],
+      /**
+       * Height
+       * @see https://tailwindcss.com/docs/height
+       */
+      h: [{
+        h: ['screen', 'lh', ...scaleSizing()]
+      }],
+      /**
+       * Min-Height
+       * @see https://tailwindcss.com/docs/min-height
+       */
+      'min-h': [{
+        'min-h': ['screen', 'lh', 'none', ...scaleSizing()]
+      }],
+      /**
+       * Max-Height
+       * @see https://tailwindcss.com/docs/max-height
+       */
+      'max-h': [{
+        'max-h': ['screen', 'lh', ...scaleSizing()]
+      }],
+      // ------------------
+      // --- Typography ---
+      // ------------------
+      /**
+       * Font Size
+       * @see https://tailwindcss.com/docs/font-size
+       */
+      'font-size': [{
+        text: ['base', themeText, isArbitraryVariableLength, isArbitraryLength]
+      }],
+      /**
+       * Font Smoothing
+       * @see https://tailwindcss.com/docs/font-smoothing
+       */
+      'font-smoothing': ['antialiased', 'subpixel-antialiased'],
+      /**
+       * Font Style
+       * @see https://tailwindcss.com/docs/font-style
+       */
+      'font-style': ['italic', 'not-italic'],
+      /**
+       * Font Weight
+       * @see https://tailwindcss.com/docs/font-weight
+       */
+      'font-weight': [{
+        font: [themeFontWeight, isArbitraryVariableWeight, isArbitraryWeight]
+      }],
+      /**
+       * Font Stretch
+       * @see https://tailwindcss.com/docs/font-stretch
+       */
+      'font-stretch': [{
+        'font-stretch': ['ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'normal', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', isPercent, isArbitraryValue]
+      }],
+      /**
+       * Font Family
+       * @see https://tailwindcss.com/docs/font-family
+       */
+      'font-family': [{
+        font: [isArbitraryVariableFamilyName, isArbitraryFamilyName, themeFont]
+      }],
+      /**
+       * Font Feature Settings
+       * @see https://tailwindcss.com/docs/font-feature-settings
+       */
+      'font-features': [{
+        'font-features': [isArbitraryValue]
+      }],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      'fvn-normal': ['normal-nums'],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      'fvn-ordinal': ['ordinal'],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      'fvn-slashed-zero': ['slashed-zero'],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      'fvn-figure': ['lining-nums', 'oldstyle-nums'],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      'fvn-spacing': ['proportional-nums', 'tabular-nums'],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      'fvn-fraction': ['diagonal-fractions', 'stacked-fractions'],
+      /**
+       * Letter Spacing
+       * @see https://tailwindcss.com/docs/letter-spacing
+       */
+      tracking: [{
+        tracking: [themeTracking, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Line Clamp
+       * @see https://tailwindcss.com/docs/line-clamp
+       */
+      'line-clamp': [{
+        'line-clamp': [isNumber$1, 'none', isArbitraryVariable, isArbitraryNumber]
+      }],
+      /**
+       * Line Height
+       * @see https://tailwindcss.com/docs/line-height
+       */
+      leading: [{
+        leading: [/** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+        themeLeading, ...scaleUnambiguousSpacing()]
+      }],
+      /**
+       * List Style Image
+       * @see https://tailwindcss.com/docs/list-style-image
+       */
+      'list-image': [{
+        'list-image': ['none', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * List Style Position
+       * @see https://tailwindcss.com/docs/list-style-position
+       */
+      'list-style-position': [{
+        list: ['inside', 'outside']
+      }],
+      /**
+       * List Style Type
+       * @see https://tailwindcss.com/docs/list-style-type
+       */
+      'list-style-type': [{
+        list: ['disc', 'decimal', 'none', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Text Alignment
+       * @see https://tailwindcss.com/docs/text-align
+       */
+      'text-alignment': [{
+        text: ['left', 'center', 'right', 'justify', 'start', 'end']
+      }],
+      /**
+       * Placeholder Color
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://v3.tailwindcss.com/docs/placeholder-color
+       */
+      'placeholder-color': [{
+        placeholder: scaleColor()
+      }],
+      /**
+       * Text Color
+       * @see https://tailwindcss.com/docs/text-color
+       */
+      'text-color': [{
+        text: scaleColor()
+      }],
+      /**
+       * Text Decoration
+       * @see https://tailwindcss.com/docs/text-decoration
+       */
+      'text-decoration': ['underline', 'overline', 'line-through', 'no-underline'],
+      /**
+       * Text Decoration Style
+       * @see https://tailwindcss.com/docs/text-decoration-style
+       */
+      'text-decoration-style': [{
+        decoration: [...scaleLineStyle(), 'wavy']
+      }],
+      /**
+       * Text Decoration Thickness
+       * @see https://tailwindcss.com/docs/text-decoration-thickness
+       */
+      'text-decoration-thickness': [{
+        decoration: [isNumber$1, 'from-font', 'auto', isArbitraryVariable, isArbitraryLength]
+      }],
+      /**
+       * Text Decoration Color
+       * @see https://tailwindcss.com/docs/text-decoration-color
+       */
+      'text-decoration-color': [{
+        decoration: scaleColor()
+      }],
+      /**
+       * Text Underline Offset
+       * @see https://tailwindcss.com/docs/text-underline-offset
+       */
+      'underline-offset': [{
+        'underline-offset': [isNumber$1, 'auto', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Text Transform
+       * @see https://tailwindcss.com/docs/text-transform
+       */
+      'text-transform': ['uppercase', 'lowercase', 'capitalize', 'normal-case'],
+      /**
+       * Text Overflow
+       * @see https://tailwindcss.com/docs/text-overflow
+       */
+      'text-overflow': ['truncate', 'text-ellipsis', 'text-clip'],
+      /**
+       * Text Wrap
+       * @see https://tailwindcss.com/docs/text-wrap
+       */
+      'text-wrap': [{
+        text: ['wrap', 'nowrap', 'balance', 'pretty']
+      }],
+      /**
+       * Text Indent
+       * @see https://tailwindcss.com/docs/text-indent
+       */
+      indent: [{
+        indent: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Tab Size
+       * @see https://tailwindcss.com/docs/tab-size
+       */
+      'tab-size': [{
+        tab: [isInteger, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Vertical Alignment
+       * @see https://tailwindcss.com/docs/vertical-align
+       */
+      'vertical-align': [{
+        align: ['baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom', 'sub', 'super', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Whitespace
+       * @see https://tailwindcss.com/docs/whitespace
+       */
+      whitespace: [{
+        whitespace: ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap', 'break-spaces']
+      }],
+      /**
+       * Word Break
+       * @see https://tailwindcss.com/docs/word-break
+       */
+      break: [{
+        break: ['normal', 'words', 'all', 'keep']
+      }],
+      /**
+       * Overflow Wrap
+       * @see https://tailwindcss.com/docs/overflow-wrap
+       */
+      wrap: [{
+        wrap: ['break-word', 'anywhere', 'normal']
+      }],
+      /**
+       * Hyphens
+       * @see https://tailwindcss.com/docs/hyphens
+       */
+      hyphens: [{
+        hyphens: ['none', 'manual', 'auto']
+      }],
+      /**
+       * Content
+       * @see https://tailwindcss.com/docs/content
+       */
+      content: [{
+        content: ['none', isArbitraryVariable, isArbitraryValue]
+      }],
+      // -------------------
+      // --- Backgrounds ---
+      // -------------------
+      /**
+       * Background Attachment
+       * @see https://tailwindcss.com/docs/background-attachment
+       */
+      'bg-attachment': [{
+        bg: ['fixed', 'local', 'scroll']
+      }],
+      /**
+       * Background Clip
+       * @see https://tailwindcss.com/docs/background-clip
+       */
+      'bg-clip': [{
+        'bg-clip': ['border', 'padding', 'content', 'text']
+      }],
+      /**
+       * Background Origin
+       * @see https://tailwindcss.com/docs/background-origin
+       */
+      'bg-origin': [{
+        'bg-origin': ['border', 'padding', 'content']
+      }],
+      /**
+       * Background Position
+       * @see https://tailwindcss.com/docs/background-position
+       */
+      'bg-position': [{
+        bg: scaleBgPosition()
+      }],
+      /**
+       * Background Repeat
+       * @see https://tailwindcss.com/docs/background-repeat
+       */
+      'bg-repeat': [{
+        bg: scaleBgRepeat()
+      }],
+      /**
+       * Background Size
+       * @see https://tailwindcss.com/docs/background-size
+       */
+      'bg-size': [{
+        bg: scaleBgSize()
+      }],
+      /**
+       * Background Image
+       * @see https://tailwindcss.com/docs/background-image
+       */
+      'bg-image': [{
+        bg: ['none', {
+          linear: [{
+            to: ['t', 'tr', 'r', 'br', 'b', 'bl', 'l', 'tl']
+          }, isInteger, isArbitraryVariable, isArbitraryValue],
+          radial: ['', isArbitraryVariable, isArbitraryValue],
+          conic: [isInteger, isArbitraryVariable, isArbitraryValue]
+        }, isArbitraryVariableImage, isArbitraryImage]
+      }],
+      /**
+       * Background Color
+       * @see https://tailwindcss.com/docs/background-color
+       */
+      'bg-color': [{
+        bg: scaleColor()
+      }],
+      /**
+       * Gradient Color Stops From Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      'gradient-from-pos': [{
+        from: scaleGradientStopPosition()
+      }],
+      /**
+       * Gradient Color Stops Via Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      'gradient-via-pos': [{
+        via: scaleGradientStopPosition()
+      }],
+      /**
+       * Gradient Color Stops To Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      'gradient-to-pos': [{
+        to: scaleGradientStopPosition()
+      }],
+      /**
+       * Gradient Color Stops From
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      'gradient-from': [{
+        from: scaleColor()
+      }],
+      /**
+       * Gradient Color Stops Via
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      'gradient-via': [{
+        via: scaleColor()
+      }],
+      /**
+       * Gradient Color Stops To
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      'gradient-to': [{
+        to: scaleColor()
+      }],
+      // ---------------
+      // --- Borders ---
+      // ---------------
+      /**
+       * Border Radius
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      rounded: [{
+        rounded: scaleRadius()
+      }],
+      /**
+       * Border Radius Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-s': [{
+        'rounded-s': scaleRadius()
+      }],
+      /**
+       * Border Radius End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-e': [{
+        'rounded-e': scaleRadius()
+      }],
+      /**
+       * Border Radius Top
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-t': [{
+        'rounded-t': scaleRadius()
+      }],
+      /**
+       * Border Radius Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-r': [{
+        'rounded-r': scaleRadius()
+      }],
+      /**
+       * Border Radius Bottom
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-b': [{
+        'rounded-b': scaleRadius()
+      }],
+      /**
+       * Border Radius Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-l': [{
+        'rounded-l': scaleRadius()
+      }],
+      /**
+       * Border Radius Start Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-ss': [{
+        'rounded-ss': scaleRadius()
+      }],
+      /**
+       * Border Radius Start End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-se': [{
+        'rounded-se': scaleRadius()
+      }],
+      /**
+       * Border Radius End End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-ee': [{
+        'rounded-ee': scaleRadius()
+      }],
+      /**
+       * Border Radius End Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-es': [{
+        'rounded-es': scaleRadius()
+      }],
+      /**
+       * Border Radius Top Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-tl': [{
+        'rounded-tl': scaleRadius()
+      }],
+      /**
+       * Border Radius Top Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-tr': [{
+        'rounded-tr': scaleRadius()
+      }],
+      /**
+       * Border Radius Bottom Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-br': [{
+        'rounded-br': scaleRadius()
+      }],
+      /**
+       * Border Radius Bottom Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      'rounded-bl': [{
+        'rounded-bl': scaleRadius()
+      }],
+      /**
+       * Border Width
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w': [{
+        border: scaleBorderWidth()
+      }],
+      /**
+       * Border Width Inline
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-x': [{
+        'border-x': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Block
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-y': [{
+        'border-y': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Inline Start
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-s': [{
+        'border-s': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Inline End
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-e': [{
+        'border-e': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Block Start
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-bs': [{
+        'border-bs': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Block End
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-be': [{
+        'border-be': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Top
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-t': [{
+        'border-t': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Right
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-r': [{
+        'border-r': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Bottom
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-b': [{
+        'border-b': scaleBorderWidth()
+      }],
+      /**
+       * Border Width Left
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      'border-w-l': [{
+        'border-l': scaleBorderWidth()
+      }],
+      /**
+       * Divide Width X
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      'divide-x': [{
+        'divide-x': scaleBorderWidth()
+      }],
+      /**
+       * Divide Width X Reverse
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      'divide-x-reverse': ['divide-x-reverse'],
+      /**
+       * Divide Width Y
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      'divide-y': [{
+        'divide-y': scaleBorderWidth()
+      }],
+      /**
+       * Divide Width Y Reverse
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      'divide-y-reverse': ['divide-y-reverse'],
+      /**
+       * Border Style
+       * @see https://tailwindcss.com/docs/border-style
+       */
+      'border-style': [{
+        border: [...scaleLineStyle(), 'hidden', 'none']
+      }],
+      /**
+       * Divide Style
+       * @see https://tailwindcss.com/docs/border-style#setting-the-divider-style
+       */
+      'divide-style': [{
+        divide: [...scaleLineStyle(), 'hidden', 'none']
+      }],
+      /**
+       * Border Color
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color': [{
+        border: scaleColor()
+      }],
+      /**
+       * Border Color Inline
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-x': [{
+        'border-x': scaleColor()
+      }],
+      /**
+       * Border Color Block
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-y': [{
+        'border-y': scaleColor()
+      }],
+      /**
+       * Border Color Inline Start
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-s': [{
+        'border-s': scaleColor()
+      }],
+      /**
+       * Border Color Inline End
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-e': [{
+        'border-e': scaleColor()
+      }],
+      /**
+       * Border Color Block Start
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-bs': [{
+        'border-bs': scaleColor()
+      }],
+      /**
+       * Border Color Block End
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-be': [{
+        'border-be': scaleColor()
+      }],
+      /**
+       * Border Color Top
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-t': [{
+        'border-t': scaleColor()
+      }],
+      /**
+       * Border Color Right
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-r': [{
+        'border-r': scaleColor()
+      }],
+      /**
+       * Border Color Bottom
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-b': [{
+        'border-b': scaleColor()
+      }],
+      /**
+       * Border Color Left
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      'border-color-l': [{
+        'border-l': scaleColor()
+      }],
+      /**
+       * Divide Color
+       * @see https://tailwindcss.com/docs/divide-color
+       */
+      'divide-color': [{
+        divide: scaleColor()
+      }],
+      /**
+       * Outline Style
+       * @see https://tailwindcss.com/docs/outline-style
+       */
+      'outline-style': [{
+        outline: [...scaleLineStyle(), 'none', 'hidden']
+      }],
+      /**
+       * Outline Offset
+       * @see https://tailwindcss.com/docs/outline-offset
+       */
+      'outline-offset': [{
+        'outline-offset': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Outline Width
+       * @see https://tailwindcss.com/docs/outline-width
+       */
+      'outline-w': [{
+        outline: ['', isNumber$1, isArbitraryVariableLength, isArbitraryLength]
+      }],
+      /**
+       * Outline Color
+       * @see https://tailwindcss.com/docs/outline-color
+       */
+      'outline-color': [{
+        outline: scaleColor()
+      }],
+      // ---------------
+      // --- Effects ---
+      // ---------------
+      /**
+       * Box Shadow
+       * @see https://tailwindcss.com/docs/box-shadow
+       */
+      shadow: [{
+        shadow: [
+        // Deprecated since Tailwind CSS v4.0.0
+        '', 'none', themeShadow, isArbitraryVariableShadow, isArbitraryShadow]
+      }],
+      /**
+       * Box Shadow Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-shadow-color
+       */
+      'shadow-color': [{
+        shadow: scaleColor()
+      }],
+      /**
+       * Inset Box Shadow
+       * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-shadow
+       */
+      'inset-shadow': [{
+        'inset-shadow': ['none', themeInsetShadow, isArbitraryVariableShadow, isArbitraryShadow]
+      }],
+      /**
+       * Inset Box Shadow Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-inset-shadow-color
+       */
+      'inset-shadow-color': [{
+        'inset-shadow': scaleColor()
+      }],
+      /**
+       * Ring Width
+       * @see https://tailwindcss.com/docs/box-shadow#adding-a-ring
+       */
+      'ring-w': [{
+        ring: scaleBorderWidth()
+      }],
+      /**
+       * Ring Width Inset
+       * @see https://v3.tailwindcss.com/docs/ring-width#inset-rings
+       * @deprecated since Tailwind CSS v4.0.0
+       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
+       */
+      'ring-w-inset': ['ring-inset'],
+      /**
+       * Ring Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-ring-color
+       */
+      'ring-color': [{
+        ring: scaleColor()
+      }],
+      /**
+       * Ring Offset Width
+       * @see https://v3.tailwindcss.com/docs/ring-offset-width
+       * @deprecated since Tailwind CSS v4.0.0
+       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
+       */
+      'ring-offset-w': [{
+        'ring-offset': [isNumber$1, isArbitraryLength]
+      }],
+      /**
+       * Ring Offset Color
+       * @see https://v3.tailwindcss.com/docs/ring-offset-color
+       * @deprecated since Tailwind CSS v4.0.0
+       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
+       */
+      'ring-offset-color': [{
+        'ring-offset': scaleColor()
+      }],
+      /**
+       * Inset Ring Width
+       * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-ring
+       */
+      'inset-ring-w': [{
+        'inset-ring': scaleBorderWidth()
+      }],
+      /**
+       * Inset Ring Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-inset-ring-color
+       */
+      'inset-ring-color': [{
+        'inset-ring': scaleColor()
+      }],
+      /**
+       * Text Shadow
+       * @see https://tailwindcss.com/docs/text-shadow
+       */
+      'text-shadow': [{
+        'text-shadow': ['none', themeTextShadow, isArbitraryVariableShadow, isArbitraryShadow]
+      }],
+      /**
+       * Text Shadow Color
+       * @see https://tailwindcss.com/docs/text-shadow#setting-the-shadow-color
+       */
+      'text-shadow-color': [{
+        'text-shadow': scaleColor()
+      }],
+      /**
+       * Opacity
+       * @see https://tailwindcss.com/docs/opacity
+       */
+      opacity: [{
+        opacity: [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Mix Blend Mode
+       * @see https://tailwindcss.com/docs/mix-blend-mode
+       */
+      'mix-blend': [{
+        'mix-blend': [...scaleBlendMode(), 'plus-darker', 'plus-lighter']
+      }],
+      /**
+       * Background Blend Mode
+       * @see https://tailwindcss.com/docs/background-blend-mode
+       */
+      'bg-blend': [{
+        'bg-blend': scaleBlendMode()
+      }],
+      /**
+       * Mask Clip
+       * @see https://tailwindcss.com/docs/mask-clip
+       */
+      'mask-clip': [{
+        'mask-clip': ['border', 'padding', 'content', 'fill', 'stroke', 'view']
+      }, 'mask-no-clip'],
+      /**
+       * Mask Composite
+       * @see https://tailwindcss.com/docs/mask-composite
+       */
+      'mask-composite': [{
+        mask: ['add', 'subtract', 'intersect', 'exclude']
+      }],
+      /**
+       * Mask Image
+       * @see https://tailwindcss.com/docs/mask-image
+       */
+      'mask-image-linear-pos': [{
+        'mask-linear': [isNumber$1]
+      }],
+      'mask-image-linear-from-pos': [{
+        'mask-linear-from': scaleMaskImagePosition()
+      }],
+      'mask-image-linear-to-pos': [{
+        'mask-linear-to': scaleMaskImagePosition()
+      }],
+      'mask-image-linear-from-color': [{
+        'mask-linear-from': scaleColor()
+      }],
+      'mask-image-linear-to-color': [{
+        'mask-linear-to': scaleColor()
+      }],
+      'mask-image-t-from-pos': [{
+        'mask-t-from': scaleMaskImagePosition()
+      }],
+      'mask-image-t-to-pos': [{
+        'mask-t-to': scaleMaskImagePosition()
+      }],
+      'mask-image-t-from-color': [{
+        'mask-t-from': scaleColor()
+      }],
+      'mask-image-t-to-color': [{
+        'mask-t-to': scaleColor()
+      }],
+      'mask-image-r-from-pos': [{
+        'mask-r-from': scaleMaskImagePosition()
+      }],
+      'mask-image-r-to-pos': [{
+        'mask-r-to': scaleMaskImagePosition()
+      }],
+      'mask-image-r-from-color': [{
+        'mask-r-from': scaleColor()
+      }],
+      'mask-image-r-to-color': [{
+        'mask-r-to': scaleColor()
+      }],
+      'mask-image-b-from-pos': [{
+        'mask-b-from': scaleMaskImagePosition()
+      }],
+      'mask-image-b-to-pos': [{
+        'mask-b-to': scaleMaskImagePosition()
+      }],
+      'mask-image-b-from-color': [{
+        'mask-b-from': scaleColor()
+      }],
+      'mask-image-b-to-color': [{
+        'mask-b-to': scaleColor()
+      }],
+      'mask-image-l-from-pos': [{
+        'mask-l-from': scaleMaskImagePosition()
+      }],
+      'mask-image-l-to-pos': [{
+        'mask-l-to': scaleMaskImagePosition()
+      }],
+      'mask-image-l-from-color': [{
+        'mask-l-from': scaleColor()
+      }],
+      'mask-image-l-to-color': [{
+        'mask-l-to': scaleColor()
+      }],
+      'mask-image-x-from-pos': [{
+        'mask-x-from': scaleMaskImagePosition()
+      }],
+      'mask-image-x-to-pos': [{
+        'mask-x-to': scaleMaskImagePosition()
+      }],
+      'mask-image-x-from-color': [{
+        'mask-x-from': scaleColor()
+      }],
+      'mask-image-x-to-color': [{
+        'mask-x-to': scaleColor()
+      }],
+      'mask-image-y-from-pos': [{
+        'mask-y-from': scaleMaskImagePosition()
+      }],
+      'mask-image-y-to-pos': [{
+        'mask-y-to': scaleMaskImagePosition()
+      }],
+      'mask-image-y-from-color': [{
+        'mask-y-from': scaleColor()
+      }],
+      'mask-image-y-to-color': [{
+        'mask-y-to': scaleColor()
+      }],
+      'mask-image-radial': [{
+        'mask-radial': [isArbitraryVariable, isArbitraryValue]
+      }],
+      'mask-image-radial-from-pos': [{
+        'mask-radial-from': scaleMaskImagePosition()
+      }],
+      'mask-image-radial-to-pos': [{
+        'mask-radial-to': scaleMaskImagePosition()
+      }],
+      'mask-image-radial-from-color': [{
+        'mask-radial-from': scaleColor()
+      }],
+      'mask-image-radial-to-color': [{
+        'mask-radial-to': scaleColor()
+      }],
+      'mask-image-radial-shape': [{
+        'mask-radial': ['circle', 'ellipse']
+      }],
+      'mask-image-radial-size': [{
+        'mask-radial': [{
+          closest: ['side', 'corner'],
+          farthest: ['side', 'corner']
+        }]
+      }],
+      'mask-image-radial-pos': [{
+        'mask-radial-at': scalePosition()
+      }],
+      'mask-image-conic-pos': [{
+        'mask-conic': [isNumber$1]
+      }],
+      'mask-image-conic-from-pos': [{
+        'mask-conic-from': scaleMaskImagePosition()
+      }],
+      'mask-image-conic-to-pos': [{
+        'mask-conic-to': scaleMaskImagePosition()
+      }],
+      'mask-image-conic-from-color': [{
+        'mask-conic-from': scaleColor()
+      }],
+      'mask-image-conic-to-color': [{
+        'mask-conic-to': scaleColor()
+      }],
+      /**
+       * Mask Mode
+       * @see https://tailwindcss.com/docs/mask-mode
+       */
+      'mask-mode': [{
+        mask: ['alpha', 'luminance', 'match']
+      }],
+      /**
+       * Mask Origin
+       * @see https://tailwindcss.com/docs/mask-origin
+       */
+      'mask-origin': [{
+        'mask-origin': ['border', 'padding', 'content', 'fill', 'stroke', 'view']
+      }],
+      /**
+       * Mask Position
+       * @see https://tailwindcss.com/docs/mask-position
+       */
+      'mask-position': [{
+        mask: scaleBgPosition()
+      }],
+      /**
+       * Mask Repeat
+       * @see https://tailwindcss.com/docs/mask-repeat
+       */
+      'mask-repeat': [{
+        mask: scaleBgRepeat()
+      }],
+      /**
+       * Mask Size
+       * @see https://tailwindcss.com/docs/mask-size
+       */
+      'mask-size': [{
+        mask: scaleBgSize()
+      }],
+      /**
+       * Mask Type
+       * @see https://tailwindcss.com/docs/mask-type
+       */
+      'mask-type': [{
+        'mask-type': ['alpha', 'luminance']
+      }],
+      /**
+       * Mask Image
+       * @see https://tailwindcss.com/docs/mask-image
+       */
+      'mask-image': [{
+        mask: ['none', isArbitraryVariable, isArbitraryValue]
+      }],
+      // ---------------
+      // --- Filters ---
+      // ---------------
+      /**
+       * Filter
+       * @see https://tailwindcss.com/docs/filter
+       */
+      filter: [{
+        filter: [
+        // Deprecated since Tailwind CSS v3.0.0
+        '', 'none', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Blur
+       * @see https://tailwindcss.com/docs/blur
+       */
+      blur: [{
+        blur: scaleBlur()
+      }],
+      /**
+       * Brightness
+       * @see https://tailwindcss.com/docs/brightness
+       */
+      brightness: [{
+        brightness: [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Contrast
+       * @see https://tailwindcss.com/docs/contrast
+       */
+      contrast: [{
+        contrast: [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Drop Shadow
+       * @see https://tailwindcss.com/docs/drop-shadow
+       */
+      'drop-shadow': [{
+        'drop-shadow': [
+        // Deprecated since Tailwind CSS v4.0.0
+        '', 'none', themeDropShadow, isArbitraryVariableShadow, isArbitraryShadow]
+      }],
+      /**
+       * Drop Shadow Color
+       * @see https://tailwindcss.com/docs/filter-drop-shadow#setting-the-shadow-color
+       */
+      'drop-shadow-color': [{
+        'drop-shadow': scaleColor()
+      }],
+      /**
+       * Grayscale
+       * @see https://tailwindcss.com/docs/grayscale
+       */
+      grayscale: [{
+        grayscale: ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Hue Rotate
+       * @see https://tailwindcss.com/docs/hue-rotate
+       */
+      'hue-rotate': [{
+        'hue-rotate': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Invert
+       * @see https://tailwindcss.com/docs/invert
+       */
+      invert: [{
+        invert: ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Saturate
+       * @see https://tailwindcss.com/docs/saturate
+       */
+      saturate: [{
+        saturate: [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Sepia
+       * @see https://tailwindcss.com/docs/sepia
+       */
+      sepia: [{
+        sepia: ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Filter
+       * @see https://tailwindcss.com/docs/backdrop-filter
+       */
+      'backdrop-filter': [{
+        'backdrop-filter': [
+        // Deprecated since Tailwind CSS v3.0.0
+        '', 'none', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Blur
+       * @see https://tailwindcss.com/docs/backdrop-blur
+       */
+      'backdrop-blur': [{
+        'backdrop-blur': scaleBlur()
+      }],
+      /**
+       * Backdrop Brightness
+       * @see https://tailwindcss.com/docs/backdrop-brightness
+       */
+      'backdrop-brightness': [{
+        'backdrop-brightness': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Contrast
+       * @see https://tailwindcss.com/docs/backdrop-contrast
+       */
+      'backdrop-contrast': [{
+        'backdrop-contrast': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Grayscale
+       * @see https://tailwindcss.com/docs/backdrop-grayscale
+       */
+      'backdrop-grayscale': [{
+        'backdrop-grayscale': ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Hue Rotate
+       * @see https://tailwindcss.com/docs/backdrop-hue-rotate
+       */
+      'backdrop-hue-rotate': [{
+        'backdrop-hue-rotate': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Invert
+       * @see https://tailwindcss.com/docs/backdrop-invert
+       */
+      'backdrop-invert': [{
+        'backdrop-invert': ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Opacity
+       * @see https://tailwindcss.com/docs/backdrop-opacity
+       */
+      'backdrop-opacity': [{
+        'backdrop-opacity': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Saturate
+       * @see https://tailwindcss.com/docs/backdrop-saturate
+       */
+      'backdrop-saturate': [{
+        'backdrop-saturate': [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Sepia
+       * @see https://tailwindcss.com/docs/backdrop-sepia
+       */
+      'backdrop-sepia': [{
+        'backdrop-sepia': ['', isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      // --------------
+      // --- Tables ---
+      // --------------
+      /**
+       * Border Collapse
+       * @see https://tailwindcss.com/docs/border-collapse
+       */
+      'border-collapse': [{
+        border: ['collapse', 'separate']
+      }],
+      /**
+       * Border Spacing
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      'border-spacing': [{
+        'border-spacing': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Border Spacing X
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      'border-spacing-x': [{
+        'border-spacing-x': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Border Spacing Y
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      'border-spacing-y': [{
+        'border-spacing-y': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Table Layout
+       * @see https://tailwindcss.com/docs/table-layout
+       */
+      'table-layout': [{
+        table: ['auto', 'fixed']
+      }],
+      /**
+       * Caption Side
+       * @see https://tailwindcss.com/docs/caption-side
+       */
+      caption: [{
+        caption: ['top', 'bottom']
+      }],
+      // ---------------------------------
+      // --- Transitions and Animation ---
+      // ---------------------------------
+      /**
+       * Transition Property
+       * @see https://tailwindcss.com/docs/transition-property
+       */
+      transition: [{
+        transition: ['', 'all', 'colors', 'opacity', 'shadow', 'transform', 'none', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Transition Behavior
+       * @see https://tailwindcss.com/docs/transition-behavior
+       */
+      'transition-behavior': [{
+        transition: ['normal', 'discrete']
+      }],
+      /**
+       * Transition Duration
+       * @see https://tailwindcss.com/docs/transition-duration
+       */
+      duration: [{
+        duration: [isNumber$1, 'initial', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Transition Timing Function
+       * @see https://tailwindcss.com/docs/transition-timing-function
+       */
+      ease: [{
+        ease: ['linear', 'initial', themeEase, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Transition Delay
+       * @see https://tailwindcss.com/docs/transition-delay
+       */
+      delay: [{
+        delay: [isNumber$1, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Animation
+       * @see https://tailwindcss.com/docs/animation
+       */
+      animate: [{
+        animate: ['none', themeAnimate, isArbitraryVariable, isArbitraryValue]
+      }],
+      // ------------------
+      // --- Transforms ---
+      // ------------------
+      /**
+       * Backface Visibility
+       * @see https://tailwindcss.com/docs/backface-visibility
+       */
+      backface: [{
+        backface: ['hidden', 'visible']
+      }],
+      /**
+       * Perspective
+       * @see https://tailwindcss.com/docs/perspective
+       */
+      perspective: [{
+        perspective: [themePerspective, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Perspective Origin
+       * @see https://tailwindcss.com/docs/perspective-origin
+       */
+      'perspective-origin': [{
+        'perspective-origin': scalePositionWithArbitrary()
+      }],
+      /**
+       * Rotate
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      rotate: [{
+        rotate: scaleRotate()
+      }],
+      /**
+       * Rotate X
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      'rotate-x': [{
+        'rotate-x': scaleRotate()
+      }],
+      /**
+       * Rotate Y
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      'rotate-y': [{
+        'rotate-y': scaleRotate()
+      }],
+      /**
+       * Rotate Z
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      'rotate-z': [{
+        'rotate-z': scaleRotate()
+      }],
+      /**
+       * Scale
+       * @see https://tailwindcss.com/docs/scale
+       */
+      scale: [{
+        scale: scaleScale()
+      }],
+      /**
+       * Scale X
+       * @see https://tailwindcss.com/docs/scale
+       */
+      'scale-x': [{
+        'scale-x': scaleScale()
+      }],
+      /**
+       * Scale Y
+       * @see https://tailwindcss.com/docs/scale
+       */
+      'scale-y': [{
+        'scale-y': scaleScale()
+      }],
+      /**
+       * Scale Z
+       * @see https://tailwindcss.com/docs/scale
+       */
+      'scale-z': [{
+        'scale-z': scaleScale()
+      }],
+      /**
+       * Scale 3D
+       * @see https://tailwindcss.com/docs/scale
+       */
+      'scale-3d': ['scale-3d'],
+      /**
+       * Skew
+       * @see https://tailwindcss.com/docs/skew
+       */
+      skew: [{
+        skew: scaleSkew()
+      }],
+      /**
+       * Skew X
+       * @see https://tailwindcss.com/docs/skew
+       */
+      'skew-x': [{
+        'skew-x': scaleSkew()
+      }],
+      /**
+       * Skew Y
+       * @see https://tailwindcss.com/docs/skew
+       */
+      'skew-y': [{
+        'skew-y': scaleSkew()
+      }],
+      /**
+       * Transform
+       * @see https://tailwindcss.com/docs/transform
+       */
+      transform: [{
+        transform: [isArbitraryVariable, isArbitraryValue, '', 'none', 'gpu', 'cpu']
+      }],
+      /**
+       * Transform Origin
+       * @see https://tailwindcss.com/docs/transform-origin
+       */
+      'transform-origin': [{
+        origin: scalePositionWithArbitrary()
+      }],
+      /**
+       * Transform Style
+       * @see https://tailwindcss.com/docs/transform-style
+       */
+      'transform-style': [{
+        transform: ['3d', 'flat']
+      }],
+      /**
+       * Translate
+       * @see https://tailwindcss.com/docs/translate
+       */
+      translate: [{
+        translate: scaleTranslate()
+      }],
+      /**
+       * Translate X
+       * @see https://tailwindcss.com/docs/translate
+       */
+      'translate-x': [{
+        'translate-x': scaleTranslate()
+      }],
+      /**
+       * Translate Y
+       * @see https://tailwindcss.com/docs/translate
+       */
+      'translate-y': [{
+        'translate-y': scaleTranslate()
+      }],
+      /**
+       * Translate Z
+       * @see https://tailwindcss.com/docs/translate
+       */
+      'translate-z': [{
+        'translate-z': scaleTranslate()
+      }],
+      /**
+       * Translate None
+       * @see https://tailwindcss.com/docs/translate
+       */
+      'translate-none': ['translate-none'],
+      /**
+       * Zoom
+       * @see https://tailwindcss.com/docs/zoom
+       */
+      zoom: [{
+        zoom: [isInteger, isArbitraryVariable, isArbitraryValue]
+      }],
+      // ---------------------
+      // --- Interactivity ---
+      // ---------------------
+      /**
+       * Accent Color
+       * @see https://tailwindcss.com/docs/accent-color
+       */
+      accent: [{
+        accent: scaleColor()
+      }],
+      /**
+       * Appearance
+       * @see https://tailwindcss.com/docs/appearance
+       */
+      appearance: [{
+        appearance: ['none', 'auto']
+      }],
+      /**
+       * Caret Color
+       * @see https://tailwindcss.com/docs/just-in-time-mode#caret-color-utilities
+       */
+      'caret-color': [{
+        caret: scaleColor()
+      }],
+      /**
+       * Color Scheme
+       * @see https://tailwindcss.com/docs/color-scheme
+       */
+      'color-scheme': [{
+        scheme: ['normal', 'dark', 'light', 'light-dark', 'only-dark', 'only-light']
+      }],
+      /**
+       * Cursor
+       * @see https://tailwindcss.com/docs/cursor
+       */
+      cursor: [{
+        cursor: ['auto', 'default', 'pointer', 'wait', 'text', 'move', 'help', 'not-allowed', 'none', 'context-menu', 'progress', 'cell', 'crosshair', 'vertical-text', 'alias', 'copy', 'no-drop', 'grab', 'grabbing', 'all-scroll', 'col-resize', 'row-resize', 'n-resize', 'e-resize', 's-resize', 'w-resize', 'ne-resize', 'nw-resize', 'se-resize', 'sw-resize', 'ew-resize', 'ns-resize', 'nesw-resize', 'nwse-resize', 'zoom-in', 'zoom-out', isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Field Sizing
+       * @see https://tailwindcss.com/docs/field-sizing
+       */
+      'field-sizing': [{
+        'field-sizing': ['fixed', 'content']
+      }],
+      /**
+       * Pointer Events
+       * @see https://tailwindcss.com/docs/pointer-events
+       */
+      'pointer-events': [{
+        'pointer-events': ['auto', 'none']
+      }],
+      /**
+       * Resize
+       * @see https://tailwindcss.com/docs/resize
+       */
+      resize: [{
+        resize: ['none', '', 'y', 'x']
+      }],
+      /**
+       * Scroll Behavior
+       * @see https://tailwindcss.com/docs/scroll-behavior
+       */
+      'scroll-behavior': [{
+        scroll: ['auto', 'smooth']
+      }],
+      /**
+       * Scrollbar Thumb Color
+       * @see https://tailwindcss.com/docs/scrollbar-color
+       */
+      'scrollbar-thumb-color': [{
+        'scrollbar-thumb': scaleColor()
+      }],
+      /**
+       * Scrollbar Track Color
+       * @see https://tailwindcss.com/docs/scrollbar-color
+       */
+      'scrollbar-track-color': [{
+        'scrollbar-track': scaleColor()
+      }],
+      /**
+       * Scrollbar Gutter
+       * @see https://tailwindcss.com/docs/scrollbar-gutter
+       */
+      'scrollbar-gutter': [{
+        'scrollbar-gutter': ['auto', 'stable', 'both']
+      }],
+      /**
+       * Scrollbar Width
+       * @see https://tailwindcss.com/docs/scrollbar-width
+       */
+      'scrollbar-w': [{
+        scrollbar: ['auto', 'thin', 'none']
+      }],
+      /**
+       * Scroll Margin
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-m': [{
+        'scroll-m': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Inline
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-mx': [{
+        'scroll-mx': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Block
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-my': [{
+        'scroll-my': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Inline Start
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-ms': [{
+        'scroll-ms': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Inline End
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-me': [{
+        'scroll-me': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Block Start
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-mbs': [{
+        'scroll-mbs': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Block End
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-mbe': [{
+        'scroll-mbe': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Top
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-mt': [{
+        'scroll-mt': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Right
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-mr': [{
+        'scroll-mr': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Bottom
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-mb': [{
+        'scroll-mb': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Left
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      'scroll-ml': [{
+        'scroll-ml': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-p': [{
+        'scroll-p': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Inline
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-px': [{
+        'scroll-px': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Block
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-py': [{
+        'scroll-py': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Inline Start
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-ps': [{
+        'scroll-ps': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Inline End
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pe': [{
+        'scroll-pe': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Block Start
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pbs': [{
+        'scroll-pbs': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Block End
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pbe': [{
+        'scroll-pbe': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Top
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pt': [{
+        'scroll-pt': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Right
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pr': [{
+        'scroll-pr': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Bottom
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pb': [{
+        'scroll-pb': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Left
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      'scroll-pl': [{
+        'scroll-pl': scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Snap Align
+       * @see https://tailwindcss.com/docs/scroll-snap-align
+       */
+      'snap-align': [{
+        snap: ['start', 'end', 'center', 'align-none']
+      }],
+      /**
+       * Scroll Snap Stop
+       * @see https://tailwindcss.com/docs/scroll-snap-stop
+       */
+      'snap-stop': [{
+        snap: ['normal', 'always']
+      }],
+      /**
+       * Scroll Snap Type
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */
+      'snap-type': [{
+        snap: ['none', 'x', 'y', 'both']
+      }],
+      /**
+       * Scroll Snap Type Strictness
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */
+      'snap-strictness': [{
+        snap: ['mandatory', 'proximity']
+      }],
+      /**
+       * Touch Action
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      touch: [{
+        touch: ['auto', 'none', 'manipulation']
+      }],
+      /**
+       * Touch Action X
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      'touch-x': [{
+        'touch-pan': ['x', 'left', 'right']
+      }],
+      /**
+       * Touch Action Y
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      'touch-y': [{
+        'touch-pan': ['y', 'up', 'down']
+      }],
+      /**
+       * Touch Action Pinch Zoom
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      'touch-pz': ['touch-pinch-zoom'],
+      /**
+       * User Select
+       * @see https://tailwindcss.com/docs/user-select
+       */
+      select: [{
+        select: ['none', 'text', 'all', 'auto']
+      }],
+      /**
+       * Will Change
+       * @see https://tailwindcss.com/docs/will-change
+       */
+      'will-change': [{
+        'will-change': ['auto', 'scroll', 'contents', 'transform', isArbitraryVariable, isArbitraryValue]
+      }],
+      // -----------
+      // --- SVG ---
+      // -----------
+      /**
+       * Fill
+       * @see https://tailwindcss.com/docs/fill
+       */
+      fill: [{
+        fill: ['none', ...scaleColor()]
+      }],
+      /**
+       * Stroke Width
+       * @see https://tailwindcss.com/docs/stroke-width
+       */
+      'stroke-w': [{
+        stroke: [isNumber$1, isArbitraryVariableLength, isArbitraryLength, isArbitraryNumber]
+      }],
+      /**
+       * Stroke
+       * @see https://tailwindcss.com/docs/stroke
+       */
+      stroke: [{
+        stroke: ['none', ...scaleColor()]
+      }],
+      // ---------------------
+      // --- Accessibility ---
+      // ---------------------
+      /**
+       * Forced Color Adjust
+       * @see https://tailwindcss.com/docs/forced-color-adjust
+       */
+      'forced-color-adjust': [{
+        'forced-color-adjust': ['auto', 'none']
+      }]
+    },
+    conflictingClassGroups: {
+      'container-named': ['container-type'],
+      overflow: ['overflow-x', 'overflow-y'],
+      overscroll: ['overscroll-x', 'overscroll-y'],
+      inset: ['inset-x', 'inset-y', 'inset-bs', 'inset-be', 'start', 'end', 'top', 'right', 'bottom', 'left'],
+      'inset-x': ['right', 'left'],
+      'inset-y': ['top', 'bottom'],
+      flex: ['basis', 'grow', 'shrink'],
+      gap: ['gap-x', 'gap-y'],
+      p: ['px', 'py', 'ps', 'pe', 'pbs', 'pbe', 'pt', 'pr', 'pb', 'pl'],
+      px: ['pr', 'pl'],
+      py: ['pt', 'pb'],
+      m: ['mx', 'my', 'ms', 'me', 'mbs', 'mbe', 'mt', 'mr', 'mb', 'ml'],
+      mx: ['mr', 'ml'],
+      my: ['mt', 'mb'],
+      size: ['w', 'h'],
+      'font-size': ['leading'],
+      'fvn-normal': ['fvn-ordinal', 'fvn-slashed-zero', 'fvn-figure', 'fvn-spacing', 'fvn-fraction'],
+      'fvn-ordinal': ['fvn-normal'],
+      'fvn-slashed-zero': ['fvn-normal'],
+      'fvn-figure': ['fvn-normal'],
+      'fvn-spacing': ['fvn-normal'],
+      'fvn-fraction': ['fvn-normal'],
+      'line-clamp': ['display', 'overflow'],
+      rounded: ['rounded-s', 'rounded-e', 'rounded-t', 'rounded-r', 'rounded-b', 'rounded-l', 'rounded-ss', 'rounded-se', 'rounded-ee', 'rounded-es', 'rounded-tl', 'rounded-tr', 'rounded-br', 'rounded-bl'],
+      'rounded-s': ['rounded-ss', 'rounded-es'],
+      'rounded-e': ['rounded-se', 'rounded-ee'],
+      'rounded-t': ['rounded-tl', 'rounded-tr'],
+      'rounded-r': ['rounded-tr', 'rounded-br'],
+      'rounded-b': ['rounded-br', 'rounded-bl'],
+      'rounded-l': ['rounded-tl', 'rounded-bl'],
+      'border-spacing': ['border-spacing-x', 'border-spacing-y'],
+      'border-w': ['border-w-x', 'border-w-y', 'border-w-s', 'border-w-e', 'border-w-bs', 'border-w-be', 'border-w-t', 'border-w-r', 'border-w-b', 'border-w-l'],
+      'border-w-x': ['border-w-r', 'border-w-l'],
+      'border-w-y': ['border-w-t', 'border-w-b'],
+      'border-color': ['border-color-x', 'border-color-y', 'border-color-s', 'border-color-e', 'border-color-bs', 'border-color-be', 'border-color-t', 'border-color-r', 'border-color-b', 'border-color-l'],
+      'border-color-x': ['border-color-r', 'border-color-l'],
+      'border-color-y': ['border-color-t', 'border-color-b'],
+      translate: ['translate-x', 'translate-y', 'translate-none'],
+      'translate-none': ['translate', 'translate-x', 'translate-y', 'translate-z'],
+      'scroll-m': ['scroll-mx', 'scroll-my', 'scroll-ms', 'scroll-me', 'scroll-mbs', 'scroll-mbe', 'scroll-mt', 'scroll-mr', 'scroll-mb', 'scroll-ml'],
+      'scroll-mx': ['scroll-mr', 'scroll-ml'],
+      'scroll-my': ['scroll-mt', 'scroll-mb'],
+      'scroll-p': ['scroll-px', 'scroll-py', 'scroll-ps', 'scroll-pe', 'scroll-pbs', 'scroll-pbe', 'scroll-pt', 'scroll-pr', 'scroll-pb', 'scroll-pl'],
+      'scroll-px': ['scroll-pr', 'scroll-pl'],
+      'scroll-py': ['scroll-pt', 'scroll-pb'],
+      touch: ['touch-x', 'touch-y', 'touch-pz'],
+      'touch-x': ['touch'],
+      'touch-y': ['touch'],
+      'touch-pz': ['touch']
+    },
+    conflictingClassGroupModifiers: {
+      'font-size': ['leading']
+    },
+    postfixLookupClassGroups: ['container-type'],
+    orderSensitiveModifiers: ['*', '**', 'after', 'backdrop', 'before', 'details-content', 'file', 'first-letter', 'first-line', 'marker', 'placeholder', 'selection']
+  };
+};
+
+/**
+ * @param baseConfig Config where other config will be merged into. This object will be mutated.
+ * @param configExtension Partial config to merge into the `baseConfig`.
+ */
+const mergeConfigs = (baseConfig, {
+  cacheSize,
+  prefix,
+  experimentalParseClassName,
+  extend = {},
+  override = {}
+}) => {
+  overrideProperty(baseConfig, 'cacheSize', cacheSize);
+  overrideProperty(baseConfig, 'prefix', prefix);
+  overrideProperty(baseConfig, 'experimentalParseClassName', experimentalParseClassName);
+  overrideConfigProperties(baseConfig.theme, override.theme);
+  overrideConfigProperties(baseConfig.classGroups, override.classGroups);
+  overrideConfigProperties(baseConfig.conflictingClassGroups, override.conflictingClassGroups);
+  overrideConfigProperties(baseConfig.conflictingClassGroupModifiers, override.conflictingClassGroupModifiers);
+  overrideProperty(baseConfig, 'postfixLookupClassGroups', override.postfixLookupClassGroups);
+  overrideProperty(baseConfig, 'orderSensitiveModifiers', override.orderSensitiveModifiers);
+  mergeConfigProperties(baseConfig.theme, extend.theme);
+  mergeConfigProperties(baseConfig.classGroups, extend.classGroups);
+  mergeConfigProperties(baseConfig.conflictingClassGroups, extend.conflictingClassGroups);
+  mergeConfigProperties(baseConfig.conflictingClassGroupModifiers, extend.conflictingClassGroupModifiers);
+  mergeArrayProperties(baseConfig, extend, 'postfixLookupClassGroups');
+  mergeArrayProperties(baseConfig, extend, 'orderSensitiveModifiers');
+  return baseConfig;
+};
+const overrideProperty = (baseObject, overrideKey, overrideValue) => {
+  if (overrideValue !== undefined) {
+    baseObject[overrideKey] = overrideValue;
+  }
+};
+const overrideConfigProperties = (baseObject, overrideObject) => {
+  if (overrideObject) {
+    for (const key in overrideObject) {
+      overrideProperty(baseObject, key, overrideObject[key]);
+    }
+  }
+};
+const mergeConfigProperties = (baseObject, mergeObject) => {
+  if (mergeObject) {
+    for (const key in mergeObject) {
+      mergeArrayProperties(baseObject, mergeObject, key);
+    }
+  }
+};
+const mergeArrayProperties = (baseObject, mergeObject, key) => {
+  const mergeValue = mergeObject[key];
+  if (mergeValue !== undefined) {
+    baseObject[key] = baseObject[key] ? baseObject[key].concat(mergeValue) : mergeValue;
+  }
+};
+const extendTailwindMerge = (configExtension, ...createConfig) => typeof configExtension === 'function' ? createTailwindMerge(getDefaultConfig, configExtension, ...createConfig) : createTailwindMerge(() => mergeConfigs(getDefaultConfig(), configExtension), ...createConfig);
+const twMerge = /*#__PURE__*/createTailwindMerge(getDefaultConfig);
+
+var createTwMerge = (cachedTwMergeConfig) => {
+  return isEmptyObject(cachedTwMergeConfig) ? twMerge : extendTailwindMerge({
+    ...cachedTwMergeConfig,
+    extend: {
+      theme: cachedTwMergeConfig.theme,
+      classGroups: cachedTwMergeConfig.classGroups,
+      conflictingClassGroupModifiers: cachedTwMergeConfig.conflictingClassGroupModifiers,
+      conflictingClassGroups: cachedTwMergeConfig.conflictingClassGroups,
+      ...cachedTwMergeConfig.extend
+    }
+  });
+};
+var executeMerge = (classnames, config) => {
+  const base = cx(classnames);
+  if (!base || !(config?.twMerge ?? true)) return base;
+  if (!state.cachedTwMerge || state.didTwMergeConfigChange) {
+    state.didTwMergeConfigChange = false;
+    state.cachedTwMerge = createTwMerge(state.cachedTwMergeConfig);
+  }
+  return state.cachedTwMerge(base) || void 0;
+};
+var cnMerge = (...classnames) => {
+  return (config) => executeMerge(classnames, config);
+};
+
+// src/index.js
+var { createTV} = getTailwindVariants(cnMerge);
+
 if (!globalThis.$fetch) {
   globalThis.$fetch = $fetch$1.create({
     baseURL: baseURL()
@@ -307,7 +9766,7 @@ function createNuxtApp(options) {
   let hydratingCount = 0;
   const nuxtApp = {
     _id: options.id || appId || "nuxt-app",
-    _scope: effectScope(),
+    _scope: vueExports.effectScope(),
     provide: void 0,
     versions: {
       get nuxt() {
@@ -317,18 +9776,18 @@ function createNuxtApp(options) {
         return nuxtApp.vueApp.version;
       }
     },
-    payload: shallowReactive({
+    payload: vueExports.shallowReactive({
       ...options.ssrContext?.payload || {},
-      data: shallowReactive({}),
-      state: reactive({}),
+      data: vueExports.shallowReactive({}),
+      state: vueExports.reactive({}),
       once: /* @__PURE__ */ new Set(),
-      _errors: shallowReactive({})
+      _errors: vueExports.shallowReactive({})
     }),
     static: {
       data: {}
     },
     runWithContext(fn) {
-      if (nuxtApp._scope.active && !getCurrentScope()) {
+      if (nuxtApp._scope.active && !vueExports.getCurrentScope()) {
         return nuxtApp._scope.run(() => callWithNuxt(nuxtApp, fn));
       }
       return callWithNuxt(nuxtApp, fn);
@@ -354,8 +9813,8 @@ function createNuxtApp(options) {
       };
     },
     _asyncDataPromises: {},
-    _asyncData: shallowReactive({}),
-    _state: shallowReactive({}),
+    _asyncData: vueExports.shallowReactive({}),
+    _state: vueExports.shallowReactive({}),
     _payloadRevivers: {},
     ...options
   };
@@ -486,8 +9945,8 @@ function callWithNuxt(nuxt, setup, args) {
 }
 function tryUseNuxtApp(id) {
   let nuxtAppInstance;
-  if (hasInjectionContext()) {
-    nuxtAppInstance = getCurrentInstance()?.appContext.app.$nuxt;
+  if (vueExports.hasInjectionContext()) {
+    nuxtAppInstance = vueExports.getCurrentInstance()?.appContext.app.$nuxt;
   }
   nuxtAppInstance ||= getNuxtAppCtx(id).tryUse();
   return nuxtAppInstance || null;
@@ -518,8 +9977,8 @@ const useRouter = () => {
   return useNuxtApp()?.$router;
 };
 const useRoute = () => {
-  if (hasInjectionContext()) {
-    return inject(PageRouteSymbol, useNuxtApp()._route);
+  if (vueExports.hasInjectionContext()) {
+    return vueExports.inject(PageRouteSymbol, useNuxtApp()._route);
   }
   return useNuxtApp()._route;
 };
@@ -623,11 +10082,11 @@ function encodeURL(location2, isExternalHost = false) {
   return url.toString();
 }
 function encodeRoutePath(url) {
-  const parsed = parseURL(url);
-  return encodePath(decodePath(parsed.pathname)) + parsed.search + parsed.hash;
+  const parsed = parseURL$1(url);
+  return encodePath$1(decodePath(parsed.pathname)) + parsed.search + parsed.hash;
 }
 const NUXT_ERROR_SIGNATURE = "__nuxt_error";
-const useError = /* @__NO_SIDE_EFFECTS__ */ () => toRef(useNuxtApp().payload, "error");
+const useError = /* @__NO_SIDE_EFFECTS__ */ () => vueExports.toRef(useNuxtApp().payload, "error");
 const showError = (error) => {
   const nuxtError = createError(error);
   try {
@@ -835,7 +10294,7 @@ function generateRouteKey(route) {
   return typeof source === "function" ? source(route) : source;
 }
 function isChangingPage(to, from) {
-  if (to === from || from === START_LOCATION) {
+  if (to === from || from === START_LOCATION_NORMALIZED) {
     return false;
   }
   if (generateRouteKey(to) !== generateRouteKey(from)) {
@@ -883,7 +10342,7 @@ const routerOptions0 = {
     if (routeAllowsScrollToTop === false) {
       return false;
     }
-    if (from === START_LOCATION) {
+    if (from === START_LOCATION_NORMALIZED) {
       return _calculatePosition(to, from, savedPosition, hashScrollBehaviour);
     }
     return new Promise((resolve) => {
@@ -959,8 +10418,8 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to, from) => {
 function injectHead(nuxtApp) {
   const nuxt = nuxtApp || useNuxtApp();
   return nuxt.ssrContext?.head || nuxt.runWithContext(() => {
-    if (hasInjectionContext()) {
-      const head = inject(headSymbol);
+    if (vueExports.hasInjectionContext()) {
+      const head = vueExports.inject(headSymbol);
       if (!head) {
         throw new Error("[nuxt] [unhead] Missing Unhead instance.");
       }
@@ -1046,7 +10505,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     const router = createRouter({
       ...routerOptions,
       scrollBehavior: (to, from, savedPosition) => {
-        if (from === START_LOCATION) {
+        if (from === START_LOCATION_NORMALIZED) {
           startPosition = savedPosition;
           return;
         }
@@ -1058,14 +10517,14 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
               (void 0).history.scrollRestoration = "manual";
             });
           }
-          return routerOptions.scrollBehavior(to, START_LOCATION, startPosition || savedPosition);
+          return routerOptions.scrollBehavior(to, START_LOCATION_NORMALIZED, startPosition || savedPosition);
         }
       },
       history,
       routes: routes2
     });
     nuxtApp.vueApp.use(router);
-    const previousRoute = shallowRef(router.currentRoute.value);
+    const previousRoute = vueExports.shallowRef(router.currentRoute.value);
     router.afterEach((_to, from) => {
       previousRoute.value = from;
     });
@@ -1073,7 +10532,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
       get: () => previousRoute.value
     });
     const initialURL = nuxtApp.ssrContext.url;
-    const _route = shallowRef(router.currentRoute.value);
+    const _route = vueExports.shallowRef(router.currentRoute.value);
     const syncCurrentRoute = () => {
       _route.value = router.currentRoute.value;
     };
@@ -1095,7 +10554,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
         enumerable: true
       });
     }
-    nuxtApp._route = shallowReactive(route);
+    nuxtApp._route = vueExports.shallowReactive(route);
     nuxtApp._middleware ||= {
       global: [],
       named: {}
@@ -1137,8 +10596,8 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     const initialLayout = nuxtApp.payload.state._layout;
     router.beforeEach(async (to, from) => {
       await nuxtApp.callHook("page:loading:start");
-      to.meta = reactive(to.meta);
-      if (nuxtApp.isHydrating && initialLayout && !isReadonly(to.meta.layout)) {
+      to.meta = vueExports.reactive(to.meta);
+      if (nuxtApp.isHydrating && initialLayout && !vueExports.isReadonly(to.meta.layout)) {
         to.meta.layout = initialLayout;
       }
       nuxtApp._processingMiddleware = true;
@@ -1259,12 +10718,12 @@ function definePayloadReducer(name, reduce) {
 }
 const reducers = [
   ["NuxtError", (data) => isNuxtError(data) && data.toJSON()],
-  ["EmptyShallowRef", (data) => isRef(data) && isShallow(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_")],
-  ["EmptyRef", (data) => isRef(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_")],
-  ["ShallowRef", (data) => isRef(data) && isShallow(data) && data.value],
-  ["ShallowReactive", (data) => isReactive(data) && isShallow(data) && toRaw(data)],
-  ["Ref", (data) => isRef(data) && data.value],
-  ["Reactive", (data) => isReactive(data) && toRaw(data)]
+  ["EmptyShallowRef", (data) => vueExports.isRef(data) && vueExports.isShallow(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_")],
+  ["EmptyRef", (data) => vueExports.isRef(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_")],
+  ["ShallowRef", (data) => vueExports.isRef(data) && vueExports.isShallow(data) && data.value],
+  ["ShallowReactive", (data) => vueExports.isReactive(data) && vueExports.isShallow(data) && vueExports.toRaw(data)],
+  ["Ref", (data) => vueExports.isRef(data) && data.value],
+  ["Reactive", (data) => vueExports.isReactive(data) && vueExports.toRaw(data)]
 ];
 const revive_payload_server_0CCnjySEN7WZNLz2Wf5hRZ2_Sry6GQHgR87V2z7q0nA = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:revive-payload:server",
@@ -1290,13 +10749,13 @@ function useState(...args) {
   }
   const key = useStateKeyPrefix + _key;
   const nuxtApp = useNuxtApp();
-  const state = toRef(nuxtApp.payload.state, key);
+  const state = vueExports.toRef(nuxtApp.payload.state, key);
   if (init) {
     nuxtApp._state[key] ??= { _default: init };
   }
   if (state.value === void 0 && init) {
     const initialValue = init();
-    if (isRef(initialValue)) {
+    if (vueExports.isRef(initialValue)) {
       nuxtApp.payload.state[key] = initialValue;
       return initialValue;
     }
@@ -1305,7 +10764,7 @@ function useState(...args) {
   return state;
 }
 const plugin_server_6DU6u9_thvFjUZGaui8oA2Sk4oPYGPayZ029lx_r1og = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  const colorMode = nuxtApp.ssrContext?.islandContext ? ref({}) : useState("color-mode", () => reactive({
+  const colorMode = nuxtApp.ssrContext?.islandContext ? vueExports.ref({}) : useState("color-mode", () => vueExports.reactive({
     preference,
     value: preference,
     unknown: true,
@@ -1681,7 +11140,7 @@ const plugin_5h94ABupEB54UysnGJ12bCfa3B_wROQJ1WiNF9_jK9Y = /* @__PURE__ */ defin
   // For type portability
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 });
-const LazyIcon = defineAsyncComponent(() => Promise.resolve().then(() => index).then((r) => r["default"] || r.default || r));
+const LazyIcon = vueExports.defineAsyncComponent(() => Promise.resolve().then(() => index).then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon]
 ];
@@ -1696,8 +11155,8 @@ const components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8 = /* @__PURE
 });
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 function getColor(color, shade) {
-  if (color in colors && typeof colors[color] === "object" && shade in colors[color]) {
-    return colors[color][shade];
+  if (color in l && typeof l[color] === "object" && shade in l[color]) {
+    return l[color][shade];
   }
   return "";
 }
@@ -1711,7 +11170,7 @@ function generateColor(key, shade) {
 const colors_xC3ho5GNTvfP1Bka5__kDhOC7KjL0ahloaRC6Ow6hcs = /* @__PURE__ */ defineNuxtPlugin(() => {
   const appConfig2 = useAppConfig();
   useNuxtApp();
-  const root = computed(() => {
+  const root = vueExports.computed(() => {
     const { neutral, ...colors2 } = appConfig2.ui.colors;
     const prefix = appConfig2.ui.prefix;
     return `@layer theme {
@@ -1735,40 +11194,40 @@ const colors_xC3ho5GNTvfP1Bka5__kDhOC7KjL0ahloaRC6Ow6hcs = /* @__PURE__ */ defin
   };
   useHead(headData);
 });
-defineComponent({
+vueExports.defineComponent({
   name: "ServerPlaceholder",
   render() {
-    return createElementBlock("div");
+    return vueExports.createElementBlock("div");
   }
 });
 const clientOnlySymbol = /* @__PURE__ */ Symbol.for("nuxt:client-only");
-const __nuxt_component_2$1 = defineComponent({
+const __nuxt_component_2$1 = vueExports.defineComponent({
   name: "ClientOnly",
   inheritAttrs: false,
   props: ["fallback", "placeholder", "placeholderTag", "fallbackTag"],
   ...false,
   setup(props, { slots, attrs }) {
-    const mounted = shallowRef(false);
-    const vm = getCurrentInstance();
+    const mounted = vueExports.shallowRef(false);
+    const vm = vueExports.getCurrentInstance();
     if (vm) {
       vm._nuxtClientOnly = true;
     }
-    provide(clientOnlySymbol, true);
+    vueExports.provide(clientOnlySymbol, true);
     return () => {
       if (mounted.value) {
         const vnodes = slots.default?.();
         if (vnodes && vnodes.length === 1) {
-          return [cloneVNode(vnodes[0], attrs)];
+          return [vueExports.cloneVNode(vnodes[0], attrs)];
         }
         return vnodes;
       }
       const slot = slots.fallback || slots.placeholder;
       if (slot) {
-        return h(slot);
+        return vueExports.h(slot);
       }
       const fallbackStr = props.fallback || props.placeholder || "";
       const fallbackTag = props.fallbackTag || props.placeholderTag || "span";
-      return createElementBlock(fallbackTag, attrs, fallbackStr);
+      return vueExports.createElementBlock(fallbackTag, attrs, fallbackStr);
     };
   }
 });
@@ -1790,8 +11249,8 @@ const createUseAsyncData = defineKeyedFunctionFactory({
         args.unshift(autoKey);
       }
       let [_key, _handler, opts = {}] = args;
-      const isKeyReactive = isRef(_key) || typeof _key === "function";
-      const key = isKeyReactive ? computed(() => toValue(_key)) : { value: _key };
+      const isKeyReactive = vueExports.isRef(_key) || typeof _key === "function";
+      const key = isKeyReactive ? vueExports.computed(() => vueExports.toValue(_key)) : { value: _key };
       if (!key.value || typeof key.value !== "string") {
         throw new TypeError("[nuxt] [useAsyncData] key must be a non-empty string.");
       }
@@ -1846,8 +11305,8 @@ const createUseAsyncData = defineKeyedFunctionFactory({
       const fetchOnServer = opts.server !== false && nuxtApp.payload.serverRendered;
       if (fetchOnServer && opts.immediate) {
         const promise = initialFetch();
-        if (getCurrentInstance()) {
-          onServerPrefetch(() => promise);
+        if (vueExports.getCurrentInstance()) {
+          vueExports.onServerPrefetch(() => promise);
         } else {
           nuxtApp.hook("app:created", async () => {
             await promise;
@@ -1898,7 +11357,7 @@ createUseAsyncData.__nuxt_factory({
   _functionName: "useLazyAsyncData"
 });
 function writableComputedRef(getter) {
-  return computed({
+  return vueExports.computed({
     get() {
       return getter()?.value;
     },
@@ -1930,7 +11389,7 @@ function clearNuxtDataByKey(nuxtApp, key) {
     nuxtApp.payload._errors[key] = void 0;
   }
   if (nuxtApp._asyncData[key]) {
-    nuxtApp._asyncData[key].data.value = unref(nuxtApp._asyncData[key]._default());
+    nuxtApp._asyncData[key].data.value = vueExports.unref(nuxtApp._asyncData[key]._default());
     nuxtApp._asyncData[key].error.value = void 0;
     nuxtApp._asyncData[key].status.value = "idle";
     nuxtApp._asyncData[key]._initialCachedData = void 0;
@@ -1950,7 +11409,7 @@ function buildAsyncData(nuxtApp, key, _handler, options, initialCachedData) {
   nuxtApp.payload._errors[key] ??= void 0;
   const hasCustomGetCachedData = options.getCachedData !== getDefaultCachedData;
   const handler = _handler ;
-  const _ref = options.deep ? ref : shallowRef;
+  const _ref = options.deep ? vueExports.ref : vueExports.shallowRef;
   const hasCachedData = initialCachedData !== void 0;
   const unsubRefreshAsyncData = nuxtApp.hook("app:data:refresh", async (keys) => {
     if (!keys || keys.includes(key)) {
@@ -1959,9 +11418,9 @@ function buildAsyncData(nuxtApp, key, _handler, options, initialCachedData) {
   });
   const asyncData = {
     data: _ref(hasCachedData ? initialCachedData : options.default()),
-    pending: computed(() => asyncData.status.value === "pending"),
-    error: toRef(nuxtApp.payload._errors, key),
-    status: shallowRef("idle"),
+    pending: vueExports.computed(() => asyncData.status.value === "pending"),
+    error: vueExports.toRef(nuxtApp.payload._errors, key),
+    status: vueExports.shallowRef("idle"),
     execute: (...args) => {
       const [_opts, newValue = void 0] = args;
       const opts = _opts && newValue === void 0 && typeof _opts === "object" ? _opts : {};
@@ -2031,7 +11490,7 @@ function buildAsyncData(nuxtApp, key, _handler, options, initialCachedData) {
           return nuxtApp._asyncDataPromises[key];
         }
         asyncData.error.value = createError(error);
-        asyncData.data.value = unref(options.default());
+        asyncData.data.value = vueExports.unref(options.default());
         asyncData.status.value = "error";
       }).finally(() => {
         cleanupController.abort();
@@ -2053,7 +11512,7 @@ function buildAsyncData(nuxtApp, key, _handler, options, initialCachedData) {
         nuxtApp._asyncData[key]._init = false;
       }
       if (!hasCustomGetCachedData) {
-        nextTick(() => {
+        vueExports.nextTick(() => {
           if (!nuxtApp._asyncData[key]?._init) {
             clearNuxtDataByKey(nuxtApp, key);
             asyncData.execute = () => Promise.resolve();
@@ -2120,7 +11579,7 @@ const themes_SeU80dEmCo7RnrsKcPNmky_Fst_WRPlrUc9mZFREYLA = /* @__PURE__ */ defin
   )), __temp = await __temp, __restore(), __temp);
   return {
     provide: {
-      themes: computed(() => data.value?.themes ?? [])
+      themes: vueExports.computed(() => data.value?.themes ?? [])
     }
   };
 });
@@ -2144,13 +11603,13 @@ function createContext(providerComponentName, contextName) {
   const symbolDescription = typeof providerComponentName === "string" && !contextName ? `${providerComponentName}Context` : contextName;
   const injectionKey = Symbol(symbolDescription);
   const injectContext = (fallback) => {
-    const context = inject(injectionKey, fallback);
+    const context = vueExports.inject(injectionKey, fallback);
     if (context) return context;
     if (context === null) return context;
     throw new Error(`Injection \`${injectionKey.toString()}\` not found. Component must be used within ${Array.isArray(providerComponentName) ? `one of the following components: ${providerComponentName.join(", ")}` : `\`${providerComponentName}\``}`);
   };
   const provideContext = (contextValue) => {
-    provide(injectionKey, contextValue);
+    vueExports.provide(injectionKey, contextValue);
     return contextValue;
   };
   return [injectContext, provideContext];
@@ -2167,12 +11626,12 @@ function isNullish(value) {
 function renderSlotFragments(children) {
   if (!children) return [];
   return children.flatMap((child) => {
-    if (child.type === Fragment) return renderSlotFragments(child.children);
+    if (child.type === vueExports.Fragment) return renderSlotFragments(child.children);
     return [child];
   });
 }
 const [injectConfigProviderContext, provideConfigProviderContext] = /* @__PURE__ */ createContext("ConfigProvider");
-var ConfigProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ConfigProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "ConfigProvider",
   props: {
@@ -2204,7 +11663,7 @@ var ConfigProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
   },
   setup(__props) {
     const props = __props;
-    const { dir, locale, scrollBody, nonce } = toRefs(props);
+    const { dir, locale, scrollBody, nonce } = vueExports.toRefs(props);
     provideConfigProviderContext({
       dir,
       locale,
@@ -2213,25 +11672,25 @@ var ConfigProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
       useId: props.useId
     });
     return (_ctx, _cache) => {
-      return renderSlot(_ctx.$slots, "default");
+      return vueExports.renderSlot(_ctx.$slots, "default");
     };
   }
 });
 var ConfigProvider_default = ConfigProvider_vue_vue_type_script_setup_true_lang_default;
 function useEmitAsProps(emit) {
-  const vm = getCurrentInstance();
+  const vm = vueExports.getCurrentInstance();
   const events = vm?.type.emits;
   const result = {};
   if (!events?.length) console.warn(`No emitted event found. Please check component: ${vm?.type.__name}`);
   events?.forEach((ev) => {
-    result[toHandlerKey(camelize(ev))] = (...arg) => emit(ev, ...arg);
+    result[vueExports.toHandlerKey(vueExports.camelize(ev))] = (...arg) => emit(ev, ...arg);
   });
   return result;
 }
 function useForwardExpose() {
-  const instance = getCurrentInstance();
-  const currentRef = ref();
-  const currentElement = computed(() => resolveCurrentElement());
+  const instance = vueExports.getCurrentInstance();
+  const currentRef = vueExports.ref();
+  const currentElement = vueExports.computed(() => resolveCurrentElement());
   function resolveCurrentElement() {
     return currentRef.value && "$el" in currentRef.value && ["#text", "#comment"].includes(currentRef.value.$el.nodeName) ? currentRef.value.$el.nextElementSibling : unrefElement(currentRef);
   }
@@ -2279,18 +11738,18 @@ function useForwardExpose() {
   };
 }
 function useForwardProps$1(props) {
-  const vm = getCurrentInstance();
+  const vm = vueExports.getCurrentInstance();
   const defaultProps = Object.keys(vm?.type.props ?? {}).reduce((prev, curr) => {
     const defaultValue = (vm?.type.props[curr]).default;
     if (defaultValue !== void 0) prev[curr] = defaultValue;
     return prev;
   }, {});
-  const refProps = toRef(props);
-  return computed(() => {
+  const refProps = vueExports.toRef(props);
+  return vueExports.computed(() => {
     const preservedProps = {};
     const assignedProps = vm?.vnode.props ?? {};
     Object.keys(assignedProps).forEach((key) => {
-      preservedProps[camelize(key)] = assignedProps[key];
+      preservedProps[vueExports.camelize(key)] = assignedProps[key];
     });
     return Object.keys({
       ...defaultProps,
@@ -2302,7 +11761,7 @@ function useForwardProps$1(props) {
   });
 }
 function useStateMachine(initialState, machine) {
-  const state = ref(initialState);
+  const state = vueExports.ref(initialState);
   function reducer(event) {
     const nextState = machine[state.value][event];
     return nextState ?? state.value;
@@ -2316,9 +11775,9 @@ function useStateMachine(initialState, machine) {
   };
 }
 function usePresence(present, node) {
-  const stylesRef = ref({});
-  const prevAnimationNameRef = ref("none");
-  const prevPresentRef = ref(present);
+  const stylesRef = vueExports.ref({});
+  const prevAnimationNameRef = vueExports.ref("none");
+  const prevPresentRef = vueExports.ref(present);
   const initialState = present.value ? "mounted" : "unmounted";
   let timeoutId;
   const ownerWindow = node.value?.ownerDocument.defaultView ?? defaultWindow;
@@ -2333,37 +11792,22 @@ function usePresence(present, node) {
     },
     unmounted: { MOUNT: "mounted" }
   });
-  const dispatchCustomEvent = (name) => {
-    if (isClient) {
-      const customEvent = new CustomEvent(name, {
-        bubbles: false,
-        cancelable: false
-      });
-      node.value?.dispatchEvent(customEvent);
-    }
-  };
-  watch(present, async (currentPresent, prevPresent) => {
+  vueExports.watch(present, async (currentPresent, prevPresent) => {
     const hasPresentChanged = prevPresent !== currentPresent;
-    await nextTick();
+    await vueExports.nextTick();
     if (hasPresentChanged) {
       const prevAnimationName = prevAnimationNameRef.value;
       const currentAnimationName = getAnimationName(node.value);
       if (currentPresent) {
         dispatch("MOUNT");
-        dispatchCustomEvent("enter");
-        if (currentAnimationName === "none") dispatchCustomEvent("after-enter");
       } else if (currentAnimationName === "none" || currentAnimationName === "undefined" || stylesRef.value?.display === "none") {
         dispatch("UNMOUNT");
-        dispatchCustomEvent("leave");
-        dispatchCustomEvent("after-leave");
       } else {
         const isAnimating = prevAnimationName !== currentAnimationName;
         if (prevPresent && isAnimating) {
           dispatch("ANIMATION_OUT");
-          dispatchCustomEvent("leave");
         } else {
           dispatch("UNMOUNT");
-          dispatchCustomEvent("after-leave");
         }
       }
     }
@@ -2371,9 +11815,8 @@ function usePresence(present, node) {
   const handleAnimationEnd = (event) => {
     const currentAnimationName = getAnimationName(node.value);
     const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
-    const directionName = state.value === "mounted" ? "enter" : "leave";
+    state.value === "mounted" ? "enter" : "leave";
     if (event.target === node.value && isCurrentAnimation) {
-      dispatchCustomEvent(`after-${directionName}`);
       dispatch("ANIMATION_END");
       if (!prevPresentRef.value) {
         const currentFillMode = node.value.style.animationFillMode;
@@ -2388,7 +11831,7 @@ function usePresence(present, node) {
   const handleAnimationStart = (event) => {
     if (event.target === node.value) prevAnimationNameRef.value = getAnimationName(node.value);
   };
-  watch(node, (newNode, oldNode) => {
+  vueExports.watch(node, (newNode, oldNode) => {
     if (newNode) {
       stylesRef.value = getComputedStyle(newNode);
       newNode.addEventListener("animationstart", handleAnimationStart);
@@ -2402,17 +11845,17 @@ function usePresence(present, node) {
       oldNode?.removeEventListener("animationend", handleAnimationEnd);
     }
   }, { immediate: true });
-  watch(state, () => {
+  vueExports.watch(state, () => {
     const currentAnimationName = getAnimationName(node.value);
     prevAnimationNameRef.value = state.value === "mounted" ? currentAnimationName : "none";
   });
-  const isPresent = computed(() => ["mounted", "unmountSuspended"].includes(state.value));
+  const isPresent = vueExports.computed(() => ["mounted", "unmountSuspended"].includes(state.value));
   return { isPresent };
 }
 function getAnimationName(node) {
   return node ? getComputedStyle(node).animationName || "none" : "none";
 }
-var Presence_default = /* @__PURE__ */ defineComponent({
+var Presence_default = /* @__PURE__ */ vueExports.defineComponent({
   name: "Presence",
   props: {
     present: {
@@ -2423,13 +11866,13 @@ var Presence_default = /* @__PURE__ */ defineComponent({
   },
   slots: {},
   setup(props, { slots, expose }) {
-    const { present, forceMount } = toRefs(props);
-    const node = ref();
+    const { present, forceMount } = vueExports.toRefs(props);
+    const node = vueExports.ref();
     const { isPresent } = usePresence(present, node);
     expose({ present: isPresent });
     let children = slots.default({ present: isPresent.value });
     children = renderSlotFragments(children || []);
-    const instance = getCurrentInstance();
+    const instance = vueExports.getCurrentInstance();
     if (children && children?.length > 1) {
       const componentName = instance?.parent?.type.name ? `<${instance.parent.type.name} />` : "component";
       throw new Error([
@@ -2441,7 +11884,7 @@ var Presence_default = /* @__PURE__ */ defineComponent({
       ].join("\n"));
     }
     return () => {
-      if (forceMount.value || present.value || isPresent.value) return h(slots.default({ present: isPresent.value })[0], { ref: (v) => {
+      if (forceMount.value || present.value || isPresent.value) return vueExports.h(slots.default({ present: isPresent.value })[0], { ref: (v) => {
         const el = unrefElement(v);
         if (typeof el?.hasAttribute === "undefined") return el;
         if (el?.hasAttribute("data-reka-popper-content-wrapper")) node.value = el.firstElementChild;
@@ -2452,19 +11895,19 @@ var Presence_default = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const Slot = /* @__PURE__ */ defineComponent({
+const Slot = /* @__PURE__ */ vueExports.defineComponent({
   name: "PrimitiveSlot",
   inheritAttrs: false,
   setup(_, { attrs, slots }) {
     return () => {
       if (!slots.default) return null;
       const children = renderSlotFragments(slots.default());
-      const firstNonCommentChildrenIndex = children.findIndex((child) => child.type !== Comment);
+      const firstNonCommentChildrenIndex = children.findIndex((child) => child.type !== vueExports.Comment);
       if (firstNonCommentChildrenIndex === -1) return children;
       const firstNonCommentChildren = children[firstNonCommentChildrenIndex];
       delete firstNonCommentChildren.props?.ref;
-      const mergedProps = firstNonCommentChildren.props ? mergeProps(attrs, firstNonCommentChildren.props) : attrs;
-      const cloned = cloneVNode({
+      const mergedProps = firstNonCommentChildren.props ? vueExports.mergeProps(attrs, firstNonCommentChildren.props) : attrs;
+      const cloned = vueExports.cloneVNode({
         ...firstNonCommentChildren,
         props: {}
       }, mergedProps);
@@ -2479,7 +11922,7 @@ const SELF_CLOSING_TAGS = [
   "img",
   "input"
 ];
-const Primitive = /* @__PURE__ */ defineComponent({
+const Primitive = /* @__PURE__ */ vueExports.defineComponent({
   name: "Primitive",
   inheritAttrs: false,
   props: {
@@ -2494,20 +11937,20 @@ const Primitive = /* @__PURE__ */ defineComponent({
   },
   setup(props, { attrs, slots }) {
     const asTag = props.asChild ? "template" : props.as;
-    if (typeof asTag === "string" && SELF_CLOSING_TAGS.includes(asTag)) return () => h(asTag, attrs);
-    if (asTag !== "template") return () => h(props.as, attrs, { default: slots.default });
-    return () => h(Slot, attrs, { default: slots.default });
+    if (typeof asTag === "string" && SELF_CLOSING_TAGS.includes(asTag)) return () => vueExports.h(asTag, attrs);
+    if (asTag !== "template") return () => vueExports.h(props.as, attrs, { default: slots.default });
+    return () => vueExports.h(Slot, attrs, { default: slots.default });
   }
 });
 function usePrimitiveElement() {
-  const primitiveElement = ref();
-  const currentElement = computed(() => ["#text", "#comment"].includes(primitiveElement.value?.$el.nodeName) ? primitiveElement.value?.$el.nextElementSibling : unrefElement(primitiveElement));
+  const primitiveElement = vueExports.ref();
+  const currentElement = vueExports.computed(() => ["#text", "#comment"].includes(primitiveElement.value?.$el.nodeName) ? primitiveElement.value?.$el.nextElementSibling : unrefElement(primitiveElement));
   return {
     primitiveElement,
     currentElement
   };
 }
-var DismissableLayerBranch_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var DismissableLayerBranch_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "DismissableLayerBranch",
   props: {
     asChild: {
@@ -2523,8 +11966,8 @@ var DismissableLayerBranch_vue_vue_type_script_setup_true_lang_default = /* @__P
     const props = __props;
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps({ ref: unref(forwardRef) }, props), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps({ ref: vueExports.unref(forwardRef) }, props), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
@@ -2582,7 +12025,7 @@ function focus(element, { select = false } = {}) {
     if (element !== previouslyFocusedElement && isSelectableInput(element) && select) element.select();
   }
 }
-var Teleport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var Teleport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Teleport",
   props: {
     to: {
@@ -2606,16 +12049,16 @@ var Teleport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defin
   setup(__props) {
     const isMounted = useMounted();
     return (_ctx, _cache) => {
-      return unref(isMounted) || _ctx.forceMount ? (openBlock(), createBlock(Teleport, {
+      return vueExports.unref(isMounted) || _ctx.forceMount ? (vueExports.openBlock(), vueExports.createBlock(vueExports.Teleport, {
         key: 0,
         to: _ctx.to,
         disabled: _ctx.disabled,
         defer: _ctx.defer
-      }, [renderSlot(_ctx.$slots, "default")], 8, [
+      }, [vueExports.renderSlot(_ctx.$slots, "default")], 8, [
         "to",
         "disabled",
         "defer"
-      ])) : createCommentVNode("v-if", true);
+      ])) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
@@ -2626,14 +12069,14 @@ function useCollection(options = {}) {
   const injectionKey = `${key}CollectionProvider`;
   let context;
   if (isProvider) {
-    const itemMap = ref(/* @__PURE__ */ new Map());
-    const collectionRef = ref();
+    const itemMap = vueExports.ref(/* @__PURE__ */ new Map());
+    const collectionRef = vueExports.ref();
     context = {
       collectionRef,
       itemMap
     };
-    provide(injectionKey, context);
-  } else context = inject(injectionKey);
+    vueExports.provide(injectionKey, context);
+  } else context = vueExports.inject(injectionKey);
   const getItems = (includeDisabledItem = false) => {
     const collectionNode = context.collectionRef.value;
     if (!collectionNode) return [];
@@ -2643,29 +12086,29 @@ function useCollection(options = {}) {
     if (includeDisabledItem) return orderedItems;
     else return orderedItems.filter((i) => i.ref.dataset.disabled !== "");
   };
-  const CollectionSlot = /* @__PURE__ */ defineComponent({
+  const CollectionSlot = /* @__PURE__ */ vueExports.defineComponent({
     name: "CollectionSlot",
     inheritAttrs: false,
     setup(_, { slots, attrs }) {
       const { primitiveElement, currentElement } = usePrimitiveElement();
-      watch(currentElement, () => {
+      vueExports.watch(currentElement, () => {
         context.collectionRef.value = currentElement.value;
       });
-      return () => h(Slot, {
+      return () => vueExports.h(Slot, {
         ref: primitiveElement,
         ...attrs
       }, slots);
     }
   });
-  const CollectionItem = /* @__PURE__ */ defineComponent({
+  const CollectionItem = /* @__PURE__ */ vueExports.defineComponent({
     name: "CollectionItem",
     inheritAttrs: false,
     props: { value: { validator: () => true } },
     setup(props, { slots, attrs }) {
       const { primitiveElement, currentElement } = usePrimitiveElement();
-      watchEffect((cleanupFn) => {
+      vueExports.watchEffect((cleanupFn) => {
         if (currentElement.value) {
-          const key$1 = markRaw(currentElement.value);
+          const key$1 = vueExports.markRaw(currentElement.value);
           context.itemMap.value.set(key$1, {
             ref: currentElement.value,
             value: props.value
@@ -2673,15 +12116,15 @@ function useCollection(options = {}) {
           cleanupFn(() => context.itemMap.value.delete(key$1));
         }
       });
-      return () => h(Slot, {
+      return () => vueExports.h(Slot, {
         ...attrs,
         [ITEM_DATA_ATTR]: "",
         ref: primitiveElement
       }, slots);
     }
   });
-  const reactiveItems = computed(() => Array.from(context.itemMap.value.values()));
-  const itemMapSize = computed(() => context.itemMap.value.size);
+  const reactiveItems = vueExports.computed(() => Array.from(context.itemMap.value.values()));
+  const itemMapSize = vueExports.computed(() => context.itemMap.value.size);
   return {
     getItems,
     reactiveItems,
@@ -2690,7 +12133,7 @@ function useCollection(options = {}) {
     CollectionItem
   };
 }
-var VisuallyHidden_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var VisuallyHidden_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "VisuallyHidden",
   props: {
     feature: {
@@ -2710,7 +12153,7 @@ var VisuallyHidden_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         as: _ctx.as,
         "as-child": _ctx.asChild,
         "aria-hidden": _ctx.feature === "focusable" ? "true" : void 0,
@@ -2732,7 +12175,7 @@ var VisuallyHidden_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
           left: "-1px"
         }
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "as",
@@ -2765,7 +12208,7 @@ function validateMax(max) {
   console.error(`Invalid prop \`max\` of value \`${max}\` supplied to \`ProgressRoot\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`);
   return DEFAULT_MAX;
 }
-var ProgressRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ProgressRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ProgressRoot",
   props: {
     modelValue: {
@@ -2802,18 +12245,18 @@ var ProgressRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
     useForwardExpose();
     const modelValue = useVModel(props, "modelValue", emit, { passive: props.modelValue === void 0 });
     const max = useVModel(props, "max", emit, { passive: props.max === void 0 });
-    watch(() => modelValue.value, async (value) => {
+    vueExports.watch(() => modelValue.value, async (value) => {
       const correctedValue = validateValue(value, props.max);
       if (correctedValue !== value) {
-        await nextTick();
+        await vueExports.nextTick();
         modelValue.value = correctedValue;
       }
     }, { immediate: true });
-    watch(() => props.max, (newMax) => {
+    vueExports.watch(() => props.max, (newMax) => {
       const correctedMax = validateMax(props.max);
       if (correctedMax !== newMax) max.value = correctedMax;
     }, { immediate: true });
-    const progressState = computed(() => {
+    const progressState = vueExports.computed(() => {
       if (isNullish(modelValue.value)) return "indeterminate";
       if (modelValue.value === max.value) return "complete";
       return "loading";
@@ -2824,20 +12267,20 @@ var ProgressRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
       progressState
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         "as-child": _ctx.asChild,
         as: _ctx.as,
-        "aria-valuemax": unref(max),
+        "aria-valuemax": vueExports.unref(max),
         "aria-valuemin": 0,
-        "aria-valuenow": isNumber(unref(modelValue)) ? unref(modelValue) : void 0,
-        "aria-valuetext": _ctx.getValueText?.(unref(modelValue), unref(max)),
-        "aria-label": _ctx.getValueLabel(unref(modelValue), unref(max)),
+        "aria-valuenow": isNumber(vueExports.unref(modelValue)) ? vueExports.unref(modelValue) : void 0,
+        "aria-valuetext": _ctx.getValueText?.(vueExports.unref(modelValue), vueExports.unref(max)),
+        "aria-label": _ctx.getValueLabel(vueExports.unref(modelValue), vueExports.unref(max)),
         role: "progressbar",
         "data-state": progressState.value,
-        "data-value": unref(modelValue) ?? void 0,
-        "data-max": unref(max)
+        "data-value": vueExports.unref(modelValue) ?? void 0,
+        "data-max": vueExports.unref(max)
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) })]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", { modelValue: vueExports.unref(modelValue) })]),
         _: 3
       }, 8, [
         "as-child",
@@ -2854,7 +12297,7 @@ var ProgressRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
   }
 });
 var ProgressRoot_default = ProgressRoot_vue_vue_type_script_setup_true_lang_default;
-var ProgressIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ProgressIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ProgressIndicator",
   props: {
     asChild: {
@@ -2871,12 +12314,12 @@ var ProgressIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
     const rootContext = injectProgressRootContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
-        "data-state": unref(rootContext).progressState.value,
-        "data-value": unref(rootContext).modelValue?.value ?? void 0,
-        "data-max": unref(rootContext).max.value
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, {
+        "data-state": vueExports.unref(rootContext).progressState.value,
+        "data-value": vueExports.unref(rootContext).modelValue?.value ?? void 0,
+        "data-max": vueExports.unref(rootContext).max.value
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, [
         "data-state",
@@ -2887,7 +12330,7 @@ var ProgressIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
   }
 });
 var ProgressIndicator_default = ProgressIndicator_vue_vue_type_script_setup_true_lang_default;
-var ToastAnnounceExclude_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastAnnounceExclude_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastAnnounceExclude",
   props: {
     altText: {
@@ -2905,13 +12348,13 @@ var ToastAnnounceExclude_vue_vue_type_script_setup_true_lang_default = /* @__PUR
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         as: _ctx.as,
         "as-child": _ctx.asChild,
         "data-reka-toast-announce-exclude": "",
         "data-reka-toast-announce-alt": _ctx.altText || void 0
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "as",
@@ -2923,7 +12366,7 @@ var ToastAnnounceExclude_vue_vue_type_script_setup_true_lang_default = /* @__PUR
 });
 var ToastAnnounceExclude_default = ToastAnnounceExclude_vue_vue_type_script_setup_true_lang_default;
 const [injectToastProviderContext, provideToastProviderContext] = /* @__PURE__ */ createContext("ToastProvider");
-var ToastProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "ToastProvider",
   props: {
@@ -2954,12 +12397,12 @@ var ToastProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
   },
   setup(__props) {
     const props = __props;
-    const { label, duration, disableSwipe, swipeDirection, swipeThreshold } = toRefs(props);
+    const { label, duration, disableSwipe, swipeDirection, swipeThreshold } = vueExports.toRefs(props);
     useCollection({ isProvider: true });
-    const viewport = ref();
-    const toastCount = ref(0);
-    const isFocusedToastEscapeKeyDownRef = ref(false);
-    const isClosePausedRef = ref(false);
+    const viewport = vueExports.ref();
+    const toastCount = vueExports.ref(0);
+    const isFocusedToastEscapeKeyDownRef = vueExports.ref(false);
+    const isClosePausedRef = vueExports.ref(false);
     if (props.label && typeof props.label === "string" && !props.label.trim()) {
       const error = "Invalid prop `label` supplied to `ToastProvider`. Expected non-empty `string`.";
       throw new Error(error);
@@ -2985,38 +12428,25 @@ var ToastProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
       isClosePausedRef
     });
     return (_ctx, _cache) => {
-      return renderSlot(_ctx.$slots, "default");
+      return vueExports.renderSlot(_ctx.$slots, "default");
     };
   }
 });
 var ToastProvider_default = ToastProvider_vue_vue_type_script_setup_true_lang_default;
-var ToastAnnounce_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastAnnounce_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastAnnounce",
   setup(__props) {
     const providerContext = injectToastProviderContext();
     const isAnnounced = useTimeout(1e3);
-    const renderAnnounceText = ref(false);
-    let raf1 = 0;
-    let raf2 = 0;
-    if (isClient) {
-      raf1 = requestAnimationFrame(() => {
-        raf2 = requestAnimationFrame(() => {
-          renderAnnounceText.value = true;
-        });
-      });
-      onScopeDispose(() => {
-        cancelAnimationFrame(raf1);
-        cancelAnimationFrame(raf2);
-      });
-    }
+    const renderAnnounceText = vueExports.ref(false);
     return (_ctx, _cache) => {
-      return unref(isAnnounced) || renderAnnounceText.value ? (openBlock(), createBlock(unref(VisuallyHidden_default), {
+      return vueExports.unref(isAnnounced) || renderAnnounceText.value ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), {
         key: 0,
         feature: "fully-hidden"
       }, {
-        default: withCtx(() => [createTextVNode(toDisplayString(unref(providerContext).label.value) + " ", 1), renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(providerContext).label.value) + " ", 1), vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
-      })) : createCommentVNode("v-if", true);
+      })) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
@@ -3064,7 +12494,7 @@ function getAnnounceTextContent(container) {
   return textContent;
 }
 const [injectToastRootContext, provideToastRootContext] = /* @__PURE__ */ createContext("ToastRoot");
-var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "ToastRootImpl",
   props: {
@@ -3107,23 +12537,20 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const { forwardRef, currentElement } = useForwardExpose();
     const { CollectionItem } = useCollection();
     const providerContext = injectToastProviderContext();
-    const pointerStartRef = ref(null);
-    const swipeDeltaRef = ref(null);
-    const duration = computed(() => typeof props.duration === "number" ? props.duration : providerContext.duration.value);
-    const closeTimerStartTimeRef = ref(0);
-    const closeTimerRemainingTimeRef = ref(duration.value);
-    const closeTimerRef = ref(0);
-    const remainingTime = ref(duration.value);
+    const pointerStartRef = vueExports.ref(null);
+    const swipeDeltaRef = vueExports.ref(null);
+    const duration = vueExports.computed(() => typeof props.duration === "number" ? props.duration : providerContext.duration.value);
+    const closeTimerStartTimeRef = vueExports.ref(0);
+    const closeTimerRemainingTimeRef = vueExports.ref(duration.value);
+    const closeTimerRef = vueExports.ref(0);
+    const remainingTime = vueExports.ref(duration.value);
     const remainingRaf = useRafFn(() => {
       const elapsedTime = Date.now() - closeTimerStartTimeRef.value;
       remainingTime.value = Math.max(closeTimerRemainingTimeRef.value - elapsedTime, 0);
     }, { fpsLimit: 60 });
     function startTimer(duration$1) {
       if (duration$1 <= 0 || duration$1 === Number.POSITIVE_INFINITY) return;
-      if (!isClient) return;
-      (void 0).clearTimeout(closeTimerRef.value);
-      closeTimerStartTimeRef.value = Date.now();
-      closeTimerRef.value = (void 0).setTimeout(handleClose, duration$1);
+      return;
     }
     function handleClose(event) {
       const isNonPointerEvent = event?.pointerType === "";
@@ -3132,12 +12559,12 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
       if (isNonPointerEvent) providerContext.isClosePausedRef.value = false;
       emits("close");
     }
-    const announceTextContent = computed(() => currentElement.value ? getAnnounceTextContent(currentElement.value) : null);
+    const announceTextContent = vueExports.computed(() => currentElement.value ? getAnnounceTextContent(currentElement.value) : null);
     if (props.type && !["foreground", "background"].includes(props.type)) {
       const error = "Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.";
       throw new Error(error);
     }
-    watchEffect((cleanupFn) => {
+    vueExports.watchEffect((cleanupFn) => {
       const viewport = providerContext.viewport.value;
       if (viewport) {
         const handleResume = () => {
@@ -3160,7 +12587,7 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
         };
       }
     });
-    watch(() => [props.open, duration.value], () => {
+    vueExports.watch(() => [props.open, duration.value], () => {
       closeTimerRemainingTimeRef.value = duration.value;
       if (props.open && !providerContext.isClosePausedRef.value) startTimer(duration.value);
     }, { immediate: true });
@@ -3173,45 +12600,45 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     });
     provideToastRootContext({ onClose: handleClose });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock(Fragment, null, [announceTextContent.value ? (openBlock(), createBlock(ToastAnnounce_default, {
+      return vueExports.openBlock(), vueExports.createElementBlock(vueExports.Fragment, null, [announceTextContent.value ? (vueExports.openBlock(), vueExports.createBlock(ToastAnnounce_default, {
         key: 0,
         role: "alert",
         "aria-live": _ctx.type === "foreground" ? "assertive" : "polite"
       }, {
-        default: withCtx(() => [createCommentVNode("\n      Render each chunk as its own text node so screen readers get the\n      natural pause break between nodes (see comment in utils.ts).\n      Interpolating the array directly with `{{ announceTextContent }}`\n      would route through Vue's `toDisplayString`, which JSON-stringifies\n      arrays — the live region would then announce literal `[`, quotes\n      and commas instead of the toast title and description.\n    "), (openBlock(true), createElementBlock(Fragment, null, renderList(announceTextContent.value, (text, i) => {
-          return openBlock(), createElementBlock(Fragment, { key: i }, [createTextVNode(toDisplayString(text), 1)], 64);
+        default: vueExports.withCtx(() => [vueExports.createCommentVNode("\n      Render each chunk as its own text node so screen readers get the\n      natural pause break between nodes (see comment in utils.ts).\n      Interpolating the array directly with `{{ announceTextContent }}`\n      would route through Vue's `toDisplayString`, which JSON-stringifies\n      arrays — the live region would then announce literal `[`, quotes\n      and commas instead of the toast title and description.\n    "), (vueExports.openBlock(true), vueExports.createElementBlock(vueExports.Fragment, null, vueExports.renderList(announceTextContent.value, (text, i) => {
+          return vueExports.openBlock(), vueExports.createElementBlock(vueExports.Fragment, { key: i }, [vueExports.createTextVNode(vueExports.toDisplayString(text), 1)], 64);
         }), 128))]),
         _: 1
-      }, 8, ["aria-live"])) : createCommentVNode("v-if", true), unref(providerContext).viewport.value ? (openBlock(), createBlock(Teleport, {
+      }, 8, ["aria-live"])) : vueExports.createCommentVNode("v-if", true), vueExports.unref(providerContext).viewport.value ? (vueExports.openBlock(), vueExports.createBlock(vueExports.Teleport, {
         key: 1,
-        to: unref(providerContext).viewport.value
-      }, [createVNode(unref(CollectionItem), null, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps({
-          ref: unref(forwardRef),
+        to: vueExports.unref(providerContext).viewport.value
+      }, [vueExports.createVNode(vueExports.unref(CollectionItem), null, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
+          ref: vueExports.unref(forwardRef),
           tabindex: "0"
         }, _ctx.$attrs, {
           as: _ctx.as,
           "as-child": _ctx.asChild,
           "data-state": _ctx.open ? "open" : "closed",
-          "data-swipe-direction": unref(providerContext).swipeDirection.value,
-          style: unref(providerContext).disableSwipe.value ? void 0 : {
+          "data-swipe-direction": vueExports.unref(providerContext).swipeDirection.value,
+          style: vueExports.unref(providerContext).disableSwipe.value ? void 0 : {
             userSelect: "none",
             touchAction: "none"
           },
-          onPointerdown: _cache[0] || (_cache[0] = withModifiers((event) => {
-            if (unref(providerContext).disableSwipe.value) return;
+          onPointerdown: _cache[0] || (_cache[0] = vueExports.withModifiers((event) => {
+            if (vueExports.unref(providerContext).disableSwipe.value) return;
             pointerStartRef.value = {
               x: event.clientX,
               y: event.clientY
             };
           }, ["left"])),
           onPointermove: _cache[1] || (_cache[1] = (event) => {
-            if (unref(providerContext).disableSwipe.value || !pointerStartRef.value) return;
+            if (vueExports.unref(providerContext).disableSwipe.value || !pointerStartRef.value) return;
             const x = event.clientX - pointerStartRef.value.x;
             const y = event.clientY - pointerStartRef.value.y;
             const hasSwipeMoveStarted = Boolean(swipeDeltaRef.value);
-            const isHorizontalSwipe = ["left", "right"].includes(unref(providerContext).swipeDirection.value);
-            const clamp = ["left", "up"].includes(unref(providerContext).swipeDirection.value) ? Math.min : Math.max;
+            const isHorizontalSwipe = ["left", "right"].includes(vueExports.unref(providerContext).swipeDirection.value);
+            const clamp = ["left", "up"].includes(vueExports.unref(providerContext).swipeDirection.value) ? Math.min : Math.max;
             const clampedX = isHorizontalSwipe ? clamp(0, x) : 0;
             const clampedY = !isHorizontalSwipe ? clamp(0, y) : 0;
             const moveStartBuffer = event.pointerType === "touch" ? 10 : 2;
@@ -3225,15 +12652,15 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
             };
             if (hasSwipeMoveStarted) {
               swipeDeltaRef.value = delta;
-              unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_MOVE), (ev) => emits("swipeMove", ev), eventDetail);
-            } else if (unref(isDeltaInDirection)(delta, unref(providerContext).swipeDirection.value, moveStartBuffer)) {
+              vueExports.unref(handleAndDispatchCustomEvent)(vueExports.unref(TOAST_SWIPE_MOVE), (ev) => emits("swipeMove", ev), eventDetail);
+            } else if (vueExports.unref(isDeltaInDirection)(delta, vueExports.unref(providerContext).swipeDirection.value, moveStartBuffer)) {
               swipeDeltaRef.value = delta;
-              unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_START), (ev) => emits("swipeStart", ev), eventDetail);
+              vueExports.unref(handleAndDispatchCustomEvent)(vueExports.unref(TOAST_SWIPE_START), (ev) => emits("swipeStart", ev), eventDetail);
               event.target.setPointerCapture(event.pointerId);
             } else if (Math.abs(x) > moveStartBuffer || Math.abs(y) > moveStartBuffer) pointerStartRef.value = null;
           }),
           onPointerup: _cache[2] || (_cache[2] = (event) => {
-            if (unref(providerContext).disableSwipe.value) return;
+            if (vueExports.unref(providerContext).disableSwipe.value) return;
             const delta = swipeDeltaRef.value;
             const target = event.target;
             if (target.hasPointerCapture(event.pointerId)) target.releasePointerCapture(event.pointerId);
@@ -3245,13 +12672,13 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
                 originalEvent: event,
                 delta
               };
-              if (unref(isDeltaInDirection)(delta, unref(providerContext).swipeDirection.value, unref(providerContext).swipeThreshold.value)) unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_END), (ev) => emits("swipeEnd", ev), eventDetail);
-              else unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_CANCEL), (ev) => emits("swipeCancel", ev), eventDetail);
+              if (vueExports.unref(isDeltaInDirection)(delta, vueExports.unref(providerContext).swipeDirection.value, vueExports.unref(providerContext).swipeThreshold.value)) vueExports.unref(handleAndDispatchCustomEvent)(vueExports.unref(TOAST_SWIPE_END), (ev) => emits("swipeEnd", ev), eventDetail);
+              else vueExports.unref(handleAndDispatchCustomEvent)(vueExports.unref(TOAST_SWIPE_CANCEL), (ev) => emits("swipeCancel", ev), eventDetail);
               toast?.addEventListener("click", (event$1) => event$1.preventDefault(), { once: true });
             }
           })
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", {
             remaining: remainingTime.value,
             duration: duration.value
           })]),
@@ -3264,12 +12691,12 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
           "style"
         ])]),
         _: 3
-      })], 8, ["to"])) : createCommentVNode("v-if", true)], 64);
+      })], 8, ["to"])) : vueExports.createCommentVNode("v-if", true)], 64);
     };
   }
 });
 var ToastRootImpl_default = ToastRootImpl_vue_vue_type_script_setup_true_lang_default;
-var ToastClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastClose",
   props: {
     asChild: {
@@ -3287,13 +12714,13 @@ var ToastClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
     const rootContext = injectToastRootContext();
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(ToastAnnounceExclude_default, { "as-child": "" }, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps(props, {
-          ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(ToastAnnounceExclude_default, { "as-child": "" }, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps(props, {
+          ref: vueExports.unref(forwardRef),
           type: _ctx.as === "button" ? "button" : void 0,
-          onClick: unref(rootContext).onClose
+          onClick: vueExports.unref(rootContext).onClose
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, ["type", "onClick"])]),
         _: 3
@@ -3302,7 +12729,7 @@ var ToastClose_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   }
 });
 var ToastClose_default = ToastClose_vue_vue_type_script_setup_true_lang_default;
-var ToastAction_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastAction_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastAction",
   props: {
     altText: {
@@ -3323,26 +12750,26 @@ var ToastAction_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     if (!props.altText) throw new Error("Missing prop `altText` expected on `ToastAction`");
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return _ctx.altText ? (openBlock(), createBlock(ToastAnnounceExclude_default, {
+      return _ctx.altText ? (vueExports.openBlock(), vueExports.createBlock(ToastAnnounceExclude_default, {
         key: 0,
         "alt-text": _ctx.altText,
         "as-child": ""
       }, {
-        default: withCtx(() => [createVNode(ToastClose_default, {
-          ref: unref(forwardRef),
+        default: vueExports.withCtx(() => [vueExports.createVNode(ToastClose_default, {
+          ref: vueExports.unref(forwardRef),
           as: _ctx.as,
           "as-child": _ctx.asChild
         }, {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 8, ["as", "as-child"])]),
         _: 3
-      }, 8, ["alt-text"])) : createCommentVNode("v-if", true);
+      }, 8, ["alt-text"])) : vueExports.createCommentVNode("v-if", true);
     };
   }
 });
 var ToastAction_default = ToastAction_vue_vue_type_script_setup_true_lang_default;
-var ToastDescription_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastDescription_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastDescription",
   props: {
     asChild: {
@@ -3358,15 +12785,15 @@ var ToastDescription_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), normalizeProps(guardReactiveProps(props)), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.normalizeProps(vueExports.guardReactiveProps(props)), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var ToastDescription_default = ToastDescription_vue_vue_type_script_setup_true_lang_default;
-var ToastPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastPortal",
   props: {
     to: {
@@ -3389,15 +12816,15 @@ var ToastPortal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Teleport_default), normalizeProps(guardReactiveProps(props)), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Teleport_default), vueExports.normalizeProps(vueExports.guardReactiveProps(props)), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var ToastPortal_default = ToastPortal_vue_vue_type_script_setup_true_lang_default;
-var ToastRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastRoot",
   props: {
     defaultOpen: {
@@ -3452,10 +12879,10 @@ var ToastRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defi
       passive: props.open === void 0
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Presence_default), { present: _ctx.forceMount || unref(open) }, {
-        default: withCtx(() => [createVNode(ToastRootImpl_default, mergeProps({
-          ref: unref(forwardRef),
-          open: unref(open),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Presence_default), { present: _ctx.forceMount || vueExports.unref(open) }, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(ToastRootImpl_default, vueExports.mergeProps({
+          ref: vueExports.unref(forwardRef),
+          open: vueExports.unref(open),
           type: _ctx.type,
           as: _ctx.as,
           "as-child": _ctx.asChild,
@@ -3504,10 +12931,10 @@ var ToastRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defi
             }
           })
         }), {
-          default: withCtx(({ remaining, duration: _duration }) => [renderSlot(_ctx.$slots, "default", {
+          default: vueExports.withCtx(({ remaining, duration: _duration }) => [vueExports.renderSlot(_ctx.$slots, "default", {
             remaining,
             duration: _duration,
-            open: unref(open)
+            open: vueExports.unref(open)
           })]),
           _: 3
         }, 16, [
@@ -3523,7 +12950,7 @@ var ToastRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defi
   }
 });
 var ToastRoot_default = ToastRoot_vue_vue_type_script_setup_true_lang_default;
-var ToastTitle_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastTitle_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ToastTitle",
   props: {
     asChild: {
@@ -3539,38 +12966,38 @@ var ToastTitle_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), normalizeProps(guardReactiveProps(props)), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.normalizeProps(vueExports.guardReactiveProps(props)), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var ToastTitle_default = ToastTitle_vue_vue_type_script_setup_true_lang_default;
-var FocusProxy_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var FocusProxy_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "FocusProxy",
   emits: ["focusFromOutsideViewport"],
   setup(__props, { emit: __emit }) {
     const emits = __emit;
     const providerContext = injectToastProviderContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(VisuallyHidden_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHidden_default), {
         tabindex: "0",
         style: { "position": "fixed" },
         onFocus: _cache[0] || (_cache[0] = (event) => {
           const prevFocusedElement = event.relatedTarget;
-          const isFocusFromOutsideViewport = !unref(providerContext).viewport.value?.contains(prevFocusedElement);
+          const isFocusFromOutsideViewport = !vueExports.unref(providerContext).viewport.value?.contains(prevFocusedElement);
           if (isFocusFromOutsideViewport) emits("focusFromOutsideViewport");
         })
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       });
     };
   }
 });
 var FocusProxy_default = FocusProxy_vue_vue_type_script_setup_true_lang_default;
-var ToastViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var ToastViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "ToastViewport",
   props: {
@@ -3596,20 +13023,20 @@ var ToastViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
   },
   setup(__props) {
     const props = __props;
-    const { hotkey, label } = toRefs(props);
+    const { hotkey, label } = vueExports.toRefs(props);
     const { forwardRef, currentElement } = useForwardExpose();
     const { CollectionSlot, getItems } = useCollection();
     const providerContext = injectToastProviderContext();
-    const hasToasts = computed(() => providerContext.toastCount.value > 0);
-    const headFocusProxyRef = ref();
-    const tailFocusProxyRef = ref();
+    const hasToasts = vueExports.computed(() => providerContext.toastCount.value > 0);
+    const headFocusProxyRef = vueExports.ref();
+    const tailFocusProxyRef = vueExports.ref();
     const KEY_RE = /Key/g;
     const DIGIT_RE = /Digit/g;
-    const hotkeyMessage = computed(() => hotkey.value.join("+").replace(KEY_RE, "").replace(DIGIT_RE, ""));
+    const hotkeyMessage = vueExports.computed(() => hotkey.value.join("+").replace(KEY_RE, "").replace(DIGIT_RE, ""));
     onKeyStroke(hotkey.value, () => {
       currentElement.value.focus();
     });
-    watchEffect((cleanupFn) => {
+    vueExports.watchEffect((cleanupFn) => {
       const viewport = currentElement.value;
       if (hasToasts.value && viewport) {
         const handlePause = () => {
@@ -3679,49 +13106,49 @@ var ToastViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
       return (tabbingDirection === "forwards" ? tabbableCandidates.reverse() : tabbableCandidates).flat();
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(DismissableLayerBranch_default), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(DismissableLayerBranch_default), {
         role: "region",
-        "aria-label": typeof unref(label) === "string" ? unref(label).replace("{hotkey}", hotkeyMessage.value) : unref(label)(hotkeyMessage.value),
+        "aria-label": typeof vueExports.unref(label) === "string" ? vueExports.unref(label).replace("{hotkey}", hotkeyMessage.value) : vueExports.unref(label)(hotkeyMessage.value),
         tabindex: "-1",
-        style: normalizeStyle({ pointerEvents: hasToasts.value ? void 0 : "none" })
+        style: vueExports.normalizeStyle({ pointerEvents: hasToasts.value ? void 0 : "none" })
       }, {
-        default: withCtx(() => [
-          hasToasts.value ? (openBlock(), createBlock(FocusProxy_default, {
+        default: vueExports.withCtx(() => [
+          hasToasts.value ? (vueExports.openBlock(), vueExports.createBlock(FocusProxy_default, {
             key: 0,
             ref: (node) => {
               if (!node) return void 0;
-              headFocusProxyRef.value = unref(unrefElement)(node);
+              headFocusProxyRef.value = vueExports.unref(unrefElement)(node);
               return void 0;
             },
             onFocusFromOutsideViewport: _cache[0] || (_cache[0] = () => {
               const tabbableCandidates = getSortedTabbableCandidates({ tabbingDirection: "forwards" });
-              unref(focusFirst)(tabbableCandidates);
+              vueExports.unref(focusFirst)(tabbableCandidates);
             })
-          }, null, 512)) : createCommentVNode("v-if", true),
-          createVNode(unref(CollectionSlot), null, {
-            default: withCtx(() => [createVNode(unref(Primitive), mergeProps({
-              ref: unref(forwardRef),
+          }, null, 512)) : vueExports.createCommentVNode("v-if", true),
+          vueExports.createVNode(vueExports.unref(CollectionSlot), null, {
+            default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
+              ref: vueExports.unref(forwardRef),
               tabindex: "-1",
               as: _ctx.as,
               "as-child": _ctx.asChild
             }, _ctx.$attrs), {
-              default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+              default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
               _: 3
             }, 16, ["as", "as-child"])]),
             _: 3
           }),
-          hasToasts.value ? (openBlock(), createBlock(FocusProxy_default, {
+          hasToasts.value ? (vueExports.openBlock(), vueExports.createBlock(FocusProxy_default, {
             key: 1,
             ref: (node) => {
               if (!node) return void 0;
-              tailFocusProxyRef.value = unref(unrefElement)(node);
+              tailFocusProxyRef.value = vueExports.unref(unrefElement)(node);
               return void 0;
             },
             onFocusFromOutsideViewport: _cache[1] || (_cache[1] = () => {
               const tabbableCandidates = getSortedTabbableCandidates({ tabbingDirection: "backwards" });
-              unref(focusFirst)(tabbableCandidates);
+              vueExports.unref(focusFirst)(tabbableCandidates);
             })
-          }, null, 512)) : createCommentVNode("v-if", true)
+          }, null, 512)) : vueExports.createCommentVNode("v-if", true)
         ]),
         _: 3
       }, 8, ["aria-label", "style"]);
@@ -3730,7 +13157,7 @@ var ToastViewport_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
 });
 var ToastViewport_default = ToastViewport_vue_vue_type_script_setup_true_lang_default;
 const [injectTooltipProviderContext, provideTooltipProviderContext] = /* @__PURE__ */ createContext("TooltipProvider");
-var TooltipProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var TooltipProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "TooltipProvider",
   props: {
@@ -3769,10 +13196,10 @@ var TooltipProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ *
   },
   setup(__props) {
     const props = __props;
-    const { delayDuration, skipDelayDuration, disableHoverableContent, disableClosingTrigger, ignoreNonKeyboardFocus, disabled, content } = toRefs(props);
+    const { delayDuration, skipDelayDuration, disableHoverableContent, disableClosingTrigger, ignoreNonKeyboardFocus, disabled, content } = vueExports.toRefs(props);
     useForwardExpose();
-    const isOpenDelayed = ref(true);
-    const isPointerInTransitRef = ref(false);
+    const isOpenDelayed = vueExports.ref(true);
+    const isPointerInTransitRef = vueExports.ref(false);
     const { start: startTimer, stop: clearTimer } = useTimeoutFn(() => {
       isOpenDelayed.value = true;
     }, skipDelayDuration, { immediate: false });
@@ -3794,7 +13221,7 @@ var TooltipProvider_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ *
       content
     });
     return (_ctx, _cache) => {
-      return renderSlot(_ctx.$slots, "default");
+      return vueExports.renderSlot(_ctx.$slots, "default");
     };
   }
 });
@@ -3839,7 +13266,7 @@ function compare(value, currentValue, comparator) {
   if (typeof comparator === "string") {
     return get(value, comparator) === get(currentValue, comparator);
   }
-  return isEqual(value, currentValue);
+  return isEqual$1(value, currentValue);
 }
 function isEmpty(value) {
   if (value == null) {
@@ -3911,7 +13338,7 @@ function getSlotChildrenText(children) {
   }).join("");
 }
 function buildTranslator(locale) {
-  return (path, option) => translate(path, option, unref(locale));
+  return (path, option) => translate(path, option, vueExports.unref(locale));
 }
 function translate(path, option, locale) {
   const prop = get(locale, `messages.${path}`, path);
@@ -3921,10 +13348,10 @@ function translate(path, option, locale) {
   );
 }
 function buildLocaleContext(locale) {
-  const lang = computed(() => unref(locale).name);
-  const code = computed(() => unref(locale).code);
-  const dir = computed(() => unref(locale).dir);
-  const localeRef = isRef(locale) ? locale : ref(locale);
+  const lang = vueExports.computed(() => vueExports.unref(locale).name);
+  const code = vueExports.computed(() => vueExports.unref(locale).code);
+  const dir = vueExports.computed(() => vueExports.unref(locale).dir);
+  const localeRef = vueExports.isRef(locale) ? locale : vueExports.ref(locale);
   return {
     lang,
     code,
@@ -4090,24 +13517,24 @@ const en = /* @__PURE__ */ defineLocale({
 });
 const localeContextInjectionKey = /* @__PURE__ */ Symbol.for("nuxt-ui.locale-context");
 const _useLocale = (localeOverrides) => {
-  const locale = localeOverrides || toRef(inject(localeContextInjectionKey, en));
-  return buildLocaleContext(computed(() => locale.value || en));
+  const locale = localeOverrides || vueExports.toRef(vueExports.inject(localeContextInjectionKey, en));
+  return buildLocaleContext(vueExports.computed(() => locale.value || en));
 };
 const useLocale = _useLocale;
 const portalTargetInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.portal-target");
 function usePortal(portal) {
-  const globalPortal = inject(portalTargetInjectionKey, void 0);
-  const value = computed(() => portal.value === true ? globalPortal?.value : portal.value);
-  const disabled = computed(() => typeof value.value === "boolean" ? !value.value : false);
-  const to = computed(() => typeof value.value === "boolean" ? "body" : value.value);
-  return computed(() => ({
+  const globalPortal = vueExports.inject(portalTargetInjectionKey, void 0);
+  const value = vueExports.computed(() => portal.value === true ? globalPortal?.value : portal.value);
+  const disabled = vueExports.computed(() => typeof value.value === "boolean" ? !value.value : false);
+  const to = vueExports.computed(() => typeof value.value === "boolean" ? "body" : value.value);
+  return vueExports.computed(() => ({
     to: to.value,
     disabled: disabled.value
   }));
 }
 const [_injectThemeContext] = createContext("UTheme", "RootContext");
 const defaultThemeContext = {
-  defaults: computed(() => ({}))
+  defaults: vueExports.computed(() => ({}))
 };
 function injectThemeContext(fallback = defaultThemeContext) {
   return _injectThemeContext(fallback);
@@ -4123,7 +13550,7 @@ function propIsDefined(vnode, prop) {
   return vnode.props[camelCase(prop)] !== void 0 || vnode.props[kebabCase(prop)] !== void 0;
 }
 function useComponentProps(name, props) {
-  const vm = getCurrentInstance();
+  const vm = vueExports.getCurrentInstance();
   const { defaults } = injectThemeContext();
   const appConfig2 = useAppConfig();
   return new Proxy(props, {
@@ -4160,8 +13587,8 @@ function useComponentProps(name, props) {
 }
 function useForwardProps(source, emits) {
   const emitAsProps = emits ? useEmitAsProps(emits) : {};
-  return computed(() => {
-    const src = isRef(source) ? source.value : source;
+  return vueExports.computed(() => {
+    const src = vueExports.isRef(source) ? source.value : source;
     const out = { ...emitAsProps };
     for (const key in src) {
       const value = src[key];
@@ -4173,8 +13600,8 @@ function useForwardProps(source, emits) {
 const toastMaxInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.toast-max");
 function useToast() {
   const toasts = useState("toasts", () => []);
-  const max = inject(toastMaxInjectionKey, void 0);
-  const running = ref(false);
+  const max = vueExports.inject(toastMaxInjectionKey, void 0);
+  const running = vueExports.ref(false);
   const queue = [];
   const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
   async function processQueue() {
@@ -4184,7 +13611,7 @@ function useToast() {
     running.value = true;
     while (queue.length > 0) {
       const toast = queue.shift();
-      await nextTick();
+      await vueExports.nextTick();
       toasts.value = [...toasts.value, toast].slice(-(max?.value ?? 5));
     }
     running.value = false;
@@ -4218,7 +13645,7 @@ function useToast() {
         open: true,
         _updated: true
       };
-      nextTick(() => {
+      vueExports.nextTick(() => {
         const i = toasts.value.findIndex((t) => t.id === id);
         if (i !== -1 && toasts.value[i]._updated) {
           toasts.value[i] = {
@@ -4285,7 +13712,7 @@ async function loadIcon(name, timeout) {
 function useResolvedName(getName) {
   const options = useAppConfig().icon;
   const collections = (options.collections || []).sort((a, b) => b.length - a.length);
-  return computed(() => {
+  return vueExports.computed(() => {
     const name = getName();
     const bare = name.startsWith(options.cssSelectorPrefix) ? name.slice(options.cssSelectorPrefix.length) : name;
     const resolved = options.aliases?.[bare] || bare;
@@ -4305,7 +13732,7 @@ const SYMBOL_SERVER_CSS = "NUXT_ICONS_SERVER_CSS";
 function escapeCssSelector(selector) {
   return selector.replace(/([^\w-])/g, "\\$1");
 }
-const NuxtIconCss = /* @__PURE__ */ defineComponent({
+const NuxtIconCss = /* @__PURE__ */ vueExports.defineComponent({
   name: "NuxtIconCss",
   props: {
     name: {
@@ -4321,8 +13748,8 @@ const NuxtIconCss = /* @__PURE__ */ defineComponent({
   setup(props) {
     const nuxt = useNuxtApp();
     const options = useAppConfig().icon;
-    const cssClass = computed(() => props.name ? options.cssSelectorPrefix + props.name : "");
-    const selector = computed(() => "." + escapeCssSelector(cssClass.value));
+    const cssClass = vueExports.computed(() => props.name ? options.cssSelectorPrefix + props.name : "");
+    const selector = vueExports.computed(() => "." + escapeCssSelector(cssClass.value));
     function getCSS(icon, withLayer = true) {
       let iconSelector = selector.value;
       if (options.cssWherePseudo) {
@@ -4338,7 +13765,7 @@ const NuxtIconCss = /* @__PURE__ */ defineComponent({
       }
       return css;
     }
-    onServerPrefetch(async () => {
+    vueExports.onServerPrefetch(async () => {
       {
         const configs = (/* @__PURE__ */ useRuntimeConfig()).icon || {};
         if (!configs?.serverKnownCssClasses?.includes(cssClass.value)) {
@@ -4373,10 +13800,10 @@ const NuxtIconCss = /* @__PURE__ */ defineComponent({
         }
       }
     });
-    return () => h("span", { class: ["iconify", cssClass.value] });
+    return () => vueExports.h("span", { class: ["iconify", cssClass.value] });
   }
 });
-const NuxtIconSvg = /* @__PURE__ */ defineComponent({
+const NuxtIconSvg = /* @__PURE__ */ vueExports.defineComponent({
   name: "NuxtIconSvg",
   props: {
     name: {
@@ -4395,7 +13822,7 @@ const NuxtIconSvg = /* @__PURE__ */ defineComponent({
     const name = useResolvedName(() => props.name);
     const storeKey = "i-" + name.value;
     if (name.value) {
-      onServerPrefetch(async () => {
+      vueExports.onServerPrefetch(async () => {
         {
           await useAsyncData(
             storeKey,
@@ -4405,7 +13832,7 @@ const NuxtIconSvg = /* @__PURE__ */ defineComponent({
         }
       });
     }
-    return () => h(Icon, {
+    return () => vueExports.h(Icon, {
       icon: name.value,
       ssr: true,
       // Iconify uses `customise`, where we expose `customize` for consistency
@@ -4413,7 +13840,7 @@ const NuxtIconSvg = /* @__PURE__ */ defineComponent({
     }, slots);
   }
 });
-const __nuxt_component_0$2 = defineComponent({
+const __nuxt_component_0$2 = vueExports.defineComponent({
   name: "NuxtIcon",
   props: {
     name: {
@@ -4440,14 +13867,14 @@ const __nuxt_component_0$2 = defineComponent({
     const nuxtApp = useNuxtApp();
     const runtimeOptions = useAppConfig().icon;
     const name = useResolvedName(() => props.name);
-    const component = computed(
+    const component = vueExports.computed(
       () => nuxtApp.vueApp?.component(name.value) || ((props.mode || runtimeOptions.mode) === "svg" ? NuxtIconSvg : NuxtIconCss)
     );
-    const style = computed(() => {
+    const style = vueExports.computed(() => {
       const size = props.size || runtimeOptions.size;
       return size ? { fontSize: Number.isNaN(+size) ? size : size + "px" } : null;
     });
-    return () => h(
+    return () => vueExports.h(
       component.value,
       {
         ...runtimeOptions.attrs,
@@ -4479,26 +13906,26 @@ const _sfc_main$d = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Icon = __nuxt_component_0$2;
       if (typeof __props.name === "string") {
-        _push(ssrRenderComponent(_component_Icon, mergeProps({ name: __props.name }, unref(iconProps), _attrs), null, _parent));
+        _push(ssrRenderComponent_1(_component_Icon, vueExports.mergeProps({ name: __props.name }, vueExports.unref(iconProps), _attrs), null, _parent));
       } else {
-        ssrRenderVNode(_push, createVNode(resolveDynamicComponent(__props.name), _attrs, null), _parent);
+        ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(__props.name), _attrs, null), _parent);
       }
     };
   }
 };
 const _sfc_setup$d = _sfc_main$d.setup;
 _sfc_main$d.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Icon.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
 const ImageComponent = "img";
 const avatarGroupInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.avatar-group");
 function useAvatarGroup(props) {
-  const avatarGroup = inject(avatarGroupInjectionKey, void 0);
-  const size = computed(() => props.size ?? avatarGroup?.value.size);
-  const color = computed(() => props.color ?? avatarGroup?.value.color);
-  provide(avatarGroupInjectionKey, computed(() => ({ size: size.value, color: color.value })));
+  const avatarGroup = vueExports.inject(avatarGroupInjectionKey, void 0);
+  const size = vueExports.computed(() => props.size ?? avatarGroup?.value.size);
+  const color = vueExports.computed(() => props.color ?? avatarGroup?.value.color);
+  vueExports.provide(avatarGroupInjectionKey, vueExports.computed(() => ({ size: size.value, color: color.value })));
   return {
     size,
     color
@@ -4574,7 +14001,7 @@ const theme$6 = {
 const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "UChip",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     as: { type: null, required: false },
     text: { type: [String, Number], required: false },
     color: { type: null, required: false },
@@ -4592,10 +14019,10 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   setup(__props) {
     const _props = __props;
     const props = useComponentProps("chip", _props);
-    const show = useModel(__props, "show", { type: Boolean, ...{ default: true } });
+    const show = vueExports.useModel(__props, "show", { type: Boolean, ...{ default: true } });
     const { size } = useAvatarGroup(_props);
     const appConfig2 = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$6), ...appConfig2.ui?.chip || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$6), ...appConfig2.ui?.chip || {} })({
       color: props.color,
       size: size.value ?? props.size,
       position: props.position,
@@ -4603,29 +14030,29 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       standalone: props.standalone
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(unref(Slot), _ctx.$attrs, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+            _push2(ssrRenderComponent_1(vueExports.unref(Slot), _ctx.$attrs, {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  ssrRenderSlot(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
+                  ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
                 } else {
                   return [
-                    renderSlot(_ctx.$slots, "default")
+                    vueExports.renderSlot(_ctx.$slots, "default")
                   ];
                 }
               }),
               _: 3
             }, _parent2, _scopeId));
             if (show.value) {
-              _push2(`<span data-slot="base" class="${ssrRenderClass(ui.value.base({ class: unref(props).ui?.base }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "content", {}, () => {
-                _push2(`${ssrInterpolate(unref(props).text)}`);
+              _push2(`<span data-slot="base" class="${ssrRenderClass_1(ui.value.base({ class: vueExports.unref(props).ui?.base }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "content", {}, () => {
+                _push2(`${ssrInterpolate_1(vueExports.unref(props).text)}`);
               }, _push2, _parent2, _scopeId);
               _push2(`</span>`);
             } else {
@@ -4633,21 +14060,21 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }
           } else {
             return [
-              createVNode(unref(Slot), _ctx.$attrs, {
-                default: withCtx(() => [
-                  renderSlot(_ctx.$slots, "default")
+              vueExports.createVNode(vueExports.unref(Slot), _ctx.$attrs, {
+                default: vueExports.withCtx(() => [
+                  vueExports.renderSlot(_ctx.$slots, "default")
                 ]),
                 _: 3
               }, 16),
-              show.value ? (openBlock(), createBlock("span", {
+              show.value ? (vueExports.openBlock(), vueExports.createBlock("span", {
                 key: 0,
                 "data-slot": "base",
-                class: ui.value.base({ class: unref(props).ui?.base })
+                class: ui.value.base({ class: vueExports.unref(props).ui?.base })
               }, [
-                renderSlot(_ctx.$slots, "content", {}, () => [
-                  createTextVNode(toDisplayString(unref(props).text), 1)
+                vueExports.renderSlot(_ctx.$slots, "content", {}, () => [
+                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).text), 1)
                 ])
-              ], 2)) : createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -4658,7 +14085,7 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$c = _sfc_main$c.setup;
 _sfc_main$c.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Chip.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
@@ -4761,21 +14188,21 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   setup(__props) {
     const _props = __props;
     const props = useComponentProps("avatar", _props);
-    const as = computed(() => {
+    const as = vueExports.computed(() => {
       if (typeof props.as === "string" || typeof props.as?.render === "function") {
         return { root: props.as };
       }
       return defu(props.as, { root: "span" });
     });
-    const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
+    const fallback = vueExports.computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
     const appConfig2 = useAppConfig();
     const { size, color } = useAvatarGroup(_props);
-    const ui = computed(() => tv({ extend: tv(theme$5), ...appConfig2.ui?.avatar || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$5), ...appConfig2.ui?.avatar || {} })({
       size: size.value ?? props.size,
       color: color.value ?? props.color
     }));
-    const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }));
-    const sizePx = computed(() => {
+    const rootClass = vueExports.computed(() => ui.value.root({ class: [props.ui?.root, props.class] }));
+    const sizePx = vueExports.computed(() => {
       const sizeClass = rootClass.value.split(" ").find((c) => /^size-\d+$/.test(c));
       if (sizeClass) {
         const num = Number.parseFloat(sizeClass.split("-")[1] ?? "");
@@ -4783,8 +14210,8 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       }
       return null;
     });
-    const error = ref(false);
-    watch(() => props.src, () => {
+    const error = vueExports.ref(false);
+    vueExports.watch(() => props.src, () => {
       if (error.value) {
         error.value = false;
       }
@@ -4793,54 +14220,54 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       error.value = true;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(props).chip ? _sfc_main$c : unref(Primitive)), mergeProps({
+      ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).chip ? _sfc_main$c : vueExports.unref(Primitive)), vueExports.mergeProps({
         as: as.value.root
-      }, unref(props).chip ? typeof unref(props).chip === "object" ? { inset: true, ...unref(props).chip } : { inset: true } : {}, {
+      }, vueExports.unref(props).chip ? typeof vueExports.unref(props).chip === "object" ? { inset: true, ...vueExports.unref(props).chip } : { inset: true } : {}, {
         "data-slot": "root",
         class: rootClass.value,
-        style: unref(props).style
+        style: vueExports.unref(props).style
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            if (unref(props).src && !error.value) {
-              ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(as.value.img || unref(ImageComponent)), mergeProps({
-                src: unref(props).src,
-                alt: unref(props).alt,
+            if (vueExports.unref(props).src && !error.value) {
+              ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(as.value.img || vueExports.unref(ImageComponent)), vueExports.mergeProps({
+                src: vueExports.unref(props).src,
+                alt: vueExports.unref(props).alt,
                 width: sizePx.value,
                 height: sizePx.value
               }, _ctx.$attrs, {
                 "data-slot": "image",
-                class: ui.value.image({ class: unref(props).ui?.image }),
+                class: ui.value.image({ class: vueExports.unref(props).ui?.image }),
                 onError
               }), null), _parent2, _scopeId);
             } else {
-              _push2(ssrRenderComponent(unref(Slot), _ctx.$attrs, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              _push2(ssrRenderComponent_1(vueExports.unref(Slot), _ctx.$attrs, {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    ssrRenderSlot(_ctx.$slots, "default", {}, () => {
-                      if (unref(props).icon) {
-                        _push3(ssrRenderComponent(_sfc_main$d, {
-                          name: unref(props).icon,
+                    ssrRenderSlot_1(_ctx.$slots, "default", {}, () => {
+                      if (vueExports.unref(props).icon) {
+                        _push3(ssrRenderComponent_1(_sfc_main$d, {
+                          name: vueExports.unref(props).icon,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon })
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                         }, null, _parent3, _scopeId2));
                       } else {
-                        _push3(`<span data-slot="fallback" class="${ssrRenderClass(ui.value.fallback({ class: unref(props).ui?.fallback }))}"${_scopeId2}>${ssrInterpolate(fallback.value || " ")}</span>`);
+                        _push3(`<span data-slot="fallback" class="${ssrRenderClass_1(ui.value.fallback({ class: vueExports.unref(props).ui?.fallback }))}"${_scopeId2}>${ssrInterpolate_1(fallback.value || " ")}</span>`);
                       }
                     }, _push3, _parent3, _scopeId2);
                   } else {
                     return [
-                      renderSlot(_ctx.$slots, "default", {}, () => [
-                        unref(props).icon ? (openBlock(), createBlock(_sfc_main$d, {
+                      vueExports.renderSlot(_ctx.$slots, "default", {}, () => [
+                        vueExports.unref(props).icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                           key: 0,
-                          name: unref(props).icon,
+                          name: vueExports.unref(props).icon,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon })
-                        }, null, 8, ["name", "class"])) : (openBlock(), createBlock("span", {
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
+                        }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock("span", {
                           key: 1,
                           "data-slot": "fallback",
-                          class: ui.value.fallback({ class: unref(props).ui?.fallback })
-                        }, toDisplayString(fallback.value || " "), 3))
+                          class: ui.value.fallback({ class: vueExports.unref(props).ui?.fallback })
+                        }, vueExports.toDisplayString(fallback.value || " "), 3))
                       ])
                     ];
                   }
@@ -4850,29 +14277,29 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }
           } else {
             return [
-              unref(props).src && !error.value ? (openBlock(), createBlock(resolveDynamicComponent(as.value.img || unref(ImageComponent)), mergeProps({
+              vueExports.unref(props).src && !error.value ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(as.value.img || vueExports.unref(ImageComponent)), vueExports.mergeProps({
                 key: 0,
-                src: unref(props).src,
-                alt: unref(props).alt,
+                src: vueExports.unref(props).src,
+                alt: vueExports.unref(props).alt,
                 width: sizePx.value,
                 height: sizePx.value
               }, _ctx.$attrs, {
                 "data-slot": "image",
-                class: ui.value.image({ class: unref(props).ui?.image }),
+                class: ui.value.image({ class: vueExports.unref(props).ui?.image }),
                 onError
-              }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), mergeProps({ key: 1 }, _ctx.$attrs), {
-                default: withCtx(() => [
-                  renderSlot(_ctx.$slots, "default", {}, () => [
-                    unref(props).icon ? (openBlock(), createBlock(_sfc_main$d, {
+              }), null, 16, ["src", "alt", "width", "height", "class"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Slot), vueExports.mergeProps({ key: 1 }, _ctx.$attrs), {
+                default: vueExports.withCtx(() => [
+                  vueExports.renderSlot(_ctx.$slots, "default", {}, () => [
+                    vueExports.unref(props).icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                       key: 0,
-                      name: unref(props).icon,
+                      name: vueExports.unref(props).icon,
                       "data-slot": "icon",
-                      class: ui.value.icon({ class: unref(props).ui?.icon })
-                    }, null, 8, ["name", "class"])) : (openBlock(), createBlock("span", {
+                      class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
+                    }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock("span", {
                       key: 1,
                       "data-slot": "fallback",
-                      class: ui.value.fallback({ class: unref(props).ui?.fallback })
-                    }, toDisplayString(fallback.value || " "), 3))
+                      class: ui.value.fallback({ class: vueExports.unref(props).ui?.fallback })
+                    }, vueExports.toDisplayString(fallback.value || " "), 3))
                   ])
                 ]),
                 _: 3
@@ -4887,22 +14314,22 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$b = _sfc_main$b.setup;
 _sfc_main$b.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Avatar.vue");
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
 function useComponentIcons(componentProps) {
   const appConfig2 = useAppConfig();
-  const props = computed(() => toValue(componentProps));
-  const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
-  const isTrailing = computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon && props.value.trailing !== false);
-  const leadingIconName = computed(() => {
+  const props = vueExports.computed(() => vueExports.toValue(componentProps));
+  const isLeading = vueExports.computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
+  const isTrailing = vueExports.computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon && props.value.trailing !== false);
+  const leadingIconName = vueExports.computed(() => {
     if (props.value.loading) {
       return props.value.loadingIcon || appConfig2.ui.icons.loading;
     }
     return props.value.leadingIcon || props.value.icon;
   });
-  const trailingIconName = computed(() => {
+  const trailingIconName = vueExports.computed(() => {
     if (props.value.loading && !isLeading.value) {
       return props.value.loadingIcon || appConfig2.ui.icons.loading;
     }
@@ -4917,16 +14344,16 @@ function useComponentIcons(componentProps) {
 }
 const fieldGroupInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.field-group");
 function useFieldGroup(props) {
-  const fieldGroup = inject(fieldGroupInjectionKey, void 0);
+  const fieldGroup = vueExports.inject(fieldGroupInjectionKey, void 0);
   return {
-    orientation: computed(() => fieldGroup?.value.orientation),
-    size: computed(() => props?.size ?? fieldGroup?.value.size)
+    orientation: vueExports.computed(() => fieldGroup?.value.orientation),
+    size: vueExports.computed(() => props?.size ?? fieldGroup?.value.size)
   };
 }
-const FieldGroupReset = defineComponent({
+const FieldGroupReset = vueExports.defineComponent({
   name: "FieldGroupReset",
   setup(_, { slots }) {
-    provide(fieldGroupInjectionKey, computed(() => ({
+    vueExports.provide(fieldGroupInjectionKey, vueExports.computed(() => ({
       size: void 0,
       orientation: void 0
     })));
@@ -4942,11 +14369,11 @@ const formInputsInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.form-inputs");
 const formLoadingInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.form-loading");
 const formErrorsInjectionKey = /* @__PURE__ */ Symbol("nuxt-ui.form-errors");
 function useFormField(props, opts) {
-  const formOptions = inject(formOptionsInjectionKey, void 0);
-  const formBus = inject(formBusInjectionKey, void 0);
-  const formField = inject(formFieldInjectionKey, void 0);
-  const inputId = inject(inputIdInjectionKey, void 0);
-  provide(formFieldInjectionKey, void 0);
+  const formOptions = vueExports.inject(formOptionsInjectionKey, void 0);
+  const formBus = vueExports.inject(formBusInjectionKey, void 0);
+  const formField = vueExports.inject(formFieldInjectionKey, void 0);
+  const inputId = vueExports.inject(inputIdInjectionKey, void 0);
+  vueExports.provide(formFieldInjectionKey, void 0);
   if (formField && inputId) {
     if (opts?.bind === false) {
       inputId.value = void 0;
@@ -4975,17 +14402,17 @@ function useFormField(props, opts) {
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   );
   return {
-    id: computed(() => props?.id ?? inputId?.value),
-    name: computed(() => props?.name ?? formField?.value.name),
-    size: computed(() => props?.size ?? formField?.value.size),
-    color: computed(() => formField?.value.error ? "error" : props?.color),
-    highlight: computed(() => formField?.value.error ? true : props?.highlight),
-    disabled: computed(() => formOptions?.value.disabled || props?.disabled),
+    id: vueExports.computed(() => props?.id ?? inputId?.value),
+    name: vueExports.computed(() => props?.name ?? formField?.value.name),
+    size: vueExports.computed(() => props?.size ?? formField?.value.size),
+    color: vueExports.computed(() => formField?.value.error ? "error" : props?.color),
+    highlight: vueExports.computed(() => formField?.value.error ? true : props?.highlight),
+    disabled: vueExports.computed(() => formOptions?.value.disabled || props?.disabled),
     emitFormBlur,
     emitFormInput,
     emitFormChange,
     emitFormFocus,
-    ariaAttrs: computed(() => {
+    ariaAttrs: vueExports.computed(() => {
       if (!formField?.value) return;
       const descriptiveAttrs = ["error", "hint", "description", "help"].filter((type) => formField?.value?.[type]).map((type) => `${formField?.value.ariaId}-${type}`) || [];
       const attrs = {
@@ -5058,7 +14485,7 @@ function isPartiallyEqual(item1, item2) {
   }, /* @__PURE__ */ new Set());
   const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
   const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
-  return isEqual(item1Filtered, item2Filtered);
+  return isEqual$1(item1Filtered, item2Filtered);
 }
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
 // @__NO_SIDE_EFFECTS__
@@ -5087,33 +14514,33 @@ function defineNuxtLink(options) {
   function useNuxtLink(props) {
     const router = useRouter();
     const config = /* @__PURE__ */ useRuntimeConfig();
-    const hasTarget = computed(() => !!unref(props.target) && unref(props.target) !== "_self");
-    const isAbsoluteUrl = computed(() => {
-      const path = unref(props.to) || unref(props.href) || "";
+    const hasTarget = vueExports.computed(() => !!vueExports.unref(props.target) && vueExports.unref(props.target) !== "_self");
+    const isAbsoluteUrl = vueExports.computed(() => {
+      const path = vueExports.unref(props.to) || vueExports.unref(props.href) || "";
       return typeof path === "string" && hasProtocol(path, { acceptRelative: true });
     });
-    const builtinRouterLink = resolveComponent("RouterLink");
+    const builtinRouterLink = vueExports.resolveComponent("RouterLink");
     const useBuiltinLink = builtinRouterLink && typeof builtinRouterLink !== "string" ? builtinRouterLink.useLink : void 0;
-    const isExternal = computed(() => {
-      if (unref(props.external)) {
+    const isExternal = vueExports.computed(() => {
+      if (vueExports.unref(props.external)) {
         return true;
       }
-      const path = unref(props.to) || unref(props.href) || "";
+      const path = vueExports.unref(props.to) || vueExports.unref(props.href) || "";
       if (typeof path === "object") {
         return false;
       }
       return path === "" || isAbsoluteUrl.value;
     });
-    const to = computed(() => {
-      const path = unref(props.to) || unref(props.href) || "";
+    const to = vueExports.computed(() => {
+      const path = vueExports.unref(props.to) || vueExports.unref(props.href) || "";
       if (isExternal.value) {
         return path;
       }
-      return resolveTrailingSlashBehavior(path, router.resolve, unref(props.trailingSlash));
+      return resolveTrailingSlashBehavior(path, router.resolve, vueExports.unref(props.trailingSlash));
     });
-    const link = isExternal.value ? void 0 : useBuiltinLink?.({ ...props, to, viewTransition: unref(props.viewTransition) });
-    const href = computed(() => {
-      const effectiveTrailingSlash = unref(props.trailingSlash) ?? options.trailingSlash;
+    const link = isExternal.value ? void 0 : useBuiltinLink?.({ ...props, to, viewTransition: vueExports.unref(props.viewTransition) });
+    const href = vueExports.computed(() => {
+      const effectiveTrailingSlash = vueExports.unref(props.trailingSlash) ?? options.trailingSlash;
       if (!to.value || isAbsoluteUrl.value || isHashLinkWithoutHashMode(to.value)) {
         return to.value;
       }
@@ -5134,15 +14561,15 @@ function defineNuxtLink(options) {
       isExternal,
       //
       href,
-      isActive: link?.isActive ?? computed(() => to.value === router.currentRoute.value.path),
-      isExactActive: link?.isExactActive ?? computed(() => to.value === router.currentRoute.value.path),
-      route: link?.route ?? computed(() => router.resolve(to.value)),
+      isActive: link?.isActive ?? vueExports.computed(() => to.value === router.currentRoute.value.path),
+      isExactActive: link?.isExactActive ?? vueExports.computed(() => to.value === router.currentRoute.value.path),
+      route: link?.route ?? vueExports.computed(() => router.resolve(to.value)),
       async navigate(_e) {
-        await navigateTo(href.value, { replace: unref(props.replace), external: isExternal.value || hasTarget.value });
+        await navigateTo(href.value, { replace: vueExports.unref(props.replace), external: isExternal.value || hasTarget.value });
       }
     };
   }
-  return defineComponent({
+  return vueExports.defineComponent({
     name: componentName,
     props: {
       // Routing
@@ -5238,7 +14665,7 @@ function defineNuxtLink(options) {
     setup(props, { slots }) {
       const router = useRouter();
       const { to, href, navigate, isExternal, hasTarget, isAbsoluteUrl } = useNuxtLink(props);
-      shallowRef(false);
+      vueExports.shallowRef(false);
       const el = void 0;
       const elRef = void 0;
       async function prefetch(nuxtApp = useNuxtApp()) {
@@ -5260,8 +14687,8 @@ function defineNuxtLink(options) {
           if (!props.custom) {
             routerLinkProps.rel = props.rel || void 0;
           }
-          return h(
-            resolveComponent("RouterLink"),
+          return vueExports.h(
+            vueExports.resolveComponent("RouterLink"),
             routerLinkProps,
             slots.default
           );
@@ -5294,7 +14721,7 @@ function defineNuxtLink(options) {
                 path: url.pathname,
                 fullPath: url.pathname,
                 get query() {
-                  return parseQuery(url.search);
+                  return parseQuery$1(url.search);
                 },
                 hash: url.hash,
                 params: {},
@@ -5312,7 +14739,7 @@ function defineNuxtLink(options) {
             isExactActive: false
           });
         }
-        return h("a", {
+        return vueExports.h("a", {
           ref: el,
           href: href.value || null,
           // converts `""` to `null` to prevent the attribute from being added as empty (`href=""`)
@@ -5376,7 +14803,7 @@ const _sfc_main$a = {
       }
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps(__props.href ? {
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps(__props.href ? {
         "as": "a",
         "href": __props.disabled ? void 0 : __props.href,
         "aria-disabled": __props.disabled ? "true" : void 0,
@@ -5393,12 +14820,12 @@ const _sfc_main$a = {
         target: __props.target,
         onClick: onClickWrapper
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "default")
+              vueExports.renderSlot(_ctx.$slots, "default")
             ];
           }
         }),
@@ -5409,7 +14836,7 @@ const _sfc_main$a = {
 };
 const _sfc_setup$a = _sfc_main$a.setup;
 _sfc_main$a.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/LinkBase.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
@@ -5474,7 +14901,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const appConfig2 = useAppConfig();
     const nuxtApp = useNuxtApp();
     const nuxtLinkProps = useForwardProps$1(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "locale", "class"));
-    const ui = computed(() => tv({
+    const ui = vueExports.computed(() => tv({
       extend: tv(theme$4),
       ...defu({
         variants: {
@@ -5485,7 +14912,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         }
       }, appConfig2.ui?.link || {})
     }));
-    const to = computed(() => {
+    const to = vueExports.computed(() => {
       const path = props.to ?? props.href;
       if (!path) return path;
       if (typeof path !== "string") return path;
@@ -5506,7 +14933,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       }
       return localePath(path, typeof props.locale === "string" ? props.locale : void 0);
     });
-    const isInternalLink = computed(() => {
+    const isInternalLink = vueExports.computed(() => {
       if (!to.value) return false;
       if (props.external) return false;
       if (typeof to.value !== "string") return true;
@@ -5514,7 +14941,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       if (props.target && props.target !== "_self") return false;
       return true;
     });
-    const externalRel = computed(() => {
+    const externalRel = vueExports.computed(() => {
       if (props.noRel) return null;
       if (props.rel) return props.rel;
       return "noopener noreferrer";
@@ -5529,7 +14956,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       if (props.exactQuery === "partial") {
         if (!isPartiallyEqual(linkRoute.query, route.query)) return false;
       } else if (props.exactQuery === true) {
-        if (!isEqual(linkRoute.query, route.query)) return false;
+        if (!isEqual$1(linkRoute.query, route.query)) return false;
       }
       if (props.exactHash && linkRoute.hash !== route.hash) {
         return false;
@@ -5552,17 +14979,17 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$1;
       if (isInternalLink.value) {
-        _push(ssrRenderComponent(_component_NuxtLink, mergeProps(unref(nuxtLinkProps), {
+        _push(ssrRenderComponent_1(_component_NuxtLink, vueExports.mergeProps(vueExports.unref(nuxtLinkProps), {
           to: to.value,
           custom: ""
         }, _attrs), {
-          default: withCtx(({ href, navigate, route: linkRoute, isActive, isExactActive, ...rest }, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx(({ href, navigate, route: linkRoute, isActive, isExactActive, ...rest }, _push2, _parent2, _scopeId) => {
             if (_push2) {
               if (__props.custom) {
-                _push2(ssrRenderComponent(unref(Slot), null, {
-                  default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                _push2(ssrRenderComponent_1(vueExports.unref(Slot), null, {
+                  default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      ssrRenderSlot(_ctx.$slots, "default", {
+                      ssrRenderSlot_1(_ctx.$slots, "default", {
                         ..._ctx.$attrs,
                         ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
                         as: __props.as,
@@ -5577,7 +15004,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                       }, null, _push3, _parent3, _scopeId2);
                     } else {
                       return [
-                        renderSlot(_ctx.$slots, "default", {
+                        vueExports.renderSlot(_ctx.$slots, "default", {
                           ..._ctx.$attrs,
                           ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
                           as: __props.as,
@@ -5596,7 +15023,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   _: 2
                 }, _parent2, _scopeId));
               } else {
-                _push2(ssrRenderComponent(_sfc_main$a, mergeProps({
+                _push2(ssrRenderComponent_1(_sfc_main$a, vueExports.mergeProps({
                   ..._ctx.$attrs,
                   ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
                   as: __props.as,
@@ -5610,14 +15037,14 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                 }, {
                   class: resolveLinkClass({ route: linkRoute, isActive, isExactActive })
                 }), {
-                  default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      ssrRenderSlot(_ctx.$slots, "default", {
+                      ssrRenderSlot_1(_ctx.$slots, "default", {
                         active: isLinkActive({ route: linkRoute, isActive, isExactActive })
                       }, null, _push3, _parent3, _scopeId2);
                     } else {
                       return [
-                        renderSlot(_ctx.$slots, "default", {
+                        vueExports.renderSlot(_ctx.$slots, "default", {
                           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
                         })
                       ];
@@ -5628,9 +15055,9 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               }
             } else {
               return [
-                __props.custom ? (openBlock(), createBlock(unref(Slot), { key: 0 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "default", {
+                __props.custom ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Slot), { key: 0 }, {
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "default", {
                       ..._ctx.$attrs,
                       ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
                       as: __props.as,
@@ -5645,7 +15072,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                     })
                   ]),
                   _: 2
-                }, 1024)) : (openBlock(), createBlock(_sfc_main$a, mergeProps({ key: 1 }, {
+                }, 1024)) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$a, vueExports.mergeProps({ key: 1 }, {
                   ..._ctx.$attrs,
                   ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
                   as: __props.as,
@@ -5659,8 +15086,8 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                 }, {
                   class: resolveLinkClass({ route: linkRoute, isActive, isExactActive })
                 }), {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "default", {
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "default", {
                       active: isLinkActive({ route: linkRoute, isActive, isExactActive })
                     })
                   ]),
@@ -5672,10 +15099,10 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
           _: 3
         }, _parent));
       } else if (__props.custom) {
-        _push(ssrRenderComponent(unref(Slot), _attrs, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+        _push(ssrRenderComponent_1(vueExports.unref(Slot), _attrs, {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "default", {
+              ssrRenderSlot_1(_ctx.$slots, "default", {
                 ..._ctx.$attrs,
                 as: __props.as,
                 type: __props.type,
@@ -5685,7 +15112,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               }, null, _push2, _parent2, _scopeId);
             } else {
               return [
-                renderSlot(_ctx.$slots, "default", {
+                vueExports.renderSlot(_ctx.$slots, "default", {
                   ..._ctx.$attrs,
                   as: __props.as,
                   type: __props.type,
@@ -5699,7 +15126,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
           _: 3
         }, _parent));
       } else {
-        _push(ssrRenderComponent(_sfc_main$a, mergeProps({
+        _push(ssrRenderComponent_1(_sfc_main$a, vueExports.mergeProps({
           ..._ctx.$attrs,
           as: __props.as,
           type: __props.type,
@@ -5708,14 +15135,14 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
         }, {
           class: resolveLinkClass()
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "default", {
+              ssrRenderSlot_1(_ctx.$slots, "default", {
                 active: __props.active ?? false
               }, null, _push2, _parent2, _scopeId);
             } else {
               return [
-                renderSlot(_ctx.$slots, "default", {
+                vueExports.renderSlot(_ctx.$slots, "default", {
                   active: __props.active ?? false
                 })
               ];
@@ -5729,7 +15156,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$9 = _sfc_main$9.setup;
 _sfc_main$9.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Link.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
@@ -6136,13 +15563,13 @@ const _sfc_main$8 = {
   },
   setup(__props) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("button", _props);
     const appConfig2 = useAppConfig();
     const { orientation, size: buttonSize } = useFieldGroup(_props);
     const linkProps = useForwardProps(pickLinkProps(props));
-    const loadingAutoState = ref(false);
-    const formLoading = inject(formLoadingInjectionKey, void 0);
+    const loadingAutoState = vueExports.ref(false);
+    const formLoading = vueExports.inject(formLoadingInjectionKey, void 0);
     async function onClickWrapper(event) {
       loadingAutoState.value = true;
       const callbacks = Array.isArray(props.onClick) ? props.onClick : [props.onClick];
@@ -6152,13 +15579,13 @@ const _sfc_main$8 = {
         loadingAutoState.value = false;
       }
     }
-    const isLoading = computed(() => {
+    const isLoading = vueExports.computed(() => {
       return props.loading || props.loadingAuto && (loadingAutoState.value || formLoading?.value && props.type === "submit");
     });
     const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
-      computed(() => ({ ...props, loading: isLoading.value }))
+      vueExports.computed(() => ({ ...props, loading: isLoading.value }))
     );
-    const ui = computed(() => tv({
+    const ui = vueExports.computed(() => tv({
       extend: tv(theme$3),
       ...defu({
         variants: {
@@ -6184,55 +15611,55 @@ const _sfc_main$8 = {
       fieldGroup: orientation.value
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$9, mergeProps({
-        type: unref(props).type,
-        disabled: unref(props).disabled || isLoading.value
-      }, unref(omit)(unref(linkProps), ["type", "disabled", "onClick"]), { custom: "" }, _attrs), {
-        default: withCtx(({ active, ...slotProps }, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(_sfc_main$9, vueExports.mergeProps({
+        type: vueExports.unref(props).type,
+        disabled: vueExports.unref(props).disabled || isLoading.value
+      }, vueExports.unref(omit)(vueExports.unref(linkProps), ["type", "disabled", "onClick"]), { custom: "" }, _attrs), {
+        default: vueExports.withCtx(({ active, ...slotProps }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_sfc_main$a, mergeProps(slotProps, {
+            _push2(ssrRenderComponent_1(_sfc_main$a, vueExports.mergeProps(slotProps, {
               "data-slot": "base",
               class: ui.value.base({
-                class: [unref(props).ui?.base, unref(props).class],
+                class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class],
                 active,
-                ...active && unref(props).activeVariant ? { variant: unref(props).activeVariant } : {},
-                ...active && unref(props).activeColor ? { color: unref(props).activeColor } : {}
+                ...active && vueExports.unref(props).activeVariant ? { variant: vueExports.unref(props).activeVariant } : {},
+                ...active && vueExports.unref(props).activeColor ? { color: vueExports.unref(props).activeColor } : {}
               }),
               onClick: onClickWrapper
             }), {
-              default: withCtx((_, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  ssrRenderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
-                    if (unref(isLeading) && unref(leadingIconName)) {
-                      _push3(ssrRenderComponent(_sfc_main$d, {
-                        name: unref(leadingIconName),
+                  ssrRenderSlot_1(_ctx.$slots, "leading", { ui: ui.value }, () => {
+                    if (vueExports.unref(isLeading) && vueExports.unref(leadingIconName)) {
+                      _push3(ssrRenderComponent_1(_sfc_main$d, {
+                        name: vueExports.unref(leadingIconName),
                         "data-slot": "leadingIcon",
-                        class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon, active })
+                        class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon, active })
                       }, null, _parent3, _scopeId2));
-                    } else if (!!unref(props).avatar) {
-                      _push3(ssrRenderComponent(_sfc_main$b, mergeProps({
-                        size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                      }, unref(props).avatar, {
+                    } else if (!!vueExports.unref(props).avatar) {
+                      _push3(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                        size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                      }, vueExports.unref(props).avatar, {
                         "data-slot": "leadingAvatar",
-                        class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar, active })
+                        class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar, active })
                       }), null, _parent3, _scopeId2));
                     } else {
                       _push3(`<!---->`);
                     }
                   }, _push3, _parent3, _scopeId2);
-                  ssrRenderSlot(_ctx.$slots, "default", { ui: ui.value }, () => {
-                    if (unref(props).label !== void 0 && unref(props).label !== null) {
-                      _push3(`<span data-slot="label" class="${ssrRenderClass(ui.value.label({ class: unref(props).ui?.label, active }))}"${_scopeId2}>${ssrInterpolate(unref(props).label)}</span>`);
+                  ssrRenderSlot_1(_ctx.$slots, "default", { ui: ui.value }, () => {
+                    if (vueExports.unref(props).label !== void 0 && vueExports.unref(props).label !== null) {
+                      _push3(`<span data-slot="label" class="${ssrRenderClass_1(ui.value.label({ class: vueExports.unref(props).ui?.label, active }))}"${_scopeId2}>${ssrInterpolate_1(vueExports.unref(props).label)}</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                   }, _push3, _parent3, _scopeId2);
-                  ssrRenderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => {
-                    if (unref(isTrailing) && unref(trailingIconName)) {
-                      _push3(ssrRenderComponent(_sfc_main$d, {
-                        name: unref(trailingIconName),
+                  ssrRenderSlot_1(_ctx.$slots, "trailing", { ui: ui.value }, () => {
+                    if (vueExports.unref(isTrailing) && vueExports.unref(trailingIconName)) {
+                      _push3(ssrRenderComponent_1(_sfc_main$d, {
+                        name: vueExports.unref(trailingIconName),
                         "data-slot": "trailingIcon",
-                        class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon, active })
+                        class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon, active })
                       }, null, _parent3, _scopeId2));
                     } else {
                       _push3(`<!---->`);
@@ -6240,34 +15667,34 @@ const _sfc_main$8 = {
                   }, _push3, _parent3, _scopeId2);
                 } else {
                   return [
-                    renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
-                      unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                    vueExports.renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
+                      vueExports.unref(isLeading) && vueExports.unref(leadingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                         key: 0,
-                        name: unref(leadingIconName),
+                        name: vueExports.unref(leadingIconName),
                         "data-slot": "leadingIcon",
-                        class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon, active })
-                      }, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                        class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon, active })
+                      }, null, 8, ["name", "class"])) : !!vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                         key: 1,
-                        size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                      }, unref(props).avatar, {
+                        size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                      }, vueExports.unref(props).avatar, {
                         "data-slot": "leadingAvatar",
-                        class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar, active })
-                      }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                        class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar, active })
+                      }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                     ]),
-                    renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [
-                      unref(props).label !== void 0 && unref(props).label !== null ? (openBlock(), createBlock("span", {
+                    vueExports.renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [
+                      vueExports.unref(props).label !== void 0 && vueExports.unref(props).label !== null ? (vueExports.openBlock(), vueExports.createBlock("span", {
                         key: 0,
                         "data-slot": "label",
-                        class: ui.value.label({ class: unref(props).ui?.label, active })
-                      }, toDisplayString(unref(props).label), 3)) : createCommentVNode("", true)
+                        class: ui.value.label({ class: vueExports.unref(props).ui?.label, active })
+                      }, vueExports.toDisplayString(vueExports.unref(props).label), 3)) : vueExports.createCommentVNode("", true)
                     ]),
-                    renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
-                      unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                    vueExports.renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
+                      vueExports.unref(isTrailing) && vueExports.unref(trailingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                         key: 0,
-                        name: unref(trailingIconName),
+                        name: vueExports.unref(trailingIconName),
                         "data-slot": "trailingIcon",
-                        class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon, active })
-                      }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                        class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon, active })
+                      }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                     ])
                   ];
                 }
@@ -6276,45 +15703,45 @@ const _sfc_main$8 = {
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_sfc_main$a, mergeProps(slotProps, {
+              vueExports.createVNode(_sfc_main$a, vueExports.mergeProps(slotProps, {
                 "data-slot": "base",
                 class: ui.value.base({
-                  class: [unref(props).ui?.base, unref(props).class],
+                  class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class],
                   active,
-                  ...active && unref(props).activeVariant ? { variant: unref(props).activeVariant } : {},
-                  ...active && unref(props).activeColor ? { color: unref(props).activeColor } : {}
+                  ...active && vueExports.unref(props).activeVariant ? { variant: vueExports.unref(props).activeVariant } : {},
+                  ...active && vueExports.unref(props).activeColor ? { color: vueExports.unref(props).activeColor } : {}
                 }),
                 onClick: onClickWrapper
               }), {
-                default: withCtx(() => [
-                  renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
-                    unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                default: vueExports.withCtx(() => [
+                  vueExports.renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
+                    vueExports.unref(isLeading) && vueExports.unref(leadingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                       key: 0,
-                      name: unref(leadingIconName),
+                      name: vueExports.unref(leadingIconName),
                       "data-slot": "leadingIcon",
-                      class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon, active })
-                    }, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                      class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon, active })
+                    }, null, 8, ["name", "class"])) : !!vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                       key: 1,
-                      size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                    }, unref(props).avatar, {
+                      size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                    }, vueExports.unref(props).avatar, {
                       "data-slot": "leadingAvatar",
-                      class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar, active })
-                    }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                      class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar, active })
+                    }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
                   ]),
-                  renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [
-                    unref(props).label !== void 0 && unref(props).label !== null ? (openBlock(), createBlock("span", {
+                  vueExports.renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [
+                    vueExports.unref(props).label !== void 0 && vueExports.unref(props).label !== null ? (vueExports.openBlock(), vueExports.createBlock("span", {
                       key: 0,
                       "data-slot": "label",
-                      class: ui.value.label({ class: unref(props).ui?.label, active })
-                    }, toDisplayString(unref(props).label), 3)) : createCommentVNode("", true)
+                      class: ui.value.label({ class: vueExports.unref(props).ui?.label, active })
+                    }, vueExports.toDisplayString(vueExports.unref(props).label), 3)) : vueExports.createCommentVNode("", true)
                   ]),
-                  renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
-                    unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+                  vueExports.renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
+                    vueExports.unref(isTrailing) && vueExports.unref(trailingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                       key: 0,
-                      name: unref(trailingIconName),
+                      name: vueExports.unref(trailingIconName),
                       "data-slot": "trailingIcon",
-                      class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon, active })
-                    }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                      class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon, active })
+                    }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                   ])
                 ]),
                 _: 2
@@ -6329,7 +15756,7 @@ const _sfc_main$8 = {
 };
 const _sfc_setup$8 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Button.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
@@ -6613,14 +16040,14 @@ const _sfc_main$7 = {
   setup(__props, { emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("progress", _props);
     const { dir } = useLocale();
     const appConfig2 = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "getValueLabel", "getValueText", "modelValue"), emits);
-    const isIndeterminate = computed(() => rootProps.value.modelValue === null);
-    const hasSteps = computed(() => Array.isArray(props.max));
-    const realMax = computed(() => {
+    const isIndeterminate = vueExports.computed(() => rootProps.value.modelValue === null);
+    const hasSteps = vueExports.computed(() => Array.isArray(props.max));
+    const realMax = vueExports.computed(() => {
       if (isIndeterminate.value || !props.max) {
         return void 0;
       }
@@ -6629,7 +16056,7 @@ const _sfc_main$7 = {
       }
       return Number(props.max);
     });
-    const percent = computed(() => {
+    const percent = vueExports.computed(() => {
       if (isIndeterminate.value) {
         return void 0;
       }
@@ -6642,7 +16069,7 @@ const _sfc_main$7 = {
           return Math.round(rootProps.value.modelValue / (realMax.value ?? 100) * 100);
       }
     });
-    const indicatorStyle = computed(() => {
+    const indicatorStyle = vueExports.computed(() => {
       if (percent.value === void 0) {
         return;
       }
@@ -6662,7 +16089,7 @@ const _sfc_main$7 = {
         }
       }
     });
-    const statusStyle = computed(() => {
+    const statusStyle = vueExports.computed(() => {
       const value = `${Math.max(percent.value ?? 0, 0)}%`;
       return props.orientation === "vertical" ? { height: value } : { width: value };
     });
@@ -6688,7 +16115,7 @@ const _sfc_main$7 = {
       }
       return "other";
     }
-    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig2.ui?.progress || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$2), ...appConfig2.ui?.progress || {} })({
       animation: props.animation,
       size: props.size,
       color: props.color,
@@ -6696,41 +16123,41 @@ const _sfc_main$7 = {
       inverted: props.inverted
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
-        "data-orientation": unref(props).orientation,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
+        "data-orientation": vueExports.unref(props).orientation,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            if (!isIndeterminate.value && (unref(props).status || !!slots.status)) {
-              _push2(`<div data-slot="status" class="${ssrRenderClass(ui.value.status({ class: unref(props).ui?.status }))}" style="${ssrRenderStyle(statusStyle.value)}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "status", { percent: percent.value }, () => {
-                _push2(`${ssrInterpolate(percent.value)}% `);
+            if (!isIndeterminate.value && (vueExports.unref(props).status || !!slots.status)) {
+              _push2(`<div data-slot="status" class="${ssrRenderClass_1(ui.value.status({ class: vueExports.unref(props).ui?.status }))}" style="${ssrRenderStyle_1(statusStyle.value)}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "status", { percent: percent.value }, () => {
+                _push2(`${ssrInterpolate_1(percent.value)}% `);
               }, _push2, _parent2, _scopeId);
               _push2(`</div>`);
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(unref(ProgressRoot_default), mergeProps(unref(rootProps), {
+            _push2(ssrRenderComponent_1(vueExports.unref(ProgressRoot_default), vueExports.mergeProps(vueExports.unref(rootProps), {
               max: realMax.value,
               "data-slot": "base",
-              class: ui.value.base({ class: unref(props).ui?.base }),
+              class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
               style: { "transform": "translateZ(0)" }
             }), {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(ProgressIndicator_default), {
+                  _push3(ssrRenderComponent_1(vueExports.unref(ProgressIndicator_default), {
                     "data-slot": "indicator",
-                    class: ui.value.indicator({ class: unref(props).ui?.indicator }),
+                    class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator }),
                     style: indicatorStyle.value
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(ProgressIndicator_default), {
+                    vueExports.createVNode(vueExports.unref(ProgressIndicator_default), {
                       "data-slot": "indicator",
-                      class: ui.value.indicator({ class: unref(props).ui?.indicator }),
+                      class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator }),
                       style: indicatorStyle.value
                     }, null, 8, ["class", "style"])
                   ];
@@ -6739,11 +16166,11 @@ const _sfc_main$7 = {
               _: 1
             }, _parent2, _scopeId));
             if (hasSteps.value) {
-              _push2(`<div data-slot="steps" class="${ssrRenderClass(ui.value.steps({ class: unref(props).ui?.steps }))}"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(props).max, (step, index2) => {
-                _push2(`<div data-slot="step" class="${ssrRenderClass(ui.value.step({ class: unref(props).ui?.step, step: stepVariant(index2) }))}"${_scopeId}>`);
-                ssrRenderSlot(_ctx.$slots, `step-${index2}`, { step }, () => {
-                  _push2(`${ssrInterpolate(step)}`);
+              _push2(`<div data-slot="steps" class="${ssrRenderClass_1(ui.value.steps({ class: vueExports.unref(props).ui?.steps }))}"${_scopeId}><!--[-->`);
+              ssrRenderList_1(vueExports.unref(props).max, (step, index2) => {
+                _push2(`<div data-slot="step" class="${ssrRenderClass_1(ui.value.step({ class: vueExports.unref(props).ui?.step, step: stepVariant(index2) }))}"${_scopeId}>`);
+                ssrRenderSlot_1(_ctx.$slots, `step-${index2}`, { step }, () => {
+                  _push2(`${ssrInterpolate_1(step)}`);
                 }, _push2, _parent2, _scopeId);
                 _push2(`</div>`);
               });
@@ -6753,48 +16180,48 @@ const _sfc_main$7 = {
             }
           } else {
             return [
-              !isIndeterminate.value && (unref(props).status || !!slots.status) ? (openBlock(), createBlock("div", {
+              !isIndeterminate.value && (vueExports.unref(props).status || !!slots.status) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "status",
-                class: ui.value.status({ class: unref(props).ui?.status }),
+                class: ui.value.status({ class: vueExports.unref(props).ui?.status }),
                 style: statusStyle.value
               }, [
-                renderSlot(_ctx.$slots, "status", { percent: percent.value }, () => [
-                  createTextVNode(toDisplayString(percent.value) + "% ", 1)
+                vueExports.renderSlot(_ctx.$slots, "status", { percent: percent.value }, () => [
+                  vueExports.createTextVNode(vueExports.toDisplayString(percent.value) + "% ", 1)
                 ])
-              ], 6)) : createCommentVNode("", true),
-              createVNode(unref(ProgressRoot_default), mergeProps(unref(rootProps), {
+              ], 6)) : vueExports.createCommentVNode("", true),
+              vueExports.createVNode(vueExports.unref(ProgressRoot_default), vueExports.mergeProps(vueExports.unref(rootProps), {
                 max: realMax.value,
                 "data-slot": "base",
-                class: ui.value.base({ class: unref(props).ui?.base }),
+                class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
                 style: { "transform": "translateZ(0)" }
               }), {
-                default: withCtx(() => [
-                  createVNode(unref(ProgressIndicator_default), {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(vueExports.unref(ProgressIndicator_default), {
                     "data-slot": "indicator",
-                    class: ui.value.indicator({ class: unref(props).ui?.indicator }),
+                    class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator }),
                     style: indicatorStyle.value
                   }, null, 8, ["class", "style"])
                 ]),
                 _: 1
               }, 16, ["max", "class"]),
-              hasSteps.value ? (openBlock(), createBlock("div", {
+              hasSteps.value ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 1,
                 "data-slot": "steps",
-                class: ui.value.steps({ class: unref(props).ui?.steps })
+                class: ui.value.steps({ class: vueExports.unref(props).ui?.steps })
               }, [
-                (openBlock(true), createBlock(Fragment, null, renderList(unref(props).max, (step, index2) => {
-                  return openBlock(), createBlock("div", {
+                (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(props).max, (step, index2) => {
+                  return vueExports.openBlock(), vueExports.createBlock("div", {
                     key: index2,
                     "data-slot": "step",
-                    class: ui.value.step({ class: unref(props).ui?.step, step: stepVariant(index2) })
+                    class: ui.value.step({ class: vueExports.unref(props).ui?.step, step: stepVariant(index2) })
                   }, [
-                    renderSlot(_ctx.$slots, `step-${index2}`, { step }, () => [
-                      createTextVNode(toDisplayString(step), 1)
+                    vueExports.renderSlot(_ctx.$slots, `step-${index2}`, { step }, () => [
+                      vueExports.createTextVNode(vueExports.toDisplayString(step), 1)
                     ])
                   ], 2);
                 }), 128))
-              ], 2)) : createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -6805,7 +16232,7 @@ const _sfc_main$7 = {
 };
 const _sfc_setup$7 = _sfc_main$7.setup;
 _sfc_main$7.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Progress.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
@@ -6899,73 +16326,73 @@ const _sfc_main$6 = {
   setup(__props, { expose: __expose, emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("toast", _props);
     const { t } = useLocale();
     const appConfig2 = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "as", "defaultOpen", "open", "duration", "type"), emits);
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig2.ui?.toast || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig2.ui?.toast || {} })({
       color: props.color,
       orientation: props.orientation,
       title: !!props.title || !!slots.title
     }));
-    const rootRef = useTemplateRef("rootRef");
-    const height = ref(0);
+    const rootRef = vueExports.useTemplateRef("rootRef");
+    const height = vueExports.ref(0);
     __expose({
       height
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(ToastRoot_default), mergeProps({
+      _push(ssrRenderComponent_1(vueExports.unref(ToastRoot_default), vueExports.mergeProps({
         ref_key: "rootRef",
         ref: rootRef
-      }, unref(rootProps), {
-        "data-orientation": unref(props).orientation,
+      }, vueExports.unref(rootProps), {
+        "data-orientation": vueExports.unref(props).orientation,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] }),
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] }),
         style: { "--height": height.value }
       }, _attrs), {
-        default: withCtx(({ remaining, duration, open }, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx(({ remaining, duration, open }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
-              if (unref(props).avatar) {
-                _push2(ssrRenderComponent(_sfc_main$b, mergeProps({
-                  size: unref(props).ui?.avatarSize || ui.value.avatarSize()
-                }, unref(props).avatar, {
+            ssrRenderSlot_1(_ctx.$slots, "leading", { ui: ui.value }, () => {
+              if (vueExports.unref(props).avatar) {
+                _push2(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                  size: vueExports.unref(props).ui?.avatarSize || ui.value.avatarSize()
+                }, vueExports.unref(props).avatar, {
                   "data-slot": "avatar",
-                  class: ui.value.avatar({ class: unref(props).ui?.avatar })
+                  class: ui.value.avatar({ class: vueExports.unref(props).ui?.avatar })
                 }), null, _parent2, _scopeId));
-              } else if (unref(props).icon) {
-                _push2(ssrRenderComponent(_sfc_main$d, {
-                  name: unref(props).icon,
+              } else if (vueExports.unref(props).icon) {
+                _push2(ssrRenderComponent_1(_sfc_main$d, {
+                  name: vueExports.unref(props).icon,
                   "data-slot": "icon",
-                  class: ui.value.icon({ class: unref(props).ui?.icon })
+                  class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                 }, null, _parent2, _scopeId));
               } else {
                 _push2(`<!---->`);
               }
             }, _push2, _parent2, _scopeId);
-            _push2(`<div data-slot="wrapper" class="${ssrRenderClass(ui.value.wrapper({ class: unref(props).ui?.wrapper }))}"${_scopeId}>`);
-            if (unref(props).title || !!slots.title) {
-              _push2(ssrRenderComponent(unref(ToastTitle_default), {
+            _push2(`<div data-slot="wrapper" class="${ssrRenderClass_1(ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper }))}"${_scopeId}>`);
+            if (vueExports.unref(props).title || !!slots.title) {
+              _push2(ssrRenderComponent_1(vueExports.unref(ToastTitle_default), {
                 "data-slot": "title",
-                class: ui.value.title({ class: unref(props).ui?.title })
+                class: ui.value.title({ class: vueExports.unref(props).ui?.title })
               }, {
-                default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    ssrRenderSlot(_ctx.$slots, "title", {}, () => {
-                      if (typeof unref(props).title === "function") {
-                        ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(unref(props).title()), null, null), _parent3, _scopeId2);
-                      } else if (typeof unref(props).title === "object") {
-                        ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(unref(props).title), null, null), _parent3, _scopeId2);
+                    ssrRenderSlot_1(_ctx.$slots, "title", {}, () => {
+                      if (typeof vueExports.unref(props).title === "function") {
+                        ssrRenderVNode(_push3, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).title()), null, null), _parent3, _scopeId2);
+                      } else if (typeof vueExports.unref(props).title === "object") {
+                        ssrRenderVNode(_push3, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).title), null, null), _parent3, _scopeId2);
                       } else {
-                        _push3(`<!--[-->${ssrInterpolate(unref(props).title)}<!--]-->`);
+                        _push3(`<!--[-->${ssrInterpolate_1(vueExports.unref(props).title)}<!--]-->`);
                       }
                     }, _push3, _parent3, _scopeId2);
                   } else {
                     return [
-                      renderSlot(_ctx.$slots, "title", {}, () => [
-                        typeof unref(props).title === "function" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).title()), { key: 0 })) : typeof unref(props).title === "object" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).title), { key: 1 })) : (openBlock(), createBlock(Fragment, { key: 2 }, [
-                          createTextVNode(toDisplayString(unref(props).title), 1)
+                      vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                        typeof vueExports.unref(props).title === "function" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).title()), { key: 0 })) : typeof vueExports.unref(props).title === "object" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).title), { key: 1 })) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 2 }, [
+                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                         ], 64))
                       ])
                     ];
@@ -6976,27 +16403,27 @@ const _sfc_main$6 = {
             } else {
               _push2(`<!---->`);
             }
-            if (unref(props).description || !!slots.description) {
-              _push2(ssrRenderComponent(unref(ToastDescription_default), {
+            if (vueExports.unref(props).description || !!slots.description) {
+              _push2(ssrRenderComponent_1(vueExports.unref(ToastDescription_default), {
                 "data-slot": "description",
-                class: ui.value.description({ class: unref(props).ui?.description })
+                class: ui.value.description({ class: vueExports.unref(props).ui?.description })
               }, {
-                default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    ssrRenderSlot(_ctx.$slots, "description", {}, () => {
-                      if (typeof unref(props).description === "function") {
-                        ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(unref(props).description()), null, null), _parent3, _scopeId2);
-                      } else if (typeof unref(props).description === "object") {
-                        ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(unref(props).description), null, null), _parent3, _scopeId2);
+                    ssrRenderSlot_1(_ctx.$slots, "description", {}, () => {
+                      if (typeof vueExports.unref(props).description === "function") {
+                        ssrRenderVNode(_push3, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).description()), null, null), _parent3, _scopeId2);
+                      } else if (typeof vueExports.unref(props).description === "object") {
+                        ssrRenderVNode(_push3, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(props).description), null, null), _parent3, _scopeId2);
                       } else {
-                        _push3(`<!--[-->${ssrInterpolate(unref(props).description)}<!--]-->`);
+                        _push3(`<!--[-->${ssrInterpolate_1(vueExports.unref(props).description)}<!--]-->`);
                       }
                     }, _push3, _parent3, _scopeId2);
                   } else {
                     return [
-                      renderSlot(_ctx.$slots, "description", {}, () => [
-                        typeof unref(props).description === "function" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).description()), { key: 0 })) : typeof unref(props).description === "object" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).description), { key: 1 })) : (openBlock(), createBlock(Fragment, { key: 2 }, [
-                          createTextVNode(toDisplayString(unref(props).description), 1)
+                      vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                        typeof vueExports.unref(props).description === "function" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).description()), { key: 0 })) : typeof vueExports.unref(props).description === "object" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).description), { key: 1 })) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 2 }, [
+                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                         ], 64))
                       ])
                     ];
@@ -7007,29 +16434,29 @@ const _sfc_main$6 = {
             } else {
               _push2(`<!---->`);
             }
-            if (unref(props).orientation === "vertical" && (unref(props).actions?.length || !!slots.actions)) {
-              _push2(`<div data-slot="actions" class="${ssrRenderClass(ui.value.actions({ class: unref(props).ui?.actions }))}"${_scopeId}>`);
-              ssrRenderSlot(_ctx.$slots, "actions", {}, () => {
+            if (vueExports.unref(props).orientation === "vertical" && (vueExports.unref(props).actions?.length || !!slots.actions)) {
+              _push2(`<div data-slot="actions" class="${ssrRenderClass_1(ui.value.actions({ class: vueExports.unref(props).ui?.actions }))}"${_scopeId}>`);
+              ssrRenderSlot_1(_ctx.$slots, "actions", {}, () => {
                 _push2(`<!--[-->`);
-                ssrRenderList(unref(props).actions, (action, index2) => {
-                  _push2(ssrRenderComponent(unref(ToastAction_default), {
+                ssrRenderList_1(vueExports.unref(props).actions, (action, index2) => {
+                  _push2(ssrRenderComponent_1(vueExports.unref(ToastAction_default), {
                     key: index2,
                     "alt-text": action.label || "Action",
                     "as-child": "",
                     onClick: () => {
                     }
                   }, {
-                    default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                    default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                       if (_push3) {
-                        _push3(ssrRenderComponent(_sfc_main$8, mergeProps({
+                        _push3(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
                           size: "xs",
-                          color: unref(props).color
+                          color: vueExports.unref(props).color
                         }, { ref_for: true }, action), null, _parent3, _scopeId2));
                       } else {
                         return [
-                          createVNode(_sfc_main$8, mergeProps({
+                          vueExports.createVNode(_sfc_main$8, vueExports.mergeProps({
                             size: "xs",
-                            color: unref(props).color
+                            color: vueExports.unref(props).color
                           }, { ref_for: true }, action), null, 16, ["color"])
                         ];
                       }
@@ -7044,30 +16471,30 @@ const _sfc_main$6 = {
               _push2(`<!---->`);
             }
             _push2(`</div>`);
-            if (unref(props).orientation === "horizontal" && (unref(props).actions?.length || !!slots.actions) || unref(props).close) {
-              _push2(`<div data-slot="actions" class="${ssrRenderClass(ui.value.actions({ class: unref(props).ui?.actions, orientation: "horizontal" }))}"${_scopeId}>`);
-              if (unref(props).orientation === "horizontal" && (unref(props).actions?.length || !!slots.actions)) {
-                ssrRenderSlot(_ctx.$slots, "actions", {}, () => {
+            if (vueExports.unref(props).orientation === "horizontal" && (vueExports.unref(props).actions?.length || !!slots.actions) || vueExports.unref(props).close) {
+              _push2(`<div data-slot="actions" class="${ssrRenderClass_1(ui.value.actions({ class: vueExports.unref(props).ui?.actions, orientation: "horizontal" }))}"${_scopeId}>`);
+              if (vueExports.unref(props).orientation === "horizontal" && (vueExports.unref(props).actions?.length || !!slots.actions)) {
+                ssrRenderSlot_1(_ctx.$slots, "actions", {}, () => {
                   _push2(`<!--[-->`);
-                  ssrRenderList(unref(props).actions, (action, index2) => {
-                    _push2(ssrRenderComponent(unref(ToastAction_default), {
+                  ssrRenderList_1(vueExports.unref(props).actions, (action, index2) => {
+                    _push2(ssrRenderComponent_1(vueExports.unref(ToastAction_default), {
                       key: index2,
                       "alt-text": action.label || "Action",
                       "as-child": "",
                       onClick: () => {
                       }
                     }, {
-                      default: withCtx((_, _push3, _parent3, _scopeId2) => {
+                      default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                         if (_push3) {
-                          _push3(ssrRenderComponent(_sfc_main$8, mergeProps({
+                          _push3(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
                             size: "xs",
-                            color: unref(props).color
+                            color: vueExports.unref(props).color
                           }, { ref_for: true }, action), null, _parent3, _scopeId2));
                         } else {
                           return [
-                            createVNode(_sfc_main$8, mergeProps({
+                            vueExports.createVNode(_sfc_main$8, vueExports.mergeProps({
                               size: "xs",
-                              color: unref(props).color
+                              color: vueExports.unref(props).color
                             }, { ref_for: true }, action), null, 16, ["color"])
                           ];
                         }
@@ -7080,20 +16507,20 @@ const _sfc_main$6 = {
               } else {
                 _push2(`<!---->`);
               }
-              if (unref(props).close || !!slots.close) {
-                _push2(ssrRenderComponent(unref(ToastClose_default), { "as-child": "" }, {
-                  default: withCtx((_, _push3, _parent3, _scopeId2) => {
+              if (vueExports.unref(props).close || !!slots.close) {
+                _push2(ssrRenderComponent_1(vueExports.unref(ToastClose_default), { "as-child": "" }, {
+                  default: vueExports.withCtx((_, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      ssrRenderSlot(_ctx.$slots, "close", { ui: ui.value }, () => {
-                        if (unref(props).close) {
-                          _push3(ssrRenderComponent(_sfc_main$8, mergeProps({
-                            icon: unref(props).closeIcon || unref(appConfig2).ui.icons.close,
+                      ssrRenderSlot_1(_ctx.$slots, "close", { ui: ui.value }, () => {
+                        if (vueExports.unref(props).close) {
+                          _push3(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
+                            icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig2).ui.icons.close,
                             color: "neutral",
                             variant: "link",
-                            "aria-label": unref(t)("toast.close")
-                          }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                            "aria-label": vueExports.unref(t)("toast.close")
+                          }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                             "data-slot": "close",
-                            class: ui.value.close({ class: unref(props).ui?.close }),
+                            class: ui.value.close({ class: vueExports.unref(props).ui?.close }),
                             onClick: () => {
                             }
                           }), null, _parent3, _scopeId2));
@@ -7103,19 +16530,19 @@ const _sfc_main$6 = {
                       }, _push3, _parent3, _scopeId2);
                     } else {
                       return [
-                        renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                          unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                        vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                          vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                             key: 0,
-                            icon: unref(props).closeIcon || unref(appConfig2).ui.icons.close,
+                            icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig2).ui.icons.close,
                             color: "neutral",
                             variant: "link",
-                            "aria-label": unref(t)("toast.close")
-                          }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                            "aria-label": vueExports.unref(t)("toast.close")
+                          }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                             "data-slot": "close",
-                            class: ui.value.close({ class: unref(props).ui?.close }),
-                            onClick: withModifiers(() => {
+                            class: ui.value.close({ class: vueExports.unref(props).ui?.close }),
+                            onClick: vueExports.withModifiers(() => {
                             }, ["stop"])
-                          }), null, 16, ["icon", "aria-label", "class", "onClick"])) : createCommentVNode("", true)
+                          }), null, 16, ["icon", "aria-label", "class", "onClick"])) : vueExports.createCommentVNode("", true)
                         ])
                       ];
                     }
@@ -7129,148 +16556,148 @@ const _sfc_main$6 = {
             } else {
               _push2(`<!---->`);
             }
-            if (unref(props).progress && open && remaining > 0 && duration) {
-              _push2(ssrRenderComponent(_sfc_main$7, mergeProps({
+            if (vueExports.unref(props).progress && open && remaining > 0 && duration) {
+              _push2(ssrRenderComponent_1(_sfc_main$7, vueExports.mergeProps({
                 "model-value": remaining / duration * 100,
-                color: unref(props).color
-              }, typeof unref(props).progress === "object" ? unref(props).progress : {}, {
+                color: vueExports.unref(props).color
+              }, typeof vueExports.unref(props).progress === "object" ? vueExports.unref(props).progress : {}, {
                 size: "sm",
                 "data-slot": "progress",
-                class: ui.value.progress({ class: unref(props).ui?.progress })
+                class: ui.value.progress({ class: vueExports.unref(props).ui?.progress })
               }), null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
             }
           } else {
             return [
-              renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
-                unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+              vueExports.renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
+                vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                   key: 0,
-                  size: unref(props).ui?.avatarSize || ui.value.avatarSize()
-                }, unref(props).avatar, {
+                  size: vueExports.unref(props).ui?.avatarSize || ui.value.avatarSize()
+                }, vueExports.unref(props).avatar, {
                   "data-slot": "avatar",
-                  class: ui.value.avatar({ class: unref(props).ui?.avatar })
-                }), null, 16, ["size", "class"])) : unref(props).icon ? (openBlock(), createBlock(_sfc_main$d, {
+                  class: ui.value.avatar({ class: vueExports.unref(props).ui?.avatar })
+                }), null, 16, ["size", "class"])) : vueExports.unref(props).icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                   key: 1,
-                  name: unref(props).icon,
+                  name: vueExports.unref(props).icon,
                   "data-slot": "icon",
-                  class: ui.value.icon({ class: unref(props).ui?.icon })
-                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                  class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
+                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
               ]),
-              createVNode("div", {
+              vueExports.createVNode("div", {
                 "data-slot": "wrapper",
-                class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
               }, [
-                unref(props).title || !!slots.title ? (openBlock(), createBlock(unref(ToastTitle_default), {
+                vueExports.unref(props).title || !!slots.title ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ToastTitle_default), {
                   key: 0,
                   "data-slot": "title",
-                  class: ui.value.title({ class: unref(props).ui?.title })
+                  class: ui.value.title({ class: vueExports.unref(props).ui?.title })
                 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "title", {}, () => [
-                      typeof unref(props).title === "function" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).title()), { key: 0 })) : typeof unref(props).title === "object" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).title), { key: 1 })) : (openBlock(), createBlock(Fragment, { key: 2 }, [
-                        createTextVNode(toDisplayString(unref(props).title), 1)
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "title", {}, () => [
+                      typeof vueExports.unref(props).title === "function" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).title()), { key: 0 })) : typeof vueExports.unref(props).title === "object" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).title), { key: 1 })) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 2 }, [
+                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).title), 1)
                       ], 64))
                     ])
                   ]),
                   _: 3
-                }, 8, ["class"])) : createCommentVNode("", true),
-                unref(props).description || !!slots.description ? (openBlock(), createBlock(unref(ToastDescription_default), {
+                }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ToastDescription_default), {
                   key: 1,
                   "data-slot": "description",
-                  class: ui.value.description({ class: unref(props).ui?.description })
+                  class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "description", {}, () => [
-                      typeof unref(props).description === "function" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).description()), { key: 0 })) : typeof unref(props).description === "object" ? (openBlock(), createBlock(resolveDynamicComponent(unref(props).description), { key: 1 })) : (openBlock(), createBlock(Fragment, { key: 2 }, [
-                        createTextVNode(toDisplayString(unref(props).description), 1)
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "description", {}, () => [
+                      typeof vueExports.unref(props).description === "function" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).description()), { key: 0 })) : typeof vueExports.unref(props).description === "object" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(props).description), { key: 1 })) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 2 }, [
+                        vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                       ], 64))
                     ])
                   ]),
                   _: 3
-                }, 8, ["class"])) : createCommentVNode("", true),
-                unref(props).orientation === "vertical" && (unref(props).actions?.length || !!slots.actions) ? (openBlock(), createBlock("div", {
+                }, 8, ["class"])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(props).orientation === "vertical" && (vueExports.unref(props).actions?.length || !!slots.actions) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 2,
                   "data-slot": "actions",
-                  class: ui.value.actions({ class: unref(props).ui?.actions })
+                  class: ui.value.actions({ class: vueExports.unref(props).ui?.actions })
                 }, [
-                  renderSlot(_ctx.$slots, "actions", {}, () => [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(props).actions, (action, index2) => {
-                      return openBlock(), createBlock(unref(ToastAction_default), {
+                  vueExports.renderSlot(_ctx.$slots, "actions", {}, () => [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(props).actions, (action, index2) => {
+                      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ToastAction_default), {
                         key: index2,
                         "alt-text": action.label || "Action",
                         "as-child": "",
-                        onClick: withModifiers(() => {
+                        onClick: vueExports.withModifiers(() => {
                         }, ["stop"])
                       }, {
-                        default: withCtx(() => [
-                          createVNode(_sfc_main$8, mergeProps({
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode(_sfc_main$8, vueExports.mergeProps({
                             size: "xs",
-                            color: unref(props).color
+                            color: vueExports.unref(props).color
                           }, { ref_for: true }, action), null, 16, ["color"])
                         ]),
                         _: 2
                       }, 1032, ["alt-text", "onClick"]);
                     }), 128))
                   ])
-                ], 2)) : createCommentVNode("", true)
+                ], 2)) : vueExports.createCommentVNode("", true)
               ], 2),
-              unref(props).orientation === "horizontal" && (unref(props).actions?.length || !!slots.actions) || unref(props).close ? (openBlock(), createBlock("div", {
+              vueExports.unref(props).orientation === "horizontal" && (vueExports.unref(props).actions?.length || !!slots.actions) || vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "actions",
-                class: ui.value.actions({ class: unref(props).ui?.actions, orientation: "horizontal" })
+                class: ui.value.actions({ class: vueExports.unref(props).ui?.actions, orientation: "horizontal" })
               }, [
-                unref(props).orientation === "horizontal" && (unref(props).actions?.length || !!slots.actions) ? renderSlot(_ctx.$slots, "actions", { key: 0 }, () => [
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(props).actions, (action, index2) => {
-                    return openBlock(), createBlock(unref(ToastAction_default), {
+                vueExports.unref(props).orientation === "horizontal" && (vueExports.unref(props).actions?.length || !!slots.actions) ? vueExports.renderSlot(_ctx.$slots, "actions", { key: 0 }, () => [
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(props).actions, (action, index2) => {
+                    return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ToastAction_default), {
                       key: index2,
                       "alt-text": action.label || "Action",
                       "as-child": "",
-                      onClick: withModifiers(() => {
+                      onClick: vueExports.withModifiers(() => {
                       }, ["stop"])
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_sfc_main$8, mergeProps({
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_sfc_main$8, vueExports.mergeProps({
                           size: "xs",
-                          color: unref(props).color
+                          color: vueExports.unref(props).color
                         }, { ref_for: true }, action), null, 16, ["color"])
                       ]),
                       _: 2
                     }, 1032, ["alt-text", "onClick"]);
                   }), 128))
-                ]) : createCommentVNode("", true),
-                unref(props).close || !!slots.close ? (openBlock(), createBlock(unref(ToastClose_default), {
+                ]) : vueExports.createCommentVNode("", true),
+                vueExports.unref(props).close || !!slots.close ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(ToastClose_default), {
                   key: 1,
                   "as-child": ""
                 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                      unref(props).close ? (openBlock(), createBlock(_sfc_main$8, mergeProps({
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                      vueExports.unref(props).close ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$8, vueExports.mergeProps({
                         key: 0,
-                        icon: unref(props).closeIcon || unref(appConfig2).ui.icons.close,
+                        icon: vueExports.unref(props).closeIcon || vueExports.unref(appConfig2).ui.icons.close,
                         color: "neutral",
                         variant: "link",
-                        "aria-label": unref(t)("toast.close")
-                      }, typeof unref(props).close === "object" ? unref(props).close : {}, {
+                        "aria-label": vueExports.unref(t)("toast.close")
+                      }, typeof vueExports.unref(props).close === "object" ? vueExports.unref(props).close : {}, {
                         "data-slot": "close",
-                        class: ui.value.close({ class: unref(props).ui?.close }),
-                        onClick: withModifiers(() => {
+                        class: ui.value.close({ class: vueExports.unref(props).ui?.close }),
+                        onClick: vueExports.withModifiers(() => {
                         }, ["stop"])
-                      }), null, 16, ["icon", "aria-label", "class", "onClick"])) : createCommentVNode("", true)
+                      }), null, 16, ["icon", "aria-label", "class", "onClick"])) : vueExports.createCommentVNode("", true)
                     ])
                   ]),
                   _: 3
-                })) : createCommentVNode("", true)
-              ], 2)) : createCommentVNode("", true),
-              unref(props).progress && open && remaining > 0 && duration ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
+                })) : vueExports.createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true),
+              vueExports.unref(props).progress && open && remaining > 0 && duration ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$7, vueExports.mergeProps({
                 key: 1,
                 "model-value": remaining / duration * 100,
-                color: unref(props).color
-              }, typeof unref(props).progress === "object" ? unref(props).progress : {}, {
+                color: vueExports.unref(props).color
+              }, typeof vueExports.unref(props).progress === "object" ? vueExports.unref(props).progress : {}, {
                 size: "sm",
                 "data-slot": "progress",
-                class: ui.value.progress({ class: unref(props).ui?.progress })
-              }), null, 16, ["model-value", "color", "class"])) : createCommentVNode("", true)
+                class: ui.value.progress({ class: vueExports.unref(props).ui?.progress })
+              }), null, 16, ["model-value", "color", "class"])) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -7281,7 +16708,7 @@ const _sfc_main$6 = {
 };
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Toast.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
@@ -7383,10 +16810,10 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
     const props = useComponentProps("toaster", _props);
     const { toasts, remove } = useToast();
     const appConfig2 = useAppConfig();
-    provide(toastMaxInjectionKey, toRef(() => props.max));
+    vueExports.provide(toastMaxInjectionKey, vueExports.toRef(() => props.max));
     const providerProps = useForwardProps(reactivePick(props, "duration", "label", "swipeThreshold", "disableSwipe"));
-    const portalProps = usePortal(toRef(() => props.portal));
-    const swipeDirection = computed(() => {
+    const portalProps = usePortal(vueExports.toRef(() => props.portal));
+    const swipeDirection = vueExports.computed(() => {
       switch (props.position) {
         case "top-center":
           return "up";
@@ -7401,7 +16828,7 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
       }
       return "right";
     });
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig2.ui?.toaster || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig2.ui?.toaster || {} })({
       position: props.position,
       swipeDirection: swipeDirection.value
     }));
@@ -7411,58 +16838,58 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
       }
       remove(id);
     }
-    const hovered = ref(false);
-    const expanded = computed(() => props.expand || hovered.value);
-    const refs = ref([]);
-    const height = computed(() => refs.value.reduce((acc, { height: height2 }) => acc + height2 + 16, 0));
-    const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0);
+    const hovered = vueExports.ref(false);
+    const expanded = vueExports.computed(() => props.expand || hovered.value);
+    const refs = vueExports.ref([]);
+    const height = vueExports.computed(() => refs.value.reduce((acc, { height: height2 }) => acc + height2 + 16, 0));
+    const frontHeight = vueExports.computed(() => refs.value[refs.value.length - 1]?.height || 0);
     function getOffset(index2) {
       return refs.value.slice(index2 + 1).reduce((acc, { height: height2 }) => acc + height2 + 16, 0);
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(ToastProvider_default), mergeProps({ "swipe-direction": swipeDirection.value }, unref(providerProps), _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(vueExports.unref(ToastProvider_default), vueExports.mergeProps({ "swipe-direction": swipeDirection.value }, vueExports.unref(providerProps), _attrs), {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
             _push2(`<!--[-->`);
-            ssrRenderList(unref(toasts), (toast, index2) => {
-              _push2(ssrRenderComponent(_sfc_main$6, mergeProps({
+            ssrRenderList_1(vueExports.unref(toasts), (toast, index2) => {
+              _push2(ssrRenderComponent_1(_sfc_main$6, vueExports.mergeProps({
                 key: toast.id,
                 ref_for: true,
                 ref_key: "refs",
                 ref: refs,
-                progress: unref(props).progress
-              }, { ref_for: true }, unref(omit)(toast, ["id", "close", "_duplicate", "_updated"]), {
+                progress: vueExports.unref(props).progress
+              }, { ref_for: true }, vueExports.unref(omit)(toast, ["id", "close", "_duplicate", "_updated"]), {
                 close: toast.close,
                 "data-expanded": expanded.value,
-                "data-front": !expanded.value && index2 === unref(toasts).length - 1,
+                "data-front": !expanded.value && index2 === vueExports.unref(toasts).length - 1,
                 "data-pulsing": toast._duplicate ? toast._duplicate % 2 === 0 ? "even" : "odd" : void 0,
                 style: {
-                  "--index": index2 - unref(toasts).length + unref(toasts).length,
-                  "--before": unref(toasts).length - 1 - index2,
+                  "--index": index2 - vueExports.unref(toasts).length + vueExports.unref(toasts).length,
+                  "--before": vueExports.unref(toasts).length - 1 - index2,
                   "--offset": getOffset(index2),
                   "--scale": expanded.value ? "1" : "calc(1 - var(--before) * var(--scale-factor))",
                   "--translate": expanded.value ? "calc(var(--offset) * var(--translate-factor))" : "calc(var(--before) * var(--gap))",
                   "--transform": "translateY(var(--translate)) scale(var(--scale))"
                 },
                 "data-slot": "base",
-                class: ui.value.base({ class: [unref(props).ui?.base, toast.onClick ? "cursor-pointer" : void 0] }),
+                class: ui.value.base({ class: [vueExports.unref(props).ui?.base, toast.onClick ? "cursor-pointer" : void 0] }),
                 "onUpdate:open": ($event) => onUpdateOpen($event, toast.id),
                 onClick: ($event) => toast.onClick && toast.onClick(toast)
               }), null, _parent2, _scopeId));
             });
             _push2(`<!--]-->`);
-            _push2(ssrRenderComponent(unref(ToastPortal_default), unref(portalProps), {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+            _push2(ssrRenderComponent_1(vueExports.unref(ToastPortal_default), vueExports.unref(portalProps), {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(ToastViewport_default), {
+                  _push3(ssrRenderComponent_1(vueExports.unref(ToastViewport_default), {
                     "data-expanded": expanded.value,
                     "data-slot": "viewport",
-                    class: ui.value.viewport({ class: [unref(props).ui?.viewport, unref(props).class] }),
+                    class: ui.value.viewport({ class: [vueExports.unref(props).ui?.viewport, vueExports.unref(props).class] }),
                     style: {
                       "--scale-factor": "0.05",
-                      "--translate-factor": unref(props).position?.startsWith("top") ? "1px" : "-1px",
-                      "--gap": unref(props).position?.startsWith("top") ? "16px" : "-16px",
+                      "--translate-factor": vueExports.unref(props).position?.startsWith("top") ? "1px" : "-1px",
+                      "--gap": vueExports.unref(props).position?.startsWith("top") ? "16px" : "-16px",
                       "--front-height": `${frontHeight.value}px`,
                       "--height": `${height.value}px`
                     },
@@ -7471,14 +16898,14 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(ToastViewport_default), {
+                    vueExports.createVNode(vueExports.unref(ToastViewport_default), {
                       "data-expanded": expanded.value,
                       "data-slot": "viewport",
-                      class: ui.value.viewport({ class: [unref(props).ui?.viewport, unref(props).class] }),
+                      class: ui.value.viewport({ class: [vueExports.unref(props).ui?.viewport, vueExports.unref(props).class] }),
                       style: {
                         "--scale-factor": "0.05",
-                        "--translate-factor": unref(props).position?.startsWith("top") ? "1px" : "-1px",
-                        "--gap": unref(props).position?.startsWith("top") ? "16px" : "-16px",
+                        "--translate-factor": vueExports.unref(props).position?.startsWith("top") ? "1px" : "-1px",
+                        "--gap": vueExports.unref(props).position?.startsWith("top") ? "16px" : "-16px",
                         "--front-height": `${frontHeight.value}px`,
                         "--height": `${height.value}px`
                       },
@@ -7492,43 +16919,43 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
             }, _parent2, _scopeId));
           } else {
             return [
-              renderSlot(_ctx.$slots, "default"),
-              (openBlock(true), createBlock(Fragment, null, renderList(unref(toasts), (toast, index2) => {
-                return openBlock(), createBlock(_sfc_main$6, mergeProps({
+              vueExports.renderSlot(_ctx.$slots, "default"),
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(toasts), (toast, index2) => {
+                return vueExports.openBlock(), vueExports.createBlock(_sfc_main$6, vueExports.mergeProps({
                   key: toast.id,
                   ref_for: true,
                   ref_key: "refs",
                   ref: refs,
-                  progress: unref(props).progress
-                }, { ref_for: true }, unref(omit)(toast, ["id", "close", "_duplicate", "_updated"]), {
+                  progress: vueExports.unref(props).progress
+                }, { ref_for: true }, vueExports.unref(omit)(toast, ["id", "close", "_duplicate", "_updated"]), {
                   close: toast.close,
                   "data-expanded": expanded.value,
-                  "data-front": !expanded.value && index2 === unref(toasts).length - 1,
+                  "data-front": !expanded.value && index2 === vueExports.unref(toasts).length - 1,
                   "data-pulsing": toast._duplicate ? toast._duplicate % 2 === 0 ? "even" : "odd" : void 0,
                   style: {
-                    "--index": index2 - unref(toasts).length + unref(toasts).length,
-                    "--before": unref(toasts).length - 1 - index2,
+                    "--index": index2 - vueExports.unref(toasts).length + vueExports.unref(toasts).length,
+                    "--before": vueExports.unref(toasts).length - 1 - index2,
                     "--offset": getOffset(index2),
                     "--scale": expanded.value ? "1" : "calc(1 - var(--before) * var(--scale-factor))",
                     "--translate": expanded.value ? "calc(var(--offset) * var(--translate-factor))" : "calc(var(--before) * var(--gap))",
                     "--transform": "translateY(var(--translate)) scale(var(--scale))"
                   },
                   "data-slot": "base",
-                  class: ui.value.base({ class: [unref(props).ui?.base, toast.onClick ? "cursor-pointer" : void 0] }),
+                  class: ui.value.base({ class: [vueExports.unref(props).ui?.base, toast.onClick ? "cursor-pointer" : void 0] }),
                   "onUpdate:open": ($event) => onUpdateOpen($event, toast.id),
                   onClick: ($event) => toast.onClick && toast.onClick(toast)
                 }), null, 16, ["progress", "close", "data-expanded", "data-front", "data-pulsing", "style", "class", "onUpdate:open", "onClick"]);
               }), 128)),
-              createVNode(unref(ToastPortal_default), unref(portalProps), {
-                default: withCtx(() => [
-                  createVNode(unref(ToastViewport_default), {
+              vueExports.createVNode(vueExports.unref(ToastPortal_default), vueExports.unref(portalProps), {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(vueExports.unref(ToastViewport_default), {
                     "data-expanded": expanded.value,
                     "data-slot": "viewport",
-                    class: ui.value.viewport({ class: [unref(props).ui?.viewport, unref(props).class] }),
+                    class: ui.value.viewport({ class: [vueExports.unref(props).ui?.viewport, vueExports.unref(props).class] }),
                     style: {
                       "--scale-factor": "0.05",
-                      "--translate-factor": unref(props).position?.startsWith("top") ? "1px" : "-1px",
-                      "--gap": unref(props).position?.startsWith("top") ? "16px" : "-16px",
+                      "--translate-factor": vueExports.unref(props).position?.startsWith("top") ? "1px" : "-1px",
+                      "--gap": vueExports.unref(props).position?.startsWith("top") ? "16px" : "-16px",
                       "--front-height": `${frontHeight.value}px`,
                       "--height": `${height.value}px`
                     },
@@ -7548,19 +16975,19 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
 });
 const _sfc_setup$5 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Toaster.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
 const UToaster = Object.assign(_sfc_main$5, { __name: "UToaster" });
 function _useOverlay() {
-  const overlays = shallowReactive([]);
+  const overlays = vueExports.shallowReactive([]);
   const create = (component, _options) => {
     const { props, defaultOpen, destroyOnClose } = _options || {};
-    const options = reactive({
+    const options = vueExports.reactive({
       id: /* @__PURE__ */ Symbol(""),
       isOpen: !!defaultOpen,
-      component: markRaw(component),
+      component: vueExports.markRaw(component),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
       originalProps: props || {},
@@ -7642,7 +17069,7 @@ const _sfc_main$4 = {
   __ssrInlineRender: true,
   setup(__props) {
     const { overlays, unmount, close } = useOverlay();
-    const mountedOverlays = computed(() => overlays.filter((overlay) => overlay.isMounted));
+    const mountedOverlays = vueExports.computed(() => overlays.filter((overlay) => overlay.isMounted));
     const onAfterLeave = (id) => {
       close(id);
       unmount(id);
@@ -7652,8 +17079,8 @@ const _sfc_main$4 = {
     };
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
-      ssrRenderList(mountedOverlays.value, (overlay) => {
-        ssrRenderVNode(_push, createVNode(resolveDynamicComponent(overlay.component), mergeProps({
+      ssrRenderList_1(mountedOverlays.value, (overlay) => {
+        ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(overlay.component), vueExports.mergeProps({
           key: overlay.id
         }, { ref_for: true }, overlay.props, {
           open: overlay.isOpen,
@@ -7668,7 +17095,7 @@ const _sfc_main$4 = {
 };
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/OverlayProvider.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
@@ -7689,49 +17116,49 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign(__default__, {
   setup(__props) {
     const props = __props;
     const configProviderProps = useForwardProps$1(reactivePick(props, "scrollBody"));
-    const tooltipProps = toRef(() => props.tooltip);
-    const toasterProps = toRef(() => props.toaster);
-    const locale = toRef(() => props.locale);
-    provide(localeContextInjectionKey, locale);
-    const portal = toRef(() => props.portal);
-    provide(portalTargetInjectionKey, portal);
+    const tooltipProps = vueExports.toRef(() => props.tooltip);
+    const toasterProps = vueExports.toRef(() => props.toaster);
+    const locale = vueExports.toRef(() => props.locale);
+    vueExports.provide(localeContextInjectionKey, locale);
+    const portal = vueExports.toRef(() => props.portal);
+    vueExports.provide(portalTargetInjectionKey, portal);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(ConfigProvider_default), mergeProps({
-        "use-id": () => useId(),
+      _push(ssrRenderComponent_1(vueExports.unref(ConfigProvider_default), vueExports.mergeProps({
+        "use-id": () => vueExports.useId(),
         dir: props.dir || locale.value?.dir,
         locale: locale.value?.code
-      }, unref(configProviderProps), _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      }, vueExports.unref(configProviderProps), _attrs), {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(unref(TooltipProvider_default), tooltipProps.value, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+            _push2(ssrRenderComponent_1(vueExports.unref(TooltipProvider_default), tooltipProps.value, {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   if (__props.toaster !== null) {
-                    _push3(ssrRenderComponent(UToaster, toasterProps.value, {
-                      default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    _push3(ssrRenderComponent_1(UToaster, toasterProps.value, {
+                      default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          ssrRenderSlot(_ctx.$slots, "default", {}, null, _push4, _parent4, _scopeId3);
+                          ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push4, _parent4, _scopeId3);
                         } else {
                           return [
-                            renderSlot(_ctx.$slots, "default")
+                            vueExports.renderSlot(_ctx.$slots, "default")
                           ];
                         }
                       }),
                       _: 3
                     }, _parent3, _scopeId2));
                   } else {
-                    ssrRenderSlot(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
+                    ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push3, _parent3, _scopeId2);
                   }
-                  _push3(ssrRenderComponent(_sfc_main$4, null, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent_1(_sfc_main$4, null, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    __props.toaster !== null ? (openBlock(), createBlock(UToaster, mergeProps({ key: 0 }, toasterProps.value), {
-                      default: withCtx(() => [
-                        renderSlot(_ctx.$slots, "default")
+                    __props.toaster !== null ? (vueExports.openBlock(), vueExports.createBlock(UToaster, vueExports.mergeProps({ key: 0 }, toasterProps.value), {
+                      default: vueExports.withCtx(() => [
+                        vueExports.renderSlot(_ctx.$slots, "default")
                       ]),
                       _: 3
-                    }, 16)) : renderSlot(_ctx.$slots, "default", { key: 1 }),
-                    createVNode(_sfc_main$4)
+                    }, 16)) : vueExports.renderSlot(_ctx.$slots, "default", { key: 1 }),
+                    vueExports.createVNode(_sfc_main$4)
                   ];
                 }
               }),
@@ -7739,15 +17166,15 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign(__default__, {
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode(unref(TooltipProvider_default), tooltipProps.value, {
-                default: withCtx(() => [
-                  __props.toaster !== null ? (openBlock(), createBlock(UToaster, mergeProps({ key: 0 }, toasterProps.value), {
-                    default: withCtx(() => [
-                      renderSlot(_ctx.$slots, "default")
+              vueExports.createVNode(vueExports.unref(TooltipProvider_default), tooltipProps.value, {
+                default: vueExports.withCtx(() => [
+                  __props.toaster !== null ? (vueExports.openBlock(), vueExports.createBlock(UToaster, vueExports.mergeProps({ key: 0 }, toasterProps.value), {
+                    default: vueExports.withCtx(() => [
+                      vueExports.renderSlot(_ctx.$slots, "default")
                     ]),
                     _: 3
-                  }, 16)) : renderSlot(_ctx.$slots, "default", { key: 1 }),
-                  createVNode(_sfc_main$4)
+                  }, 16)) : vueExports.renderSlot(_ctx.$slots, "default", { key: 1 }),
+                  vueExports.createVNode(_sfc_main$4)
                 ]),
                 _: 3
               }, 16)
@@ -7761,17 +17188,17 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign(__default__, {
 });
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/App.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$3, { __name: "UApp" });
 const layouts = {
-  admin: defineAsyncComponent(() => import('./admin-CeGY3R7Y.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-CBW_-h-m.mjs').then((m) => m.default || m))
+  admin: vueExports.defineAsyncComponent(() => import('./admin-CeGY3R7Y.mjs').then((m) => m.default || m)),
+  default: vueExports.defineAsyncComponent(() => import('./default-CBW_-h-m.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
-const LayoutLoader = defineComponent({
+const LayoutLoader = vueExports.defineComponent({
   name: "LayoutLoader",
   inheritAttrs: false,
   props: {
@@ -7779,7 +17206,7 @@ const LayoutLoader = defineComponent({
     layoutProps: Object
   },
   setup(props, context) {
-    return () => h(layouts[props.name], props.layoutProps, context.slots);
+    return () => vueExports.h(layouts[props.name], props.layoutProps, context.slots);
   }
 });
 const nuxtLayoutProps = {
@@ -7792,25 +17219,25 @@ const nuxtLayoutProps = {
     default: null
   }
 };
-const __nuxt_component_1 = defineComponent({
+const __nuxt_component_1 = vueExports.defineComponent({
   name: "NuxtLayout",
   inheritAttrs: false,
   props: nuxtLayoutProps,
   setup(props, context) {
     const nuxtApp = useNuxtApp();
-    const injectedRoute = inject(PageRouteSymbol);
+    const injectedRoute = vueExports.inject(PageRouteSymbol);
     const shouldUseEagerRoute = !injectedRoute || injectedRoute === useRoute();
     const route = shouldUseEagerRoute ? useRoute$1() : injectedRoute;
-    const layout = computed(() => {
-      let layout2 = unref(props.name) ?? route?.meta.layout ?? routeRulesMatcher(route?.path).appLayout ?? "default";
+    const layout = vueExports.computed(() => {
+      let layout2 = vueExports.unref(props.name) ?? route?.meta.layout ?? routeRulesMatcher(route?.path).appLayout ?? "default";
       if (layout2 && !(layout2 in layouts)) {
         if (props.fallback) {
-          layout2 = unref(props.fallback);
+          layout2 = vueExports.unref(props.fallback);
         }
       }
       return layout2;
     });
-    const layoutRef = shallowRef();
+    const layoutRef = vueExports.shallowRef();
     context.expose({ layoutRef });
     const done = nuxtApp.deferHydration();
     let lastLayout;
@@ -7836,19 +17263,19 @@ const __nuxt_component_1 = defineComponent({
       const previouslyRenderedLayout = lastLayout;
       lastLayout = layout.value;
       return _wrapInTransition(transitionProps, {
-        default: () => h(
-          Suspense,
+        default: () => vueExports.h(
+          vueExports.Suspense,
           {
             suspensible: true,
             onResolve: async () => {
-              await nextTick(done);
+              await vueExports.nextTick(done);
             }
           },
           {
-            default: () => h(
+            default: () => vueExports.h(
               LayoutProvider,
               {
-                layoutProps: mergeProps(context.attrs, route.meta.layoutProps ?? {}, { ref: layoutRef }),
+                layoutProps: vueExports.mergeProps(context.attrs, route.meta.layoutProps ?? {}, { ref: layoutRef }),
                 key: layout.value || void 0,
                 name: layout.value,
                 shouldProvide: !props.name,
@@ -7865,7 +17292,7 @@ const __nuxt_component_1 = defineComponent({
     };
   }
 });
-const LayoutProvider = defineComponent({
+const LayoutProvider = vueExports.defineComponent({
   name: "NuxtLayoutProvider",
   inheritAttrs: false,
   props: {
@@ -7889,12 +17316,12 @@ const LayoutProvider = defineComponent({
   setup(props, context) {
     const name = props.name;
     if (props.shouldProvide) {
-      provide(LayoutMetaSymbol, {
+      vueExports.provide(LayoutMetaSymbol, {
         // When name=false, always return true so NuxtPage doesn't skip rendering
         isCurrent: (route) => name === false || name === (route.meta.layout ?? routeRulesMatcher(route.path).appLayout ?? "default")
       });
     }
-    const injectedRoute = inject(PageRouteSymbol);
+    const injectedRoute = vueExports.inject(PageRouteSymbol);
     const isNotWithinNuxtPage = injectedRoute && injectedRoute === useRoute();
     if (isNotWithinNuxtPage) {
       const vueRouterRoute = useRoute$1();
@@ -7908,13 +17335,13 @@ const LayoutProvider = defineComponent({
           }
         });
       }
-      provide(PageRouteSymbol, shallowReactive(reactiveChildRoute));
+      vueExports.provide(PageRouteSymbol, vueExports.shallowReactive(reactiveChildRoute));
     }
     return () => {
       if (!name || typeof name === "string" && !(name in layouts)) {
         return context.slots.default?.();
       }
-      return h(
+      return vueExports.h(
         LayoutLoader,
         { key: name, layoutProps: props.layoutProps, name },
         context.slots
@@ -7922,7 +17349,7 @@ const LayoutProvider = defineComponent({
     };
   }
 });
-const defineRouteProvider = (name = "RouteProvider") => defineComponent({
+const defineRouteProvider = (name = "RouteProvider") => vueExports.defineComponent({
   name,
   props: {
     route: {
@@ -7944,17 +17371,17 @@ const defineRouteProvider = (name = "RouteProvider") => defineComponent({
         enumerable: true
       });
     }
-    provide(PageRouteSymbol, shallowReactive(route));
+    vueExports.provide(PageRouteSymbol, vueExports.shallowReactive(route));
     return () => {
       if (!props.vnode) {
         return props.vnode;
       }
-      return h(props.vnode, { ref: props.vnodeRef });
+      return vueExports.h(props.vnode, { ref: props.vnodeRef });
     };
   }
 });
 const RouteProvider = defineRouteProvider();
-const __nuxt_component_2 = defineComponent({
+const __nuxt_component_2 = vueExports.defineComponent({
   name: "NuxtPage",
   inheritAttrs: false,
   props: {
@@ -7979,17 +17406,17 @@ const __nuxt_component_2 = defineComponent({
   },
   setup(props, { attrs, slots, expose }) {
     const nuxtApp = useNuxtApp();
-    const pageRef = ref();
-    inject(PageRouteSymbol, null);
+    const pageRef = vueExports.ref();
+    vueExports.inject(PageRouteSymbol, null);
     expose({ pageRef });
-    inject(LayoutMetaSymbol, null);
+    vueExports.inject(LayoutMetaSymbol, null);
     nuxtApp.deferHydration();
     return () => {
-      return h(RouterView, { name: props.name, route: props.route, ...attrs }, {
+      return vueExports.h(RouterView, { name: props.name, route: props.route, ...attrs }, {
         default: (routeProps) => {
-          return h(Suspense, { suspensible: true }, {
+          return vueExports.h(vueExports.Suspense, { suspensible: true }, {
             default() {
-              return h(RouteProvider, {
+              return vueExports.h(RouteProvider, {
                 vnode: slots.default ? normalizeSlot(slots.default, routeProps) : routeProps.Component,
                 route: routeProps.route,
                 vnodeRef: pageRef
@@ -8003,7 +17430,7 @@ const __nuxt_component_2 = defineComponent({
 });
 function normalizeSlot(slot, data) {
   const slotContent = slot(data);
-  return slotContent.length === 1 ? h(slotContent[0]) : h(Fragment, void 0, slotContent);
+  return slotContent.length === 1 ? vueExports.h(slotContent[0]) : vueExports.h(vueExports.Fragment, void 0, slotContent);
 }
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -8017,16 +17444,16 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   const _component_UApp = __nuxt_component_0;
   const _component_NuxtLayout = __nuxt_component_1;
   const _component_NuxtPage = __nuxt_component_2;
-  _push(ssrRenderComponent(_component_UApp, _attrs, {
-    default: withCtx((_, _push2, _parent2, _scopeId) => {
+  _push(ssrRenderComponent_1(_component_UApp, _attrs, {
+    default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(ssrRenderComponent(_component_NuxtLayout, null, {
-          default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+        _push2(ssrRenderComponent_1(_component_NuxtLayout, null, {
+          default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
             if (_push3) {
-              _push3(ssrRenderComponent(_component_NuxtPage, null, null, _parent3, _scopeId2));
+              _push3(ssrRenderComponent_1(_component_NuxtPage, null, null, _parent3, _scopeId2));
             } else {
               return [
-                createVNode(_component_NuxtPage)
+                vueExports.createVNode(_component_NuxtPage)
               ];
             }
           }),
@@ -8034,9 +17461,9 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
         }, _parent2, _scopeId));
       } else {
         return [
-          createVNode(_component_NuxtLayout, null, {
-            default: withCtx(() => [
-              createVNode(_component_NuxtPage)
+          vueExports.createVNode(_component_NuxtLayout, null, {
+            default: vueExports.withCtx(() => [
+              vueExports.createVNode(_component_NuxtPage)
             ]),
             _: 1
           })
@@ -8048,7 +17475,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
 }
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("app.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -8067,17 +17494,17 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-DkcnSBpq.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-MfD-uxet.mjs'));
+    const _Error404 = vueExports.defineAsyncComponent(() => import('./error-404-DkcnSBpq.mjs'));
+    const _Error = vueExports.defineAsyncComponent(() => import('./error-500-MfD-uxet.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
+      _push(ssrRenderComponent_1(vueExports.unref(ErrorTemplate), vueExports.mergeProps({ status: vueExports.unref(status), statusText: vueExports.unref(statusText), statusCode: vueExports.unref(status), statusMessage: vueExports.unref(statusText), description: vueExports.unref(description), stack: vueExports.unref(stack) }, _attrs), null, _parent));
     };
   }
 };
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/nuxt@4.4.6_@babel+plugin-syntax-jsx@7.28.6_@babel+core@7.29.0__@babel+plugin-syntax-typ_1485e275e43cd56bc328a2bd77d8e50a/node_modules/nuxt/dist/app/components/nuxt-error-page.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -8090,7 +17517,7 @@ const _sfc_main = {
     nuxtApp.deferHydration();
     nuxtApp.ssrContext.url;
     const SingleRenderer = false;
-    provide(PageRouteSymbol, useRoute());
+    vueExports.provide(PageRouteSymbol, useRoute());
     nuxtApp.hooks.callHookWith((hooks) => hooks.map((hook) => hook()), "vue:setup", []);
     const error = /* @__PURE__ */ useError();
     const abortRender = error.value && !nuxtApp.ssrContext.error;
@@ -8104,29 +17531,29 @@ const _sfc_main = {
         }
       }
     }
-    onErrorCaptured((err, target, info) => {
+    vueExports.onErrorCaptured((err, target, info) => {
       nuxtApp.hooks.callHook("vue:error", err, target, info)?.catch((hookError) => console.error("[nuxt] Error in `vue:error` hook", hookError));
       {
         const p = nuxtApp.runWithContext(() => showError(err));
-        onServerPrefetch(() => p);
+        vueExports.onServerPrefetch(() => p);
         invokeAppErrorHandler(err, target, info);
         return false;
       }
     });
     const islandContext = nuxtApp.ssrContext.islandContext;
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderSuspense(_push, {
+      ssrRenderSuspense_1(_push, {
         default: () => {
-          if (unref(abortRender)) {
+          if (vueExports.unref(abortRender)) {
             _push(`<div></div>`);
-          } else if (unref(error)) {
-            _push(ssrRenderComponent(unref(_sfc_main$1), { error: unref(error) }, null, _parent));
-          } else if (unref(islandContext)) {
-            _push(ssrRenderComponent(unref(IslandRenderer), { context: unref(islandContext) }, null, _parent));
-          } else if (unref(SingleRenderer)) {
-            ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(SingleRenderer)), null, null), _parent);
+          } else if (vueExports.unref(error)) {
+            _push(ssrRenderComponent_1(vueExports.unref(_sfc_main$1), { error: vueExports.unref(error) }, null, _parent));
+          } else if (vueExports.unref(islandContext)) {
+            _push(ssrRenderComponent_1(vueExports.unref(IslandRenderer), { context: vueExports.unref(islandContext) }, null, _parent));
+          } else if (vueExports.unref(SingleRenderer)) {
+            ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(SingleRenderer)), null, null), _parent);
           } else {
-            _push(ssrRenderComponent(unref(AppComponent), null, null, _parent));
+            _push(ssrRenderComponent_1(vueExports.unref(AppComponent), null, null, _parent));
           }
         },
         _: 1
@@ -8136,14 +17563,14 @@ const _sfc_main = {
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/nuxt@4.4.6_@babel+plugin-syntax-jsx@7.28.6_@babel+core@7.29.0__@babel+plugin-syntax-typ_1485e275e43cd56bc328a2bd77d8e50a/node_modules/nuxt/dist/app/components/nuxt-root.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 let entry;
 {
   entry = async function createNuxtAppServer(ssrContext) {
-    const vueApp = createApp(_sfc_main);
+    const vueApp = vueExports.createApp(_sfc_main);
     const nuxt = createNuxtApp({ vueApp, ssrContext });
     try {
       await applyPlugins(nuxt, plugins);
@@ -8160,5 +17587,76 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { useForwardProps as $, AUTOFOCUS_ON_MOUNT as A, getTabbableEdges as B, injectConfigProviderContext as C, injectTooltipProviderContext as D, EVENT_OPTIONS as E, FieldGroupReset as F, inputIdInjectionKey as G, isArrayOfArray as H, isNullish as I, looseToNumber as J, navigateTo as K, pickLinkProps as L, tv as M, useAppConfig as N, useAsyncData as O, Presence_default as P, useCollection as Q, useComponentIcons as R, Slot as S, Teleport_default as T, useComponentProps as U, VisuallyHidden_default as V, useEmitAsProps as W, useFieldGroup as X, useFormField as Y, useForwardExpose as Z, __nuxt_component_0$1 as _, AUTOFOCUS_ON_UNMOUNT as a, useForwardProps$1 as a0, useHead as a1, useLocale as a2, useNuxtApp as a3, usePortal as a4, usePrimitiveElement as a5, useRequestEvent as a6, useRequestHeaders as a7, useRoute as a8, useRuntimeConfig as a9, useSeoMeta as aa, useState as ab, Primitive as b, __nuxt_component_2$1 as c, _export_sfc as d, entry_default as default, _sfc_main$d as e, _sfc_main$8 as f, _sfc_main$b as g, _sfc_main$c as h, _sfc_main$9 as i, _sfc_main$a as j, createContext as k, createError as l, focus as m, focusFirst as n, formBusInjectionKey as o, formErrorsInjectionKey as p, formFieldInjectionKey as q, formInputsInjectionKey as r, formLoadingInjectionKey as s, formOptionsInjectionKey as t, formStateInjectionKey as u, get as v, getActiveElement as w, getDisplayValue as x, getSlotChildrenText as y, getTabbableCandidates as z };
+const server = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  $: useForwardProps,
+  A: AUTOFOCUS_ON_MOUNT,
+  B: getTabbableEdges,
+  C: injectConfigProviderContext,
+  D: injectTooltipProviderContext,
+  E: EVENT_OPTIONS,
+  F: FieldGroupReset,
+  G: inputIdInjectionKey,
+  H: isArrayOfArray,
+  I: isNullish,
+  J: looseToNumber,
+  K: navigateTo,
+  L: pickLinkProps,
+  M: tv,
+  N: useAppConfig,
+  O: useAsyncData,
+  P: Presence_default,
+  Q: useCollection,
+  R: useComponentIcons,
+  S: Slot,
+  T: Teleport_default,
+  U: useComponentProps,
+  V: VisuallyHidden_default,
+  W: useEmitAsProps,
+  X: useFieldGroup,
+  Y: useFormField,
+  Z: useForwardExpose,
+  _: __nuxt_component_0$1,
+  a: AUTOFOCUS_ON_UNMOUNT,
+  a0: useForwardProps$1,
+  a1: useHead,
+  a2: useLocale,
+  a3: useNuxtApp,
+  a4: usePortal,
+  a5: usePrimitiveElement,
+  a6: useRequestEvent,
+  a7: useRequestHeaders,
+  a8: useRoute,
+  a9: useRuntimeConfig,
+  aa: useSeoMeta,
+  ab: useState,
+  b: Primitive,
+  c: __nuxt_component_2$1,
+  d: _export_sfc,
+  default: entry_default,
+  e: _sfc_main$d,
+  f: _sfc_main$8,
+  g: _sfc_main$b,
+  h: _sfc_main$c,
+  i: _sfc_main$9,
+  j: _sfc_main$a,
+  k: createContext,
+  l: createError,
+  m: focus,
+  n: focusFirst,
+  o: formBusInjectionKey,
+  p: formErrorsInjectionKey,
+  q: formFieldInjectionKey,
+  r: formInputsInjectionKey,
+  s: formLoadingInjectionKey,
+  t: formOptionsInjectionKey,
+  u: formStateInjectionKey,
+  v: get,
+  w: getActiveElement,
+  x: getDisplayValue,
+  y: getSlotChildrenText,
+  z: getTabbableCandidates
+}, Symbol.toStringTag, { value: 'Module' }));
+
+export { reactivePick as $, AUTOFOCUS_ON_MOUNT as A, formStateInjectionKey as B, get as C, getActiveElement as D, EVENT_OPTIONS as E, FieldGroupReset as F, getDisplayValue as G, getSlotChildrenText as H, getTabbableCandidates as I, getTabbableEdges as J, injectConfigProviderContext as K, injectTooltipProviderContext as L, inputIdInjectionKey as M, isArrayOfArray as N, isClient as O, Presence_default as P, isNullish as Q, looseToNumber as R, Slot as S, Teleport_default as T, navigateTo as U, VisuallyHidden_default as V, onBeforeRouteLeave as W, onKeyStroke as X, pickLinkProps as Y, reactiveOmit as Z, __nuxt_component_0$1 as _, AUTOFOCUS_ON_UNMOUNT as a, refAutoReset as a0, server as a1, ssrIncludeBooleanAttr as a2, ssrInterpolate_1 as a3, ssrRenderAttr_1 as a4, ssrRenderAttrs_1 as a5, ssrRenderClass_1 as a6, ssrRenderComponent_1 as a7, ssrRenderList_1 as a8, ssrRenderSlot_1 as a9, useNuxtApp as aA, usePortal as aB, usePrimitiveElement as aC, useRequestEvent as aD, useRequestHeaders as aE, useResizeObserver as aF, useRoute as aG, useRuntimeConfig as aH, useSeoMeta as aI, useState as aJ, useStorage as aK, useTimeoutFn as aL, useVModel as aM, vue as aN, vueExports as aO, ssrRenderStyle_1 as aa, ssrRenderTeleport_1 as ab, ssrRenderVNode as ac, syncRef as ad, tryOnBeforeUnmount as ae, tryOnScopeDispose as af, tv as ag, unrefElement as ah, useActiveElement as ai, useAppConfig as aj, useAsyncData as ak, useCollection as al, useComponentIcons as am, useComponentProps as an, useDebounceFn as ao, useEmitAsProps as ap, useEventBus as aq, useEventListener as ar, useFieldGroup as as, useFormField as at, useForwardExpose as au, useForwardProps as av, useForwardProps$1 as aw, useHead as ax, useLocale as ay, useMounted as az, Primitive as b, __nuxt_component_2$1 as c, _export_sfc as d, _sfc_main$8 as e, _sfc_main$9 as f, _sfc_main$a as g, _sfc_main$b as h, _sfc_main$c as i, _sfc_main$d as j, computedEager as k, createContext as l, createError as m, createEventHook as n, createGlobalState as o, createReusableTemplate as p, createSharedComposable as q, defaultWindow as r, focus as s, focusFirst as t, formBusInjectionKey as u, formErrorsInjectionKey as v, formFieldInjectionKey as w, formInputsInjectionKey as x, formLoadingInjectionKey as y, formOptionsInjectionKey as z };
 //# sourceMappingURL=server.mjs.map

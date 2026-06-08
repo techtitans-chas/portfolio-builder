@@ -1,6 +1,4 @@
-import { useSlots, computed, unref, mergeProps, withCtx, renderSlot, openBlock, createBlock, createCommentVNode, toDisplayString, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate } from 'vue/server-renderer';
-import { U as useComponentProps, N as useAppConfig, X as useFieldGroup, R as useComponentIcons, M as tv, b as Primitive, e as _sfc_main$d, g as _sfc_main$b } from './server.mjs';
+import { aO as vueExports, an as useComponentProps, aj as useAppConfig, as as useFieldGroup, am as useComponentIcons, ag as tv, a7 as ssrRenderComponent_1, b as Primitive, a9 as ssrRenderSlot_1, j as _sfc_main$d, h as _sfc_main$b, a6 as ssrRenderClass_1, a3 as ssrInterpolate_1 } from './server.mjs';
 
 const theme = {
   "slots": {
@@ -261,12 +259,12 @@ const _sfc_main = {
   },
   setup(__props) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("badge", _props);
     const appConfig = useAppConfig();
     const { orientation, size: fieldGroupSize } = useFieldGroup(_props);
     const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.badge || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.badge || {} })({
       color: props.color,
       variant: props.variant,
       size: fieldGroupSize.value ?? props.size,
@@ -274,44 +272,44 @@ const _sfc_main = {
       fieldGroup: orientation.value
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         "data-slot": "base",
-        class: ui.value.base({ class: [unref(props).ui?.base, unref(props).class] })
+        class: ui.value.base({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
-              if (unref(isLeading) && unref(leadingIconName)) {
-                _push2(ssrRenderComponent(_sfc_main$d, {
-                  name: unref(leadingIconName),
+            ssrRenderSlot_1(_ctx.$slots, "leading", { ui: ui.value }, () => {
+              if (vueExports.unref(isLeading) && vueExports.unref(leadingIconName)) {
+                _push2(ssrRenderComponent_1(_sfc_main$d, {
+                  name: vueExports.unref(leadingIconName),
                   "data-slot": "leadingIcon",
-                  class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
+                  class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
                 }, null, _parent2, _scopeId));
-              } else if (!!unref(props).avatar) {
-                _push2(ssrRenderComponent(_sfc_main$b, mergeProps({
-                  size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                }, unref(props).avatar, {
+              } else if (!!vueExports.unref(props).avatar) {
+                _push2(ssrRenderComponent_1(_sfc_main$b, vueExports.mergeProps({
+                  size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                }, vueExports.unref(props).avatar, {
                   "data-slot": "leadingAvatar",
-                  class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar })
+                  class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar })
                 }), null, _parent2, _scopeId));
               } else {
                 _push2(`<!---->`);
               }
             }, _push2, _parent2, _scopeId);
-            ssrRenderSlot(_ctx.$slots, "default", { ui: ui.value }, () => {
-              if (unref(props).label !== void 0 && unref(props).label !== null) {
-                _push2(`<span data-slot="label" class="${ssrRenderClass(ui.value.label({ class: unref(props).ui?.label }))}"${_scopeId}>${ssrInterpolate(unref(props).label)}</span>`);
+            ssrRenderSlot_1(_ctx.$slots, "default", { ui: ui.value }, () => {
+              if (vueExports.unref(props).label !== void 0 && vueExports.unref(props).label !== null) {
+                _push2(`<span data-slot="label" class="${ssrRenderClass_1(ui.value.label({ class: vueExports.unref(props).ui?.label }))}"${_scopeId}>${ssrInterpolate_1(vueExports.unref(props).label)}</span>`);
               } else {
                 _push2(`<!---->`);
               }
             }, _push2, _parent2, _scopeId);
-            ssrRenderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => {
-              if (unref(isTrailing) && unref(trailingIconName)) {
-                _push2(ssrRenderComponent(_sfc_main$d, {
-                  name: unref(trailingIconName),
+            ssrRenderSlot_1(_ctx.$slots, "trailing", { ui: ui.value }, () => {
+              if (vueExports.unref(isTrailing) && vueExports.unref(trailingIconName)) {
+                _push2(ssrRenderComponent_1(_sfc_main$d, {
+                  name: vueExports.unref(trailingIconName),
                   "data-slot": "trailingIcon",
-                  class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
+                  class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
                 }, null, _parent2, _scopeId));
               } else {
                 _push2(`<!---->`);
@@ -319,34 +317,34 @@ const _sfc_main = {
             }, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
-                unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+              vueExports.renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [
+                vueExports.unref(isLeading) && vueExports.unref(leadingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                   key: 0,
-                  name: unref(leadingIconName),
+                  name: vueExports.unref(leadingIconName),
                   "data-slot": "leadingIcon",
-                  class: ui.value.leadingIcon({ class: unref(props).ui?.leadingIcon })
-                }, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$b, mergeProps({
+                  class: ui.value.leadingIcon({ class: vueExports.unref(props).ui?.leadingIcon })
+                }, null, 8, ["name", "class"])) : !!vueExports.unref(props).avatar ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$b, vueExports.mergeProps({
                   key: 1,
-                  size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                }, unref(props).avatar, {
+                  size: vueExports.unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                }, vueExports.unref(props).avatar, {
                   "data-slot": "leadingAvatar",
-                  class: ui.value.leadingAvatar({ class: unref(props).ui?.leadingAvatar })
-                }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+                  class: ui.value.leadingAvatar({ class: vueExports.unref(props).ui?.leadingAvatar })
+                }), null, 16, ["size", "class"])) : vueExports.createCommentVNode("", true)
               ]),
-              renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [
-                unref(props).label !== void 0 && unref(props).label !== null ? (openBlock(), createBlock("span", {
+              vueExports.renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [
+                vueExports.unref(props).label !== void 0 && vueExports.unref(props).label !== null ? (vueExports.openBlock(), vueExports.createBlock("span", {
                   key: 0,
                   "data-slot": "label",
-                  class: ui.value.label({ class: unref(props).ui?.label })
-                }, toDisplayString(unref(props).label), 3)) : createCommentVNode("", true)
+                  class: ui.value.label({ class: vueExports.unref(props).ui?.label })
+                }, vueExports.toDisplayString(vueExports.unref(props).label), 3)) : vueExports.createCommentVNode("", true)
               ]),
-              renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
-                unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$d, {
+              vueExports.renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [
+                vueExports.unref(isTrailing) && vueExports.unref(trailingIconName) ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d, {
                   key: 0,
-                  name: unref(trailingIconName),
+                  name: vueExports.unref(trailingIconName),
                   "data-slot": "trailingIcon",
-                  class: ui.value.trailingIcon({ class: unref(props).ui?.trailingIcon })
-                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                  class: ui.value.trailingIcon({ class: vueExports.unref(props).ui?.trailingIcon })
+                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
@@ -358,7 +356,7 @@ const _sfc_main = {
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Badge.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

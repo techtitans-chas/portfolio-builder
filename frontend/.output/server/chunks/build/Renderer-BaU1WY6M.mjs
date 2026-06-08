@@ -1,11 +1,6 @@
-import { computed, defineComponent, unref, createVNode, resolveDynamicComponent, mergeProps, withCtx, toDisplayString, openBlock, createBlock, createCommentVNode, createTextVNode, inject, withAsyncContext, Fragment, renderList, ref, Transition, watch, createSlots, toValue, useTemplateRef, reactive, useSSRContext } from 'vue';
-import { ssrRenderVNode, ssrInterpolate, ssrRenderAttrs, ssrRenderAttr, ssrRenderStyle, ssrRenderClass, ssrRenderComponent, ssrRenderList, ssrRenderSlot, ssrRenderTeleport } from 'vue/server-renderer';
 import { a as BlocksHeader, B as BlocksFooter, b as MAX_CONTENT_WIDTH_OPTIONS, u as useActivePalette, s as sanitizeHtml, i as inlineEditorKey, c as useLayoutSettings, M as MAX_CONTENT_WIDTH_CLASS, p as portfolioSlugKey, v as visibleTags } from './usePortfolio-CUdxQeA9.mjs';
-import { ab as useState, O as useAsyncData, e as _sfc_main$d$1, d as _export_sfc, a9 as useRuntimeConfig } from './server.mjs';
-import { useEditor, EditorContent } from '@tiptap/vue-3';
-import StarterKit from '@tiptap/starter-kit';
-import TextAlign from '@tiptap/extension-text-align';
-import Placeholder from '@tiptap/extension-placeholder';
+import { aJ as useState, aO as vueExports, ac as ssrRenderVNode, a3 as ssrInterpolate_1, a5 as ssrRenderAttrs_1, a4 as ssrRenderAttr_1, aa as ssrRenderStyle_1, a6 as ssrRenderClass_1, a7 as ssrRenderComponent_1, ak as useAsyncData, a8 as ssrRenderList_1, j as _sfc_main$d$1, d as _export_sfc, aH as useRuntimeConfig, a9 as ssrRenderSlot_1, ab as ssrRenderTeleport_1 } from './server.mjs';
+import { u as useEditor, i as index_default, a as index_default$1, b as index_default$2, E as EditorContent } from '../_/index.mjs';
 import { g as getCollectionType } from './collectionTypes-6EiXkZ_r.mjs';
 import { _ as _sfc_main$h } from './Separator-CgixisDT.mjs';
 
@@ -435,7 +430,7 @@ function setPath(obj, path, value) {
   cursor[keys[keys.length - 1]] = value;
   return result;
 }
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$g = /* @__PURE__ */ vueExports.defineComponent({
   ...{ inheritAttrs: false },
   __name: "InlineTextField",
   __ssrInlineRender: true,
@@ -445,11 +440,11 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const ctx = inject(inlineEditorKey, null);
-    const value = computed(() => ctx ? String(getPath(ctx.blockContent, props.fieldKey) ?? "") : "");
-    const elRef = useTemplateRef("el");
-    const isFocused = ref(false);
-    watch(value, (v) => {
+    const ctx = vueExports.inject(inlineEditorKey, null);
+    const value = vueExports.computed(() => ctx ? String(getPath(ctx.blockContent, props.fieldKey) ?? "") : "");
+    const elRef = vueExports.useTemplateRef("el");
+    const isFocused = vueExports.ref(false);
+    vueExports.watch(value, (v) => {
       if (elRef.value && (void 0).activeElement !== elRef.value) {
         elRef.value.innerText = v;
       }
@@ -459,31 +454,31 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
       ctx?.setField(props.fieldKey, e.target.innerText);
     }
     return (_ctx, _push, _parent, _attrs) => {
-      if (unref(ctx)) {
-        ssrRenderVNode(_push, createVNode(resolveDynamicComponent(__props.tag ?? "span"), mergeProps({
+      if (vueExports.unref(ctx)) {
+        ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(__props.tag ?? "span"), vueExports.mergeProps({
           ref: "el",
-          contenteditable: unref(ctx).isActive
+          contenteditable: vueExports.unref(ctx).isActive
         }, _ctx.$attrs, {
-          class: unref(ctx).isActive ? "outline-none cursor-text empty:before:content-[attr(data-placeholder)] empty:before:opacity-40" : "",
-          style: unref(isFocused) ? "outline: 1px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;" : "",
+          class: vueExports.unref(ctx).isActive ? "outline-none cursor-text empty:before:content-[attr(data-placeholder)] empty:before:opacity-40" : "",
+          style: vueExports.unref(isFocused) ? "outline: 1px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;" : "",
           onFocus: ($event) => isFocused.value = true,
           onBlur,
-          onKeydown: ($event) => unref(elRef)?.blur()
+          onKeydown: ($event) => vueExports.unref(elRef)?.blur()
         }, _attrs), null), _parent);
       } else {
-        ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+        ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push, _parent);
       }
     };
   }
 });
 const _sfc_setup$g = _sfc_main$g.setup;
 _sfc_main$g.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/editor/InlineTextField.vue");
   return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
 };
 const __nuxt_component_1 = Object.assign(_sfc_main$g, { __name: "EditorInlineTextField" });
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ vueExports.defineComponent({
   ...{ inheritAttrs: false },
   __name: "InlineRichField",
   __ssrInlineRender: true,
@@ -494,15 +489,15 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const ctx = inject(inlineEditorKey, null);
-    const value = computed(() => ctx ? String(getPath(ctx.blockContent, props.fieldKey) ?? "") : "");
-    const toolbarVisible = ref(false);
-    const isFocused = ref(false);
-    const toolbarStyle = ref({});
-    const toolbarRef = useTemplateRef("toolbar");
-    const openPanel = ref(null);
-    const linkUrl = ref("");
-    const fmt = reactive({
+    const ctx = vueExports.inject(inlineEditorKey, null);
+    const value = vueExports.computed(() => ctx ? String(getPath(ctx.blockContent, props.fieldKey) ?? "") : "");
+    const toolbarVisible = vueExports.ref(false);
+    const isFocused = vueExports.ref(false);
+    const toolbarStyle = vueExports.ref({});
+    const toolbarRef = vueExports.useTemplateRef("toolbar");
+    const openPanel = vueExports.ref(null);
+    const linkUrl = vueExports.ref("");
+    const fmt = vueExports.reactive({
       bold: false,
       italic: false,
       strike: false,
@@ -522,7 +517,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       alignRight: false,
       link: false
     });
-    const activeHeading = computed(() => {
+    const activeHeading = vueExports.computed(() => {
       if (fmt.h1) return "H1";
       if (fmt.h2) return "H2";
       if (fmt.h3) return "H3";
@@ -531,12 +526,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       if (fmt.h6) return "H6";
       return "H";
     });
-    const activeAlign = computed(() => {
+    const activeAlign = vueExports.computed(() => {
       if (fmt.alignCenter) return "i-lucide-align-center";
       if (fmt.alignRight) return "i-lucide-align-right";
       return "i-lucide-align-left";
     });
-    const activeList = computed(() => {
+    const activeList = vueExports.computed(() => {
       if (fmt.orderedList) return "1.";
       if (fmt.bulletList) return "•";
       return "i-lucide-list";
@@ -585,9 +580,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       content: value.value,
       editable: ctx.isActive,
       extensions: [
-        StarterKit,
-        TextAlign.configure({ types: ["heading", "paragraph"] }),
-        Placeholder.configure({ placeholder: props.placeholder ?? "" })
+        index_default,
+        index_default$1.configure({ types: ["heading", "paragraph"] }),
+        index_default$2.configure({ placeholder: props.placeholder ?? "" })
       ],
       editorProps: { attributes: { class: "outline-none cursor-text rich-text" } },
       onUpdate({ editor: editor2 }) {
@@ -611,12 +606,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
         updateToolbar();
       }
     }) : null;
-    watch(value, (v) => {
+    vueExports.watch(value, (v) => {
       if (!editor?.value || editor.value.isFocused) return;
       const current = props.html ? editor.value.getHTML() : editor.value.getText();
       if (current !== v) editor.value.commands.setContent(v);
     });
-    watch(
+    vueExports.watch(
       () => ctx?.isActive,
       (active) => {
         if (!editor?.value) return;
@@ -630,33 +625,33 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     );
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UIcon = _sfc_main$d$1;
-      if (unref(ctx) && unref(editor)) {
+      if (vueExports.unref(ctx) && vueExports.unref(editor)) {
         _push(`<!--[-->`);
-        ssrRenderTeleport(_push, (_push2) => {
-          if (unref(toolbarVisible)) {
-            _push2(`<div style="${ssrRenderStyle(unref(toolbarStyle))}" class="relative" data-v-983cf2f1>`);
-            if (unref(openPanel) === "heading") {
+        ssrRenderTeleport_1(_push, (_push2) => {
+          if (vueExports.unref(toolbarVisible)) {
+            _push2(`<div style="${ssrRenderStyle_1(vueExports.unref(toolbarStyle))}" class="relative" data-v-983cf2f1>`);
+            if (vueExports.unref(openPanel) === "heading") {
               _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5" data-v-983cf2f1><!--[-->`);
-              ssrRenderList([1, 2, 3, 4, 5, 6], (lvl) => {
-                _push2(`<button class="${ssrRenderClass([{ active: unref(fmt)[`h${lvl}`] }, "tiptap-toolbar-btn text-xs font-semibold w-7"])}" data-v-983cf2f1> H${ssrInterpolate(lvl)}</button>`);
+              ssrRenderList_1([1, 2, 3, 4, 5, 6], (lvl) => {
+                _push2(`<button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt)[`h${lvl}`] }, "tiptap-toolbar-btn text-xs font-semibold w-7"])}" data-v-983cf2f1> H${ssrInterpolate_1(lvl)}</button>`);
               });
               _push2(`<!--]--></div>`);
             } else {
               _push2(`<!---->`);
             }
-            if (unref(openPanel) === "list") {
-              _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5" data-v-983cf2f1><button class="${ssrRenderClass([{ active: unref(fmt).bulletList }, "tiptap-toolbar-btn text-xs"])}" title="Bullet list" data-v-983cf2f1>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+            if (vueExports.unref(openPanel) === "list") {
+              _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5" data-v-983cf2f1><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).bulletList }, "tiptap-toolbar-btn text-xs"])}" title="Bullet list" data-v-983cf2f1>`);
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-list",
                 class: "size-3.5"
               }, null, _parent));
-              _push2(`</button><button class="${ssrRenderClass([{ active: unref(fmt).orderedList }, "tiptap-toolbar-btn text-xs"])}" title="Numbered list" data-v-983cf2f1>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(`</button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).orderedList }, "tiptap-toolbar-btn text-xs"])}" title="Numbered list" data-v-983cf2f1>`);
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-list-ordered",
                 class: "size-3.5"
               }, null, _parent));
-              _push2(`</button><button class="${ssrRenderClass([{ active: unref(fmt).blockquote }, "tiptap-toolbar-btn text-xs"])}" title="Blockquote" data-v-983cf2f1>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(`</button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).blockquote }, "tiptap-toolbar-btn text-xs"])}" title="Blockquote" data-v-983cf2f1>`);
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-quote",
                 class: "size-3.5"
               }, null, _parent));
@@ -664,19 +659,19 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            if (unref(openPanel) === "align") {
-              _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5" data-v-983cf2f1><button class="${ssrRenderClass([{ active: unref(fmt).alignLeft }, "tiptap-toolbar-btn text-xs"])}" title="Align left" data-v-983cf2f1>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+            if (vueExports.unref(openPanel) === "align") {
+              _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1 flex gap-0.5" data-v-983cf2f1><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).alignLeft }, "tiptap-toolbar-btn text-xs"])}" title="Align left" data-v-983cf2f1>`);
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-align-left",
                 class: "size-3.5"
               }, null, _parent));
-              _push2(`</button><button class="${ssrRenderClass([{ active: unref(fmt).alignCenter }, "tiptap-toolbar-btn text-xs"])}" title="Align center" data-v-983cf2f1>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(`</button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).alignCenter }, "tiptap-toolbar-btn text-xs"])}" title="Align center" data-v-983cf2f1>`);
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-align-center",
                 class: "size-3.5"
               }, null, _parent));
-              _push2(`</button><button class="${ssrRenderClass([{ active: unref(fmt).alignRight }, "tiptap-toolbar-btn text-xs"])}" title="Align right" data-v-983cf2f1>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(`</button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).alignRight }, "tiptap-toolbar-btn text-xs"])}" title="Align right" data-v-983cf2f1>`);
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-align-right",
                 class: "size-3.5"
               }, null, _parent));
@@ -684,11 +679,11 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            if (unref(openPanel) === "link") {
-              _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1.5 flex items-center gap-1 min-w-48" data-v-983cf2f1><input${ssrRenderAttr("value", unref(linkUrl))} placeholder="https://..." class="flex-1 bg-white/10 rounded px-2 py-0.5 text-xs outline-none placeholder:text-white/40" data-v-983cf2f1><button class="tiptap-toolbar-btn text-xs bg-white/20 hover:bg-white/30" data-v-983cf2f1> Apply </button>`);
-              if (unref(fmt).link) {
+            if (vueExports.unref(openPanel) === "link") {
+              _push2(`<div class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-neutral-900 text-white rounded-lg shadow-xl p-1.5 flex items-center gap-1 min-w-48" data-v-983cf2f1><input${ssrRenderAttr_1("value", vueExports.unref(linkUrl))} placeholder="https://..." class="flex-1 bg-white/10 rounded px-2 py-0.5 text-xs outline-none placeholder:text-white/40" data-v-983cf2f1><button class="tiptap-toolbar-btn text-xs bg-white/20 hover:bg-white/30" data-v-983cf2f1> Apply </button>`);
+              if (vueExports.unref(fmt).link) {
                 _push2(`<button class="tiptap-toolbar-btn text-xs text-red-400" data-v-983cf2f1>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-unlink",
                   class: "size-3.5"
                 }, null, _parent));
@@ -700,37 +695,37 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(`<div class="flex items-center gap-0.5 bg-neutral-900 text-white rounded-lg shadow-xl px-1.5 py-1 text-sm select-none" data-v-983cf2f1><button class="${ssrRenderClass([{ active: unref(fmt).bold }, "tiptap-toolbar-btn font-bold"])}" title="Bold" data-v-983cf2f1> B </button><button class="${ssrRenderClass([{ active: unref(fmt).italic }, "tiptap-toolbar-btn italic"])}" title="Italic" data-v-983cf2f1><em data-v-983cf2f1>I</em></button><button class="${ssrRenderClass([{ active: unref(fmt).underline }, "tiptap-toolbar-btn underline text-xs"])}" title="Underline" data-v-983cf2f1> U </button><button class="${ssrRenderClass([{ active: unref(fmt).strike }, "tiptap-toolbar-btn line-through text-xs"])}" title="Strikethrough" data-v-983cf2f1> S </button><button class="${ssrRenderClass([{ active: unref(fmt).code }, "tiptap-toolbar-btn font-mono text-xs"])}" title="Inline code" data-v-983cf2f1> &lt;/&gt; </button><div class="tiptap-toolbar-divider" data-v-983cf2f1></div><button class="${ssrRenderClass([{
-              active: unref(openPanel) === "heading" || unref(fmt).h1 || unref(fmt).h2 || unref(fmt).h3 || unref(fmt).h4 || unref(fmt).h5 || unref(fmt).h6
-            }, "tiptap-toolbar-btn text-xs font-semibold w-7"])}" title="Headings" data-v-983cf2f1>${ssrInterpolate(unref(activeHeading))}</button><button class="${ssrRenderClass([{
-              active: unref(openPanel) === "list" || unref(fmt).bulletList || unref(fmt).orderedList || unref(fmt).blockquote
+            _push2(`<div class="flex items-center gap-0.5 bg-neutral-900 text-white rounded-lg shadow-xl px-1.5 py-1 text-sm select-none" data-v-983cf2f1><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).bold }, "tiptap-toolbar-btn font-bold"])}" title="Bold" data-v-983cf2f1> B </button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).italic }, "tiptap-toolbar-btn italic"])}" title="Italic" data-v-983cf2f1><em data-v-983cf2f1>I</em></button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).underline }, "tiptap-toolbar-btn underline text-xs"])}" title="Underline" data-v-983cf2f1> U </button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).strike }, "tiptap-toolbar-btn line-through text-xs"])}" title="Strikethrough" data-v-983cf2f1> S </button><button class="${ssrRenderClass_1([{ active: vueExports.unref(fmt).code }, "tiptap-toolbar-btn font-mono text-xs"])}" title="Inline code" data-v-983cf2f1> &lt;/&gt; </button><div class="tiptap-toolbar-divider" data-v-983cf2f1></div><button class="${ssrRenderClass_1([{
+              active: vueExports.unref(openPanel) === "heading" || vueExports.unref(fmt).h1 || vueExports.unref(fmt).h2 || vueExports.unref(fmt).h3 || vueExports.unref(fmt).h4 || vueExports.unref(fmt).h5 || vueExports.unref(fmt).h6
+            }, "tiptap-toolbar-btn text-xs font-semibold w-7"])}" title="Headings" data-v-983cf2f1>${ssrInterpolate_1(vueExports.unref(activeHeading))}</button><button class="${ssrRenderClass_1([{
+              active: vueExports.unref(openPanel) === "list" || vueExports.unref(fmt).bulletList || vueExports.unref(fmt).orderedList || vueExports.unref(fmt).blockquote
             }, "tiptap-toolbar-btn text-xs"])}" title="Lists" data-v-983cf2f1>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
-              name: typeof unref(activeList) === "string" && unref(activeList).startsWith("i-") ? unref(activeList) : "i-lucide-list",
+            _push2(ssrRenderComponent_1(_component_UIcon, {
+              name: typeof vueExports.unref(activeList) === "string" && vueExports.unref(activeList).startsWith("i-") ? vueExports.unref(activeList) : "i-lucide-list",
               class: "size-3.5"
             }, null, _parent));
-            _push2(`</button><button class="${ssrRenderClass([{ active: unref(openPanel) === "align" || unref(fmt).alignCenter || unref(fmt).alignRight }, "tiptap-toolbar-btn text-xs"])}" title="Text alignment" data-v-983cf2f1>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
-              name: unref(activeAlign),
+            _push2(`</button><button class="${ssrRenderClass_1([{ active: vueExports.unref(openPanel) === "align" || vueExports.unref(fmt).alignCenter || vueExports.unref(fmt).alignRight }, "tiptap-toolbar-btn text-xs"])}" title="Text alignment" data-v-983cf2f1>`);
+            _push2(ssrRenderComponent_1(_component_UIcon, {
+              name: vueExports.unref(activeAlign),
               class: "size-3.5"
             }, null, _parent));
-            _push2(`</button><div class="tiptap-toolbar-divider" data-v-983cf2f1></div><button class="${ssrRenderClass([{ active: unref(openPanel) === "link" || unref(fmt).link }, "tiptap-toolbar-btn text-xs"])}" title="Link" data-v-983cf2f1>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
+            _push2(`</button><div class="tiptap-toolbar-divider" data-v-983cf2f1></div><button class="${ssrRenderClass_1([{ active: vueExports.unref(openPanel) === "link" || vueExports.unref(fmt).link }, "tiptap-toolbar-btn text-xs"])}" title="Link" data-v-983cf2f1>`);
+            _push2(ssrRenderComponent_1(_component_UIcon, {
               name: "i-lucide-link",
               class: "size-3.5"
             }, null, _parent));
             _push2(`</button><button class="tiptap-toolbar-btn text-xs" title="Horizontal rule" data-v-983cf2f1>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
+            _push2(ssrRenderComponent_1(_component_UIcon, {
               name: "i-lucide-minus",
               class: "size-3.5"
             }, null, _parent));
             _push2(`</button><div class="tiptap-toolbar-divider" data-v-983cf2f1></div><button class="tiptap-toolbar-btn text-xs" title="Undo" data-v-983cf2f1>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
+            _push2(ssrRenderComponent_1(_component_UIcon, {
               name: "i-lucide-undo-2",
               class: "size-3.5"
             }, null, _parent));
             _push2(`</button><button class="tiptap-toolbar-btn text-xs" title="Redo" data-v-983cf2f1>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
+            _push2(ssrRenderComponent_1(_component_UIcon, {
               name: "i-lucide-redo-2",
               class: "size-3.5"
             }, null, _parent));
@@ -739,23 +734,23 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             _push2(`<!---->`);
           }
         }, "body", false, _parent);
-        _push(`<div style="${ssrRenderStyle(
-          unref(isFocused) ? "outline: 1px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;" : ""
+        _push(`<div style="${ssrRenderStyle_1(
+          vueExports.unref(isFocused) ? "outline: 1px solid var(--ui-secondary); outline-offset: 4px; border-radius: 2px;" : ""
         )}" data-v-983cf2f1>`);
-        _push(ssrRenderComponent(unref(EditorContent), {
-          editor: unref(editor),
+        _push(ssrRenderComponent_1(vueExports.unref(EditorContent), {
+          editor: vueExports.unref(editor),
           class: _ctx.$attrs.class
         }, null, _parent));
         _push(`</div><!--]-->`);
       } else {
-        ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+        ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push, _parent);
       }
     };
   }
 });
 const _sfc_setup$f = _sfc_main$f.setup;
 _sfc_main$f.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/editor/InlineRichField.vue");
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
@@ -769,43 +764,43 @@ function hexToRgba(hex, alpha) {
 }
 function useBlockBackground(background) {
   const { resolveTextColor } = useActivePalette();
-  const autoTextColor = computed(() => {
-    const key = toValue(background);
+  const autoTextColor = vueExports.computed(() => {
+    const key = vueExports.toValue(background);
     return key ? resolveTextColor(key) : null;
   });
-  const textColorStyle = computed(
+  const textColorStyle = vueExports.computed(
     () => autoTextColor.value ? { color: autoTextColor.value } : {}
   );
-  const textPrimaryStyle = computed(
+  const textPrimaryStyle = vueExports.computed(
     () => autoTextColor.value ? { color: autoTextColor.value } : { color: "var(--text-primary)" }
   );
-  const textMutedStyle = computed(
+  const textMutedStyle = vueExports.computed(
     () => autoTextColor.value ? { color: autoTextColor.value, opacity: "0.6" } : { color: "var(--text-secondary)" }
   );
   return { autoTextColor, textColorStyle, textPrimaryStyle, textMutedStyle };
 }
 function useBlockSurface(surfaceColor) {
   const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
-  const surfaceHex = computed(() => {
-    const key = toValue(surfaceColor);
+  const surfaceHex = vueExports.computed(() => {
+    const key = vueExports.toValue(surfaceColor);
     return key ? resolveColor(key) : null;
   });
-  const surfaceHexOrDefault = computed(() => surfaceHex.value ?? "var(--bg-surface)");
-  const surfaceStyle = computed(
+  const surfaceHexOrDefault = vueExports.computed(() => surfaceHex.value ?? "var(--bg-surface)");
+  const surfaceStyle = vueExports.computed(
     () => surfaceHex.value ? { backgroundColor: surfaceHex.value } : { backgroundColor: "var(--bg-surface)" }
   );
-  const surfaceTextColor = computed(() => {
-    const key = toValue(surfaceColor);
+  const surfaceTextColor = vueExports.computed(() => {
+    const key = vueExports.toValue(surfaceColor);
     return key ? resolveTextColor(key) : null;
   });
-  const surfaceTextStyle = computed(
+  const surfaceTextStyle = vueExports.computed(
     () => surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: "var(--text-primary)" }
   );
-  const surfaceTextMutedStyle = computed(
+  const surfaceTextMutedStyle = vueExports.computed(
     () => surfaceTextColor.value ? { color: surfaceTextColor.value, opacity: "0.6" } : { color: "var(--text-secondary)" }
   );
-  const surfacePrimary = computed(() => resolvePrimary(toValue(surfaceColor)));
-  const surfaceSecondary = computed(() => resolveSecondary(toValue(surfaceColor)));
+  const surfacePrimary = vueExports.computed(() => resolvePrimary(vueExports.toValue(surfaceColor)));
+  const surfaceSecondary = vueExports.computed(() => resolveSecondary(vueExports.toValue(surfaceColor)));
   return {
     surfaceHex,
     surfaceHexOrDefault,
@@ -817,7 +812,7 @@ function useBlockSurface(surfaceColor) {
     surfaceSecondary
   };
 }
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Hero",
   __ssrInlineRender: true,
   props: {
@@ -876,14 +871,14 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     };
     const props = __props;
     const { resolveColor, resolveTextColor, resolvePrimary, resolveSecondary } = useActivePalette();
-    const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
-    const autoTextColor = computed(
+    const bgHex = vueExports.computed(() => props.background ? resolveColor(props.background) : null);
+    const autoTextColor = vueExports.computed(
       () => props.background ? resolveTextColor(props.background) : null
     );
-    const hasBackgroundImage = computed(() => !!props.backgroundImage);
-    const headingColor = computed(() => autoTextColor.value ?? "var(--text-primary)");
-    const subheadingColor = computed(() => autoTextColor.value ?? "var(--text-secondary)");
-    const textShadowColor = computed(() => {
+    const hasBackgroundImage = vueExports.computed(() => !!props.backgroundImage);
+    const headingColor = vueExports.computed(() => autoTextColor.value ?? "var(--text-primary)");
+    const subheadingColor = vueExports.computed(() => autoTextColor.value ?? "var(--text-secondary)");
+    const textShadowColor = vueExports.computed(() => {
       const c = autoTextColor.value;
       if (!c || !c.startsWith("#")) return "rgba(0,0,0,0.6)";
       const h = c.replace("#", "");
@@ -894,20 +889,20 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       const lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
       return lum > 0.5 ? "rgba(0,0,0,0.55)" : "rgba(255,255,255,0.55)";
     });
-    const overlayColorHex = computed(
+    const overlayColorHex = vueExports.computed(
       () => props.overlayColor ? resolveColor(props.overlayColor) : null
     );
-    const overlayColor2Hex = computed(
+    const overlayColor2Hex = vueExports.computed(
       () => props.overlayColor2 ? resolveColor(props.overlayColor2) : null
     );
-    const overlayStyle = computed(() => {
+    const overlayStyle = vueExports.computed(() => {
       if (!props.overlayEnabled) return null;
       const opacity = (props.overlayOpacity ?? 40) / 100;
       const c1 = hexToRgba(overlayColorHex.value ?? "#000000", opacity);
       const bg = props.overlayType === "gradient" ? `linear-gradient(${props.overlayDegree ?? 180}deg, ${c1}, ${hexToRgba(overlayColor2Hex.value ?? "#000000", opacity)})` : c1;
       return { background: bg };
     });
-    const sectionStyle = computed(() => ({
+    const sectionStyle = vueExports.computed(() => ({
       minHeight: props.fullHeight ? "100vh" : `${props.height}px`,
       paddingTop: `${props.padding}px`,
       paddingBottom: `${props.padding}px`,
@@ -921,43 +916,43 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         opacity: void 0
       } : {}
     }));
-    const bgImageStyle = computed(() => ({
+    const bgImageStyle = vueExports.computed(() => ({
       opacity: (props.backgroundOpacity ?? 100) / 100
     }));
-    const maxWidthClass = computed(() => {
+    const maxWidthClass = vueExports.computed(() => {
       if (props.maxWidth === "sm") return "max-w-xl";
       if (props.maxWidth === "lg") return "max-w-5xl";
       if (props.maxWidth === "full") return "max-w-none";
       return "max-w-3xl";
     });
-    const textAlignClass = computed(() => {
+    const textAlignClass = vueExports.computed(() => {
       if (props.alignH === "left") return "items-start text-left";
       if (props.alignH === "right") return "items-end text-right";
       return "items-center text-center";
     });
-    const justifyHClass = computed(() => {
+    const justifyHClass = vueExports.computed(() => {
       if (props.alignH === "left") return "justify-start";
       if (props.alignH === "right") return "justify-end";
       return "justify-center";
     });
-    const justifyVClass = computed(() => {
+    const justifyVClass = vueExports.computed(() => {
       if (props.alignV === "top") return "justify-start";
       if (props.alignV === "bottom") return "justify-end";
       return "justify-center";
     });
-    const hasImage = computed(() => !!props.image);
-    const isVerticalImage = computed(
+    const hasImage = vueExports.computed(() => !!props.image);
+    const isVerticalImage = vueExports.computed(
       () => props.imagePosition === "above" || props.imagePosition === "below"
     );
-    const contentLayout = computed(() => {
+    const contentLayout = vueExports.computed(() => {
       if (!hasImage.value) return "flex-col";
       return isVerticalImage.value ? "flex-col" : "flex-row gap-12";
     });
-    const imageOrderClass = computed(() => {
+    const imageOrderClass = vueExports.computed(() => {
       if (props.imagePosition === "left" || props.imagePosition === "above") return "order-first";
       return "order-last";
     });
-    const imageSizeClass = computed(() => {
+    const imageSizeClass = vueExports.computed(() => {
       if (isVerticalImage.value) {
         const map2 = { sm: "max-w-xs", md: "max-w-sm", lg: "max-w-lg", xl: "max-w-2xl" };
         return map2[props.imageSize ?? "md"];
@@ -965,7 +960,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       const map = { sm: "sm:max-w-[200px]", md: "sm:max-w-xs", lg: "sm:max-w-sm", xl: "sm:max-w-md" };
       return map[props.imageSize ?? "md"];
     });
-    const imageAspectClass = computed(() => {
+    const imageAspectClass = vueExports.computed(() => {
       const map = {
         auto: "",
         square: "aspect-square",
@@ -974,8 +969,8 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       };
       return map[props.imageAspect ?? "auto"];
     });
-    const imageRadiusStyle = computed(() => ({ borderRadius: `${props.imageRadius ?? 12}px` }));
-    const textShadowStyle = computed(
+    const imageRadiusStyle = vueExports.computed(() => ({ borderRadius: `${props.imageRadius ?? 12}px` }));
+    const textShadowStyle = vueExports.computed(
       () => props.textShadow ? { textShadow: `0 1px 4px ${textShadowColor.value}` } : {}
     );
     function btnRadiusClass(radius) {
@@ -997,8 +992,8 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         ...style.letterSpacing > 0 ? { letterSpacing: `${(style.letterSpacing * 0.0625).toFixed(4)}em` } : {}
       };
     }
-    const bgPrimary = computed(() => resolvePrimary(props.background));
-    const bgSecondary = computed(() => resolveSecondary(props.background));
+    const bgPrimary = vueExports.computed(() => resolvePrimary(props.background));
+    const bgSecondary = vueExports.computed(() => resolveSecondary(props.background));
     function btnStyle(bStyle, color) {
       const text = btnTextStyle(bStyle);
       const luminance = (hex) => {
@@ -1027,91 +1022,91 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       }
       return { color, backgroundColor: "transparent", ...text };
     }
-    const btn1Resolved = computed(() => ({ ...B1_DEFAULTS, ...props.button1Style }));
-    const btn2Resolved = computed(() => ({ ...B2_DEFAULTS, ...props.button2Style }));
-    const btn1Class = computed(
+    const btn1Resolved = vueExports.computed(() => ({ ...B1_DEFAULTS, ...props.button1Style }));
+    const btn2Resolved = vueExports.computed(() => ({ ...B2_DEFAULTS, ...props.button2Style }));
+    const btn1Class = vueExports.computed(
       () => `font-medium transition-opacity hover:opacity-90 ${btnRadiusClass(btn1Resolved.value.radius)} ${btnSizeClass(btn1Resolved.value.size)}`
     );
-    const btn2Class = computed(
+    const btn2Class = vueExports.computed(
       () => `font-medium transition-opacity hover:opacity-90 ${btnRadiusClass(btn2Resolved.value.radius)} ${btnSizeClass(btn2Resolved.value.size)}`
     );
-    const btn1StyleVal = computed(() => btnStyle(btn1Resolved.value, bgPrimary.value));
-    const btn2StyleVal = computed(() => btnStyle(btn2Resolved.value, bgSecondary.value));
-    const subheadingIsEmpty = computed(() => {
+    const btn1StyleVal = vueExports.computed(() => btnStyle(btn1Resolved.value, bgPrimary.value));
+    const btn2StyleVal = vueExports.computed(() => btnStyle(btn2Resolved.value, bgSecondary.value));
+    const subheadingIsEmpty = vueExports.computed(() => {
       const t = props.subheading?.trim() ?? "";
       return !t || t === "<p></p>";
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_EditorInlineTextField = __nuxt_component_1;
       const _component_EditorInlineRichField = __nuxt_component_3$1;
-      _push(`<section${ssrRenderAttrs(mergeProps({
-        class: ["relative px-8 flex flex-col", unref(justifyVClass)],
-        style: unref(sectionStyle)
+      _push(`<section${ssrRenderAttrs_1(vueExports.mergeProps({
+        class: ["relative px-8 flex flex-col", vueExports.unref(justifyVClass)],
+        style: vueExports.unref(sectionStyle)
       }, _attrs))}>`);
       if (__props.backgroundImage && !__props.backgroundFixed) {
-        _push(`<img${ssrRenderAttr("src", __props.backgroundImage)} aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none" style="${ssrRenderStyle(unref(bgImageStyle))}">`);
+        _push(`<img${ssrRenderAttr_1("src", __props.backgroundImage)} aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none" style="${ssrRenderStyle_1(vueExports.unref(bgImageStyle))}">`);
       } else {
         _push(`<!---->`);
       }
-      if (__props.overlayEnabled && unref(overlayStyle)) {
-        _push(`<div class="absolute inset-0 pointer-events-none" style="${ssrRenderStyle(unref(overlayStyle))}"></div>`);
+      if (__props.overlayEnabled && vueExports.unref(overlayStyle)) {
+        _push(`<div class="absolute inset-0 pointer-events-none" style="${ssrRenderStyle_1(vueExports.unref(overlayStyle))}"></div>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="${ssrRenderClass([unref(maxWidthClass), "relative w-full mx-auto"])}"><div class="${ssrRenderClass([[unref(contentLayout), unref(textAlignClass)], "flex flex-wrap w-full"])}"><div class="${ssrRenderClass([unref(textAlignClass), "flex flex-col flex-1 min-w-0"])}">`);
-      _push(ssrRenderComponent(_component_EditorInlineTextField, {
+      _push(`<div class="${ssrRenderClass_1([vueExports.unref(maxWidthClass), "relative w-full mx-auto"])}"><div class="${ssrRenderClass_1([[vueExports.unref(contentLayout), vueExports.unref(textAlignClass)], "flex flex-wrap w-full"])}"><div class="${ssrRenderClass_1([vueExports.unref(textAlignClass), "flex flex-col flex-1 min-w-0"])}">`);
+      _push(ssrRenderComponent_1(_component_EditorInlineTextField, {
         "field-key": "heading",
         tag: "h1",
         class: "text-5xl font-bold leading-tight",
         style: {
-          color: unref(headingColor),
+          color: vueExports.unref(headingColor),
           fontFamily: __props.headingFont ?? void 0,
-          ...unref(textShadowStyle)
+          ...vueExports.unref(textShadowStyle)
         }
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<h1 class="text-5xl font-bold leading-tight" style="${ssrRenderStyle({
-              color: unref(headingColor),
+            _push2(`<h1 class="text-5xl font-bold leading-tight" style="${ssrRenderStyle_1({
+              color: vueExports.unref(headingColor),
               fontFamily: __props.headingFont ?? void 0,
-              ...unref(textShadowStyle)
-            })}"${_scopeId}>${ssrInterpolate(__props.heading)}</h1>`);
+              ...vueExports.unref(textShadowStyle)
+            })}"${_scopeId}>${ssrInterpolate_1(__props.heading)}</h1>`);
           } else {
             return [
-              createVNode("h1", {
+              vueExports.createVNode("h1", {
                 class: "text-5xl font-bold leading-tight",
                 style: {
-                  color: unref(headingColor),
+                  color: vueExports.unref(headingColor),
                   fontFamily: __props.headingFont ?? void 0,
-                  ...unref(textShadowStyle)
+                  ...vueExports.unref(textShadowStyle)
                 }
-              }, toDisplayString(__props.heading), 5)
+              }, vueExports.toDisplayString(__props.heading), 5)
             ];
           }
         }),
         _: 1
       }, _parent));
       if (__props.showSubheading) {
-        _push(`<div style="${ssrRenderStyle({ color: unref(subheadingColor), ...unref(textShadowStyle) })}">`);
-        _push(ssrRenderComponent(_component_EditorInlineRichField, {
+        _push(`<div style="${ssrRenderStyle_1({ color: vueExports.unref(subheadingColor), ...vueExports.unref(textShadowStyle) })}">`);
+        _push(ssrRenderComponent_1(_component_EditorInlineRichField, {
           "field-key": "subheading",
           placeholder: "Your tagline",
           class: "text-lg mt-4 max-w-xl rich-text"
         }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              if (!unref(subheadingIsEmpty)) {
-                _push2(`<div class="text-lg mt-4 max-w-xl rich-text"${_scopeId}>${unref(sanitizeHtml)(__props.subheading ?? "") ?? ""}</div>`);
+              if (!vueExports.unref(subheadingIsEmpty)) {
+                _push2(`<div class="text-lg mt-4 max-w-xl rich-text"${_scopeId}>${vueExports.unref(sanitizeHtml)(__props.subheading ?? "") ?? ""}</div>`);
               } else {
                 _push2(`<!---->`);
               }
             } else {
               return [
-                !unref(subheadingIsEmpty) ? (openBlock(), createBlock("div", {
+                !vueExports.unref(subheadingIsEmpty) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   class: "text-lg mt-4 max-w-xl rich-text",
-                  innerHTML: unref(sanitizeHtml)(__props.subheading ?? "")
-                }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                  innerHTML: vueExports.unref(sanitizeHtml)(__props.subheading ?? "")
+                }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
               ];
             }
           }),
@@ -1122,19 +1117,19 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
       if (__props.showButton1 || __props.showButton2) {
-        _push(`<div class="${ssrRenderClass([unref(justifyHClass), "flex flex-wrap gap-3 mt-8"])}">`);
+        _push(`<div class="${ssrRenderClass_1([vueExports.unref(justifyHClass), "flex flex-wrap gap-3 mt-8"])}">`);
         if (__props.showButton1) {
-          _push(`<a${ssrRenderAttr("href", __props.button1Url)} class="${ssrRenderClass(unref(btn1Class))}" style="${ssrRenderStyle(unref(btn1StyleVal))}">`);
-          _push(ssrRenderComponent(_component_EditorInlineTextField, {
+          _push(`<a${ssrRenderAttr_1("href", __props.button1Url)} class="${ssrRenderClass_1(vueExports.unref(btn1Class))}" style="${ssrRenderStyle_1(vueExports.unref(btn1StyleVal))}">`);
+          _push(ssrRenderComponent_1(_component_EditorInlineTextField, {
             "field-key": "button1Label",
             "data-placeholder": __props.button1Label
           }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
+            default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`${ssrInterpolate(__props.button1Label)}`);
+                _push2(`${ssrInterpolate_1(__props.button1Label)}`);
               } else {
                 return [
-                  createTextVNode(toDisplayString(__props.button1Label), 1)
+                  vueExports.createTextVNode(vueExports.toDisplayString(__props.button1Label), 1)
                 ];
               }
             }),
@@ -1145,17 +1140,17 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
           _push(`<!---->`);
         }
         if (__props.showButton2) {
-          _push(`<a${ssrRenderAttr("href", __props.button2Url)} class="${ssrRenderClass(unref(btn2Class))}" style="${ssrRenderStyle(unref(btn2StyleVal))}">`);
-          _push(ssrRenderComponent(_component_EditorInlineTextField, {
+          _push(`<a${ssrRenderAttr_1("href", __props.button2Url)} class="${ssrRenderClass_1(vueExports.unref(btn2Class))}" style="${ssrRenderStyle_1(vueExports.unref(btn2StyleVal))}">`);
+          _push(ssrRenderComponent_1(_component_EditorInlineTextField, {
             "field-key": "button2Label",
             "data-placeholder": __props.button2Label
           }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
+            default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`${ssrInterpolate(__props.button2Label)}`);
+                _push2(`${ssrInterpolate_1(__props.button2Label)}`);
               } else {
                 return [
-                  createTextVNode(toDisplayString(__props.button2Label), 1)
+                  vueExports.createTextVNode(vueExports.toDisplayString(__props.button2Label), 1)
                 ];
               }
             }),
@@ -1171,11 +1166,11 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       }
       _push(`</div>`);
       if (__props.image) {
-        _push(`<div class="${ssrRenderClass([
-          unref(imageOrderClass),
-          unref(imageSizeClass),
-          unref(isVerticalImage) ? "w-full mx-auto" : "shrink-0 w-full sm:w-auto"
-        ])}"><img${ssrRenderAttr("src", __props.image)} alt="" class="${ssrRenderClass([unref(imageAspectClass) || "h-auto", "w-full object-cover"])}" style="${ssrRenderStyle(unref(imageRadiusStyle))}"></div>`);
+        _push(`<div class="${ssrRenderClass_1([
+          vueExports.unref(imageOrderClass),
+          vueExports.unref(imageSizeClass),
+          vueExports.unref(isVerticalImage) ? "w-full mx-auto" : "shrink-0 w-full sm:w-auto"
+        ])}"><img${ssrRenderAttr_1("src", __props.image)} alt="" class="${ssrRenderClass_1([vueExports.unref(imageAspectClass) || "h-auto", "w-full object-cover"])}" style="${ssrRenderStyle_1(vueExports.unref(imageRadiusStyle))}"></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -1185,7 +1180,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$e = _sfc_main$e.setup;
 _sfc_main$e.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Hero.vue");
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
@@ -1430,7 +1425,7 @@ const heroDefinition = {
     styleTab
   ]
 };
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const _sfc_main$d = /* @__PURE__ */ vueExports.defineComponent({
   ...{ inheritAttrs: false },
   __name: "BlockWrapper",
   __ssrInlineRender: true,
@@ -1450,9 +1445,9 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     const props = __props;
     const { resolveColor } = useActivePalette();
-    const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
-    const hasBackgroundImage = computed(() => !!props.backgroundImage);
-    const sectionStyle = computed(() => ({
+    const bgHex = vueExports.computed(() => props.background ? resolveColor(props.background) : null);
+    const hasBackgroundImage = vueExports.computed(() => !!props.backgroundImage);
+    const sectionStyle = vueExports.computed(() => ({
       ...bgHex.value ? { backgroundColor: bgHex.value } : {},
       // Fixed/parallax must use CSS background-image — position:fixed on <img> breaks layout
       ...hasBackgroundImage.value && props.backgroundFixed ? {
@@ -1462,55 +1457,55 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
         backgroundAttachment: "fixed"
       } : {}
     }));
-    const bgImageStyle = computed(() => ({
+    const bgImageStyle = vueExports.computed(() => ({
       opacity: (props.backgroundOpacity ?? 100) / 100
     }));
-    const overlayColorHex = computed(
+    const overlayColorHex = vueExports.computed(
       () => props.overlayColor ? resolveColor(props.overlayColor) : null
     );
-    const overlayColor2Hex = computed(
+    const overlayColor2Hex = vueExports.computed(
       () => props.overlayColor2 ? resolveColor(props.overlayColor2) : null
     );
-    const overlayStyle = computed(() => {
+    const overlayStyle = vueExports.computed(() => {
       if (!props.overlayEnabled) return null;
       const opacity = (props.overlayOpacity ?? 40) / 100;
       const c1 = hexToRgba(overlayColorHex.value ?? "#000000", opacity);
       const bg = props.overlayType === "gradient" ? `linear-gradient(${props.overlayDegree ?? 180}deg, ${c1}, ${hexToRgba(overlayColor2Hex.value ?? "#000000", opacity)})` : c1;
       return { background: bg };
     });
-    const sectionEl = useTemplateRef("sectionEl");
+    const sectionEl = vueExports.useTemplateRef("sectionEl");
     __expose({ el: sectionEl });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<section${ssrRenderAttrs(mergeProps({
+      _push(`<section${ssrRenderAttrs_1(vueExports.mergeProps({
         ref_key: "sectionEl",
         ref: sectionEl,
         class: ["relative", props.class],
-        style: unref(sectionStyle)
+        style: vueExports.unref(sectionStyle)
       }, _attrs))}>`);
       if (__props.backgroundImage && !__props.backgroundFixed) {
-        _push(`<img${ssrRenderAttr("src", __props.backgroundImage)} aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none" style="${ssrRenderStyle(unref(bgImageStyle))}">`);
+        _push(`<img${ssrRenderAttr_1("src", __props.backgroundImage)} aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none" style="${ssrRenderStyle_1(vueExports.unref(bgImageStyle))}">`);
       } else {
         _push(`<!---->`);
       }
-      if (__props.overlayEnabled && unref(overlayStyle)) {
-        _push(`<div class="absolute inset-0 pointer-events-none" style="${ssrRenderStyle(unref(overlayStyle))}"></div>`);
+      if (__props.overlayEnabled && vueExports.unref(overlayStyle)) {
+        _push(`<div class="absolute inset-0 pointer-events-none" style="${ssrRenderStyle_1(vueExports.unref(overlayStyle))}"></div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`<div class="relative">`);
-      ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+      ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(`</div></section>`);
     };
   }
 });
 const _sfc_setup$d = _sfc_main$d.setup;
 _sfc_main$d.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/BlockWrapper.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$d, { __name: "BlocksBlockWrapper" });
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const _sfc_main$c = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Text",
   __ssrInlineRender: true,
   props: {
@@ -1530,19 +1525,19 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const inEditor = Boolean(inject(inlineEditorKey, null));
-    const isEmpty = computed(() => {
+    const inEditor = Boolean(vueExports.inject(inlineEditorKey, null));
+    const isEmpty = vueExports.computed(() => {
       const t = props.content?.trim() ?? "";
       return !t || t === "<p></p>";
     });
     const { autoTextColor } = useBlockBackground(() => props.background);
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineRichField = __nuxt_component_3$1;
-      if (unref(inEditor) || !unref(isEmpty)) {
-        _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "px-8 py-12" }, {
+      if (vueExports.unref(inEditor) || !vueExports.unref(isEmpty)) {
+        _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "px-8 py-12" }, {
           background: __props.background,
           backgroundImage: __props.backgroundImage,
           backgroundOpacity: __props.backgroundOpacity,
@@ -1554,35 +1549,35 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
           overlayDegree: __props.overlayDegree,
           overlayOpacity: __props.overlayOpacity
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="${ssrRenderClass([[
-                unref(maxWidthClass),
+              _push2(`<div class="${ssrRenderClass_1([[
+                vueExports.unref(maxWidthClass),
                 {
                   "text-left": __props.align === "left",
                   "text-center": __props.align === "center",
                   "text-right": __props.align === "right"
                 }
-              ], "mx-auto rich-text"])}" style="${ssrRenderStyle(unref(autoTextColor) ? { color: unref(autoTextColor) } : {})}"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_EditorInlineRichField, {
+              ], "mx-auto rich-text"])}" style="${ssrRenderStyle_1(vueExports.unref(autoTextColor) ? { color: vueExports.unref(autoTextColor) } : {})}"${_scopeId}>`);
+              _push2(ssrRenderComponent_1(_component_EditorInlineRichField, {
                 "field-key": "content",
                 placeholder: "Start typing...",
                 html: "",
                 class: "w-full"
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     if (__props.content) {
-                      _push3(`<div${_scopeId2}>${unref(sanitizeHtml)(__props.content) ?? ""}</div>`);
+                      _push3(`<div${_scopeId2}>${vueExports.unref(sanitizeHtml)(__props.content) ?? ""}</div>`);
                     } else {
                       _push3(`<!---->`);
                     }
                   } else {
                     return [
-                      __props.content ? (openBlock(), createBlock("div", {
+                      __props.content ? (vueExports.openBlock(), vueExports.createBlock("div", {
                         key: 0,
-                        innerHTML: unref(sanitizeHtml)(__props.content)
-                      }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                        innerHTML: vueExports.unref(sanitizeHtml)(__props.content)
+                      }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
                     ];
                   }
                 }),
@@ -1591,28 +1586,28 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
               _push2(`</div>`);
             } else {
               return [
-                createVNode("div", {
+                vueExports.createVNode("div", {
                   class: ["mx-auto rich-text", [
-                    unref(maxWidthClass),
+                    vueExports.unref(maxWidthClass),
                     {
                       "text-left": __props.align === "left",
                       "text-center": __props.align === "center",
                       "text-right": __props.align === "right"
                     }
                   ]],
-                  style: unref(autoTextColor) ? { color: unref(autoTextColor) } : {}
+                  style: vueExports.unref(autoTextColor) ? { color: vueExports.unref(autoTextColor) } : {}
                 }, [
-                  createVNode(_component_EditorInlineRichField, {
+                  vueExports.createVNode(_component_EditorInlineRichField, {
                     "field-key": "content",
                     placeholder: "Start typing...",
                     html: "",
                     class: "w-full"
                   }, {
-                    default: withCtx(() => [
-                      __props.content ? (openBlock(), createBlock("div", {
+                    default: vueExports.withCtx(() => [
+                      __props.content ? (vueExports.openBlock(), vueExports.createBlock("div", {
                         key: 0,
-                        innerHTML: unref(sanitizeHtml)(__props.content)
-                      }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                        innerHTML: vueExports.unref(sanitizeHtml)(__props.content)
+                      }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
                     ]),
                     _: 1
                   })
@@ -1630,7 +1625,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$c = _sfc_main$c.setup;
 _sfc_main$c.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Text.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
@@ -1681,7 +1676,7 @@ const textDefinition = {
     styleTab
   ]
 };
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const _sfc_main$b = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Projects",
   __ssrInlineRender: true,
   props: {
@@ -1705,17 +1700,17 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
-    const slug = inject(portfolioSlugKey, "");
+    const slug = vueExports.inject(portfolioSlugKey, "");
     const config = useRuntimeConfig();
     const baseURL = config.apiUrl;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolvePrimary, resolveSecondary } = useActivePalette();
-    const bgPrimary = computed(() => resolvePrimary(props.background));
-    const bgSecondary = computed(() => resolveSecondary(props.background));
+    const bgPrimary = vueExports.computed(() => resolvePrimary(props.background));
+    const bgSecondary = vueExports.computed(() => resolveSecondary(props.background));
     const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
     const { surfaceHex, surfaceStyle, surfaceTextStyle, surfaceTextMutedStyle, surfacePrimary } = useBlockSurface(() => props.surfaceColor);
-    const { data } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
+    const { data } = ([__temp, __restore] = vueExports.withAsyncContext(() => useAsyncData(
       () => `portfolio-${slug}-projects-${props.collectionId || "default"}`,
       () => {
         const url = props.collectionId ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}` : `/api/portfolios/${slug}/collections/projects`;
@@ -1724,17 +1719,17 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       "$J64TZpMVvD"
       /* nuxt-injected */
     )), __temp = await __temp, __restore(), __temp);
-    const projects = computed(() => {
+    const projects = vueExports.computed(() => {
       const all = data.value?.items ?? [];
       return props.filterTag ? all.filter((p) => p.data.tags?.includes(props.filterTag)) : all;
     });
     const hasDetailPage = !!getCollectionType("projects")?.pageTemplate;
-    const isLinked = computed(() => hasDetailPage && props.linkToPage);
+    const isLinked = vueExports.computed(() => hasDetailPage && props.linkToPage);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineTextField = __nuxt_component_1;
-      if (unref(projects).length) {
-        _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "px-8 py-16" }, {
+      if (vueExports.unref(projects).length) {
+        _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "px-8 py-16" }, {
           background: __props.background,
           backgroundImage: __props.backgroundImage,
           backgroundOpacity: __props.backgroundOpacity,
@@ -1746,31 +1741,31 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
           overlayDegree: __props.overlayDegree,
           overlayOpacity: __props.overlayOpacity
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="${ssrRenderClass([[unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
+              _push2(`<div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
               if (__props.showHeading) {
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-8",
-                  style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                  style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({
-                        ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({
+                        ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                         fontFamily: "var(--font-heading)"
-                      })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                      })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                     } else {
                       return [
-                        createVNode("h2", {
+                        vueExports.createVNode("h2", {
                           class: "text-3xl font-bold mb-8",
                           style: {
-                            ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                            ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                             fontFamily: "var(--font-heading)"
                           }
-                        }, toDisplayString(__props.heading), 5)
+                        }, vueExports.toDisplayString(__props.heading), 5)
                       ];
                     }
                   }),
@@ -1780,41 +1775,41 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               _push2(`<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(projects), (project, i) => {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(unref(isLinked) ? "a" : "div"), {
+              ssrRenderList_1(vueExports.unref(projects), (project, i) => {
+                ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(isLinked) ? "a" : "div"), {
                   key: project.id,
-                  class: ["rounded-xl p-6 flex flex-col gap-3 transition-opacity hover:opacity-80", { "cursor-pointer": unref(isLinked) }],
-                  href: unref(isLinked) ? `/p/${unref(slug)}/projects/${project.id}` : void 0,
-                  style: unref(surfaceStyle)
+                  class: ["rounded-xl p-6 flex flex-col gap-3 transition-opacity hover:opacity-80", { "cursor-pointer": vueExports.unref(isLinked) }],
+                  href: vueExports.unref(isLinked) ? `/p/${vueExports.unref(slug)}/projects/${project.id}` : void 0,
+                  style: vueExports.unref(surfaceStyle)
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<div class="h-32 rounded-lg overflow-hidden" style="${ssrRenderStyle({
-                        backgroundColor: i % 2 === 0 ? `color-mix(in srgb, ${unref(bgSecondary)} 20%, ${unref(surfaceHex) ?? "var(--bg-surface)"})` : `color-mix(in srgb, ${unref(bgPrimary)} 20%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`
+                      _push3(`<div class="h-32 rounded-lg overflow-hidden" style="${ssrRenderStyle_1({
+                        backgroundColor: i % 2 === 0 ? `color-mix(in srgb, ${vueExports.unref(bgSecondary)} 20%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})` : `color-mix(in srgb, ${vueExports.unref(bgPrimary)} 20%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`
                       })}"${_scopeId2}>`);
                       if (project.data.previewImageUrl) {
-                        _push3(`<img${ssrRenderAttr("src", project.data.previewImageUrl)}${ssrRenderAttr("alt", project.data.title)} class="w-full h-full object-cover"${_scopeId2}>`);
+                        _push3(`<img${ssrRenderAttr_1("src", project.data.previewImageUrl)}${ssrRenderAttr_1("alt", project.data.title)} class="w-full h-full object-cover"${_scopeId2}>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      _push3(`</div><h3 class="font-semibold text-lg" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId2}>${ssrInterpolate(project.data.title)}</h3>`);
+                      _push3(`</div><h3 class="font-semibold text-lg" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId2}>${ssrInterpolate_1(project.data.title)}</h3>`);
                       if (project.data.time) {
-                        _push3(`<p class="text-sm" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate(project.data.time)}</p>`);
+                        _push3(`<p class="text-sm" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate_1(project.data.time)}</p>`);
                       } else {
                         _push3(`<!---->`);
                       }
                       if (project.data.description) {
-                        _push3(`<p class="text-sm" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate(project.data.description)}</p>`);
+                        _push3(`<p class="text-sm" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate_1(project.data.description)}</p>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      if (unref(visibleTags)(project.data.tags ?? []).length) {
+                      if (vueExports.unref(visibleTags)(project.data.tags ?? []).length) {
                         _push3(`<div class="flex flex-wrap gap-1 mt-auto"${_scopeId2}><!--[-->`);
-                        ssrRenderList(unref(visibleTags)(project.data.tags ?? []), (tag) => {
-                          _push3(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle({
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                            color: unref(surfacePrimary)
-                          })}"${_scopeId2}>${ssrInterpolate(tag)}</span>`);
+                        ssrRenderList_1(vueExports.unref(visibleTags)(project.data.tags ?? []), (tag) => {
+                          _push3(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle_1({
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                            color: vueExports.unref(surfacePrimary)
+                          })}"${_scopeId2}>${ssrInterpolate_1(tag)}</span>`);
                         });
                         _push3(`<!--]--></div>`);
                       } else {
@@ -1822,48 +1817,48 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                       }
                     } else {
                       return [
-                        createVNode("div", {
+                        vueExports.createVNode("div", {
                           class: "h-32 rounded-lg overflow-hidden",
                           style: {
-                            backgroundColor: i % 2 === 0 ? `color-mix(in srgb, ${unref(bgSecondary)} 20%, ${unref(surfaceHex) ?? "var(--bg-surface)"})` : `color-mix(in srgb, ${unref(bgPrimary)} 20%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`
+                            backgroundColor: i % 2 === 0 ? `color-mix(in srgb, ${vueExports.unref(bgSecondary)} 20%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})` : `color-mix(in srgb, ${vueExports.unref(bgPrimary)} 20%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`
                           }
                         }, [
-                          project.data.previewImageUrl ? (openBlock(), createBlock("img", {
+                          project.data.previewImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                             key: 0,
                             src: project.data.previewImageUrl,
                             alt: project.data.title,
                             class: "w-full h-full object-cover"
-                          }, null, 8, ["src", "alt"])) : createCommentVNode("", true)
+                          }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true)
                         ], 4),
-                        createVNode("h3", {
+                        vueExports.createVNode("h3", {
                           class: "font-semibold text-lg",
-                          style: unref(surfaceTextStyle)
-                        }, toDisplayString(project.data.title), 5),
-                        project.data.time ? (openBlock(), createBlock("p", {
+                          style: vueExports.unref(surfaceTextStyle)
+                        }, vueExports.toDisplayString(project.data.title), 5),
+                        project.data.time ? (vueExports.openBlock(), vueExports.createBlock("p", {
                           key: 0,
                           class: "text-sm",
-                          style: unref(surfaceTextMutedStyle)
-                        }, toDisplayString(project.data.time), 5)) : createCommentVNode("", true),
-                        project.data.description ? (openBlock(), createBlock("p", {
+                          style: vueExports.unref(surfaceTextMutedStyle)
+                        }, vueExports.toDisplayString(project.data.time), 5)) : vueExports.createCommentVNode("", true),
+                        project.data.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                           key: 1,
                           class: "text-sm",
-                          style: unref(surfaceTextMutedStyle)
-                        }, toDisplayString(project.data.description), 5)) : createCommentVNode("", true),
-                        unref(visibleTags)(project.data.tags ?? []).length ? (openBlock(), createBlock("div", {
+                          style: vueExports.unref(surfaceTextMutedStyle)
+                        }, vueExports.toDisplayString(project.data.description), 5)) : vueExports.createCommentVNode("", true),
+                        vueExports.unref(visibleTags)(project.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                           key: 2,
                           class: "flex flex-wrap gap-1 mt-auto"
                         }, [
-                          (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(project.data.tags ?? []), (tag) => {
-                            return openBlock(), createBlock("span", {
+                          (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(project.data.tags ?? []), (tag) => {
+                            return vueExports.openBlock(), vueExports.createBlock("span", {
                               key: tag,
                               class: "text-xs px-2 py-0.5 rounded-full",
                               style: {
-                                backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                                color: unref(surfacePrimary)
+                                backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                                color: vueExports.unref(surfacePrimary)
                               }
-                            }, toDisplayString(tag), 5);
+                            }, vueExports.toDisplayString(tag), 5);
                           }), 128))
-                        ])) : createCommentVNode("", true)
+                        ])) : vueExports.createCommentVNode("", true)
                       ];
                     }
                   }),
@@ -1873,78 +1868,78 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
               _push2(`<!--]--></div></div>`);
             } else {
               return [
-                createVNode("div", {
-                  class: ["mx-auto", [unref(maxWidthClass)]]
+                vueExports.createVNode("div", {
+                  class: ["mx-auto", [vueExports.unref(maxWidthClass)]]
                 }, [
-                  __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                  __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                     key: 0,
                     "field-key": "heading",
                     tag: "h2",
                     class: "text-3xl font-bold mb-8",
-                    style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                    style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                   }, {
-                    default: withCtx(() => [
-                      createVNode("h2", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-8",
                         style: {
-                          ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                          ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                           fontFamily: "var(--font-heading)"
                         }
-                      }, toDisplayString(__props.heading), 5)
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ]),
                     _: 1
-                  }, 8, ["style"])) : createCommentVNode("", true),
-                  createVNode("div", { class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(projects), (project, i) => {
-                      return openBlock(), createBlock(resolveDynamicComponent(unref(isLinked) ? "a" : "div"), {
+                  }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode("div", { class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" }, [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(projects), (project, i) => {
+                      return vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(isLinked) ? "a" : "div"), {
                         key: project.id,
-                        class: ["rounded-xl p-6 flex flex-col gap-3 transition-opacity hover:opacity-80", { "cursor-pointer": unref(isLinked) }],
-                        href: unref(isLinked) ? `/p/${unref(slug)}/projects/${project.id}` : void 0,
-                        style: unref(surfaceStyle)
+                        class: ["rounded-xl p-6 flex flex-col gap-3 transition-opacity hover:opacity-80", { "cursor-pointer": vueExports.unref(isLinked) }],
+                        href: vueExports.unref(isLinked) ? `/p/${vueExports.unref(slug)}/projects/${project.id}` : void 0,
+                        style: vueExports.unref(surfaceStyle)
                       }, {
-                        default: withCtx(() => [
-                          createVNode("div", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode("div", {
                             class: "h-32 rounded-lg overflow-hidden",
                             style: {
-                              backgroundColor: i % 2 === 0 ? `color-mix(in srgb, ${unref(bgSecondary)} 20%, ${unref(surfaceHex) ?? "var(--bg-surface)"})` : `color-mix(in srgb, ${unref(bgPrimary)} 20%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`
+                              backgroundColor: i % 2 === 0 ? `color-mix(in srgb, ${vueExports.unref(bgSecondary)} 20%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})` : `color-mix(in srgb, ${vueExports.unref(bgPrimary)} 20%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`
                             }
                           }, [
-                            project.data.previewImageUrl ? (openBlock(), createBlock("img", {
+                            project.data.previewImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                               key: 0,
                               src: project.data.previewImageUrl,
                               alt: project.data.title,
                               class: "w-full h-full object-cover"
-                            }, null, 8, ["src", "alt"])) : createCommentVNode("", true)
+                            }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true)
                           ], 4),
-                          createVNode("h3", {
+                          vueExports.createVNode("h3", {
                             class: "font-semibold text-lg",
-                            style: unref(surfaceTextStyle)
-                          }, toDisplayString(project.data.title), 5),
-                          project.data.time ? (openBlock(), createBlock("p", {
+                            style: vueExports.unref(surfaceTextStyle)
+                          }, vueExports.toDisplayString(project.data.title), 5),
+                          project.data.time ? (vueExports.openBlock(), vueExports.createBlock("p", {
                             key: 0,
                             class: "text-sm",
-                            style: unref(surfaceTextMutedStyle)
-                          }, toDisplayString(project.data.time), 5)) : createCommentVNode("", true),
-                          project.data.description ? (openBlock(), createBlock("p", {
+                            style: vueExports.unref(surfaceTextMutedStyle)
+                          }, vueExports.toDisplayString(project.data.time), 5)) : vueExports.createCommentVNode("", true),
+                          project.data.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                             key: 1,
                             class: "text-sm",
-                            style: unref(surfaceTextMutedStyle)
-                          }, toDisplayString(project.data.description), 5)) : createCommentVNode("", true),
-                          unref(visibleTags)(project.data.tags ?? []).length ? (openBlock(), createBlock("div", {
+                            style: vueExports.unref(surfaceTextMutedStyle)
+                          }, vueExports.toDisplayString(project.data.description), 5)) : vueExports.createCommentVNode("", true),
+                          vueExports.unref(visibleTags)(project.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 2,
                             class: "flex flex-wrap gap-1 mt-auto"
                           }, [
-                            (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(project.data.tags ?? []), (tag) => {
-                              return openBlock(), createBlock("span", {
+                            (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(project.data.tags ?? []), (tag) => {
+                              return vueExports.openBlock(), vueExports.createBlock("span", {
                                 key: tag,
                                 class: "text-xs px-2 py-0.5 rounded-full",
                                 style: {
-                                  backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                                  color: unref(surfacePrimary)
+                                  backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                                  color: vueExports.unref(surfacePrimary)
                                 }
-                              }, toDisplayString(tag), 5);
+                              }, vueExports.toDisplayString(tag), 5);
                             }), 128))
-                          ])) : createCommentVNode("", true)
+                          ])) : vueExports.createCommentVNode("", true)
                         ]),
                         _: 2
                       }, 1032, ["class", "href", "style"]);
@@ -1964,12 +1959,12 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$b = _sfc_main$b.setup;
 _sfc_main$b.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Projects.vue");
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
 const BlocksProjects = Object.assign(_sfc_main$b, { __name: "BlocksProjects" });
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ProjectList",
   __ssrInlineRender: true,
   props: {
@@ -1993,32 +1988,32 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
-    const slug = inject(portfolioSlugKey, "");
+    const slug = vueExports.inject(portfolioSlugKey, "");
     const config = useRuntimeConfig();
     const baseURL = config.apiUrl;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
-    const autoTextColor = computed(
+    const autoTextColor = vueExports.computed(
       () => props.background ? resolveTextColor(props.background) : null
     );
-    const textColorStyle = computed(() => autoTextColor.value ? { color: autoTextColor.value } : {});
-    const surfaceHex = computed(() => props.surfaceColor ? resolveColor(props.surfaceColor) : null);
-    const surfaceTextColor = computed(
+    const textColorStyle = vueExports.computed(() => autoTextColor.value ? { color: autoTextColor.value } : {});
+    const surfaceHex = vueExports.computed(() => props.surfaceColor ? resolveColor(props.surfaceColor) : null);
+    const surfaceTextColor = vueExports.computed(
       () => props.surfaceColor ? resolveTextColor(props.surfaceColor) : null
     );
-    const surfaceTextStyle = computed(
+    const surfaceTextStyle = vueExports.computed(
       () => surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: "var(--text-primary)" }
     );
-    const surfaceTextMutedStyle = computed(
+    const surfaceTextMutedStyle = vueExports.computed(
       () => surfaceTextColor.value ? { color: surfaceTextColor.value, opacity: "0.6" } : { color: "var(--text-secondary)" }
     );
-    const surfacePrimary = computed(() => resolvePrimary(props.surfaceColor));
-    const surfaceHexOrDefault = computed(() => surfaceHex.value ?? "var(--bg-surface)");
-    const borderStyle = computed(() => ({
+    const surfacePrimary = vueExports.computed(() => resolvePrimary(props.surfaceColor));
+    const surfaceHexOrDefault = vueExports.computed(() => surfaceHex.value ?? "var(--bg-surface)");
+    const borderStyle = vueExports.computed(() => ({
       borderTop: `1px solid ${autoTextColor.value ? `color-mix(in srgb, ${autoTextColor.value} 15%, transparent)` : "var(--border)"}`
     }));
-    const { data } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
+    const { data } = ([__temp, __restore] = vueExports.withAsyncContext(() => useAsyncData(
       () => `portfolio-${slug}-projects-${props.collectionId || "default"}`,
       () => {
         const url = props.collectionId ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}` : `/api/portfolios/${slug}/collections/projects`;
@@ -2027,17 +2022,17 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       "$BVEKjC_2BI"
       /* nuxt-injected */
     )), __temp = await __temp, __restore(), __temp);
-    const projects = computed(() => {
+    const projects = vueExports.computed(() => {
       const all = data.value?.items ?? [];
       return props.filterTag ? all.filter((p) => p.data.tags?.includes(props.filterTag)) : all;
     });
     const hasDetailPage = !!getCollectionType("projects")?.pageTemplate;
-    const isLinked = computed(() => hasDetailPage && props.linkToPage);
+    const isLinked = vueExports.computed(() => hasDetailPage && props.linkToPage);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineTextField = __nuxt_component_1;
-      if (unref(projects).length) {
-        _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "px-8 py-16" }, {
+      if (vueExports.unref(projects).length) {
+        _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "px-8 py-16" }, {
           background: __props.background,
           backgroundImage: __props.backgroundImage,
           backgroundOpacity: __props.backgroundOpacity,
@@ -2049,31 +2044,31 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
           overlayDegree: __props.overlayDegree,
           overlayOpacity: __props.overlayOpacity
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="${ssrRenderClass([unref(maxWidthClass), "mx-auto"])}"${_scopeId}>`);
+              _push2(`<div class="${ssrRenderClass_1([vueExports.unref(maxWidthClass), "mx-auto"])}"${_scopeId}>`);
               if (__props.showHeading) {
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-8",
-                  style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                  style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({
-                        ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({
+                        ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                         fontFamily: "var(--font-heading)"
-                      })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                      })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                     } else {
                       return [
-                        createVNode("h2", {
+                        vueExports.createVNode("h2", {
                           class: "text-3xl font-bold mb-8",
                           style: {
-                            ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                            ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                             fontFamily: "var(--font-heading)"
                           }
-                        }, toDisplayString(__props.heading), 5)
+                        }, vueExports.toDisplayString(__props.heading), 5)
                       ];
                     }
                   }),
@@ -2083,42 +2078,42 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               _push2(`<div class="flex flex-col"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(projects), (project, i) => {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(unref(isLinked) ? "a" : "div"), {
+              ssrRenderList_1(vueExports.unref(projects), (project, i) => {
+                ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(isLinked) ? "a" : "div"), {
                   key: project.id,
-                  class: ["flex gap-4 py-5 transition-opacity hover:opacity-80", { "cursor-pointer": unref(isLinked) }],
-                  style: i > 0 ? unref(borderStyle) : {},
-                  href: unref(isLinked) ? `/p/${unref(slug)}/projects/${project.id}` : void 0
+                  class: ["flex gap-4 py-5 transition-opacity hover:opacity-80", { "cursor-pointer": vueExports.unref(isLinked) }],
+                  style: i > 0 ? vueExports.unref(borderStyle) : {},
+                  href: vueExports.unref(isLinked) ? `/p/${vueExports.unref(slug)}/projects/${project.id}` : void 0
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<div class="w-24 h-20 shrink-0 rounded-lg overflow-hidden" style="${ssrRenderStyle({
-                        backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                      _push3(`<div class="w-24 h-20 shrink-0 rounded-lg overflow-hidden" style="${ssrRenderStyle_1({
+                        backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                       })}"${_scopeId2}>`);
                       if (project.data.previewImageUrl) {
-                        _push3(`<img${ssrRenderAttr("src", project.data.previewImageUrl)}${ssrRenderAttr("alt", project.data.title)} class="w-full h-full object-cover"${_scopeId2}>`);
+                        _push3(`<img${ssrRenderAttr_1("src", project.data.previewImageUrl)}${ssrRenderAttr_1("alt", project.data.title)} class="w-full h-full object-cover"${_scopeId2}>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      _push3(`</div><div class="flex flex-col gap-1 min-w-0 flex-1 justify-center"${_scopeId2}><div class="flex items-start justify-between gap-2"${_scopeId2}><h3 class="font-semibold text-base leading-snug" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId2}>${ssrInterpolate(project.data.title)}</h3>`);
+                      _push3(`</div><div class="flex flex-col gap-1 min-w-0 flex-1 justify-center"${_scopeId2}><div class="flex items-start justify-between gap-2"${_scopeId2}><h3 class="font-semibold text-base leading-snug" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId2}>${ssrInterpolate_1(project.data.title)}</h3>`);
                       if (project.data.time) {
-                        _push3(`<span class="text-xs shrink-0 pt-0.5" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate(project.data.time)}</span>`);
+                        _push3(`<span class="text-xs shrink-0 pt-0.5" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate_1(project.data.time)}</span>`);
                       } else {
                         _push3(`<!---->`);
                       }
                       _push3(`</div>`);
                       if (project.data.description) {
-                        _push3(`<p class="text-sm line-clamp-2" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate(project.data.description)}</p>`);
+                        _push3(`<p class="text-sm line-clamp-2" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate_1(project.data.description)}</p>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      if (unref(visibleTags)(project.data.tags ?? []).length) {
+                      if (vueExports.unref(visibleTags)(project.data.tags ?? []).length) {
                         _push3(`<div class="flex flex-wrap gap-1 mt-1"${_scopeId2}><!--[-->`);
-                        ssrRenderList(unref(visibleTags)(project.data.tags ?? []), (tag) => {
-                          _push3(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle({
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                            color: unref(surfacePrimary)
-                          })}"${_scopeId2}>${ssrInterpolate(tag)}</span>`);
+                        ssrRenderList_1(vueExports.unref(visibleTags)(project.data.tags ?? []), (tag) => {
+                          _push3(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle_1({
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                            color: vueExports.unref(surfacePrimary)
+                          })}"${_scopeId2}>${ssrInterpolate_1(tag)}</span>`);
                         });
                         _push3(`<!--]--></div>`);
                       } else {
@@ -2127,51 +2122,51 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                       _push3(`</div>`);
                     } else {
                       return [
-                        createVNode("div", {
+                        vueExports.createVNode("div", {
                           class: "w-24 h-20 shrink-0 rounded-lg overflow-hidden",
                           style: {
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                           }
                         }, [
-                          project.data.previewImageUrl ? (openBlock(), createBlock("img", {
+                          project.data.previewImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                             key: 0,
                             src: project.data.previewImageUrl,
                             alt: project.data.title,
                             class: "w-full h-full object-cover"
-                          }, null, 8, ["src", "alt"])) : createCommentVNode("", true)
+                          }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true)
                         ], 4),
-                        createVNode("div", { class: "flex flex-col gap-1 min-w-0 flex-1 justify-center" }, [
-                          createVNode("div", { class: "flex items-start justify-between gap-2" }, [
-                            createVNode("h3", {
+                        vueExports.createVNode("div", { class: "flex flex-col gap-1 min-w-0 flex-1 justify-center" }, [
+                          vueExports.createVNode("div", { class: "flex items-start justify-between gap-2" }, [
+                            vueExports.createVNode("h3", {
                               class: "font-semibold text-base leading-snug",
-                              style: unref(surfaceTextStyle)
-                            }, toDisplayString(project.data.title), 5),
-                            project.data.time ? (openBlock(), createBlock("span", {
+                              style: vueExports.unref(surfaceTextStyle)
+                            }, vueExports.toDisplayString(project.data.title), 5),
+                            project.data.time ? (vueExports.openBlock(), vueExports.createBlock("span", {
                               key: 0,
                               class: "text-xs shrink-0 pt-0.5",
-                              style: unref(surfaceTextMutedStyle)
-                            }, toDisplayString(project.data.time), 5)) : createCommentVNode("", true)
+                              style: vueExports.unref(surfaceTextMutedStyle)
+                            }, vueExports.toDisplayString(project.data.time), 5)) : vueExports.createCommentVNode("", true)
                           ]),
-                          project.data.description ? (openBlock(), createBlock("p", {
+                          project.data.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                             key: 0,
                             class: "text-sm line-clamp-2",
-                            style: unref(surfaceTextMutedStyle)
-                          }, toDisplayString(project.data.description), 5)) : createCommentVNode("", true),
-                          unref(visibleTags)(project.data.tags ?? []).length ? (openBlock(), createBlock("div", {
+                            style: vueExports.unref(surfaceTextMutedStyle)
+                          }, vueExports.toDisplayString(project.data.description), 5)) : vueExports.createCommentVNode("", true),
+                          vueExports.unref(visibleTags)(project.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 1,
                             class: "flex flex-wrap gap-1 mt-1"
                           }, [
-                            (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(project.data.tags ?? []), (tag) => {
-                              return openBlock(), createBlock("span", {
+                            (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(project.data.tags ?? []), (tag) => {
+                              return vueExports.openBlock(), vueExports.createBlock("span", {
                                 key: tag,
                                 class: "text-xs px-2 py-0.5 rounded-full",
                                 style: {
-                                  backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                                  color: unref(surfacePrimary)
+                                  backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                                  color: vueExports.unref(surfacePrimary)
                                 }
-                              }, toDisplayString(tag), 5);
+                              }, vueExports.toDisplayString(tag), 5);
                             }), 128))
-                          ])) : createCommentVNode("", true)
+                          ])) : vueExports.createCommentVNode("", true)
                         ])
                       ];
                     }
@@ -2182,81 +2177,81 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               _push2(`<!--]--></div></div>`);
             } else {
               return [
-                createVNode("div", {
-                  class: ["mx-auto", unref(maxWidthClass)]
+                vueExports.createVNode("div", {
+                  class: ["mx-auto", vueExports.unref(maxWidthClass)]
                 }, [
-                  __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                  __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                     key: 0,
                     "field-key": "heading",
                     tag: "h2",
                     class: "text-3xl font-bold mb-8",
-                    style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                    style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                   }, {
-                    default: withCtx(() => [
-                      createVNode("h2", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-8",
                         style: {
-                          ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                          ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                           fontFamily: "var(--font-heading)"
                         }
-                      }, toDisplayString(__props.heading), 5)
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ]),
                     _: 1
-                  }, 8, ["style"])) : createCommentVNode("", true),
-                  createVNode("div", { class: "flex flex-col" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(projects), (project, i) => {
-                      return openBlock(), createBlock(resolveDynamicComponent(unref(isLinked) ? "a" : "div"), {
+                  }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode("div", { class: "flex flex-col" }, [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(projects), (project, i) => {
+                      return vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(isLinked) ? "a" : "div"), {
                         key: project.id,
-                        class: ["flex gap-4 py-5 transition-opacity hover:opacity-80", { "cursor-pointer": unref(isLinked) }],
-                        style: i > 0 ? unref(borderStyle) : {},
-                        href: unref(isLinked) ? `/p/${unref(slug)}/projects/${project.id}` : void 0
+                        class: ["flex gap-4 py-5 transition-opacity hover:opacity-80", { "cursor-pointer": vueExports.unref(isLinked) }],
+                        style: i > 0 ? vueExports.unref(borderStyle) : {},
+                        href: vueExports.unref(isLinked) ? `/p/${vueExports.unref(slug)}/projects/${project.id}` : void 0
                       }, {
-                        default: withCtx(() => [
-                          createVNode("div", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode("div", {
                             class: "w-24 h-20 shrink-0 rounded-lg overflow-hidden",
                             style: {
-                              backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                              backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                             }
                           }, [
-                            project.data.previewImageUrl ? (openBlock(), createBlock("img", {
+                            project.data.previewImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                               key: 0,
                               src: project.data.previewImageUrl,
                               alt: project.data.title,
                               class: "w-full h-full object-cover"
-                            }, null, 8, ["src", "alt"])) : createCommentVNode("", true)
+                            }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true)
                           ], 4),
-                          createVNode("div", { class: "flex flex-col gap-1 min-w-0 flex-1 justify-center" }, [
-                            createVNode("div", { class: "flex items-start justify-between gap-2" }, [
-                              createVNode("h3", {
+                          vueExports.createVNode("div", { class: "flex flex-col gap-1 min-w-0 flex-1 justify-center" }, [
+                            vueExports.createVNode("div", { class: "flex items-start justify-between gap-2" }, [
+                              vueExports.createVNode("h3", {
                                 class: "font-semibold text-base leading-snug",
-                                style: unref(surfaceTextStyle)
-                              }, toDisplayString(project.data.title), 5),
-                              project.data.time ? (openBlock(), createBlock("span", {
+                                style: vueExports.unref(surfaceTextStyle)
+                              }, vueExports.toDisplayString(project.data.title), 5),
+                              project.data.time ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                 key: 0,
                                 class: "text-xs shrink-0 pt-0.5",
-                                style: unref(surfaceTextMutedStyle)
-                              }, toDisplayString(project.data.time), 5)) : createCommentVNode("", true)
+                                style: vueExports.unref(surfaceTextMutedStyle)
+                              }, vueExports.toDisplayString(project.data.time), 5)) : vueExports.createCommentVNode("", true)
                             ]),
-                            project.data.description ? (openBlock(), createBlock("p", {
+                            project.data.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                               key: 0,
                               class: "text-sm line-clamp-2",
-                              style: unref(surfaceTextMutedStyle)
-                            }, toDisplayString(project.data.description), 5)) : createCommentVNode("", true),
-                            unref(visibleTags)(project.data.tags ?? []).length ? (openBlock(), createBlock("div", {
+                              style: vueExports.unref(surfaceTextMutedStyle)
+                            }, vueExports.toDisplayString(project.data.description), 5)) : vueExports.createCommentVNode("", true),
+                            vueExports.unref(visibleTags)(project.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 1,
                               class: "flex flex-wrap gap-1 mt-1"
                             }, [
-                              (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(project.data.tags ?? []), (tag) => {
-                                return openBlock(), createBlock("span", {
+                              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(project.data.tags ?? []), (tag) => {
+                                return vueExports.openBlock(), vueExports.createBlock("span", {
                                   key: tag,
                                   class: "text-xs px-2 py-0.5 rounded-full",
                                   style: {
-                                    backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                                    color: unref(surfacePrimary)
+                                    backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                                    color: vueExports.unref(surfacePrimary)
                                   }
-                                }, toDisplayString(tag), 5);
+                                }, vueExports.toDisplayString(tag), 5);
                               }), 128))
-                            ])) : createCommentVNode("", true)
+                            ])) : vueExports.createCommentVNode("", true)
                           ])
                         ]),
                         _: 2
@@ -2277,7 +2272,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$a = _sfc_main$a.setup;
 _sfc_main$a.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/ProjectList.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
@@ -2343,7 +2338,7 @@ const projectListDefinition = {
     styleTab
   ]
 };
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Experiences",
   __ssrInlineRender: true,
   props: {
@@ -2366,11 +2361,11 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
-    const slug = inject(portfolioSlugKey, "");
+    const slug = vueExports.inject(portfolioSlugKey, "");
     const config = useRuntimeConfig();
     const baseURL = config.apiUrl;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
     const {
       surfaceHexOrDefault,
@@ -2379,7 +2374,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       surfaceTextMutedStyle,
       surfaceSecondary
     } = useBlockSurface(() => props.surfaceColor);
-    const { data } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
+    const { data } = ([__temp, __restore] = vueExports.withAsyncContext(() => useAsyncData(
       () => `portfolio-${slug}-experiences-${props.collectionId || "default"}`,
       () => {
         const url = props.collectionId ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}` : `/api/portfolios/${slug}/collections/experiences`;
@@ -2388,15 +2383,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       "$MnuZ8N0mw6"
       /* nuxt-injected */
     )), __temp = await __temp, __restore(), __temp);
-    const experiences = computed(() => {
+    const experiences = vueExports.computed(() => {
       const all = data.value?.items ?? [];
       return props.filterTag ? all.filter((e) => e.data.tags?.includes(props.filterTag)) : all;
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineTextField = __nuxt_component_1;
-      if (unref(experiences).length) {
-        _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "py-16" }, {
+      if (vueExports.unref(experiences).length) {
+        _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "py-16" }, {
           background: __props.background,
           backgroundImage: __props.backgroundImage,
           backgroundOpacity: __props.backgroundOpacity,
@@ -2408,31 +2403,31 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           overlayDegree: __props.overlayDegree,
           overlayOpacity: __props.overlayOpacity
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="${ssrRenderClass([[unref(maxWidthClass)], "px-8 mx-auto"])}"${_scopeId}>`);
+              _push2(`<div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "px-8 mx-auto"])}"${_scopeId}>`);
               if (__props.showHeading) {
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-8",
-                  style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                  style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({
-                        ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({
+                        ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                         fontFamily: "var(--font-heading)"
-                      })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                      })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                     } else {
                       return [
-                        createVNode("h2", {
+                        vueExports.createVNode("h2", {
                           class: "text-3xl font-bold mb-8",
                           style: {
-                            ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                            ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                             fontFamily: "var(--font-heading)"
                           }
-                        }, toDisplayString(__props.heading), 5)
+                        }, vueExports.toDisplayString(__props.heading), 5)
                       ];
                     }
                   }),
@@ -2442,12 +2437,12 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               _push2(`<ul class="space-y-6"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(experiences), (experience) => {
-                _push2(`<li class="rounded-xl p-6" style="${ssrRenderStyle(unref(surfaceStyle))}"${_scopeId}><p class="font-semibold text-lg" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId}>${ssrInterpolate(experience.data.title)}</p>`);
+              ssrRenderList_1(vueExports.unref(experiences), (experience) => {
+                _push2(`<li class="rounded-xl p-6" style="${ssrRenderStyle_1(vueExports.unref(surfaceStyle))}"${_scopeId}><p class="font-semibold text-lg" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId}>${ssrInterpolate_1(experience.data.title)}</p>`);
                 if (experience.data.place || experience.data.time) {
-                  _push2(`<p class="text-sm mt-1" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId}>`);
+                  _push2(`<p class="text-sm mt-1" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId}>`);
                   if (experience.data.place) {
-                    _push2(`<span${_scopeId}>${ssrInterpolate(experience.data.place)}</span>`);
+                    _push2(`<span${_scopeId}>${ssrInterpolate_1(experience.data.place)}</span>`);
                   } else {
                     _push2(`<!---->`);
                   }
@@ -2457,12 +2452,12 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     _push2(`<!---->`);
                   }
                   if (experience.data.time) {
-                    _push2(`<span${_scopeId}>${ssrInterpolate(experience.data.time)}</span>`);
+                    _push2(`<span${_scopeId}>${ssrInterpolate_1(experience.data.time)}</span>`);
                   } else {
                     _push2(`<!---->`);
                   }
                   if (experience.data.location) {
-                    _push2(`<span${_scopeId}> · ${ssrInterpolate(experience.data.location)}</span>`);
+                    _push2(`<span${_scopeId}> · ${ssrInterpolate_1(experience.data.location)}</span>`);
                   } else {
                     _push2(`<!---->`);
                   }
@@ -2471,17 +2466,17 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   _push2(`<!---->`);
                 }
                 if (experience.data.description) {
-                  _push2(`<p class="text-sm mt-2" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate(experience.data.description)}</p>`);
+                  _push2(`<p class="text-sm mt-2" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate_1(experience.data.description)}</p>`);
                 } else {
                   _push2(`<!---->`);
                 }
-                if (unref(visibleTags)(experience.data.tags ?? []).length) {
+                if (vueExports.unref(visibleTags)(experience.data.tags ?? []).length) {
                   _push2(`<div class="flex flex-wrap gap-1 mt-3"${_scopeId}><!--[-->`);
-                  ssrRenderList(unref(visibleTags)(experience.data.tags ?? []), (tag) => {
-                    _push2(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle({
-                      backgroundColor: `color-mix(in srgb, ${unref(surfaceSecondary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                      color: unref(surfaceSecondary)
-                    })}"${_scopeId}>${ssrInterpolate(tag)}</span>`);
+                  ssrRenderList_1(vueExports.unref(visibleTags)(experience.data.tags ?? []), (tag) => {
+                    _push2(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle_1({
+                      backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfaceSecondary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                      color: vueExports.unref(surfaceSecondary)
+                    })}"${_scopeId}>${ssrInterpolate_1(tag)}</span>`);
                   });
                   _push2(`<!--]--></div>`);
                 } else {
@@ -2492,68 +2487,68 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
               _push2(`<!--]--></ul></div>`);
             } else {
               return [
-                createVNode("div", {
-                  class: ["px-8 mx-auto", [unref(maxWidthClass)]]
+                vueExports.createVNode("div", {
+                  class: ["px-8 mx-auto", [vueExports.unref(maxWidthClass)]]
                 }, [
-                  __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                  __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                     key: 0,
                     "field-key": "heading",
                     tag: "h2",
                     class: "text-3xl font-bold mb-8",
-                    style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                    style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                   }, {
-                    default: withCtx(() => [
-                      createVNode("h2", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-8",
                         style: {
-                          ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                          ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                           fontFamily: "var(--font-heading)"
                         }
-                      }, toDisplayString(__props.heading), 5)
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ]),
                     _: 1
-                  }, 8, ["style"])) : createCommentVNode("", true),
-                  createVNode("ul", { class: "space-y-6" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(experiences), (experience) => {
-                      return openBlock(), createBlock("li", {
+                  }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode("ul", { class: "space-y-6" }, [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(experiences), (experience) => {
+                      return vueExports.openBlock(), vueExports.createBlock("li", {
                         key: experience.id,
                         class: "rounded-xl p-6",
-                        style: unref(surfaceStyle)
+                        style: vueExports.unref(surfaceStyle)
                       }, [
-                        createVNode("p", {
+                        vueExports.createVNode("p", {
                           class: "font-semibold text-lg",
-                          style: unref(surfaceTextStyle)
-                        }, toDisplayString(experience.data.title), 5),
-                        experience.data.place || experience.data.time ? (openBlock(), createBlock("p", {
+                          style: vueExports.unref(surfaceTextStyle)
+                        }, vueExports.toDisplayString(experience.data.title), 5),
+                        experience.data.place || experience.data.time ? (vueExports.openBlock(), vueExports.createBlock("p", {
                           key: 0,
                           class: "text-sm mt-1",
-                          style: unref(surfaceTextMutedStyle)
+                          style: vueExports.unref(surfaceTextMutedStyle)
                         }, [
-                          experience.data.place ? (openBlock(), createBlock("span", { key: 0 }, toDisplayString(experience.data.place), 1)) : createCommentVNode("", true),
-                          experience.data.place && experience.data.time ? (openBlock(), createBlock("span", { key: 1 }, " · ")) : createCommentVNode("", true),
-                          experience.data.time ? (openBlock(), createBlock("span", { key: 2 }, toDisplayString(experience.data.time), 1)) : createCommentVNode("", true),
-                          experience.data.location ? (openBlock(), createBlock("span", { key: 3 }, " · " + toDisplayString(experience.data.location), 1)) : createCommentVNode("", true)
-                        ], 4)) : createCommentVNode("", true),
-                        experience.data.description ? (openBlock(), createBlock("p", {
+                          experience.data.place ? (vueExports.openBlock(), vueExports.createBlock("span", { key: 0 }, vueExports.toDisplayString(experience.data.place), 1)) : vueExports.createCommentVNode("", true),
+                          experience.data.place && experience.data.time ? (vueExports.openBlock(), vueExports.createBlock("span", { key: 1 }, " · ")) : vueExports.createCommentVNode("", true),
+                          experience.data.time ? (vueExports.openBlock(), vueExports.createBlock("span", { key: 2 }, vueExports.toDisplayString(experience.data.time), 1)) : vueExports.createCommentVNode("", true),
+                          experience.data.location ? (vueExports.openBlock(), vueExports.createBlock("span", { key: 3 }, " · " + vueExports.toDisplayString(experience.data.location), 1)) : vueExports.createCommentVNode("", true)
+                        ], 4)) : vueExports.createCommentVNode("", true),
+                        experience.data.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                           key: 1,
                           class: "text-sm mt-2",
-                          style: unref(surfaceTextMutedStyle)
-                        }, toDisplayString(experience.data.description), 5)) : createCommentVNode("", true),
-                        unref(visibleTags)(experience.data.tags ?? []).length ? (openBlock(), createBlock("div", {
+                          style: vueExports.unref(surfaceTextMutedStyle)
+                        }, vueExports.toDisplayString(experience.data.description), 5)) : vueExports.createCommentVNode("", true),
+                        vueExports.unref(visibleTags)(experience.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                           key: 2,
                           class: "flex flex-wrap gap-1 mt-3"
                         }, [
-                          (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(experience.data.tags ?? []), (tag) => {
-                            return openBlock(), createBlock("span", {
+                          (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(experience.data.tags ?? []), (tag) => {
+                            return vueExports.openBlock(), vueExports.createBlock("span", {
                               key: tag,
                               class: "text-xs px-2 py-0.5 rounded-full",
                               style: {
-                                backgroundColor: `color-mix(in srgb, ${unref(surfaceSecondary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                                color: unref(surfaceSecondary)
+                                backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfaceSecondary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                                color: vueExports.unref(surfaceSecondary)
                               }
-                            }, toDisplayString(tag), 5);
+                            }, vueExports.toDisplayString(tag), 5);
                           }), 128))
-                        ])) : createCommentVNode("", true)
+                        ])) : vueExports.createCommentVNode("", true)
                       ], 4);
                     }), 128))
                   ])
@@ -2571,7 +2566,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$9 = _sfc_main$9.setup;
 _sfc_main$9.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Experiences.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
@@ -2617,7 +2612,7 @@ const experiencesDefinition = {
     styleTab
   ]
 };
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$8 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PostCards",
   __ssrInlineRender: true,
   props: {
@@ -2634,15 +2629,15 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
-    const slug = inject(portfolioSlugKey, "");
+    const slug = vueExports.inject(portfolioSlugKey, "");
     const config = useRuntimeConfig();
     const baseURL = config.apiUrl;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolveColor, resolveTextColor, resolvePrimary } = useActivePalette();
-    const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
-    const surfaceHex = computed(() => props.surfaceColor ? resolveColor(props.surfaceColor) : null);
-    const sectionStyle = computed(() => ({
+    const bgHex = vueExports.computed(() => props.background ? resolveColor(props.background) : null);
+    const surfaceHex = vueExports.computed(() => props.surfaceColor ? resolveColor(props.surfaceColor) : null);
+    const sectionStyle = vueExports.computed(() => ({
       ...bgHex.value ? { backgroundColor: bgHex.value } : {},
       ...props.backgroundImage ? {
         backgroundImage: `url(${props.backgroundImage})`,
@@ -2651,26 +2646,26 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         backgroundAttachment: props.backgroundFixed ? "fixed" : "scroll"
       } : {}
     }));
-    const autoTextColor = computed(
+    const autoTextColor = vueExports.computed(
       () => props.background ? resolveTextColor(props.background) : null
     );
-    const textColorStyle = computed(() => autoTextColor.value ? { color: autoTextColor.value } : {});
-    const surfaceStyle = computed(
+    const textColorStyle = vueExports.computed(() => autoTextColor.value ? { color: autoTextColor.value } : {});
+    const surfaceStyle = vueExports.computed(
       () => surfaceHex.value ? { backgroundColor: surfaceHex.value } : { backgroundColor: "var(--bg-surface)" }
     );
-    const surfaceTextColor = computed(
+    const surfaceTextColor = vueExports.computed(
       () => props.surfaceColor ? resolveTextColor(props.surfaceColor) : null
     );
-    const surfaceTextStyle = computed(
+    const surfaceTextStyle = vueExports.computed(
       () => surfaceTextColor.value ? { color: surfaceTextColor.value } : { color: "var(--text-primary)" }
     );
-    const surfaceTextMutedStyle = computed(
+    const surfaceTextMutedStyle = vueExports.computed(
       () => surfaceTextColor.value ? { color: surfaceTextColor.value, opacity: "0.6" } : { color: "var(--text-secondary)" }
     );
-    const surfacePrimary = computed(() => resolvePrimary(props.surfaceColor));
-    const bgPrimary = computed(() => resolvePrimary(props.background));
-    const surfaceHexOrDefault = computed(() => surfaceHex.value ?? "var(--bg-surface)");
-    const { data } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
+    const surfacePrimary = vueExports.computed(() => resolvePrimary(props.surfaceColor));
+    const bgPrimary = vueExports.computed(() => resolvePrimary(props.background));
+    const surfaceHexOrDefault = vueExports.computed(() => surfaceHex.value ?? "var(--bg-surface)");
+    const { data } = ([__temp, __restore] = vueExports.withAsyncContext(() => useAsyncData(
       () => `portfolio-${slug}-posts-${props.collectionId || "default"}`,
       () => {
         const url = props.collectionId ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}` : `/api/portfolios/${slug}/collections/posts`;
@@ -2680,45 +2675,45 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       /* nuxt-injected */
     )), __temp = await __temp, __restore(), __temp);
     const hasDetailPage = !!getCollectionType("posts")?.pageTemplate;
-    const allPosts = computed(() => {
+    const allPosts = vueExports.computed(() => {
       const all = data.value?.items ?? [];
       return props.filterTag ? all.filter((p) => p.data.tags?.includes(props.filterTag)) : all;
     });
-    const page = ref(1);
-    const totalPages = computed(() => Math.ceil(allPosts.value.length / props.pageSize));
-    const posts = computed(() => {
+    const page = vueExports.ref(1);
+    const totalPages = vueExports.computed(() => Math.ceil(allPosts.value.length / props.pageSize));
+    const posts = vueExports.computed(() => {
       const start = (page.value - 1) * props.pageSize;
       return allPosts.value.slice(start, start + props.pageSize);
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_EditorInlineTextField = __nuxt_component_1;
-      if (unref(allPosts).length) {
-        _push(`<section${ssrRenderAttrs(mergeProps({
+      if (vueExports.unref(allPosts).length) {
+        _push(`<section${ssrRenderAttrs_1(vueExports.mergeProps({
           class: "px-8 py-16",
-          style: unref(sectionStyle)
-        }, _attrs))}><div class="${ssrRenderClass([[unref(maxWidthClass)], "mx-auto"])}">`);
+          style: vueExports.unref(sectionStyle)
+        }, _attrs))}><div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "mx-auto"])}">`);
         if (__props.showHeading) {
-          _push(ssrRenderComponent(_component_EditorInlineTextField, {
+          _push(ssrRenderComponent_1(_component_EditorInlineTextField, {
             "field-key": "heading",
             tag: "h2",
             class: "text-3xl font-bold mb-8",
-            style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+            style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
           }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
+            default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({
-                  ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                _push2(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({
+                  ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                   fontFamily: "var(--font-heading)"
-                })}"${_scopeId}>${ssrInterpolate(__props.heading)}</h2>`);
+                })}"${_scopeId}>${ssrInterpolate_1(__props.heading)}</h2>`);
               } else {
                 return [
-                  createVNode("h2", {
+                  vueExports.createVNode("h2", {
                     class: "text-3xl font-bold mb-8",
                     style: {
-                      ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                      ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                       fontFamily: "var(--font-heading)"
                     }
-                  }, toDisplayString(__props.heading), 5)
+                  }, vueExports.toDisplayString(__props.heading), 5)
                 ];
               }
             }),
@@ -2728,105 +2723,105 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           _push(`<!---->`);
         }
         _push(`<div class="grid grid-cols-1 sm:grid-cols-2 gap-6"><!--[-->`);
-        ssrRenderList(unref(posts), (post) => {
-          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
+        ssrRenderList_1(vueExports.unref(posts), (post) => {
+          ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
             key: post.id,
             class: ["rounded-xl overflow-hidden flex flex-col transition-opacity hover:opacity-80", { "cursor-pointer": hasDetailPage }],
-            href: hasDetailPage ? `/p/${unref(slug)}/posts/${post.id}` : void 0,
-            style: unref(surfaceStyle)
+            href: hasDetailPage ? `/p/${vueExports.unref(slug)}/posts/${post.id}` : void 0,
+            style: vueExports.unref(surfaceStyle)
           }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
+            default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<div class="h-44 w-full overflow-hidden shrink-0" style="${ssrRenderStyle({
-                  backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                _push2(`<div class="h-44 w-full overflow-hidden shrink-0" style="${ssrRenderStyle_1({
+                  backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                 })}"${_scopeId}>`);
                 if (post.data.coverImageUrl) {
-                  _push2(`<img${ssrRenderAttr("src", post.data.coverImageUrl)}${ssrRenderAttr("alt", post.data.title)} class="w-full h-full object-cover"${_scopeId}>`);
+                  _push2(`<img${ssrRenderAttr_1("src", post.data.coverImageUrl)}${ssrRenderAttr_1("alt", post.data.title)} class="w-full h-full object-cover"${_scopeId}>`);
                 } else {
                   _push2(`<!---->`);
                 }
-                _push2(`</div><div class="p-5 flex flex-col gap-2 flex-1"${_scopeId}><div class="flex items-start justify-between gap-2"${_scopeId}><h3 class="font-semibold text-base leading-snug" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId}>${ssrInterpolate(post.data.title)}</h3>`);
+                _push2(`</div><div class="p-5 flex flex-col gap-2 flex-1"${_scopeId}><div class="flex items-start justify-between gap-2"${_scopeId}><h3 class="font-semibold text-base leading-snug" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId}>${ssrInterpolate_1(post.data.title)}</h3>`);
                 if (post.data.date) {
-                  _push2(`<span class="text-xs shrink-0 pt-0.5" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate(post.data.date)}</span>`);
+                  _push2(`<span class="text-xs shrink-0 pt-0.5" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate_1(post.data.date)}</span>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 _push2(`</div>`);
                 if (post.data.excerpt) {
-                  _push2(`<p class="text-sm line-clamp-3" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate(post.data.excerpt)}</p>`);
+                  _push2(`<p class="text-sm line-clamp-3" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate_1(post.data.excerpt)}</p>`);
                 } else {
                   _push2(`<!---->`);
                 }
-                if (unref(visibleTags)(post.data.tags ?? []).length) {
+                if (vueExports.unref(visibleTags)(post.data.tags ?? []).length) {
                   _push2(`<div class="flex flex-wrap gap-1 mt-auto pt-2"${_scopeId}><!--[-->`);
-                  ssrRenderList(unref(visibleTags)(post.data.tags ?? []), (tag) => {
-                    _push2(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle({
-                      backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                      color: unref(surfacePrimary)
-                    })}"${_scopeId}>${ssrInterpolate(tag)}</span>`);
+                  ssrRenderList_1(vueExports.unref(visibleTags)(post.data.tags ?? []), (tag) => {
+                    _push2(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle_1({
+                      backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                      color: vueExports.unref(surfacePrimary)
+                    })}"${_scopeId}>${ssrInterpolate_1(tag)}</span>`);
                   });
                   _push2(`<!--]--></div>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 if (hasDetailPage) {
-                  _push2(`<span class="text-xs font-medium mt-auto pt-1" style="${ssrRenderStyle({ color: unref(surfacePrimary) })}"${_scopeId}> Read more → </span>`);
+                  _push2(`<span class="text-xs font-medium mt-auto pt-1" style="${ssrRenderStyle_1({ color: vueExports.unref(surfacePrimary) })}"${_scopeId}> Read more → </span>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 _push2(`</div>`);
               } else {
                 return [
-                  createVNode("div", {
+                  vueExports.createVNode("div", {
                     class: "h-44 w-full overflow-hidden shrink-0",
                     style: {
-                      backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                      backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                     }
                   }, [
-                    post.data.coverImageUrl ? (openBlock(), createBlock("img", {
+                    post.data.coverImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                       key: 0,
                       src: post.data.coverImageUrl,
                       alt: post.data.title,
                       class: "w-full h-full object-cover"
-                    }, null, 8, ["src", "alt"])) : createCommentVNode("", true)
+                    }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true)
                   ], 4),
-                  createVNode("div", { class: "p-5 flex flex-col gap-2 flex-1" }, [
-                    createVNode("div", { class: "flex items-start justify-between gap-2" }, [
-                      createVNode("h3", {
+                  vueExports.createVNode("div", { class: "p-5 flex flex-col gap-2 flex-1" }, [
+                    vueExports.createVNode("div", { class: "flex items-start justify-between gap-2" }, [
+                      vueExports.createVNode("h3", {
                         class: "font-semibold text-base leading-snug",
-                        style: unref(surfaceTextStyle)
-                      }, toDisplayString(post.data.title), 5),
-                      post.data.date ? (openBlock(), createBlock("span", {
+                        style: vueExports.unref(surfaceTextStyle)
+                      }, vueExports.toDisplayString(post.data.title), 5),
+                      post.data.date ? (vueExports.openBlock(), vueExports.createBlock("span", {
                         key: 0,
                         class: "text-xs shrink-0 pt-0.5",
-                        style: unref(surfaceTextMutedStyle)
-                      }, toDisplayString(post.data.date), 5)) : createCommentVNode("", true)
+                        style: vueExports.unref(surfaceTextMutedStyle)
+                      }, vueExports.toDisplayString(post.data.date), 5)) : vueExports.createCommentVNode("", true)
                     ]),
-                    post.data.excerpt ? (openBlock(), createBlock("p", {
+                    post.data.excerpt ? (vueExports.openBlock(), vueExports.createBlock("p", {
                       key: 0,
                       class: "text-sm line-clamp-3",
-                      style: unref(surfaceTextMutedStyle)
-                    }, toDisplayString(post.data.excerpt), 5)) : createCommentVNode("", true),
-                    unref(visibleTags)(post.data.tags ?? []).length ? (openBlock(), createBlock("div", {
+                      style: vueExports.unref(surfaceTextMutedStyle)
+                    }, vueExports.toDisplayString(post.data.excerpt), 5)) : vueExports.createCommentVNode("", true),
+                    vueExports.unref(visibleTags)(post.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                       key: 1,
                       class: "flex flex-wrap gap-1 mt-auto pt-2"
                     }, [
-                      (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(post.data.tags ?? []), (tag) => {
-                        return openBlock(), createBlock("span", {
+                      (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(post.data.tags ?? []), (tag) => {
+                        return vueExports.openBlock(), vueExports.createBlock("span", {
                           key: tag,
                           class: "text-xs px-2 py-0.5 rounded-full",
                           style: {
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                            color: unref(surfacePrimary)
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                            color: vueExports.unref(surfacePrimary)
                           }
-                        }, toDisplayString(tag), 5);
+                        }, vueExports.toDisplayString(tag), 5);
                       }), 128))
-                    ])) : createCommentVNode("", true),
-                    hasDetailPage ? (openBlock(), createBlock("span", {
+                    ])) : vueExports.createCommentVNode("", true),
+                    hasDetailPage ? (vueExports.openBlock(), vueExports.createBlock("span", {
                       key: 2,
                       class: "text-xs font-medium mt-auto pt-1",
-                      style: { color: unref(surfacePrimary) }
-                    }, " Read more → ", 4)) : createCommentVNode("", true)
+                      style: { color: vueExports.unref(surfacePrimary) }
+                    }, " Read more → ", 4)) : vueExports.createCommentVNode("", true)
                   ])
                 ];
               }
@@ -2835,12 +2830,12 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           }), _parent);
         });
         _push(`<!--]--></div>`);
-        if (unref(totalPages) > 1) {
+        if (vueExports.unref(totalPages) > 1) {
           _push(`<div class="flex justify-center gap-2 mt-10"><!--[-->`);
-          ssrRenderList(unref(totalPages), (p) => {
-            _push(`<button class="w-8 h-8 rounded-full text-sm transition-colors" style="${ssrRenderStyle(
-              p === unref(page) ? { backgroundColor: unref(bgPrimary), color: unref(bgHex) ?? "var(--bg-page)" } : { ...unref(surfaceStyle), ...unref(surfaceTextMutedStyle) }
-            )}">${ssrInterpolate(p)}</button>`);
+          ssrRenderList_1(vueExports.unref(totalPages), (p) => {
+            _push(`<button class="w-8 h-8 rounded-full text-sm transition-colors" style="${ssrRenderStyle_1(
+              p === vueExports.unref(page) ? { backgroundColor: vueExports.unref(bgPrimary), color: vueExports.unref(bgHex) ?? "var(--bg-page)" } : { ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextMutedStyle) }
+            )}">${ssrInterpolate_1(p)}</button>`);
           });
           _push(`<!--]--></div>`);
         } else {
@@ -2855,12 +2850,12 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$8 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/PostCards.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
 const BlocksPostCards = Object.assign(_sfc_main$8, { __name: "BlocksPostCards" });
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PostFeed",
   __ssrInlineRender: true,
   props: {
@@ -2884,14 +2879,14 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
-    const slug = inject(portfolioSlugKey, "");
+    const slug = vueExports.inject(portfolioSlugKey, "");
     const config = useRuntimeConfig();
     const baseURL = config.apiUrl;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolveColor, resolvePrimary } = useActivePalette();
-    const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
-    const bgPrimary = computed(() => resolvePrimary(props.background));
+    const bgHex = vueExports.computed(() => props.background ? resolveColor(props.background) : null);
+    const bgPrimary = vueExports.computed(() => resolvePrimary(props.background));
     const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
     const {
       surfaceHexOrDefault,
@@ -2900,7 +2895,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       surfaceTextMutedStyle,
       surfacePrimary
     } = useBlockSurface(() => props.surfaceColor);
-    const { data } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
+    const { data } = ([__temp, __restore] = vueExports.withAsyncContext(() => useAsyncData(
       () => `portfolio-${slug}-posts-${props.collectionId || "default"}`,
       () => {
         const url = props.collectionId ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}` : `/api/portfolios/${slug}/collections/posts`;
@@ -2910,21 +2905,21 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       /* nuxt-injected */
     )), __temp = await __temp, __restore(), __temp);
     const hasDetailPage = !!getCollectionType("posts")?.pageTemplate;
-    const allPosts = computed(() => {
+    const allPosts = vueExports.computed(() => {
       const all = data.value?.items ?? [];
       return props.filterTag ? all.filter((p) => p.data.tags?.includes(props.filterTag)) : all;
     });
-    const page = ref(1);
-    const totalPages = computed(() => Math.ceil(allPosts.value.length / props.pageSize));
-    const posts = computed(() => {
+    const page = vueExports.ref(1);
+    const totalPages = vueExports.computed(() => Math.ceil(allPosts.value.length / props.pageSize));
+    const posts = vueExports.computed(() => {
       const start = (page.value - 1) * props.pageSize;
       return allPosts.value.slice(start, start + props.pageSize);
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineTextField = __nuxt_component_1;
-      if (unref(allPosts).length) {
-        _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "py-16" }, {
+      if (vueExports.unref(allPosts).length) {
+        _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "py-16" }, {
           background: __props.background,
           backgroundImage: __props.backgroundImage,
           backgroundOpacity: __props.backgroundOpacity,
@@ -2936,31 +2931,31 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
           overlayDegree: __props.overlayDegree,
           overlayOpacity: __props.overlayOpacity
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="${ssrRenderClass([[unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
+              _push2(`<div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
               if (__props.showHeading) {
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-8",
-                  style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                  style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({
-                        ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({
+                        ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                         fontFamily: "var(--font-heading)"
-                      })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                      })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                     } else {
                       return [
-                        createVNode("h2", {
+                        vueExports.createVNode("h2", {
                           class: "text-3xl font-bold mb-8",
                           style: {
-                            ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                            ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                             fontFamily: "var(--font-heading)"
                           }
-                        }, toDisplayString(__props.heading), 5)
+                        }, vueExports.toDisplayString(__props.heading), 5)
                       ];
                     }
                   }),
@@ -2970,133 +2965,133 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               _push2(`<div class="flex flex-col gap-4"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(posts), (post) => {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
+              ssrRenderList_1(vueExports.unref(posts), (post) => {
+                ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
                   key: post.id,
                   class: ["rounded-xl overflow-hidden flex flex-row transition-opacity hover:opacity-80", { "cursor-pointer": hasDetailPage }],
-                  href: hasDetailPage ? `/p/${unref(slug)}/posts/${post.id}` : void 0,
-                  style: unref(surfaceStyle)
+                  href: hasDetailPage ? `/p/${vueExports.unref(slug)}/posts/${post.id}` : void 0,
+                  style: vueExports.unref(surfaceStyle)
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<div class="relative w-40 sm:w-52 shrink-0 overflow-hidden" style="${ssrRenderStyle({
-                        backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                      _push3(`<div class="relative w-40 sm:w-52 shrink-0 overflow-hidden" style="${ssrRenderStyle_1({
+                        backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                       })}"${_scopeId2}>`);
                       if (post.data.coverImageUrl) {
-                        _push3(`<img${ssrRenderAttr("src", post.data.coverImageUrl)}${ssrRenderAttr("alt", post.data.title)} class="w-full h-full object-cover absolute inset-0"${_scopeId2}>`);
+                        _push3(`<img${ssrRenderAttr_1("src", post.data.coverImageUrl)}${ssrRenderAttr_1("alt", post.data.title)} class="w-full h-full object-cover absolute inset-0"${_scopeId2}>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      if (unref(visibleTags)(post.data.tags ?? []).length) {
-                        _push3(`<span class="absolute top-3 left-3 text-xs px-2.5 py-1 rounded-md font-medium" style="${ssrRenderStyle({
-                          backgroundColor: unref(surfacePrimary),
-                          color: unref(surfaceHexOrDefault)
-                        })}"${_scopeId2}>${ssrInterpolate(unref(visibleTags)(post.data.tags ?? [])[0])}</span>`);
+                      if (vueExports.unref(visibleTags)(post.data.tags ?? []).length) {
+                        _push3(`<span class="absolute top-3 left-3 text-xs px-2.5 py-1 rounded-md font-medium" style="${ssrRenderStyle_1({
+                          backgroundColor: vueExports.unref(surfacePrimary),
+                          color: vueExports.unref(surfaceHexOrDefault)
+                        })}"${_scopeId2}>${ssrInterpolate_1(vueExports.unref(visibleTags)(post.data.tags ?? [])[0])}</span>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      _push3(`</div><div class="p-5 flex flex-col gap-2 flex-1 min-w-0"${_scopeId2}><div class="flex justify-between items-center gap-3 text-xs" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}>`);
+                      _push3(`</div><div class="p-5 flex flex-col gap-2 flex-1 min-w-0"${_scopeId2}><div class="flex justify-between items-center gap-3 text-xs" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}>`);
                       if (post.data.date) {
-                        _push3(`<span${_scopeId2}>${ssrInterpolate(post.data.date)}</span>`);
+                        _push3(`<span${_scopeId2}>${ssrInterpolate_1(post.data.date)}</span>`);
                       } else {
                         _push3(`<!---->`);
                       }
-                      _push3(`</div><h3 class="font-bold text-base leading-snug" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId2}>${ssrInterpolate(post.data.title)}</h3>`);
+                      _push3(`</div><h3 class="font-bold text-base leading-snug" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId2}>${ssrInterpolate_1(post.data.title)}</h3>`);
                       if (post.data.excerpt) {
-                        _push3(`<p class="text-sm line-clamp-2" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate(post.data.excerpt)}</p>`);
+                        _push3(`<p class="text-sm line-clamp-2" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}>${ssrInterpolate_1(post.data.excerpt)}</p>`);
                       } else {
                         _push3(`<!---->`);
                       }
                       _push3(`<div class="flex items-center justify-between gap-2 mt-auto pt-2"${_scopeId2}>`);
-                      if (unref(visibleTags)(post.data.tags ?? []).length > 1) {
-                        _push3(`<div class="flex flex-wrap gap-x-1.5 gap-y-1" style="${ssrRenderStyle({
-                          color: unref(surfacePrimary)
+                      if (vueExports.unref(visibleTags)(post.data.tags ?? []).length > 1) {
+                        _push3(`<div class="flex flex-wrap gap-x-1.5 gap-y-1" style="${ssrRenderStyle_1({
+                          color: vueExports.unref(surfacePrimary)
                         })}"${_scopeId2}><!--[-->`);
-                        ssrRenderList(unref(visibleTags)(post.data.tags ?? []).slice(1), (tag) => {
-                          _push3(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle({
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                            color: unref(surfacePrimary)
-                          })}"${_scopeId2}>${ssrInterpolate(tag)}</span>`);
+                        ssrRenderList_1(vueExports.unref(visibleTags)(post.data.tags ?? []).slice(1), (tag) => {
+                          _push3(`<span class="text-xs px-2 py-0.5 rounded-full" style="${ssrRenderStyle_1({
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                            color: vueExports.unref(surfacePrimary)
+                          })}"${_scopeId2}>${ssrInterpolate_1(tag)}</span>`);
                         });
                         _push3(`<!--]--></div>`);
                       } else {
                         _push3(`<!---->`);
                       }
                       if (post.data.author) {
-                        _push3(`<span class="text-xs shrink-0 flex items-center gap-1.5" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId2}><span class="w-1.5 h-1.5 rounded-full inline-block" style="${ssrRenderStyle({ backgroundColor: unref(surfacePrimary) })}"${_scopeId2}></span> ${ssrInterpolate(post.data.author)}</span>`);
+                        _push3(`<span class="text-xs shrink-0 flex items-center gap-1.5" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId2}><span class="w-1.5 h-1.5 rounded-full inline-block" style="${ssrRenderStyle_1({ backgroundColor: vueExports.unref(surfacePrimary) })}"${_scopeId2}></span> ${ssrInterpolate_1(post.data.author)}</span>`);
                       } else {
                         _push3(`<div class="flex-1"${_scopeId2}></div>`);
                       }
                       _push3(`</div></div>`);
                     } else {
                       return [
-                        createVNode("div", {
+                        vueExports.createVNode("div", {
                           class: "relative w-40 sm:w-52 shrink-0 overflow-hidden",
                           style: {
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                           }
                         }, [
-                          post.data.coverImageUrl ? (openBlock(), createBlock("img", {
+                          post.data.coverImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                             key: 0,
                             src: post.data.coverImageUrl,
                             alt: post.data.title,
                             class: "w-full h-full object-cover absolute inset-0"
-                          }, null, 8, ["src", "alt"])) : createCommentVNode("", true),
-                          unref(visibleTags)(post.data.tags ?? []).length ? (openBlock(), createBlock("span", {
+                          }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true),
+                          vueExports.unref(visibleTags)(post.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("span", {
                             key: 1,
                             class: "absolute top-3 left-3 text-xs px-2.5 py-1 rounded-md font-medium",
                             style: {
-                              backgroundColor: unref(surfacePrimary),
-                              color: unref(surfaceHexOrDefault)
+                              backgroundColor: vueExports.unref(surfacePrimary),
+                              color: vueExports.unref(surfaceHexOrDefault)
                             }
-                          }, toDisplayString(unref(visibleTags)(post.data.tags ?? [])[0]), 5)) : createCommentVNode("", true)
+                          }, vueExports.toDisplayString(vueExports.unref(visibleTags)(post.data.tags ?? [])[0]), 5)) : vueExports.createCommentVNode("", true)
                         ], 4),
-                        createVNode("div", { class: "p-5 flex flex-col gap-2 flex-1 min-w-0" }, [
-                          createVNode("div", {
+                        vueExports.createVNode("div", { class: "p-5 flex flex-col gap-2 flex-1 min-w-0" }, [
+                          vueExports.createVNode("div", {
                             class: "flex justify-between items-center gap-3 text-xs",
-                            style: unref(surfaceTextMutedStyle)
+                            style: vueExports.unref(surfaceTextMutedStyle)
                           }, [
-                            post.data.date ? (openBlock(), createBlock("span", { key: 0 }, toDisplayString(post.data.date), 1)) : createCommentVNode("", true)
+                            post.data.date ? (vueExports.openBlock(), vueExports.createBlock("span", { key: 0 }, vueExports.toDisplayString(post.data.date), 1)) : vueExports.createCommentVNode("", true)
                           ], 4),
-                          createVNode("h3", {
+                          vueExports.createVNode("h3", {
                             class: "font-bold text-base leading-snug",
-                            style: unref(surfaceTextStyle)
-                          }, toDisplayString(post.data.title), 5),
-                          post.data.excerpt ? (openBlock(), createBlock("p", {
+                            style: vueExports.unref(surfaceTextStyle)
+                          }, vueExports.toDisplayString(post.data.title), 5),
+                          post.data.excerpt ? (vueExports.openBlock(), vueExports.createBlock("p", {
                             key: 0,
                             class: "text-sm line-clamp-2",
-                            style: unref(surfaceTextMutedStyle)
-                          }, toDisplayString(post.data.excerpt), 5)) : createCommentVNode("", true),
-                          createVNode("div", { class: "flex items-center justify-between gap-2 mt-auto pt-2" }, [
-                            unref(visibleTags)(post.data.tags ?? []).length > 1 ? (openBlock(), createBlock("div", {
+                            style: vueExports.unref(surfaceTextMutedStyle)
+                          }, vueExports.toDisplayString(post.data.excerpt), 5)) : vueExports.createCommentVNode("", true),
+                          vueExports.createVNode("div", { class: "flex items-center justify-between gap-2 mt-auto pt-2" }, [
+                            vueExports.unref(visibleTags)(post.data.tags ?? []).length > 1 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 0,
                               class: "flex flex-wrap gap-x-1.5 gap-y-1",
                               style: {
-                                color: unref(surfacePrimary)
+                                color: vueExports.unref(surfacePrimary)
                               }
                             }, [
-                              (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(post.data.tags ?? []).slice(1), (tag) => {
-                                return openBlock(), createBlock("span", {
+                              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(post.data.tags ?? []).slice(1), (tag) => {
+                                return vueExports.openBlock(), vueExports.createBlock("span", {
                                   key: tag,
                                   class: "text-xs px-2 py-0.5 rounded-full",
                                   style: {
-                                    backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                                    color: unref(surfacePrimary)
+                                    backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                                    color: vueExports.unref(surfacePrimary)
                                   }
-                                }, toDisplayString(tag), 5);
+                                }, vueExports.toDisplayString(tag), 5);
                               }), 128))
-                            ], 4)) : createCommentVNode("", true),
-                            post.data.author ? (openBlock(), createBlock("span", {
+                            ], 4)) : vueExports.createCommentVNode("", true),
+                            post.data.author ? (vueExports.openBlock(), vueExports.createBlock("span", {
                               key: 1,
                               class: "text-xs shrink-0 flex items-center gap-1.5",
-                              style: unref(surfaceTextMutedStyle)
+                              style: vueExports.unref(surfaceTextMutedStyle)
                             }, [
-                              createVNode("span", {
+                              vueExports.createVNode("span", {
                                 class: "w-1.5 h-1.5 rounded-full inline-block",
-                                style: { backgroundColor: unref(surfacePrimary) }
+                                style: { backgroundColor: vueExports.unref(surfacePrimary) }
                               }, null, 4),
-                              createTextVNode(" " + toDisplayString(post.data.author), 1)
-                            ], 4)) : (openBlock(), createBlock("div", {
+                              vueExports.createTextVNode(" " + vueExports.toDisplayString(post.data.author), 1)
+                            ], 4)) : (vueExports.openBlock(), vueExports.createBlock("div", {
                               key: 2,
                               class: "flex-1"
                             }))
@@ -3109,12 +3104,12 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                 }), _parent2, _scopeId);
               });
               _push2(`<!--]--></div>`);
-              if (unref(totalPages) > 1) {
+              if (vueExports.unref(totalPages) > 1) {
                 _push2(`<div class="flex justify-center gap-2 mt-10"${_scopeId}><!--[-->`);
-                ssrRenderList(unref(totalPages), (p) => {
-                  _push2(`<button class="w-8 h-8 rounded-full text-sm transition-colors" style="${ssrRenderStyle(
-                    p === unref(page) ? { backgroundColor: unref(bgPrimary), color: unref(bgHex) ?? "var(--bg-page)" } : { ...unref(surfaceStyle), ...unref(surfaceTextMutedStyle) }
-                  )}"${_scopeId}>${ssrInterpolate(p)}</button>`);
+                ssrRenderList_1(vueExports.unref(totalPages), (p) => {
+                  _push2(`<button class="w-8 h-8 rounded-full text-sm transition-colors" style="${ssrRenderStyle_1(
+                    p === vueExports.unref(page) ? { backgroundColor: vueExports.unref(bgPrimary), color: vueExports.unref(bgHex) ?? "var(--bg-page)" } : { ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextMutedStyle) }
+                  )}"${_scopeId}>${ssrInterpolate_1(p)}</button>`);
                 });
                 _push2(`<!--]--></div>`);
               } else {
@@ -3123,103 +3118,103 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
               _push2(`</div>`);
             } else {
               return [
-                createVNode("div", {
-                  class: ["mx-auto", [unref(maxWidthClass)]]
+                vueExports.createVNode("div", {
+                  class: ["mx-auto", [vueExports.unref(maxWidthClass)]]
                 }, [
-                  __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                  __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                     key: 0,
                     "field-key": "heading",
                     tag: "h2",
                     class: "text-3xl font-bold mb-8",
-                    style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                    style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                   }, {
-                    default: withCtx(() => [
-                      createVNode("h2", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-8",
                         style: {
-                          ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                          ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                           fontFamily: "var(--font-heading)"
                         }
-                      }, toDisplayString(__props.heading), 5)
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ]),
                     _: 1
-                  }, 8, ["style"])) : createCommentVNode("", true),
-                  createVNode("div", { class: "flex flex-col gap-4" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(posts), (post) => {
-                      return openBlock(), createBlock(resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
+                  }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode("div", { class: "flex flex-col gap-4" }, [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(posts), (post) => {
+                      return vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
                         key: post.id,
                         class: ["rounded-xl overflow-hidden flex flex-row transition-opacity hover:opacity-80", { "cursor-pointer": hasDetailPage }],
-                        href: hasDetailPage ? `/p/${unref(slug)}/posts/${post.id}` : void 0,
-                        style: unref(surfaceStyle)
+                        href: hasDetailPage ? `/p/${vueExports.unref(slug)}/posts/${post.id}` : void 0,
+                        style: vueExports.unref(surfaceStyle)
                       }, {
-                        default: withCtx(() => [
-                          createVNode("div", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode("div", {
                             class: "relative w-40 sm:w-52 shrink-0 overflow-hidden",
                             style: {
-                              backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`
+                              backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`
                             }
                           }, [
-                            post.data.coverImageUrl ? (openBlock(), createBlock("img", {
+                            post.data.coverImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                               key: 0,
                               src: post.data.coverImageUrl,
                               alt: post.data.title,
                               class: "w-full h-full object-cover absolute inset-0"
-                            }, null, 8, ["src", "alt"])) : createCommentVNode("", true),
-                            unref(visibleTags)(post.data.tags ?? []).length ? (openBlock(), createBlock("span", {
+                            }, null, 8, ["src", "alt"])) : vueExports.createCommentVNode("", true),
+                            vueExports.unref(visibleTags)(post.data.tags ?? []).length ? (vueExports.openBlock(), vueExports.createBlock("span", {
                               key: 1,
                               class: "absolute top-3 left-3 text-xs px-2.5 py-1 rounded-md font-medium",
                               style: {
-                                backgroundColor: unref(surfacePrimary),
-                                color: unref(surfaceHexOrDefault)
+                                backgroundColor: vueExports.unref(surfacePrimary),
+                                color: vueExports.unref(surfaceHexOrDefault)
                               }
-                            }, toDisplayString(unref(visibleTags)(post.data.tags ?? [])[0]), 5)) : createCommentVNode("", true)
+                            }, vueExports.toDisplayString(vueExports.unref(visibleTags)(post.data.tags ?? [])[0]), 5)) : vueExports.createCommentVNode("", true)
                           ], 4),
-                          createVNode("div", { class: "p-5 flex flex-col gap-2 flex-1 min-w-0" }, [
-                            createVNode("div", {
+                          vueExports.createVNode("div", { class: "p-5 flex flex-col gap-2 flex-1 min-w-0" }, [
+                            vueExports.createVNode("div", {
                               class: "flex justify-between items-center gap-3 text-xs",
-                              style: unref(surfaceTextMutedStyle)
+                              style: vueExports.unref(surfaceTextMutedStyle)
                             }, [
-                              post.data.date ? (openBlock(), createBlock("span", { key: 0 }, toDisplayString(post.data.date), 1)) : createCommentVNode("", true)
+                              post.data.date ? (vueExports.openBlock(), vueExports.createBlock("span", { key: 0 }, vueExports.toDisplayString(post.data.date), 1)) : vueExports.createCommentVNode("", true)
                             ], 4),
-                            createVNode("h3", {
+                            vueExports.createVNode("h3", {
                               class: "font-bold text-base leading-snug",
-                              style: unref(surfaceTextStyle)
-                            }, toDisplayString(post.data.title), 5),
-                            post.data.excerpt ? (openBlock(), createBlock("p", {
+                              style: vueExports.unref(surfaceTextStyle)
+                            }, vueExports.toDisplayString(post.data.title), 5),
+                            post.data.excerpt ? (vueExports.openBlock(), vueExports.createBlock("p", {
                               key: 0,
                               class: "text-sm line-clamp-2",
-                              style: unref(surfaceTextMutedStyle)
-                            }, toDisplayString(post.data.excerpt), 5)) : createCommentVNode("", true),
-                            createVNode("div", { class: "flex items-center justify-between gap-2 mt-auto pt-2" }, [
-                              unref(visibleTags)(post.data.tags ?? []).length > 1 ? (openBlock(), createBlock("div", {
+                              style: vueExports.unref(surfaceTextMutedStyle)
+                            }, vueExports.toDisplayString(post.data.excerpt), 5)) : vueExports.createCommentVNode("", true),
+                            vueExports.createVNode("div", { class: "flex items-center justify-between gap-2 mt-auto pt-2" }, [
+                              vueExports.unref(visibleTags)(post.data.tags ?? []).length > 1 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                 key: 0,
                                 class: "flex flex-wrap gap-x-1.5 gap-y-1",
                                 style: {
-                                  color: unref(surfacePrimary)
+                                  color: vueExports.unref(surfacePrimary)
                                 }
                               }, [
-                                (openBlock(true), createBlock(Fragment, null, renderList(unref(visibleTags)(post.data.tags ?? []).slice(1), (tag) => {
-                                  return openBlock(), createBlock("span", {
+                                (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(visibleTags)(post.data.tags ?? []).slice(1), (tag) => {
+                                  return vueExports.openBlock(), vueExports.createBlock("span", {
                                     key: tag,
                                     class: "text-xs px-2 py-0.5 rounded-full",
                                     style: {
-                                      backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHexOrDefault)})`,
-                                      color: unref(surfacePrimary)
+                                      backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHexOrDefault)})`,
+                                      color: vueExports.unref(surfacePrimary)
                                     }
-                                  }, toDisplayString(tag), 5);
+                                  }, vueExports.toDisplayString(tag), 5);
                                 }), 128))
-                              ], 4)) : createCommentVNode("", true),
-                              post.data.author ? (openBlock(), createBlock("span", {
+                              ], 4)) : vueExports.createCommentVNode("", true),
+                              post.data.author ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                 key: 1,
                                 class: "text-xs shrink-0 flex items-center gap-1.5",
-                                style: unref(surfaceTextMutedStyle)
+                                style: vueExports.unref(surfaceTextMutedStyle)
                               }, [
-                                createVNode("span", {
+                                vueExports.createVNode("span", {
                                   class: "w-1.5 h-1.5 rounded-full inline-block",
-                                  style: { backgroundColor: unref(surfacePrimary) }
+                                  style: { backgroundColor: vueExports.unref(surfacePrimary) }
                                 }, null, 4),
-                                createTextVNode(" " + toDisplayString(post.data.author), 1)
-                              ], 4)) : (openBlock(), createBlock("div", {
+                                vueExports.createTextVNode(" " + vueExports.toDisplayString(post.data.author), 1)
+                              ], 4)) : (vueExports.openBlock(), vueExports.createBlock("div", {
                                 key: 2,
                                 class: "flex-1"
                               }))
@@ -3230,19 +3225,19 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                       }, 1032, ["class", "href", "style"]);
                     }), 128))
                   ]),
-                  unref(totalPages) > 1 ? (openBlock(), createBlock("div", {
+                  vueExports.unref(totalPages) > 1 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 1,
                     class: "flex justify-center gap-2 mt-10"
                   }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(totalPages), (p) => {
-                      return openBlock(), createBlock("button", {
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(totalPages), (p) => {
+                      return vueExports.openBlock(), vueExports.createBlock("button", {
                         key: p,
                         class: "w-8 h-8 rounded-full text-sm transition-colors",
-                        style: p === unref(page) ? { backgroundColor: unref(bgPrimary), color: unref(bgHex) ?? "var(--bg-page)" } : { ...unref(surfaceStyle), ...unref(surfaceTextMutedStyle) },
+                        style: p === vueExports.unref(page) ? { backgroundColor: vueExports.unref(bgPrimary), color: vueExports.unref(bgHex) ?? "var(--bg-page)" } : { ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextMutedStyle) },
                         onClick: ($event) => page.value = p
-                      }, toDisplayString(p), 13, ["onClick"]);
+                      }, vueExports.toDisplayString(p), 13, ["onClick"]);
                     }), 128))
-                  ])) : createCommentVNode("", true)
+                  ])) : vueExports.createCommentVNode("", true)
                 ], 2)
               ];
             }
@@ -3257,12 +3252,12 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$7 = _sfc_main$7.setup;
 _sfc_main$7.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/PostFeed.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
 const BlocksPostFeed = Object.assign(_sfc_main$7, { __name: "BlocksPostFeed" });
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PostList",
   __ssrInlineRender: true,
   props: {
@@ -3286,23 +3281,23 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
-    const slug = inject(portfolioSlugKey, "");
+    const slug = vueExports.inject(portfolioSlugKey, "");
     const config = useRuntimeConfig();
     const baseURL = config.apiUrl;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolveTextColor } = useActivePalette();
-    const autoTextColor = computed(
+    const autoTextColor = vueExports.computed(
       () => props.background ? resolveTextColor(props.background) : null
     );
-    const textColorStyle = computed(() => autoTextColor.value ? { color: autoTextColor.value } : {});
-    const textMutedStyle = computed(
+    const textColorStyle = vueExports.computed(() => autoTextColor.value ? { color: autoTextColor.value } : {});
+    const textMutedStyle = vueExports.computed(
       () => autoTextColor.value ? { color: autoTextColor.value, opacity: "0.6" } : { color: "var(--text-secondary)" }
     );
-    const borderStyle = computed(() => ({
+    const borderStyle = vueExports.computed(() => ({
       borderTop: `1px solid ${autoTextColor.value ? `color-mix(in srgb, ${autoTextColor.value} 15%, transparent)` : "var(--border)"}`
     }));
-    const { data } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
+    const { data } = ([__temp, __restore] = vueExports.withAsyncContext(() => useAsyncData(
       () => `portfolio-${slug}-posts-${props.collectionId || "default"}`,
       () => {
         const url = props.collectionId ? `/api/portfolios/${slug}/collections/by-id/${props.collectionId}` : `/api/portfolios/${slug}/collections/posts`;
@@ -3312,7 +3307,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       /* nuxt-injected */
     )), __temp = await __temp, __restore(), __temp);
     const hasDetailPage = !!getCollectionType("posts")?.pageTemplate;
-    const posts = computed(() => {
+    const posts = vueExports.computed(() => {
       const all = data.value?.items ?? [];
       const filtered = props.filterTag ? all.filter((p) => p.data.tags?.includes(props.filterTag)) : all;
       return props.maxItems ? filtered.slice(0, props.maxItems) : filtered;
@@ -3320,8 +3315,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineTextField = __nuxt_component_1;
-      if (unref(posts).length) {
-        _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "px-8 py-16" }, {
+      if (vueExports.unref(posts).length) {
+        _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "px-8 py-16" }, {
           background: __props.background,
           backgroundImage: __props.backgroundImage,
           backgroundOpacity: __props.backgroundOpacity,
@@ -3333,31 +3328,31 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           overlayDegree: __props.overlayDegree,
           overlayOpacity: __props.overlayOpacity
         }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="${ssrRenderClass([unref(maxWidthClass), "mx-auto"])}"${_scopeId}>`);
+              _push2(`<div class="${ssrRenderClass_1([vueExports.unref(maxWidthClass), "mx-auto"])}"${_scopeId}>`);
               if (__props.showHeading) {
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-8",
-                  style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                  style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({
-                        ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                      _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({
+                        ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                         fontFamily: "var(--font-heading)"
-                      })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                      })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                     } else {
                       return [
-                        createVNode("h2", {
+                        vueExports.createVNode("h2", {
                           class: "text-3xl font-bold mb-8",
                           style: {
-                            ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                            ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                             fontFamily: "var(--font-heading)"
                           }
-                        }, toDisplayString(__props.heading), 5)
+                        }, vueExports.toDisplayString(__props.heading), 5)
                       ];
                     }
                   }),
@@ -3367,32 +3362,32 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               _push2(`<div class="flex flex-col"${_scopeId}><!--[-->`);
-              ssrRenderList(unref(posts), (post, i) => {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
+              ssrRenderList_1(vueExports.unref(posts), (post, i) => {
+                ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
                   key: post.id,
                   class: ["flex items-baseline justify-between gap-4 py-3 transition-opacity hover:opacity-80", { "cursor-pointer": hasDetailPage }],
-                  style: i > 0 ? unref(borderStyle) : {},
-                  href: hasDetailPage ? `/p/${unref(slug)}/posts/${post.id}` : void 0
+                  style: i > 0 ? vueExports.unref(borderStyle) : {},
+                  href: hasDetailPage ? `/p/${vueExports.unref(slug)}/posts/${post.id}` : void 0
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<span class="font-medium text-sm leading-snug" style="${ssrRenderStyle(unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" })}"${_scopeId2}>${ssrInterpolate(post.data.title)}</span>`);
+                      _push3(`<span class="font-medium text-sm leading-snug" style="${ssrRenderStyle_1(vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" })}"${_scopeId2}>${ssrInterpolate_1(post.data.title)}</span>`);
                       if (post.data.date) {
-                        _push3(`<span class="text-xs shrink-0 tabular-nums" style="${ssrRenderStyle(unref(textMutedStyle))}"${_scopeId2}>${ssrInterpolate(post.data.date)}</span>`);
+                        _push3(`<span class="text-xs shrink-0 tabular-nums" style="${ssrRenderStyle_1(vueExports.unref(textMutedStyle))}"${_scopeId2}>${ssrInterpolate_1(post.data.date)}</span>`);
                       } else {
                         _push3(`<!---->`);
                       }
                     } else {
                       return [
-                        createVNode("span", {
+                        vueExports.createVNode("span", {
                           class: "font-medium text-sm leading-snug",
-                          style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
-                        }, toDisplayString(post.data.title), 5),
-                        post.data.date ? (openBlock(), createBlock("span", {
+                          style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
+                        }, vueExports.toDisplayString(post.data.title), 5),
+                        post.data.date ? (vueExports.openBlock(), vueExports.createBlock("span", {
                           key: 0,
                           class: "text-xs shrink-0 tabular-nums",
-                          style: unref(textMutedStyle)
-                        }, toDisplayString(post.data.date), 5)) : createCommentVNode("", true)
+                          style: vueExports.unref(textMutedStyle)
+                        }, vueExports.toDisplayString(post.data.date), 5)) : vueExports.createCommentVNode("", true)
                       ];
                     }
                   }),
@@ -3402,45 +3397,45 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
               _push2(`<!--]--></div></div>`);
             } else {
               return [
-                createVNode("div", {
-                  class: ["mx-auto", unref(maxWidthClass)]
+                vueExports.createVNode("div", {
+                  class: ["mx-auto", vueExports.unref(maxWidthClass)]
                 }, [
-                  __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                  __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                     key: 0,
                     "field-key": "heading",
                     tag: "h2",
                     class: "text-3xl font-bold mb-8",
-                    style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                    style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                   }, {
-                    default: withCtx(() => [
-                      createVNode("h2", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-8",
                         style: {
-                          ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                          ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                           fontFamily: "var(--font-heading)"
                         }
-                      }, toDisplayString(__props.heading), 5)
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ]),
                     _: 1
-                  }, 8, ["style"])) : createCommentVNode("", true),
-                  createVNode("div", { class: "flex flex-col" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(posts), (post, i) => {
-                      return openBlock(), createBlock(resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
+                  }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                  vueExports.createVNode("div", { class: "flex flex-col" }, [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(posts), (post, i) => {
+                      return vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(hasDetailPage ? "a" : "div"), {
                         key: post.id,
                         class: ["flex items-baseline justify-between gap-4 py-3 transition-opacity hover:opacity-80", { "cursor-pointer": hasDetailPage }],
-                        style: i > 0 ? unref(borderStyle) : {},
-                        href: hasDetailPage ? `/p/${unref(slug)}/posts/${post.id}` : void 0
+                        style: i > 0 ? vueExports.unref(borderStyle) : {},
+                        href: hasDetailPage ? `/p/${vueExports.unref(slug)}/posts/${post.id}` : void 0
                       }, {
-                        default: withCtx(() => [
-                          createVNode("span", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode("span", {
                             class: "font-medium text-sm leading-snug",
-                            style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
-                          }, toDisplayString(post.data.title), 5),
-                          post.data.date ? (openBlock(), createBlock("span", {
+                            style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
+                          }, vueExports.toDisplayString(post.data.title), 5),
+                          post.data.date ? (vueExports.openBlock(), vueExports.createBlock("span", {
                             key: 0,
                             class: "text-xs shrink-0 tabular-nums",
-                            style: unref(textMutedStyle)
-                          }, toDisplayString(post.data.date), 5)) : createCommentVNode("", true)
+                            style: vueExports.unref(textMutedStyle)
+                          }, vueExports.toDisplayString(post.data.date), 5)) : vueExports.createCommentVNode("", true)
                         ]),
                         _: 2
                       }, 1032, ["class", "style", "href"]);
@@ -3460,7 +3455,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/PostList.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
@@ -3598,7 +3593,7 @@ const postListDefinition = {
     styleTab
   ]
 };
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Demo",
   __ssrInlineRender: true,
   props: {
@@ -3620,46 +3615,46 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       const _component_EditorInlineTextField = __nuxt_component_1;
       const _component_EditorInlineRichField = __nuxt_component_3$1;
-      _push(`<section${ssrRenderAttrs(mergeProps({
+      _push(`<section${ssrRenderAttrs_1(vueExports.mergeProps({
         class: "px-8 py-12 flex flex-col gap-6",
         style: __props.themeColorField ? { backgroundColor: `var(--palette-${__props.themeColorField})` } : {}
       }, _attrs))}><p class="text-xs uppercase tracking-widest font-semibold opacity-40">Demo Block</p><div>`);
-      _push(ssrRenderComponent(_component_EditorInlineTextField, {
+      _push(ssrRenderComponent_1(_component_EditorInlineTextField, {
         "field-key": "inlineTextField",
         tag: "h2",
         class: "text-3xl font-bold"
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`${ssrInterpolate(__props.inlineTextField)}`);
+            _push2(`${ssrInterpolate_1(__props.inlineTextField)}`);
           } else {
             return [
-              createTextVNode(toDisplayString(__props.inlineTextField), 1)
+              vueExports.createTextVNode(vueExports.toDisplayString(__props.inlineTextField), 1)
             ];
           }
         }),
         _: 1
       }, _parent));
       _push(`</div><div class="rich-text">`);
-      _push(ssrRenderComponent(_component_EditorInlineRichField, {
+      _push(ssrRenderComponent_1(_component_EditorInlineRichField, {
         "field-key": "inlineRichField",
         placeholder: "Rich text field (click to edit)",
         html: "",
         class: "w-full"
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (__props.inlineRichField) {
-              _push2(`<div${_scopeId}>${unref(sanitizeHtml)(__props.inlineRichField) ?? ""}</div>`);
+              _push2(`<div${_scopeId}>${vueExports.unref(sanitizeHtml)(__props.inlineRichField) ?? ""}</div>`);
             } else {
               _push2(`<!---->`);
             }
           } else {
             return [
-              __props.inlineRichField ? (openBlock(), createBlock("div", {
+              __props.inlineRichField ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
-                innerHTML: unref(sanitizeHtml)(__props.inlineRichField)
-              }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                innerHTML: vueExports.unref(sanitizeHtml)(__props.inlineRichField)
+              }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -3667,58 +3662,58 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</div><div class="grid grid-cols-2 gap-4 text-sm">`);
       if (__props.textField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">text</span><span>${ssrInterpolate(__props.textField)}</span></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">text</span><span>${ssrInterpolate_1(__props.textField)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.textareaField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">textarea</span><span class="whitespace-pre-wrap">${ssrInterpolate(__props.textareaField)}</span></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">textarea</span><span class="whitespace-pre-wrap">${ssrInterpolate_1(__props.textareaField)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.urlField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">url</span><a${ssrRenderAttr("href", __props.urlField)} class="underline break-all">${ssrInterpolate(__props.urlField)}</a></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">url</span><a${ssrRenderAttr_1("href", __props.urlField)} class="underline break-all">${ssrInterpolate_1(__props.urlField)}</a></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.selectField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">select</span><span>${ssrInterpolate(__props.selectField)}</span></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">select</span><span>${ssrInterpolate_1(__props.selectField)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">checkbox</span><span>${ssrInterpolate(__props.checkboxField ? "true" : "false")}</span></div>`);
+      _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">checkbox</span><span>${ssrInterpolate_1(__props.checkboxField ? "true" : "false")}</span></div>`);
       if (__props.fontField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">font</span><span style="${ssrRenderStyle({ fontFamily: __props.fontField })}">${ssrInterpolate(__props.fontField)}</span></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">font</span><span style="${ssrRenderStyle_1({ fontFamily: __props.fontField })}">${ssrInterpolate_1(__props.fontField)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.colorField) {
-        _push(`<div class="flex items-center gap-2"><span class="text-xs opacity-50">color</span><span class="size-5 rounded border border-default inline-block" style="${ssrRenderStyle({ backgroundColor: __props.colorField })}"></span><span>${ssrInterpolate(__props.colorField)}</span></div>`);
+        _push(`<div class="flex items-center gap-2"><span class="text-xs opacity-50">color</span><span class="size-5 rounded border border-default inline-block" style="${ssrRenderStyle_1({ backgroundColor: __props.colorField })}"></span><span>${ssrInterpolate_1(__props.colorField)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.themeColorField) {
-        _push(`<div class="flex items-center gap-2"><span class="text-xs opacity-50">theme-color</span><span class="size-5 rounded border border-default inline-block" style="${ssrRenderStyle({ backgroundColor: `var(--palette-${__props.themeColorField})` })}"></span><span>${ssrInterpolate(__props.themeColorField)}</span></div>`);
+        _push(`<div class="flex items-center gap-2"><span class="text-xs opacity-50">theme-color</span><span class="size-5 rounded border border-default inline-block" style="${ssrRenderStyle_1({ backgroundColor: `var(--palette-${__props.themeColorField})` })}"></span><span>${ssrInterpolate_1(__props.themeColorField)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div>`);
       if (__props.imageField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">image</span><img${ssrRenderAttr("src", __props.imageField)} alt="" class="max-h-48 rounded object-cover"></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">image</span><img${ssrRenderAttr_1("src", __props.imageField)} alt="" class="max-h-48 rounded object-cover"></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.fileField) {
-        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">file</span><a${ssrRenderAttr("href", __props.fileField)} class="underline text-sm break-all">${ssrInterpolate(__props.fileField.split("/").at(-1))}</a></div>`);
+        _push(`<div class="flex flex-col gap-1"><span class="text-xs opacity-50">file</span><a${ssrRenderAttr_1("href", __props.fileField)} class="underline text-sm break-all">${ssrInterpolate_1(__props.fileField.split("/").at(-1))}</a></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.listField?.length) {
         _push(`<div class="flex flex-col gap-2"><span class="text-xs opacity-50">list</span><!--[-->`);
-        ssrRenderList(__props.listField, (item, i) => {
-          _push(`<div class="flex gap-3 text-sm"><span class="opacity-50">${ssrInterpolate(i + 1)}.</span><span>${ssrInterpolate(item.label)}</span>`);
+        ssrRenderList_1(__props.listField, (item, i) => {
+          _push(`<div class="flex gap-3 text-sm"><span class="opacity-50">${ssrInterpolate_1(i + 1)}.</span><span>${ssrInterpolate_1(item.label)}</span>`);
           if (item.url) {
-            _push(`<a${ssrRenderAttr("href", item.url)} class="underline opacity-60">${ssrInterpolate(item.url)}</a>`);
+            _push(`<a${ssrRenderAttr_1("href", item.url)} class="underline opacity-60">${ssrInterpolate_1(item.url)}</a>`);
           } else {
             _push(`<!---->`);
           }
@@ -3734,7 +3729,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$5 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Demo.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
@@ -3848,7 +3843,7 @@ const demoDefinition = {
     }
   ]
 };
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+const _sfc_main$4 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Accordion",
   __ssrInlineRender: true,
   props: {
@@ -3870,15 +3865,15 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { autoTextColor, textPrimaryStyle, textMutedStyle } = useBlockBackground(
       () => props.background
     );
-    const borderColorStyle = computed(() => ({
+    const borderColorStyle = vueExports.computed(() => ({
       borderColor: autoTextColor.value ? `color-mix(in srgb, ${autoTextColor.value} 15%, transparent)` : "color-mix(in srgb, var(--text-primary) 12%, transparent)"
     }));
-    const inEditor = Boolean(inject(inlineEditorKey, null));
-    const openSet = ref(/* @__PURE__ */ new Set([0]));
+    const inEditor = Boolean(vueExports.inject(inlineEditorKey, null));
+    const openSet = vueExports.ref(/* @__PURE__ */ new Set([0]));
     function toggle(index) {
       if (inEditor) return;
       if (openSet.value.has(index)) {
@@ -3895,7 +3890,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       const _component_EditorInlineTextField = __nuxt_component_1;
       const _component_UIcon = _sfc_main$d$1;
       const _component_EditorInlineRichField = __nuxt_component_3$1;
-      _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "px-8 py-12" }, {
+      _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "px-8 py-12" }, {
         background: __props.background,
         backgroundImage: __props.backgroundImage,
         backgroundOpacity: __props.backgroundOpacity,
@@ -3907,25 +3902,25 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
         overlayDegree: __props.overlayDegree,
         overlayOpacity: __props.overlayOpacity
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="${ssrRenderClass([[unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
+            _push2(`<div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
             if (__props.showHeading) {
-              _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+              _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                 "field-key": "heading",
                 tag: "h2",
                 class: "text-3xl font-bold mb-8",
-                style: unref(textPrimaryStyle)
+                style: vueExports.unref(textPrimaryStyle)
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle({ ...unref(textPrimaryStyle), fontFamily: "var(--font-heading)" })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                    _push3(`<h2 class="text-3xl font-bold mb-8" style="${ssrRenderStyle_1({ ...vueExports.unref(textPrimaryStyle), fontFamily: "var(--font-heading)" })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                   } else {
                     return [
-                      createVNode("h2", {
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-8",
-                        style: { ...unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
-                      }, toDisplayString(__props.heading), 5)
+                        style: { ...vueExports.unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ];
                   }
                 }),
@@ -3934,54 +3929,54 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(`<div class="divide-y" style="${ssrRenderStyle(unref(borderColorStyle))}"${_scopeId}><!--[-->`);
-            ssrRenderList(__props.items, (item, index) => {
-              _push2(`<div style="${ssrRenderStyle(unref(borderColorStyle))}"${_scopeId}>`);
-              ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(unref(inEditor) ? "div" : "button"), {
-                class: ["w-full flex items-center justify-between py-4 text-left gap-4", unref(inEditor) ? "cursor-default" : "cursor-pointer"],
+            _push2(`<div class="divide-y" style="${ssrRenderStyle_1(vueExports.unref(borderColorStyle))}"${_scopeId}><!--[-->`);
+            ssrRenderList_1(__props.items, (item, index) => {
+              _push2(`<div style="${ssrRenderStyle_1(vueExports.unref(borderColorStyle))}"${_scopeId}>`);
+              ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(inEditor) ? "div" : "button"), {
+                class: ["w-full flex items-center justify-between py-4 text-left gap-4", vueExports.unref(inEditor) ? "cursor-default" : "cursor-pointer"],
                 onClick: ($event) => toggle(index)
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(ssrRenderComponent(_component_EditorInlineTextField, {
+                    _push3(ssrRenderComponent_1(_component_EditorInlineTextField, {
                       "field-key": `items.${index}.question`,
                       tag: "span",
                       class: "font-semibold flex-1 text-base",
-                      style: unref(textPrimaryStyle)
+                      style: vueExports.unref(textPrimaryStyle)
                     }, {
-                      default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`${ssrInterpolate(item.question)}`);
+                          _push4(`${ssrInterpolate_1(item.question)}`);
                         } else {
                           return [
-                            createTextVNode(toDisplayString(item.question), 1)
+                            vueExports.createTextVNode(vueExports.toDisplayString(item.question), 1)
                           ];
                         }
                       }),
                       _: 2
                     }, _parent3, _scopeId2));
-                    _push3(ssrRenderComponent(_component_UIcon, {
+                    _push3(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-chevron-down",
                       class: ["w-5 h-5 shrink-0 transition-transform duration-200", { "rotate-180": isOpen(index) }],
-                      style: unref(textMutedStyle)
+                      style: vueExports.unref(textMutedStyle)
                     }, null, _parent3, _scopeId2));
                   } else {
                     return [
-                      createVNode(_component_EditorInlineTextField, {
+                      vueExports.createVNode(_component_EditorInlineTextField, {
                         "field-key": `items.${index}.question`,
                         tag: "span",
                         class: "font-semibold flex-1 text-base",
-                        style: unref(textPrimaryStyle)
+                        style: vueExports.unref(textPrimaryStyle)
                       }, {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(item.question), 1)
+                        default: vueExports.withCtx(() => [
+                          vueExports.createTextVNode(vueExports.toDisplayString(item.question), 1)
                         ]),
                         _: 2
                       }, 1032, ["field-key", "style"]),
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: "i-lucide-chevron-down",
                         class: ["w-5 h-5 shrink-0 transition-transform duration-200", { "rotate-180": isOpen(index) }],
-                        style: unref(textMutedStyle)
+                        style: vueExports.unref(textMutedStyle)
                       }, null, 8, ["class", "style"])
                     ];
                   }
@@ -3990,26 +3985,26 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
               }), _parent2, _scopeId);
               if (isOpen(index)) {
                 _push2(`<div class="pb-5"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_EditorInlineRichField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineRichField, {
                   "field-key": `items.${index}.answer`,
                   placeholder: "Write your answer...",
                   class: "rich-text",
-                  style: unref(textMutedStyle),
+                  style: vueExports.unref(textMutedStyle),
                   html: ""
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
                       if (item.answer) {
-                        _push3(`<div${_scopeId2}>${unref(sanitizeHtml)(item.answer) ?? ""}</div>`);
+                        _push3(`<div${_scopeId2}>${vueExports.unref(sanitizeHtml)(item.answer) ?? ""}</div>`);
                       } else {
                         _push3(`<!---->`);
                       }
                     } else {
                       return [
-                        item.answer ? (openBlock(), createBlock("div", {
+                        item.answer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                           key: 0,
-                          innerHTML: unref(sanitizeHtml)(item.answer)
-                        }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                          innerHTML: vueExports.unref(sanitizeHtml)(item.answer)
+                        }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
                       ];
                     }
                   }),
@@ -4024,58 +4019,58 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div></div>`);
           } else {
             return [
-              createVNode("div", {
-                class: ["mx-auto", [unref(maxWidthClass)]]
+              vueExports.createVNode("div", {
+                class: ["mx-auto", [vueExports.unref(maxWidthClass)]]
               }, [
-                __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                   key: 0,
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-8",
-                  style: unref(textPrimaryStyle)
+                  style: vueExports.unref(textPrimaryStyle)
                 }, {
-                  default: withCtx(() => [
-                    createVNode("h2", {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode("h2", {
                       class: "text-3xl font-bold mb-8",
-                      style: { ...unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
-                    }, toDisplayString(__props.heading), 5)
+                      style: { ...vueExports.unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
+                    }, vueExports.toDisplayString(__props.heading), 5)
                   ]),
                   _: 1
-                }, 8, ["style"])) : createCommentVNode("", true),
-                createVNode("div", {
+                }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                vueExports.createVNode("div", {
                   class: "divide-y",
-                  style: unref(borderColorStyle)
+                  style: vueExports.unref(borderColorStyle)
                 }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(__props.items, (item, index) => {
-                    return openBlock(), createBlock("div", {
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(__props.items, (item, index) => {
+                    return vueExports.openBlock(), vueExports.createBlock("div", {
                       key: item.id ?? index,
-                      style: unref(borderColorStyle)
+                      style: vueExports.unref(borderColorStyle)
                     }, [
-                      (openBlock(), createBlock(resolveDynamicComponent(unref(inEditor) ? "div" : "button"), {
-                        class: ["w-full flex items-center justify-between py-4 text-left gap-4", unref(inEditor) ? "cursor-default" : "cursor-pointer"],
+                      (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(inEditor) ? "div" : "button"), {
+                        class: ["w-full flex items-center justify-between py-4 text-left gap-4", vueExports.unref(inEditor) ? "cursor-default" : "cursor-pointer"],
                         onClick: ($event) => toggle(index)
                       }, {
-                        default: withCtx(() => [
-                          createVNode(_component_EditorInlineTextField, {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode(_component_EditorInlineTextField, {
                             "field-key": `items.${index}.question`,
                             tag: "span",
                             class: "font-semibold flex-1 text-base",
-                            style: unref(textPrimaryStyle)
+                            style: vueExports.unref(textPrimaryStyle)
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(item.question), 1)
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(vueExports.toDisplayString(item.question), 1)
                             ]),
                             _: 2
                           }, 1032, ["field-key", "style"]),
-                          createVNode(_component_UIcon, {
+                          vueExports.createVNode(_component_UIcon, {
                             name: "i-lucide-chevron-down",
                             class: ["w-5 h-5 shrink-0 transition-transform duration-200", { "rotate-180": isOpen(index) }],
-                            style: unref(textMutedStyle)
+                            style: vueExports.unref(textMutedStyle)
                           }, null, 8, ["class", "style"])
                         ]),
                         _: 2
                       }, 1032, ["class", "onClick"])),
-                      createVNode(Transition, {
+                      vueExports.createVNode(vueExports.Transition, {
                         "enter-active-class": "transition-all duration-200 ease-out",
                         "enter-from-class": "opacity-0 -translate-y-1",
                         "enter-to-class": "opacity-100 translate-y-0",
@@ -4083,27 +4078,27 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                         "leave-from-class": "opacity-100 translate-y-0",
                         "leave-to-class": "opacity-0 -translate-y-1"
                       }, {
-                        default: withCtx(() => [
-                          isOpen(index) ? (openBlock(), createBlock("div", {
+                        default: vueExports.withCtx(() => [
+                          isOpen(index) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 0,
                             class: "pb-5"
                           }, [
-                            createVNode(_component_EditorInlineRichField, {
+                            vueExports.createVNode(_component_EditorInlineRichField, {
                               "field-key": `items.${index}.answer`,
                               placeholder: "Write your answer...",
                               class: "rich-text",
-                              style: unref(textMutedStyle),
+                              style: vueExports.unref(textMutedStyle),
                               html: ""
                             }, {
-                              default: withCtx(() => [
-                                item.answer ? (openBlock(), createBlock("div", {
+                              default: vueExports.withCtx(() => [
+                                item.answer ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                   key: 0,
-                                  innerHTML: unref(sanitizeHtml)(item.answer)
-                                }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                                  innerHTML: vueExports.unref(sanitizeHtml)(item.answer)
+                                }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
                               ]),
                               _: 2
                             }, 1032, ["field-key", "style"])
-                          ])) : createCommentVNode("", true)
+                          ])) : vueExports.createCommentVNode("", true)
                         ]),
                         _: 2
                       }, 1024)
@@ -4121,7 +4116,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Accordion.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
@@ -4195,7 +4190,7 @@ const intervalError = "[nuxt] `setInterval` should not be used on the server. Co
 const setInterval = (() => {
   console.error(intervalError);
 });
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+const _sfc_main$3 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Testimonial",
   __ssrInlineRender: true,
   props: {
@@ -4218,7 +4213,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolvePrimary } = useActivePalette();
     const { autoTextColor, textColorStyle } = useBlockBackground(() => props.background);
     const {
@@ -4229,12 +4224,12 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       surfaceTextMutedStyle,
       surfacePrimary
     } = useBlockSurface(() => props.surfaceColor);
-    const quoteIconStyle = computed(
+    const quoteIconStyle = vueExports.computed(
       () => surfaceTextColor.value ? { color: surfaceTextColor.value, opacity: "0.25" } : { color: "var(--primary)", opacity: "1" }
     );
-    const bgPrimary = computed(() => resolvePrimary(props.background));
-    const inEditor = Boolean(inject(inlineEditorKey, null));
-    const current = ref(0);
+    const bgPrimary = vueExports.computed(() => resolvePrimary(props.background));
+    const inEditor = Boolean(vueExports.inject(inlineEditorKey, null));
+    const current = vueExports.ref(0);
     let timer = null;
     function prev() {
       current.value = (current.value - 1 + props.items.length) % props.items.length;
@@ -4252,14 +4247,14 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
         timer = null;
       }
     }
-    watch(
+    vueExports.watch(
       () => props.autoplay,
       (val) => {
         stopAutoplay();
         if (val) startAutoplay();
       }
     );
-    watch(
+    vueExports.watch(
       () => props.items?.length,
       (len) => {
         if (current.value >= (len ?? 0)) current.value = 0;
@@ -4270,7 +4265,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       const _component_EditorInlineTextField = __nuxt_component_1;
       const _component_UIcon = _sfc_main$d$1;
       const _component_EditorInlineRichField = __nuxt_component_3$1;
-      _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({ class: "px-8 py-12" }, {
+      _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({ class: "px-8 py-12" }, {
         background: __props.background,
         backgroundImage: __props.backgroundImage,
         backgroundOpacity: __props.backgroundOpacity,
@@ -4282,31 +4277,31 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
         overlayDegree: __props.overlayDegree,
         overlayOpacity: __props.overlayOpacity
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="${ssrRenderClass([[unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
+            _push2(`<div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
             if (__props.showHeading) {
-              _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+              _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                 "field-key": "heading",
                 tag: "h2",
                 class: "text-3xl font-bold mb-10 text-center",
-                style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<h2 class="text-3xl font-bold mb-10 text-center" style="${ssrRenderStyle({
-                      ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                    _push3(`<h2 class="text-3xl font-bold mb-10 text-center" style="${ssrRenderStyle_1({
+                      ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                       fontFamily: "var(--font-heading)"
-                    })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                    })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                   } else {
                     return [
-                      createVNode("h2", {
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-10 text-center",
                         style: {
-                          ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                          ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                           fontFamily: "var(--font-heading)"
                         }
-                      }, toDisplayString(__props.heading), 5)
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ];
                   }
                 }),
@@ -4315,35 +4310,35 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            if (unref(inEditor)) {
+            if (vueExports.unref(inEditor)) {
               _push2(`<div class="flex flex-col gap-6"${_scopeId}><!--[-->`);
-              ssrRenderList(__props.items, (item, index) => {
-                _push2(`<div class="rounded-2xl p-8" style="${ssrRenderStyle(unref(surfaceStyle))}"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+              ssrRenderList_1(__props.items, (item, index) => {
+                _push2(`<div class="rounded-2xl p-8" style="${ssrRenderStyle_1(vueExports.unref(surfaceStyle))}"${_scopeId}>`);
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-quote",
                   class: "w-8 h-8 mb-4",
-                  style: unref(quoteIconStyle)
+                  style: vueExports.unref(quoteIconStyle)
                 }, null, _parent2, _scopeId));
-                _push2(ssrRenderComponent(_component_EditorInlineRichField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineRichField, {
                   "field-key": `items.${index}.quote`,
                   placeholder: "Write a testimonial...",
                   class: "rich-text text-lg leading-relaxed mb-6",
-                  style: unref(surfaceTextStyle),
+                  style: vueExports.unref(surfaceTextStyle),
                   html: ""
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
                       if (item.quote) {
-                        _push3(`<div${_scopeId2}>${unref(sanitizeHtml)(item.quote) ?? ""}</div>`);
+                        _push3(`<div${_scopeId2}>${vueExports.unref(sanitizeHtml)(item.quote) ?? ""}</div>`);
                       } else {
                         _push3(`<!---->`);
                       }
                     } else {
                       return [
-                        item.quote ? (openBlock(), createBlock("div", {
+                        item.quote ? (vueExports.openBlock(), vueExports.createBlock("div", {
                           key: 0,
-                          innerHTML: unref(sanitizeHtml)(item.quote)
-                        }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                          innerHTML: vueExports.unref(sanitizeHtml)(item.quote)
+                        }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
                       ];
                     }
                   }),
@@ -4351,45 +4346,45 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
                 }, _parent2, _scopeId));
                 _push2(`<div class="flex items-center gap-3"${_scopeId}>`);
                 if (item.avatar) {
-                  _push2(`<img${ssrRenderAttr("src", item.avatar)}${ssrRenderAttr("alt", item.author)} class="w-10 h-10 rounded-full object-cover shrink-0"${_scopeId}>`);
+                  _push2(`<img${ssrRenderAttr_1("src", item.avatar)}${ssrRenderAttr_1("alt", item.author)} class="w-10 h-10 rounded-full object-cover shrink-0"${_scopeId}>`);
                 } else {
-                  _push2(`<div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold" style="${ssrRenderStyle({
-                    backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                    color: unref(surfacePrimary)
-                  })}"${_scopeId}>${ssrInterpolate(item.author?.charAt(0) ?? "?")}</div>`);
+                  _push2(`<div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold" style="${ssrRenderStyle_1({
+                    backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                    color: vueExports.unref(surfacePrimary)
+                  })}"${_scopeId}>${ssrInterpolate_1(item.author?.charAt(0) ?? "?")}</div>`);
                 }
                 _push2(`<div${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": `items.${index}.author`,
                   tag: "p",
                   class: "font-semibold text-sm",
-                  style: unref(surfaceTextStyle),
+                  style: vueExports.unref(surfaceTextStyle),
                   "data-placeholder": item.author
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`${ssrInterpolate(item.author)}`);
+                      _push3(`${ssrInterpolate_1(item.author)}`);
                     } else {
                       return [
-                        createTextVNode(toDisplayString(item.author), 1)
+                        vueExports.createTextVNode(vueExports.toDisplayString(item.author), 1)
                       ];
                     }
                   }),
                   _: 2
                 }, _parent2, _scopeId));
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": `items.${index}.role`,
                   tag: "p",
                   class: "text-sm",
-                  style: unref(surfaceTextMutedStyle),
+                  style: vueExports.unref(surfaceTextMutedStyle),
                   "data-placeholder": item.role
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`${ssrInterpolate(item.role)}`);
+                      _push3(`${ssrInterpolate_1(item.role)}`);
                     } else {
                       return [
-                        createTextVNode(toDisplayString(item.role), 1)
+                        vueExports.createTextVNode(vueExports.toDisplayString(item.role), 1)
                       ];
                     }
                   }),
@@ -4399,34 +4394,34 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
               });
               _push2(`<!--]--></div>`);
             } else if (__props.items && __props.items.length) {
-              _push2(`<div${_scopeId}><div class="relative"${_scopeId}><div class="overflow-hidden"${_scopeId}><div class="flex transition-transform duration-500 ease-in-out" style="${ssrRenderStyle({ transform: `translateX(-${unref(current) * 100}%)` })}"${_scopeId}><!--[-->`);
-              ssrRenderList(__props.items, (item, index) => {
-                _push2(`<div class="w-full shrink-0 px-1"${_scopeId}><div class="rounded-2xl p-8" style="${ssrRenderStyle(unref(surfaceStyle))}"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(`<div${_scopeId}><div class="relative"${_scopeId}><div class="overflow-hidden"${_scopeId}><div class="flex transition-transform duration-500 ease-in-out" style="${ssrRenderStyle_1({ transform: `translateX(-${vueExports.unref(current) * 100}%)` })}"${_scopeId}><!--[-->`);
+              ssrRenderList_1(__props.items, (item, index) => {
+                _push2(`<div class="w-full shrink-0 px-1"${_scopeId}><div class="rounded-2xl p-8" style="${ssrRenderStyle_1(vueExports.unref(surfaceStyle))}"${_scopeId}>`);
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-quote",
                   class: "w-8 h-8 mb-4",
-                  style: unref(quoteIconStyle)
+                  style: vueExports.unref(quoteIconStyle)
                 }, null, _parent2, _scopeId));
                 if (item.quote) {
-                  _push2(`<div class="rich-text text-lg leading-relaxed mb-6" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId}>${unref(sanitizeHtml)(item.quote) ?? ""}</div>`);
+                  _push2(`<div class="rich-text text-lg leading-relaxed mb-6" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId}>${vueExports.unref(sanitizeHtml)(item.quote) ?? ""}</div>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 _push2(`<div class="flex items-center gap-3"${_scopeId}>`);
                 if (item.avatar) {
-                  _push2(`<img${ssrRenderAttr("src", item.avatar)}${ssrRenderAttr("alt", item.author)} class="w-10 h-10 rounded-full object-cover shrink-0"${_scopeId}>`);
+                  _push2(`<img${ssrRenderAttr_1("src", item.avatar)}${ssrRenderAttr_1("alt", item.author)} class="w-10 h-10 rounded-full object-cover shrink-0"${_scopeId}>`);
                 } else {
-                  _push2(`<div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold" style="${ssrRenderStyle({
-                    backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                    color: unref(surfacePrimary)
-                  })}"${_scopeId}>${ssrInterpolate(item.author?.charAt(0) ?? "?")}</div>`);
+                  _push2(`<div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold" style="${ssrRenderStyle_1({
+                    backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                    color: vueExports.unref(surfacePrimary)
+                  })}"${_scopeId}>${ssrInterpolate_1(item.author?.charAt(0) ?? "?")}</div>`);
                 }
-                _push2(`<div${_scopeId}><p class="font-semibold text-sm" style="${ssrRenderStyle(unref(surfaceTextStyle))}"${_scopeId}>${ssrInterpolate(item.author)}</p><p class="text-sm" style="${ssrRenderStyle(unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate(item.role)}</p></div></div></div></div>`);
+                _push2(`<div${_scopeId}><p class="font-semibold text-sm" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextStyle))}"${_scopeId}>${ssrInterpolate_1(item.author)}</p><p class="text-sm" style="${ssrRenderStyle_1(vueExports.unref(surfaceTextMutedStyle))}"${_scopeId}>${ssrInterpolate_1(item.role)}</p></div></div></div></div>`);
               });
               _push2(`<!--]--></div></div>`);
               if (__props.items.length > 1) {
-                _push2(`<button class="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80" style="${ssrRenderStyle({ ...unref(surfaceStyle), ...unref(surfaceTextStyle) })}" aria-label="Previous"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+                _push2(`<button class="absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80" style="${ssrRenderStyle_1({ ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextStyle) })}" aria-label="Previous"${_scopeId}>`);
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-chevron-left",
                   class: "w-4 h-4"
                 }, null, _parent2, _scopeId));
@@ -4435,8 +4430,8 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
                 _push2(`<!---->`);
               }
               if (__props.items.length > 1) {
-                _push2(`<button class="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80" style="${ssrRenderStyle({ ...unref(surfaceStyle), ...unref(surfaceTextStyle) })}" aria-label="Next"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+                _push2(`<button class="absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80" style="${ssrRenderStyle_1({ ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextStyle) })}" aria-label="Next"${_scopeId}>`);
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-chevron-right",
                   class: "w-4 h-4"
                 }, null, _parent2, _scopeId));
@@ -4447,11 +4442,11 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
               _push2(`</div>`);
               if (__props.items.length > 1) {
                 _push2(`<div class="flex justify-center gap-2 mt-6"${_scopeId}><!--[-->`);
-                ssrRenderList(__props.items, (_2, i) => {
-                  _push2(`<button class="w-2 h-2 rounded-full transition-all duration-300" style="${ssrRenderStyle({
-                    backgroundColor: i === unref(current) ? unref(bgPrimary) : unref(autoTextColor) ? `color-mix(in srgb, ${unref(autoTextColor)} 20%, transparent)` : "color-mix(in srgb, var(--text-primary) 20%, transparent)",
-                    transform: i === unref(current) ? "scale(1.25)" : "scale(1)"
-                  })}"${ssrRenderAttr("aria-label", `Go to slide ${i + 1}`)}${_scopeId}></button>`);
+                ssrRenderList_1(__props.items, (_2, i) => {
+                  _push2(`<button class="w-2 h-2 rounded-full transition-all duration-300" style="${ssrRenderStyle_1({
+                    backgroundColor: i === vueExports.unref(current) ? vueExports.unref(bgPrimary) : vueExports.unref(autoTextColor) ? `color-mix(in srgb, ${vueExports.unref(autoTextColor)} 20%, transparent)` : "color-mix(in srgb, var(--text-primary) 20%, transparent)",
+                    transform: i === vueExports.unref(current) ? "scale(1.25)" : "scale(1)"
+                  })}"${ssrRenderAttr_1("aria-label", `Go to slide ${i + 1}`)}${_scopeId}></button>`);
                 });
                 _push2(`<!--]--></div>`);
               } else {
@@ -4464,93 +4459,93 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", {
-                class: ["mx-auto", [unref(maxWidthClass)]]
+              vueExports.createVNode("div", {
+                class: ["mx-auto", [vueExports.unref(maxWidthClass)]]
               }, [
-                __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                   key: 0,
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-10 text-center",
-                  style: unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" }
+                  style: vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" }
                 }, {
-                  default: withCtx(() => [
-                    createVNode("h2", {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode("h2", {
                       class: "text-3xl font-bold mb-10 text-center",
                       style: {
-                        ...unref(autoTextColor) ? unref(textColorStyle) : { color: "var(--text-primary)" },
+                        ...vueExports.unref(autoTextColor) ? vueExports.unref(textColorStyle) : { color: "var(--text-primary)" },
                         fontFamily: "var(--font-heading)"
                       }
-                    }, toDisplayString(__props.heading), 5)
+                    }, vueExports.toDisplayString(__props.heading), 5)
                   ]),
                   _: 1
-                }, 8, ["style"])) : createCommentVNode("", true),
-                unref(inEditor) ? (openBlock(), createBlock("div", {
+                }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(inEditor) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 1,
                   class: "flex flex-col gap-6"
                 }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(__props.items, (item, index) => {
-                    return openBlock(), createBlock("div", {
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(__props.items, (item, index) => {
+                    return vueExports.openBlock(), vueExports.createBlock("div", {
                       key: item.id ?? index,
                       class: "rounded-2xl p-8",
-                      style: unref(surfaceStyle)
+                      style: vueExports.unref(surfaceStyle)
                     }, [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: "i-lucide-quote",
                         class: "w-8 h-8 mb-4",
-                        style: unref(quoteIconStyle)
+                        style: vueExports.unref(quoteIconStyle)
                       }, null, 8, ["style"]),
-                      createVNode(_component_EditorInlineRichField, {
+                      vueExports.createVNode(_component_EditorInlineRichField, {
                         "field-key": `items.${index}.quote`,
                         placeholder: "Write a testimonial...",
                         class: "rich-text text-lg leading-relaxed mb-6",
-                        style: unref(surfaceTextStyle),
+                        style: vueExports.unref(surfaceTextStyle),
                         html: ""
                       }, {
-                        default: withCtx(() => [
-                          item.quote ? (openBlock(), createBlock("div", {
+                        default: vueExports.withCtx(() => [
+                          item.quote ? (vueExports.openBlock(), vueExports.createBlock("div", {
                             key: 0,
-                            innerHTML: unref(sanitizeHtml)(item.quote)
-                          }, null, 8, ["innerHTML"])) : createCommentVNode("", true)
+                            innerHTML: vueExports.unref(sanitizeHtml)(item.quote)
+                          }, null, 8, ["innerHTML"])) : vueExports.createCommentVNode("", true)
                         ]),
                         _: 2
                       }, 1032, ["field-key", "style"]),
-                      createVNode("div", { class: "flex items-center gap-3" }, [
-                        item.avatar ? (openBlock(), createBlock("img", {
+                      vueExports.createVNode("div", { class: "flex items-center gap-3" }, [
+                        item.avatar ? (vueExports.openBlock(), vueExports.createBlock("img", {
                           key: 0,
                           src: item.avatar,
                           alt: item.author,
                           class: "w-10 h-10 rounded-full object-cover shrink-0"
-                        }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                        }, null, 8, ["src", "alt"])) : (vueExports.openBlock(), vueExports.createBlock("div", {
                           key: 1,
                           class: "w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold",
                           style: {
-                            backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                            color: unref(surfacePrimary)
+                            backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                            color: vueExports.unref(surfacePrimary)
                           }
-                        }, toDisplayString(item.author?.charAt(0) ?? "?"), 5)),
-                        createVNode("div", null, [
-                          createVNode(_component_EditorInlineTextField, {
+                        }, vueExports.toDisplayString(item.author?.charAt(0) ?? "?"), 5)),
+                        vueExports.createVNode("div", null, [
+                          vueExports.createVNode(_component_EditorInlineTextField, {
                             "field-key": `items.${index}.author`,
                             tag: "p",
                             class: "font-semibold text-sm",
-                            style: unref(surfaceTextStyle),
+                            style: vueExports.unref(surfaceTextStyle),
                             "data-placeholder": item.author
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(item.author), 1)
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(vueExports.toDisplayString(item.author), 1)
                             ]),
                             _: 2
                           }, 1032, ["field-key", "style", "data-placeholder"]),
-                          createVNode(_component_EditorInlineTextField, {
+                          vueExports.createVNode(_component_EditorInlineTextField, {
                             "field-key": `items.${index}.role`,
                             tag: "p",
                             class: "text-sm",
-                            style: unref(surfaceTextMutedStyle),
+                            style: vueExports.unref(surfaceTextMutedStyle),
                             "data-placeholder": item.role
                           }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(item.role), 1)
+                            default: vueExports.withCtx(() => [
+                              vueExports.createTextVNode(vueExports.toDisplayString(item.role), 1)
                             ]),
                             _: 2
                           }, 1032, ["field-key", "style", "data-placeholder"])
@@ -4558,60 +4553,60 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
                       ])
                     ], 4);
                   }), 128))
-                ])) : __props.items && __props.items.length ? (openBlock(), createBlock("div", {
+                ])) : __props.items && __props.items.length ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 2,
                   onMouseenter: stopAutoplay,
                   onMouseleave: startAutoplay
                 }, [
-                  createVNode("div", { class: "relative" }, [
-                    createVNode("div", { class: "overflow-hidden" }, [
-                      createVNode("div", {
+                  vueExports.createVNode("div", { class: "relative" }, [
+                    vueExports.createVNode("div", { class: "overflow-hidden" }, [
+                      vueExports.createVNode("div", {
                         class: "flex transition-transform duration-500 ease-in-out",
-                        style: { transform: `translateX(-${unref(current) * 100}%)` }
+                        style: { transform: `translateX(-${vueExports.unref(current) * 100}%)` }
                       }, [
-                        (openBlock(true), createBlock(Fragment, null, renderList(__props.items, (item, index) => {
-                          return openBlock(), createBlock("div", {
+                        (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(__props.items, (item, index) => {
+                          return vueExports.openBlock(), vueExports.createBlock("div", {
                             key: item.id ?? index,
                             class: "w-full shrink-0 px-1"
                           }, [
-                            createVNode("div", {
+                            vueExports.createVNode("div", {
                               class: "rounded-2xl p-8",
-                              style: unref(surfaceStyle)
+                              style: vueExports.unref(surfaceStyle)
                             }, [
-                              createVNode(_component_UIcon, {
+                              vueExports.createVNode(_component_UIcon, {
                                 name: "i-lucide-quote",
                                 class: "w-8 h-8 mb-4",
-                                style: unref(quoteIconStyle)
+                                style: vueExports.unref(quoteIconStyle)
                               }, null, 8, ["style"]),
-                              item.quote ? (openBlock(), createBlock("div", {
+                              item.quote ? (vueExports.openBlock(), vueExports.createBlock("div", {
                                 key: 0,
                                 class: "rich-text text-lg leading-relaxed mb-6",
-                                style: unref(surfaceTextStyle),
-                                innerHTML: unref(sanitizeHtml)(item.quote)
-                              }, null, 12, ["innerHTML"])) : createCommentVNode("", true),
-                              createVNode("div", { class: "flex items-center gap-3" }, [
-                                item.avatar ? (openBlock(), createBlock("img", {
+                                style: vueExports.unref(surfaceTextStyle),
+                                innerHTML: vueExports.unref(sanitizeHtml)(item.quote)
+                              }, null, 12, ["innerHTML"])) : vueExports.createCommentVNode("", true),
+                              vueExports.createVNode("div", { class: "flex items-center gap-3" }, [
+                                item.avatar ? (vueExports.openBlock(), vueExports.createBlock("img", {
                                   key: 0,
                                   src: item.avatar,
                                   alt: item.author,
                                   class: "w-10 h-10 rounded-full object-cover shrink-0"
-                                }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                                }, null, 8, ["src", "alt"])) : (vueExports.openBlock(), vueExports.createBlock("div", {
                                   key: 1,
                                   class: "w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-semibold",
                                   style: {
-                                    backgroundColor: `color-mix(in srgb, ${unref(surfacePrimary)} 15%, ${unref(surfaceHex) ?? "var(--bg-surface)"})`,
-                                    color: unref(surfacePrimary)
+                                    backgroundColor: `color-mix(in srgb, ${vueExports.unref(surfacePrimary)} 15%, ${vueExports.unref(surfaceHex) ?? "var(--bg-surface)"})`,
+                                    color: vueExports.unref(surfacePrimary)
                                   }
-                                }, toDisplayString(item.author?.charAt(0) ?? "?"), 5)),
-                                createVNode("div", null, [
-                                  createVNode("p", {
+                                }, vueExports.toDisplayString(item.author?.charAt(0) ?? "?"), 5)),
+                                vueExports.createVNode("div", null, [
+                                  vueExports.createVNode("p", {
                                     class: "font-semibold text-sm",
-                                    style: unref(surfaceTextStyle)
-                                  }, toDisplayString(item.author), 5),
-                                  createVNode("p", {
+                                    style: vueExports.unref(surfaceTextStyle)
+                                  }, vueExports.toDisplayString(item.author), 5),
+                                  vueExports.createVNode("p", {
                                     class: "text-sm",
-                                    style: unref(surfaceTextMutedStyle)
-                                  }, toDisplayString(item.role), 5)
+                                    style: vueExports.unref(surfaceTextMutedStyle)
+                                  }, vueExports.toDisplayString(item.role), 5)
                                 ])
                               ])
                             ], 4)
@@ -4619,49 +4614,49 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
                         }), 128))
                       ], 4)
                     ]),
-                    __props.items.length > 1 ? (openBlock(), createBlock("button", {
+                    __props.items.length > 1 ? (vueExports.openBlock(), vueExports.createBlock("button", {
                       key: 0,
                       class: "absolute -left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80",
-                      style: { ...unref(surfaceStyle), ...unref(surfaceTextStyle) },
+                      style: { ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextStyle) },
                       "aria-label": "Previous",
                       onClick: prev
                     }, [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: "i-lucide-chevron-left",
                         class: "w-4 h-4"
                       })
-                    ], 4)) : createCommentVNode("", true),
-                    __props.items.length > 1 ? (openBlock(), createBlock("button", {
+                    ], 4)) : vueExports.createCommentVNode("", true),
+                    __props.items.length > 1 ? (vueExports.openBlock(), vueExports.createBlock("button", {
                       key: 1,
                       class: "absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-opacity hover:opacity-80",
-                      style: { ...unref(surfaceStyle), ...unref(surfaceTextStyle) },
+                      style: { ...vueExports.unref(surfaceStyle), ...vueExports.unref(surfaceTextStyle) },
                       "aria-label": "Next",
                       onClick: next
                     }, [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: "i-lucide-chevron-right",
                         class: "w-4 h-4"
                       })
-                    ], 4)) : createCommentVNode("", true)
+                    ], 4)) : vueExports.createCommentVNode("", true)
                   ]),
-                  __props.items.length > 1 ? (openBlock(), createBlock("div", {
+                  __props.items.length > 1 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     class: "flex justify-center gap-2 mt-6"
                   }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(__props.items, (_2, i) => {
-                      return openBlock(), createBlock("button", {
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(__props.items, (_2, i) => {
+                      return vueExports.openBlock(), vueExports.createBlock("button", {
                         key: i,
                         class: "w-2 h-2 rounded-full transition-all duration-300",
                         style: {
-                          backgroundColor: i === unref(current) ? unref(bgPrimary) : unref(autoTextColor) ? `color-mix(in srgb, ${unref(autoTextColor)} 20%, transparent)` : "color-mix(in srgb, var(--text-primary) 20%, transparent)",
-                          transform: i === unref(current) ? "scale(1.25)" : "scale(1)"
+                          backgroundColor: i === vueExports.unref(current) ? vueExports.unref(bgPrimary) : vueExports.unref(autoTextColor) ? `color-mix(in srgb, ${vueExports.unref(autoTextColor)} 20%, transparent)` : "color-mix(in srgb, var(--text-primary) 20%, transparent)",
+                          transform: i === vueExports.unref(current) ? "scale(1.25)" : "scale(1)"
                         },
                         "aria-label": `Go to slide ${i + 1}`,
                         onClick: ($event) => current.value = i
                       }, null, 12, ["aria-label", "onClick"]);
                     }), 128))
-                  ])) : createCommentVNode("", true)
-                ], 32)) : createCommentVNode("", true)
+                  ])) : vueExports.createCommentVNode("", true)
+                ], 32)) : vueExports.createCommentVNode("", true)
               ], 2)
             ];
           }
@@ -4673,7 +4668,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Testimonial.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
@@ -4768,7 +4763,7 @@ const testimonialDefinition = {
     styleTab
   ]
 };
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+const _sfc_main$2 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Skills",
   __ssrInlineRender: true,
   props: {
@@ -4791,20 +4786,20 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const { maxContentWidth } = useLayoutSettings();
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
     const { resolveColor, resolvePrimary, resolveSecondary } = useActivePalette();
-    const bgHex = computed(() => props.background ? resolveColor(props.background) : null);
-    const bgPrimary = computed(() => resolvePrimary(props.background));
-    const bgSecondary = computed(() => resolveSecondary(props.background));
+    const bgHex = vueExports.computed(() => props.background ? resolveColor(props.background) : null);
+    const bgPrimary = vueExports.computed(() => resolvePrimary(props.background));
+    const bgSecondary = vueExports.computed(() => resolveSecondary(props.background));
     const { textPrimaryStyle, textMutedStyle } = useBlockBackground(() => props.background);
-    const trackStyle = computed(() => ({
+    const trackStyle = vueExports.computed(() => ({
       backgroundColor: `color-mix(in srgb, ${bgPrimary.value} 12%, ${bgHex.value ?? "var(--bg-surface)"})`
     }));
-    const barGradient = computed(
+    const barGradient = vueExports.computed(
       () => `linear-gradient(to right, ${bgPrimary.value}, color-mix(in srgb, ${bgPrimary.value} 75%, ${bgSecondary.value}))`
     );
-    const inEditor = Boolean(inject(inlineEditorKey, null));
-    const grouped = computed(() => {
+    const inEditor = Boolean(vueExports.inject(inlineEditorKey, null));
+    const grouped = vueExports.computed(() => {
       const map = /* @__PURE__ */ new Map();
       (props.skills ?? []).forEach((item, i) => {
         const cat = item.category?.trim() || "General";
@@ -4813,10 +4808,10 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       });
       return [...map.entries()];
     });
-    const hasCategories = computed(
+    const hasCategories = vueExports.computed(
       () => grouped.value.length > 1 || grouped.value[0]?.[0] !== "General"
     );
-    const delayMap = computed(() => {
+    const delayMap = vueExports.computed(() => {
       const m = /* @__PURE__ */ new Map();
       let counter = 0;
       for (const [, entries] of grouped.value) {
@@ -4827,12 +4822,12 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       }
       return m;
     });
-    const wrapperRef = ref(null);
-    const animated = ref(inEditor);
+    const wrapperRef = vueExports.ref(null);
+    const animated = vueExports.ref(inEditor);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BlocksBlockWrapper = __nuxt_component_0;
       const _component_EditorInlineTextField = __nuxt_component_1;
-      _push(ssrRenderComponent(_component_BlocksBlockWrapper, mergeProps({
+      _push(ssrRenderComponent_1(_component_BlocksBlockWrapper, vueExports.mergeProps({
         ref_key: "wrapperRef",
         ref: wrapperRef,
         class: "px-8 py-12"
@@ -4848,25 +4843,25 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         overlayDegree: __props.overlayDegree,
         overlayOpacity: __props.overlayOpacity
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="${ssrRenderClass([[unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
+            _push2(`<div class="${ssrRenderClass_1([[vueExports.unref(maxWidthClass)], "mx-auto"])}"${_scopeId}>`);
             if (__props.showHeading) {
-              _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+              _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                 "field-key": "heading",
                 tag: "h2",
                 class: "text-3xl font-bold mb-10",
-                style: unref(textPrimaryStyle)
+                style: vueExports.unref(textPrimaryStyle)
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<h2 class="text-3xl font-bold mb-10" style="${ssrRenderStyle({ ...unref(textPrimaryStyle), fontFamily: "var(--font-heading)" })}"${_scopeId2}>${ssrInterpolate(__props.heading)}</h2>`);
+                    _push3(`<h2 class="text-3xl font-bold mb-10" style="${ssrRenderStyle_1({ ...vueExports.unref(textPrimaryStyle), fontFamily: "var(--font-heading)" })}"${_scopeId2}>${ssrInterpolate_1(__props.heading)}</h2>`);
                   } else {
                     return [
-                      createVNode("h2", {
+                      vueExports.createVNode("h2", {
                         class: "text-3xl font-bold mb-10",
-                        style: { ...unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
-                      }, toDisplayString(__props.heading), 5)
+                        style: { ...vueExports.unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
+                      }, vueExports.toDisplayString(__props.heading), 5)
                     ];
                   }
                 }),
@@ -4875,39 +4870,39 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(`<div class="${ssrRenderClass([__props.columns === "2" ? "grid grid-cols-1 sm:grid-cols-2" : "flex flex-col", "gap-x-12 gap-y-10"])}"${_scopeId}><!--[-->`);
-            ssrRenderList(unref(grouped), ([category, entries]) => {
+            _push2(`<div class="${ssrRenderClass_1([__props.columns === "2" ? "grid grid-cols-1 sm:grid-cols-2" : "flex flex-col", "gap-x-12 gap-y-10"])}"${_scopeId}><!--[-->`);
+            ssrRenderList_1(vueExports.unref(grouped), ([category, entries]) => {
               _push2(`<div${_scopeId}>`);
-              if (unref(hasCategories)) {
-                _push2(`<p class="text-xs font-semibold uppercase tracking-widest mb-4" style="${ssrRenderStyle(unref(textMutedStyle))}"${_scopeId}>${ssrInterpolate(category)}</p>`);
+              if (vueExports.unref(hasCategories)) {
+                _push2(`<p class="text-xs font-semibold uppercase tracking-widest mb-4" style="${ssrRenderStyle_1(vueExports.unref(textMutedStyle))}"${_scopeId}>${ssrInterpolate_1(category)}</p>`);
               } else {
                 _push2(`<!---->`);
               }
               _push2(`<div class="flex flex-col gap-4"${_scopeId}><!--[-->`);
-              ssrRenderList(entries, (entry) => {
+              ssrRenderList_1(entries, (entry) => {
                 _push2(`<div${_scopeId}><div class="flex items-center justify-between mb-2"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_EditorInlineTextField, {
+                _push2(ssrRenderComponent_1(_component_EditorInlineTextField, {
                   "field-key": `skills.${entry.flatIndex}.name`,
                   tag: "span",
                   class: "text-sm font-medium",
-                  style: unref(textPrimaryStyle),
+                  style: vueExports.unref(textPrimaryStyle),
                   "data-placeholder": entry.item.name
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`${ssrInterpolate(entry.item.name)}`);
+                      _push3(`${ssrInterpolate_1(entry.item.name)}`);
                     } else {
                       return [
-                        createTextVNode(toDisplayString(entry.item.name), 1)
+                        vueExports.createTextVNode(vueExports.toDisplayString(entry.item.name), 1)
                       ];
                     }
                   }),
                   _: 2
                 }, _parent2, _scopeId));
-                _push2(`<span class="text-xs tabular-nums font-medium ml-3 shrink-0" style="${ssrRenderStyle(unref(textMutedStyle))}"${_scopeId}>${ssrInterpolate(entry.item.level ?? 0)}% </span></div><div class="w-full h-1.5 rounded-full overflow-hidden" style="${ssrRenderStyle(unref(trackStyle))}"${_scopeId}><div class="h-full rounded-full" style="${ssrRenderStyle({
-                  width: unref(animated) ? (Number(entry.item.level) || 0) + "%" : "0%",
-                  background: unref(barGradient),
-                  transition: unref(animated) ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${unref(delayMap).get(entry.flatIndex) ?? 0}ms` : "none"
+                _push2(`<span class="text-xs tabular-nums font-medium ml-3 shrink-0" style="${ssrRenderStyle_1(vueExports.unref(textMutedStyle))}"${_scopeId}>${ssrInterpolate_1(entry.item.level ?? 0)}% </span></div><div class="w-full h-1.5 rounded-full overflow-hidden" style="${ssrRenderStyle_1(vueExports.unref(trackStyle))}"${_scopeId}><div class="h-full rounded-full" style="${ssrRenderStyle_1({
+                  width: vueExports.unref(animated) ? (Number(entry.item.level) || 0) + "%" : "0%",
+                  background: vueExports.unref(barGradient),
+                  transition: vueExports.unref(animated) ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${vueExports.unref(delayMap).get(entry.flatIndex) ?? 0}ms` : "none"
                 })}"${_scopeId}></div></div></div>`);
               });
               _push2(`<!--]--></div></div>`);
@@ -4915,67 +4910,67 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div></div>`);
           } else {
             return [
-              createVNode("div", {
-                class: ["mx-auto", [unref(maxWidthClass)]]
+              vueExports.createVNode("div", {
+                class: ["mx-auto", [vueExports.unref(maxWidthClass)]]
               }, [
-                __props.showHeading ? (openBlock(), createBlock(_component_EditorInlineTextField, {
+                __props.showHeading ? (vueExports.openBlock(), vueExports.createBlock(_component_EditorInlineTextField, {
                   key: 0,
                   "field-key": "heading",
                   tag: "h2",
                   class: "text-3xl font-bold mb-10",
-                  style: unref(textPrimaryStyle)
+                  style: vueExports.unref(textPrimaryStyle)
                 }, {
-                  default: withCtx(() => [
-                    createVNode("h2", {
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode("h2", {
                       class: "text-3xl font-bold mb-10",
-                      style: { ...unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
-                    }, toDisplayString(__props.heading), 5)
+                      style: { ...vueExports.unref(textPrimaryStyle), fontFamily: "var(--font-heading)" }
+                    }, vueExports.toDisplayString(__props.heading), 5)
                   ]),
                   _: 1
-                }, 8, ["style"])) : createCommentVNode("", true),
-                createVNode("div", {
+                }, 8, ["style"])) : vueExports.createCommentVNode("", true),
+                vueExports.createVNode("div", {
                   class: ["gap-x-12 gap-y-10", __props.columns === "2" ? "grid grid-cols-1 sm:grid-cols-2" : "flex flex-col"]
                 }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(grouped), ([category, entries]) => {
-                    return openBlock(), createBlock("div", { key: category }, [
-                      unref(hasCategories) ? (openBlock(), createBlock("p", {
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(grouped), ([category, entries]) => {
+                    return vueExports.openBlock(), vueExports.createBlock("div", { key: category }, [
+                      vueExports.unref(hasCategories) ? (vueExports.openBlock(), vueExports.createBlock("p", {
                         key: 0,
                         class: "text-xs font-semibold uppercase tracking-widest mb-4",
-                        style: unref(textMutedStyle)
-                      }, toDisplayString(category), 5)) : createCommentVNode("", true),
-                      createVNode("div", { class: "flex flex-col gap-4" }, [
-                        (openBlock(true), createBlock(Fragment, null, renderList(entries, (entry) => {
-                          return openBlock(), createBlock("div", {
+                        style: vueExports.unref(textMutedStyle)
+                      }, vueExports.toDisplayString(category), 5)) : vueExports.createCommentVNode("", true),
+                      vueExports.createVNode("div", { class: "flex flex-col gap-4" }, [
+                        (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(entries, (entry) => {
+                          return vueExports.openBlock(), vueExports.createBlock("div", {
                             key: entry.item.id ?? entry.flatIndex
                           }, [
-                            createVNode("div", { class: "flex items-center justify-between mb-2" }, [
-                              createVNode(_component_EditorInlineTextField, {
+                            vueExports.createVNode("div", { class: "flex items-center justify-between mb-2" }, [
+                              vueExports.createVNode(_component_EditorInlineTextField, {
                                 "field-key": `skills.${entry.flatIndex}.name`,
                                 tag: "span",
                                 class: "text-sm font-medium",
-                                style: unref(textPrimaryStyle),
+                                style: vueExports.unref(textPrimaryStyle),
                                 "data-placeholder": entry.item.name
                               }, {
-                                default: withCtx(() => [
-                                  createTextVNode(toDisplayString(entry.item.name), 1)
+                                default: vueExports.withCtx(() => [
+                                  vueExports.createTextVNode(vueExports.toDisplayString(entry.item.name), 1)
                                 ]),
                                 _: 2
                               }, 1032, ["field-key", "style", "data-placeholder"]),
-                              createVNode("span", {
+                              vueExports.createVNode("span", {
                                 class: "text-xs tabular-nums font-medium ml-3 shrink-0",
-                                style: unref(textMutedStyle)
-                              }, toDisplayString(entry.item.level ?? 0) + "% ", 5)
+                                style: vueExports.unref(textMutedStyle)
+                              }, vueExports.toDisplayString(entry.item.level ?? 0) + "% ", 5)
                             ]),
-                            createVNode("div", {
+                            vueExports.createVNode("div", {
                               class: "w-full h-1.5 rounded-full overflow-hidden",
-                              style: unref(trackStyle)
+                              style: vueExports.unref(trackStyle)
                             }, [
-                              createVNode("div", {
+                              vueExports.createVNode("div", {
                                 class: "h-full rounded-full",
                                 style: {
-                                  width: unref(animated) ? (Number(entry.item.level) || 0) + "%" : "0%",
-                                  background: unref(barGradient),
-                                  transition: unref(animated) ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${unref(delayMap).get(entry.flatIndex) ?? 0}ms` : "none"
+                                  width: vueExports.unref(animated) ? (Number(entry.item.level) || 0) + "%" : "0%",
+                                  background: vueExports.unref(barGradient),
+                                  transition: vueExports.unref(animated) ? `width 0.75s cubic-bezier(0.4, 0, 0.2, 1) ${vueExports.unref(delayMap).get(entry.flatIndex) ?? 0}ms` : "none"
                                 }
                               }, null, 4)
                             ], 4)
@@ -4996,7 +4991,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Skills.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -5089,7 +5084,7 @@ const skillsDefinition = {
     styleTab
   ]
 };
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Separator",
   __ssrInlineRender: true,
   props: {
@@ -5104,8 +5099,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const { resolveColor } = useActivePalette();
-    const resolvedColor = computed(() => props.color ? resolveColor(props.color) : null);
-    const wrapperStyle = computed(() => {
+    const resolvedColor = vueExports.computed(() => props.color ? resolveColor(props.color) : null);
+    const wrapperStyle = vueExports.computed(() => {
       const c = resolvedColor.value;
       if (!c) return {};
       return {
@@ -5113,58 +5108,58 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         "--sep-border-color": `color-mix(in srgb, ${c} 40%, transparent)`
       };
     });
-    const labelStyle = computed(() => ({
+    const labelStyle = vueExports.computed(() => ({
       ...resolvedColor.value ? { color: resolvedColor.value } : {},
       ...props.labelFont ? { fontFamily: props.labelFont } : {}
     }));
-    const iconStyle = computed(() => resolvedColor.value ? { color: resolvedColor.value } : {});
-    const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[props.maxWidth]);
+    const iconStyle = vueExports.computed(() => resolvedColor.value ? { color: resolvedColor.value } : {});
+    const maxWidthClass = vueExports.computed(() => MAX_CONTENT_WIDTH_CLASS[props.maxWidth]);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_USeparator = _sfc_main$h;
       const _component_UIcon = _sfc_main$d$1;
-      _push(`<div${ssrRenderAttrs(mergeProps({
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({
         class: "px-8 py-6",
-        style: unref(wrapperStyle)
-      }, _attrs))}><div class="${ssrRenderClass([unref(maxWidthClass), "mx-auto [&_.separator-border]:border-(--sep-border-color,inherit)"])}">`);
-      _push(ssrRenderComponent(_component_USeparator, {
+        style: vueExports.unref(wrapperStyle)
+      }, _attrs))}><div class="${ssrRenderClass_1([vueExports.unref(maxWidthClass), "mx-auto [&_.separator-border]:border-(--sep-border-color,inherit)"])}">`);
+      _push(ssrRenderComponent_1(_component_USeparator, {
         label: __props.label || void 0,
         icon: !__props.avatar && __props.icon ? __props.icon : void 0,
         avatar: __props.avatar ? { src: __props.avatar } : void 0,
         size: __props.size,
         ui: {
-          border: unref(resolvedColor) ? "border-[var(--sep-border-color)]" : "",
+          border: vueExports.unref(resolvedColor) ? "border-[var(--sep-border-color)]" : "",
           label: "text-sm",
           icon: "shrink-0 size-5"
         }
-      }, createSlots({ _: 2 }, [
-        __props.label && (unref(resolvedColor) || __props.labelFont) ? {
+      }, vueExports.createSlots({ _: 2 }, [
+        __props.label && (vueExports.unref(resolvedColor) || __props.labelFont) ? {
           name: "default",
-          fn: withCtx((_, _push2, _parent2, _scopeId) => {
+          fn: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<span style="${ssrRenderStyle(unref(labelStyle))}"${_scopeId}>${ssrInterpolate(__props.label)}</span>`);
+              _push2(`<span style="${ssrRenderStyle_1(vueExports.unref(labelStyle))}"${_scopeId}>${ssrInterpolate_1(__props.label)}</span>`);
             } else {
               return [
-                createVNode("span", { style: unref(labelStyle) }, toDisplayString(__props.label), 5)
+                vueExports.createVNode("span", { style: vueExports.unref(labelStyle) }, vueExports.toDisplayString(__props.label), 5)
               ];
             }
           }),
           key: "0"
         } : void 0,
-        !__props.avatar && __props.icon && unref(resolvedColor) ? {
+        !__props.avatar && __props.icon && vueExports.unref(resolvedColor) ? {
           name: "icon",
-          fn: withCtx((_, _push2, _parent2, _scopeId) => {
+          fn: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: __props.icon,
                 class: "shrink-0 size-5",
-                style: unref(iconStyle)
+                style: vueExports.unref(iconStyle)
               }, null, _parent2, _scopeId));
             } else {
               return [
-                createVNode(_component_UIcon, {
+                vueExports.createVNode(_component_UIcon, {
                   name: __props.icon,
                   class: "shrink-0 size-5",
-                  style: unref(iconStyle)
+                  style: vueExports.unref(iconStyle)
                 }, null, 8, ["name", "style"])
               ];
             }
@@ -5178,7 +5173,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Separator.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -5323,7 +5318,7 @@ function usePageEditor() {
     pendingNameEdits.value = {};
     pendingDeletions.value = /* @__PURE__ */ new Set();
   }
-  const hasPendingChanges = computed(
+  const hasPendingChanges = vueExports.computed(
     () => pendingNewBlocks.value.length > 0 || Object.keys(pendingContentEdits.value).length > 0 || Object.keys(pendingNameEdits.value).length > 0 || pendingDeletions.value.size > 0
   );
   return {
@@ -5341,7 +5336,7 @@ function usePageEditor() {
     resetPending
   };
 }
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Renderer",
   __ssrInlineRender: true,
   props: {
@@ -5349,22 +5344,22 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const component = computed(() => {
+    const component = vueExports.computed(() => {
       const def = allBlockDefinitions.find((d) => d.type === props.block.type);
       return def?.component ?? null;
     });
     const { pendingContentEdits } = usePageEditor();
-    const blockProps = computed(() => {
+    const blockProps = vueExports.computed(() => {
       const pending = pendingContentEdits.value[props.block.id];
       return pending ? { ...props.block.content, ...pending } : props.block.content;
     });
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.block.isVisible !== false) {
         _push(`<!--[-->`);
-        if (unref(component)) {
-          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(component)), unref(blockProps), null), _parent);
+        if (vueExports.unref(component)) {
+          ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent(vueExports.unref(component)), vueExports.unref(blockProps), null), _parent);
         } else {
-          _push(`<div class="px-8 py-4 text-sm opacity-50">Unknown block type: ${ssrInterpolate(__props.block.type)}</div>`);
+          _push(`<div class="px-8 py-4 text-sm opacity-50">Unknown block type: ${ssrInterpolate_1(__props.block.type)}</div>`);
         }
         _push(`<!--]-->`);
       } else {
@@ -5375,7 +5370,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/blocks/Renderer.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

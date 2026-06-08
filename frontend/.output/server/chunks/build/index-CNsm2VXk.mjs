@@ -1,41 +1,34 @@
 import { _ as __nuxt_component_0 } from './PageWrapper-dRmsqRwL.mjs';
 import { _ as _sfc_main$g, d as _sfc_main$2$2, f as isValueEqualOrExist, b as AccordionRoot_default, a as AccordionItem_default, c as AccordionTrigger_default, A as AccordionContent_default, e as injectAccordionRootContext, i as injectAccordionItemContext } from './Tooltip-DoUsDOvw.mjs';
-import { c as __nuxt_component_2$1$1, e as _sfc_main$d$1, f as _sfc_main$8$1, ab as useState, d as _export_sfc, a7 as useRequestHeaders, U as useComponentProps, N as useAppConfig, $ as useForwardProps, Y as useFormField, M as tv, b as Primitive, Z as useForwardExpose, I as isNullish, P as Presence_default, Q as useCollection, v as get, k as createContext } from './server.mjs';
+import { aO as vueExports, W as onBeforeRouteLeave, a7 as ssrRenderComponent_1, c as __nuxt_component_2$1$1, j as _sfc_main$d$1, e as _sfc_main$8$1, aJ as useState, d as _export_sfc, aE as useRequestHeaders, a5 as ssrRenderAttrs_1, aa as ssrRenderStyle_1, a3 as ssrInterpolate_1, a8 as ssrRenderList_1, a6 as ssrRenderClass_1, a4 as ssrRenderAttr_1, a2 as ssrIncludeBooleanAttr, an as useComponentProps, aj as useAppConfig, av as useForwardProps, $ as reactivePick, at as useFormField, ag as tv, b as Primitive, ac as ssrRenderVNode, a9 as ssrRenderSlot_1, au as useForwardExpose, aM as useVModel, Q as isNullish, P as Presence_default, al as useCollection, C as get, l as createContext, az as useMounted } from './server.mjs';
 import { _ as _sfc_main$j } from './Modal-D9bZkufO.mjs';
 import { L as Label_default, _ as _sfc_main$k } from './FormField-9wkfNHPa.mjs';
 import { _ as _sfc_main$i } from './Input-DWHPzDmy.mjs';
 import { a as _sfc_main$1$1, b as _sfc_main$2$1, _ as __nuxt_component_11, V as VisuallyHiddenInput_default } from './MediaPickerModal-CIxpt8n3.mjs';
 import { _ as _sfc_main$l } from './Separator-CgixisDT.mjs';
 import { _ as _sfc_main$m } from './Alert-Nv5RlKkm.mjs';
-import { defineComponent, withAsyncContext, useTemplateRef, computed, ref, mergeProps, withCtx, unref, createVNode, openBlock, createBlock, createCommentVNode, isRef, watch, createTextVNode, toDisplayString, provide, nextTick, Fragment, renderList, withModifiers, Transition, useSlots, useId, useAttrs, resolveDynamicComponent, renderSlot, useModel, mergeModels, withKeys, toRefs, normalizeStyle, reactive, toRaw, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderAttrs, ssrRenderStyle, ssrInterpolate, ssrRenderList, ssrRenderClass, ssrRenderAttr, ssrIncludeBooleanAttr, ssrRenderVNode, ssrRenderSlot } from 'vue/server-renderer';
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
 import { _ as __nuxt_component_4$1 } from './ConfirmModal-D6HutMUe.mjs';
-import { VueDraggable } from 'vue-draggable-plus';
+import { l as lo } from '../_/vue-draggable-plus.mjs';
 import { u as useCurrentUser } from './useCurrentUser-0x7hmjnh.mjs';
 import { _ as _sfc_main$h, R as RovingFocusItem_default } from './Tabs-CjxPSbMS.mjs';
 import { u as usePageEditor, a as allBlockDefinitions, _ as __nuxt_component_3$2, g as getPath, s as setPath, b as blockDefinitions } from './Renderer-BaU1WY6M.mjs';
 import { u as useCollections } from './useCollections-Be_EdGTg.mjs';
-import { reactivePick, useVModel, useMounted } from '@vueuse/core';
 import { a as _sfc_main$1$2, u as useFormControl, c as clamp } from './MediaGrid-DBtVJH5B.mjs';
 import { u as useActivePalette, c as useLayoutSettings, d as usePortfolio, p as portfolioSlugKey, _ as __nuxt_component_0$1, e as useThemes, b as MAX_CONTENT_WIDTH_OPTIONS, i as inlineEditorKey } from './usePortfolio-CUdxQeA9.mjs';
 import { u as useDirection, f as useSize } from './PopperArrow-CVyIWJ6M.mjs';
-import { onBeforeRouteLeave } from 'vue-router';
 import { y as isEqual } from '../nitro/nitro.mjs';
 import './DashboardSidebarToggle-uAAQWn-6.mjs';
 import './overlay-BWwBD9XH.mjs';
-import 'aria-hidden';
-import '@vueuse/shared';
-import '@iconify/vue';
-import 'tailwindcss/colors';
-import 'perfect-debounce';
-import 'tailwind-variants';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
-import 'unhead/server';
-import 'devalue';
-import 'unhead/plugins';
-import 'unhead/utils';
+import '../_/shared.cjs.prod.mjs';
+import 'node:stream';
+import './useServerFeatures-DOIxALfL.mjs';
+import './Badge-C0tQ5UcT.mjs';
+import '../_/index.mjs';
+import './collectionTypes-6EiXkZ_r.mjs';
+import './Main-CoIIuktv.mjs';
+import './usePrefix-DEbZTxVe.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -44,20 +37,11 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import 'consola';
-import './useServerFeatures-DOIxALfL.mjs';
-import './Badge-C0tQ5UcT.mjs';
-import '@tiptap/vue-3';
-import '@tiptap/starter-kit';
-import '@tiptap/extension-text-align';
-import '@tiptap/extension-placeholder';
-import './collectionTypes-6EiXkZ_r.mjs';
-import './Main-CoIIuktv.mjs';
-import './usePrefix-DEbZTxVe.mjs';
-import 'sortablejs';
-import '@floating-ui/vue';
+import 'node:util';
+import 'node:process';
+import 'node:tty';
 
-var AccordionHeader_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var AccordionHeader_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "AccordionHeader",
   props: {
     asChild: {
@@ -76,14 +60,14 @@ var AccordionHeader_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ *
     const itemContext = injectAccordionItemContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         as: props.as,
         "as-child": props.asChild,
-        "data-orientation": unref(rootContext).orientation,
-        "data-state": unref(itemContext).dataState.value,
-        "data-disabled": unref(itemContext).dataDisabled.value
+        "data-orientation": vueExports.unref(rootContext).orientation,
+        "data-state": vueExports.unref(itemContext).dataState.value,
+        "data-disabled": vueExports.unref(itemContext).dataDisabled.value
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "as",
@@ -104,7 +88,7 @@ function getState(checked) {
   return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
 const [injectCheckboxRootContext, provideCheckboxRootContext] = /* @__PURE__ */ createContext("CheckboxRoot");
-var CheckboxRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var CheckboxRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "CheckboxRoot",
   props: {
@@ -168,9 +152,9 @@ var CheckboxRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
       defaultValue: props.defaultValue ?? props.falseValue,
       passive: props.modelValue === void 0
     });
-    const disabled = computed(() => checkboxGroupContext?.disabled.value || props.disabled);
-    const isChecked = computed(() => isEqual(modelValue.value, props.trueValue));
-    const checkboxState = computed(() => {
+    const disabled = vueExports.computed(() => checkboxGroupContext?.disabled.value || props.disabled);
+    const isChecked = vueExports.computed(() => isEqual(modelValue.value, props.trueValue));
+    const checkboxState = vueExports.computed(() => {
       if (!isNullish(checkboxGroupContext?.modelValue.value)) return isValueEqualOrExist(checkboxGroupContext.modelValue.value, props.value);
       else {
         if (modelValue.value === "indeterminate") return "indeterminate";
@@ -189,34 +173,34 @@ var CheckboxRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
       else modelValue.value = isChecked.value ? props.falseValue : props.trueValue;
     }
     const isFormControl = useFormControl(currentElement);
-    const ariaLabel = computed(() => props.id && currentElement.value ? (void 0).querySelector(`[for="${props.id}"]`)?.innerText : void 0);
+    const ariaLabel = vueExports.computed(() => props.id && currentElement.value ? (void 0).querySelector(`[for="${props.id}"]`)?.innerText : void 0);
     provideCheckboxRootContext({
       disabled,
       state: checkboxState
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(unref(checkboxGroupContext)?.rovingFocus.value ? unref(RovingFocusItem_default) : unref(Primitive)), mergeProps(_ctx.$attrs, {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(checkboxGroupContext)?.rovingFocus.value ? vueExports.unref(RovingFocusItem_default) : vueExports.unref(Primitive)), vueExports.mergeProps(_ctx.$attrs, {
         id: _ctx.id,
-        ref: unref(forwardRef),
+        ref: vueExports.unref(forwardRef),
         role: "checkbox",
         "as-child": _ctx.asChild,
         as: _ctx.as,
         type: _ctx.as === "button" ? "button" : void 0,
-        "aria-checked": unref(isIndeterminate)(checkboxState.value) ? "mixed" : checkboxState.value,
+        "aria-checked": vueExports.unref(isIndeterminate)(checkboxState.value) ? "mixed" : checkboxState.value,
         "aria-required": _ctx.required,
         "aria-label": _ctx.$attrs["aria-label"] || ariaLabel.value,
-        "data-state": unref(getState)(checkboxState.value),
+        "data-state": vueExports.unref(getState)(checkboxState.value),
         "data-disabled": disabled.value ? "" : void 0,
         disabled: disabled.value,
-        focusable: unref(checkboxGroupContext)?.rovingFocus.value ? !disabled.value : void 0,
-        onKeydown: withKeys(withModifiers(() => {
+        focusable: vueExports.unref(checkboxGroupContext)?.rovingFocus.value ? !disabled.value : void 0,
+        onKeydown: vueExports.withKeys(vueExports.withModifiers(() => {
         }, ["prevent"]), ["enter"]),
         onClick: handleClick
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
-          modelValue: unref(modelValue),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", {
+          modelValue: vueExports.unref(modelValue),
           state: checkboxState.value
-        }), unref(isFormControl) && _ctx.name && !unref(checkboxGroupContext) ? (openBlock(), createBlock(unref(VisuallyHiddenInput_default), {
+        }), vueExports.unref(isFormControl) && _ctx.name && !vueExports.unref(checkboxGroupContext) ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHiddenInput_default), {
           key: 0,
           type: "checkbox",
           checked: !!checkboxState.value,
@@ -230,7 +214,7 @@ var CheckboxRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
           "value",
           "disabled",
           "required"
-        ])) : createCommentVNode("v-if", true)]),
+        ])) : vueExports.createCommentVNode("v-if", true)]),
         _: 3
       }, 16, [
         "id",
@@ -250,7 +234,7 @@ var CheckboxRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ d
   }
 });
 var CheckboxRoot_default = CheckboxRoot_vue_vue_type_script_setup_true_lang_default;
-var CheckboxIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var CheckboxIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "CheckboxIndicator",
   props: {
     forceMount: {
@@ -271,16 +255,16 @@ var CheckboxIndicator_vue_vue_type_script_setup_true_lang_default = /* @__PURE__
     const { forwardRef } = useForwardExpose();
     const rootContext = injectCheckboxRootContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Presence_default), { present: _ctx.forceMount || unref(isIndeterminate)(unref(rootContext).state.value) || unref(rootContext).state.value === true }, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps({
-          ref: unref(forwardRef),
-          "data-state": unref(getState)(unref(rootContext).state.value),
-          "data-disabled": unref(rootContext).disabled.value ? "" : void 0,
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Presence_default), { present: _ctx.forceMount || vueExports.unref(isIndeterminate)(vueExports.unref(rootContext).state.value) || vueExports.unref(rootContext).state.value === true }, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({
+          ref: vueExports.unref(forwardRef),
+          "data-state": vueExports.unref(getState)(vueExports.unref(rootContext).state.value),
+          "data-disabled": vueExports.unref(rootContext).disabled.value ? "" : void 0,
           style: { pointerEvents: "none" },
           "as-child": _ctx.asChild,
           as: _ctx.as
         }, _ctx.$attrs), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, [
           "data-state",
@@ -381,7 +365,7 @@ const BACK_KEYS = {
   ]
 };
 const [injectSliderOrientationContext, provideSliderOrientationContext] = /* @__PURE__ */ createContext(["SliderVertical", "SliderHorizontal"]);
-var SliderHorizontal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderHorizontal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SliderHorizontal",
   props: {
     dir: {
@@ -412,12 +396,12 @@ var SliderHorizontal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emits = __emit;
-    const { max, min, dir, inverted } = toRefs(props);
+    const { max, min, dir, inverted } = vueExports.toRefs(props);
     const { forwardRef, currentElement: sliderElement } = useForwardExpose();
     const rootContext = injectSliderRootContext();
-    const offsetPosition = ref();
-    const rectRef = ref();
-    const isSlidingFromLeft = computed(() => dir?.value !== "rtl" && !inverted.value || dir?.value !== "ltr" && inverted.value);
+    const offsetPosition = vueExports.ref();
+    const rectRef = vueExports.ref();
+    const isSlidingFromLeft = vueExports.computed(() => dir?.value !== "rtl" && !inverted.value || dir?.value !== "ltr" && inverted.value);
     function getValueFromPointerEvent(event, slideStart) {
       const rect = rectRef.value || sliderElement.value.getBoundingClientRect();
       const thumb = [...rootContext.thumbElements.value][rootContext.valueIndexToChangeRef.value];
@@ -430,9 +414,9 @@ var SliderHorizontal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
       const position = slideStart ? event.clientX - rect.left - thumbWidth / 2 : event.clientX - rect.left - (offsetPosition.value ?? 0);
       return value(position);
     }
-    const startEdge = computed(() => isSlidingFromLeft.value ? "left" : "right");
-    const endEdge = computed(() => isSlidingFromLeft.value ? "right" : "left");
-    const direction = computed(() => isSlidingFromLeft.value ? 1 : -1);
+    const startEdge = vueExports.computed(() => isSlidingFromLeft.value ? "left" : "right");
+    const endEdge = vueExports.computed(() => isSlidingFromLeft.value ? "right" : "left");
+    const direction = vueExports.computed(() => isSlidingFromLeft.value ? 1 : -1);
     provideSliderOrientationContext({
       startEdge,
       endEdge,
@@ -440,11 +424,11 @@ var SliderHorizontal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
       size: "width"
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(SliderImpl_default, {
-        ref: unref(forwardRef),
-        dir: unref(dir),
+      return vueExports.openBlock(), vueExports.createBlock(SliderImpl_default, {
+        ref: vueExports.unref(forwardRef),
+        dir: vueExports.unref(dir),
         "data-orientation": "horizontal",
-        style: normalizeStyle({ ["--reka-slider-thumb-transform"]: !isSlidingFromLeft.value && unref(rootContext).thumbAlignment.value === "overflow" ? "translateX(50%)" : "translateX(-50%)" }),
+        style: vueExports.normalizeStyle({ ["--reka-slider-thumb-transform"]: !isSlidingFromLeft.value && vueExports.unref(rootContext).thumbAlignment.value === "overflow" ? "translateX(50%)" : "translateX(-50%)" }),
         onSlideStart: _cache[0] || (_cache[0] = (event) => {
           const value = getValueFromPointerEvent(event, true);
           emits("slideStart", value);
@@ -460,20 +444,20 @@ var SliderHorizontal_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ 
         }),
         onStepKeyDown: _cache[3] || (_cache[3] = (event) => {
           const slideDirection = isSlidingFromLeft.value ? "from-left" : "from-right";
-          const isBackKey = unref(BACK_KEYS)[slideDirection].includes(event.key);
+          const isBackKey = vueExports.unref(BACK_KEYS)[slideDirection].includes(event.key);
           emits("stepKeyDown", event, isBackKey ? -1 : 1);
         }),
         onEndKeyDown: _cache[4] || (_cache[4] = ($event) => emits("endKeyDown", $event)),
         onHomeKeyDown: _cache[5] || (_cache[5] = ($event) => emits("homeKeyDown", $event))
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, ["dir", "style"]);
     };
   }
 });
 var SliderHorizontal_default = SliderHorizontal_vue_vue_type_script_setup_true_lang_default;
-var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SliderVertical",
   props: {
     min: {
@@ -500,12 +484,12 @@ var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emits = __emit;
-    const { max, min, inverted } = toRefs(props);
+    const { max, min, inverted } = vueExports.toRefs(props);
     const rootContext = injectSliderRootContext();
     const { forwardRef, currentElement: sliderElement } = useForwardExpose();
-    const offsetPosition = ref();
-    const rectRef = ref();
-    const isSlidingFromBottom = computed(() => !inverted.value);
+    const offsetPosition = vueExports.ref();
+    const rectRef = vueExports.ref();
+    const isSlidingFromBottom = vueExports.computed(() => !inverted.value);
     function getValueFromPointerEvent(event, slideStart) {
       const rect = rectRef.value || sliderElement.value.getBoundingClientRect();
       const thumb = [...rootContext.thumbElements.value][rootContext.valueIndexToChangeRef.value];
@@ -518,9 +502,9 @@ var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
       rectRef.value = rect;
       return value(position);
     }
-    const startEdge = computed(() => isSlidingFromBottom.value ? "bottom" : "top");
-    const endEdge = computed(() => isSlidingFromBottom.value ? "top" : "bottom");
-    const direction = computed(() => isSlidingFromBottom.value ? 1 : -1);
+    const startEdge = vueExports.computed(() => isSlidingFromBottom.value ? "bottom" : "top");
+    const endEdge = vueExports.computed(() => isSlidingFromBottom.value ? "top" : "bottom");
+    const direction = vueExports.computed(() => isSlidingFromBottom.value ? 1 : -1);
     provideSliderOrientationContext({
       startEdge,
       endEdge,
@@ -528,10 +512,10 @@ var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
       size: "height"
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(SliderImpl_default, {
-        ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(SliderImpl_default, {
+        ref: vueExports.unref(forwardRef),
         "data-orientation": "vertical",
-        style: normalizeStyle({ ["--reka-slider-thumb-transform"]: !isSlidingFromBottom.value && unref(rootContext).thumbAlignment.value === "overflow" ? "translateY(-50%)" : "translateY(50%)" }),
+        style: vueExports.normalizeStyle({ ["--reka-slider-thumb-transform"]: !isSlidingFromBottom.value && vueExports.unref(rootContext).thumbAlignment.value === "overflow" ? "translateY(-50%)" : "translateY(50%)" }),
         onSlideStart: _cache[0] || (_cache[0] = (event) => {
           const value = getValueFromPointerEvent(event, true);
           emits("slideStart", value);
@@ -547,13 +531,13 @@ var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
         }),
         onStepKeyDown: _cache[3] || (_cache[3] = (event) => {
           const slideDirection = isSlidingFromBottom.value ? "from-bottom" : "from-top";
-          const isBackKey = unref(BACK_KEYS)[slideDirection].includes(event.key);
+          const isBackKey = vueExports.unref(BACK_KEYS)[slideDirection].includes(event.key);
           emits("stepKeyDown", event, isBackKey ? -1 : 1);
         }),
         onEndKeyDown: _cache[4] || (_cache[4] = ($event) => emits("endKeyDown", $event)),
         onHomeKeyDown: _cache[5] || (_cache[5] = ($event) => emits("homeKeyDown", $event))
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, ["style"]);
     };
@@ -561,7 +545,7 @@ var SliderVertical_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */
 });
 var SliderVertical_default = SliderVertical_vue_vue_type_script_setup_true_lang_default;
 const [injectSliderRootContext, provideSliderRootContext] = /* @__PURE__ */ createContext("SliderRoot");
-var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SliderRoot",
   props: {
@@ -640,7 +624,7 @@ var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emits = __emit;
-    const { min, max, step, minStepsBetweenThumbs, orientation, disabled, thumbAlignment, dir: propDir } = toRefs(props);
+    const { min, max, step, minStepsBetweenThumbs, orientation, disabled, thumbAlignment, dir: propDir } = vueExports.toRefs(props);
     const dir = useDirection(propDir);
     const { forwardRef, currentElement } = useForwardExpose();
     const isFormControl = useFormControl(currentElement);
@@ -649,9 +633,9 @@ var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       defaultValue: props.defaultValue,
       passive: props.modelValue === void 0
     });
-    const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
-    const valueIndexToChangeRef = ref(0);
-    const valuesBeforeSlideStartRef = ref(currentModelValue.value);
+    const currentModelValue = vueExports.computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
+    const valueIndexToChangeRef = vueExports.ref(0);
+    const valuesBeforeSlideStartRef = vueExports.ref(currentModelValue.value);
     function handleSlideStart(value) {
       const closestIndex = getClosestValueIndex(currentModelValue.value, value);
       updateValues(value, closestIndex);
@@ -663,7 +647,7 @@ var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       const prevValue = valuesBeforeSlideStartRef.value[valueIndexToChangeRef.value];
       const nextValue = currentModelValue.value[valueIndexToChangeRef.value];
       const hasChanged = nextValue !== prevValue;
-      if (hasChanged) emits("valueCommit", toRaw(currentModelValue.value));
+      if (hasChanged) emits("valueCommit", vueExports.toRaw(currentModelValue.value));
     }
     function updateValues(value, atIndex, { commit } = { commit: false }) {
       const decimalCount = getDecimalCount(step.value);
@@ -680,7 +664,7 @@ var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
         }
       }
     }
-    const thumbElements = ref([]);
+    const thumbElements = vueExports.ref([]);
     provideSliderRootContext({
       modelValue,
       currentModelValue,
@@ -693,52 +677,52 @@ var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
       thumbAlignment
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(CollectionSlot), null, {
-        default: withCtx(() => [(openBlock(), createBlock(resolveDynamicComponent(unref(orientation) === "horizontal" ? SliderHorizontal_default : SliderVertical_default), mergeProps(_ctx.$attrs, {
-          ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(CollectionSlot), null, {
+        default: vueExports.withCtx(() => [(vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(vueExports.unref(orientation) === "horizontal" ? SliderHorizontal_default : SliderVertical_default), vueExports.mergeProps(_ctx.$attrs, {
+          ref: vueExports.unref(forwardRef),
           "as-child": _ctx.asChild,
           as: _ctx.as,
-          min: unref(min),
-          max: unref(max),
-          dir: unref(dir),
+          min: vueExports.unref(min),
+          max: vueExports.unref(max),
+          dir: vueExports.unref(dir),
           inverted: _ctx.inverted,
-          "aria-disabled": unref(disabled),
-          "data-disabled": unref(disabled) ? "" : void 0,
+          "aria-disabled": vueExports.unref(disabled),
+          "data-disabled": vueExports.unref(disabled) ? "" : void 0,
           onPointerdown: _cache[0] || (_cache[0] = () => {
-            if (!unref(disabled)) valuesBeforeSlideStartRef.value = currentModelValue.value;
+            if (!vueExports.unref(disabled)) valuesBeforeSlideStartRef.value = currentModelValue.value;
           }),
-          onSlideStart: _cache[1] || (_cache[1] = ($event) => !unref(disabled) && handleSlideStart($event)),
-          onSlideMove: _cache[2] || (_cache[2] = ($event) => !unref(disabled) && handleSlideMove($event)),
-          onSlideEnd: _cache[3] || (_cache[3] = ($event) => !unref(disabled) && handleSlideEnd()),
-          onHomeKeyDown: _cache[4] || (_cache[4] = ($event) => !unref(disabled) && updateValues(unref(min), 0, { commit: true })),
-          onEndKeyDown: _cache[5] || (_cache[5] = ($event) => !unref(disabled) && updateValues(unref(max), currentModelValue.value.length - 1, { commit: true })),
+          onSlideStart: _cache[1] || (_cache[1] = ($event) => !vueExports.unref(disabled) && handleSlideStart($event)),
+          onSlideMove: _cache[2] || (_cache[2] = ($event) => !vueExports.unref(disabled) && handleSlideMove($event)),
+          onSlideEnd: _cache[3] || (_cache[3] = ($event) => !vueExports.unref(disabled) && handleSlideEnd()),
+          onHomeKeyDown: _cache[4] || (_cache[4] = ($event) => !vueExports.unref(disabled) && updateValues(vueExports.unref(min), 0, { commit: true })),
+          onEndKeyDown: _cache[5] || (_cache[5] = ($event) => !vueExports.unref(disabled) && updateValues(vueExports.unref(max), currentModelValue.value.length - 1, { commit: true })),
           onStepKeyDown: _cache[6] || (_cache[6] = (event, direction) => {
-            if (!unref(disabled)) {
-              const isPageKey = unref(PAGE_KEYS).includes(event.key);
-              const isSkipKey = isPageKey || event.shiftKey && unref(ARROW_KEYS).includes(event.key);
+            if (!vueExports.unref(disabled)) {
+              const isPageKey = vueExports.unref(PAGE_KEYS).includes(event.key);
+              const isSkipKey = isPageKey || event.shiftKey && vueExports.unref(ARROW_KEYS).includes(event.key);
               const multiplier = isSkipKey ? 10 : 1;
               const atIndex = valueIndexToChangeRef.value;
               const value = currentModelValue.value[atIndex];
-              const stepInDirection = unref(step) * multiplier * direction;
+              const stepInDirection = vueExports.unref(step) * multiplier * direction;
               updateValues(value + stepInDirection, atIndex, { commit: true });
             }
           })
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) }), unref(isFormControl) && _ctx.name ? (openBlock(), createBlock(unref(VisuallyHiddenInput_default), {
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", { modelValue: vueExports.unref(modelValue) }), vueExports.unref(isFormControl) && _ctx.name ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(VisuallyHiddenInput_default), {
             key: 0,
             type: "number",
-            value: unref(modelValue),
+            value: vueExports.unref(modelValue),
             name: _ctx.name,
             required: _ctx.required,
-            disabled: unref(disabled),
-            step: unref(step)
+            disabled: vueExports.unref(disabled),
+            step: vueExports.unref(step)
           }, null, 8, [
             "value",
             "name",
             "required",
             "disabled",
             "step"
-          ])) : createCommentVNode("v-if", true)]),
+          ])) : vueExports.createCommentVNode("v-if", true)]),
           _: 3
         }, 16, [
           "as-child",
@@ -756,7 +740,7 @@ var SliderRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
   }
 });
 var SliderRoot_default = SliderRoot_vue_vue_type_script_setup_true_lang_default;
-var SliderImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SliderImpl",
   props: {
     asChild: {
@@ -782,7 +766,7 @@ var SliderImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
     const emits = __emit;
     const rootContext = injectSliderRootContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps({ "data-slider-impl": "" }, props, {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps({ "data-slider-impl": "" }, props, {
         onKeydown: _cache[0] || (_cache[0] = (event) => {
           if (event.key === "Home") {
             emits("homeKeyDown", event);
@@ -790,7 +774,7 @@ var SliderImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
           } else if (event.key === "End") {
             emits("endKeyDown", event);
             event.preventDefault();
-          } else if (unref(PAGE_KEYS).concat(unref(ARROW_KEYS)).includes(event.key)) {
+          } else if (vueExports.unref(PAGE_KEYS).concat(vueExports.unref(ARROW_KEYS)).includes(event.key)) {
             emits("stepKeyDown", event);
             event.preventDefault();
           }
@@ -799,7 +783,7 @@ var SliderImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
           const target = event.target;
           target.setPointerCapture(event.pointerId);
           event.preventDefault();
-          if (unref(rootContext).thumbElements.value.includes(target)) target.focus();
+          if (vueExports.unref(rootContext).thumbElements.value.includes(target)) target.focus();
           else emits("slideStart", event);
         }),
         onPointermove: _cache[2] || (_cache[2] = (event) => {
@@ -814,14 +798,14 @@ var SliderImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ def
           }
         })
       }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16);
     };
   }
 });
 var SliderImpl_default = SliderImpl_vue_vue_type_script_setup_true_lang_default;
-var SliderRange_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderRange_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SliderRange",
   props: {
     asChild: {
@@ -838,21 +822,21 @@ var SliderRange_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const rootContext = injectSliderRootContext();
     const orientation = injectSliderOrientationContext();
     useForwardExpose();
-    const percentages = computed(() => rootContext.currentModelValue.value.map((value) => convertValueToPercentage(value, rootContext.min.value, rootContext.max.value)));
-    const offsetStart = computed(() => rootContext.currentModelValue.value.length > 1 ? Math.min(...percentages.value) : 0);
-    const offsetEnd = computed(() => 100 - Math.max(...percentages.value, 0));
+    const percentages = vueExports.computed(() => rootContext.currentModelValue.value.map((value) => convertValueToPercentage(value, rootContext.min.value, rootContext.max.value)));
+    const offsetStart = vueExports.computed(() => rootContext.currentModelValue.value.length > 1 ? Math.min(...percentages.value) : 0);
+    const offsetEnd = vueExports.computed(() => 100 - Math.max(...percentages.value, 0));
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        "data-disabled": unref(rootContext).disabled.value ? "" : void 0,
-        "data-orientation": unref(rootContext).orientation.value,
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
+        "data-disabled": vueExports.unref(rootContext).disabled.value ? "" : void 0,
+        "data-orientation": vueExports.unref(rootContext).orientation.value,
         "as-child": _ctx.asChild,
         as: _ctx.as,
-        style: normalizeStyle({
-          [unref(orientation).startEdge.value]: `${offsetStart.value}%`,
-          [unref(orientation).endEdge.value]: `${offsetEnd.value}%`
+        style: vueExports.normalizeStyle({
+          [vueExports.unref(orientation).startEdge.value]: `${offsetStart.value}%`,
+          [vueExports.unref(orientation).endEdge.value]: `${offsetEnd.value}%`
         })
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "data-disabled",
@@ -865,7 +849,7 @@ var SliderRange_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
   }
 });
 var SliderRange_default = SliderRange_vue_vue_type_script_setup_true_lang_default;
-var SliderThumbImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderThumbImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "SliderThumbImpl",
   props: {
@@ -888,42 +872,42 @@ var SliderThumbImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ *
     const orientation = injectSliderOrientationContext();
     const { forwardRef } = useForwardExpose();
     const { CollectionItem } = useCollection();
-    const value = computed(() => rootContext.modelValue?.value?.[props.index]);
-    const percent = computed(() => value.value === void 0 ? 0 : convertValueToPercentage(value.value, rootContext.min.value ?? 0, rootContext.max.value ?? 100));
-    const label = computed(() => getLabel(props.index, rootContext.modelValue?.value?.length ?? 0));
+    const value = vueExports.computed(() => rootContext.modelValue?.value?.[props.index]);
+    const percent = vueExports.computed(() => value.value === void 0 ? 0 : convertValueToPercentage(value.value, rootContext.min.value ?? 0, rootContext.max.value ?? 100));
+    const label = vueExports.computed(() => getLabel(props.index, rootContext.modelValue?.value?.length ?? 0));
     const size = useSize();
-    const orientationSize = computed(() => size[orientation.size].value);
-    const thumbInBoundsOffset = computed(() => {
+    const orientationSize = vueExports.computed(() => size[orientation.size].value);
+    const thumbInBoundsOffset = vueExports.computed(() => {
       if (rootContext.thumbAlignment.value === "overflow" || !orientationSize.value) return 0;
       else return getThumbInBoundsOffset(orientationSize.value, percent.value, orientation.direction.value);
     });
     const isMounted = useMounted();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(CollectionItem), null, {
-        default: withCtx(() => [createVNode(unref(Primitive), mergeProps(_ctx.$attrs, {
-          ref: unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(CollectionItem), null, {
+        default: vueExports.withCtx(() => [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps(_ctx.$attrs, {
+          ref: vueExports.unref(forwardRef),
           role: "slider",
-          tabindex: unref(rootContext).disabled.value ? void 0 : 0,
+          tabindex: vueExports.unref(rootContext).disabled.value ? void 0 : 0,
           "aria-label": _ctx.$attrs["aria-label"] || label.value,
-          "data-disabled": unref(rootContext).disabled.value ? "" : void 0,
-          "data-orientation": unref(rootContext).orientation.value,
+          "data-disabled": vueExports.unref(rootContext).disabled.value ? "" : void 0,
+          "data-orientation": vueExports.unref(rootContext).orientation.value,
           "aria-valuenow": value.value,
-          "aria-valuemin": unref(rootContext).min.value,
-          "aria-valuemax": unref(rootContext).max.value,
-          "aria-orientation": unref(rootContext).orientation.value,
+          "aria-valuemin": vueExports.unref(rootContext).min.value,
+          "aria-valuemax": vueExports.unref(rootContext).max.value,
+          "aria-orientation": vueExports.unref(rootContext).orientation.value,
           "as-child": _ctx.asChild,
           as: _ctx.as,
           style: {
             transform: "var(--reka-slider-thumb-transform)",
             position: "absolute",
-            [unref(orientation).startEdge.value]: `calc(${percent.value}% + ${thumbInBoundsOffset.value}px)`,
-            display: !unref(isMounted) && value.value === void 0 ? "none" : void 0
+            [vueExports.unref(orientation).startEdge.value]: `calc(${percent.value}% + ${thumbInBoundsOffset.value}px)`,
+            display: !vueExports.unref(isMounted) && value.value === void 0 ? "none" : void 0
           },
           onFocus: _cache[0] || (_cache[0] = () => {
-            unref(rootContext).valueIndexToChangeRef.value = _ctx.index;
+            vueExports.unref(rootContext).valueIndexToChangeRef.value = _ctx.index;
           })
         }), {
-          default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+          default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
           _: 3
         }, 16, [
           "tabindex",
@@ -944,7 +928,7 @@ var SliderThumbImpl_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ *
   }
 });
 var SliderThumbImpl_default = SliderThumbImpl_vue_vue_type_script_setup_true_lang_default;
-var SliderThumb_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderThumb_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SliderThumb",
   props: {
     asChild: {
@@ -961,17 +945,17 @@ var SliderThumb_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const props = __props;
     const { getItems } = useCollection();
     const { forwardRef, currentElement: thumbElement } = useForwardExpose();
-    const index = computed(() => thumbElement.value ? getItems(true).findIndex((i) => i.ref === thumbElement.value) : -1);
+    const index = vueExports.computed(() => thumbElement.value ? getItems(true).findIndex((i) => i.ref === thumbElement.value) : -1);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(SliderThumbImpl_default, mergeProps({ ref: unref(forwardRef) }, props, { index: index.value }), {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+      return vueExports.openBlock(), vueExports.createBlock(SliderThumbImpl_default, vueExports.mergeProps({ ref: vueExports.unref(forwardRef) }, props, { index: index.value }), {
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, ["index"]);
     };
   }
 });
 var SliderThumb_default = SliderThumb_vue_vue_type_script_setup_true_lang_default;
-var SliderTrack_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
+var SliderTrack_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "SliderTrack",
   props: {
     asChild: {
@@ -988,13 +972,13 @@ var SliderTrack_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
     const rootContext = injectSliderRootContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
         "as-child": _ctx.asChild,
         as: _ctx.as,
-        "data-disabled": unref(rootContext).disabled.value ? "" : void 0,
-        "data-orientation": unref(rootContext).orientation.value
+        "data-disabled": vueExports.unref(rootContext).disabled.value ? "" : void 0,
+        "data-orientation": vueExports.unref(rootContext).orientation.value
       }, {
-        default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, [
         "as-child",
@@ -1006,24 +990,24 @@ var SliderTrack_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ de
   }
 });
 var SliderTrack_default = SliderTrack_vue_vue_type_script_setup_true_lang_default;
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PageModal",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     portfolioId: {},
     page: {}
   }, {
     "open": { type: Boolean, ...{ default: false } },
     "openModifiers": {}
   }),
-  emits: /* @__PURE__ */ mergeModels(["saved"], ["update:open"]),
+  emits: /* @__PURE__ */ vueExports.mergeModels(["saved"], ["update:open"]),
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit = __emit;
-    const open = useModel(__props, "open");
+    const open = vueExports.useModel(__props, "open");
     const { fetcher } = useApi();
-    const isEdit = computed(() => !!props.page);
-    const form = reactive({
+    const isEdit = vueExports.computed(() => !!props.page);
+    const form = vueExports.reactive({
       title: "",
       slug: "",
       seoDescription: "",
@@ -1032,7 +1016,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       isPublished: false,
       showInMenu: true
     });
-    const snapshot = ref("");
+    const snapshot = vueExports.ref("");
     function resetForm() {
       const p = props.page;
       form.title = p?.title ?? "";
@@ -1044,15 +1028,15 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       form.showInMenu = p?.showInMenu ?? true;
       snapshot.value = JSON.stringify(form);
     }
-    watch(open, (val) => {
+    vueExports.watch(open, (val) => {
       if (val) resetForm();
     });
-    const isDirty = computed(() => snapshot.value !== JSON.stringify(form));
-    const slugTouched = ref(false);
-    watch(open, (val) => {
+    const isDirty = vueExports.computed(() => snapshot.value !== JSON.stringify(form));
+    const slugTouched = vueExports.ref(false);
+    vueExports.watch(open, (val) => {
       if (val) slugTouched.value = false;
     });
-    watch(
+    vueExports.watch(
       () => form.title,
       (title) => {
         if (isEdit.value || slugTouched.value) return;
@@ -1062,7 +1046,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     function onSlugInput() {
       slugTouched.value = true;
     }
-    const confirmCloseOpen = ref(false);
+    const confirmCloseOpen = vueExports.ref(false);
     function tryClose() {
       if (isDirty.value) {
         confirmCloseOpen.value = true;
@@ -1074,9 +1058,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       confirmCloseOpen.value = false;
       open.value = false;
     }
-    const ogImagePickerOpen = ref(false);
-    const saving = ref(false);
-    const errorMessage = ref("");
+    const ogImagePickerOpen = vueExports.ref(false);
+    const saving = vueExports.ref(false);
+    const errorMessage = vueExports.ref("");
     async function save() {
       saving.value = true;
       errorMessage.value = "";
@@ -1125,7 +1109,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       const _component_USwitch = _sfc_main$2$1;
       const _component_AdminMediaPickerModal = __nuxt_component_11;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_component_UModal, {
+      _push(ssrRenderComponent_1(_component_UModal, {
         open: open.value,
         title: "Page settings",
         ui: { content: "max-w-xl" },
@@ -1133,27 +1117,27 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           if (!val) tryClose();
         }
       }, {
-        body: withCtx((_, _push2, _parent2, _scopeId) => {
+        body: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="space-y-5"${_scopeId}><div class="grid grid-cols-2 gap-4"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: "Page title",
               name: "title",
               class: "col-span-2 sm:col-span-1"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UInput, {
-                    modelValue: unref(form).title,
-                    "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                  _push3(ssrRenderComponent_1(_component_UInput, {
+                    modelValue: vueExports.unref(form).title,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                     placeholder: "About",
                     class: "w-full"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UInput, {
-                      modelValue: unref(form).title,
-                      "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                    vueExports.createVNode(_component_UInput, {
+                      modelValue: vueExports.unref(form).title,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                       placeholder: "About",
                       class: "w-full"
                     }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -1162,27 +1146,27 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: "Page slug",
               name: "slug",
               class: "col-span-2 sm:col-span-1"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UInput, {
-                    modelValue: unref(form).slug,
-                    "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                  _push3(ssrRenderComponent_1(_component_UInput, {
+                    modelValue: vueExports.unref(form).slug,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                     placeholder: "about",
                     class: "w-full",
                     ui: { base: "ps-4" },
                     onInput: onSlugInput
                   }, {
-                    leading: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    leading: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<span class="text-muted text-sm"${_scopeId3}>/</span>`);
                       } else {
                         return [
-                          createVNode("span", { class: "text-muted text-sm" }, "/")
+                          vueExports.createVNode("span", { class: "text-muted text-sm" }, "/")
                         ];
                       }
                     }),
@@ -1190,16 +1174,16 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UInput, {
-                      modelValue: unref(form).slug,
-                      "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                    vueExports.createVNode(_component_UInput, {
+                      modelValue: vueExports.unref(form).slug,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                       placeholder: "about",
                       class: "w-full",
                       ui: { base: "ps-4" },
                       onInput: onSlugInput
                     }, {
-                      leading: withCtx(() => [
-                        createVNode("span", { class: "text-muted text-sm" }, "/")
+                      leading: vueExports.withCtx(() => [
+                        vueExports.createVNode("span", { class: "text-muted text-sm" }, "/")
                       ]),
                       _: 1
                     }, 8, ["modelValue", "onUpdate:modelValue"])
@@ -1209,24 +1193,24 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
               _: 1
             }, _parent2, _scopeId));
             _push2(`</div>`);
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: "Page description",
               name: "seoDescription"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UTextarea, {
-                    modelValue: unref(form).seoDescription,
-                    "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                  _push3(ssrRenderComponent_1(_component_UTextarea, {
+                    modelValue: vueExports.unref(form).seoDescription,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                     placeholder: "A short description of this page.",
                     class: "w-full",
                     rows: 3
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UTextarea, {
-                      modelValue: unref(form).seoDescription,
-                      "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                    vueExports.createVNode(_component_UTextarea, {
+                      modelValue: vueExports.unref(form).seoDescription,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                       placeholder: "A short description of this page.",
                       class: "w-full",
                       rows: 3
@@ -1236,51 +1220,51 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_USeparator, null, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent_1(_component_USeparator, null, null, _parent2, _scopeId));
             _push2(`<div class="flex gap-5 items-start"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: "OG image",
               name: "seoOgImageUrl",
               class: "shrink-0"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`<div class="flex flex-col gap-2"${_scopeId2}><div class="relative w-32 h-[72px] rounded-md overflow-hidden border border-default bg-muted flex items-center justify-center cursor-pointer hover:border-primary transition-colors"${_scopeId2}>`);
-                  if (unref(form).seoOgImageUrl) {
-                    _push3(`<img${ssrRenderAttr("src", unref(form).seoOgImageUrl)} alt="" class="w-full h-full object-cover"${_scopeId2}>`);
+                  if (vueExports.unref(form).seoOgImageUrl) {
+                    _push3(`<img${ssrRenderAttr_1("src", vueExports.unref(form).seoOgImageUrl)} alt="" class="w-full h-full object-cover"${_scopeId2}>`);
                   } else {
-                    _push3(ssrRenderComponent(_component_UIcon, {
+                    _push3(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-image",
                       class: "text-muted size-6"
                     }, null, _parent3, _scopeId2));
                   }
-                  if (unref(form).seoOgImageUrl) {
-                    _push3(ssrRenderComponent(_component_UButton, {
+                  if (vueExports.unref(form).seoOgImageUrl) {
+                    _push3(ssrRenderComponent_1(_component_UButton, {
                       icon: "i-lucide-x",
                       color: "neutral",
                       variant: "solid",
                       size: "xs",
                       class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                       "aria-label": "Remove OG image",
-                      onClick: ($event) => unref(form).seoOgImageUrl = null
+                      onClick: ($event) => vueExports.unref(form).seoOgImageUrl = null
                     }, null, _parent3, _scopeId2));
                   } else {
                     _push3(`<!---->`);
                   }
                   _push3(`</div>`);
-                  _push3(ssrRenderComponent(_component_UButton, {
+                  _push3(ssrRenderComponent_1(_component_UButton, {
                     color: "neutral",
                     variant: "outline",
                     size: "xs",
                     class: "w-32 flex justify-center",
                     onClick: ($event) => ogImagePickerOpen.value = true
                   }, {
-                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`${ssrInterpolate(unref(form).seoOgImageUrl ? "Change" : "Choose")}`);
+                        _push4(`${ssrInterpolate_1(vueExports.unref(form).seoOgImageUrl ? "Change" : "Choose")}`);
                       } else {
                         return [
-                          createTextVNode(toDisplayString(unref(form).seoOgImageUrl ? "Change" : "Choose"), 1)
+                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).seoOgImageUrl ? "Change" : "Choose"), 1)
                         ];
                       }
                     }),
@@ -1289,22 +1273,22 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                   _push3(`</div>`);
                 } else {
                   return [
-                    createVNode("div", { class: "flex flex-col gap-2" }, [
-                      createVNode("div", {
+                    vueExports.createVNode("div", { class: "flex flex-col gap-2" }, [
+                      vueExports.createVNode("div", {
                         class: "relative w-32 h-[72px] rounded-md overflow-hidden border border-default bg-muted flex items-center justify-center cursor-pointer hover:border-primary transition-colors",
                         onClick: ($event) => ogImagePickerOpen.value = true
                       }, [
-                        unref(form).seoOgImageUrl ? (openBlock(), createBlock("img", {
+                        vueExports.unref(form).seoOgImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                           key: 0,
-                          src: unref(form).seoOgImageUrl,
+                          src: vueExports.unref(form).seoOgImageUrl,
                           alt: "",
                           class: "w-full h-full object-cover"
-                        }, null, 8, ["src"])) : (openBlock(), createBlock(_component_UIcon, {
+                        }, null, 8, ["src"])) : (vueExports.openBlock(), vueExports.createBlock(_component_UIcon, {
                           key: 1,
                           name: "i-lucide-image",
                           class: "text-muted size-6"
                         })),
-                        unref(form).seoOgImageUrl ? (openBlock(), createBlock(_component_UButton, {
+                        vueExports.unref(form).seoOgImageUrl ? (vueExports.openBlock(), vueExports.createBlock(_component_UButton, {
                           key: 2,
                           icon: "i-lucide-x",
                           color: "neutral",
@@ -1312,18 +1296,18 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                           size: "xs",
                           class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                           "aria-label": "Remove OG image",
-                          onClick: withModifiers(($event) => unref(form).seoOgImageUrl = null, ["stop"])
-                        }, null, 8, ["onClick"])) : createCommentVNode("", true)
+                          onClick: vueExports.withModifiers(($event) => vueExports.unref(form).seoOgImageUrl = null, ["stop"])
+                        }, null, 8, ["onClick"])) : vueExports.createCommentVNode("", true)
                       ], 8, ["onClick"]),
-                      createVNode(_component_UButton, {
+                      vueExports.createVNode(_component_UButton, {
                         color: "neutral",
                         variant: "outline",
                         size: "xs",
                         class: "w-32 flex justify-center",
                         onClick: ($event) => ogImagePickerOpen.value = true
                       }, {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(unref(form).seoOgImageUrl ? "Change" : "Choose"), 1)
+                        default: vueExports.withCtx(() => [
+                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).seoOgImageUrl ? "Change" : "Choose"), 1)
                         ]),
                         _: 1
                       }, 8, ["onClick"])
@@ -1334,23 +1318,23 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
               _: 1
             }, _parent2, _scopeId));
             _push2(`<div class="flex-1 space-y-4"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: "SEO title",
               name: "seoTitle"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UInput, {
-                    modelValue: unref(form).seoTitle,
-                    "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                  _push3(ssrRenderComponent_1(_component_UInput, {
+                    modelValue: vueExports.unref(form).seoTitle,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                     placeholder: "About - My Portfolio",
                     class: "w-full"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UInput, {
-                      modelValue: unref(form).seoTitle,
-                      "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                    vueExports.createVNode(_component_UInput, {
+                      modelValue: vueExports.unref(form).seoTitle,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                       placeholder: "About - My Portfolio",
                       class: "w-full"
                     }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -1359,24 +1343,24 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UFormField, {
+            _push2(ssrRenderComponent_1(_component_UFormField, {
               label: "SEO description",
               name: "seoDescription2"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UTextarea, {
-                    modelValue: unref(form).seoDescription,
-                    "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                  _push3(ssrRenderComponent_1(_component_UTextarea, {
+                    modelValue: vueExports.unref(form).seoDescription,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                     placeholder: "A short description for search engines.",
                     class: "w-full",
                     rows: 3
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UTextarea, {
-                      modelValue: unref(form).seoDescription,
-                      "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                    vueExports.createVNode(_component_UTextarea, {
+                      modelValue: vueExports.unref(form).seoDescription,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                       placeholder: "A short description for search engines.",
                       class: "w-full",
                       rows: 3
@@ -1387,11 +1371,11 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
               _: 1
             }, _parent2, _scopeId));
             _push2(`</div></div>`);
-            if (unref(errorMessage)) {
-              _push2(ssrRenderComponent(_component_UAlert, {
+            if (vueExports.unref(errorMessage)) {
+              _push2(ssrRenderComponent_1(_component_UAlert, {
                 color: "error",
                 variant: "soft",
-                description: unref(errorMessage)
+                description: vueExports.unref(errorMessage)
               }, null, _parent2, _scopeId));
             } else {
               _push2(`<!---->`);
@@ -1399,39 +1383,39 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "space-y-5" }, [
-                createVNode("div", { class: "grid grid-cols-2 gap-4" }, [
-                  createVNode(_component_UFormField, {
+              vueExports.createVNode("div", { class: "space-y-5" }, [
+                vueExports.createVNode("div", { class: "grid grid-cols-2 gap-4" }, [
+                  vueExports.createVNode(_component_UFormField, {
                     label: "Page title",
                     name: "title",
                     class: "col-span-2 sm:col-span-1"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(form).title,
-                        "onUpdate:modelValue": ($event) => unref(form).title = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(form).title,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).title = $event,
                         placeholder: "About",
                         class: "w-full"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UFormField, {
+                  vueExports.createVNode(_component_UFormField, {
                     label: "Page slug",
                     name: "slug",
                     class: "col-span-2 sm:col-span-1"
                   }, {
-                    default: withCtx(() => [
-                      createVNode(_component_UInput, {
-                        modelValue: unref(form).slug,
-                        "onUpdate:modelValue": ($event) => unref(form).slug = $event,
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(_component_UInput, {
+                        modelValue: vueExports.unref(form).slug,
+                        "onUpdate:modelValue": ($event) => vueExports.unref(form).slug = $event,
                         placeholder: "about",
                         class: "w-full",
                         ui: { base: "ps-4" },
                         onInput: onSlugInput
                       }, {
-                        leading: withCtx(() => [
-                          createVNode("span", { class: "text-muted text-sm" }, "/")
+                        leading: vueExports.withCtx(() => [
+                          vueExports.createVNode("span", { class: "text-muted text-sm" }, "/")
                         ]),
                         _: 1
                       }, 8, ["modelValue", "onUpdate:modelValue"])
@@ -1439,14 +1423,14 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                     _: 1
                   })
                 ]),
-                createVNode(_component_UFormField, {
+                vueExports.createVNode(_component_UFormField, {
                   label: "Page description",
                   name: "seoDescription"
                 }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UTextarea, {
-                      modelValue: unref(form).seoDescription,
-                      "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                  default: vueExports.withCtx(() => [
+                    vueExports.createVNode(_component_UTextarea, {
+                      modelValue: vueExports.unref(form).seoDescription,
+                      "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                       placeholder: "A short description of this page.",
                       class: "w-full",
                       rows: 3
@@ -1454,30 +1438,30 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                   ]),
                   _: 1
                 }),
-                createVNode(_component_USeparator),
-                createVNode("div", { class: "flex gap-5 items-start" }, [
-                  createVNode(_component_UFormField, {
+                vueExports.createVNode(_component_USeparator),
+                vueExports.createVNode("div", { class: "flex gap-5 items-start" }, [
+                  vueExports.createVNode(_component_UFormField, {
                     label: "OG image",
                     name: "seoOgImageUrl",
                     class: "shrink-0"
                   }, {
-                    default: withCtx(() => [
-                      createVNode("div", { class: "flex flex-col gap-2" }, [
-                        createVNode("div", {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode("div", { class: "flex flex-col gap-2" }, [
+                        vueExports.createVNode("div", {
                           class: "relative w-32 h-[72px] rounded-md overflow-hidden border border-default bg-muted flex items-center justify-center cursor-pointer hover:border-primary transition-colors",
                           onClick: ($event) => ogImagePickerOpen.value = true
                         }, [
-                          unref(form).seoOgImageUrl ? (openBlock(), createBlock("img", {
+                          vueExports.unref(form).seoOgImageUrl ? (vueExports.openBlock(), vueExports.createBlock("img", {
                             key: 0,
-                            src: unref(form).seoOgImageUrl,
+                            src: vueExports.unref(form).seoOgImageUrl,
                             alt: "",
                             class: "w-full h-full object-cover"
-                          }, null, 8, ["src"])) : (openBlock(), createBlock(_component_UIcon, {
+                          }, null, 8, ["src"])) : (vueExports.openBlock(), vueExports.createBlock(_component_UIcon, {
                             key: 1,
                             name: "i-lucide-image",
                             class: "text-muted size-6"
                           })),
-                          unref(form).seoOgImageUrl ? (openBlock(), createBlock(_component_UButton, {
+                          vueExports.unref(form).seoOgImageUrl ? (vueExports.openBlock(), vueExports.createBlock(_component_UButton, {
                             key: 2,
                             icon: "i-lucide-x",
                             color: "neutral",
@@ -1485,18 +1469,18 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                             size: "xs",
                             class: "absolute top-1 right-1 opacity-80 hover:opacity-100",
                             "aria-label": "Remove OG image",
-                            onClick: withModifiers(($event) => unref(form).seoOgImageUrl = null, ["stop"])
-                          }, null, 8, ["onClick"])) : createCommentVNode("", true)
+                            onClick: vueExports.withModifiers(($event) => vueExports.unref(form).seoOgImageUrl = null, ["stop"])
+                          }, null, 8, ["onClick"])) : vueExports.createCommentVNode("", true)
                         ], 8, ["onClick"]),
-                        createVNode(_component_UButton, {
+                        vueExports.createVNode(_component_UButton, {
                           color: "neutral",
                           variant: "outline",
                           size: "xs",
                           class: "w-32 flex justify-center",
                           onClick: ($event) => ogImagePickerOpen.value = true
                         }, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(unref(form).seoOgImageUrl ? "Change" : "Choose"), 1)
+                          default: vueExports.withCtx(() => [
+                            vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(form).seoOgImageUrl ? "Change" : "Choose"), 1)
                           ]),
                           _: 1
                         }, 8, ["onClick"])
@@ -1504,29 +1488,29 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode("div", { class: "flex-1 space-y-4" }, [
-                    createVNode(_component_UFormField, {
+                  vueExports.createVNode("div", { class: "flex-1 space-y-4" }, [
+                    vueExports.createVNode(_component_UFormField, {
                       label: "SEO title",
                       name: "seoTitle"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UInput, {
-                          modelValue: unref(form).seoTitle,
-                          "onUpdate:modelValue": ($event) => unref(form).seoTitle = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UInput, {
+                          modelValue: vueExports.unref(form).seoTitle,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).seoTitle = $event,
                           placeholder: "About - My Portfolio",
                           class: "w-full"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       _: 1
                     }),
-                    createVNode(_component_UFormField, {
+                    vueExports.createVNode(_component_UFormField, {
                       label: "SEO description",
                       name: "seoDescription2"
                     }, {
-                      default: withCtx(() => [
-                        createVNode(_component_UTextarea, {
-                          modelValue: unref(form).seoDescription,
-                          "onUpdate:modelValue": ($event) => unref(form).seoDescription = $event,
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(_component_UTextarea, {
+                          modelValue: vueExports.unref(form).seoDescription,
+                          "onUpdate:modelValue": ($event) => vueExports.unref(form).seoDescription = $event,
                           placeholder: "A short description for search engines.",
                           class: "w-full",
                           rows: 3
@@ -1536,56 +1520,56 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                     })
                   ])
                 ]),
-                unref(errorMessage) ? (openBlock(), createBlock(_component_UAlert, {
+                vueExports.unref(errorMessage) ? (vueExports.openBlock(), vueExports.createBlock(_component_UAlert, {
                   key: 0,
                   color: "error",
                   variant: "soft",
-                  description: unref(errorMessage)
-                }, null, 8, ["description"])) : createCommentVNode("", true)
+                  description: vueExports.unref(errorMessage)
+                }, null, 8, ["description"])) : vueExports.createCommentVNode("", true)
               ])
             ];
           }
         }),
-        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+        footer: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex items-center justify-between w-full"${_scopeId}><div class="flex gap-4"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_USwitch, {
-              modelValue: unref(form).isPublished,
-              "onUpdate:modelValue": ($event) => unref(form).isPublished = $event,
+            _push2(ssrRenderComponent_1(_component_USwitch, {
+              modelValue: vueExports.unref(form).isPublished,
+              "onUpdate:modelValue": ($event) => vueExports.unref(form).isPublished = $event,
               label: "Published"
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_USwitch, {
-              modelValue: unref(form).showInMenu,
-              "onUpdate:modelValue": ($event) => unref(form).showInMenu = $event,
+            _push2(ssrRenderComponent_1(_component_USwitch, {
+              modelValue: vueExports.unref(form).showInMenu,
+              "onUpdate:modelValue": ($event) => vueExports.unref(form).showInMenu = $event,
               label: "Show in menu"
             }, null, _parent2, _scopeId));
             _push2(`</div><div class="flex gap-2"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               variant: "ghost",
               onClick: tryClose
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Cancel`);
                 } else {
                   return [
-                    createTextVNode("Cancel")
+                    vueExports.createTextVNode("Cancel")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UButton, {
-              loading: unref(saving),
-              disabled: !unref(form).title.trim(),
+            _push2(ssrRenderComponent_1(_component_UButton, {
+              loading: vueExports.unref(saving),
+              disabled: !vueExports.unref(form).title.trim(),
               onClick: save
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Save`);
                 } else {
                   return [
-                    createTextVNode("Save")
+                    vueExports.createTextVNode("Save")
                   ];
                 }
               }),
@@ -1594,36 +1578,36 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             _push2(`</div></div>`);
           } else {
             return [
-              createVNode("div", { class: "flex items-center justify-between w-full" }, [
-                createVNode("div", { class: "flex gap-4" }, [
-                  createVNode(_component_USwitch, {
-                    modelValue: unref(form).isPublished,
-                    "onUpdate:modelValue": ($event) => unref(form).isPublished = $event,
+              vueExports.createVNode("div", { class: "flex items-center justify-between w-full" }, [
+                vueExports.createVNode("div", { class: "flex gap-4" }, [
+                  vueExports.createVNode(_component_USwitch, {
+                    modelValue: vueExports.unref(form).isPublished,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).isPublished = $event,
                     label: "Published"
                   }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                  createVNode(_component_USwitch, {
-                    modelValue: unref(form).showInMenu,
-                    "onUpdate:modelValue": ($event) => unref(form).showInMenu = $event,
+                  vueExports.createVNode(_component_USwitch, {
+                    modelValue: vueExports.unref(form).showInMenu,
+                    "onUpdate:modelValue": ($event) => vueExports.unref(form).showInMenu = $event,
                     label: "Show in menu"
                   }, null, 8, ["modelValue", "onUpdate:modelValue"])
                 ]),
-                createVNode("div", { class: "flex gap-2" }, [
-                  createVNode(_component_UButton, {
+                vueExports.createVNode("div", { class: "flex gap-2" }, [
+                  vueExports.createVNode(_component_UButton, {
                     variant: "ghost",
                     onClick: tryClose
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode("Cancel")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode("Cancel")
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_UButton, {
-                    loading: unref(saving),
-                    disabled: !unref(form).title.trim(),
+                  vueExports.createVNode(_component_UButton, {
+                    loading: vueExports.unref(saving),
+                    disabled: !vueExports.unref(form).title.trim(),
                     onClick: save
                   }, {
-                    default: withCtx(() => [
-                      createTextVNode("Save")
+                    default: vueExports.withCtx(() => [
+                      vueExports.createTextVNode("Save")
                     ]),
                     _: 1
                   }, 8, ["loading", "disabled"])
@@ -1634,40 +1618,40 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_UModal, {
-        open: unref(confirmCloseOpen),
-        "onUpdate:open": ($event) => isRef(confirmCloseOpen) ? confirmCloseOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_UModal, {
+        open: vueExports.unref(confirmCloseOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(confirmCloseOpen) ? confirmCloseOpen.value = $event : null,
         title: "Unsaved changes",
         description: "You have unsaved changes. Are you sure you want to discard them?"
       }, {
-        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+        footer: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex justify-end gap-2 w-full"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               variant: "ghost",
               onClick: ($event) => confirmCloseOpen.value = false
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Keep editing`);
                 } else {
                   return [
-                    createTextVNode("Keep editing")
+                    vueExports.createTextVNode("Keep editing")
                   ];
                 }
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               color: "error",
               onClick: forceClose
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`Discard changes`);
                 } else {
                   return [
-                    createTextVNode("Discard changes")
+                    vueExports.createTextVNode("Discard changes")
                   ];
                 }
               }),
@@ -1676,22 +1660,22 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "flex justify-end gap-2 w-full" }, [
-                createVNode(_component_UButton, {
+              vueExports.createVNode("div", { class: "flex justify-end gap-2 w-full" }, [
+                vueExports.createVNode(_component_UButton, {
                   variant: "ghost",
                   onClick: ($event) => confirmCloseOpen.value = false
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode("Keep editing")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode("Keep editing")
                   ]),
                   _: 1
                 }, 8, ["onClick"]),
-                createVNode(_component_UButton, {
+                vueExports.createVNode(_component_UButton, {
                   color: "error",
                   onClick: forceClose
                 }, {
-                  default: withCtx(() => [
-                    createTextVNode("Discard changes")
+                  default: vueExports.withCtx(() => [
+                    vueExports.createTextVNode("Discard changes")
                   ]),
                   _: 1
                 })
@@ -1701,12 +1685,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_AdminMediaPickerModal, {
-        open: unref(ogImagePickerOpen),
-        "onUpdate:open": ($event) => isRef(ogImagePickerOpen) ? ogImagePickerOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminMediaPickerModal, {
+        open: vueExports.unref(ogImagePickerOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(ogImagePickerOpen) ? ogImagePickerOpen.value = $event : null,
         "images-only": "",
-        "selected-url": unref(form).seoOgImageUrl,
-        onSelect: (url) => unref(form).seoOgImageUrl = url
+        "selected-url": vueExports.unref(form).seoOgImageUrl,
+        onSelect: (url) => vueExports.unref(form).seoOgImageUrl = url
       }, null, _parent));
       _push(`<!--]-->`);
     };
@@ -1714,7 +1698,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$f = _sfc_main$f.setup;
 _sfc_main$f.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/PageModal.vue");
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
@@ -1749,7 +1733,7 @@ function usePages() {
 function useActivePage() {
   const { pages } = usePages();
   const activePageId = useState("active-page-id", () => null);
-  watch(
+  vueExports.watch(
     pages,
     (newPages) => {
       if (!activePageId.value && newPages.length > 0) {
@@ -1758,12 +1742,12 @@ function useActivePage() {
     },
     { immediate: true }
   );
-  const activePage = computed(
+  const activePage = vueExports.computed(
     () => pages.value.find((p) => p.id === activePageId.value) ?? pages.value[0] ?? null
   );
   return { activePageId, activePage };
 }
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PageControls",
   __ssrInlineRender: true,
   props: {
@@ -1811,10 +1795,10 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         page.showInMenu = original;
       }
     }
-    const deleteModalOpen = ref(false);
-    const pageToDelete = ref(null);
-    const deleting = ref(false);
-    const deleteError = ref("");
+    const deleteModalOpen = vueExports.ref(false);
+    const pageToDelete = vueExports.ref(null);
+    const deleting = vueExports.ref(false);
+    const deleteError = vueExports.ref("");
     function openDeleteModal(page) {
       pageToDelete.value = page;
       deleteError.value = "";
@@ -1842,9 +1826,9 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         deleting.value = false;
       }
     }
-    const atPageLimit = computed(() => pages.value.length >= MAX_PAGES_PER_PORTFOLIO);
-    const pageModalOpen = ref(false);
-    const pageToEdit = ref(null);
+    const atPageLimit = vueExports.computed(() => pages.value.length >= MAX_PAGES_PER_PORTFOLIO);
+    const pageModalOpen = vueExports.ref(false);
+    const pageToEdit = vueExports.ref(null);
     function openAddPage() {
       if (atPageLimit.value) return;
       pageToEdit.value = null;
@@ -1870,45 +1854,45 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       const _component_PagebuilderPageModal = __nuxt_component_3$1;
       const _component_AdminConfirmModal = __nuxt_component_4$1;
       _push(`<!--[--><div class="flex items-center gap-1">`);
-      _push(ssrRenderComponent(_component_UPopover, null, {
-        content: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(_component_UPopover, null, {
+        content: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="p-1 min-w-52"${_scopeId}><div class="flex items-center justify-between px-2 py-1.5"${_scopeId}><button class="${ssrRenderClass([
-              unref(atPageLimit) ? "text-muted cursor-not-allowed" : "text-primary hover:text-primary/80",
+            _push2(`<div class="p-1 min-w-52"${_scopeId}><div class="flex items-center justify-between px-2 py-1.5"${_scopeId}><button class="${ssrRenderClass_1([
+              vueExports.unref(atPageLimit) ? "text-muted cursor-not-allowed" : "text-primary hover:text-primary/80",
               "flex items-center gap-2 text-sm rounded-md font-medium transition-colors"
-            ])}"${ssrIncludeBooleanAttr(unref(atPageLimit)) ? " disabled" : ""}${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
+            ])}"${ssrIncludeBooleanAttr(vueExports.unref(atPageLimit)) ? " disabled" : ""}${_scopeId}>`);
+            _push2(ssrRenderComponent_1(_component_UIcon, {
               name: "i-lucide-plus",
               class: "size-4 shrink-0"
             }, null, _parent2, _scopeId));
-            _push2(` Add page </button><span class="text-xs text-muted tabular-nums"${_scopeId}>${ssrInterpolate(unref(pages).length)} / ${ssrInterpolate(unref(MAX_PAGES_PER_PORTFOLIO))}</span></div><div class="my-1 border-t border-default"${_scopeId}></div>`);
-            if (unref(pagesLoading)) {
+            _push2(` Add page </button><span class="text-xs text-muted tabular-nums"${_scopeId}>${ssrInterpolate_1(vueExports.unref(pages).length)} / ${ssrInterpolate_1(vueExports.unref(MAX_PAGES_PER_PORTFOLIO))}</span></div><div class="my-1 border-t border-default"${_scopeId}></div>`);
+            if (vueExports.unref(pagesLoading)) {
               _push2(`<div class="flex items-center justify-center py-4"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-loader-2",
                 class: "size-4 animate-spin text-muted"
               }, null, _parent2, _scopeId));
               _push2(`</div>`);
-            } else if (unref(pagesError)) {
-              _push2(`<p class="px-2 py-2 text-sm text-error"${_scopeId}>${ssrInterpolate(unref(pagesError))}</p>`);
+            } else if (vueExports.unref(pagesError)) {
+              _push2(`<p class="px-2 py-2 text-sm text-error"${_scopeId}>${ssrInterpolate_1(vueExports.unref(pagesError))}</p>`);
             } else {
-              _push2(ssrRenderComponent(unref(VueDraggable), {
-                modelValue: unref(pages),
-                "onUpdate:modelValue": ($event) => isRef(pages) ? pages.value = $event : null,
+              _push2(ssrRenderComponent_1(vueExports.unref(lo), {
+                modelValue: vueExports.unref(pages),
+                "onUpdate:modelValue": ($event) => vueExports.isRef(pages) ? pages.value = $event : null,
                 handle: ".drag-handle",
                 onEnd: onPagesReorder
               }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(`<!--[-->`);
-                    ssrRenderList(unref(pages), (page) => {
-                      _push3(`<div class="${ssrRenderClass([{ "bg-elevated": page.id === unref(activePageId) }, "group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer"])}"${_scopeId2}>`);
-                      _push3(ssrRenderComponent(_component_UIcon, {
+                    ssrRenderList_1(vueExports.unref(pages), (page) => {
+                      _push3(`<div class="${ssrRenderClass_1([{ "bg-elevated": page.id === vueExports.unref(activePageId) }, "group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer"])}"${_scopeId2}>`);
+                      _push3(ssrRenderComponent_1(_component_UIcon, {
                         name: "i-lucide-grip-vertical",
                         class: "drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
                       }, null, _parent3, _scopeId2));
-                      _push3(`<span class="flex-1 truncate"${_scopeId2}>${ssrInterpolate(page.title)}</span><div class="flex -my-0.5"${_scopeId2}>`);
-                      _push3(ssrRenderComponent(_component_UButton, {
+                      _push3(`<span class="flex-1 truncate"${_scopeId2}>${ssrInterpolate_1(page.title)}</span><div class="flex -my-0.5"${_scopeId2}>`);
+                      _push3(ssrRenderComponent_1(_component_UButton, {
                         icon: page.showInMenu ? "pepicons-pop-list" : "pepicons-pop-list-off",
                         color: "neutral",
                         variant: "ghost",
@@ -1917,7 +1901,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
                         onClick: ($event) => toggleShowInMenu(page)
                       }, null, _parent3, _scopeId2));
                       if (!page.isMandatory) {
-                        _push3(ssrRenderComponent(_component_UButton, {
+                        _push3(ssrRenderComponent_1(_component_UButton, {
                           icon: page.isPublished ? "i-lucide-globe" : "i-lucide-globe-off",
                           color: "neutral",
                           variant: "ghost",
@@ -1928,7 +1912,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
                       } else {
                         _push3(`<!---->`);
                       }
-                      _push3(ssrRenderComponent(_component_UButton, {
+                      _push3(ssrRenderComponent_1(_component_UButton, {
                         icon: page.isMandatory ? "i-lucide-lock" : "i-lucide-trash",
                         color: "neutral",
                         variant: "ghost",
@@ -1942,43 +1926,43 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
                     _push3(`<!--]-->`);
                   } else {
                     return [
-                      (openBlock(true), createBlock(Fragment, null, renderList(unref(pages), (page) => {
-                        return openBlock(), createBlock("div", {
+                      (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(pages), (page) => {
+                        return vueExports.openBlock(), vueExports.createBlock("div", {
                           key: page.id,
-                          class: ["group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer", { "bg-elevated": page.id === unref(activePageId) }],
+                          class: ["group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer", { "bg-elevated": page.id === vueExports.unref(activePageId) }],
                           onClick: ($event) => selectPage(page)
                         }, [
-                          createVNode(_component_UIcon, {
+                          vueExports.createVNode(_component_UIcon, {
                             name: "i-lucide-grip-vertical",
                             class: "drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
                           }),
-                          createVNode("span", { class: "flex-1 truncate" }, toDisplayString(page.title), 1),
-                          createVNode("div", { class: "flex -my-0.5" }, [
-                            createVNode(_component_UButton, {
+                          vueExports.createVNode("span", { class: "flex-1 truncate" }, vueExports.toDisplayString(page.title), 1),
+                          vueExports.createVNode("div", { class: "flex -my-0.5" }, [
+                            vueExports.createVNode(_component_UButton, {
                               icon: page.showInMenu ? "pepicons-pop-list" : "pepicons-pop-list-off",
                               color: "neutral",
                               variant: "ghost",
                               size: "xs",
                               class: [page.showInMenu ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
-                              onClick: withModifiers(($event) => toggleShowInMenu(page), ["stop"])
+                              onClick: vueExports.withModifiers(($event) => toggleShowInMenu(page), ["stop"])
                             }, null, 8, ["icon", "class", "onClick"]),
-                            !page.isMandatory ? (openBlock(), createBlock(_component_UButton, {
+                            !page.isMandatory ? (vueExports.openBlock(), vueExports.createBlock(_component_UButton, {
                               key: 0,
                               icon: page.isPublished ? "i-lucide-globe" : "i-lucide-globe-off",
                               color: "neutral",
                               variant: "ghost",
                               size: "xs",
                               class: [page.isPublished ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
-                              onClick: withModifiers(($event) => toggleVisibility(page), ["stop"])
-                            }, null, 8, ["icon", "class", "onClick"])) : createCommentVNode("", true),
-                            createVNode(_component_UButton, {
+                              onClick: vueExports.withModifiers(($event) => toggleVisibility(page), ["stop"])
+                            }, null, 8, ["icon", "class", "onClick"])) : vueExports.createCommentVNode("", true),
+                            vueExports.createVNode(_component_UButton, {
                               icon: page.isMandatory ? "i-lucide-lock" : "i-lucide-trash",
                               color: "neutral",
                               variant: "ghost",
                               size: "xs",
                               disabled: page.isMandatory,
                               class: "text-muted hover:text-highlighted hover:bg-accented/50",
-                              onClick: withModifiers(($event) => openDeleteModal(page), ["stop"])
+                              onClick: vueExports.withModifiers(($event) => openDeleteModal(page), ["stop"])
                             }, null, 8, ["icon", "disabled", "onClick"])
                           ])
                         ], 10, ["onClick"]);
@@ -1992,81 +1976,81 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "p-1 min-w-52" }, [
-                createVNode("div", { class: "flex items-center justify-between px-2 py-1.5" }, [
-                  createVNode("button", {
+              vueExports.createVNode("div", { class: "p-1 min-w-52" }, [
+                vueExports.createVNode("div", { class: "flex items-center justify-between px-2 py-1.5" }, [
+                  vueExports.createVNode("button", {
                     class: [
                       "flex items-center gap-2 text-sm rounded-md font-medium transition-colors",
-                      unref(atPageLimit) ? "text-muted cursor-not-allowed" : "text-primary hover:text-primary/80"
+                      vueExports.unref(atPageLimit) ? "text-muted cursor-not-allowed" : "text-primary hover:text-primary/80"
                     ],
-                    disabled: unref(atPageLimit),
+                    disabled: vueExports.unref(atPageLimit),
                     onClick: openAddPage
                   }, [
-                    createVNode(_component_UIcon, {
+                    vueExports.createVNode(_component_UIcon, {
                       name: "i-lucide-plus",
                       class: "size-4 shrink-0"
                     }),
-                    createTextVNode(" Add page ")
+                    vueExports.createTextVNode(" Add page ")
                   ], 10, ["disabled"]),
-                  createVNode("span", { class: "text-xs text-muted tabular-nums" }, toDisplayString(unref(pages).length) + " / " + toDisplayString(unref(MAX_PAGES_PER_PORTFOLIO)), 1)
+                  vueExports.createVNode("span", { class: "text-xs text-muted tabular-nums" }, vueExports.toDisplayString(vueExports.unref(pages).length) + " / " + vueExports.toDisplayString(vueExports.unref(MAX_PAGES_PER_PORTFOLIO)), 1)
                 ]),
-                createVNode("div", { class: "my-1 border-t border-default" }),
-                unref(pagesLoading) ? (openBlock(), createBlock("div", {
+                vueExports.createVNode("div", { class: "my-1 border-t border-default" }),
+                vueExports.unref(pagesLoading) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                   key: 0,
                   class: "flex items-center justify-center py-4"
                 }, [
-                  createVNode(_component_UIcon, {
+                  vueExports.createVNode(_component_UIcon, {
                     name: "i-lucide-loader-2",
                     class: "size-4 animate-spin text-muted"
                   })
-                ])) : unref(pagesError) ? (openBlock(), createBlock("p", {
+                ])) : vueExports.unref(pagesError) ? (vueExports.openBlock(), vueExports.createBlock("p", {
                   key: 1,
                   class: "px-2 py-2 text-sm text-error"
-                }, toDisplayString(unref(pagesError)), 1)) : (openBlock(), createBlock(unref(VueDraggable), {
+                }, vueExports.toDisplayString(vueExports.unref(pagesError)), 1)) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(lo), {
                   key: 2,
-                  modelValue: unref(pages),
-                  "onUpdate:modelValue": ($event) => isRef(pages) ? pages.value = $event : null,
+                  modelValue: vueExports.unref(pages),
+                  "onUpdate:modelValue": ($event) => vueExports.isRef(pages) ? pages.value = $event : null,
                   handle: ".drag-handle",
                   onEnd: onPagesReorder
                 }, {
-                  default: withCtx(() => [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(pages), (page) => {
-                      return openBlock(), createBlock("div", {
+                  default: vueExports.withCtx(() => [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(pages), (page) => {
+                      return vueExports.openBlock(), vueExports.createBlock("div", {
                         key: page.id,
-                        class: ["group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer", { "bg-elevated": page.id === unref(activePageId) }],
+                        class: ["group flex items-center gap-1.5 w-full px-2 py-1.5 text-sm rounded-md hover:bg-elevated/50 cursor-pointer", { "bg-elevated": page.id === vueExports.unref(activePageId) }],
                         onClick: ($event) => selectPage(page)
                       }, [
-                        createVNode(_component_UIcon, {
+                        vueExports.createVNode(_component_UIcon, {
                           name: "i-lucide-grip-vertical",
                           class: "drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
                         }),
-                        createVNode("span", { class: "flex-1 truncate" }, toDisplayString(page.title), 1),
-                        createVNode("div", { class: "flex -my-0.5" }, [
-                          createVNode(_component_UButton, {
+                        vueExports.createVNode("span", { class: "flex-1 truncate" }, vueExports.toDisplayString(page.title), 1),
+                        vueExports.createVNode("div", { class: "flex -my-0.5" }, [
+                          vueExports.createVNode(_component_UButton, {
                             icon: page.showInMenu ? "pepicons-pop-list" : "pepicons-pop-list-off",
                             color: "neutral",
                             variant: "ghost",
                             size: "xs",
                             class: [page.showInMenu ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
-                            onClick: withModifiers(($event) => toggleShowInMenu(page), ["stop"])
+                            onClick: vueExports.withModifiers(($event) => toggleShowInMenu(page), ["stop"])
                           }, null, 8, ["icon", "class", "onClick"]),
-                          !page.isMandatory ? (openBlock(), createBlock(_component_UButton, {
+                          !page.isMandatory ? (vueExports.openBlock(), vueExports.createBlock(_component_UButton, {
                             key: 0,
                             icon: page.isPublished ? "i-lucide-globe" : "i-lucide-globe-off",
                             color: "neutral",
                             variant: "ghost",
                             size: "xs",
                             class: [page.isPublished ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
-                            onClick: withModifiers(($event) => toggleVisibility(page), ["stop"])
-                          }, null, 8, ["icon", "class", "onClick"])) : createCommentVNode("", true),
-                          createVNode(_component_UButton, {
+                            onClick: vueExports.withModifiers(($event) => toggleVisibility(page), ["stop"])
+                          }, null, 8, ["icon", "class", "onClick"])) : vueExports.createCommentVNode("", true),
+                          vueExports.createVNode(_component_UButton, {
                             icon: page.isMandatory ? "i-lucide-lock" : "i-lucide-trash",
                             color: "neutral",
                             variant: "ghost",
                             size: "xs",
                             disabled: page.isMandatory,
                             class: "text-muted hover:text-highlighted hover:bg-accented/50",
-                            onClick: withModifiers(($event) => openDeleteModal(page), ["stop"])
+                            onClick: vueExports.withModifiers(($event) => openDeleteModal(page), ["stop"])
                           }, null, 8, ["icon", "disabled", "onClick"])
                         ])
                       ], 10, ["onClick"]);
@@ -2078,23 +2062,23 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               color: "neutral",
               variant: "ghost",
               size: "md",
               "trailing-icon": "i-lucide-chevron-down",
               class: "min-w-45 justify-between"
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<span class="flex items-center gap-2"${_scopeId2}><span class="text-muted"${_scopeId2}>Page:</span><span${_scopeId2}>${ssrInterpolate(unref(activePage)?.title ?? "Select page")}</span></span>`);
+                  _push3(`<span class="flex items-center gap-2"${_scopeId2}><span class="text-muted"${_scopeId2}>Page:</span><span${_scopeId2}>${ssrInterpolate_1(vueExports.unref(activePage)?.title ?? "Select page")}</span></span>`);
                 } else {
                   return [
-                    createVNode("span", { class: "flex items-center gap-2" }, [
-                      createVNode("span", { class: "text-muted" }, "Page:"),
-                      createVNode("span", null, toDisplayString(unref(activePage)?.title ?? "Select page"), 1)
+                    vueExports.createVNode("span", { class: "flex items-center gap-2" }, [
+                      vueExports.createVNode("span", { class: "text-muted" }, "Page:"),
+                      vueExports.createVNode("span", null, vueExports.toDisplayString(vueExports.unref(activePage)?.title ?? "Select page"), 1)
                     ])
                   ];
                 }
@@ -2103,17 +2087,17 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_component_UButton, {
+              vueExports.createVNode(_component_UButton, {
                 color: "neutral",
                 variant: "ghost",
                 size: "md",
                 "trailing-icon": "i-lucide-chevron-down",
                 class: "min-w-45 justify-between"
               }, {
-                default: withCtx(() => [
-                  createVNode("span", { class: "flex items-center gap-2" }, [
-                    createVNode("span", { class: "text-muted" }, "Page:"),
-                    createVNode("span", null, toDisplayString(unref(activePage)?.title ?? "Select page"), 1)
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode("span", { class: "flex items-center gap-2" }, [
+                    vueExports.createVNode("span", { class: "text-muted" }, "Page:"),
+                    vueExports.createVNode("span", null, vueExports.toDisplayString(vueExports.unref(activePage)?.title ?? "Select page"), 1)
                   ])
                 ]),
                 _: 1
@@ -2123,7 +2107,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_UButton, {
+      _push(ssrRenderComponent_1(_component_UButton, {
         icon: "i-lucide-edit-3",
         color: "neutral",
         variant: "ghost",
@@ -2133,24 +2117,24 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       }, null, _parent));
       _push(`</div>`);
       if (__props.portfolioId) {
-        _push(ssrRenderComponent(_component_PagebuilderPageModal, {
-          open: unref(pageModalOpen),
-          "onUpdate:open": ($event) => isRef(pageModalOpen) ? pageModalOpen.value = $event : null,
+        _push(ssrRenderComponent_1(_component_PagebuilderPageModal, {
+          open: vueExports.unref(pageModalOpen),
+          "onUpdate:open": ($event) => vueExports.isRef(pageModalOpen) ? pageModalOpen.value = $event : null,
           "portfolio-id": __props.portfolioId,
-          page: unref(pageToEdit),
+          page: vueExports.unref(pageToEdit),
           onSaved: onPageSaved
         }, null, _parent));
       } else {
         _push(`<!---->`);
       }
-      _push(ssrRenderComponent(_component_AdminConfirmModal, {
-        open: unref(deleteModalOpen),
-        "onUpdate:open": ($event) => isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminConfirmModal, {
+        open: vueExports.unref(deleteModalOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(deleteModalOpen) ? deleteModalOpen.value = $event : null,
         title: "Delete page",
-        description: unref(pageToDelete) ? `Are you sure you want to delete '${unref(pageToDelete).title}'?` : "",
+        description: vueExports.unref(pageToDelete) ? `Are you sure you want to delete '${vueExports.unref(pageToDelete).title}'?` : "",
         "confirm-label": "Delete",
-        loading: unref(deleting),
-        "error-message": unref(deleteError),
+        loading: vueExports.unref(deleting),
+        "error-message": vueExports.unref(deleteError),
         onConfirm: confirmDelete,
         onCancel: ($event) => deleteModalOpen.value = false
       }, null, _parent));
@@ -2160,7 +2144,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$e = _sfc_main$e.setup;
 _sfc_main$e.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/PageControls.vue");
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
@@ -2175,7 +2159,7 @@ function useSelectedBlock() {
   }
   return { selectedBlock, selectBlock, clearSelection };
 }
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const _sfc_main$d = /* @__PURE__ */ vueExports.defineComponent({
   __name: "BlocksView",
   __ssrInlineRender: true,
   emits: ["blockAdded"],
@@ -2184,8 +2168,8 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     const { selectBlock } = useSelectedBlock();
     const { activeCollectionTypes } = useCollections();
     const emit = __emit;
-    const addingType = ref(null);
-    const availableBlocks = computed(
+    const addingType = vueExports.ref(null);
+    const availableBlocks = vueExports.computed(
       () => blockDefinitions.filter(
         (d) => !d.allowedCollections || d.allowedCollections.some((type) => activeCollectionTypes.value.has(type))
       )
@@ -2203,25 +2187,25 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UButton = _sfc_main$8$1;
-      _push(ssrRenderComponent(unref(VueDraggable), mergeProps({
-        "model-value": unref(availableBlocks),
+      _push(ssrRenderComponent_1(vueExports.unref(lo), vueExports.mergeProps({
+        "model-value": vueExports.unref(availableBlocks),
         group: { name: "blocks", pull: "clone", put: false },
         clone: cloneDefinition,
         sort: false,
         class: "grid grid-cols-2 overflow-hidden"
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<!--[-->`);
-            ssrRenderList(unref(availableBlocks), (block) => {
-              _push2(ssrRenderComponent(_component_UButton, {
+            ssrRenderList_1(vueExports.unref(availableBlocks), (block) => {
+              _push2(ssrRenderComponent_1(_component_UButton, {
                 key: block.type,
                 color: "neutral",
                 variant: "ghost",
                 "aria-label": block.label,
                 label: block.label,
                 icon: block.icon,
-                class: ["flex-col text-xs justify-center aspect-square rounded-none border-r border-b border-[var(--ui-border)] [&:nth-child(2n)]:border-r-0", { "block-added": unref(addingType) === block.type }],
+                class: ["flex-col text-xs justify-center aspect-square rounded-none border-r border-b border-[var(--ui-border)] [&:nth-child(2n)]:border-r-0", { "block-added": vueExports.unref(addingType) === block.type }],
                 ui: { leadingIcon: "size-6" },
                 onClick: ($event) => addBlock(block.type)
               }, null, _parent2, _scopeId));
@@ -2229,15 +2213,15 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
             _push2(`<!--]-->`);
           } else {
             return [
-              (openBlock(true), createBlock(Fragment, null, renderList(unref(availableBlocks), (block) => {
-                return openBlock(), createBlock(_component_UButton, {
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(availableBlocks), (block) => {
+                return vueExports.openBlock(), vueExports.createBlock(_component_UButton, {
                   key: block.type,
                   color: "neutral",
                   variant: "ghost",
                   "aria-label": block.label,
                   label: block.label,
                   icon: block.icon,
-                  class: ["flex-col text-xs justify-center aspect-square rounded-none border-r border-b border-[var(--ui-border)] [&:nth-child(2n)]:border-r-0", { "block-added": unref(addingType) === block.type }],
+                  class: ["flex-col text-xs justify-center aspect-square rounded-none border-r border-b border-[var(--ui-border)] [&:nth-child(2n)]:border-r-0", { "block-added": vueExports.unref(addingType) === block.type }],
                   ui: { leadingIcon: "size-6" },
                   onClick: ($event) => addBlock(block.type)
                 }, null, 8, ["aria-label", "label", "icon", "class", "onClick"]);
@@ -2252,12 +2236,12 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$d = _sfc_main$d.setup;
 _sfc_main$d.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/BlocksView.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
 const __nuxt_component_1 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$d, [["__scopeId", "data-v-8a609928"]]), { __name: "PagebuilderBlocksView" });
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const _sfc_main$c = /* @__PURE__ */ vueExports.defineComponent({
   __name: "LayersView",
   __ssrInlineRender: true,
   props: {
@@ -2275,8 +2259,8 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       setCurrentPage,
       addPendingBlock
     } = usePageEditor();
-    const blockToDelete = ref(null);
-    const confirmDeleteOpen = ref(false);
+    const blockToDelete = vueExports.ref(null);
+    const confirmDeleteOpen = vueExports.ref(false);
     function requestDelete(block) {
       blockToDelete.value = block;
       confirmDeleteOpen.value = true;
@@ -2301,15 +2285,15 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       reorder(newOrder);
       selectBlock(newBlock);
     }
-    const dbContentBlocks = ref([]);
-    const headerBlock = ref(null);
-    const footerBlock = ref(null);
-    const loading = ref(false);
-    const error = ref("");
-    const visibilityChanges = ref({});
-    const reorderedIds = ref(null);
-    const resolvedPageId = ref(null);
-    const homePageId = ref(null);
+    const dbContentBlocks = vueExports.ref([]);
+    const headerBlock = vueExports.ref(null);
+    const footerBlock = vueExports.ref(null);
+    const loading = vueExports.ref(false);
+    const error = vueExports.ref("");
+    const visibilityChanges = vueExports.ref({});
+    const reorderedIds = vueExports.ref(null);
+    const resolvedPageId = vueExports.ref(null);
+    const homePageId = vueExports.ref(null);
     async function resolvePageId() {
       if (!props.portfolioId) {
         resolvedPageId.value = null;
@@ -2355,7 +2339,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
         loading.value = false;
       }
     }
-    watch(
+    vueExports.watch(
       () => [props.portfolioId, props.pageId],
       async () => {
         await resolvePageId();
@@ -2363,15 +2347,15 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       },
       { immediate: true }
     );
-    watch(resolvedPageId, (id) => setCurrentPage(id), { immediate: true });
+    vueExports.watch(resolvedPageId, (id) => setCurrentPage(id), { immediate: true });
     const { selectBlock, selectedBlock } = useSelectedBlock();
-    const contentBlocks = ref([]);
-    const explicitOrder = ref(null);
+    const contentBlocks = vueExports.ref([]);
+    const explicitOrder = vueExports.ref(null);
     function applyPendingContent(block) {
       const edits = pendingContentEdits.value[block.id];
       return edits ? { ...block, content: { ...block.content, ...edits } } : block;
     }
-    watch(
+    vueExports.watch(
       [dbContentBlocks, pendingNewBlocks, pendingDeletions, pendingContentEdits, resolvedPageId],
       () => {
         const pageNewBlocks = pendingNewBlocks.value.filter((b) => b.pageId === resolvedPageId.value);
@@ -2417,19 +2401,19 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       explicitOrder.value = newList.map((b) => b.id);
       reorderedIds.value = newList.filter((b) => !b.id.startsWith("pending-")).map((b) => b.id);
     }
-    const layersChanges = computed(() => ({
+    const layersChanges = vueExports.computed(() => ({
       visibilityChanges: visibilityChanges.value,
       reorderedIds: reorderedIds.value
     }));
-    const liveHeaderBlock = computed(
+    const liveHeaderBlock = vueExports.computed(
       () => headerBlock.value ? applyPendingContent(headerBlock.value) : null
     );
-    const liveFooterBlock = computed(
+    const liveFooterBlock = vueExports.computed(
       () => footerBlock.value ? applyPendingContent(footerBlock.value) : null
     );
     __expose({
       layersChanges,
-      portfolioId: computed(() => props.portfolioId),
+      portfolioId: vueExports.computed(() => props.portfolioId),
       pageId: resolvedPageId,
       homePageId,
       refresh: fetchBlocks,
@@ -2444,38 +2428,38 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       const _component_UIcon = _sfc_main$d$1;
       const _component_UButton = _sfc_main$8$1;
       const _component_AdminConfirmModal = __nuxt_component_4$1;
-      _push(`<div${ssrRenderAttrs(_attrs)}><div class="flex flex-col">`);
-      if (unref(loading)) {
+      _push(`<div${ssrRenderAttrs_1(_attrs)}><div class="flex flex-col">`);
+      if (vueExports.unref(loading)) {
         _push(`<div class="text-sm text-muted py-4 text-center">Loading…</div>`);
-      } else if (unref(error)) {
-        _push(`<div class="text-sm text-error py-2">${ssrInterpolate(unref(error))}</div>`);
+      } else if (vueExports.unref(error)) {
+        _push(`<div class="text-sm text-error py-2">${ssrInterpolate_1(vueExports.unref(error))}</div>`);
       } else {
         _push(`<!--[-->`);
-        if (unref(headerBlock)) {
-          _push(`<div class="${ssrRenderClass([
-            unref(selectedBlock)?.id === unref(headerBlock).id ? "bg-elevated" : "bg-elevated/30 hover:bg-elevated/60",
+        if (vueExports.unref(headerBlock)) {
+          _push(`<div class="${ssrRenderClass_1([
+            vueExports.unref(selectedBlock)?.id === vueExports.unref(headerBlock).id ? "bg-elevated" : "bg-elevated/30 hover:bg-elevated/60",
             "flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer"
           ])}">`);
-          _push(ssrRenderComponent(_component_UIcon, {
+          _push(ssrRenderComponent_1(_component_UIcon, {
             name: "i-lucide-panel-top",
             class: "size-4 text-muted shrink-0"
           }, null, _parent));
-          _push(`<span class="flex-1 truncate min-w-0"><span class="block truncate">${ssrInterpolate(unref(headerBlock).name || unref(headerBlock).type)}</span>`);
-          if (unref(headerBlock).name) {
-            _push(`<span class="block text-xs text-muted capitalize">${ssrInterpolate(unref(headerBlock).type)}</span>`);
+          _push(`<span class="flex-1 truncate min-w-0"><span class="block truncate">${ssrInterpolate_1(vueExports.unref(headerBlock).name || vueExports.unref(headerBlock).type)}</span>`);
+          if (vueExports.unref(headerBlock).name) {
+            _push(`<span class="block text-xs text-muted capitalize">${ssrInterpolate_1(vueExports.unref(headerBlock).type)}</span>`);
           } else {
             _push(`<!---->`);
           }
           _push(`</span><div class="flex -my-0.5">`);
-          _push(ssrRenderComponent(_component_UButton, {
-            icon: unref(headerBlock).isVisible ? "i-lucide-eye" : "i-lucide-eye-off",
+          _push(ssrRenderComponent_1(_component_UButton, {
+            icon: vueExports.unref(headerBlock).isVisible ? "i-lucide-eye" : "i-lucide-eye-off",
             color: "neutral",
             variant: "ghost",
             size: "xs",
-            class: [unref(headerBlock).isVisible ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
+            class: [vueExports.unref(headerBlock).isVisible ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
             onClick: toggleHeaderVisibility
           }, null, _parent));
-          _push(ssrRenderComponent(_component_UButton, {
+          _push(ssrRenderComponent_1(_component_UButton, {
             icon: "i-lucide-lock",
             color: "neutral",
             variant: "ghost",
@@ -2487,33 +2471,33 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
         } else {
           _push(`<!---->`);
         }
-        _push(ssrRenderComponent(unref(VueDraggable), {
-          modelValue: unref(contentBlocks),
-          "onUpdate:modelValue": ($event) => isRef(contentBlocks) ? contentBlocks.value = $event : null,
+        _push(ssrRenderComponent_1(vueExports.unref(lo), {
+          modelValue: vueExports.unref(contentBlocks),
+          "onUpdate:modelValue": ($event) => vueExports.isRef(contentBlocks) ? contentBlocks.value = $event : null,
           handle: ".drag-handle",
           class: "flex flex-col",
           onEnd: onReorder
         }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`<!--[-->`);
-              ssrRenderList(unref(contentBlocks), (block) => {
-                _push2(`<div class="${ssrRenderClass([[
-                  unref(selectedBlock)?.id === block.id ? "bg-elevated" : "hover:bg-elevated/50",
+              ssrRenderList_1(vueExports.unref(contentBlocks), (block) => {
+                _push2(`<div class="${ssrRenderClass_1([[
+                  vueExports.unref(selectedBlock)?.id === block.id ? "bg-elevated" : "hover:bg-elevated/50",
                   { "opacity-50": !block.isVisible }
                 ], "flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer"])}"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-grip-vertical",
                   class: "drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
                 }, null, _parent2, _scopeId));
-                _push2(`<span class="flex-1 truncate min-w-0"${_scopeId}><span class="block truncate"${_scopeId}>${ssrInterpolate(block.name || block.type)}</span>`);
+                _push2(`<span class="flex-1 truncate min-w-0"${_scopeId}><span class="block truncate"${_scopeId}>${ssrInterpolate_1(block.name || block.type)}</span>`);
                 if (block.name) {
-                  _push2(`<span class="block text-xs text-muted capitalize"${_scopeId}>${ssrInterpolate(block.type)}</span>`);
+                  _push2(`<span class="block text-xs text-muted capitalize"${_scopeId}>${ssrInterpolate_1(block.type)}</span>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 _push2(`</span><div class="flex -my-0.5"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UButton, {
+                _push2(ssrRenderComponent_1(_component_UButton, {
                   icon: block.isVisible ? "i-lucide-eye" : "i-lucide-eye-off",
                   color: "neutral",
                   variant: "ghost",
@@ -2521,7 +2505,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   class: [block.isVisible ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
                   onClick: ($event) => toggleVisibility(block)
                 }, null, _parent2, _scopeId));
-                _push2(ssrRenderComponent(_component_UButton, {
+                _push2(ssrRenderComponent_1(_component_UButton, {
                   icon: "i-lucide-copy",
                   color: "neutral",
                   variant: "ghost",
@@ -2530,12 +2514,12 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   title: "Duplicate block",
                   onClick: ($event) => duplicateBlock(block)
                 }, null, _parent2, _scopeId));
-                _push2(ssrRenderComponent(_component_UButton, {
+                _push2(ssrRenderComponent_1(_component_UButton, {
                   icon: "i-lucide-trash",
                   color: "neutral",
                   variant: "ghost",
                   size: "xs",
-                  class: unref(pendingDeletions).has(block.id) ? "text-error" : "text-muted hover:text-highlighted hover:bg-accented/50",
+                  class: vueExports.unref(pendingDeletions).has(block.id) ? "text-error" : "text-muted hover:text-highlighted hover:bg-accented/50",
                   onClick: ($event) => requestDelete(block)
                 }, null, _parent2, _scopeId));
                 _push2(`</div></div>`);
@@ -2543,28 +2527,28 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
               _push2(`<!--]-->`);
             } else {
               return [
-                (openBlock(true), createBlock(Fragment, null, renderList(unref(contentBlocks), (block) => {
-                  return openBlock(), createBlock("div", {
+                (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(contentBlocks), (block) => {
+                  return vueExports.openBlock(), vueExports.createBlock("div", {
                     key: block.id,
                     class: ["flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer", [
-                      unref(selectedBlock)?.id === block.id ? "bg-elevated" : "hover:bg-elevated/50",
+                      vueExports.unref(selectedBlock)?.id === block.id ? "bg-elevated" : "hover:bg-elevated/50",
                       { "opacity-50": !block.isVisible }
                     ]],
-                    onClick: ($event) => unref(selectBlock)(block)
+                    onClick: ($event) => vueExports.unref(selectBlock)(block)
                   }, [
-                    createVNode(_component_UIcon, {
+                    vueExports.createVNode(_component_UIcon, {
                       name: "i-lucide-grip-vertical",
                       class: "drag-handle size-4 text-muted shrink-0 -ml-1 cursor-grab active:cursor-grabbing"
                     }),
-                    createVNode("span", { class: "flex-1 truncate min-w-0" }, [
-                      createVNode("span", { class: "block truncate" }, toDisplayString(block.name || block.type), 1),
-                      block.name ? (openBlock(), createBlock("span", {
+                    vueExports.createVNode("span", { class: "flex-1 truncate min-w-0" }, [
+                      vueExports.createVNode("span", { class: "block truncate" }, vueExports.toDisplayString(block.name || block.type), 1),
+                      block.name ? (vueExports.openBlock(), vueExports.createBlock("span", {
                         key: 0,
                         class: "block text-xs text-muted capitalize"
-                      }, toDisplayString(block.type), 1)) : createCommentVNode("", true)
+                      }, vueExports.toDisplayString(block.type), 1)) : vueExports.createCommentVNode("", true)
                     ]),
-                    createVNode("div", { class: "flex -my-0.5" }, [
-                      createVNode(_component_UButton, {
+                    vueExports.createVNode("div", { class: "flex -my-0.5" }, [
+                      vueExports.createVNode(_component_UButton, {
                         icon: block.isVisible ? "i-lucide-eye" : "i-lucide-eye-off",
                         color: "neutral",
                         variant: "ghost",
@@ -2572,22 +2556,22 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                         class: [block.isVisible ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
                         onClick: ($event) => toggleVisibility(block)
                       }, null, 8, ["icon", "class", "onClick"]),
-                      createVNode(_component_UButton, {
+                      vueExports.createVNode(_component_UButton, {
                         icon: "i-lucide-copy",
                         color: "neutral",
                         variant: "ghost",
                         size: "xs",
                         class: "text-muted hover:text-highlighted hover:bg-accented/50",
                         title: "Duplicate block",
-                        onClick: withModifiers(($event) => duplicateBlock(block), ["stop"])
+                        onClick: vueExports.withModifiers(($event) => duplicateBlock(block), ["stop"])
                       }, null, 8, ["onClick"]),
-                      createVNode(_component_UButton, {
+                      vueExports.createVNode(_component_UButton, {
                         icon: "i-lucide-trash",
                         color: "neutral",
                         variant: "ghost",
                         size: "xs",
-                        class: unref(pendingDeletions).has(block.id) ? "text-error" : "text-muted hover:text-highlighted hover:bg-accented/50",
-                        onClick: withModifiers(($event) => requestDelete(block), ["stop"])
+                        class: vueExports.unref(pendingDeletions).has(block.id) ? "text-error" : "text-muted hover:text-highlighted hover:bg-accented/50",
+                        onClick: vueExports.withModifiers(($event) => requestDelete(block), ["stop"])
                       }, null, 8, ["class", "onClick"])
                     ])
                   ], 10, ["onClick"]);
@@ -2597,31 +2581,31 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
           }),
           _: 1
         }, _parent));
-        if (unref(footerBlock)) {
-          _push(`<div class="${ssrRenderClass([
-            unref(selectedBlock)?.id === unref(footerBlock).id ? "bg-elevated" : "bg-elevated/30 hover:bg-elevated/60",
+        if (vueExports.unref(footerBlock)) {
+          _push(`<div class="${ssrRenderClass_1([
+            vueExports.unref(selectedBlock)?.id === vueExports.unref(footerBlock).id ? "bg-elevated" : "bg-elevated/30 hover:bg-elevated/60",
             "flex items-center gap-1.5 px-2 py-3 text-sm cursor-pointer"
           ])}">`);
-          _push(ssrRenderComponent(_component_UIcon, {
+          _push(ssrRenderComponent_1(_component_UIcon, {
             name: "i-lucide-panel-bottom",
             class: "size-4 text-muted shrink-0"
           }, null, _parent));
-          _push(`<span class="flex-1 truncate min-w-0"><span class="block truncate">${ssrInterpolate(unref(footerBlock).name || unref(footerBlock).type)}</span>`);
-          if (unref(footerBlock).name) {
-            _push(`<span class="block text-xs text-muted capitalize">${ssrInterpolate(unref(footerBlock).type)}</span>`);
+          _push(`<span class="flex-1 truncate min-w-0"><span class="block truncate">${ssrInterpolate_1(vueExports.unref(footerBlock).name || vueExports.unref(footerBlock).type)}</span>`);
+          if (vueExports.unref(footerBlock).name) {
+            _push(`<span class="block text-xs text-muted capitalize">${ssrInterpolate_1(vueExports.unref(footerBlock).type)}</span>`);
           } else {
             _push(`<!---->`);
           }
           _push(`</span><div class="flex -my-0.5">`);
-          _push(ssrRenderComponent(_component_UButton, {
-            icon: unref(footerBlock).isVisible ? "i-lucide-eye" : "i-lucide-eye-off",
+          _push(ssrRenderComponent_1(_component_UButton, {
+            icon: vueExports.unref(footerBlock).isVisible ? "i-lucide-eye" : "i-lucide-eye-off",
             color: "neutral",
             variant: "ghost",
             size: "xs",
-            class: [unref(footerBlock).isVisible ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
+            class: [vueExports.unref(footerBlock).isVisible ? "text-highlighted" : "text-muted", "hover:text-highlighted hover:bg-accented/50"],
             onClick: toggleFooterVisibility
           }, null, _parent));
-          _push(ssrRenderComponent(_component_UButton, {
+          _push(ssrRenderComponent_1(_component_UButton, {
             icon: "i-lucide-lock",
             color: "neutral",
             variant: "ghost",
@@ -2636,11 +2620,11 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
         _push(`<!--]-->`);
       }
       _push(`</div>`);
-      _push(ssrRenderComponent(_component_AdminConfirmModal, {
-        open: unref(confirmDeleteOpen),
-        "onUpdate:open": ($event) => isRef(confirmDeleteOpen) ? confirmDeleteOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminConfirmModal, {
+        open: vueExports.unref(confirmDeleteOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(confirmDeleteOpen) ? confirmDeleteOpen.value = $event : null,
         title: "Delete block?",
-        description: `'${unref(blockToDelete)?.name || unref(blockToDelete)?.type}' will be removed when you save.`,
+        description: `'${vueExports.unref(blockToDelete)?.name || vueExports.unref(blockToDelete)?.type}' will be removed when you save.`,
         "confirm-label": "Delete",
         onConfirm: confirmDelete,
         onCancel: ($event) => confirmDeleteOpen.value = false
@@ -2651,7 +2635,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$c = _sfc_main$c.setup;
 _sfc_main$c.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/LayersView.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
@@ -2698,124 +2682,124 @@ const _sfc_main$b = {
   setup(__props, { emit: __emit }) {
     const _props = __props;
     const emits = __emit;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const props = useComponentProps("accordion", _props);
     const appConfig = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "as", "collapsible", "defaultValue", "disabled", "modelValue", "unmountOnHide"), emits);
-    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.accordion || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.accordion || {} })({
       disabled: props.disabled
     }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(AccordionRoot_default), mergeProps(unref(rootProps), {
-        type: unref(props).type,
+      _push(ssrRenderComponent_1(vueExports.unref(AccordionRoot_default), vueExports.mergeProps(vueExports.unref(rootProps), {
+        type: vueExports.unref(props).type,
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<!--[-->`);
-            ssrRenderList(unref(props).items, (item, index) => {
-              _push2(ssrRenderComponent(unref(AccordionItem_default), {
-                key: unref(get)(item, unref(props).valueKey) ?? index,
-                value: unref(get)(item, unref(props).valueKey) ?? String(index),
+            ssrRenderList_1(vueExports.unref(props).items, (item, index) => {
+              _push2(ssrRenderComponent_1(vueExports.unref(AccordionItem_default), {
+                key: vueExports.unref(get)(item, vueExports.unref(props).valueKey) ?? index,
+                value: vueExports.unref(get)(item, vueExports.unref(props).valueKey) ?? String(index),
                 disabled: item.disabled,
                 "data-slot": "item",
-                class: ui.value.item({ class: [unref(props).ui?.item, item.ui?.item, item.class] })
+                class: ui.value.item({ class: [vueExports.unref(props).ui?.item, item.ui?.item, item.class] })
               }, {
-                default: withCtx(({ open }, _push3, _parent3, _scopeId2) => {
+                default: vueExports.withCtx(({ open }, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(ssrRenderComponent(unref(AccordionHeader_default), {
+                    _push3(ssrRenderComponent_1(vueExports.unref(AccordionHeader_default), {
                       as: "div",
                       "data-slot": "header",
-                      class: ui.value.header({ class: [unref(props).ui?.header, item.ui?.header] })
+                      class: ui.value.header({ class: [vueExports.unref(props).ui?.header, item.ui?.header] })
                     }, {
-                      default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                      default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(ssrRenderComponent(unref(AccordionTrigger_default), {
+                          _push4(ssrRenderComponent_1(vueExports.unref(AccordionTrigger_default), {
                             "data-slot": "trigger",
-                            class: ui.value.trigger({ class: [unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
+                            class: ui.value.trigger({ class: [vueExports.unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
                           }, {
-                            default: withCtx((_3, _push5, _parent5, _scopeId4) => {
+                            default: vueExports.withCtx((_3, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                ssrRenderSlot(_ctx.$slots, "leading", {
+                                ssrRenderSlot_1(_ctx.$slots, "leading", {
                                   item,
                                   index,
                                   open,
                                   ui: ui.value
                                 }, () => {
                                   if (item.icon) {
-                                    _push5(ssrRenderComponent(_sfc_main$d$1, {
+                                    _push5(ssrRenderComponent_1(_sfc_main$d$1, {
                                       name: item.icon,
                                       "data-slot": "leadingIcon",
-                                      class: ui.value.leadingIcon({ class: [unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
+                                      class: ui.value.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
                                     }, null, _parent5, _scopeId4));
                                   } else {
                                     _push5(`<!---->`);
                                   }
                                 }, _push5, _parent5, _scopeId4);
-                                if (unref(get)(item, unref(props).labelKey) || !!slots.default) {
-                                  _push5(`<span data-slot="label" class="${ssrRenderClass(ui.value.label({ class: [unref(props).ui?.label, item.ui?.label] }))}"${_scopeId4}>`);
-                                  ssrRenderSlot(_ctx.$slots, "default", {
+                                if (vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots.default) {
+                                  _push5(`<span data-slot="label" class="${ssrRenderClass_1(ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label] }))}"${_scopeId4}>`);
+                                  ssrRenderSlot_1(_ctx.$slots, "default", {
                                     item,
                                     index,
                                     open
                                   }, () => {
-                                    _push5(`${ssrInterpolate(unref(get)(item, unref(props).labelKey))}`);
+                                    _push5(`${ssrInterpolate_1(vueExports.unref(get)(item, vueExports.unref(props).labelKey))}`);
                                   }, _push5, _parent5, _scopeId4);
                                   _push5(`</span>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
-                                ssrRenderSlot(_ctx.$slots, "trailing", {
+                                ssrRenderSlot_1(_ctx.$slots, "trailing", {
                                   item,
                                   index,
                                   open,
                                   ui: ui.value
                                 }, () => {
-                                  _push5(ssrRenderComponent(_sfc_main$d$1, {
-                                    name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                                  _push5(ssrRenderComponent_1(_sfc_main$d$1, {
+                                    name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                                     "data-slot": "trailingIcon",
-                                    class: ui.value.trailingIcon({ class: [unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
+                                    class: ui.value.trailingIcon({ class: [vueExports.unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
                                   }, null, _parent5, _scopeId4));
                                 }, _push5, _parent5, _scopeId4);
                               } else {
                                 return [
-                                  renderSlot(_ctx.$slots, "leading", {
+                                  vueExports.renderSlot(_ctx.$slots, "leading", {
                                     item,
                                     index,
                                     open,
                                     ui: ui.value
                                   }, () => [
-                                    item.icon ? (openBlock(), createBlock(_sfc_main$d$1, {
+                                    item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                                       key: 0,
                                       name: item.icon,
                                       "data-slot": "leadingIcon",
-                                      class: ui.value.leadingIcon({ class: [unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
-                                    }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                      class: ui.value.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
+                                    }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                   ]),
-                                  unref(get)(item, unref(props).labelKey) || !!slots.default ? (openBlock(), createBlock("span", {
+                                  vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots.default ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                     key: 0,
                                     "data-slot": "label",
-                                    class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label] })
+                                    class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label] })
                                   }, [
-                                    renderSlot(_ctx.$slots, "default", {
+                                    vueExports.renderSlot(_ctx.$slots, "default", {
                                       item,
                                       index,
                                       open
                                     }, () => [
-                                      createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                     ])
-                                  ], 2)) : createCommentVNode("", true),
-                                  renderSlot(_ctx.$slots, "trailing", {
+                                  ], 2)) : vueExports.createCommentVNode("", true),
+                                  vueExports.renderSlot(_ctx.$slots, "trailing", {
                                     item,
                                     index,
                                     open,
                                     ui: ui.value
                                   }, () => [
-                                    createVNode(_sfc_main$d$1, {
-                                      name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                                    vueExports.createVNode(_sfc_main$d$1, {
+                                      name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                                       "data-slot": "trailingIcon",
-                                      class: ui.value.trailingIcon({ class: [unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
+                                      class: ui.value.trailingIcon({ class: [vueExports.unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
                                     }, null, 8, ["name", "class"])
                                   ])
                                 ];
@@ -2825,47 +2809,47 @@ const _sfc_main$b = {
                           }, _parent4, _scopeId3));
                         } else {
                           return [
-                            createVNode(unref(AccordionTrigger_default), {
+                            vueExports.createVNode(vueExports.unref(AccordionTrigger_default), {
                               "data-slot": "trigger",
-                              class: ui.value.trigger({ class: [unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
+                              class: ui.value.trigger({ class: [vueExports.unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
                             }, {
-                              default: withCtx(() => [
-                                renderSlot(_ctx.$slots, "leading", {
+                              default: vueExports.withCtx(() => [
+                                vueExports.renderSlot(_ctx.$slots, "leading", {
                                   item,
                                   index,
                                   open,
                                   ui: ui.value
                                 }, () => [
-                                  item.icon ? (openBlock(), createBlock(_sfc_main$d$1, {
+                                  item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                                     key: 0,
                                     name: item.icon,
                                     "data-slot": "leadingIcon",
-                                    class: ui.value.leadingIcon({ class: [unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
-                                  }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                    class: ui.value.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
+                                  }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                                 ]),
-                                unref(get)(item, unref(props).labelKey) || !!slots.default ? (openBlock(), createBlock("span", {
+                                vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots.default ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                   key: 0,
                                   "data-slot": "label",
-                                  class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label] })
+                                  class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label] })
                                 }, [
-                                  renderSlot(_ctx.$slots, "default", {
+                                  vueExports.renderSlot(_ctx.$slots, "default", {
                                     item,
                                     index,
                                     open
                                   }, () => [
-                                    createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                   ])
-                                ], 2)) : createCommentVNode("", true),
-                                renderSlot(_ctx.$slots, "trailing", {
+                                ], 2)) : vueExports.createCommentVNode("", true),
+                                vueExports.renderSlot(_ctx.$slots, "trailing", {
                                   item,
                                   index,
                                   open,
                                   ui: ui.value
                                 }, () => [
-                                  createVNode(_sfc_main$d$1, {
-                                    name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                                  vueExports.createVNode(_sfc_main$d$1, {
+                                    name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                                     "data-slot": "trailingIcon",
-                                    class: ui.value.trailingIcon({ class: [unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
+                                    class: ui.value.trailingIcon({ class: [vueExports.unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
                                   }, null, 8, ["name", "class"])
                                 ])
                               ]),
@@ -2877,48 +2861,48 @@ const _sfc_main$b = {
                       _: 2
                     }, _parent3, _scopeId2));
                     if (item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`]) {
-                      _push3(ssrRenderComponent(unref(AccordionContent_default), {
+                      _push3(ssrRenderComponent_1(vueExports.unref(AccordionContent_default), {
                         "data-slot": "content",
-                        class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                        class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                       }, {
-                        default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                        default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                           if (_push4) {
-                            ssrRenderSlot(_ctx.$slots, item.slot || "content", {
+                            ssrRenderSlot_1(_ctx.$slots, item.slot || "content", {
                               item,
                               index,
                               open,
                               ui: ui.value
                             }, () => {
-                              _push4(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: [unref(props).ui?.body, item.ui?.body] }))}"${_scopeId3}>`);
-                              ssrRenderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
+                              _push4(`<div data-slot="body" class="${ssrRenderClass_1(ui.value.body({ class: [vueExports.unref(props).ui?.body, item.ui?.body] }))}"${_scopeId3}>`);
+                              ssrRenderSlot_1(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
                                 item,
                                 index,
                                 open,
                                 ui: ui.value
                               }, () => {
-                                _push4(`${ssrInterpolate(item.content)}`);
+                                _push4(`${ssrInterpolate_1(item.content)}`);
                               }, _push4, _parent4, _scopeId3);
                               _push4(`</div>`);
                             }, _push4, _parent4, _scopeId3);
                           } else {
                             return [
-                              renderSlot(_ctx.$slots, item.slot || "content", {
+                              vueExports.renderSlot(_ctx.$slots, item.slot || "content", {
                                 item,
                                 index,
                                 open,
                                 ui: ui.value
                               }, () => [
-                                createVNode("div", {
+                                vueExports.createVNode("div", {
                                   "data-slot": "body",
-                                  class: ui.value.body({ class: [unref(props).ui?.body, item.ui?.body] })
+                                  class: ui.value.body({ class: [vueExports.unref(props).ui?.body, item.ui?.body] })
                                 }, [
-                                  renderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
+                                  vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
                                     item,
                                     index,
                                     open,
                                     ui: ui.value
                                   }, () => [
-                                    createTextVNode(toDisplayString(item.content), 1)
+                                    vueExports.createTextVNode(vueExports.toDisplayString(item.content), 1)
                                   ])
                                 ], 2)
                               ])
@@ -2932,53 +2916,53 @@ const _sfc_main$b = {
                     }
                   } else {
                     return [
-                      createVNode(unref(AccordionHeader_default), {
+                      vueExports.createVNode(vueExports.unref(AccordionHeader_default), {
                         as: "div",
                         "data-slot": "header",
-                        class: ui.value.header({ class: [unref(props).ui?.header, item.ui?.header] })
+                        class: ui.value.header({ class: [vueExports.unref(props).ui?.header, item.ui?.header] })
                       }, {
-                        default: withCtx(() => [
-                          createVNode(unref(AccordionTrigger_default), {
+                        default: vueExports.withCtx(() => [
+                          vueExports.createVNode(vueExports.unref(AccordionTrigger_default), {
                             "data-slot": "trigger",
-                            class: ui.value.trigger({ class: [unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
+                            class: ui.value.trigger({ class: [vueExports.unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
                           }, {
-                            default: withCtx(() => [
-                              renderSlot(_ctx.$slots, "leading", {
+                            default: vueExports.withCtx(() => [
+                              vueExports.renderSlot(_ctx.$slots, "leading", {
                                 item,
                                 index,
                                 open,
                                 ui: ui.value
                               }, () => [
-                                item.icon ? (openBlock(), createBlock(_sfc_main$d$1, {
+                                item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                                   key: 0,
                                   name: item.icon,
                                   "data-slot": "leadingIcon",
-                                  class: ui.value.leadingIcon({ class: [unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
-                                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                  class: ui.value.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
+                                }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                               ]),
-                              unref(get)(item, unref(props).labelKey) || !!slots.default ? (openBlock(), createBlock("span", {
+                              vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots.default ? (vueExports.openBlock(), vueExports.createBlock("span", {
                                 key: 0,
                                 "data-slot": "label",
-                                class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label] })
+                                class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label] })
                               }, [
-                                renderSlot(_ctx.$slots, "default", {
+                                vueExports.renderSlot(_ctx.$slots, "default", {
                                   item,
                                   index,
                                   open
                                 }, () => [
-                                  createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                  vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                                 ])
-                              ], 2)) : createCommentVNode("", true),
-                              renderSlot(_ctx.$slots, "trailing", {
+                              ], 2)) : vueExports.createCommentVNode("", true),
+                              vueExports.renderSlot(_ctx.$slots, "trailing", {
                                 item,
                                 index,
                                 open,
                                 ui: ui.value
                               }, () => [
-                                createVNode(_sfc_main$d$1, {
-                                  name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                                vueExports.createVNode(_sfc_main$d$1, {
+                                  name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                                   "data-slot": "trailingIcon",
-                                  class: ui.value.trailingIcon({ class: [unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
+                                  class: ui.value.trailingIcon({ class: [vueExports.unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
                                 }, null, 8, ["name", "class"])
                               ])
                             ]),
@@ -2987,35 +2971,35 @@ const _sfc_main$b = {
                         ]),
                         _: 2
                       }, 1032, ["class"]),
-                      item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(AccordionContent_default), {
+                      item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(AccordionContent_default), {
                         key: 0,
                         "data-slot": "content",
-                        class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                        class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                       }, {
-                        default: withCtx(() => [
-                          renderSlot(_ctx.$slots, item.slot || "content", {
+                        default: vueExports.withCtx(() => [
+                          vueExports.renderSlot(_ctx.$slots, item.slot || "content", {
                             item,
                             index,
                             open,
                             ui: ui.value
                           }, () => [
-                            createVNode("div", {
+                            vueExports.createVNode("div", {
                               "data-slot": "body",
-                              class: ui.value.body({ class: [unref(props).ui?.body, item.ui?.body] })
+                              class: ui.value.body({ class: [vueExports.unref(props).ui?.body, item.ui?.body] })
                             }, [
-                              renderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
+                              vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
                                 item,
                                 index,
                                 open,
                                 ui: ui.value
                               }, () => [
-                                createTextVNode(toDisplayString(item.content), 1)
+                                vueExports.createTextVNode(vueExports.toDisplayString(item.content), 1)
                               ])
                             ], 2)
                           ])
                         ]),
                         _: 2
-                      }, 1032, ["class"])) : createCommentVNode("", true)
+                      }, 1032, ["class"])) : vueExports.createCommentVNode("", true)
                     ];
                   }
                 }),
@@ -3025,62 +3009,62 @@ const _sfc_main$b = {
             _push2(`<!--]-->`);
           } else {
             return [
-              (openBlock(true), createBlock(Fragment, null, renderList(unref(props).items, (item, index) => {
-                return openBlock(), createBlock(unref(AccordionItem_default), {
-                  key: unref(get)(item, unref(props).valueKey) ?? index,
-                  value: unref(get)(item, unref(props).valueKey) ?? String(index),
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(props).items, (item, index) => {
+                return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(AccordionItem_default), {
+                  key: vueExports.unref(get)(item, vueExports.unref(props).valueKey) ?? index,
+                  value: vueExports.unref(get)(item, vueExports.unref(props).valueKey) ?? String(index),
                   disabled: item.disabled,
                   "data-slot": "item",
-                  class: ui.value.item({ class: [unref(props).ui?.item, item.ui?.item, item.class] })
+                  class: ui.value.item({ class: [vueExports.unref(props).ui?.item, item.ui?.item, item.class] })
                 }, {
-                  default: withCtx(({ open }) => [
-                    createVNode(unref(AccordionHeader_default), {
+                  default: vueExports.withCtx(({ open }) => [
+                    vueExports.createVNode(vueExports.unref(AccordionHeader_default), {
                       as: "div",
                       "data-slot": "header",
-                      class: ui.value.header({ class: [unref(props).ui?.header, item.ui?.header] })
+                      class: ui.value.header({ class: [vueExports.unref(props).ui?.header, item.ui?.header] })
                     }, {
-                      default: withCtx(() => [
-                        createVNode(unref(AccordionTrigger_default), {
+                      default: vueExports.withCtx(() => [
+                        vueExports.createVNode(vueExports.unref(AccordionTrigger_default), {
                           "data-slot": "trigger",
-                          class: ui.value.trigger({ class: [unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
+                          class: ui.value.trigger({ class: [vueExports.unref(props).ui?.trigger, item.ui?.trigger], disabled: item.disabled })
                         }, {
-                          default: withCtx(() => [
-                            renderSlot(_ctx.$slots, "leading", {
+                          default: vueExports.withCtx(() => [
+                            vueExports.renderSlot(_ctx.$slots, "leading", {
                               item,
                               index,
                               open,
                               ui: ui.value
                             }, () => [
-                              item.icon ? (openBlock(), createBlock(_sfc_main$d$1, {
+                              item.icon ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                                 key: 0,
                                 name: item.icon,
                                 "data-slot": "leadingIcon",
-                                class: ui.value.leadingIcon({ class: [unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
-                              }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+                                class: ui.value.leadingIcon({ class: [vueExports.unref(props).ui?.leadingIcon, item?.ui?.leadingIcon] })
+                              }, null, 8, ["name", "class"])) : vueExports.createCommentVNode("", true)
                             ]),
-                            unref(get)(item, unref(props).labelKey) || !!slots.default ? (openBlock(), createBlock("span", {
+                            vueExports.unref(get)(item, vueExports.unref(props).labelKey) || !!slots.default ? (vueExports.openBlock(), vueExports.createBlock("span", {
                               key: 0,
                               "data-slot": "label",
-                              class: ui.value.label({ class: [unref(props).ui?.label, item.ui?.label] })
+                              class: ui.value.label({ class: [vueExports.unref(props).ui?.label, item.ui?.label] })
                             }, [
-                              renderSlot(_ctx.$slots, "default", {
+                              vueExports.renderSlot(_ctx.$slots, "default", {
                                 item,
                                 index,
                                 open
                               }, () => [
-                                createTextVNode(toDisplayString(unref(get)(item, unref(props).labelKey)), 1)
+                                vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(get)(item, vueExports.unref(props).labelKey)), 1)
                               ])
-                            ], 2)) : createCommentVNode("", true),
-                            renderSlot(_ctx.$slots, "trailing", {
+                            ], 2)) : vueExports.createCommentVNode("", true),
+                            vueExports.renderSlot(_ctx.$slots, "trailing", {
                               item,
                               index,
                               open,
                               ui: ui.value
                             }, () => [
-                              createVNode(_sfc_main$d$1, {
-                                name: item.trailingIcon || unref(props).trailingIcon || unref(appConfig).ui.icons.chevronDown,
+                              vueExports.createVNode(_sfc_main$d$1, {
+                                name: item.trailingIcon || vueExports.unref(props).trailingIcon || vueExports.unref(appConfig).ui.icons.chevronDown,
                                 "data-slot": "trailingIcon",
-                                class: ui.value.trailingIcon({ class: [unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
+                                class: ui.value.trailingIcon({ class: [vueExports.unref(props).ui?.trailingIcon, item.ui?.trailingIcon] })
                               }, null, 8, ["name", "class"])
                             ])
                           ]),
@@ -3089,35 +3073,35 @@ const _sfc_main$b = {
                       ]),
                       _: 2
                     }, 1032, ["class"]),
-                    item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(AccordionContent_default), {
+                    item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(AccordionContent_default), {
                       key: 0,
                       "data-slot": "content",
-                      class: ui.value.content({ class: [unref(props).ui?.content, item.ui?.content] })
+                      class: ui.value.content({ class: [vueExports.unref(props).ui?.content, item.ui?.content] })
                     }, {
-                      default: withCtx(() => [
-                        renderSlot(_ctx.$slots, item.slot || "content", {
+                      default: vueExports.withCtx(() => [
+                        vueExports.renderSlot(_ctx.$slots, item.slot || "content", {
                           item,
                           index,
                           open,
                           ui: ui.value
                         }, () => [
-                          createVNode("div", {
+                          vueExports.createVNode("div", {
                             "data-slot": "body",
-                            class: ui.value.body({ class: [unref(props).ui?.body, item.ui?.body] })
+                            class: ui.value.body({ class: [vueExports.unref(props).ui?.body, item.ui?.body] })
                           }, [
-                            renderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
+                            vueExports.renderSlot(_ctx.$slots, item.slot ? `${item.slot}-body` : "body", {
                               item,
                               index,
                               open,
                               ui: ui.value
                             }, () => [
-                              createTextVNode(toDisplayString(item.content), 1)
+                              vueExports.createTextVNode(vueExports.toDisplayString(item.content), 1)
                             ])
                           ], 2)
                         ])
                       ]),
                       _: 2
-                    }, 1032, ["class"])) : createCommentVNode("", true)
+                    }, 1032, ["class"])) : vueExports.createCommentVNode("", true)
                   ]),
                   _: 2
                 }, 1032, ["value", "disabled", "class"]);
@@ -3132,7 +3116,7 @@ const _sfc_main$b = {
 };
 const _sfc_setup$b = _sfc_main$b.setup;
 _sfc_main$b.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Accordion.vue");
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
@@ -3148,7 +3132,7 @@ const FONT_OPTIONS = [
   "Poppins",
   "Source Sans 3"
 ].map((f) => ({ label: f, value: f }));
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ThemeView",
   __ssrInlineRender: true,
   props: {
@@ -3165,10 +3149,10 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   },
   emits: ["update:selected", "update:fonts", "update:mode", "update:maxContentWidth"],
   setup(__props) {
-    const selected = useModel(__props, "selected");
-    const fonts = useModel(__props, "fonts");
-    const mode = useModel(__props, "mode");
-    const maxContentWidth = useModel(__props, "maxContentWidth");
+    const selected = vueExports.useModel(__props, "selected");
+    const fonts = vueExports.useModel(__props, "fonts");
+    const mode = vueExports.useModel(__props, "mode");
+    const maxContentWidth = vueExports.useModel(__props, "maxContentWidth");
     const themes = useThemes();
     const themeModeOptions = [
       { label: "Only light mode", value: "light" },
@@ -3184,30 +3168,30 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       const _component_UAccordion = _sfc_main$b;
       const _component_USelect = _sfc_main$1$2;
       const _component_UIcon = _sfc_main$d$1;
-      _push(ssrRenderComponent(_component_UAccordion, mergeProps({
+      _push(ssrRenderComponent_1(_component_UAccordion, vueExports.mergeProps({
         items: accordionItems,
         multiple: "",
         "default-value": ["Colors", "Typography", "Layout"],
         class: "-mt-4"
       }, _attrs), {
-        colors: withCtx((_, _push2, _parent2, _scopeId) => {
+        colors: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex flex-col gap-3 pb-3"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_USelect, {
+            _push2(ssrRenderComponent_1(_component_USelect, {
               modelValue: mode.value,
               "onUpdate:modelValue": ($event) => mode.value = $event,
               items: themeModeOptions,
               "value-key": "value"
             }, null, _parent2, _scopeId));
             _push2(`<div class="grid grid-cols-3 gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList(unref(themes), (theme2) => {
-              _push2(`<button type="button"${ssrRenderAttr("aria-label", theme2.label)}${ssrRenderAttr("title", theme2.label)} class="${ssrRenderClass([
+            ssrRenderList_1(vueExports.unref(themes), (theme2) => {
+              _push2(`<button type="button"${ssrRenderAttr_1("aria-label", theme2.label)}${ssrRenderAttr_1("title", theme2.label)} class="${ssrRenderClass_1([
                 selected.value === theme2.id ? "border border-gray-500 bg-elevated/60" : "border-default bg-transparent hover:bg-elevated/40",
                 "relative overflow-visible aspect-square rounded-md border p-1.5 cursor-pointer transition-colors"
               ])}"${_scopeId}>`);
               if (selected.value === theme2.id) {
                 _push2(`<div class="absolute bottom-1 right-1 z-10 flex items-center justify-center size-4 rounded-full bg-success text-white"${_scopeId}>`);
-                _push2(ssrRenderComponent(_component_UIcon, {
+                _push2(ssrRenderComponent_1(_component_UIcon, {
                   name: "i-lucide-check",
                   class: "size-2.5"
                 }, null, _parent2, _scopeId));
@@ -3215,10 +3199,10 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               } else {
                 _push2(`<!---->`);
               }
-              _push2(`<div class="flex w-full h-full gap-1.5"${_scopeId}><div class="h-full w-full rounded" style="${ssrRenderStyle({
+              _push2(`<div class="flex w-full h-full gap-1.5"${_scopeId}><div class="h-full w-full rounded" style="${ssrRenderStyle_1({
                 backgroundColor: theme2.light.primary,
                 outline: `1px solid color-mix(in srgb, ${theme2.light.primary} 80%, black)`
-              })}"${_scopeId}></div><div class="h-full w-full rounded" style="${ssrRenderStyle({
+              })}"${_scopeId}></div><div class="h-full w-full rounded" style="${ssrRenderStyle_1({
                 backgroundColor: theme2.light.secondary,
                 outline: `1px solid color-mix(in srgb, ${theme2.light.secondary} 80%, black)`
               })}"${_scopeId}></div></div></button>`);
@@ -3226,16 +3210,16 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div></div>`);
           } else {
             return [
-              createVNode("div", { class: "flex flex-col gap-3 pb-3" }, [
-                createVNode(_component_USelect, {
+              vueExports.createVNode("div", { class: "flex flex-col gap-3 pb-3" }, [
+                vueExports.createVNode(_component_USelect, {
                   modelValue: mode.value,
                   "onUpdate:modelValue": ($event) => mode.value = $event,
                   items: themeModeOptions,
                   "value-key": "value"
                 }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                createVNode("div", { class: "grid grid-cols-3 gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(themes), (theme2) => {
-                    return openBlock(), createBlock("button", {
+                vueExports.createVNode("div", { class: "grid grid-cols-3 gap-2" }, [
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(themes), (theme2) => {
+                    return vueExports.openBlock(), vueExports.createBlock("button", {
                       key: theme2.id,
                       type: "button",
                       "aria-label": theme2.label,
@@ -3246,24 +3230,24 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                       ],
                       onClick: ($event) => selected.value = theme2.id
                     }, [
-                      selected.value === theme2.id ? (openBlock(), createBlock("div", {
+                      selected.value === theme2.id ? (vueExports.openBlock(), vueExports.createBlock("div", {
                         key: 0,
                         class: "absolute bottom-1 right-1 z-10 flex items-center justify-center size-4 rounded-full bg-success text-white"
                       }, [
-                        createVNode(_component_UIcon, {
+                        vueExports.createVNode(_component_UIcon, {
                           name: "i-lucide-check",
                           class: "size-2.5"
                         })
-                      ])) : createCommentVNode("", true),
-                      createVNode("div", { class: "flex w-full h-full gap-1.5" }, [
-                        createVNode("div", {
+                      ])) : vueExports.createCommentVNode("", true),
+                      vueExports.createVNode("div", { class: "flex w-full h-full gap-1.5" }, [
+                        vueExports.createVNode("div", {
                           class: "h-full w-full rounded",
                           style: {
                             backgroundColor: theme2.light.primary,
                             outline: `1px solid color-mix(in srgb, ${theme2.light.primary} 80%, black)`
                           }
                         }, null, 4),
-                        createVNode("div", {
+                        vueExports.createVNode("div", {
                           class: "h-full w-full rounded",
                           style: {
                             backgroundColor: theme2.light.secondary,
@@ -3278,40 +3262,40 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        typography: withCtx((_, _push2, _parent2, _scopeId) => {
+        typography: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex flex-col gap-3 pb-3"${_scopeId}><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Heading font</label>`);
-            _push2(ssrRenderComponent(_component_USelect, {
+            _push2(ssrRenderComponent_1(_component_USelect, {
               "model-value": fonts.value.heading,
-              items: unref(FONT_OPTIONS),
+              items: vueExports.unref(FONT_OPTIONS),
               "value-key": "value",
               "onUpdate:modelValue": ($event) => fonts.value = { ...fonts.value, heading: $event }
             }, null, _parent2, _scopeId));
             _push2(`</div><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Body font</label>`);
-            _push2(ssrRenderComponent(_component_USelect, {
+            _push2(ssrRenderComponent_1(_component_USelect, {
               "model-value": fonts.value.body,
-              items: unref(FONT_OPTIONS),
+              items: vueExports.unref(FONT_OPTIONS),
               "value-key": "value",
               "onUpdate:modelValue": ($event) => fonts.value = { ...fonts.value, body: $event }
             }, null, _parent2, _scopeId));
             _push2(`</div></div>`);
           } else {
             return [
-              createVNode("div", { class: "flex flex-col gap-3 pb-3" }, [
-                createVNode("div", { class: "flex flex-col gap-1" }, [
-                  createVNode("label", { class: "text-xs text-muted" }, "Heading font"),
-                  createVNode(_component_USelect, {
+              vueExports.createVNode("div", { class: "flex flex-col gap-3 pb-3" }, [
+                vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                  vueExports.createVNode("label", { class: "text-xs text-muted" }, "Heading font"),
+                  vueExports.createVNode(_component_USelect, {
                     "model-value": fonts.value.heading,
-                    items: unref(FONT_OPTIONS),
+                    items: vueExports.unref(FONT_OPTIONS),
                     "value-key": "value",
                     "onUpdate:modelValue": ($event) => fonts.value = { ...fonts.value, heading: $event }
                   }, null, 8, ["model-value", "items", "onUpdate:modelValue"])
                 ]),
-                createVNode("div", { class: "flex flex-col gap-1" }, [
-                  createVNode("label", { class: "text-xs text-muted" }, "Body font"),
-                  createVNode(_component_USelect, {
+                vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                  vueExports.createVNode("label", { class: "text-xs text-muted" }, "Body font"),
+                  vueExports.createVNode(_component_USelect, {
                     "model-value": fonts.value.body,
-                    items: unref(FONT_OPTIONS),
+                    items: vueExports.unref(FONT_OPTIONS),
                     "value-key": "value",
                     "onUpdate:modelValue": ($event) => fonts.value = { ...fonts.value, body: $event }
                   }, null, 8, ["model-value", "items", "onUpdate:modelValue"])
@@ -3320,25 +3304,25 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        layout: withCtx((_, _push2, _parent2, _scopeId) => {
+        layout: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex flex-col gap-3 pb-3"${_scopeId}><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Max content width</label>`);
-            _push2(ssrRenderComponent(_component_USelect, {
+            _push2(ssrRenderComponent_1(_component_USelect, {
               modelValue: maxContentWidth.value,
               "onUpdate:modelValue": ($event) => maxContentWidth.value = $event,
-              items: unref(MAX_CONTENT_WIDTH_OPTIONS),
+              items: vueExports.unref(MAX_CONTENT_WIDTH_OPTIONS),
               "value-key": "value"
             }, null, _parent2, _scopeId));
             _push2(`</div></div>`);
           } else {
             return [
-              createVNode("div", { class: "flex flex-col gap-3 pb-3" }, [
-                createVNode("div", { class: "flex flex-col gap-1" }, [
-                  createVNode("label", { class: "text-xs text-muted" }, "Max content width"),
-                  createVNode(_component_USelect, {
+              vueExports.createVNode("div", { class: "flex flex-col gap-3 pb-3" }, [
+                vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                  vueExports.createVNode("label", { class: "text-xs text-muted" }, "Max content width"),
+                  vueExports.createVNode(_component_USelect, {
                     modelValue: maxContentWidth.value,
                     "onUpdate:modelValue": ($event) => maxContentWidth.value = $event,
-                    items: unref(MAX_CONTENT_WIDTH_OPTIONS),
+                    items: vueExports.unref(MAX_CONTENT_WIDTH_OPTIONS),
                     "value-key": "value"
                   }, null, 8, ["modelValue", "onUpdate:modelValue", "items"])
                 ])
@@ -3353,12 +3337,12 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$a = _sfc_main$a.setup;
 _sfc_main$a.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/ThemeView.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
 const __nuxt_component_3 = Object.assign(_sfc_main$a, { __name: "PagebuilderThemeView" });
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "LeftSidebar",
   __ssrInlineRender: true,
   props: {
@@ -3367,19 +3351,19 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { expose: __expose }) {
     const props = __props;
-    const panelViews = ref([{ label: "Blocks" }, { label: "Layers" }, { label: "Theme" }]);
-    const currentView = ref("0");
-    const currentThemeMode = ref(
+    const panelViews = vueExports.ref([{ label: "Blocks" }, { label: "Layers" }, { label: "Theme" }]);
+    const currentView = vueExports.ref("0");
+    const currentThemeMode = vueExports.ref(
       props.initialThemeSettings?.mode ?? "light"
     );
-    const selectedThemeId = ref(props.initialThemeSettings?.themeId ?? null);
-    const selectedFonts = ref(
+    const selectedThemeId = vueExports.ref(props.initialThemeSettings?.themeId ?? null);
+    const selectedFonts = vueExports.ref(
       props.initialThemeSettings?.fonts ?? { heading: "Inter", body: "Inter" }
     );
-    const selectedMaxContentWidth = ref(
+    const selectedMaxContentWidth = vueExports.ref(
       props.initialThemeSettings?.maxContentWidth ?? "sm"
     );
-    const themeSettings = computed(() => ({
+    const themeSettings = vueExports.computed(() => ({
       themeId: selectedThemeId.value,
       mode: currentThemeMode.value,
       fonts: selectedFonts.value,
@@ -3387,7 +3371,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       logoDark: props.initialThemeSettings?.logoDark ?? null,
       maxContentWidth: selectedMaxContentWidth.value
     }));
-    watch(
+    vueExports.watch(
       () => props.initialThemeSettings,
       (settings) => {
         if (!settings) return;
@@ -3397,19 +3381,19 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         selectedMaxContentWidth.value = settings.maxContentWidth ?? "sm";
       }
     );
-    const isThemeDirty = computed(
+    const isThemeDirty = vueExports.computed(
       () => selectedThemeId.value !== (props.initialThemeSettings?.themeId ?? null) || currentThemeMode.value !== (props.initialThemeSettings?.mode ?? "light") || selectedFonts.value.heading !== (props.initialThemeSettings?.fonts?.heading ?? "Inter") || selectedFonts.value.body !== (props.initialThemeSettings?.fonts?.body ?? "Inter") || selectedMaxContentWidth.value !== (props.initialThemeSettings?.maxContentWidth ?? "sm")
     );
     const { activePageId } = useActivePage();
     const { activeThemeId, activeThemeMode } = useActivePalette();
-    watch(
+    vueExports.watch(
       selectedThemeId,
       (id) => {
         activeThemeId.value = id;
       },
       { immediate: true }
     );
-    watch(
+    vueExports.watch(
       currentThemeMode,
       (mode) => {
         activeThemeMode.value = mode;
@@ -3417,14 +3401,14 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       { immediate: true }
     );
     const { maxContentWidth: activeMaxContentWidth } = useLayoutSettings();
-    watch(
+    vueExports.watch(
       selectedMaxContentWidth,
       (w) => {
         activeMaxContentWidth.value = w;
       },
       { immediate: true }
     );
-    const layersView = useTemplateRef("layersView");
+    const layersView = vueExports.useTemplateRef("layersView");
     function onBlockAdded() {
       layersView.value?.refresh();
     }
@@ -3434,37 +3418,37 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       const _component_PagebuilderBlocksView = __nuxt_component_1;
       const _component_PagebuilderLayersView = __nuxt_component_2$1;
       const _component_PagebuilderThemeView = __nuxt_component_3;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col w-64 shrink-0 border-r border-default" }, _attrs))}><div class="p-3 border-b border-default shrink-0">`);
-      _push(ssrRenderComponent(_component_UTabs, {
-        modelValue: unref(currentView),
-        "onUpdate:modelValue": ($event) => isRef(currentView) ? currentView.value = $event : null,
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({ class: "flex flex-col w-64 shrink-0 border-r border-default" }, _attrs))}><div class="p-3 border-b border-default shrink-0">`);
+      _push(ssrRenderComponent_1(_component_UTabs, {
+        modelValue: vueExports.unref(currentView),
+        "onUpdate:modelValue": ($event) => vueExports.isRef(currentView) ? currentView.value = $event : null,
         color: "success",
         content: false,
-        items: unref(panelViews),
+        items: vueExports.unref(panelViews),
         class: "w-full"
       }, null, _parent));
       _push(`</div><div class="flex-1 overflow-y-auto">`);
-      _push(ssrRenderComponent(_component_PagebuilderBlocksView, {
-        style: unref(currentView) === "0" ? null : { display: "none" },
+      _push(ssrRenderComponent_1(_component_PagebuilderBlocksView, {
+        style: vueExports.unref(currentView) === "0" ? null : { display: "none" },
         onBlockAdded
       }, null, _parent));
-      _push(ssrRenderComponent(_component_PagebuilderLayersView, {
-        style: unref(currentView) === "1" ? null : { display: "none" },
+      _push(ssrRenderComponent_1(_component_PagebuilderLayersView, {
+        style: vueExports.unref(currentView) === "1" ? null : { display: "none" },
         ref_key: "layersView",
         ref: layersView,
         "portfolio-id": __props.portfolioId ?? null,
-        "page-id": unref(activePageId)
+        "page-id": vueExports.unref(activePageId)
       }, null, _parent));
-      _push(`<div class="p-3" style="${ssrRenderStyle(unref(currentView) === "2" ? null : { display: "none" })}">`);
-      _push(ssrRenderComponent(_component_PagebuilderThemeView, {
-        selected: unref(selectedThemeId),
-        "onUpdate:selected": ($event) => isRef(selectedThemeId) ? selectedThemeId.value = $event : null,
-        fonts: unref(selectedFonts),
-        "onUpdate:fonts": ($event) => isRef(selectedFonts) ? selectedFonts.value = $event : null,
-        mode: unref(currentThemeMode),
-        "onUpdate:mode": ($event) => isRef(currentThemeMode) ? currentThemeMode.value = $event : null,
-        "max-content-width": unref(selectedMaxContentWidth),
-        "onUpdate:maxContentWidth": ($event) => isRef(selectedMaxContentWidth) ? selectedMaxContentWidth.value = $event : null
+      _push(`<div class="p-3" style="${ssrRenderStyle_1(vueExports.unref(currentView) === "2" ? null : { display: "none" })}">`);
+      _push(ssrRenderComponent_1(_component_PagebuilderThemeView, {
+        selected: vueExports.unref(selectedThemeId),
+        "onUpdate:selected": ($event) => vueExports.isRef(selectedThemeId) ? selectedThemeId.value = $event : null,
+        fonts: vueExports.unref(selectedFonts),
+        "onUpdate:fonts": ($event) => vueExports.isRef(selectedFonts) ? selectedFonts.value = $event : null,
+        mode: vueExports.unref(currentThemeMode),
+        "onUpdate:mode": ($event) => vueExports.isRef(currentThemeMode) ? currentThemeMode.value = $event : null,
+        "max-content-width": vueExports.unref(selectedMaxContentWidth),
+        "onUpdate:maxContentWidth": ($event) => vueExports.isRef(selectedMaxContentWidth) ? selectedMaxContentWidth.value = $event : null
       }, null, _parent));
       _push(`</div></div></div>`);
     };
@@ -3472,12 +3456,12 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$9 = _sfc_main$9.setup;
 _sfc_main$9.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/LeftSidebar.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
 const __nuxt_component_6 = Object.assign(_sfc_main$9, { __name: "PagebuilderLeftSidebar" });
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$8 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PreviewBlock",
   __ssrInlineRender: true,
   props: {
@@ -3487,8 +3471,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const { setBlockField } = usePageEditor();
     const { selectedBlock } = useSelectedBlock();
-    const isSelected = computed(() => selectedBlock.value?.id === props.block.id);
-    provide(inlineEditorKey, {
+    const isSelected = vueExports.computed(() => selectedBlock.value?.id === props.block.id);
+    vueExports.provide(inlineEditorKey, {
       get blockId() {
         return props.block.id;
       },
@@ -3505,18 +3489,18 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+      ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push, _parent);
     };
   }
 });
 const _sfc_setup$8 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/PreviewBlock.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
 const __nuxt_component_2 = Object.assign(_sfc_main$8, { __name: "PagebuilderPreviewBlock" });
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Preview",
   __ssrInlineRender: true,
   props: {
@@ -3528,43 +3512,43 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { expose: __expose }) {
     const props = __props;
-    const liveThemeOverride = computed(() => props.liveThemeSettings ?? null);
+    const liveThemeOverride = vueExports.computed(() => props.liveThemeSettings ?? null);
     const { cssVars, portfolioMode, navLinks, googleFontsUrl, logoLight, logoDark } = usePortfolio(
       props.portfolioSlug,
       liveThemeOverride
     );
-    provide(portfolioSlugKey, props.portfolioSlug);
-    const localBlocks = ref([]);
-    watch(
+    vueExports.provide(portfolioSlugKey, props.portfolioSlug);
+    const localBlocks = vueExports.ref([]);
+    vueExports.watch(
       () => props.layersView?.contentBlocks,
       (blocks) => {
         if (blocks) localBlocks.value = [...blocks];
       },
       { immediate: true, deep: true }
     );
-    const headerBlock = computed(() => props.layersView?.headerBlock ?? null);
-    const footerBlock = computed(() => props.layersView?.footerBlock ?? null);
-    const headerContent = computed(() => {
+    const headerBlock = vueExports.computed(() => props.layersView?.headerBlock ?? null);
+    const footerBlock = vueExports.computed(() => props.layersView?.footerBlock ?? null);
+    const headerContent = vueExports.computed(() => {
       const block = headerBlock.value;
       if (!block) return void 0;
       const pending = pendingContentEdits.value[block.id];
       return pending ? { ...block.content, ...pending } : block.content;
     });
-    const footerContent = computed(
+    const footerContent = vueExports.computed(
       () => footerBlock.value?.content
     );
     const { selectedBlock, selectBlock, clearSelection } = useSelectedBlock();
-    const blockEls = ref({});
+    const blockEls = vueExports.ref({});
     function setBlockRef(id, el) {
       if (el) blockEls.value[id] = el;
     }
-    watch(selectedBlock, async (block) => {
+    vueExports.watch(selectedBlock, async (block) => {
       if (!block) return;
-      await nextTick();
+      await vueExports.nextTick();
       blockEls.value[block.id]?.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
     const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent, pendingContentEdits } = usePageEditor();
-    const portfolioLayout = useTemplateRef("portfolioLayout");
+    const portfolioLayout = vueExports.useTemplateRef("portfolioLayout");
     __expose({ portfolioLayout });
     function onHeaderSlotReorder(slots) {
       const block = headerBlock.value;
@@ -3572,8 +3556,8 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       const base = pendingContentEdits.value[block.id] ?? block.content;
       setBlockContent(block.id, { ...base, ...slots });
     }
-    const blockToDelete = ref(null);
-    const confirmDeleteOpen = ref(false);
+    const blockToDelete = vueExports.ref(null);
+    const confirmDeleteOpen = vueExports.ref(false);
     function requestDelete(block) {
       blockToDelete.value = block;
       confirmDeleteOpen.value = true;
@@ -3647,31 +3631,31 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       const _component_BlocksRenderer = __nuxt_component_3$2;
       const _component_AdminConfirmModal = __nuxt_component_4$1;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_component_PortfolioLayout, {
+      _push(ssrRenderComponent_1(_component_PortfolioLayout, {
         ref_key: "portfolioLayout",
         ref: portfolioLayout,
         "is-editor": "",
-        "css-vars": unref(cssVars),
-        "portfolio-mode": unref(portfolioMode),
+        "css-vars": vueExports.unref(cssVars),
+        "portfolio-mode": vueExports.unref(portfolioMode),
         "site-name": __props.portfolioTitle,
         "home-url": __props.pageSlug === "home" ? `/p/${__props.portfolioSlug}` : `/p/${__props.portfolioSlug}/${__props.pageSlug}`,
-        "nav-links": unref(navLinks),
-        "header-content": unref(headerContent),
-        "footer-content": unref(footerContent),
-        "google-fonts-url": unref(googleFontsUrl),
-        "logo-url": unref(logoLight),
-        "logo-url-dark": unref(logoDark),
+        "nav-links": vueExports.unref(navLinks),
+        "header-content": vueExports.unref(headerContent),
+        "footer-content": vueExports.unref(footerContent),
+        "google-fonts-url": vueExports.unref(googleFontsUrl),
+        "logo-url": vueExports.unref(logoLight),
+        "logo-url-dark": vueExports.unref(logoDark),
         "on-slot-reorder": onHeaderSlotReorder,
-        onSelectHeader: ($event) => unref(headerBlock) && unref(selectBlock)(unref(headerBlock)),
-        onSelectFooter: ($event) => unref(footerBlock) && unref(selectBlock)(unref(footerBlock)),
+        onSelectHeader: ($event) => vueExports.unref(headerBlock) && vueExports.unref(selectBlock)(vueExports.unref(headerBlock)),
+        onSelectFooter: ($event) => vueExports.unref(footerBlock) && vueExports.unref(selectBlock)(vueExports.unref(footerBlock)),
         onClick: ($event) => $event.target.closest("a") && $event.preventDefault()
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="relative min-h-64" data-v-eee7ecb3${_scopeId}>`);
-            if (unref(localBlocks).length === 0) {
+            if (vueExports.unref(localBlocks).length === 0) {
               _push2(`<div class="absolute inset-0 flex flex-col items-center justify-center gap-3 py-24 text-center pointer-events-none select-none z-10" data-v-eee7ecb3${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-layout-template",
                 class: "size-10 text-muted opacity-40"
               }, null, _parent2, _scopeId));
@@ -3679,9 +3663,9 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(unref(VueDraggable), {
-              modelValue: unref(localBlocks),
-              "onUpdate:modelValue": ($event) => isRef(localBlocks) ? localBlocks.value = $event : null,
+            _push2(ssrRenderComponent_1(vueExports.unref(lo), {
+              modelValue: vueExports.unref(localBlocks),
+              "onUpdate:modelValue": ($event) => vueExports.isRef(localBlocks) ? localBlocks.value = $event : null,
               group: { name: "blocks", pull: true, put: ["blocks"] },
               animation: 150,
               handle: ".block-drag-handle",
@@ -3693,33 +3677,33 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
               onEnd: onReorder,
               onAdd: onBlockDropped
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(`<!--[-->`);
-                  ssrRenderList(unref(localBlocks), (block) => {
-                    _push3(`<div class="${ssrRenderClass([isSelected(block) ? "block-selected" : "block-hoverable", "group/block relative min-h-16 after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:-outline-offset-2"])}" data-v-eee7ecb3${_scopeId2}><div class="block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1" data-v-eee7ecb3${_scopeId2}>`);
-                    _push3(ssrRenderComponent(_component_UIcon, {
+                  ssrRenderList_1(vueExports.unref(localBlocks), (block) => {
+                    _push3(`<div class="${ssrRenderClass_1([isSelected(block) ? "block-selected" : "block-hoverable", "group/block relative min-h-16 after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:-outline-offset-2"])}" data-v-eee7ecb3${_scopeId2}><div class="block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1" data-v-eee7ecb3${_scopeId2}>`);
+                    _push3(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-grip-horizontal",
                       class: "size-4 text-white"
                     }, null, _parent3, _scopeId2));
                     _push3(`</div><div class="absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity" data-v-eee7ecb3${_scopeId2}><button class="w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded" title="Duplicate block" data-v-eee7ecb3${_scopeId2}>`);
-                    _push3(ssrRenderComponent(_component_UIcon, {
+                    _push3(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-copy",
                       class: "size-3.5 text-white"
                     }, null, _parent3, _scopeId2));
                     _push3(`</button><button class="w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-red-600 rounded" title="Delete block" data-v-eee7ecb3${_scopeId2}>`);
-                    _push3(ssrRenderComponent(_component_UIcon, {
+                    _push3(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-trash-2",
                       class: "size-3.5 text-white"
                     }, null, _parent3, _scopeId2));
                     _push3(`</button></div>`);
-                    _push3(ssrRenderComponent(_component_PagebuilderPreviewBlock, { block }, {
-                      default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                    _push3(ssrRenderComponent_1(_component_PagebuilderPreviewBlock, { block }, {
+                      default: vueExports.withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(ssrRenderComponent(_component_BlocksRenderer, { block }, null, _parent4, _scopeId3));
+                          _push4(ssrRenderComponent_1(_component_BlocksRenderer, { block }, null, _parent4, _scopeId3));
                         } else {
                           return [
-                            createVNode(_component_BlocksRenderer, { block }, null, 8, ["block"])
+                            vueExports.createVNode(_component_BlocksRenderer, { block }, null, 8, ["block"])
                           ];
                         }
                       }),
@@ -3730,46 +3714,46 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                   _push3(`<!--]-->`);
                 } else {
                   return [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(localBlocks), (block) => {
-                      return openBlock(), createBlock("div", {
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(localBlocks), (block) => {
+                      return vueExports.openBlock(), vueExports.createBlock("div", {
                         key: block.id,
                         ref_for: true,
                         ref: (el) => setBlockRef(block.id, el),
                         class: ["group/block relative min-h-16 after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:-outline-offset-2", isSelected(block) ? "block-selected" : "block-hoverable"],
                         onDragstart: ($event) => onBlockDragStart($event, block),
-                        onClick: ($event) => unref(selectBlock)(block)
+                        onClick: ($event) => vueExports.unref(selectBlock)(block)
                       }, [
-                        createVNode("div", { class: "block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1" }, [
-                          createVNode(_component_UIcon, {
+                        vueExports.createVNode("div", { class: "block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1" }, [
+                          vueExports.createVNode(_component_UIcon, {
                             name: "i-lucide-grip-horizontal",
                             class: "size-4 text-white"
                           })
                         ]),
-                        createVNode("div", { class: "absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity" }, [
-                          createVNode("button", {
+                        vueExports.createVNode("div", { class: "absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity" }, [
+                          vueExports.createVNode("button", {
                             class: "w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded",
                             title: "Duplicate block",
-                            onClick: withModifiers(($event) => duplicateBlock(block), ["stop"])
+                            onClick: vueExports.withModifiers(($event) => duplicateBlock(block), ["stop"])
                           }, [
-                            createVNode(_component_UIcon, {
+                            vueExports.createVNode(_component_UIcon, {
                               name: "i-lucide-copy",
                               class: "size-3.5 text-white"
                             })
                           ], 8, ["onClick"]),
-                          createVNode("button", {
+                          vueExports.createVNode("button", {
                             class: "w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-red-600 rounded",
                             title: "Delete block",
-                            onClick: withModifiers(($event) => requestDelete(block), ["stop"])
+                            onClick: vueExports.withModifiers(($event) => requestDelete(block), ["stop"])
                           }, [
-                            createVNode(_component_UIcon, {
+                            vueExports.createVNode(_component_UIcon, {
                               name: "i-lucide-trash-2",
                               class: "size-3.5 text-white"
                             })
                           ], 8, ["onClick"])
                         ]),
-                        createVNode(_component_PagebuilderPreviewBlock, { block }, {
-                          default: withCtx(() => [
-                            createVNode(_component_BlocksRenderer, { block }, null, 8, ["block"])
+                        vueExports.createVNode(_component_PagebuilderPreviewBlock, { block }, {
+                          default: vueExports.withCtx(() => [
+                            vueExports.createVNode(_component_BlocksRenderer, { block }, null, 8, ["block"])
                           ]),
                           _: 2
                         }, 1032, ["block"])
@@ -3783,29 +3767,29 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "relative min-h-64" }, [
-                createVNode(Transition, { name: "fade" }, {
-                  default: withCtx(() => [
-                    unref(localBlocks).length === 0 ? (openBlock(), createBlock("div", {
+              vueExports.createVNode("div", { class: "relative min-h-64" }, [
+                vueExports.createVNode(vueExports.Transition, { name: "fade" }, {
+                  default: vueExports.withCtx(() => [
+                    vueExports.unref(localBlocks).length === 0 ? (vueExports.openBlock(), vueExports.createBlock("div", {
                       key: 0,
                       class: "absolute inset-0 flex flex-col items-center justify-center gap-3 py-24 text-center pointer-events-none select-none z-10"
                     }, [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: "i-lucide-layout-template",
                         class: "size-10 text-muted opacity-40"
                       }),
-                      createVNode("p", { class: "text-sm text-muted opacity-60" }, [
-                        createTextVNode(" Drag a block here"),
-                        createVNode("br"),
-                        createTextVNode(" to start building ")
+                      vueExports.createVNode("p", { class: "text-sm text-muted opacity-60" }, [
+                        vueExports.createTextVNode(" Drag a block here"),
+                        vueExports.createVNode("br"),
+                        vueExports.createTextVNode(" to start building ")
                       ])
-                    ])) : createCommentVNode("", true)
+                    ])) : vueExports.createCommentVNode("", true)
                   ]),
                   _: 1
                 }),
-                createVNode(unref(VueDraggable), {
-                  modelValue: unref(localBlocks),
-                  "onUpdate:modelValue": ($event) => isRef(localBlocks) ? localBlocks.value = $event : null,
+                vueExports.createVNode(vueExports.unref(lo), {
+                  modelValue: vueExports.unref(localBlocks),
+                  "onUpdate:modelValue": ($event) => vueExports.isRef(localBlocks) ? localBlocks.value = $event : null,
                   group: { name: "blocks", pull: true, put: ["blocks"] },
                   animation: 150,
                   handle: ".block-drag-handle",
@@ -3817,47 +3801,47 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                   onEnd: onReorder,
                   onAdd: onBlockDropped
                 }, {
-                  default: withCtx(() => [
-                    (openBlock(true), createBlock(Fragment, null, renderList(unref(localBlocks), (block) => {
-                      return openBlock(), createBlock("div", {
+                  default: vueExports.withCtx(() => [
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(localBlocks), (block) => {
+                      return vueExports.openBlock(), vueExports.createBlock("div", {
                         key: block.id,
                         ref_for: true,
                         ref: (el) => setBlockRef(block.id, el),
                         class: ["group/block relative min-h-16 after:absolute after:inset-0 after:pointer-events-none after:transition-[outline] after:duration-150 after:outline-2 after:-outline-offset-2", isSelected(block) ? "block-selected" : "block-hoverable"],
                         onDragstart: ($event) => onBlockDragStart($event, block),
-                        onClick: ($event) => unref(selectBlock)(block)
+                        onClick: ($event) => vueExports.unref(selectBlock)(block)
                       }, [
-                        createVNode("div", { class: "block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1" }, [
-                          createVNode(_component_UIcon, {
+                        vueExports.createVNode("div", { class: "block-drag-handle w-8 h-8 flex justify-center items-center absolute top-2 left-1/2 -translate-x-1/2 z-10 cursor-grab active:cursor-grabbing opacity-0 group-hover/block:opacity-100 transition-opacity bg-black/50 rounded p-1" }, [
+                          vueExports.createVNode(_component_UIcon, {
                             name: "i-lucide-grip-horizontal",
                             class: "size-4 text-white"
                           })
                         ]),
-                        createVNode("div", { class: "absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity" }, [
-                          createVNode("button", {
+                        vueExports.createVNode("div", { class: "absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover/block:opacity-100 transition-opacity" }, [
+                          vueExports.createVNode("button", {
                             class: "w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded",
                             title: "Duplicate block",
-                            onClick: withModifiers(($event) => duplicateBlock(block), ["stop"])
+                            onClick: vueExports.withModifiers(($event) => duplicateBlock(block), ["stop"])
                           }, [
-                            createVNode(_component_UIcon, {
+                            vueExports.createVNode(_component_UIcon, {
                               name: "i-lucide-copy",
                               class: "size-3.5 text-white"
                             })
                           ], 8, ["onClick"]),
-                          createVNode("button", {
+                          vueExports.createVNode("button", {
                             class: "w-7 h-7 flex items-center justify-center bg-black/50 hover:bg-red-600 rounded",
                             title: "Delete block",
-                            onClick: withModifiers(($event) => requestDelete(block), ["stop"])
+                            onClick: vueExports.withModifiers(($event) => requestDelete(block), ["stop"])
                           }, [
-                            createVNode(_component_UIcon, {
+                            vueExports.createVNode(_component_UIcon, {
                               name: "i-lucide-trash-2",
                               class: "size-3.5 text-white"
                             })
                           ], 8, ["onClick"])
                         ]),
-                        createVNode(_component_PagebuilderPreviewBlock, { block }, {
-                          default: withCtx(() => [
-                            createVNode(_component_BlocksRenderer, { block }, null, 8, ["block"])
+                        vueExports.createVNode(_component_PagebuilderPreviewBlock, { block }, {
+                          default: vueExports.withCtx(() => [
+                            vueExports.createVNode(_component_BlocksRenderer, { block }, null, 8, ["block"])
                           ]),
                           _: 2
                         }, 1032, ["block"])
@@ -3872,11 +3856,11 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_AdminConfirmModal, {
-        open: unref(confirmDeleteOpen),
-        "onUpdate:open": ($event) => isRef(confirmDeleteOpen) ? confirmDeleteOpen.value = $event : null,
+      _push(ssrRenderComponent_1(_component_AdminConfirmModal, {
+        open: vueExports.unref(confirmDeleteOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(confirmDeleteOpen) ? confirmDeleteOpen.value = $event : null,
         title: "Delete block?",
-        description: `'${unref(blockToDelete)?.name || unref(blockToDelete)?.type}' will be removed when you save.`,
+        description: `'${vueExports.unref(blockToDelete)?.name || vueExports.unref(blockToDelete)?.type}' will be removed when you save.`,
         "confirm-label": "Delete",
         onConfirm: confirmDelete,
         onCancel: ($event) => confirmDeleteOpen.value = false
@@ -3887,12 +3871,12 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$7 = _sfc_main$7.setup;
 _sfc_main$7.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/Preview.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
 const __nuxt_component_8 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$7, [["__scopeId", "data-v-eee7ecb3"]]), { __name: "PagebuilderPreview" });
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ThemeColorPicker",
   __ssrInlineRender: true,
   props: {
@@ -3903,33 +3887,33 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit = __emit;
     const { palette, resolveColor } = useActivePalette();
-    const open = ref(false);
-    const activeColor = computed(() => resolveColor(props.modelValue));
+    const open = vueExports.ref(false);
+    const activeColor = vueExports.computed(() => resolveColor(props.modelValue));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UPopover = _sfc_main$2$2;
       const _component_UIcon = _sfc_main$d$1;
-      _push(ssrRenderComponent(_component_UPopover, mergeProps({
-        open: unref(open),
-        "onUpdate:open": ($event) => isRef(open) ? open.value = $event : null,
+      _push(ssrRenderComponent_1(_component_UPopover, vueExports.mergeProps({
+        open: vueExports.unref(open),
+        "onUpdate:open": ($event) => vueExports.isRef(open) ? open.value = $event : null,
         content: { align: "end" }
       }, _attrs), {
-        content: withCtx((_, _push2, _parent2, _scopeId) => {
+        content: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="p-2"${_scopeId}><div class="grid grid-cols-3 gap-1.5"${_scopeId}><button type="button" class="${ssrRenderClass([!__props.modelValue ? "border-primary" : "border-default", "size-8 rounded border-2 flex items-center justify-center transition-colors hover:border-primary"])}" title="None"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_UIcon, {
+            _push2(`<div class="p-2"${_scopeId}><div class="grid grid-cols-3 gap-1.5"${_scopeId}><button type="button" class="${ssrRenderClass_1([!__props.modelValue ? "border-primary" : "border-default", "size-8 rounded border-2 flex items-center justify-center transition-colors hover:border-primary"])}" title="None"${_scopeId}>`);
+            _push2(ssrRenderComponent_1(_component_UIcon, {
               name: "i-lucide-ban",
               class: "size-4 text-muted"
             }, null, _parent2, _scopeId));
             _push2(`</button><!--[-->`);
-            ssrRenderList(unref(palette), (entry) => {
-              _push2(`<button type="button" class="${ssrRenderClass([__props.modelValue === entry.key ? "border-primary" : "border-default", "size-8 rounded border-2 transition-colors hover:border-primary"])}" style="${ssrRenderStyle({ backgroundColor: unref(resolveColor)(entry.key) ?? void 0 })}"${ssrRenderAttr("title", entry.label)}${_scopeId}></button>`);
+            ssrRenderList_1(vueExports.unref(palette), (entry) => {
+              _push2(`<button type="button" class="${ssrRenderClass_1([__props.modelValue === entry.key ? "border-primary" : "border-default", "size-8 rounded border-2 transition-colors hover:border-primary"])}" style="${ssrRenderStyle_1({ backgroundColor: vueExports.unref(resolveColor)(entry.key) ?? void 0 })}"${ssrRenderAttr_1("title", entry.label)}${_scopeId}></button>`);
             });
             _push2(`<!--]--></div></div>`);
           } else {
             return [
-              createVNode("div", { class: "p-2" }, [
-                createVNode("div", { class: "grid grid-cols-3 gap-1.5" }, [
-                  createVNode("button", {
+              vueExports.createVNode("div", { class: "p-2" }, [
+                vueExports.createVNode("div", { class: "grid grid-cols-3 gap-1.5" }, [
+                  vueExports.createVNode("button", {
                     type: "button",
                     class: ["size-8 rounded border-2 flex items-center justify-center transition-colors hover:border-primary", !__props.modelValue ? "border-primary" : "border-default"],
                     title: "None",
@@ -3938,17 +3922,17 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                       open.value = false;
                     }
                   }, [
-                    createVNode(_component_UIcon, {
+                    vueExports.createVNode(_component_UIcon, {
                       name: "i-lucide-ban",
                       class: "size-4 text-muted"
                     })
                   ], 10, ["onClick"]),
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(palette), (entry) => {
-                    return openBlock(), createBlock("button", {
+                  (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(palette), (entry) => {
+                    return vueExports.openBlock(), vueExports.createBlock("button", {
                       key: entry.key,
                       type: "button",
                       class: ["size-8 rounded border-2 transition-colors hover:border-primary", __props.modelValue === entry.key ? "border-primary" : "border-default"],
-                      style: { backgroundColor: unref(resolveColor)(entry.key) ?? void 0 },
+                      style: { backgroundColor: vueExports.unref(resolveColor)(entry.key) ?? void 0 },
                       title: entry.label,
                       onClick: ($event) => {
                         emit("update:modelValue", entry.key);
@@ -3961,11 +3945,11 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<button type="button" class="size-6 rounded border-2 border-default hover:border-primary transition-colors shrink-0" style="${ssrRenderStyle(unref(activeColor) ? { backgroundColor: unref(activeColor) } : {})}"${ssrRenderAttr("title", unref(palette).find((p) => p.key === __props.modelValue)?.label ?? "None")}${_scopeId}>`);
-            if (!unref(activeColor)) {
-              _push2(ssrRenderComponent(_component_UIcon, {
+            _push2(`<button type="button" class="size-6 rounded border-2 border-default hover:border-primary transition-colors shrink-0" style="${ssrRenderStyle_1(vueExports.unref(activeColor) ? { backgroundColor: vueExports.unref(activeColor) } : {})}"${ssrRenderAttr_1("title", vueExports.unref(palette).find((p) => p.key === __props.modelValue)?.label ?? "None")}${_scopeId}>`);
+            if (!vueExports.unref(activeColor)) {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-ban",
                 class: "size-3.5 text-muted m-auto block"
               }, null, _parent2, _scopeId));
@@ -3975,17 +3959,17 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
             _push2(`</button>`);
           } else {
             return [
-              createVNode("button", {
+              vueExports.createVNode("button", {
                 type: "button",
                 class: "size-6 rounded border-2 border-default hover:border-primary transition-colors shrink-0",
-                style: unref(activeColor) ? { backgroundColor: unref(activeColor) } : {},
-                title: unref(palette).find((p) => p.key === __props.modelValue)?.label ?? "None"
+                style: vueExports.unref(activeColor) ? { backgroundColor: vueExports.unref(activeColor) } : {},
+                title: vueExports.unref(palette).find((p) => p.key === __props.modelValue)?.label ?? "None"
               }, [
-                !unref(activeColor) ? (openBlock(), createBlock(_component_UIcon, {
+                !vueExports.unref(activeColor) ? (vueExports.openBlock(), vueExports.createBlock(_component_UIcon, {
                   key: 0,
                   name: "i-lucide-ban",
                   class: "size-3.5 text-muted m-auto block"
-                })) : createCommentVNode("", true)
+                })) : vueExports.createCommentVNode("", true)
               ], 12, ["title"])
             ];
           }
@@ -3997,12 +3981,12 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/ThemeColorPicker.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
 const __nuxt_component_4 = Object.assign(_sfc_main$6, { __name: "PagebuilderThemeColorPicker" });
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ListFieldEditor",
   __ssrInlineRender: true,
   props: {
@@ -4013,11 +3997,11 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit = __emit;
-    const items = computed({
+    const items = vueExports.computed({
       get: () => props.modelValue ?? [],
       set: (val) => emit("update:modelValue", val)
     });
-    const expanded = ref(null);
+    const expanded = vueExports.ref(null);
     function addItem() {
       const newItem = props.field.defaultItem?.() ?? { id: crypto.randomUUID() };
       const next = [...items.value, newItem];
@@ -4053,26 +4037,26 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       const _component_UTextarea = _sfc_main$1$1;
       const _component_USelect = _sfc_main$1$2;
       const _component_UInput = _sfc_main$i;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col gap-1" }, _attrs))}>`);
-      _push(ssrRenderComponent(unref(VueDraggable), {
-        modelValue: unref(items),
-        "onUpdate:modelValue": ($event) => isRef(items) ? items.value = $event : null,
+      _push(`<div${ssrRenderAttrs_1(vueExports.mergeProps({ class: "flex flex-col gap-1" }, _attrs))}>`);
+      _push(ssrRenderComponent_1(vueExports.unref(lo), {
+        modelValue: vueExports.unref(items),
+        "onUpdate:modelValue": ($event) => vueExports.isRef(items) ? items.value = $event : null,
         handle: ".list-drag-handle",
         class: "flex flex-col gap-1"
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<!--[-->`);
-            ssrRenderList(unref(items), (item, index) => {
+            ssrRenderList_1(vueExports.unref(items), (item, index) => {
               _push2(`<div class="border border-default rounded-md overflow-hidden"${_scopeId}><div class="flex items-center gap-1 px-2 py-1.5 cursor-pointer hover:bg-elevated/50 select-none"${_scopeId}>`);
-              _push2(ssrRenderComponent(_component_UIcon, {
+              _push2(ssrRenderComponent_1(_component_UIcon, {
                 name: "i-lucide-grip-vertical",
                 class: "list-drag-handle size-3.5 text-muted shrink-0 cursor-grab active:cursor-grabbing",
                 onClick: () => {
                 }
               }, null, _parent2, _scopeId));
-              _push2(`<span class="flex-1 text-xs truncate min-w-0 text-highlighted"${_scopeId}>${ssrInterpolate(itemSummary(item))}</span>`);
-              _push2(ssrRenderComponent(_component_UButton, {
+              _push2(`<span class="flex-1 text-xs truncate min-w-0 text-highlighted"${_scopeId}>${ssrInterpolate_1(itemSummary(item))}</span>`);
+              _push2(ssrRenderComponent_1(_component_UButton, {
                 icon: "i-lucide-trash-2",
                 color: "neutral",
                 variant: "ghost",
@@ -4081,17 +4065,17 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                 "aria-label": `Remove ${__props.field.itemLabel ?? "item"}`,
                 onClick: ($event) => removeItem(index)
               }, null, _parent2, _scopeId));
-              _push2(ssrRenderComponent(_component_UIcon, {
-                name: unref(expanded) === index ? "i-lucide-chevron-up" : "i-lucide-chevron-down",
+              _push2(ssrRenderComponent_1(_component_UIcon, {
+                name: vueExports.unref(expanded) === index ? "i-lucide-chevron-up" : "i-lucide-chevron-down",
                 class: "size-3.5 text-muted shrink-0"
               }, null, _parent2, _scopeId));
               _push2(`</div>`);
-              if (unref(expanded) === index) {
+              if (vueExports.unref(expanded) === index) {
                 _push2(`<div class="px-2 pb-2 pt-1 flex flex-col gap-2 border-t border-default"${_scopeId}><!--[-->`);
-                ssrRenderList(__props.field.itemFields, (subField) => {
-                  _push2(`<div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>${ssrInterpolate(subField.label)}</label>`);
+                ssrRenderList_1(__props.field.itemFields, (subField) => {
+                  _push2(`<div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>${ssrInterpolate_1(subField.label)}</label>`);
                   if (subField.type === "textarea") {
-                    _push2(ssrRenderComponent(_component_UTextarea, {
+                    _push2(ssrRenderComponent_1(_component_UTextarea, {
                       "model-value": getItemField(item, subField.key) ?? "",
                       placeholder: subField.placeholder,
                       size: "sm",
@@ -4100,14 +4084,14 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                       "onUpdate:modelValue": ($event) => updateItemField(index, subField.key, $event)
                     }, null, _parent2, _scopeId));
                   } else if (subField.type === "select") {
-                    _push2(ssrRenderComponent(_component_USelect, {
+                    _push2(ssrRenderComponent_1(_component_USelect, {
                       "model-value": getItemField(item, subField.key) ?? "",
                       items: subField.options ?? [],
                       size: "sm",
                       "onUpdate:modelValue": ($event) => updateItemField(index, subField.key, $event)
                     }, null, _parent2, _scopeId));
                   } else {
-                    _push2(ssrRenderComponent(_component_UInput, {
+                    _push2(ssrRenderComponent_1(_component_UInput, {
                       "model-value": getItemField(item, subField.key) ?? "",
                       placeholder: subField.placeholder,
                       type: subField.type === "url" ? "url" : "text",
@@ -4126,47 +4110,47 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
             _push2(`<!--]-->`);
           } else {
             return [
-              (openBlock(true), createBlock(Fragment, null, renderList(unref(items), (item, index) => {
-                return openBlock(), createBlock("div", {
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(vueExports.unref(items), (item, index) => {
+                return vueExports.openBlock(), vueExports.createBlock("div", {
                   key: item.id ?? index,
                   class: "border border-default rounded-md overflow-hidden"
                 }, [
-                  createVNode("div", {
+                  vueExports.createVNode("div", {
                     class: "flex items-center gap-1 px-2 py-1.5 cursor-pointer hover:bg-elevated/50 select-none",
-                    onClick: ($event) => expanded.value = unref(expanded) === index ? null : index
+                    onClick: ($event) => expanded.value = vueExports.unref(expanded) === index ? null : index
                   }, [
-                    createVNode(_component_UIcon, {
+                    vueExports.createVNode(_component_UIcon, {
                       name: "i-lucide-grip-vertical",
                       class: "list-drag-handle size-3.5 text-muted shrink-0 cursor-grab active:cursor-grabbing",
-                      onClick: withModifiers(() => {
+                      onClick: vueExports.withModifiers(() => {
                       }, ["stop"])
                     }, null, 8, ["onClick"]),
-                    createVNode("span", { class: "flex-1 text-xs truncate min-w-0 text-highlighted" }, toDisplayString(itemSummary(item)), 1),
-                    createVNode(_component_UButton, {
+                    vueExports.createVNode("span", { class: "flex-1 text-xs truncate min-w-0 text-highlighted" }, vueExports.toDisplayString(itemSummary(item)), 1),
+                    vueExports.createVNode(_component_UButton, {
                       icon: "i-lucide-trash-2",
                       color: "neutral",
                       variant: "ghost",
                       size: "xs",
                       class: "text-muted hover:text-error shrink-0",
                       "aria-label": `Remove ${__props.field.itemLabel ?? "item"}`,
-                      onClick: withModifiers(($event) => removeItem(index), ["stop"])
+                      onClick: vueExports.withModifiers(($event) => removeItem(index), ["stop"])
                     }, null, 8, ["aria-label", "onClick"]),
-                    createVNode(_component_UIcon, {
-                      name: unref(expanded) === index ? "i-lucide-chevron-up" : "i-lucide-chevron-down",
+                    vueExports.createVNode(_component_UIcon, {
+                      name: vueExports.unref(expanded) === index ? "i-lucide-chevron-up" : "i-lucide-chevron-down",
                       class: "size-3.5 text-muted shrink-0"
                     }, null, 8, ["name"])
                   ], 8, ["onClick"]),
-                  unref(expanded) === index ? (openBlock(), createBlock("div", {
+                  vueExports.unref(expanded) === index ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     class: "px-2 pb-2 pt-1 flex flex-col gap-2 border-t border-default"
                   }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(__props.field.itemFields, (subField) => {
-                      return openBlock(), createBlock("div", {
+                    (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(__props.field.itemFields, (subField) => {
+                      return vueExports.openBlock(), vueExports.createBlock("div", {
                         key: subField.key,
                         class: "flex flex-col gap-1"
                       }, [
-                        createVNode("label", { class: "text-xs text-muted" }, toDisplayString(subField.label), 1),
-                        subField.type === "textarea" ? (openBlock(), createBlock(_component_UTextarea, {
+                        vueExports.createVNode("label", { class: "text-xs text-muted" }, vueExports.toDisplayString(subField.label), 1),
+                        subField.type === "textarea" ? (vueExports.openBlock(), vueExports.createBlock(_component_UTextarea, {
                           key: 0,
                           "model-value": getItemField(item, subField.key) ?? "",
                           placeholder: subField.placeholder,
@@ -4174,13 +4158,13 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                           autoresize: "",
                           rows: 2,
                           "onUpdate:modelValue": ($event) => updateItemField(index, subField.key, $event)
-                        }, null, 8, ["model-value", "placeholder", "onUpdate:modelValue"])) : subField.type === "select" ? (openBlock(), createBlock(_component_USelect, {
+                        }, null, 8, ["model-value", "placeholder", "onUpdate:modelValue"])) : subField.type === "select" ? (vueExports.openBlock(), vueExports.createBlock(_component_USelect, {
                           key: 1,
                           "model-value": getItemField(item, subField.key) ?? "",
                           items: subField.options ?? [],
                           size: "sm",
                           "onUpdate:modelValue": ($event) => updateItemField(index, subField.key, $event)
-                        }, null, 8, ["model-value", "items", "onUpdate:modelValue"])) : (openBlock(), createBlock(_component_UInput, {
+                        }, null, 8, ["model-value", "items", "onUpdate:modelValue"])) : (vueExports.openBlock(), vueExports.createBlock(_component_UInput, {
                           key: 2,
                           "model-value": getItemField(item, subField.key) ?? "",
                           placeholder: subField.placeholder,
@@ -4190,7 +4174,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                         }, null, 8, ["model-value", "placeholder", "type", "onUpdate:modelValue"]))
                       ]);
                     }), 128))
-                  ])) : createCommentVNode("", true)
+                  ])) : vueExports.createCommentVNode("", true)
                 ]);
               }), 128))
             ];
@@ -4198,7 +4182,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_UButton, {
+      _push(ssrRenderComponent_1(_component_UButton, {
         icon: "i-lucide-plus",
         color: "neutral",
         variant: "subtle",
@@ -4206,12 +4190,12 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         class: "w-full mt-1 flex justify-center",
         onClick: addItem
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(` Add ${ssrInterpolate(__props.field.itemLabel ?? "item")}`);
+            _push2(` Add ${ssrInterpolate_1(__props.field.itemLabel ?? "item")}`);
           } else {
             return [
-              createTextVNode(" Add " + toDisplayString(__props.field.itemLabel ?? "item"), 1)
+              vueExports.createTextVNode(" Add " + vueExports.toDisplayString(__props.field.itemLabel ?? "item"), 1)
             ];
           }
         }),
@@ -4223,7 +4207,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$5 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/ListFieldEditor.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
@@ -4517,19 +4501,19 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   emits: ["change", "update:modelValue"],
   setup(__props, { emit: __emit }) {
     const _props = __props;
-    const slots = useSlots();
+    const slots = vueExports.useSlots();
     const emits = __emit;
     const props = useComponentProps("checkbox", _props);
     const appConfig = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "required", "value", "defaultValue", "modelValue", "trueValue", "falseValue"), emits);
     const { id: _id, emitFormChange, emitFormInput, size, color, highlight, name, disabled, ariaAttrs } = useFormField(_props);
-    const id = _id.value ?? useId();
-    const attrs = useAttrs();
-    const forwardedAttrs = computed(() => {
+    const id = _id.value ?? vueExports.useId();
+    const attrs = vueExports.useAttrs();
+    const forwardedAttrs = vueExports.computed(() => {
       const { "data-state": _, ...rest } = attrs;
       return rest;
     });
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.checkbox || {} })({
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.checkbox || {} })({
       size: size.value ?? props.size,
       color: color.value ?? props.color,
       variant: props.variant,
@@ -4545,54 +4529,54 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       emitFormInput();
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: !unref(props).variant || unref(props).variant === "list" ? unref(props).as : unref(Label_default),
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: !vueExports.unref(props).variant || vueExports.unref(props).variant === "list" ? vueExports.unref(props).as : vueExports.unref(Label_default),
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div data-slot="container" class="${ssrRenderClass(ui.value.container({ class: unref(props).ui?.container }))}"${_scopeId}>`);
-            _push2(ssrRenderComponent(unref(CheckboxRoot_default), mergeProps({ id: unref(id) }, { ...unref(rootProps), ...forwardedAttrs.value, ...unref(ariaAttrs) }, {
-              name: unref(name),
-              disabled: unref(disabled),
+            _push2(`<div data-slot="container" class="${ssrRenderClass_1(ui.value.container({ class: vueExports.unref(props).ui?.container }))}"${_scopeId}>`);
+            _push2(ssrRenderComponent_1(vueExports.unref(CheckboxRoot_default), vueExports.mergeProps({ id: vueExports.unref(id) }, { ...vueExports.unref(rootProps), ...forwardedAttrs.value, ...vueExports.unref(ariaAttrs) }, {
+              name: vueExports.unref(name),
+              disabled: vueExports.unref(disabled),
               "data-slot": "base",
-              class: ui.value.base({ class: unref(props).ui?.base }),
+              class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
               "onUpdate:modelValue": onUpdate
             }), {
-              default: withCtx(({ state }, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx(({ state }, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(CheckboxIndicator_default), {
+                  _push3(ssrRenderComponent_1(vueExports.unref(CheckboxIndicator_default), {
                     "data-slot": "indicator",
-                    class: ui.value.indicator({ class: unref(props).ui?.indicator })
+                    class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator })
                   }, {
-                    default: withCtx((_2, _push4, _parent4, _scopeId3) => {
+                    default: vueExports.withCtx((_2, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         if (state === "indeterminate") {
-                          _push4(ssrRenderComponent(_sfc_main$d$1, {
-                            name: unref(props).indeterminateIcon || unref(appConfig).ui.icons.minus,
+                          _push4(ssrRenderComponent_1(_sfc_main$d$1, {
+                            name: vueExports.unref(props).indeterminateIcon || vueExports.unref(appConfig).ui.icons.minus,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon })
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                           }, null, _parent4, _scopeId3));
                         } else {
-                          _push4(ssrRenderComponent(_sfc_main$d$1, {
-                            name: unref(props).icon || unref(appConfig).ui.icons.check,
+                          _push4(ssrRenderComponent_1(_sfc_main$d$1, {
+                            name: vueExports.unref(props).icon || vueExports.unref(appConfig).ui.icons.check,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon })
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                           }, null, _parent4, _scopeId3));
                         }
                       } else {
                         return [
-                          state === "indeterminate" ? (openBlock(), createBlock(_sfc_main$d$1, {
+                          state === "indeterminate" ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                             key: 0,
-                            name: unref(props).indeterminateIcon || unref(appConfig).ui.icons.minus,
+                            name: vueExports.unref(props).indeterminateIcon || vueExports.unref(appConfig).ui.icons.minus,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon })
-                          }, null, 8, ["name", "class"])) : (openBlock(), createBlock(_sfc_main$d$1, {
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
+                          }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                             key: 1,
-                            name: unref(props).icon || unref(appConfig).ui.icons.check,
+                            name: vueExports.unref(props).icon || vueExports.unref(appConfig).ui.icons.check,
                             "data-slot": "icon",
-                            class: ui.value.icon({ class: unref(props).ui?.icon })
+                            class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                           }, null, 8, ["name", "class"]))
                         ];
                       }
@@ -4601,21 +4585,21 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(CheckboxIndicator_default), {
+                    vueExports.createVNode(vueExports.unref(CheckboxIndicator_default), {
                       "data-slot": "indicator",
-                      class: ui.value.indicator({ class: unref(props).ui?.indicator })
+                      class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator })
                     }, {
-                      default: withCtx(() => [
-                        state === "indeterminate" ? (openBlock(), createBlock(_sfc_main$d$1, {
+                      default: vueExports.withCtx(() => [
+                        state === "indeterminate" ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                           key: 0,
-                          name: unref(props).indeterminateIcon || unref(appConfig).ui.icons.minus,
+                          name: vueExports.unref(props).indeterminateIcon || vueExports.unref(appConfig).ui.icons.minus,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon })
-                        }, null, 8, ["name", "class"])) : (openBlock(), createBlock(_sfc_main$d$1, {
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
+                        }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                           key: 1,
-                          name: unref(props).icon || unref(appConfig).ui.icons.check,
+                          name: vueExports.unref(props).icon || vueExports.unref(appConfig).ui.icons.check,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon })
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                         }, null, 8, ["name", "class"]))
                       ]),
                       _: 2
@@ -4626,27 +4610,27 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               _: 1
             }, _parent2, _scopeId));
             _push2(`</div>`);
-            if (unref(props).label || !!slots.label || (unref(props).description || !!slots.description)) {
-              _push2(`<div data-slot="wrapper" class="${ssrRenderClass(ui.value.wrapper({ class: unref(props).ui?.wrapper }))}"${_scopeId}>`);
-              if (unref(props).label || !!slots.label) {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(!unref(props).variant || unref(props).variant === "list" ? unref(Label_default) : "p"), {
-                  for: unref(id),
+            if (vueExports.unref(props).label || !!slots.label || (vueExports.unref(props).description || !!slots.description)) {
+              _push2(`<div data-slot="wrapper" class="${ssrRenderClass_1(ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper }))}"${_scopeId}>`);
+              if (vueExports.unref(props).label || !!slots.label) {
+                ssrRenderVNode(_push2, vueExports.createVNode(vueExports.resolveDynamicComponent(!vueExports.unref(props).variant || vueExports.unref(props).variant === "list" ? vueExports.unref(Label_default) : "p"), {
+                  for: vueExports.unref(id),
                   "data-slot": "label",
-                  class: ui.value.label({ class: unref(props).ui?.label })
+                  class: ui.value.label({ class: vueExports.unref(props).ui?.label })
                 }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      ssrRenderSlot(_ctx.$slots, "label", {
-                        label: unref(props).label
+                      ssrRenderSlot_1(_ctx.$slots, "label", {
+                        label: vueExports.unref(props).label
                       }, () => {
-                        _push3(`${ssrInterpolate(unref(props).label)}`);
+                        _push3(`${ssrInterpolate_1(vueExports.unref(props).label)}`);
                       }, _push3, _parent3, _scopeId2);
                     } else {
                       return [
-                        renderSlot(_ctx.$slots, "label", {
-                          label: unref(props).label
+                        vueExports.renderSlot(_ctx.$slots, "label", {
+                          label: vueExports.unref(props).label
                         }, () => [
-                          createTextVNode(toDisplayString(unref(props).label), 1)
+                          vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).label), 1)
                         ])
                       ];
                     }
@@ -4656,12 +4640,12 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
               } else {
                 _push2(`<!---->`);
               }
-              if (unref(props).description || !!slots.description) {
-                _push2(`<p data-slot="description" class="${ssrRenderClass(ui.value.description({ class: unref(props).ui?.description }))}"${_scopeId}>`);
-                ssrRenderSlot(_ctx.$slots, "description", {
-                  description: unref(props).description
+              if (vueExports.unref(props).description || !!slots.description) {
+                _push2(`<p data-slot="description" class="${ssrRenderClass_1(ui.value.description({ class: vueExports.unref(props).ui?.description }))}"${_scopeId}>`);
+                ssrRenderSlot_1(_ctx.$slots, "description", {
+                  description: vueExports.unref(props).description
                 }, () => {
-                  _push2(`${ssrInterpolate(unref(props).description)}`);
+                  _push2(`${ssrInterpolate_1(vueExports.unref(props).description)}`);
                 }, _push2, _parent2, _scopeId);
                 _push2(`</p>`);
               } else {
@@ -4673,33 +4657,33 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             }
           } else {
             return [
-              createVNode("div", {
+              vueExports.createVNode("div", {
                 "data-slot": "container",
-                class: ui.value.container({ class: unref(props).ui?.container })
+                class: ui.value.container({ class: vueExports.unref(props).ui?.container })
               }, [
-                createVNode(unref(CheckboxRoot_default), mergeProps({ id: unref(id) }, { ...unref(rootProps), ...forwardedAttrs.value, ...unref(ariaAttrs) }, {
-                  name: unref(name),
-                  disabled: unref(disabled),
+                vueExports.createVNode(vueExports.unref(CheckboxRoot_default), vueExports.mergeProps({ id: vueExports.unref(id) }, { ...vueExports.unref(rootProps), ...forwardedAttrs.value, ...vueExports.unref(ariaAttrs) }, {
+                  name: vueExports.unref(name),
+                  disabled: vueExports.unref(disabled),
                   "data-slot": "base",
-                  class: ui.value.base({ class: unref(props).ui?.base }),
+                  class: ui.value.base({ class: vueExports.unref(props).ui?.base }),
                   "onUpdate:modelValue": onUpdate
                 }), {
-                  default: withCtx(({ state }) => [
-                    createVNode(unref(CheckboxIndicator_default), {
+                  default: vueExports.withCtx(({ state }) => [
+                    vueExports.createVNode(vueExports.unref(CheckboxIndicator_default), {
                       "data-slot": "indicator",
-                      class: ui.value.indicator({ class: unref(props).ui?.indicator })
+                      class: ui.value.indicator({ class: vueExports.unref(props).ui?.indicator })
                     }, {
-                      default: withCtx(() => [
-                        state === "indeterminate" ? (openBlock(), createBlock(_sfc_main$d$1, {
+                      default: vueExports.withCtx(() => [
+                        state === "indeterminate" ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                           key: 0,
-                          name: unref(props).indeterminateIcon || unref(appConfig).ui.icons.minus,
+                          name: vueExports.unref(props).indeterminateIcon || vueExports.unref(appConfig).ui.icons.minus,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon })
-                        }, null, 8, ["name", "class"])) : (openBlock(), createBlock(_sfc_main$d$1, {
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
+                        }, null, 8, ["name", "class"])) : (vueExports.openBlock(), vueExports.createBlock(_sfc_main$d$1, {
                           key: 1,
-                          name: unref(props).icon || unref(appConfig).ui.icons.check,
+                          name: vueExports.unref(props).icon || vueExports.unref(appConfig).ui.icons.check,
                           "data-slot": "icon",
-                          class: ui.value.icon({ class: unref(props).ui?.icon })
+                          class: ui.value.icon({ class: vueExports.unref(props).ui?.icon })
                         }, null, 8, ["name", "class"]))
                       ]),
                       _: 2
@@ -4708,38 +4692,38 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
                   _: 1
                 }, 16, ["id", "name", "disabled", "class"])
               ], 2),
-              unref(props).label || !!slots.label || (unref(props).description || !!slots.description) ? (openBlock(), createBlock("div", {
+              vueExports.unref(props).label || !!slots.label || (vueExports.unref(props).description || !!slots.description) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                 key: 0,
                 "data-slot": "wrapper",
-                class: ui.value.wrapper({ class: unref(props).ui?.wrapper })
+                class: ui.value.wrapper({ class: vueExports.unref(props).ui?.wrapper })
               }, [
-                unref(props).label || !!slots.label ? (openBlock(), createBlock(resolveDynamicComponent(!unref(props).variant || unref(props).variant === "list" ? unref(Label_default) : "p"), {
+                vueExports.unref(props).label || !!slots.label ? (vueExports.openBlock(), vueExports.createBlock(vueExports.resolveDynamicComponent(!vueExports.unref(props).variant || vueExports.unref(props).variant === "list" ? vueExports.unref(Label_default) : "p"), {
                   key: 0,
-                  for: unref(id),
+                  for: vueExports.unref(id),
                   "data-slot": "label",
-                  class: ui.value.label({ class: unref(props).ui?.label })
+                  class: ui.value.label({ class: vueExports.unref(props).ui?.label })
                 }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "label", {
-                      label: unref(props).label
+                  default: vueExports.withCtx(() => [
+                    vueExports.renderSlot(_ctx.$slots, "label", {
+                      label: vueExports.unref(props).label
                     }, () => [
-                      createTextVNode(toDisplayString(unref(props).label), 1)
+                      vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).label), 1)
                     ])
                   ]),
                   _: 3
-                }, 8, ["for", "class"])) : createCommentVNode("", true),
-                unref(props).description || !!slots.description ? (openBlock(), createBlock("p", {
+                }, 8, ["for", "class"])) : vueExports.createCommentVNode("", true),
+                vueExports.unref(props).description || !!slots.description ? (vueExports.openBlock(), vueExports.createBlock("p", {
                   key: 1,
                   "data-slot": "description",
-                  class: ui.value.description({ class: unref(props).ui?.description })
+                  class: ui.value.description({ class: vueExports.unref(props).ui?.description })
                 }, [
-                  renderSlot(_ctx.$slots, "description", {
-                    description: unref(props).description
+                  vueExports.renderSlot(_ctx.$slots, "description", {
+                    description: vueExports.unref(props).description
                   }, () => [
-                    createTextVNode(toDisplayString(unref(props).description), 1)
+                    vueExports.createTextVNode(vueExports.toDisplayString(vueExports.unref(props).description), 1)
                   ])
-                ], 2)) : createCommentVNode("", true)
-              ], 2)) : createCommentVNode("", true)
+                ], 2)) : vueExports.createCommentVNode("", true)
+              ], 2)) : vueExports.createCommentVNode("", true)
             ];
           }
         }),
@@ -4750,7 +4734,7 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
 });
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Checkbox.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
@@ -4905,7 +4889,7 @@ const theme = {
 const _sfc_main$3 = {
   __name: "USlider",
   __ssrInlineRender: true,
-  props: /* @__PURE__ */ mergeModels({
+  props: /* @__PURE__ */ vueExports.mergeModels({
     as: { type: null, required: false },
     size: { type: null, required: false },
     color: { type: null, required: false },
@@ -4925,22 +4909,22 @@ const _sfc_main$3 = {
     "modelValue": { type: null },
     "modelModifiers": {}
   }),
-  emits: /* @__PURE__ */ mergeModels(["change"], ["update:modelValue"]),
+  emits: /* @__PURE__ */ vueExports.mergeModels(["change"], ["update:modelValue"]),
   setup(__props, { emit: __emit }) {
     const _props = __props;
     const emits = __emit;
     const props = useComponentProps("slider", _props);
-    const modelValue = useModel(__props, "modelValue");
+    const modelValue = vueExports.useModel(__props, "modelValue");
     const appConfig = useAppConfig();
     const rootProps = useForwardProps(reactivePick(props, "as", "orientation", "min", "max", "step", "minStepsBetweenThumbs", "inverted"), emits);
     const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField(_props);
-    const defaultSliderValue = computed(() => {
+    const defaultSliderValue = vueExports.computed(() => {
       if (typeof props.defaultValue === "number") {
         return [props.defaultValue];
       }
       return props.defaultValue;
     });
-    const sliderValue = computed({
+    const sliderValue = vueExports.computed({
       get() {
         if (typeof modelValue.value === "number") {
           return [modelValue.value];
@@ -4951,8 +4935,8 @@ const _sfc_main$3 = {
         modelValue.value = value?.length !== 1 ? value : value[0];
       }
     });
-    const thumbs = computed(() => sliderValue.value?.length ?? 1);
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.slider || {} })({
+    const thumbs = vueExports.computed(() => sliderValue.value?.length ?? 1);
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.slider || {} })({
       disabled: disabled.value,
       size: size.value ?? props.size,
       color: color.value ?? props.color,
@@ -4964,34 +4948,34 @@ const _sfc_main$3 = {
       emitFormChange();
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(SliderRoot_default), mergeProps({ ...unref(rootProps), ...unref(ariaAttrs) }, {
-        id: unref(id),
+      _push(ssrRenderComponent_1(vueExports.unref(SliderRoot_default), vueExports.mergeProps({ ...vueExports.unref(rootProps), ...vueExports.unref(ariaAttrs) }, {
+        id: vueExports.unref(id),
         modelValue: sliderValue.value,
-        "onUpdate:modelValue": [($event) => sliderValue.value = $event, ($event) => unref(emitFormInput)()],
-        name: unref(name),
-        disabled: unref(disabled),
+        "onUpdate:modelValue": [($event) => sliderValue.value = $event, ($event) => vueExports.unref(emitFormInput)()],
+        name: vueExports.unref(name),
+        disabled: vueExports.unref(disabled),
         "data-slot": "root",
-        class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] }),
+        class: ui.value.root({ class: [vueExports.unref(props).ui?.root, vueExports.unref(props).class] }),
         "default-value": defaultSliderValue.value,
         onValueCommit: onChange
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(unref(SliderTrack_default), {
+            _push2(ssrRenderComponent_1(vueExports.unref(SliderTrack_default), {
               "data-slot": "track",
-              class: ui.value.track({ class: unref(props).ui?.track })
+              class: ui.value.track({ class: vueExports.unref(props).ui?.track })
             }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(SliderRange_default), {
+                  _push3(ssrRenderComponent_1(vueExports.unref(SliderRange_default), {
                     "data-slot": "range",
-                    class: ui.value.range({ class: unref(props).ui?.range })
+                    class: ui.value.range({ class: vueExports.unref(props).ui?.range })
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(SliderRange_default), {
+                    vueExports.createVNode(vueExports.unref(SliderRange_default), {
                       "data-slot": "range",
-                      class: ui.value.range({ class: unref(props).ui?.range })
+                      class: ui.value.range({ class: vueExports.unref(props).ui?.range })
                     }, null, 8, ["class"])
                   ];
                 }
@@ -4999,25 +4983,25 @@ const _sfc_main$3 = {
               _: 1
             }, _parent2, _scopeId));
             _push2(`<!--[-->`);
-            ssrRenderList(thumbs.value, (thumb) => {
+            ssrRenderList_1(thumbs.value, (thumb) => {
               _push2(`<!--[-->`);
-              if (!!unref(props).tooltip) {
-                _push2(ssrRenderComponent(_sfc_main$g, mergeProps({
+              if (!!vueExports.unref(props).tooltip) {
+                _push2(ssrRenderComponent_1(_sfc_main$g, vueExports.mergeProps({
                   text: thumbs.value > 1 ? String(sliderValue.value?.[thumb - 1]) : String(sliderValue.value),
                   "disable-closing-trigger": ""
-                }, { ref_for: true }, typeof unref(props).tooltip === "object" ? unref(props).tooltip : {}), {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                }, { ref_for: true }, typeof vueExports.unref(props).tooltip === "object" ? vueExports.unref(props).tooltip : {}), {
+                  default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(ssrRenderComponent(unref(SliderThumb_default), {
+                      _push3(ssrRenderComponent_1(vueExports.unref(SliderThumb_default), {
                         "data-slot": "thumb",
-                        class: ui.value.thumb({ class: unref(props).ui?.thumb }),
+                        class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb }),
                         "aria-label": thumbs.value === 1 ? "Thumb" : `Thumb ${thumb} of ${thumbs.value}`
                       }, null, _parent3, _scopeId2));
                     } else {
                       return [
-                        createVNode(unref(SliderThumb_default), {
+                        vueExports.createVNode(vueExports.unref(SliderThumb_default), {
                           "data-slot": "thumb",
-                          class: ui.value.thumb({ class: unref(props).ui?.thumb }),
+                          class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb }),
                           "aria-label": thumbs.value === 1 ? "Thumb" : `Thumb ${thumb} of ${thumbs.value}`
                         }, null, 8, ["class", "aria-label"])
                       ];
@@ -5026,9 +5010,9 @@ const _sfc_main$3 = {
                   _: 2
                 }, _parent2, _scopeId));
               } else {
-                _push2(ssrRenderComponent(unref(SliderThumb_default), {
+                _push2(ssrRenderComponent_1(vueExports.unref(SliderThumb_default), {
                   "data-slot": "thumb",
-                  class: ui.value.thumb({ class: unref(props).ui?.thumb }),
+                  class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb }),
                   "aria-label": thumbs.value === 1 ? "Thumb" : `Thumb ${thumb} of ${thumbs.value}`
                 }, null, _parent2, _scopeId));
               }
@@ -5037,37 +5021,37 @@ const _sfc_main$3 = {
             _push2(`<!--]-->`);
           } else {
             return [
-              createVNode(unref(SliderTrack_default), {
+              vueExports.createVNode(vueExports.unref(SliderTrack_default), {
                 "data-slot": "track",
-                class: ui.value.track({ class: unref(props).ui?.track })
+                class: ui.value.track({ class: vueExports.unref(props).ui?.track })
               }, {
-                default: withCtx(() => [
-                  createVNode(unref(SliderRange_default), {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(vueExports.unref(SliderRange_default), {
                     "data-slot": "range",
-                    class: ui.value.range({ class: unref(props).ui?.range })
+                    class: ui.value.range({ class: vueExports.unref(props).ui?.range })
                   }, null, 8, ["class"])
                 ]),
                 _: 1
               }, 8, ["class"]),
-              (openBlock(true), createBlock(Fragment, null, renderList(thumbs.value, (thumb) => {
-                return openBlock(), createBlock(Fragment, { key: thumb }, [
-                  !!unref(props).tooltip ? (openBlock(), createBlock(_sfc_main$g, mergeProps({
+              (vueExports.openBlock(true), vueExports.createBlock(vueExports.Fragment, null, vueExports.renderList(thumbs.value, (thumb) => {
+                return vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: thumb }, [
+                  !!vueExports.unref(props).tooltip ? (vueExports.openBlock(), vueExports.createBlock(_sfc_main$g, vueExports.mergeProps({
                     key: 0,
                     text: thumbs.value > 1 ? String(sliderValue.value?.[thumb - 1]) : String(sliderValue.value),
                     "disable-closing-trigger": ""
-                  }, { ref_for: true }, typeof unref(props).tooltip === "object" ? unref(props).tooltip : {}), {
-                    default: withCtx(() => [
-                      createVNode(unref(SliderThumb_default), {
+                  }, { ref_for: true }, typeof vueExports.unref(props).tooltip === "object" ? vueExports.unref(props).tooltip : {}), {
+                    default: vueExports.withCtx(() => [
+                      vueExports.createVNode(vueExports.unref(SliderThumb_default), {
                         "data-slot": "thumb",
-                        class: ui.value.thumb({ class: unref(props).ui?.thumb }),
+                        class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb }),
                         "aria-label": thumbs.value === 1 ? "Thumb" : `Thumb ${thumb} of ${thumbs.value}`
                       }, null, 8, ["class", "aria-label"])
                     ]),
                     _: 2
-                  }, 1040, ["text"])) : (openBlock(), createBlock(unref(SliderThumb_default), {
+                  }, 1040, ["text"])) : (vueExports.openBlock(), vueExports.createBlock(vueExports.unref(SliderThumb_default), {
                     key: 1,
                     "data-slot": "thumb",
-                    class: ui.value.thumb({ class: unref(props).ui?.thumb }),
+                    class: ui.value.thumb({ class: vueExports.unref(props).ui?.thumb }),
                     "aria-label": thumbs.value === 1 ? "Thumb" : `Thumb ${thumb} of ${thumbs.value}`
                   }, null, 8, ["class", "aria-label"]))
                 ], 64);
@@ -5082,11 +5066,11 @@ const _sfc_main$3 = {
 };
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/Slider.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+const _sfc_main$2 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "ButtonStyleModal",
   __ssrInlineRender: true,
   props: {
@@ -5098,8 +5082,8 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit = __emit;
-    const local = ref({ ...props.modelValue });
-    watch(
+    const local = vueExports.ref({ ...props.modelValue });
+    vueExports.watch(
       () => props.modelValue,
       (val) => {
         local.value = { ...val };
@@ -5131,8 +5115,8 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       { label: "Large", value: "lg" }
     ];
     const { resolvePrimary, resolveSecondary } = useActivePalette();
-    const primaryColor = computed(() => resolvePrimary(null));
-    const secondaryColor = computed(() => resolveSecondary(null));
+    const primaryColor = vueExports.computed(() => resolvePrimary(null));
+    const secondaryColor = vueExports.computed(() => resolveSecondary(null));
     function hexLuminance(hex) {
       const h = hex.replace("#", "");
       const r = parseInt(h.slice(0, 2), 16) / 255;
@@ -5141,7 +5125,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       const toLinear = (c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
       return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
     }
-    const radiusClass = computed(() => {
+    const radiusClass = vueExports.computed(() => {
       const r = local.value.radius;
       if (r === "none") return "rounded-none";
       if (r === "sm") return "rounded-sm";
@@ -5149,20 +5133,20 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       if (r === "full") return "rounded-full";
       return "rounded-md";
     });
-    const sizeClass = computed(() => {
+    const sizeClass = vueExports.computed(() => {
       const s = local.value.size;
       if (s === "xs") return { text: "text-xs", pad: "px-2 py-0.5" };
       if (s === "md") return { text: "text-base", pad: "px-4 py-2" };
       if (s === "lg") return { text: "text-lg", pad: "px-5 py-2.5" };
       return { text: "text-sm", pad: "px-3 py-1.5" };
     });
-    const textTransformStyle = computed(
+    const textTransformStyle = vueExports.computed(
       () => local.value.uppercase ? { textTransform: "uppercase" } : {}
     );
-    const letterSpacingStyle = computed(
+    const letterSpacingStyle = vueExports.computed(
       () => local.value.letterSpacing > 0 ? { letterSpacing: `${(local.value.letterSpacing * 0.0625).toFixed(4)}em` } : {}
     );
-    const sharedTextStyle = computed(() => ({
+    const sharedTextStyle = vueExports.computed(() => ({
       ...textTransformStyle.value,
       ...letterSpacingStyle.value
     }));
@@ -5186,186 +5170,186 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       if (variant === "link") return { color };
       return { color, backgroundColor: "transparent" };
     }
-    const gapStyle = computed(() => ({ gap: `${local.value.spacing}px` }));
+    const gapStyle = vueExports.computed(() => ({ gap: `${local.value.spacing}px` }));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UModal = _sfc_main$j;
       const _component_USelect = _sfc_main$1$2;
       const _component_USlider = _sfc_main$3;
       const _component_USwitch = _sfc_main$2$1;
-      _push(ssrRenderComponent(_component_UModal, mergeProps({
+      _push(ssrRenderComponent_1(_component_UModal, vueExports.mergeProps({
         open: __props.open,
         title: __props.label ? `Customize ${__props.label}` : "Customize button style",
         ui: { content: "max-w-2xl" },
         "onUpdate:open": ($event) => emit("update:open", $event)
       }, _attrs), {
-        body: withCtx((_, _push2, _parent2, _scopeId) => {
+        body: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex gap-6"${_scopeId}><div class="flex flex-col gap-4 w-48 shrink-0"${_scopeId}><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Style</label>`);
-            _push2(ssrRenderComponent(_component_USelect, {
-              "model-value": unref(local).variant,
+            _push2(ssrRenderComponent_1(_component_USelect, {
+              "model-value": vueExports.unref(local).variant,
               items: VARIANT_OPTIONS,
               size: "sm",
               "onUpdate:modelValue": ($event) => update("variant", $event)
             }, null, _parent2, _scopeId));
             _push2(`</div><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Corner radius</label>`);
-            _push2(ssrRenderComponent(_component_USelect, {
-              "model-value": unref(local).radius,
+            _push2(ssrRenderComponent_1(_component_USelect, {
+              "model-value": vueExports.unref(local).radius,
               items: RADIUS_OPTIONS,
               size: "sm",
               "onUpdate:modelValue": ($event) => update("radius", $event)
             }, null, _parent2, _scopeId));
             _push2(`</div><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Size</label>`);
-            _push2(ssrRenderComponent(_component_USelect, {
-              "model-value": unref(local).size,
+            _push2(ssrRenderComponent_1(_component_USelect, {
+              "model-value": vueExports.unref(local).size,
               items: SIZE_OPTIONS,
               size: "sm",
               "onUpdate:modelValue": ($event) => update("size", $event)
             }, null, _parent2, _scopeId));
             _push2(`</div><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Spacing</label><div class="flex items-center gap-2"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_USlider, {
-              "model-value": unref(local).spacing,
+            _push2(ssrRenderComponent_1(_component_USlider, {
+              "model-value": vueExports.unref(local).spacing,
               min: 0,
               max: 32,
               step: 1,
               class: "flex-1",
               "onUpdate:modelValue": ($event) => update("spacing", $event ?? 0)
             }, null, _parent2, _scopeId));
-            _push2(`<span class="text-xs text-muted w-8 text-right tabular-nums"${_scopeId}>${ssrInterpolate(unref(local).spacing)}px</span></div></div><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Letter spacing</label><div class="flex items-center gap-2"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_USlider, {
-              "model-value": unref(local).letterSpacing,
+            _push2(`<span class="text-xs text-muted w-8 text-right tabular-nums"${_scopeId}>${ssrInterpolate_1(vueExports.unref(local).spacing)}px</span></div></div><div class="flex flex-col gap-1"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Letter spacing</label><div class="flex items-center gap-2"${_scopeId}>`);
+            _push2(ssrRenderComponent_1(_component_USlider, {
+              "model-value": vueExports.unref(local).letterSpacing,
               min: 0,
               max: 8,
               step: 0.5,
               class: "flex-1",
               "onUpdate:modelValue": ($event) => update("letterSpacing", $event ?? 0)
             }, null, _parent2, _scopeId));
-            _push2(`<span class="text-xs text-muted w-8 text-right tabular-nums"${_scopeId}>${ssrInterpolate(unref(local).letterSpacing)}px</span></div></div><div class="flex items-center justify-between"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Uppercase</label>`);
-            _push2(ssrRenderComponent(_component_USwitch, {
-              "model-value": unref(local).uppercase,
+            _push2(`<span class="text-xs text-muted w-8 text-right tabular-nums"${_scopeId}>${ssrInterpolate_1(vueExports.unref(local).letterSpacing)}px</span></div></div><div class="flex items-center justify-between"${_scopeId}><label class="text-xs text-muted"${_scopeId}>Uppercase</label>`);
+            _push2(ssrRenderComponent_1(_component_USwitch, {
+              "model-value": vueExports.unref(local).uppercase,
               size: "sm",
               "onUpdate:modelValue": ($event) => update("uppercase", $event)
             }, null, _parent2, _scopeId));
-            _push2(`</div></div><div class="flex-1 flex flex-col gap-3 justify-center items-center rounded-lg bg-elevated p-6 min-h-40"${_scopeId}><p class="text-xs text-muted mb-1"${_scopeId}>Preview</p><div class="flex items-center flex-wrap justify-center" style="${ssrRenderStyle(unref(gapStyle))}"${_scopeId}>`);
-            if (unref(local).variant !== "link") {
-              _push2(`<!--[--><button class="${ssrRenderClass(previewClass(unref(local).variant))}" style="${ssrRenderStyle({ ...previewStyle(unref(local).variant, unref(primaryColor)), ...unref(sharedTextStyle) })}"${_scopeId}> Primary </button><button class="${ssrRenderClass(previewClass(unref(local).variant))}" style="${ssrRenderStyle({ ...previewStyle(unref(local).variant, unref(secondaryColor)), ...unref(sharedTextStyle) })}"${_scopeId}> Secondary </button><!--]-->`);
+            _push2(`</div></div><div class="flex-1 flex flex-col gap-3 justify-center items-center rounded-lg bg-elevated p-6 min-h-40"${_scopeId}><p class="text-xs text-muted mb-1"${_scopeId}>Preview</p><div class="flex items-center flex-wrap justify-center" style="${ssrRenderStyle_1(vueExports.unref(gapStyle))}"${_scopeId}>`);
+            if (vueExports.unref(local).variant !== "link") {
+              _push2(`<!--[--><button class="${ssrRenderClass_1(previewClass(vueExports.unref(local).variant))}" style="${ssrRenderStyle_1({ ...previewStyle(vueExports.unref(local).variant, vueExports.unref(primaryColor)), ...vueExports.unref(sharedTextStyle) })}"${_scopeId}> Primary </button><button class="${ssrRenderClass_1(previewClass(vueExports.unref(local).variant))}" style="${ssrRenderStyle_1({ ...previewStyle(vueExports.unref(local).variant, vueExports.unref(secondaryColor)), ...vueExports.unref(sharedTextStyle) })}"${_scopeId}> Secondary </button><!--]-->`);
             } else {
-              _push2(`<!--[--><button class="${ssrRenderClass(previewClass("link"))}" style="${ssrRenderStyle({ color: unref(primaryColor), ...unref(sharedTextStyle) })}"${_scopeId}> Primary link </button><button class="${ssrRenderClass(previewClass("link"))}" style="${ssrRenderStyle({ color: unref(secondaryColor), ...unref(sharedTextStyle) })}"${_scopeId}> Secondary link </button><!--]-->`);
+              _push2(`<!--[--><button class="${ssrRenderClass_1(previewClass("link"))}" style="${ssrRenderStyle_1({ color: vueExports.unref(primaryColor), ...vueExports.unref(sharedTextStyle) })}"${_scopeId}> Primary link </button><button class="${ssrRenderClass_1(previewClass("link"))}" style="${ssrRenderStyle_1({ color: vueExports.unref(secondaryColor), ...vueExports.unref(sharedTextStyle) })}"${_scopeId}> Secondary link </button><!--]-->`);
             }
             _push2(`</div>`);
-            if (unref(local).variant !== "link") {
-              _push2(`<div class="flex items-center flex-wrap justify-center mt-2" style="${ssrRenderStyle(unref(gapStyle))}"${_scopeId}><button class="${ssrRenderClass(previewClass(unref(local).variant))}" style="${ssrRenderStyle({ ...previewStyle(unref(local).variant, unref(primaryColor)), ...unref(sharedTextStyle) })}"${_scopeId}> Button A </button><button class="${ssrRenderClass(previewClass(unref(local).variant))}" style="${ssrRenderStyle({ ...previewStyle(unref(local).variant, unref(primaryColor)), ...unref(sharedTextStyle) })}"${_scopeId}> Button B </button></div>`);
+            if (vueExports.unref(local).variant !== "link") {
+              _push2(`<div class="flex items-center flex-wrap justify-center mt-2" style="${ssrRenderStyle_1(vueExports.unref(gapStyle))}"${_scopeId}><button class="${ssrRenderClass_1(previewClass(vueExports.unref(local).variant))}" style="${ssrRenderStyle_1({ ...previewStyle(vueExports.unref(local).variant, vueExports.unref(primaryColor)), ...vueExports.unref(sharedTextStyle) })}"${_scopeId}> Button A </button><button class="${ssrRenderClass_1(previewClass(vueExports.unref(local).variant))}" style="${ssrRenderStyle_1({ ...previewStyle(vueExports.unref(local).variant, vueExports.unref(primaryColor)), ...vueExports.unref(sharedTextStyle) })}"${_scopeId}> Button B </button></div>`);
             } else {
               _push2(`<!---->`);
             }
             _push2(`</div></div>`);
           } else {
             return [
-              createVNode("div", { class: "flex gap-6" }, [
-                createVNode("div", { class: "flex flex-col gap-4 w-48 shrink-0" }, [
-                  createVNode("div", { class: "flex flex-col gap-1" }, [
-                    createVNode("label", { class: "text-xs text-muted" }, "Style"),
-                    createVNode(_component_USelect, {
-                      "model-value": unref(local).variant,
+              vueExports.createVNode("div", { class: "flex gap-6" }, [
+                vueExports.createVNode("div", { class: "flex flex-col gap-4 w-48 shrink-0" }, [
+                  vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                    vueExports.createVNode("label", { class: "text-xs text-muted" }, "Style"),
+                    vueExports.createVNode(_component_USelect, {
+                      "model-value": vueExports.unref(local).variant,
                       items: VARIANT_OPTIONS,
                       size: "sm",
                       "onUpdate:modelValue": ($event) => update("variant", $event)
                     }, null, 8, ["model-value", "onUpdate:modelValue"])
                   ]),
-                  createVNode("div", { class: "flex flex-col gap-1" }, [
-                    createVNode("label", { class: "text-xs text-muted" }, "Corner radius"),
-                    createVNode(_component_USelect, {
-                      "model-value": unref(local).radius,
+                  vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                    vueExports.createVNode("label", { class: "text-xs text-muted" }, "Corner radius"),
+                    vueExports.createVNode(_component_USelect, {
+                      "model-value": vueExports.unref(local).radius,
                       items: RADIUS_OPTIONS,
                       size: "sm",
                       "onUpdate:modelValue": ($event) => update("radius", $event)
                     }, null, 8, ["model-value", "onUpdate:modelValue"])
                   ]),
-                  createVNode("div", { class: "flex flex-col gap-1" }, [
-                    createVNode("label", { class: "text-xs text-muted" }, "Size"),
-                    createVNode(_component_USelect, {
-                      "model-value": unref(local).size,
+                  vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                    vueExports.createVNode("label", { class: "text-xs text-muted" }, "Size"),
+                    vueExports.createVNode(_component_USelect, {
+                      "model-value": vueExports.unref(local).size,
                       items: SIZE_OPTIONS,
                       size: "sm",
                       "onUpdate:modelValue": ($event) => update("size", $event)
                     }, null, 8, ["model-value", "onUpdate:modelValue"])
                   ]),
-                  createVNode("div", { class: "flex flex-col gap-1" }, [
-                    createVNode("label", { class: "text-xs text-muted" }, "Spacing"),
-                    createVNode("div", { class: "flex items-center gap-2" }, [
-                      createVNode(_component_USlider, {
-                        "model-value": unref(local).spacing,
+                  vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                    vueExports.createVNode("label", { class: "text-xs text-muted" }, "Spacing"),
+                    vueExports.createVNode("div", { class: "flex items-center gap-2" }, [
+                      vueExports.createVNode(_component_USlider, {
+                        "model-value": vueExports.unref(local).spacing,
                         min: 0,
                         max: 32,
                         step: 1,
                         class: "flex-1",
                         "onUpdate:modelValue": ($event) => update("spacing", $event ?? 0)
                       }, null, 8, ["model-value", "onUpdate:modelValue"]),
-                      createVNode("span", { class: "text-xs text-muted w-8 text-right tabular-nums" }, toDisplayString(unref(local).spacing) + "px", 1)
+                      vueExports.createVNode("span", { class: "text-xs text-muted w-8 text-right tabular-nums" }, vueExports.toDisplayString(vueExports.unref(local).spacing) + "px", 1)
                     ])
                   ]),
-                  createVNode("div", { class: "flex flex-col gap-1" }, [
-                    createVNode("label", { class: "text-xs text-muted" }, "Letter spacing"),
-                    createVNode("div", { class: "flex items-center gap-2" }, [
-                      createVNode(_component_USlider, {
-                        "model-value": unref(local).letterSpacing,
+                  vueExports.createVNode("div", { class: "flex flex-col gap-1" }, [
+                    vueExports.createVNode("label", { class: "text-xs text-muted" }, "Letter spacing"),
+                    vueExports.createVNode("div", { class: "flex items-center gap-2" }, [
+                      vueExports.createVNode(_component_USlider, {
+                        "model-value": vueExports.unref(local).letterSpacing,
                         min: 0,
                         max: 8,
                         step: 0.5,
                         class: "flex-1",
                         "onUpdate:modelValue": ($event) => update("letterSpacing", $event ?? 0)
                       }, null, 8, ["model-value", "onUpdate:modelValue"]),
-                      createVNode("span", { class: "text-xs text-muted w-8 text-right tabular-nums" }, toDisplayString(unref(local).letterSpacing) + "px", 1)
+                      vueExports.createVNode("span", { class: "text-xs text-muted w-8 text-right tabular-nums" }, vueExports.toDisplayString(vueExports.unref(local).letterSpacing) + "px", 1)
                     ])
                   ]),
-                  createVNode("div", { class: "flex items-center justify-between" }, [
-                    createVNode("label", { class: "text-xs text-muted" }, "Uppercase"),
-                    createVNode(_component_USwitch, {
-                      "model-value": unref(local).uppercase,
+                  vueExports.createVNode("div", { class: "flex items-center justify-between" }, [
+                    vueExports.createVNode("label", { class: "text-xs text-muted" }, "Uppercase"),
+                    vueExports.createVNode(_component_USwitch, {
+                      "model-value": vueExports.unref(local).uppercase,
                       size: "sm",
                       "onUpdate:modelValue": ($event) => update("uppercase", $event)
                     }, null, 8, ["model-value", "onUpdate:modelValue"])
                   ])
                 ]),
-                createVNode("div", { class: "flex-1 flex flex-col gap-3 justify-center items-center rounded-lg bg-elevated p-6 min-h-40" }, [
-                  createVNode("p", { class: "text-xs text-muted mb-1" }, "Preview"),
-                  createVNode("div", {
+                vueExports.createVNode("div", { class: "flex-1 flex flex-col gap-3 justify-center items-center rounded-lg bg-elevated p-6 min-h-40" }, [
+                  vueExports.createVNode("p", { class: "text-xs text-muted mb-1" }, "Preview"),
+                  vueExports.createVNode("div", {
                     class: "flex items-center flex-wrap justify-center",
-                    style: unref(gapStyle)
+                    style: vueExports.unref(gapStyle)
                   }, [
-                    unref(local).variant !== "link" ? (openBlock(), createBlock(Fragment, { key: 0 }, [
-                      createVNode("button", {
-                        class: previewClass(unref(local).variant),
-                        style: { ...previewStyle(unref(local).variant, unref(primaryColor)), ...unref(sharedTextStyle) }
+                    vueExports.unref(local).variant !== "link" ? (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 0 }, [
+                      vueExports.createVNode("button", {
+                        class: previewClass(vueExports.unref(local).variant),
+                        style: { ...previewStyle(vueExports.unref(local).variant, vueExports.unref(primaryColor)), ...vueExports.unref(sharedTextStyle) }
                       }, " Primary ", 6),
-                      createVNode("button", {
-                        class: previewClass(unref(local).variant),
-                        style: { ...previewStyle(unref(local).variant, unref(secondaryColor)), ...unref(sharedTextStyle) }
+                      vueExports.createVNode("button", {
+                        class: previewClass(vueExports.unref(local).variant),
+                        style: { ...previewStyle(vueExports.unref(local).variant, vueExports.unref(secondaryColor)), ...vueExports.unref(sharedTextStyle) }
                       }, " Secondary ", 6)
-                    ], 64)) : (openBlock(), createBlock(Fragment, { key: 1 }, [
-                      createVNode("button", {
+                    ], 64)) : (vueExports.openBlock(), vueExports.createBlock(vueExports.Fragment, { key: 1 }, [
+                      vueExports.createVNode("button", {
                         class: previewClass("link"),
-                        style: { color: unref(primaryColor), ...unref(sharedTextStyle) }
+                        style: { color: vueExports.unref(primaryColor), ...vueExports.unref(sharedTextStyle) }
                       }, " Primary link ", 6),
-                      createVNode("button", {
+                      vueExports.createVNode("button", {
                         class: previewClass("link"),
-                        style: { color: unref(secondaryColor), ...unref(sharedTextStyle) }
+                        style: { color: vueExports.unref(secondaryColor), ...vueExports.unref(sharedTextStyle) }
                       }, " Secondary link ", 6)
                     ], 64))
                   ], 4),
-                  unref(local).variant !== "link" ? (openBlock(), createBlock("div", {
+                  vueExports.unref(local).variant !== "link" ? (vueExports.openBlock(), vueExports.createBlock("div", {
                     key: 0,
                     class: "flex items-center flex-wrap justify-center mt-2",
-                    style: unref(gapStyle)
+                    style: vueExports.unref(gapStyle)
                   }, [
-                    createVNode("button", {
-                      class: previewClass(unref(local).variant),
-                      style: { ...previewStyle(unref(local).variant, unref(primaryColor)), ...unref(sharedTextStyle) }
+                    vueExports.createVNode("button", {
+                      class: previewClass(vueExports.unref(local).variant),
+                      style: { ...previewStyle(vueExports.unref(local).variant, vueExports.unref(primaryColor)), ...vueExports.unref(sharedTextStyle) }
                     }, " Button A ", 6),
-                    createVNode("button", {
-                      class: previewClass(unref(local).variant),
-                      style: { ...previewStyle(unref(local).variant, unref(primaryColor)), ...unref(sharedTextStyle) }
+                    vueExports.createVNode("button", {
+                      class: previewClass(vueExports.unref(local).variant),
+                      style: { ...previewStyle(vueExports.unref(local).variant, vueExports.unref(primaryColor)), ...vueExports.unref(sharedTextStyle) }
                     }, " Button B ", 6)
-                  ], 4)) : createCommentVNode("", true)
+                  ], 4)) : vueExports.createCommentVNode("", true)
                 ])
               ])
             ];
@@ -5378,24 +5362,24 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/ButtonStyleModal.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const __nuxt_component_12 = Object.assign(_sfc_main$2, { __name: "PagebuilderButtonStyleModal" });
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
   __name: "RightSidebar",
   __ssrInlineRender: true,
   setup(__props) {
     const { selectedBlock } = useSelectedBlock();
     const { setBlockContent, setBlockName, pendingContentEdits } = usePageEditor();
     const { collections } = useCollections();
-    const pickerFieldKey = ref(null);
-    const pickerOpen = ref(false);
-    const pickerImagesOnly = ref(true);
-    const buttonStyleFieldKey = ref(null);
-    const buttonStyleLabel = ref(void 0);
-    const buttonStyleOpen = ref(false);
+    const pickerFieldKey = vueExports.ref(null);
+    const pickerOpen = vueExports.ref(false);
+    const pickerImagesOnly = vueExports.ref(true);
+    const buttonStyleFieldKey = vueExports.ref(null);
+    const buttonStyleLabel = vueExports.ref(void 0);
+    const buttonStyleOpen = vueExports.ref(false);
     function openButtonStyleModal(key, label) {
       buttonStyleFieldKey.value = key;
       buttonStyleLabel.value = label;
@@ -5411,16 +5395,16 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       pickerOpen.value = false;
       pickerFieldKey.value = null;
     }
-    const editingName = ref(false);
-    const nameInput = ref("");
-    watch(selectedBlock, (block) => {
+    const editingName = vueExports.ref(false);
+    const nameInput = vueExports.ref("");
+    vueExports.watch(selectedBlock, (block) => {
       editingName.value = false;
       nameInput.value = block?.name ?? "";
     });
     function startEditingName() {
       nameInput.value = selectedBlock.value?.name ?? "";
       editingName.value = true;
-      nextTick(() => {
+      vueExports.nextTick(() => {
         (void 0).querySelector("#block-name-input")?.focus();
       });
     }
@@ -5430,21 +5414,21 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       setBlockName(selectedBlock.value.id, trimmed, selectedBlock.value);
       editingName.value = false;
     }
-    const definition = computed(
+    const definition = vueExports.computed(
       () => selectedBlock.value ? allBlockDefinitions.find((d) => d.type === selectedBlock.value.type) ?? null : null
     );
-    const hasTabs = computed(() => !!definition.value?.tabs?.length);
-    const tabItems = computed(
+    const hasTabs = vueExports.computed(() => !!definition.value?.tabs?.length);
+    const tabItems = vueExports.computed(
       () => definition.value?.tabs?.map((t) => ({ label: t.label, icon: t.icon })) ?? []
     );
-    const currentTab = ref("0");
-    watch(definition, () => {
+    const currentTab = vueExports.ref("0");
+    vueExports.watch(definition, () => {
       currentTab.value = "0";
     });
-    const localContent = ref({});
-    const localContentBlockId = ref(null);
+    const localContent = vueExports.ref({});
+    const localContentBlockId = vueExports.ref(null);
     let isApplyingLocal = false;
-    watch(
+    vueExports.watch(
       () => selectedBlock.value?.id,
       (id) => {
         const block = selectedBlock.value;
@@ -5459,7 +5443,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       },
       { immediate: true }
     );
-    watch(
+    vueExports.watch(
       () => selectedBlock.value?.content,
       (content) => {
         if (!selectedBlock.value) return;
@@ -5469,7 +5453,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       },
       { deep: true }
     );
-    watch(
+    vueExports.watch(
       () => selectedBlock.value && pendingContentEdits.value[selectedBlock.value.id],
       (pending) => {
         if (isApplyingLocal) return;
@@ -5479,7 +5463,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       },
       { deep: true }
     );
-    const activeSections = computed(() => {
+    const activeSections = vueExports.computed(() => {
       if (!definition.value) return [];
       if (hasTabs.value) {
         const idx = Number(currentTab.value);
@@ -5522,30 +5506,30 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       const _component_AdminMediaPickerModal = __nuxt_component_11;
       const _component_PagebuilderButtonStyleModal = __nuxt_component_12;
       _push(`<!--[--><div class="flex flex-col w-64 shrink-0 border-l border-default">`);
-      if (unref(selectedBlock) && unref(definition)) {
+      if (vueExports.unref(selectedBlock) && vueExports.unref(definition)) {
         _push(`<!--[--><div class="p-3 border-b border-default shrink-0 flex items-center gap-2 min-w-0">`);
-        _push(ssrRenderComponent(_component_UIcon, {
-          name: unref(definition).icon,
+        _push(ssrRenderComponent_1(_component_UIcon, {
+          name: vueExports.unref(definition).icon,
           class: "size-4 text-muted shrink-0"
         }, null, _parent));
         _push(`<div class="flex-1 min-w-0">`);
-        if (unref(editingName)) {
-          _push(ssrRenderComponent(_component_UInput, {
+        if (vueExports.unref(editingName)) {
+          _push(ssrRenderComponent_1(_component_UInput, {
             id: "block-name-input",
-            modelValue: unref(nameInput),
-            "onUpdate:modelValue": ($event) => isRef(nameInput) ? nameInput.value = $event : null,
+            modelValue: vueExports.unref(nameInput),
+            "onUpdate:modelValue": ($event) => vueExports.isRef(nameInput) ? nameInput.value = $event : null,
             size: "sm",
-            placeholder: unref(definition).label,
+            placeholder: vueExports.unref(definition).label,
             class: "w-full",
             onBlur: commitName,
             onKeydown: [commitName, ($event) => editingName.value = false]
           }, null, _parent));
         } else {
-          _push(`<!--[--><p class="text-sm font-medium truncate">${ssrInterpolate(unref(selectedBlock).name || unref(definition).label)}</p><p class="text-xs text-muted capitalize">${ssrInterpolate(unref(definition).type)}</p><!--]-->`);
+          _push(`<!--[--><p class="text-sm font-medium truncate">${ssrInterpolate_1(vueExports.unref(selectedBlock).name || vueExports.unref(definition).label)}</p><p class="text-xs text-muted capitalize">${ssrInterpolate_1(vueExports.unref(definition).type)}</p><!--]-->`);
         }
         _push(`</div>`);
-        if (!unref(selectedBlock).isMandatory) {
-          _push(ssrRenderComponent(_component_UButton, {
+        if (!vueExports.unref(selectedBlock).isMandatory) {
+          _push(ssrRenderComponent_1(_component_UButton, {
             icon: "i-lucide-pencil",
             color: "neutral",
             variant: "ghost",
@@ -5558,36 +5542,36 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
           _push(`<!---->`);
         }
         _push(`</div>`);
-        if (unref(hasTabs)) {
+        if (vueExports.unref(hasTabs)) {
           _push(`<div class="px-3 pt-2 shrink-0 flex gap-0.5"><!--[-->`);
-          ssrRenderList(unref(tabItems), (tab, i) => {
-            _push(ssrRenderComponent(_component_UTooltip, {
+          ssrRenderList_1(vueExports.unref(tabItems), (tab, i) => {
+            _push(ssrRenderComponent_1(_component_UTooltip, {
               key: i,
               text: tab.label,
               "delay-duration": 300
             }, {
-              default: withCtx((_, _push2, _parent2, _scopeId) => {
+              default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
                 if (_push2) {
-                  _push2(`<button type="button" class="${ssrRenderClass([
-                    unref(currentTab) === String(i) ? "bg-elevated text-highlighted" : "text-muted hover:text-highlighted hover:bg-elevated/60",
+                  _push2(`<button type="button" class="${ssrRenderClass_1([
+                    vueExports.unref(currentTab) === String(i) ? "bg-elevated text-highlighted" : "text-muted hover:text-highlighted hover:bg-elevated/60",
                     "flex items-center justify-center size-7 rounded transition-colors"
                   ])}"${_scopeId}>`);
-                  _push2(ssrRenderComponent(_component_UIcon, {
+                  _push2(ssrRenderComponent_1(_component_UIcon, {
                     name: tab.icon ?? "i-lucide-layout",
                     class: "size-3.5"
                   }, null, _parent2, _scopeId));
                   _push2(`</button>`);
                 } else {
                   return [
-                    createVNode("button", {
+                    vueExports.createVNode("button", {
                       type: "button",
                       class: [
                         "flex items-center justify-center size-7 rounded transition-colors",
-                        unref(currentTab) === String(i) ? "bg-elevated text-highlighted" : "text-muted hover:text-highlighted hover:bg-elevated/60"
+                        vueExports.unref(currentTab) === String(i) ? "bg-elevated text-highlighted" : "text-muted hover:text-highlighted hover:bg-elevated/60"
                       ],
                       onClick: ($event) => currentTab.value = String(i)
                     }, [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: tab.icon ?? "i-lucide-layout",
                         class: "size-3.5"
                       }, null, 8, ["name"])
@@ -5603,32 +5587,32 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
           _push(`<!---->`);
         }
         _push(`<div class="flex-1 overflow-y-auto p-3 flex flex-col gap-4"><!--[-->`);
-        ssrRenderList(unref(activeSections), (section, si) => {
+        ssrRenderList_1(vueExports.unref(activeSections), (section, si) => {
           _push(`<div class="flex flex-col gap-2">`);
           if (section.fields.filter(
             (f) => f.type !== "inline-text" && f.type !== "inline-rich" && fieldVisible(f)
           ).length) {
             _push(`<!--[-->`);
             if (section.label) {
-              _push(`<p class="text-xs font-semibold text-muted uppercase tracking-wide">${ssrInterpolate(section.label)}</p>`);
+              _push(`<p class="text-xs font-semibold text-muted uppercase tracking-wide">${ssrInterpolate_1(section.label)}</p>`);
             } else {
               _push(`<!---->`);
             }
             _push(`<!--[-->`);
-            ssrRenderList(section.fields.filter(
+            ssrRenderList_1(section.fields.filter(
               (f) => f.type !== "inline-text" && f.type !== "inline-rich" && fieldVisible(f)
             ), (field) => {
-              _push(`<div class="${ssrRenderClass([
+              _push(`<div class="${ssrRenderClass_1([
                 ["theme-color", "checkbox", "switch", "color"].includes(field.type) ? "items-center justify-between" : field.type === "slider" ? "flex-col gap-1" : "flex-col",
                 "flex gap-1"
-              ])}"><label class="text-xs text-muted">${ssrInterpolate(field.label)}</label>`);
+              ])}"><label class="text-xs text-muted">${ssrInterpolate_1(field.label)}</label>`);
               if (field.type === "image" || field.type === "file") {
                 _push(`<div class="flex flex-col gap-2">`);
                 if (getValue(field.key)) {
                   _push(`<!--[-->`);
                   if (field.type === "image") {
-                    _push(`<div class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted"><img${ssrRenderAttr("src", getValue(field.key))} alt="" class="w-full h-full object-cover">`);
-                    _push(ssrRenderComponent(_component_UButton, {
+                    _push(`<div class="relative rounded-md overflow-hidden border border-default aspect-video bg-muted"><img${ssrRenderAttr_1("src", getValue(field.key))} alt="" class="w-full h-full object-cover">`);
+                    _push(ssrRenderComponent_1(_component_UButton, {
                       icon: "i-lucide-x",
                       color: "neutral",
                       variant: "solid",
@@ -5640,12 +5624,12 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                     _push(`</div>`);
                   } else {
                     _push(`<div class="flex items-center gap-2 px-2 py-1.5 rounded-md border border-default bg-muted text-xs">`);
-                    _push(ssrRenderComponent(_component_UIcon, {
+                    _push(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-file",
                       class: "size-4 text-muted shrink-0"
                     }, null, _parent));
-                    _push(`<span class="flex-1 truncate min-w-0">${ssrInterpolate(getValue(field.key).split("/").at(-1))}</span>`);
-                    _push(ssrRenderComponent(_component_UButton, {
+                    _push(`<span class="flex-1 truncate min-w-0">${ssrInterpolate_1(getValue(field.key).split("/").at(-1))}</span>`);
+                    _push(ssrRenderComponent_1(_component_UButton, {
                       icon: "i-lucide-x",
                       color: "neutral",
                       variant: "ghost",
@@ -5660,7 +5644,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                 } else {
                   _push(`<!---->`);
                 }
-                _push(ssrRenderComponent(_component_UButton, {
+                _push(ssrRenderComponent_1(_component_UButton, {
                   icon: getValue(field.key) ? field.type === "image" ? "i-lucide-image" : "i-lucide-file" : "i-lucide-plus",
                   color: "neutral",
                   variant: "subtle",
@@ -5668,12 +5652,12 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   class: "w-full flex justify-center",
                   onClick: ($event) => openPicker(field.key, field.type === "image")
                 }, {
-                  default: withCtx((_, _push2, _parent2, _scopeId) => {
+                  default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
                     if (_push2) {
-                      _push2(`${ssrInterpolate(getValue(field.key) ? field.type === "image" ? "Change image" : "Change file" : field.type === "image" ? "Choose image" : "Choose file")}`);
+                      _push2(`${ssrInterpolate_1(getValue(field.key) ? field.type === "image" ? "Change image" : "Change file" : field.type === "image" ? "Choose image" : "Choose file")}`);
                     } else {
                       return [
-                        createTextVNode(toDisplayString(getValue(field.key) ? field.type === "image" ? "Change image" : "Change file" : field.type === "image" ? "Choose image" : "Choose file"), 1)
+                        vueExports.createTextVNode(vueExports.toDisplayString(getValue(field.key) ? field.type === "image" ? "Change image" : "Change file" : field.type === "image" ? "Choose image" : "Choose file"), 1)
                       ];
                     }
                   }),
@@ -5681,12 +5665,12 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                 }, _parent));
                 _push(`</div>`);
               } else if (field.type === "theme-color") {
-                _push(ssrRenderComponent(_component_PagebuilderThemeColorPicker, {
+                _push(ssrRenderComponent_1(_component_PagebuilderThemeColorPicker, {
                   "model-value": getValue(field.key) ?? null,
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
               } else if (field.type === "button-style") {
-                _push(ssrRenderComponent(_component_UButton, {
+                _push(ssrRenderComponent_1(_component_UButton, {
                   color: "neutral",
                   variant: "subtle",
                   size: "xs",
@@ -5694,26 +5678,26 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   class: "w-full flex justify-center",
                   onClick: ($event) => openButtonStyleModal(field.key, field.label)
                 }, {
-                  default: withCtx((_, _push2, _parent2, _scopeId) => {
+                  default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
                     if (_push2) {
                       _push2(` Customize button `);
                     } else {
                       return [
-                        createTextVNode(" Customize button ")
+                        vueExports.createTextVNode(" Customize button ")
                       ];
                     }
                   }),
                   _: 2
                 }, _parent));
               } else if (field.type === "list") {
-                _push(ssrRenderComponent(_component_PagebuilderListFieldEditor, {
+                _push(ssrRenderComponent_1(_component_PagebuilderListFieldEditor, {
                   field,
                   "model-value": getValue(field.key) ?? [],
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
               } else if (field.type === "textarea") {
                 _push(`<div class="flex flex-col gap-0.5">`);
-                _push(ssrRenderComponent(_component_UTextarea, {
+                _push(ssrRenderComponent_1(_component_UTextarea, {
                   "model-value": getValue(field.key) ?? "",
                   placeholder: field.placeholder,
                   size: "sm",
@@ -5724,25 +5708,25 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
                 if (field.maxLength) {
-                  _push(`<p class="text-xs text-muted text-right tabular-nums">${ssrInterpolate((getValue(field.key) ?? "").length)} / ${ssrInterpolate(field.maxLength)}</p>`);
+                  _push(`<p class="text-xs text-muted text-right tabular-nums">${ssrInterpolate_1((getValue(field.key) ?? "").length)} / ${ssrInterpolate_1(field.maxLength)}</p>`);
                 } else {
                   _push(`<!---->`);
                 }
                 _push(`</div>`);
               } else if (field.type === "checkbox") {
-                _push(ssrRenderComponent(_component_UCheckbox, {
+                _push(ssrRenderComponent_1(_component_UCheckbox, {
                   "model-value": getValue(field.key) ?? false,
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
               } else if (field.type === "switch") {
-                _push(ssrRenderComponent(_component_USwitch, {
+                _push(ssrRenderComponent_1(_component_USwitch, {
                   "model-value": getValue(field.key) ?? false,
                   size: "sm",
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
               } else if (field.type === "slider") {
                 _push(`<div class="flex items-center gap-2">`);
-                _push(ssrRenderComponent(_component_USlider, {
+                _push(ssrRenderComponent_1(_component_USlider, {
                   "model-value": getValue(field.key) ?? field.min ?? 0,
                   min: field.min ?? 0,
                   max: field.max ?? 100,
@@ -5750,36 +5734,36 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   class: "flex-1",
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
-                _push(`<span class="text-xs text-muted w-10 text-right tabular-nums shrink-0">${ssrInterpolate(getValue(field.key) ?? field.min ?? 0)}${ssrInterpolate(field.unit !== "" ? field.unit ?? "px" : "")}</span></div>`);
+                _push(`<span class="text-xs text-muted w-10 text-right tabular-nums shrink-0">${ssrInterpolate_1(getValue(field.key) ?? field.min ?? 0)}${ssrInterpolate_1(field.unit !== "" ? field.unit ?? "px" : "")}</span></div>`);
               } else if (field.type === "collection-select") {
-                _push(ssrRenderComponent(_component_USelect, {
+                _push(ssrRenderComponent_1(_component_USelect, {
                   "model-value": getValue(field.key) || "__default__",
                   items: [
                     { label: "All (default)", value: "__default__" },
-                    ...unref(collections).filter((c) => c.type === field.collectionType).map((c) => ({ label: c.name, value: c.id }))
+                    ...vueExports.unref(collections).filter((c) => c.type === field.collectionType).map((c) => ({ label: c.name, value: c.id }))
                   ],
                   size: "sm",
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event === "__default__" ? "" : $event)
                 }, null, _parent));
               } else if (field.type === "select") {
-                _push(ssrRenderComponent(_component_USelect, {
+                _push(ssrRenderComponent_1(_component_USelect, {
                   "model-value": getValue(field.key) ?? "",
                   items: field.options ?? [],
                   size: "sm",
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
               } else if (field.type === "font") {
-                _push(ssrRenderComponent(_component_USelect, {
+                _push(ssrRenderComponent_1(_component_USelect, {
                   "model-value": getValue(field.key) ?? "",
-                  items: unref(FONT_OPTIONS),
+                  items: vueExports.unref(FONT_OPTIONS),
                   size: "sm",
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
               } else if (field.type === "color") {
-                _push(`<label class="size-6 rounded border-2 border-default hover:border-primary transition-colors shrink-0 cursor-pointer block" style="${ssrRenderStyle({ backgroundColor: getValue(field.key) || "#000000" })}"><input type="color"${ssrRenderAttr("value", getValue(field.key) ?? "#000000")} class="sr-only"></label>`);
+                _push(`<label class="size-6 rounded border-2 border-default hover:border-primary transition-colors shrink-0 cursor-pointer block" style="${ssrRenderStyle_1({ backgroundColor: getValue(field.key) || "#000000" })}"><input type="color"${ssrRenderAttr_1("value", getValue(field.key) ?? "#000000")} class="sr-only"></label>`);
               } else {
                 _push(`<div class="flex flex-col gap-0.5">`);
-                _push(ssrRenderComponent(_component_UInput, {
+                _push(ssrRenderComponent_1(_component_UInput, {
                   "model-value": getValue(field.key) ?? "",
                   placeholder: field.placeholder,
                   type: field.type === "url" ? "url" : "text",
@@ -5787,7 +5771,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   "onUpdate:modelValue": ($event) => setValue(field.key, $event)
                 }, null, _parent));
                 if (field.maxLength) {
-                  _push(`<p class="text-xs text-muted text-right tabular-nums">${ssrInterpolate((getValue(field.key) ?? "").length)} / ${ssrInterpolate(field.maxLength)}</p>`);
+                  _push(`<p class="text-xs text-muted text-right tabular-nums">${ssrInterpolate_1((getValue(field.key) ?? "").length)} / ${ssrInterpolate_1(field.maxLength)}</p>`);
                 } else {
                   _push(`<!---->`);
                 }
@@ -5806,21 +5790,21 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         _push(`<div class="flex-1 flex items-center justify-center p-4"><p class="text-sm text-muted text-center">Select a block</p></div>`);
       }
       _push(`</div>`);
-      _push(ssrRenderComponent(_component_AdminMediaPickerModal, {
-        open: unref(pickerOpen),
-        "onUpdate:open": ($event) => isRef(pickerOpen) ? pickerOpen.value = $event : null,
-        "images-only": unref(pickerImagesOnly),
-        "selected-url": unref(pickerFieldKey) ? getValue(unref(pickerFieldKey)) : null,
+      _push(ssrRenderComponent_1(_component_AdminMediaPickerModal, {
+        open: vueExports.unref(pickerOpen),
+        "onUpdate:open": ($event) => vueExports.isRef(pickerOpen) ? pickerOpen.value = $event : null,
+        "images-only": vueExports.unref(pickerImagesOnly),
+        "selected-url": vueExports.unref(pickerFieldKey) ? getValue(vueExports.unref(pickerFieldKey)) : null,
         onSelect: onImageSelected
       }, null, _parent));
-      if (unref(buttonStyleFieldKey)) {
-        _push(ssrRenderComponent(_component_PagebuilderButtonStyleModal, {
-          key: unref(buttonStyleFieldKey),
-          open: unref(buttonStyleOpen),
-          "onUpdate:open": ($event) => isRef(buttonStyleOpen) ? buttonStyleOpen.value = $event : null,
-          "model-value": getValue(unref(buttonStyleFieldKey)),
-          label: unref(buttonStyleLabel),
-          "onUpdate:modelValue": ($event) => setValue(unref(buttonStyleFieldKey), $event)
+      if (vueExports.unref(buttonStyleFieldKey)) {
+        _push(ssrRenderComponent_1(_component_PagebuilderButtonStyleModal, {
+          key: vueExports.unref(buttonStyleFieldKey),
+          open: vueExports.unref(buttonStyleOpen),
+          "onUpdate:open": ($event) => vueExports.isRef(buttonStyleOpen) ? buttonStyleOpen.value = $event : null,
+          "model-value": getValue(vueExports.unref(buttonStyleFieldKey)),
+          label: vueExports.unref(buttonStyleLabel),
+          "onUpdate:modelValue": ($event) => setValue(vueExports.unref(buttonStyleFieldKey), $event)
         }, null, _parent));
       } else {
         _push(`<!---->`);
@@ -5831,7 +5815,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/pagebuilder/RightSidebar.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -5847,9 +5831,9 @@ const VIEWPORT_WIDTHS = {
   mobile: 375
 };
 function useElementWidth(key) {
-  const el = useTemplateRef(key);
-  const width = ref(0);
-  watch(el, (next, prev) => {
+  const el = vueExports.useTemplateRef(key);
+  const width = vueExports.ref(0);
+  vueExports.watch(el, (next, prev) => {
     if (next) {
       width.value = next.getBoundingClientRect().width;
     }
@@ -5857,9 +5841,9 @@ function useElementWidth(key) {
   return width;
 }
 function useElementHeight(key) {
-  const el = useTemplateRef(key);
-  const height = ref(0);
-  watch(el, (next, prev) => {
+  const el = vueExports.useTemplateRef(key);
+  const height = vueExports.ref(0);
+  vueExports.watch(el, (next, prev) => {
     if (next) {
       height.value = next.getBoundingClientRect().height;
     }
@@ -5867,16 +5851,16 @@ function useElementHeight(key) {
   return height;
 }
 function usePreviewScale() {
-  const activeViewMode = ref("desktop");
-  const fixedWidth = computed(() => VIEWPORT_WIDTHS[activeViewMode.value] ?? 1280);
+  const activeViewMode = vueExports.ref("desktop");
+  const fixedWidth = vueExports.computed(() => VIEWPORT_WIDTHS[activeViewMode.value] ?? 1280);
   const canvasWidth = useElementWidth("previewCanvas");
   const naturalHeight = useElementHeight("previewEl");
-  const scale = computed(() => Math.min(1, canvasWidth.value / fixedWidth.value || 1));
-  const wrapperStyle = computed(() => {
+  const scale = vueExports.computed(() => Math.min(1, canvasWidth.value / fixedWidth.value || 1));
+  const wrapperStyle = vueExports.computed(() => {
     if (scale.value >= 1) return {};
     return { height: `${naturalHeight.value * scale.value}px`, overflow: "hidden" };
   });
-  const scaleStyle = computed(() => {
+  const scaleStyle = vueExports.computed(() => {
     if (scale.value >= 1) {
       return { width: `${fixedWidth.value}px`, margin: "0 auto" };
     }
@@ -5888,7 +5872,7 @@ function usePreviewScale() {
   });
   return { activeViewMode, wrapperStyle, scaleStyle };
 }
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   async setup(__props) {
@@ -5906,18 +5890,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       hasPendingChanges,
       resetPending
     } = usePageEditor();
-    [__temp, __restore] = withAsyncContext(() => fetchUser()), await __temp, __restore();
-    [__temp, __restore] = withAsyncContext(() => fetchPages()), await __temp, __restore();
-    const leftSidebar = useTemplateRef("leftSidebar");
-    const preview = useTemplateRef("preview");
-    const initialThemeSettings = computed(() => {
+    [__temp, __restore] = vueExports.withAsyncContext(() => fetchUser()), await __temp, __restore();
+    [__temp, __restore] = vueExports.withAsyncContext(() => fetchPages()), await __temp, __restore();
+    const leftSidebar = vueExports.useTemplateRef("leftSidebar");
+    const preview = vueExports.useTemplateRef("preview");
+    const initialThemeSettings = vueExports.computed(() => {
       const s = portfolio.value?.themeSettings;
       return s ?? null;
     });
-    const saving = ref(false);
-    const saved = ref(false);
-    const saveError = ref("");
-    const isDirty = computed(() => {
+    const saving = vueExports.ref(false);
+    const saved = vueExports.ref(false);
+    const saveError = vueExports.ref("");
+    const isDirty = vueExports.computed(() => {
       const layers = leftSidebar.value?.layersView;
       const layersChanges = layers?.layersChanges;
       return hasPendingChanges.value || !!leftSidebar.value?.isThemeDirty || !!layersChanges?.reorderedIds || Object.keys(layersChanges?.visibilityChanges ?? {}).length > 0;
@@ -6076,26 +6060,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_ClientOnly = __nuxt_component_2$1$1;
       const _component_PagebuilderPreview = __nuxt_component_8;
       const _component_PagebuilderRightSidebar = __nuxt_component_9;
-      _push(ssrRenderComponent(_component_AdminLayoutPageWrapper, mergeProps({ title: "" }, _attrs), {
-        left: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(ssrRenderComponent_1(_component_AdminLayoutPageWrapper, vueExports.mergeProps({ title: "" }, _attrs), {
+        left: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_PagebuilderPageControls, {
-              "portfolio-id": unref(portfolio)?.id ?? null
+            _push2(ssrRenderComponent_1(_component_PagebuilderPageControls, {
+              "portfolio-id": vueExports.unref(portfolio)?.id ?? null
             }, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_component_PagebuilderPageControls, {
-                "portfolio-id": unref(portfolio)?.id ?? null
+              vueExports.createVNode(_component_PagebuilderPageControls, {
+                "portfolio-id": vueExports.unref(portfolio)?.id ?? null
               }, null, 8, ["portfolio-id"])
             ];
           }
         }),
-        middle: withCtx((_, _push2, _parent2, _scopeId) => {
+        middle: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_UTabs, {
-              modelValue: unref(activeViewMode),
-              "onUpdate:modelValue": ($event) => isRef(activeViewMode) ? activeViewMode.value = $event : null,
-              items: unref(VIEWPORT_MODES),
+            _push2(ssrRenderComponent_1(_component_UTabs, {
+              modelValue: vueExports.unref(activeViewMode),
+              "onUpdate:modelValue": ($event) => vueExports.isRef(activeViewMode) ? activeViewMode.value = $event : null,
+              items: vueExports.unref(VIEWPORT_MODES),
               "default-value": "desktop",
               size: "sm",
               class: "w-56",
@@ -6103,10 +6087,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             }, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_component_UTabs, {
-                modelValue: unref(activeViewMode),
-                "onUpdate:modelValue": ($event) => isRef(activeViewMode) ? activeViewMode.value = $event : null,
-                items: unref(VIEWPORT_MODES),
+              vueExports.createVNode(_component_UTabs, {
+                modelValue: vueExports.unref(activeViewMode),
+                "onUpdate:modelValue": ($event) => vueExports.isRef(activeViewMode) ? activeViewMode.value = $event : null,
+                items: vueExports.unref(VIEWPORT_MODES),
                 "default-value": "desktop",
                 size: "sm",
                 class: "w-56",
@@ -6115,19 +6099,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        right: withCtx((_, _push2, _parent2, _scopeId) => {
+        right: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            if (unref(saveError)) {
-              _push2(ssrRenderComponent(_component_UTooltip, { text: unref(saveError) }, {
-                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+            if (vueExports.unref(saveError)) {
+              _push2(ssrRenderComponent_1(_component_UTooltip, { text: vueExports.unref(saveError) }, {
+                default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(ssrRenderComponent(_component_UIcon, {
+                    _push3(ssrRenderComponent_1(_component_UIcon, {
                       name: "i-lucide-alert-circle",
                       class: "text-error"
                     }, null, _parent3, _scopeId2));
                   } else {
                     return [
-                      createVNode(_component_UIcon, {
+                      vueExports.createVNode(_component_UIcon, {
                         name: "i-lucide-alert-circle",
                         class: "text-error"
                       })
@@ -6139,43 +6123,43 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(ssrRenderComponent(_component_UButton, {
+            _push2(ssrRenderComponent_1(_component_UButton, {
               color: "neutral",
               variant: "outline",
               "aria-label": "Activate",
               label: "Activate"
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UButton, {
-              color: unref(saved) ? "success" : "neutral",
+            _push2(ssrRenderComponent_1(_component_UButton, {
+              color: vueExports.unref(saved) ? "success" : "neutral",
               variant: "solid",
               "aria-label": "Save",
-              label: unref(saved) ? "Saved!" : unref(isDirty) ? "Save" : "No changes",
-              icon: unref(saved) ? "i-lucide-check" : void 0,
-              loading: unref(saving),
-              disabled: !unref(isDirty) && !unref(saving),
+              label: vueExports.unref(saved) ? "Saved!" : vueExports.unref(isDirty) ? "Save" : "No changes",
+              icon: vueExports.unref(saved) ? "i-lucide-check" : void 0,
+              loading: vueExports.unref(saving),
+              disabled: !vueExports.unref(isDirty) && !vueExports.unref(saving),
               onClick: save
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_component_UTooltip, { text: "View page" }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+            _push2(ssrRenderComponent_1(_component_UTooltip, { text: "View page" }, {
+              default: vueExports.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_component_UButton, {
+                  _push3(ssrRenderComponent_1(_component_UButton, {
                     color: "primary",
                     variant: "solid",
                     icon: "i-lucide-external-link",
                     "aria-label": "View page",
                     tooltip: "View page",
-                    to: unref(activePage)?.slug && unref(activePage).slug !== "home" ? `/p/${unref(portfolio)?.slug}/${unref(activePage).slug}` : `/p/${unref(portfolio)?.slug}`,
+                    to: vueExports.unref(activePage)?.slug && vueExports.unref(activePage).slug !== "home" ? `/p/${vueExports.unref(portfolio)?.slug}/${vueExports.unref(activePage).slug}` : `/p/${vueExports.unref(portfolio)?.slug}`,
                     target: "_blank"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_component_UButton, {
+                    vueExports.createVNode(_component_UButton, {
                       color: "primary",
                       variant: "solid",
                       icon: "i-lucide-external-link",
                       "aria-label": "View page",
                       tooltip: "View page",
-                      to: unref(activePage)?.slug && unref(activePage).slug !== "home" ? `/p/${unref(portfolio)?.slug}/${unref(activePage).slug}` : `/p/${unref(portfolio)?.slug}`,
+                      to: vueExports.unref(activePage)?.slug && vueExports.unref(activePage).slug !== "home" ? `/p/${vueExports.unref(portfolio)?.slug}/${vueExports.unref(activePage).slug}` : `/p/${vueExports.unref(portfolio)?.slug}`,
                       target: "_blank"
                     }, null, 8, ["to"])
                   ];
@@ -6185,43 +6169,43 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             }, _parent2, _scopeId));
           } else {
             return [
-              unref(saveError) ? (openBlock(), createBlock(_component_UTooltip, {
+              vueExports.unref(saveError) ? (vueExports.openBlock(), vueExports.createBlock(_component_UTooltip, {
                 key: 0,
-                text: unref(saveError)
+                text: vueExports.unref(saveError)
               }, {
-                default: withCtx(() => [
-                  createVNode(_component_UIcon, {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(_component_UIcon, {
                     name: "i-lucide-alert-circle",
                     class: "text-error"
                   })
                 ]),
                 _: 1
-              }, 8, ["text"])) : createCommentVNode("", true),
-              createVNode(_component_UButton, {
+              }, 8, ["text"])) : vueExports.createCommentVNode("", true),
+              vueExports.createVNode(_component_UButton, {
                 color: "neutral",
                 variant: "outline",
                 "aria-label": "Activate",
                 label: "Activate"
               }),
-              createVNode(_component_UButton, {
-                color: unref(saved) ? "success" : "neutral",
+              vueExports.createVNode(_component_UButton, {
+                color: vueExports.unref(saved) ? "success" : "neutral",
                 variant: "solid",
                 "aria-label": "Save",
-                label: unref(saved) ? "Saved!" : unref(isDirty) ? "Save" : "No changes",
-                icon: unref(saved) ? "i-lucide-check" : void 0,
-                loading: unref(saving),
-                disabled: !unref(isDirty) && !unref(saving),
+                label: vueExports.unref(saved) ? "Saved!" : vueExports.unref(isDirty) ? "Save" : "No changes",
+                icon: vueExports.unref(saved) ? "i-lucide-check" : void 0,
+                loading: vueExports.unref(saving),
+                disabled: !vueExports.unref(isDirty) && !vueExports.unref(saving),
                 onClick: save
               }, null, 8, ["color", "label", "icon", "loading", "disabled"]),
-              createVNode(_component_UTooltip, { text: "View page" }, {
-                default: withCtx(() => [
-                  createVNode(_component_UButton, {
+              vueExports.createVNode(_component_UTooltip, { text: "View page" }, {
+                default: vueExports.withCtx(() => [
+                  vueExports.createVNode(_component_UButton, {
                     color: "primary",
                     variant: "solid",
                     icon: "i-lucide-external-link",
                     "aria-label": "View page",
                     tooltip: "View page",
-                    to: unref(activePage)?.slug && unref(activePage).slug !== "home" ? `/p/${unref(portfolio)?.slug}/${unref(activePage).slug}` : `/p/${unref(portfolio)?.slug}`,
+                    to: vueExports.unref(activePage)?.slug && vueExports.unref(activePage).slug !== "home" ? `/p/${vueExports.unref(portfolio)?.slug}/${vueExports.unref(activePage).slug}` : `/p/${vueExports.unref(portfolio)?.slug}`,
                     target: "_blank"
                   }, null, 8, ["to"])
                 ]),
@@ -6230,55 +6214,55 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ];
           }
         }),
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex h-full w-full min-h-0"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_PagebuilderLeftSidebar, {
+            _push2(ssrRenderComponent_1(_component_PagebuilderLeftSidebar, {
               ref_key: "leftSidebar",
               ref: leftSidebar,
-              "initial-theme-settings": unref(initialThemeSettings),
-              "portfolio-id": unref(portfolio)?.id ?? null
+              "initial-theme-settings": vueExports.unref(initialThemeSettings),
+              "portfolio-id": vueExports.unref(portfolio)?.id ?? null
             }, null, _parent2, _scopeId));
             _push2(`<div class="relative flex-1 overflow-auto bg-muted/30"${_scopeId}>`);
-            _push2(ssrRenderComponent(_component_ClientOnly, null, {}, _parent2, _scopeId));
+            _push2(ssrRenderComponent_1(_component_ClientOnly, null, {}, _parent2, _scopeId));
             _push2(`</div>`);
-            _push2(ssrRenderComponent(_component_PagebuilderRightSidebar, null, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent_1(_component_PagebuilderRightSidebar, null, null, _parent2, _scopeId));
             _push2(`</div>`);
           } else {
             return [
-              createVNode("div", { class: "flex h-full w-full min-h-0" }, [
-                createVNode(_component_PagebuilderLeftSidebar, {
+              vueExports.createVNode("div", { class: "flex h-full w-full min-h-0" }, [
+                vueExports.createVNode(_component_PagebuilderLeftSidebar, {
                   ref_key: "leftSidebar",
                   ref: leftSidebar,
-                  "initial-theme-settings": unref(initialThemeSettings),
-                  "portfolio-id": unref(portfolio)?.id ?? null
+                  "initial-theme-settings": vueExports.unref(initialThemeSettings),
+                  "portfolio-id": vueExports.unref(portfolio)?.id ?? null
                 }, null, 8, ["initial-theme-settings", "portfolio-id"]),
-                createVNode("div", {
+                vueExports.createVNode("div", {
                   ref: "previewCanvas",
                   class: "relative flex-1 overflow-auto bg-muted/30"
                 }, [
-                  createVNode(_component_ClientOnly, null, {
-                    default: withCtx(() => [
-                      unref(portfolio) ? (openBlock(), createBlock("div", {
+                  vueExports.createVNode(_component_ClientOnly, null, {
+                    default: vueExports.withCtx(() => [
+                      vueExports.unref(portfolio) ? (vueExports.openBlock(), vueExports.createBlock("div", {
                         key: 0,
-                        style: unref(wrapperStyle)
+                        style: vueExports.unref(wrapperStyle)
                       }, [
-                        createVNode("div", {
+                        vueExports.createVNode("div", {
                           ref: "previewEl",
                           class: "@container",
-                          style: unref(scaleStyle)
+                          style: vueExports.unref(scaleStyle)
                         }, [
-                          createVNode(_component_PagebuilderPreview, {
+                          vueExports.createVNode(_component_PagebuilderPreview, {
                             ref_key: "preview",
                             ref: preview,
-                            "portfolio-slug": unref(portfolio).slug,
-                            "portfolio-title": unref(portfolio).title,
-                            "page-slug": unref(activePage)?.slug ?? "home",
-                            "layers-view": unref(leftSidebar)?.layersView,
-                            "live-theme-settings": unref(leftSidebar)?.themeSettings
+                            "portfolio-slug": vueExports.unref(portfolio).slug,
+                            "portfolio-title": vueExports.unref(portfolio).title,
+                            "page-slug": vueExports.unref(activePage)?.slug ?? "home",
+                            "layers-view": vueExports.unref(leftSidebar)?.layersView,
+                            "live-theme-settings": vueExports.unref(leftSidebar)?.themeSettings
                           }, null, 8, ["portfolio-slug", "portfolio-title", "page-slug", "layers-view", "live-theme-settings"])
                         ], 4)
-                      ], 4)) : (openBlock(), createBlock("div", {
+                      ], 4)) : (vueExports.openBlock(), vueExports.createBlock("div", {
                         key: 1,
                         class: "flex items-center justify-center h-full text-sm text-muted"
                       }, " No portfolio found "))
@@ -6286,7 +6270,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     _: 1
                   })
                 ], 512),
-                createVNode(_component_PagebuilderRightSidebar)
+                vueExports.createVNode(_component_PagebuilderRightSidebar)
               ])
             ];
           }
@@ -6298,7 +6282,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/admin/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

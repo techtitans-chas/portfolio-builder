@@ -1,8 +1,5 @@
-import { ref, computed, isRef, unref, watch, mergeProps, withCtx, renderSlot, customRef, useSSRContext } from 'vue';
-import { useStorage, reactiveOmit } from '@vueuse/core';
-import { k as createContext, a2 as useLocale, U as useComponentProps, $ as useForwardProps, N as useAppConfig, M as tv, f as _sfc_main$8, b as Primitive, a3 as useNuxtApp, a6 as useRequestEvent } from './server.mjs';
+import { l as createContext, aO as vueExports, ay as useLocale, aK as useStorage, an as useComponentProps, av as useForwardProps, Z as reactiveOmit, aj as useAppConfig, ag as tv, a7 as ssrRenderComponent_1, e as _sfc_main$8, b as Primitive, a9 as ssrRenderSlot_1, aA as useNuxtApp, aD as useRequestEvent } from './server.mjs';
 import { B as klona, q as getRequestHeader, y as isEqual, I as setCookie, n as getCookie, i as deleteCookie } from '../nitro/nitro.mjs';
-import { ssrRenderComponent, ssrRenderSlot } from 'vue/server-renderer';
 
 function endIndex(str, min, len) {
 	const index = str.indexOf(";", min);
@@ -168,9 +165,9 @@ function writeServerCookie(event, name, value, opts = {}) {
   }
 }
 function cookieServerRef(name, value) {
-  const internalRef = ref(value);
+  const internalRef = vueExports.ref(value);
   const nuxtApp = useNuxtApp();
-  return customRef((track, trigger) => {
+  return vueExports.customRef((track, trigger) => {
     return {
       get() {
         track();
@@ -185,9 +182,9 @@ function cookieServerRef(name, value) {
     };
   });
 }
-function useResizable(key, options = {}, { collapsed = ref(false) } = {}) {
-  const el = ref(null);
-  const opts = computed(() => ({
+function useResizable(key, options = {}, { collapsed = vueExports.ref(false) } = {}) {
+  const el = vueExports.ref(null);
+  const opts = vueExports.computed(() => ({
     side: "left",
     minSize: 0,
     maxSize: 100,
@@ -198,35 +195,35 @@ function useResizable(key, options = {}, { collapsed = ref(false) } = {}) {
     collapsedSize: 0,
     resizable: true,
     unit: "%",
-    ...isRef(options) ? options.value : options
+    ...vueExports.isRef(options) ? options.value : options
   }));
   const { dir } = useLocale();
   const defaultStorageValue = {
     size: opts.value.defaultSize,
-    collapsed: unref(collapsed) ?? false
+    collapsed: vueExports.unref(collapsed) ?? false
   };
-  const storageData = opts.value.persistent && (opts.value.resizable || opts.value.collapsible) ? opts.value.storage === "cookie" ? useCookie(key, { ...opts.value.storageOptions, default: () => defaultStorageValue }) : useStorage(key, defaultStorageValue, void 0, opts.value.storageOptions) : ref(defaultStorageValue);
-  const isCollapsed = computed({
+  const storageData = opts.value.persistent && (opts.value.resizable || opts.value.collapsible) ? opts.value.storage === "cookie" ? useCookie(key, { ...opts.value.storageOptions, default: () => defaultStorageValue }) : useStorage(key, defaultStorageValue, void 0, opts.value.storageOptions) : vueExports.ref(defaultStorageValue);
+  const isCollapsed = vueExports.computed({
     get: () => storageData.value.collapsed,
     set: (value) => {
       if (!opts.value.collapsible) {
         return;
       }
-      if (isRef(collapsed)) {
+      if (vueExports.isRef(collapsed)) {
         collapsed.value = value;
       }
       storageData.value.collapsed = value;
     }
   });
-  const previousSize = ref(opts.value.defaultSize);
-  const size = computed({
+  const previousSize = vueExports.ref(opts.value.defaultSize);
+  const size = vueExports.computed({
     get: () => storageData.value.size,
     set: (value) => {
       storageData.value.size = value;
     }
   });
-  const currentSize = computed(() => isCollapsed.value ? opts.value.collapsedSize : size.value);
-  const isDragging = ref(false);
+  const currentSize = vueExports.computed(() => isCollapsed.value ? opts.value.collapsedSize : size.value);
+  const isDragging = vueExports.ref(false);
   const onMouseMove = (e, initialPos, initialSize) => {
     if (!el.value || !opts.value.resizable) {
       return;
@@ -360,11 +357,11 @@ function useResizable(key, options = {}, { collapsed = ref(false) } = {}) {
     }
     isCollapsed.value = newCollapsed;
   };
-  if (isRef(collapsed) && storageData.value.collapsed) {
+  if (vueExports.isRef(collapsed) && storageData.value.collapsed) {
     collapsed.value = storageData.value.collapsed;
   }
-  if (isRef(collapsed)) {
-    watch(collapsed, (value) => {
+  if (vueExports.isRef(collapsed)) {
+    vueExports.watch(collapsed, (value) => {
       if (!opts.value.collapsible) {
         return;
       }
@@ -400,19 +397,19 @@ const _sfc_main$1 = {
     const _props = __props;
     const props = useComponentProps("dashboardResizeHandle", _props);
     const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.dashboardResizeHandle || {} }));
+    const ui = vueExports.computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.dashboardResizeHandle || {} }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(Primitive), mergeProps({
-        as: unref(props).as,
+      _push(ssrRenderComponent_1(vueExports.unref(Primitive), vueExports.mergeProps({
+        as: vueExports.unref(props).as,
         role: "separator",
-        class: ui.value({ class: [unref(props).ui?.base, unref(props).class] })
+        class: ui.value({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class] })
       }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            ssrRenderSlot_1(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
           } else {
             return [
-              renderSlot(_ctx.$slots, "default")
+              vueExports.renderSlot(_ctx.$slots, "default")
             ];
           }
         }),
@@ -423,7 +420,7 @@ const _sfc_main$1 = {
 };
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/DashboardResizeHandle.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -473,25 +470,25 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const buttonProps = useForwardProps(reactiveOmit(props, "icon", "side", "class"));
     const { t } = useLocale();
     const appConfig = useAppConfig();
-    const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {
+    const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: vueExports.ref(false), toggleSidebar: () => {
     } });
-    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSidebarToggle || {} }));
+    const ui = vueExports.computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSidebarToggle || {} }));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$8, mergeProps({
-        ...unref(buttonProps),
-        "icon": unref(props).icon || (unref(sidebarOpen) ? unref(appConfig).ui.icons.close : unref(appConfig).ui.icons.menu),
-        "aria-label": unref(sidebarOpen) ? unref(t)("dashboardSidebarToggle.close") : unref(t)("dashboardSidebarToggle.open"),
+      _push(ssrRenderComponent_1(_sfc_main$8, vueExports.mergeProps({
+        ...vueExports.unref(buttonProps),
+        "icon": vueExports.unref(props).icon || (vueExports.unref(sidebarOpen) ? vueExports.unref(appConfig).ui.icons.close : vueExports.unref(appConfig).ui.icons.menu),
+        "aria-label": vueExports.unref(sidebarOpen) ? vueExports.unref(t)("dashboardSidebarToggle.close") : vueExports.unref(t)("dashboardSidebarToggle.open"),
         ..._ctx.$attrs
       }, {
-        class: ui.value({ class: [unref(props).ui?.base, unref(props).class], side: unref(props).side }),
-        onClick: unref(toggleSidebar)
+        class: ui.value({ class: [vueExports.unref(props).ui?.base, vueExports.unref(props).class], side: vueExports.unref(props).side }),
+        onClick: vueExports.unref(toggleSidebar)
       }, _attrs), null, _parent));
     };
   }
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/@nuxt+ui@4.8.0_@internationalized+date@3.12.1_@internationalized+number@3.6.6_@tiptap+e_529dc020edabc129a8ce32f8d84280e8/node_modules/@nuxt/ui/dist/runtime/components/DashboardSidebarToggle.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
