@@ -8,7 +8,8 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true,
+    enabled: false,
+    // enabled: process.env.NODE_ENV !== 'production',
   },
 
   css: ['~/assets/css/main.css'],
@@ -25,7 +26,7 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: ['zod'],
+      include: ['vue-draggable-plus', 'zod'],
     },
   },
 
