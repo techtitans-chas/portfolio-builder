@@ -1,0 +1,24 @@
+FROM node:22-alpine AS base
+
+RUN apk upgrade --no-cache && corepack enable && corepack prepare pnpm@11.1.3 --activate
+
+WORKDIR /app
+
+COPY .npmrc pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.base.json ./
+COPY shared/package.json ./shared/
+COPY backend/package.json ./backend/
+COPY frontend/package.json ./frontend/
+COPY frontend/nuxt.config.ts ./frontend/
+
+RUN pnpm install --frozen-lockfile
+
+COPY shared/ ./shared/
+COPY frontend/ ./frontend/
+RUN pnpm --filter @portfolio-builder/shared build
+ENV NUXT_HOST=0.0.0.0
+# NODE_OPTIONS is set inline (build-time only) so the large heap ceiling needed
+# by the Nuxt build does not leak into the 512MB runtime container. The image is
+# built on GitHub Actions runners (~7GB), so prerendering "/" is safe here.
+RUN NODE_OPTIONS=--max-old-space-size=4096 NUXT_PRERENDER=true pnpm --filter frontend build
+EXPOSE 3000
+CMD ["node", "./frontend/.output/server/index.mjs"]

@@ -1,3 +1,3 @@
-export type * from './health';
-export type * from './db';
-export * from './collectionTypes';
+export type * from './health.js';
+export type * from './db.js';
+export * from './collectionTypes.js';
