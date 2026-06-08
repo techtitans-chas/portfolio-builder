@@ -1,6 +1,6 @@
 import type { Context } from 'hono';
 import type { Column } from 'drizzle-orm';
-import { ilike } from 'drizzle-orm';
+import { like } from 'drizzle-orm';
 
 // ---------------------------------------------------------------------------
 // Pagination
@@ -77,7 +77,12 @@ export function parseSearch(c: Context, key = 'search'): string | undefined {
   return q?.trim() || undefined;
 }
 
-/** Builds a Drizzle case-insensitive substring filter for a column. */
+/**
+ * Builds a Drizzle case-insensitive substring filter for a column.
+ *
+ * MySQL has no `ilike`; with the default `utf8mb4_*_ci` (case-insensitive)
+ * collation, `like` is already case-insensitive, matching the previous behaviour.
+ */
 export function contains(column: Column, value: string) {
-  return ilike(column, `%${value}%`);
+  return like(column, `%${value}%`);
 }

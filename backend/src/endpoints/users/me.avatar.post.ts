@@ -130,8 +130,7 @@ export const meAvatarPost = factory.createHandlers(async c => {
     await tx
       .insert(appStorage)
       .values({ id: 1, totalBytesUsed: Math.max(0, currentAppTotal + bytesDelta) })
-      .onConflictDoUpdate({
-        target: appStorage.id,
+      .onDuplicateKeyUpdate({
         set: {
           totalBytesUsed: sql`${appStorage.totalBytesUsed} + ${bytesDelta}`,
           updatedAt: new Date(),

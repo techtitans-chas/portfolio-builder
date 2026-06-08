@@ -475,16 +475,17 @@ async function seed() {
       .where(eq(portfolios.slug, user.slug));
 
     if (!portfolio) {
-      [portfolio] = await db
-        .insert(portfolios)
-        .values({
-          userId: existingUser.id,
-          slug: user.slug,
-          isPublished: true,
-          title: user.title,
-          description: user.description,
-        })
-        .returning({ id: portfolios.id });
+      // MySQL has no RETURNING — generate the id app-side so we know it.
+      const portfolioId = crypto.randomUUID();
+      await db.insert(portfolios).values({
+        id: portfolioId,
+        userId: existingUser.id,
+        slug: user.slug,
+        isPublished: true,
+        title: user.title,
+        description: user.description,
+      });
+      portfolio = { id: portfolioId };
       console.log(`  Created portfolio "${user.slug}"`);
     }
 
@@ -501,10 +502,14 @@ async function seed() {
     }
     await db.delete(pages).where(eq(pages.portfolioId, portfolio.id));
 
-    const allPages = await db
-      .insert(pages)
-      .values(defaultPages.map(p => ({ ...p, portfolioId: portfolio.id })))
-      .returning({ id: pages.id, slug: pages.slug });
+    // MySQL has no RETURNING — generate ids app-side so we can reference them below.
+    const pageRows = defaultPages.map(p => ({
+      ...p,
+      id: crypto.randomUUID(),
+      portfolioId: portfolio.id,
+    }));
+    await db.insert(pages).values(pageRows);
+    const allPages = pageRows.map(p => ({ id: p.id, slug: p.slug }));
     console.log(`  Created ${allPages.length} pages`);
 
     // --- Create blocks for each page ---
@@ -639,17 +644,15 @@ async function seed() {
     await db.delete(collections).where(eq(collections.portfolioId, portfolio.id));
 
     for (const [i, col] of user.collections.entries()) {
-      const [inserted] = await db
+      const collectionId = crypto.randomUUID();
+      await db
         .insert(collections)
-        .values({ portfolioId: portfolio.id, type: col.type, name: col.name, sortOrder: i })
-        .returning({ id: collections.id });
-
-      if (!inserted) continue;
+        .values({ id: collectionId, portfolioId: portfolio.id, type: col.type, name: col.name, sortOrder: i });
 
       if (col.items.length) {
         await db
           .insert(collectionItems)
-          .values(col.items.map(item => ({ collectionId: inserted.id, ...item })));
+          .values(col.items.map(item => ({ collectionId, ...item })));
       }
 
       console.log(`  Created collection "${col.name}" with ${col.items.length} items`);

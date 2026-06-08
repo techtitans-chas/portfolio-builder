@@ -1,27 +1,43 @@
-import { pgTable, uuid, text, boolean, jsonb, timestamp, real } from 'drizzle-orm/pg-core';
+import { mysqlTable, varchar, text, boolean, json, datetime, real } from 'drizzle-orm/mysql-core';
 import { portfolios } from './portfolios.js';
 
-export const collections = pgTable('collections', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  portfolioId: uuid('portfolio_id')
+export const collections = mysqlTable('collections', {
+  id: varchar('id', { length: 36 })
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  portfolioId: varchar('portfolio_id', { length: 36 })
     .notNull()
     .references(() => portfolios.id, { onDelete: 'cascade' }),
   type: text('type').notNull(),
-  name: text('name').notNull().default(''),
+  name: text('name')
+    .notNull()
+    .$defaultFn(() => ''),
   sortOrder: real('sort_order').notNull().default(0),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  createdAt: datetime('created_at')
+    .notNull()
+    .$defaultFn(() => new Date()),
+  updatedAt: datetime('updated_at')
+    .notNull()
+    .$defaultFn(() => new Date()),
 });
 
-export const collectionItems = pgTable('collection_items', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  collectionId: uuid('collection_id')
+export const collectionItems = mysqlTable('collection_items', {
+  id: varchar('id', { length: 36 })
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  collectionId: varchar('collection_id', { length: 36 })
     .notNull()
     .references(() => collections.id, { onDelete: 'cascade' }),
-  data: jsonb('data').notNull().default({}),
+  data: json('data')
+    .notNull()
+    .$defaultFn(() => ({})),
   pageBody: text('page_body'),
   isPublished: boolean('is_published').notNull().default(false),
   sortOrder: real('sort_order').notNull().default(0),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  createdAt: datetime('created_at')
+    .notNull()
+    .$defaultFn(() => new Date()),
+  updatedAt: datetime('updated_at')
+    .notNull()
+    .$defaultFn(() => new Date()),
 });

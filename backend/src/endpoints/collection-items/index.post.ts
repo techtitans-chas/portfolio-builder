@@ -47,16 +47,19 @@ export const collectionItemsPost = factory.createHandlers(async c => {
     throw badRequest('Validation failed', result.error.issues);
   }
 
+  const id = crypto.randomUUID();
+  await db.insert(collectionItems).values({
+    id,
+    collectionId,
+    data: result.data.data,
+    pageBody: result.data.pageBody ?? null,
+    isPublished: result.data.isPublished,
+    sortOrder: result.data.sortOrder ?? 0,
+  });
   const [created] = await db
-    .insert(collectionItems)
-    .values({
-      collectionId,
-      data: result.data.data,
-      pageBody: result.data.pageBody ?? null,
-      isPublished: result.data.isPublished,
-      sortOrder: result.data.sortOrder ?? 0,
-    })
-    .returning();
+    .select()
+    .from(collectionItems)
+    .where(eq(collectionItems.id, id));
 
   return c.json({ item: created }, 201);
 });

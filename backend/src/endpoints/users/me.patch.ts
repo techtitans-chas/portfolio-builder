@@ -24,18 +24,22 @@ export const mePatch = factory.createHandlers(async c => {
     throw badRequest('Validation failed', result.error.issues);
   }
 
-  const [updated] = await db
+  await db
     .update(users)
     .set({ name: result.data.name, updatedAt: new Date() })
-    .where(eq(users.id, session.user.id))
-    .returning({
+    .where(eq(users.id, session.user.id));
+
+  const [updated] = await db
+    .select({
       id: users.id,
       name: users.name,
       email: users.email,
       emailVerified: users.emailVerified,
       image: users.image,
       createdAt: users.createdAt,
-    });
+    })
+    .from(users)
+    .where(eq(users.id, session.user.id));
 
   if (!updated) {
     throw notFound('User not found');

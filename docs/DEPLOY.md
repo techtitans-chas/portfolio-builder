@@ -1,240 +1,187 @@
-# Deployment Guide
+# Deployment Guide (Netcup Plesk)
 
-This project deploys as two Docker-based web services (backend + frontend) plus a managed PostgreSQL database on [Render](https://render.com). Images are built by GitHub Actions on every push to `main`, published to [Docker Hub](https://hub.docker.com), and then pulled by Render — Render never builds the images itself.
+This project deploys to **Netcup webhost 4000** — a shared **Plesk** host with **no Docker**. The two Node apps (Hono backend + Nuxt SSR frontend) run under Plesk's Node.js (Phusion Passenger), each on its own subdomain, both pulling from the **same Git repo** via Plesk Git deployment. The database is the **MySQL 8** instance included with the package.
+
+Because the host can't build a pnpm monorepo (no Docker, awkward `workspace:*` resolution, limited memory), **build artifacts are committed to a dedicated `deploy` branch** and the server only runs `node`.
 
 ---
 
 ## Architecture overview
 
 ```
-GitHub push to main
-       │
-       ▼
-GitHub Actions (ci.yml)
-  ├── lint & typecheck & build  (run on every PR and push)
-  │
-  └── on push to main only:
-       ├── docker-backend ──► builds Dockerfile.backend
-       │                  ──► pushes to Docker Hub: <you>/portfolio-builder-backend:<sha>
-       │                  ──► Render deploy hook (imgURL=<sha>) ──► portfolio-builder-backend
-       └── docker-frontend ─► builds Dockerfile.frontend
-                          ──► pushes to Docker Hub: <you>/portfolio-builder-frontend:<sha>
-                          ──► Render deploy hook (imgURL=<sha>) ──► portfolio-builder-frontend
+Local / CI:  pnpm build  ──►  frontend/.output  +  backend/dist (esbuild bundle)
+                              │
+                              ▼  committed to the `deploy` branch
+Plesk Git deployment (tracks `deploy`)
+  ├── app.<domain>  → Application Root: frontend, startup: .output/server/index.mjs   (Nuxt SSR)
+  └── api.<domain>  → Application Root: backend/dist, startup: server.js              (Hono API)
+                              │
+                              ▼
+                       MySQL 8 (utf8mb4)   ← included with Netcup package
+```
 
-Render
-  ├── portfolio-builder-backend  (Hono API, port 3111) — pulls prebuilt image from Docker Hub
-  ├── portfolio-builder-frontend (Nuxt SSR, port 3000) — pulls prebuilt image from Docker Hub
-  └── portfolio-builder-db       (PostgreSQL 17, managed)
+The backend is bundled with esbuild into a single `dist/server.js` (see [`backend/build.mjs`](../backend/build.mjs)). Only the **native** modules `sharp` and `mysql2` are left external — they ship platform-specific binaries that must be installed on the Linux server, not bundled from a dev machine.
+
+---
+
+## ⚠️ Critical: the database MUST be utf8mb4
+
+The Netcup MySQL server defaults to `latin1`/`cp1252`. If the database is created with that charset, emoji and many non-ASCII characters (`åäö`, etc.) in portfolio content will be **corrupted**. The connection already forces `utf8mb4` (see [`backend/src/db/client.ts`](../backend/src/db/client.ts)), but the **database itself** must also be utf8mb4.
+
+In phpMyAdmin (or Plesk → Databases) run once, before migrating:
+
+```sql
+ALTER DATABASE `your_db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 ---
 
 ## One-time setup
 
-### 1. Create a Docker Hub account and repositories
+### 1. Create the two subdomains in Plesk
 
-1. Sign up or log in at [hub.docker.com](https://hub.docker.com)
-2. Create two **public** repositories:
-   - `<your-username>/portfolio-builder-backend`
-   - `<your-username>/portfolio-builder-frontend`
-3. Generate an access token: **Account Settings → Security → New Access Token**
-   - Scope: **Read & Write**
-   - Save the token — you'll need it for GitHub secrets
+Create `app.<domain>` (or use the apex domain) for the frontend and `api.<domain>` for the backend.
 
----
+### 2. Configure Git deployment (per subdomain)
 
-### 2. Update `render.yaml` with your Docker Hub username
+For **each** subdomain: Plesk → **Git** → add this repository, set the deployed branch to **`deploy`**, and enable automatic deployment on push if desired. Both subdomains point at the same repo/branch.
 
-Open `render.yaml` and replace both occurrences of `DOCKER_USERNAME` with your actual Docker Hub username:
+### 3. Configure Node.js (per subdomain)
 
-```yaml
-image:
-  url: docker.io/your-actual-username/portfolio-builder-backend:latest
-```
+Plesk → **Node.js** for each subdomain:
 
-```yaml
-image:
-  url: docker.io/your-actual-username/portfolio-builder-frontend:latest
-```
+| Field                     | Frontend (`app.`)            | Backend (`api.`)   |
+| ------------------------- | ---------------------------- | ------------------ |
+| **Application Root**      | `frontend`                   | `backend/dist`     |
+| **Application Startup File** | `.output/server/index.mjs` | `server.js`        |
+| **Run Node.js commands**  | _(none — `.output` is self-contained)_ | `npm install --omit=dev` (see step 6) |
 
-Commit and push this change.
+> The startup files don't exist in the repo until you build — they're committed artifacts (step 5). `.output` is a hidden folder.
 
----
+### 4. Set environment variables (per subdomain)
 
-### 3. Add GitHub repository secrets
+Plesk → Node.js → **Custom environment variables**.
 
-Go to your GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**.
+Generate the auth secret locally: `openssl rand -base64 32`
 
-Add all of the following:
+**Backend (`api.`):**
 
-| Secret                        | Value                                                         |
-| ----------------------------- | ------------------------------------------------------------- |
-| `DOCKER_USERNAME`             | Your Docker Hub username                                      |
-| `DOCKER_PASSWORD`             | The access token you generated (not your password)            |
-| `RENDER_DEPLOY_HOOK_BACKEND`  | Deploy hook URL from the Render backend service (see step 5)  |
-| `RENDER_DEPLOY_HOOK_FRONTEND` | Deploy hook URL from the Render frontend service (see step 5) |
+| Variable               | Value                                                       |
+| ---------------------- | ----------------------------------------------------------- |
+| `DATABASE_URL`         | `mysql://user:pass@host:3306/dbname` (from Plesk Databases) |
+| `BETTER_AUTH_SECRET`   | output of `openssl rand -base64 32`                         |
+| `BETTER_AUTH_URL`      | `https://api.<domain>`                                      |
+| `FRONTEND_URL`         | `https://app.<domain>`                                      |
+| `RESEND_API_KEY`       | Resend key (blank to disable email)                         |
+| `R2_ACCOUNT_ID`        | Cloudflare account ID (blank to disable uploads)            |
+| `R2_ACCESS_KEY_ID`     | R2 access key                                               |
+| `R2_SECRET_ACCESS_KEY` | R2 secret key                                               |
+| `R2_BUCKET_NAME`       | R2 bucket name                                              |
+| `R2_PUBLIC_URL`        | e.g. `https://pub-abc123.r2.dev`                            |
 
----
+**Frontend (`app.`):**
 
-### 4. Connect the repository to Render via Blueprint
+| Variable              | Value                                                  |
+| --------------------- | ------------------------------------------------------ |
+| `NUXT_PUBLIC_API_URL` | `https://api.<domain>` (used by the browser)           |
+| `NUXT_API_URL`        | `https://api.<domain>` (used by SSR; no internal network on Plesk, so same URL) |
+| `FRONTEND_URL`        | `https://app.<domain>`                                 |
+| `NUXT_HOST`           | `0.0.0.0`                                               |
 
-1. In the Render dashboard, click **New** (or **Create new service**) and choose **Blueprint**
-2. Connect your GitHub account and select this repository
-3. Render detects `render.yaml` and previews three resources:
-   - `portfolio-builder-db` — PostgreSQL 17 managed database
-   - `portfolio-builder-backend` — Hono API (pulls from Docker Hub)
-   - `portfolio-builder-frontend` — Nuxt SSR (pulls from Docker Hub)
-4. Click **Apply** — resources are created but services won't be healthy yet (Docker images haven't been pushed yet and env vars are still missing)
+### 5. Build artifacts and commit them to `deploy`
 
----
-
-### 5. Get Render deploy hook URLs
-
-For each web service (backend and frontend):
-
-1. Go to the service in the Render dashboard
-2. Navigate to **Settings → Deploy Hook**
-3. Copy the hook URL and save it as the corresponding GitHub secret (`RENDER_DEPLOY_HOOK_BACKEND` / `RENDER_DEPLOY_HOOK_FRONTEND`)
-
----
-
-### 6. Generate required secrets
+On your machine (or in CI), with Node 22 + pnpm 11.1.3:
 
 ```bash
-# Generate BETTER_AUTH_SECRET (run locally)
-openssl rand -base64 32
+pnpm install
+pnpm --filter @portfolio-builder/shared build
+pnpm --filter frontend build        # → frontend/.output
+pnpm --filter backend build         # → backend/dist/server.js + backend/dist/package.json
 ```
 
----
-
-### 7. Set environment variables in Render
-
-#### Backend service (`portfolio-builder-backend`)
-
-**Settings → Environment** in the Render dashboard:
-
-| Variable               | Value                                                                              |
-| ---------------------- | ---------------------------------------------------------------------------------- |
-| `BETTER_AUTH_SECRET`   | Output from `openssl rand -base64 32`                                              |
-| `BETTER_AUTH_URL`      | Your backend's Render URL, e.g. `https://portfolio-builder-backend.onrender.com`   |
-| `FRONTEND_URL`         | Your frontend's Render URL, e.g. `https://portfolio-builder-frontend.onrender.com` |
-| `RESEND_API_KEY`       | Your Resend API key (leave blank to disable email)                                 |
-| `R2_ACCOUNT_ID`        | Cloudflare account ID (leave blank to disable file uploads)                        |
-| `R2_ACCESS_KEY_ID`     | R2 access key                                                                      |
-| `R2_SECRET_ACCESS_KEY` | R2 secret key                                                                      |
-| `R2_BUCKET_NAME`       | Your R2 bucket name                                                                |
-| `R2_PUBLIC_URL`        | Public bucket URL, e.g. `https://pub-abc123.r2.dev`                                |
-
-> `DATABASE_URL` is automatically injected by Render from the managed database — no action needed.
-
-#### Frontend service (`portfolio-builder-frontend`)
-
-| Variable              | Value                                                                            |
-| --------------------- | -------------------------------------------------------------------------------- |
-| `NUXT_PUBLIC_API_URL` | Your backend's public URL, e.g. `https://portfolio-builder-backend.onrender.com` |
-| `NUXT_API_URL`        | Same as above (on Render, SSR and client-side use the same URL)                  |
-| `FRONTEND_URL`        | Your frontend's Render URL                                                       |
-
----
-
-### 8. Run database migrations
-
-Once the backend service is running, apply migrations using the external database URL.
-
-Get it from: Render database dashboard → **Connect → External Database URL**
+On the `deploy` branch, `dist/` and `.output/` are **not** gitignored (they are on `main`). Commit them:
 
 ```bash
-DATABASE_URL="<external-connection-string>" pnpm db:migrate
-
-# Optional: seed initial data
-DATABASE_URL="<external-connection-string>" pnpm db:seed
+git checkout deploy
+git merge main                       # bring in source changes
+# rebuild as above, then:
+git add -f frontend/.output backend/dist
+git commit -m "build: deploy artifacts"
+git push                             # Plesk pulls and restarts both apps
 ```
 
----
+### 6. Native modules on the server (`sharp` + `mysql2`)
 
-### 9. Trigger the first deploy
+The backend bundle externalizes `sharp` and `mysql2`; the build emits a minimal `backend/dist/package.json` listing only those two. The server needs their **Linux-x64** binaries.
 
-Push any commit to `main` (or re-run the workflow manually in the **Actions** tab). GitHub Actions will:
-
-1. Run lint, typecheck, and build checks in parallel
-2. Build and push both Docker images to Docker Hub
-3. Ping each Render deploy hook with the exact image SHA, triggering a pull and redeploy
-
-Visit `https://<your-backend-url>/api/health` — it should return `{"status":"healthy"}` once the backend is up.
-
----
-
-## CI/CD pipeline details
-
-The pipeline is defined in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml).
-
-### Triggers
-
-| Event                         | Jobs that run                                                      |
-| ----------------------------- | ------------------------------------------------------------------ |
-| Pull request targeting `main` | `lint`, `typecheck`, `build`                                       |
-| Push to `main`                | `lint`, `typecheck`, `build` → `docker-backend`, `docker-frontend` |
-
-### Job flow
+**Preferred** — let Plesk install them. In the backend subdomain's **Run Node.js commands**, run (from the Application Root `backend/dist`):
 
 ```
-lint ──┐
-       ├──► docker-backend  ──► push to Docker Hub ──► trigger Render backend
-typecheck ─┤
-       ├──► docker-frontend ──► push to Docker Hub ──► trigger Render frontend
-build ─┘
+npm install --omit=dev
 ```
 
-The two Docker jobs run in parallel once all three check jobs pass. A failed lint or typecheck blocks the deploy.
+**Fallback** — if the Plesk hook can't run `npm install` (no npm / no outbound access): install the Linux binaries on a matching Linux x64 environment and commit `backend/dist/node_modules` to the `deploy` branch as well (`git add -f backend/dist/node_modules`). Do **not** commit macOS binaries — they won't run on the server.
 
-### Docker images
+> **Verify which path applies before relying on it:** test whether the "Run Node.js commands" field can run `npm install` on your Netcup plan.
 
-Each service has its own dedicated Dockerfile at the repo root.
+### 7. Run database migrations
 
-| Image               | Dockerfile            | Docker Hub tag                     |
-| ------------------- | --------------------- | ---------------------------------- |
-| Backend (Hono API)  | `Dockerfile.backend`  | `<you>/portfolio-builder-backend`  |
-| Frontend (Nuxt SSR) | `Dockerfile.frontend` | `<you>/portfolio-builder-frontend` |
+Once the database exists and is utf8mb4 (see above), apply migrations from your machine against the Netcup DB:
 
-Each push produces two tags:
+```bash
+DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:migrate
+DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:seed   # optional
+```
 
-- `:latest` — always points to the most recent build
-- `:<git-sha>` — pinned to the exact commit, used by the deploy hook for precise rollout
+If the DB isn't reachable externally, run the generated SQL in [`backend/migrations/`](../backend/migrations/) via phpMyAdmin.
 
-The deploy hook URL includes an `imgURL` query parameter with the SHA tag, so Render always pulls the image that matches the commit that triggered the build — not whatever `:latest` happens to be at pull time.
+### 8. First deploy
 
-Registry-based layer caching (`buildcache` tag) is used to keep build times fast on repeat runs.
+Push the `deploy` branch (step 5). Plesk pulls and restarts both apps. Then:
+
+```
+https://api.<domain>/api/health   →  {"status":"healthy","db":"connected"}
+https://app.<domain>/             →  the SSR frontend, fetching from the API
+```
 
 ---
 
 ## Subsequent deploys
 
-Every push to `main` automatically rebuilds and redeploys both services. No manual steps needed unless you add new database migrations.
+1. Merge/develop on `main`.
+2. Check out `deploy`, merge `main`, rebuild artifacts (step 5), commit, push.
+3. New DB migrations: `DATABASE_URL=… pnpm db:migrate` against the Netcup database.
 
-For new migrations after a deploy:
+A small helper script can automate the build-and-commit; until then the steps above are the source of truth.
+
+---
+
+## Local development
+
+Unchanged — local dev still uses Postgres-or-MySQL via your `.env`:
 
 ```bash
-DATABASE_URL="<external-connection-string>" pnpm db:migrate
+pnpm install
+cp .env.example .env     # fill in DATABASE_URL etc.
+pnpm db:migrate
+pnpm db:seed             # optional
+pnpm dev                 # frontend :3000, backend :3111
+```
+
+For a local MySQL matching production:
+
+```bash
+docker run -d --name pb-mysql -e MYSQL_ROOT_PASSWORD=root \
+  -e MYSQL_DATABASE=portfolio_builder -e MYSQL_USER=pb -e MYSQL_PASSWORD=pbpw \
+  -p 3307:3306 mysql:8.0 \
+  --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+# DATABASE_URL="mysql://pb:pbpw@127.0.0.1:3307/portfolio_builder"
 ```
 
 ---
 
-## Local development (Docker)
+## Notes on the migration from Render/Postgres
 
-Local dev is unaffected by the production Dockerfiles — `docker-compose.yml` overrides the CMD with dev-mode hot-reloading:
-
-```bash
-cp .env.example .env        # fill in your local secrets
-docker compose up --build
-```
-
-| Service    | URL                   |
-| ---------- | --------------------- |
-| Frontend   | http://localhost:3000 |
-| Backend    | http://localhost:3111 |
-| PostgreSQL | localhost:5433        |
-
-```bash
-pnpm db:migrate    # apply migrations to local DB
-pnpm db:seed       # optional: seed initial data
-```
+- The database moved from **PostgreSQL to MySQL 8**. Schema uses `varchar(36)` UUID primary keys (generated app-side via `crypto.randomUUID()`), `json` columns, `datetime` timestamps, and `bigint` byte counters. better-auth runs with `provider: 'mysql'` and keeps `varchar(255)` ids.
+- MySQL has no `RETURNING`; insert/update/delete endpoints generate the id app-side (or re-select) to return the affected row.
+- The old Docker/Render path (`Dockerfile.*`, `render.yaml`, the Docker jobs in CI) is no longer used for Netcup. The Dockerfiles still work for local `docker-compose` if desired.

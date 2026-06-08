@@ -23,11 +23,9 @@ export const mediaPatch = factory.createHandlers(async c => {
 
   if (!file) throw notFound('Media not found');
 
-  const [updated] = await db
-    .update(media)
-    .set({ filename: name, updatedAt: new Date() })
-    .where(eq(media.id, id))
-    .returning();
+  await db.update(media).set({ filename: name, updatedAt: new Date() }).where(eq(media.id, id));
+
+  const [updated] = await db.select().from(media).where(eq(media.id, id));
 
   return c.json({ media: updated });
 });

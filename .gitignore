@@ -1,7 +1,6 @@
 node_modules/
 .pnpm-store/
 .nuxt/
-dist/
 .output/
 *.log
 .env.local

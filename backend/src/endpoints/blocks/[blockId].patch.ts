@@ -51,11 +51,16 @@ export const blockPatch = factory.createHandlers(async c => {
     throw badRequest('Validation failed', result.error.issues);
   }
 
-  const [updated] = await db
+  await db
     .update(blocks)
     .set({ ...result.data, updatedAt: new Date() })
-    .where(and(eq(blocks.id, blockId), eq(blocks.pageId, page.id)))
-    .returning();
+    .where(and(eq(blocks.id, blockId), eq(blocks.pageId, page.id)));
+
+  // MySQL has no RETURNING — read the row back to confirm it existed and return it.
+  const [updated] = await db
+    .select()
+    .from(blocks)
+    .where(and(eq(blocks.id, blockId), eq(blocks.pageId, page.id)));
 
   if (!updated) {
     throw notFound('Block not found');
