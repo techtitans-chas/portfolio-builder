@@ -126,14 +126,24 @@ npm install --omit=dev
 
 ### 7. Run database migrations
 
-Once the database exists and is utf8mb4 (see above), apply migrations from your machine against the Netcup DB:
+> Migrations are **not** run on Plesk (Plesk has `npm` but no `pnpm`, and no project tooling). They run either from your own machine or directly through phpMyAdmin. Pick the route that matches your DB access.
+
+**Which route?** Check the DB host in Plesk → Databases. A `localhost` / `127.0.0.1` / private `10.x.x.x` host means external connections are off → use Route A. A public hostname/IP means Route B may work.
+
+**Route A — phpMyAdmin (no tooling, always works):**
+
+1. phpMyAdmin → select your database → **SQL** tab → run the `utf8mb4` `ALTER DATABASE` (see the utf8mb4 section above) **first**.
+2. → **Import** tab → upload [`backend/migrations/0000_nebulous_layla_miller.sql`](../backend/migrations/) → **Go**. This creates all 11 tables.
+3. Seeding uses Node, so it only works with an external connection (Route B). Otherwise skip it and let the app create data.
+
+**Route B — from your machine (only if the DB is reachable externally):**
 
 ```bash
 DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:migrate
 DATABASE_URL="mysql://user:pass@host:3306/dbname" pnpm db:seed   # optional
 ```
 
-If the DB isn't reachable externally, run the generated SQL in [`backend/migrations/`](../backend/migrations/) via phpMyAdmin.
+> Note: the migration filename above may differ if the schema is regenerated — use the latest `.sql` file in [`backend/migrations/`](../backend/migrations/).
 
 ### 8. First deploy
 
