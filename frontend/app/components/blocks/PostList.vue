@@ -3,23 +3,44 @@ import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
-import type { BlockStyleProps } from '~/config/blocks/types';
-import { styleDefaults } from '~/config/blocks/presets';
-
-export interface PostListBlockProps extends BlockStyleProps {
-  heading?: string;
-  showHeading?: boolean;
-  collectionId?: string;
-  filterTag?: string;
-}
-
-const props = withDefaults(defineProps<PostListBlockProps>(), {
-  heading: 'Posts',
-  showHeading: true,
-  collectionId: '',
-  filterTag: '',
-  ...styleDefaults,
-});
+const props = withDefaults(
+  defineProps<{
+    background?: string | null;
+    backgroundImage?: string | null;
+    backgroundOpacity?: number;
+    backgroundFixed?: boolean;
+    overlayEnabled?: boolean;
+    overlayType?: 'solid' | 'gradient';
+    overlayColor?: string | null;
+    overlayColor2?: string | null;
+    overlayDegree?: number;
+    overlayOpacity?: number;
+    surfaceColor?: string | null;
+    heading?: string;
+    showHeading?: boolean;
+    collectionId?: string;
+    filterTag?: string;
+    maxItems?: number;
+  }>(),
+  {
+    background: null,
+    backgroundImage: null,
+    backgroundOpacity: 100,
+    backgroundFixed: false,
+    overlayEnabled: false,
+    overlayType: 'solid',
+    overlayColor: null,
+    overlayColor2: null,
+    overlayDegree: 180,
+    overlayOpacity: 40,
+    surfaceColor: null,
+    heading: 'Posts',
+    showHeading: true,
+    collectionId: '',
+    filterTag: '',
+    maxItems: 5,
+  },
+);
 
 const slug = inject(portfolioSlugKey, '');
 const config = useRuntimeConfig();
@@ -58,9 +79,10 @@ const hasDetailPage = !!getCollectionType('posts')?.pageTemplate;
 
 const posts = computed(() => {
   const all = data.value?.items ?? [];
-  return props.filterTag
+  const filtered = props.filterTag
     ? all.filter(p => (p.data.tags as string[] | undefined)?.includes(props.filterTag!))
     : all;
+  return props.maxItems ? filtered.slice(0, props.maxItems) : filtered;
 });
 </script>
 

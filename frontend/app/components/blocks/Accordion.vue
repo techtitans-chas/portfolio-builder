@@ -1,28 +1,48 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
-import type { BlockStyleProps } from '~/config/blocks/types';
-import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
-export interface AccordionItem {
+interface AccordionItem {
   id?: string;
   question: string;
   answer: string;
 }
 
-export interface AccordionBlockProps extends BlockStyleProps {
-  heading?: string;
-  showHeading?: boolean;
-  items?: AccordionItem[];
-}
-
-const props = withDefaults(defineProps<AccordionBlockProps>(), {
-  heading: 'FAQ',
-  showHeading: true,
-  items: () => [],
-  ...styleDefaults,
-});
+const props = withDefaults(
+  defineProps<{
+    background?: string | null;
+    backgroundImage?: string | null;
+    backgroundOpacity?: number;
+    backgroundFixed?: boolean;
+    overlayEnabled?: boolean;
+    overlayType?: 'solid' | 'gradient';
+    overlayColor?: string | null;
+    overlayColor2?: string | null;
+    overlayDegree?: number;
+    overlayOpacity?: number;
+    surfaceColor?: string | null;
+    heading?: string;
+    showHeading?: boolean;
+    items?: AccordionItem[];
+  }>(),
+  {
+    background: null,
+    backgroundImage: null,
+    backgroundOpacity: 100,
+    backgroundFixed: false,
+    overlayEnabled: false,
+    overlayType: 'solid',
+    overlayColor: null,
+    overlayColor2: null,
+    overlayDegree: 180,
+    overlayOpacity: 40,
+    surfaceColor: null,
+    heading: 'FAQ',
+    showHeading: true,
+    items: () => [],
+  },
+);
 
 const { maxContentWidth } = useLayoutSettings();
 const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);

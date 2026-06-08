@@ -1,20 +1,40 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
-import type { BlockStyleProps } from '~/config/blocks/types';
-import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
-export interface TextBlockProps extends BlockStyleProps {
-  content?: string;
-  align?: 'left' | 'center' | 'right';
-}
-
-const props = withDefaults(defineProps<TextBlockProps>(), {
-  content: '',
-  align: 'left',
-  ...styleDefaults,
-});
+const props = withDefaults(
+  defineProps<{
+    background?: string | null;
+    backgroundImage?: string | null;
+    backgroundOpacity?: number;
+    backgroundFixed?: boolean;
+    overlayEnabled?: boolean;
+    overlayType?: 'solid' | 'gradient';
+    overlayColor?: string | null;
+    overlayColor2?: string | null;
+    overlayDegree?: number;
+    overlayOpacity?: number;
+    surfaceColor?: string | null;
+    content?: string;
+    align?: 'left' | 'center' | 'right';
+  }>(),
+  {
+    background: null,
+    backgroundImage: null,
+    backgroundOpacity: 100,
+    backgroundFixed: false,
+    overlayEnabled: false,
+    overlayType: 'solid',
+    overlayColor: null,
+    overlayColor2: null,
+    overlayDegree: 180,
+    overlayOpacity: 40,
+    surfaceColor: null,
+    content: '',
+    align: 'left',
+  },
+);
 
 const inEditor = Boolean(inject(inlineEditorKey, null));
 

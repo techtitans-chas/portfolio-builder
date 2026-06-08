@@ -1,30 +1,50 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
-import type { BlockStyleProps } from '~/config/blocks/types';
-import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
-export interface SkillItem {
+interface SkillItem {
   id?: string;
   name: string;
   level: string;
   category: string;
 }
 
-export interface SkillsBlockProps extends BlockStyleProps {
-  heading?: string;
-  showHeading?: boolean;
-  columns?: '1' | '2';
-  skills?: SkillItem[];
-}
-
-const props = withDefaults(defineProps<SkillsBlockProps>(), {
-  heading: 'Skills & Expertise',
-  showHeading: true,
-  columns: '2',
-  skills: () => [],
-  ...styleDefaults,
-});
+const props = withDefaults(
+  defineProps<{
+    background?: string | null;
+    backgroundImage?: string | null;
+    backgroundOpacity?: number;
+    backgroundFixed?: boolean;
+    overlayEnabled?: boolean;
+    overlayType?: 'solid' | 'gradient';
+    overlayColor?: string | null;
+    overlayColor2?: string | null;
+    overlayDegree?: number;
+    overlayOpacity?: number;
+    surfaceColor?: string | null;
+    heading?: string;
+    showHeading?: boolean;
+    columns?: '1' | '2';
+    skills?: SkillItem[];
+  }>(),
+  {
+    background: null,
+    backgroundImage: null,
+    backgroundOpacity: 100,
+    backgroundFixed: false,
+    overlayEnabled: false,
+    overlayType: 'solid',
+    overlayColor: null,
+    overlayColor2: null,
+    overlayDegree: 180,
+    overlayOpacity: 40,
+    surfaceColor: null,
+    heading: 'Skills & Expertise',
+    showHeading: true,
+    columns: '2',
+    skills: () => [],
+  },
+);
 
 const { maxContentWidth } = useLayoutSettings();
 const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);

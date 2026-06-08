@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
-import type { BlockStyleProps } from '~/config/blocks/types';
-import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
-export interface TestimonialItem {
+interface TestimonialItem {
   id?: string;
   quote: string;
   author: string;
@@ -13,20 +11,42 @@ export interface TestimonialItem {
   avatar?: string | null;
 }
 
-export interface TestimonialBlockProps extends BlockStyleProps {
-  heading?: string;
-  showHeading?: boolean;
-  autoplay?: boolean;
-  items?: TestimonialItem[];
-}
-
-const props = withDefaults(defineProps<TestimonialBlockProps>(), {
-  heading: 'What people say',
-  showHeading: true,
-  autoplay: false,
-  items: () => [],
-  ...styleDefaults,
-});
+const props = withDefaults(
+  defineProps<{
+    background?: string | null;
+    backgroundImage?: string | null;
+    backgroundOpacity?: number;
+    backgroundFixed?: boolean;
+    overlayEnabled?: boolean;
+    overlayType?: 'solid' | 'gradient';
+    overlayColor?: string | null;
+    overlayColor2?: string | null;
+    overlayDegree?: number;
+    overlayOpacity?: number;
+    surfaceColor?: string | null;
+    heading?: string;
+    showHeading?: boolean;
+    autoplay?: boolean;
+    items?: TestimonialItem[];
+  }>(),
+  {
+    background: null,
+    backgroundImage: null,
+    backgroundOpacity: 100,
+    backgroundFixed: false,
+    overlayEnabled: false,
+    overlayType: 'solid',
+    overlayColor: null,
+    overlayColor2: null,
+    overlayDegree: 180,
+    overlayOpacity: 40,
+    surfaceColor: null,
+    heading: 'What people say',
+    showHeading: true,
+    autoplay: false,
+    items: () => [],
+  },
+);
 
 const { maxContentWidth } = useLayoutSettings();
 const maxWidthClass = computed(() => MAX_CONTENT_WIDTH_CLASS[maxContentWidth.value]);
