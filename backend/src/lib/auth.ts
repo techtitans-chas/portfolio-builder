@@ -51,6 +51,7 @@ export const auth = betterAuth({
   ],
   advanced: {
     cookiePrefix: 'better-auth',
+    useSecureCookies: false,
     crossSubDomainCookies: {
       enabled: true,
       domain: '.starlitepixels.com',
