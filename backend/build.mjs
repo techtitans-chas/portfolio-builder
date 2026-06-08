@@ -13,7 +13,7 @@ const NATIVE_DEPS = ['sharp', 'mysql2'];
 
 await build({
   entryPoints: ['src/server.ts'],
-  outfile: 'dist/server.js',
+  outfile: 'dist/server.mjs',
   bundle: true,
   platform: 'node',
   format: 'esm',
@@ -36,8 +36,8 @@ const deployPkg = {
   name: 'backend',
   type: 'module',
   private: true,
-  main: 'server.js',
-  scripts: { start: 'node server.js' },
+  main: 'server.mjs',
+  scripts: { start: 'node server.mjs' },
   dependencies: Object.fromEntries(NATIVE_DEPS.map(d => [d, srcPkg.dependencies[d]])),
 };
 writeFileSync('dist/package.json', JSON.stringify(deployPkg, null, 2) + '\n');
