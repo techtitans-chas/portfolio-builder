@@ -50,6 +50,7 @@ export const registerPost = factory.createHandlers(async c => {
   await db.insert(portfolios).values({
     userId: signUpResult.user.id,
     slug,
+    title: name || 'My Portfolio',
   });
 
   return c.json(
