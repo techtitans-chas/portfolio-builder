@@ -52,6 +52,7 @@ export const postCardsDefinition: BlockDefinition = {
               min: 2,
               max: 12,
               step: 2,
+              unit: '',
             },
           ],
         },
@@ -91,6 +92,7 @@ export const postFeedDefinition: BlockDefinition = {
               min: 2,
               max: 12,
               step: 2,
+              unit: '',
             },
           ],
         },
@@ -111,13 +113,30 @@ export const postListDefinition: BlockDefinition = {
     showHeading: true,
     collectionId: '',
     filterTag: '',
+    maxItems: 5,
     ...styleDefaults,
   },
   tabs: [
     {
       label: 'Content',
       icon: 'i-lucide-text',
-      sections: [{ label: 'Settings', fields: sharedFields }],
+      sections: [
+        {
+          label: 'Settings',
+          fields: [
+            ...sharedFields,
+            {
+              key: 'maxItems',
+              label: 'Max items',
+              type: 'slider' as const,
+              min: 1,
+              max: 20,
+              step: 1,
+              unit: '',
+            },
+          ],
+        },
+      ],
     },
     styleTab,
   ],
