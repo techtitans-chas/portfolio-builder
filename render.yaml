@@ -57,6 +57,8 @@ services:
         value: production
       - key: NUXT_HOST
         value: '0.0.0.0'
+      - key: PORT
+        value: '3000'
       - key: NUXT_PUBLIC_API_URL
         sync: false
       - key: NUXT_API_URL
