@@ -21,7 +21,7 @@ export const auth = betterAuth({
       const { resend } = await import('./resend.js');
       if (!resend) return;
       await resend.emails.send({
-        from: 'Portfolio Builder <onboarding@resend.dev>',
+        from: 'Starta Website Builder <starta-noreply@starlitepixels.com>',
         to: user.email,
         subject: 'Reset your password',
         html: `<p>Click the link below to reset your password. This link expires in 1 hour.</p><p><a href="${url}">${url}</a></p>`,
@@ -34,7 +34,7 @@ export const auth = betterAuth({
       const { resend } = await import('./resend.js');
       if (!resend) return;
       await resend.emails.send({
-        from: 'Portfolio Builder <onboarding@resend.dev>',
+        from: 'Starta Website Builder <starta-noreply@starlitepixels.com>',
         to: user.email,
         subject: 'Verify your email address',
         html: `<p>Click the link below to verify your email address:</p><p><a href="${url}">${url}</a></p>`,
