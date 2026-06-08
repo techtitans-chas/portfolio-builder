@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { prerender: true },
+    '/': { prerender: process.env.NUXT_PRERENDER === 'true' },
   },
 
   compatibilityDate: '2025-01-15',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
@@ -11,7 +11,7 @@ export interface SkillItem {
   category: string;
 }
 
-export interface SkillsBlockProps extends BlockStyleWithSurfaceProps {
+export interface SkillsBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   columns?: '1' | '2';

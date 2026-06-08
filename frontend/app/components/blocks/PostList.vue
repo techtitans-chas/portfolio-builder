@@ -3,10 +3,10 @@ import type { CollectionItem } from '@portfolio-builder/shared/types';
 import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
 
-export interface PostListBlockProps extends BlockStyleWithSurfaceProps {
+export interface PostListBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   collectionId?: string;

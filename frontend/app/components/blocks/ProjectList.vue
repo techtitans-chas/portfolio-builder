@@ -4,10 +4,10 @@ import { getCollectionType } from '@portfolio-builder/shared/types';
 import { portfolioSlugKey } from '~/utils/portfolioSlug';
 import { visibleTags } from '~/utils/sanitize';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
 
-export interface ProjectListBlockProps extends BlockStyleWithSurfaceProps {
+export interface ProjectListBlockProps extends BlockStyleProps {
   heading?: string;
   showHeading?: boolean;
   filterTag?: string;

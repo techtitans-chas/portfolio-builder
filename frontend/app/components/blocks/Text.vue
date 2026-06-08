@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { inlineEditorKey } from '~/utils/inlineEditor';
 import { sanitizeHtml } from '~/utils/sanitize';
-import type { BlockStyleWithSurfaceProps } from '~/config/blocks/types';
+import type { BlockStyleProps } from '~/config/blocks/types';
 import { styleDefaults } from '~/config/blocks/presets';
 import { useLayoutSettings, MAX_CONTENT_WIDTH_CLASS } from '~/composables/useLayoutSettings';
 
-export interface TextBlockProps extends BlockStyleWithSurfaceProps {
+export interface TextBlockProps extends BlockStyleProps {
   content?: string;
   align?: 'left' | 'center' | 'right';
 }

@@ -2,7 +2,7 @@ import type { Component } from 'vue';
 import type { ButtonStyleValue } from '~/components/pagebuilder/ButtonStyleModal.vue';
 export type { ButtonStyleValue };
 
-/** Shared style props present on every block that uses the styleTab preset. */
+/** Style props shared by all blocks. */
 export interface BlockStyleProps {
   background?: string | null;
   backgroundImage?: string | null;
@@ -14,10 +14,6 @@ export interface BlockStyleProps {
   overlayColor2?: string | null;
   overlayDegree?: number;
   overlayOpacity?: number;
-}
-
-/** Extended style props for blocks that also have a surface color. */
-export interface BlockStyleWithSurfaceProps extends BlockStyleProps {
   surfaceColor?: string | null;
 }
 
