@@ -68,7 +68,34 @@ function setBlockRef(id: string, el: unknown) {
 watch(selectedBlock, async block => {
   if (!block) return;
   await nextTick();
-  blockEls.value[block.id]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const blockEl = blockEls.value[block.id];
+  if (!blockEl) return;
+
+  // Find the scroll container (previewCanvas) and the scaled wrapper (previewEl).
+  // previewEl has CSS transform: scale() applied — getBoundingClientRect reflects the
+  // visual (scaled) position, which is what we want for scroll target calculation.
+  // scrollIntoView() operates on unscaled layout coordinates and overshoots when scale < 1.
+  const canvas = blockEl.closest<HTMLElement>('.overflow-auto');
+  if (!canvas) {
+    blockEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+
+  const canvasRect = canvas.getBoundingClientRect();
+  const blockRect = blockEl.getBoundingClientRect();
+
+  // Visual top of block relative to the canvas scroll container
+  const blockVisualTop = blockRect.top - canvasRect.top + canvas.scrollTop;
+  const blockVisualHeight = blockRect.height;
+  const canvasHeight = canvas.clientHeight;
+  const currentScrollTop = canvas.scrollTop;
+
+  const isAbove = blockVisualTop < currentScrollTop;
+  const isBelow = blockVisualTop + blockVisualHeight > currentScrollTop + canvasHeight;
+  if (isAbove || isBelow) {
+    const target = blockVisualTop - canvasHeight / 2 + blockVisualHeight / 2;
+    canvas.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+  }
 });
 const { addPendingBlock, pendingNewBlocks, queueDeletion, setBlockContent, pendingContentEdits } =
   usePageEditor();

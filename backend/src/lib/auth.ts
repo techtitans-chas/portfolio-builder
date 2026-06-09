@@ -51,15 +51,15 @@ export const auth = betterAuth({
   ],
   advanced: {
     cookiePrefix: 'better-auth',
-    useSecureCookies: false,
+    useSecureCookies: process.env.NODE_ENV === 'production',
     crossSubDomainCookies: {
-      enabled: true,
+      enabled: process.env.NODE_ENV === 'production',
       domain: '.starlitepixels.com',
     },
-    defaultCookieAttributes: {
-      sameSite: 'none',
-      secure: true,
-    },
+    defaultCookieAttributes:
+      process.env.NODE_ENV === 'production'
+        ? { sameSite: 'none' as const, secure: true }
+        : { sameSite: 'lax' as const, secure: false },
   },
 });
 

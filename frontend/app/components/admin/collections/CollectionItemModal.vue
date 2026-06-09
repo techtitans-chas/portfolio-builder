@@ -155,6 +155,7 @@ async function save() {
         <!-- Tab switcher — only shown for collection types with a detail page -->
         <UTabs
           v-if="hasDetailPage"
+          color="neutral"
           :items="[
             { label: 'Fields', value: 'fields' },
             { label: 'Page', value: 'page' },

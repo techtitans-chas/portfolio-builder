@@ -111,7 +111,7 @@ defineExpose({ themeSettings, isThemeDirty, layersView });
     <div class="p-3 border-b border-default shrink-0">
       <UTabs
         v-model="currentView"
-        color="success"
+        color="neutral"
         :content="false"
         :items="panelViews"
         class="w-full"

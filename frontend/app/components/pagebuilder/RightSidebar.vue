@@ -370,6 +370,7 @@ function setValue(key: string, value: unknown) {
               />
               <USwitch
                 v-else-if="field.type === 'switch'"
+                color="neutral"
                 :model-value="(getValue(field.key) as boolean) ?? false"
                 size="sm"
                 @update:model-value="setValue(field.key, $event)"
@@ -377,6 +378,7 @@ function setValue(key: string, value: unknown) {
               <div v-else-if="field.type === 'slider'" class="flex items-center gap-2">
                 <USlider
                   :model-value="(getValue(field.key) as number) ?? field.min ?? 0"
+                  color="neutral"
                   :min="field.min ?? 0"
                   :max="field.max ?? 100"
                   :step="field.step ?? 1"

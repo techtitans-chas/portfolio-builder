@@ -80,7 +80,9 @@ const bottomLinks = [
     :ui="{ header: 'border-b border-default' }"
   >
     <template #header="{ collapsed }">
-      <span v-if="!collapsed" class="truncate text-sm font-medium flex-1">My Portfolio</span>
+      <span v-if="!collapsed" class="truncate text-sm font-medium flex-1">
+        <AppLogo />
+      </span>
       <UDashboardSidebarCollapse :class="collapsed ? 'mx-auto' : 'ml-auto'" />
     </template>
 

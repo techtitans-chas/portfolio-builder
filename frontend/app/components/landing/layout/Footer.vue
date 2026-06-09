@@ -8,28 +8,20 @@
 
     <template #right>
       <UButton
-        icon="i-simple-icons-discord"
+        icon="i-simple-icons-github"
         color="neutral"
         variant="ghost"
-        to="https://go.nuxt.com/discord"
+        to="https://github.com/idaohlen"
         target="_blank"
-        aria-label="Discord"
-      />
-      <UButton
-        icon="i-simple-icons-x"
-        color="neutral"
-        variant="ghost"
-        to="https://go.nuxt.com/x"
-        target="_blank"
-        aria-label="X"
+        aria-label="Ida Öhlén"
       />
       <UButton
         icon="i-simple-icons-github"
         color="neutral"
         variant="ghost"
-        to="https://github.com/nuxt/nuxt"
+        to="https://github.com/martinsodersten"
         target="_blank"
-        aria-label="GitHub"
+        aria-label="Martin Södersten"
       />
       <UColorModeButton />
     </template>

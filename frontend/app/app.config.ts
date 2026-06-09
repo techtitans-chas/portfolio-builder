@@ -1,4 +1,13 @@
 export default defineAppConfig({
+  app: {
+    head: {
+      title: 'Starta Website Builder',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.svg' }],
+    },
+  },
   ui: {
     colors: {
       primary: 'teal',
