@@ -9,41 +9,27 @@ import { auth } from './lib/auth.js';
 import router from './router.js';
 
 const env = validateBackendEnv();
-const PORT = parseInt(env.PORT ?? '3111', 10);
+// Passenger injects PORT automatically; fall back to 3111 for local dev.
+const PORT = parseInt(process.env.PORT ?? env.PORT ?? '3111', 10);
 
-async function startServer(): Promise<void> {
-  const app = new Hono();
+const app = new Hono();
 
-  app.use('*', cors(corsOptions));
-  app.use(prettyJSON());
-  app.onError(onError);
+app.use('*', cors(corsOptions));
+app.use(prettyJSON());
+app.onError(onError);
 
-  app.route('/', router);
-  app.on(['GET', 'POST', 'OPTIONS'], '/api/auth/*', c => auth.handler(c.req.raw));
+app.route('/', router);
+app.on(['GET', 'POST', 'OPTIONS'], '/api/auth/*', c => auth.handler(c.req.raw));
 
-  const server = serve({
+serve(
+  {
     fetch: app.fetch,
-    port: Number(PORT),
-  });
+    port: PORT,
+  },
+  () => {
+    console.log(`Backend API running on http://localhost:${PORT}`);
+  },
+);
 
-  console.log(`Backend API running on http://localhost:${PORT}`);
-
-  process.on('SIGINT', () => {
-    server.close();
-    process.exit(0);
-  });
-  process.on('SIGTERM', () => {
-    server.close(err => {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-      process.exit(0);
-    });
-  });
-}
-
-startServer().catch(error => {
-  console.error('Failed to start backend API', error);
-  process.exit(1);
-});
+process.on('SIGINT', () => process.exit(0));
+process.on('SIGTERM', () => process.exit(0));

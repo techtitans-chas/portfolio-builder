@@ -88,10 +88,9 @@ export const pagesPost = factory.createHandlers(async c => {
 
   const sortOrder = (maxRow?.maxOrder ?? -1) + 1;
 
-  const [created] = await db
-    .insert(pages)
-    .values({ portfolioId: portfolio.id, title, slug, sortOrder, ...rest })
-    .returning();
+  const id = crypto.randomUUID();
+  await db.insert(pages).values({ id, portfolioId: portfolio.id, title, slug, sortOrder, ...rest });
+  const [created] = await db.select().from(pages).where(eq(pages.id, id));
 
   return c.json({ page: created }, 201);
 });

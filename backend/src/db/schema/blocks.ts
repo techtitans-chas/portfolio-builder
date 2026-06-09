@@ -1,18 +1,28 @@
-import { pgTable, uuid, text, real, jsonb, boolean, timestamp } from 'drizzle-orm/pg-core';
+import { mysqlTable, varchar, text, real, json, boolean, datetime } from 'drizzle-orm/mysql-core';
 import { pages } from './pages.js';
 
-export const blocks = pgTable('blocks', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  pageId: uuid('page_id')
+export const blocks = mysqlTable('blocks', {
+  id: varchar('id', { length: 36 })
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  pageId: varchar('page_id', { length: 36 })
     .notNull()
     .references(() => pages.id, { onDelete: 'cascade' }),
   type: text('type').notNull(),
   name: text('name'),
   sortOrder: real('sort_order').notNull().default(0),
-  content: jsonb('content').notNull().default({}),
-  styles: jsonb('styles').notNull().default({}),
+  content: json('content')
+    .notNull()
+    .$defaultFn(() => ({})),
+  styles: json('styles')
+    .notNull()
+    .$defaultFn(() => ({})),
   isVisible: boolean('is_visible').notNull().default(true),
   isMandatory: boolean('is_mandatory').notNull().default(false),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  createdAt: datetime('created_at')
+    .notNull()
+    .$defaultFn(() => new Date()),
+  updatedAt: datetime('updated_at')
+    .notNull()
+    .$defaultFn(() => new Date()),
 });

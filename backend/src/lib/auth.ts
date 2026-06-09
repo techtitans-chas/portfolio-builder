@@ -5,7 +5,7 @@ import * as schema from '../db/schema/index.js';
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
-    provider: 'pg',
+    provider: 'mysql',
     schema: {
       user: schema.users,
       session: schema.sessions,
@@ -21,7 +21,7 @@ export const auth = betterAuth({
       const { resend } = await import('./resend.js');
       if (!resend) return;
       await resend.emails.send({
-        from: 'Portfolio Builder <onboarding@resend.dev>',
+        from: 'Starta Website Builder <starta-noreply@starlitepixels.com>',
         to: user.email,
         subject: 'Reset your password',
         html: `<p>Click the link below to reset your password. This link expires in 1 hour.</p><p><a href="${url}">${url}</a></p>`,
@@ -34,7 +34,7 @@ export const auth = betterAuth({
       const { resend } = await import('./resend.js');
       if (!resend) return;
       await resend.emails.send({
-        from: 'Portfolio Builder <onboarding@resend.dev>',
+        from: 'Starta Website Builder <starta-noreply@starlitepixels.com>',
         to: user.email,
         subject: 'Verify your email address',
         html: `<p>Click the link below to verify your email address:</p><p><a href="${url}">${url}</a></p>`,
@@ -45,8 +45,22 @@ export const auth = betterAuth({
   trustedOrigins: [
     process.env.BETTER_AUTH_URL ?? 'http://localhost:3111',
     process.env.FRONTEND_URL ?? 'http://localhost:3000',
+    'https://starta.starlitepixels.com',
+    'https://starta-api.starlitepixels.com',
     'http://0.0.0.0:3000',
   ],
+  advanced: {
+    cookiePrefix: 'better-auth',
+    useSecureCookies: false,
+    crossSubDomainCookies: {
+      enabled: true,
+      domain: '.starlitepixels.com',
+    },
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+    },
+  },
 });
 
 export type Auth = typeof auth;

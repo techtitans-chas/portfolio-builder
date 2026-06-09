@@ -33,14 +33,19 @@ export const collectionItemDelete = factory.createHandlers(async c => {
     throw notFound('Collection not found');
   }
 
-  const [deleted] = await db
-    .delete(collectionItems)
-    .where(and(eq(collectionItems.id, itemId), eq(collectionItems.collectionId, collectionId)))
-    .returning({ id: collectionItems.id });
+  // MySQL has no RETURNING — confirm the row exists, then delete.
+  const [existing] = await db
+    .select({ id: collectionItems.id })
+    .from(collectionItems)
+    .where(and(eq(collectionItems.id, itemId), eq(collectionItems.collectionId, collectionId)));
 
-  if (!deleted) {
+  if (!existing) {
     throw notFound('Item not found');
   }
 
-  return c.json({ id: deleted.id });
+  await db
+    .delete(collectionItems)
+    .where(and(eq(collectionItems.id, itemId), eq(collectionItems.collectionId, collectionId)));
+
+  return c.json({ id: existing.id });
 });

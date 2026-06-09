@@ -36,11 +36,15 @@ export const collectionPatch = factory.createHandlers(async c => {
     throw badRequest('Validation failed', result.error.issues);
   }
 
-  const [updated] = await db
+  await db
     .update(collections)
     .set({ ...result.data, updatedAt: new Date() })
-    .where(and(eq(collections.id, id), eq(collections.portfolioId, portfolio.id)))
-    .returning();
+    .where(and(eq(collections.id, id), eq(collections.portfolioId, portfolio.id)));
+
+  const [updated] = await db
+    .select()
+    .from(collections)
+    .where(and(eq(collections.id, id), eq(collections.portfolioId, portfolio.id)));
 
   if (!updated) {
     throw notFound('Collection not found');

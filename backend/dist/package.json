@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5",
+    "mysql2": "^3.22.5"
+  }
+}

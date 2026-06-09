@@ -41,15 +41,15 @@ export const collectionsPost = factory.createHandlers(async c => {
     throw badRequest('Unknown collection type');
   }
 
-  const [created] = await db
-    .insert(collections)
-    .values({
-      portfolioId: portfolio.id,
-      type: result.data.type,
-      name: result.data.name || knownType.label,
-      sortOrder: result.data.sortOrder ?? 0,
-    })
-    .returning();
+  const id = crypto.randomUUID();
+  await db.insert(collections).values({
+    id,
+    portfolioId: portfolio.id,
+    type: result.data.type,
+    name: result.data.name || knownType.label,
+    sortOrder: result.data.sortOrder ?? 0,
+  });
+  const [created] = await db.select().from(collections).where(eq(collections.id, id));
 
   return c.json({ collection: created }, 201);
 });

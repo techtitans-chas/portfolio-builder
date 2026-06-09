@@ -13,9 +13,14 @@ COPY frontend/nuxt.config.ts ./frontend/
 
 RUN pnpm install --frozen-lockfile
 
+# ── Shared build ─────────────────────────────────────────────────────────────
+FROM base AS shared-build
+COPY shared/ ./shared/
+RUN pnpm --filter @portfolio-builder/shared build
+
 # ── Backend target ────────────────────────────────────────────────────────────
 FROM base AS backend
-COPY shared/ ./shared/
+COPY --from=shared-build /app/shared/ ./shared/
 COPY backend/ ./backend/
 RUN pnpm --filter backend build
 EXPOSE 3111
@@ -23,7 +28,7 @@ CMD ["node", "./backend/dist/server.js"]
 
 # ── Frontend target ───────────────────────────────────────────────────────────
 FROM base AS frontend
-COPY shared/ ./shared/
+COPY --from=shared-build /app/shared/ ./shared/
 COPY frontend/ ./frontend/
 ENV NUXT_HOST=0.0.0.0
 ENV NODE_OPTIONS=--max-old-space-size=4096

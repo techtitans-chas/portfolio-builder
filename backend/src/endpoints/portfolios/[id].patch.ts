@@ -56,11 +56,15 @@ export const portfolioPatch = factory.createHandlers(async c => {
     throw badRequest('Validation failed', result.error.issues);
   }
 
-  const [updated] = await db
+  await db
     .update(portfolios)
     .set({ ...result.data, updatedAt: new Date() })
-    .where(and(eq(portfolios.id, id), eq(portfolios.userId, session.user.id)))
-    .returning();
+    .where(and(eq(portfolios.id, id), eq(portfolios.userId, session.user.id)));
+
+  const [updated] = await db
+    .select()
+    .from(portfolios)
+    .where(and(eq(portfolios.id, id), eq(portfolios.userId, session.user.id)));
 
   if (!updated) {
     throw notFound('Portfolio not found');

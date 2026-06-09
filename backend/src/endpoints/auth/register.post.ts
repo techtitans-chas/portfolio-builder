@@ -6,6 +6,7 @@ import { db } from '../../db/client.js';
 import { users, portfolios } from '../../db/schema/index.js';
 import { conflict, badRequest, parseBody, AppError } from '../../utils/errorHandling.js';
 import { resendEnabled } from '../../lib/resend.js';
+import { createDefaultPortfolioContent } from '../../db/createDefaultPortfolioContent.js';
 
 export const registerPost = factory.createHandlers(async c => {
   if (!resendEnabled) {
@@ -46,11 +47,16 @@ export const registerPost = factory.createHandlers(async c => {
     throw badRequest('Registration failed');
   }
 
-  // Create linked portfolio
+  // Create linked portfolio with default pages and blocks
+  const portfolioTitle = name || 'My Portfolio';
+  const portfolioId = crypto.randomUUID();
   await db.insert(portfolios).values({
+    id: portfolioId,
     userId: signUpResult.user.id,
     slug,
+    title: portfolioTitle,
   });
+  await createDefaultPortfolioContent(portfolioId, portfolioTitle);
 
   return c.json(
     { message: 'Registration successful. Please check your email to verify your account.' },

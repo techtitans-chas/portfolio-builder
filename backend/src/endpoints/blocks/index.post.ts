@@ -60,10 +60,10 @@ export const blocksPost = factory.createHandlers(async c => {
     sortOrder = (maxRow?.maxOrder ?? -1) + 1;
   }
 
-  const [created] = await db
-    .insert(blocks)
-    .values({ pageId: page.id, sortOrder, ...rest })
-    .returning();
+  // MySQL has no RETURNING — generate the id app-side, insert, then read it back.
+  const id = crypto.randomUUID();
+  await db.insert(blocks).values({ id, pageId: page.id, sortOrder, ...rest });
+  const [created] = await db.select().from(blocks).where(eq(blocks.id, id));
 
   return c.json({ block: created }, 201);
 });

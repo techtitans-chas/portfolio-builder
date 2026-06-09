@@ -71,11 +71,15 @@ export const pagePatch = factory.createHandlers(async c => {
     }
   }
 
-  const [updated] = await db
+  await db
     .update(pages)
     .set({ ...rest, ...(slug ? { slug } : {}), updatedAt: new Date() })
-    .where(and(eq(pages.id, pageId), eq(pages.portfolioId, portfolio.id)))
-    .returning();
+    .where(and(eq(pages.id, pageId), eq(pages.portfolioId, portfolio.id)));
+
+  const [updated] = await db
+    .select()
+    .from(pages)
+    .where(and(eq(pages.id, pageId), eq(pages.portfolioId, portfolio.id)));
 
   if (!updated) {
     throw notFound('Page not found');

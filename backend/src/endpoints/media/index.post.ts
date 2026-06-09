@@ -300,17 +300,18 @@ export const mediaPost = factory.createHandlers(async c => {
   const { url } = await uploadToR2(key, buffer, storedMimeType);
 
   const [inserted] = await db.transaction(async tx => {
-    const [row] = await tx
-      .insert(media)
-      .values({
-        userId: session.user.id,
-        url,
-        filename: file.name.replace(/\.[^.]+$/, ''),
-        fileType: storedMimeType,
-        sizeBytes: buffer.byteLength,
-        purpose: typeof purpose === 'string' ? purpose : null,
-      })
-      .returning();
+    // MySQL has no RETURNING — generate the id app-side, insert, then read it back.
+    const mediaId = randomUUID();
+    await tx.insert(media).values({
+      id: mediaId,
+      userId: session.user.id,
+      url,
+      filename: file.name.replace(/\.[^.]+$/, ''),
+      fileType: storedMimeType,
+      sizeBytes: buffer.byteLength,
+      purpose: typeof purpose === 'string' ? purpose : null,
+    });
+    const [row] = await tx.select().from(media).where(eq(media.id, mediaId));
 
     await tx
       .update(users)
@@ -323,8 +324,7 @@ export const mediaPost = factory.createHandlers(async c => {
     await tx
       .insert(appStorage)
       .values({ id: 1, totalBytesUsed: currentAppTotal + buffer.byteLength })
-      .onConflictDoUpdate({
-        target: appStorage.id,
+      .onDuplicateKeyUpdate({
         set: {
           totalBytesUsed: sql`${appStorage.totalBytesUsed} + ${buffer.byteLength}`,
           updatedAt: new Date(),

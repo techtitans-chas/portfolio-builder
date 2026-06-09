@@ -68,8 +68,8 @@ async function save() {
       credentials: 'include',
       body: JSON.stringify({
         isPublished: form.isPublished,
-        title: form.title || null,
-        slug: form.slug || null,
+        ...(form.title && { title: form.title }),
+        ...(form.slug && { slug: form.slug }),
         description: form.description || null,
         ogImageUrl: form.ogImageUrl || null,
         seoMeta: {

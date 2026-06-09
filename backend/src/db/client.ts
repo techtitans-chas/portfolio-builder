@@ -1,5 +1,5 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/mysql2';
+import mysql from 'mysql2/promise';
 import * as schema from './schema/index.js';
 
 const url = process.env['DATABASE_URL'];
@@ -9,6 +9,8 @@ if (!url) {
   process.exit(1);
 }
 
-const queryClient = postgres(url);
+// Force utf8mb4 — the Netcup MySQL server defaults to latin1/cp1252, which would
+// corrupt emoji and many non-ASCII characters in portfolio content.
+const pool = mysql.createPool({ uri: url, charset: 'utf8mb4' });
 
-export const db = drizzle(queryClient, { schema });
+export const db = drizzle(pool, { schema, mode: 'default' });

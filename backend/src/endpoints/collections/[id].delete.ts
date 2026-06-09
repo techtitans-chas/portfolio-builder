@@ -23,14 +23,19 @@ export const collectionDelete = factory.createHandlers(async c => {
     throw notFound('Portfolio not found');
   }
 
-  const [deleted] = await db
-    .delete(collections)
-    .where(and(eq(collections.id, id), eq(collections.portfolioId, portfolio.id)))
-    .returning({ id: collections.id });
+  // MySQL has no RETURNING — confirm the row exists, then delete.
+  const [existing] = await db
+    .select({ id: collections.id })
+    .from(collections)
+    .where(and(eq(collections.id, id), eq(collections.portfolioId, portfolio.id)));
 
-  if (!deleted) {
+  if (!existing) {
     throw notFound('Collection not found');
   }
 
-  return c.json({ id: deleted.id });
+  await db
+    .delete(collections)
+    .where(and(eq(collections.id, id), eq(collections.portfolioId, portfolio.id)));
+
+  return c.json({ id: existing.id });
 });

@@ -1,1 +1,0 @@
-ALTER TABLE "blocks" ADD COLUMN "is_visible" boolean DEFAULT true NOT NULL;
