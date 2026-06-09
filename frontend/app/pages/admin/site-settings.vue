@@ -112,10 +112,10 @@ async function save() {
           v-model="form.slug"
           placeholder="my-portfolio"
           class="w-full"
-          :ui="{ base: 'pl-21', leading: 'pointer-events-none' }"
+          :ui="{ base: 'pl-8', leading: 'pointer-events-none' }"
         >
           <template #leading>
-            <span class="text-muted text-sm">folio.app/p/</span>
+            <span class="text-muted text-sm">/p/</span>
           </template>
         </UInput>
       </UFormField>
@@ -123,7 +123,7 @@ async function save() {
       <UFormField label="Description" name="description">
         <UTextarea
           v-model="form.description"
-          placeholder="A short description of your portfolio."
+          placeholder="A short description of your website."
           class="w-full"
         />
       </UFormField>

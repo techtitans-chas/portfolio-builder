@@ -51,6 +51,26 @@ const saving = ref(false);
 const saved = ref(false);
 const saveError = ref('');
 
+const publishing = ref(false);
+const isPublished = computed(() => portfolio.value?.isPublished ?? false);
+
+async function togglePublish() {
+  if (!portfolio.value?.id || publishing.value) return;
+  publishing.value = true;
+  try {
+    const newValue = !portfolio.value.isPublished;
+    await fetcher(`/api/portfolios/${portfolio.value.id}/settings`, {
+      method: 'PATCH',
+      credentials: 'include',
+      body: JSON.stringify({ isPublished: newValue }),
+    });
+    portfolio.value.isPublished = newValue;
+    portfolio.value.publishedAt = newValue ? new Date().toISOString() : portfolio.value.publishedAt;
+  } finally {
+    publishing.value = false;
+  }
+}
+
 const isDirty = computed<boolean>(() => {
   const layers: LayersViewInstance | null | undefined = leftSidebar.value?.layersView;
   const layersChanges = layers?.layersChanges;
@@ -272,6 +292,7 @@ async function save() {
       <UTabs
         v-model="activeViewMode"
         :items="VIEWPORT_MODES"
+        color="neutral"
         default-value="desktop"
         size="sm"
         class="w-56"
@@ -283,10 +304,17 @@ async function save() {
       <UTooltip v-if="saveError" :text="saveError">
         <UIcon name="i-lucide-alert-circle" class="text-error" />
       </UTooltip>
-      <UButton color="neutral" variant="outline" aria-label="Activate" label="Activate" />
+      <USwitch
+        :model-value="isPublished"
+        :loading="publishing"
+        color="neutral"
+        label="Publish site"
+        class="mr-2"
+        @update:model-value="togglePublish"
+      />
       <UButton
-        :color="saved ? 'success' : 'neutral'"
-        variant="solid"
+        color="neutral"
+        :variant="isDirty ? 'solid' : 'outline'"
         aria-label="Save"
         :label="saved ? 'Saved!' : isDirty ? 'Save' : 'No changes'"
         :icon="saved ? 'i-lucide-check' : undefined"
@@ -323,7 +351,7 @@ async function save() {
       <div ref="previewCanvas" class="relative flex-1 overflow-auto bg-muted/30">
         <ClientOnly>
           <div v-if="portfolio" :style="wrapperStyle">
-            <div ref="previewEl" class="@container" :style="scaleStyle">
+            <div ref="previewEl" data-preview-el class="@container" :style="scaleStyle">
               <PagebuilderPreview
                 ref="preview"
                 :portfolio-slug="portfolio.slug"

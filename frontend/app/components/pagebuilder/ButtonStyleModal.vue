@@ -179,6 +179,7 @@ const gapStyle = computed(() => ({ gap: `${local.value.spacing}px` }));
             <div class="flex items-center gap-2">
               <USlider
                 :model-value="local.spacing"
+                color="neutral"
                 :min="0"
                 :max="32"
                 :step="1"
@@ -196,6 +197,7 @@ const gapStyle = computed(() => ({ gap: `${local.value.spacing}px` }));
             <div class="flex items-center gap-2">
               <USlider
                 :model-value="local.letterSpacing"
+                color="neutral"
                 :min="0"
                 :max="8"
                 :step="0.5"
@@ -212,6 +214,7 @@ const gapStyle = computed(() => ({ gap: `${local.value.spacing}px` }));
             <label class="text-xs text-muted">Uppercase</label>
             <USwitch
               :model-value="local.uppercase"
+              color="neutral"
               size="sm"
               @update:model-value="update('uppercase', $event)"
             />

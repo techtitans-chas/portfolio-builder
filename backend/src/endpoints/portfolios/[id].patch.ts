@@ -56,9 +56,21 @@ export const portfolioPatch = factory.createHandlers(async c => {
     throw badRequest('Validation failed', result.error.issues);
   }
 
+  const updateData: typeof result.data & { updatedAt: Date; publishedAt?: Date | null } = {
+    ...result.data,
+    updatedAt: new Date(),
+  };
+  if (result.data.isPublished === true) {
+    const [current] = await db
+      .select({ publishedAt: portfolios.publishedAt })
+      .from(portfolios)
+      .where(and(eq(portfolios.id, id), eq(portfolios.userId, session.user.id)));
+    if (!current?.publishedAt) updateData.publishedAt = new Date();
+  }
+
   await db
     .update(portfolios)
-    .set({ ...result.data, updatedAt: new Date() })
+    .set(updateData)
     .where(and(eq(portfolios.id, id), eq(portfolios.userId, session.user.id)));
 
   const [updated] = await db
