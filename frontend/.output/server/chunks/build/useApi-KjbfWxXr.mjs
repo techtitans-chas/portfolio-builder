@@ -1,4 +1,4 @@
-import { aH as useRuntimeConfig } from './server.mjs';
+import { aw as useRuntimeConfig } from './server.mjs';
 
 class ApiError extends Error {
   status;

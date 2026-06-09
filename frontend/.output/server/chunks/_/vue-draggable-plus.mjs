@@ -1,4 +1,4 @@
-import { aO as vueExports } from '../build/server.mjs';
+import { o as vueExports } from '../routes/renderer.mjs';
 
 var an = Object.defineProperty;
 var Pe = Object.getOwnPropertySymbols;

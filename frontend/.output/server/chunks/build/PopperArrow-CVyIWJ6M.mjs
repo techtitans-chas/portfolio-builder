@@ -1,5 +1,5 @@
-import { aw as useForwardProps$1, ap as useEmitAsProps, aO as vueExports$1, K as injectConfigProviderContext, au as useForwardExpose, b as Primitive, l as createContext, k as computedEager } from './server.mjs';
-import { g as vueExports } from '../routes/renderer.mjs';
+import { al as useForwardProps$1, ae as useEmitAsProps, K as injectConfigProviderContext, aj as useForwardExpose, b as Primitive, l as createContext, k as computedEager } from './server.mjs';
+import { o as vueExports } from '../routes/renderer.mjs';
 
 /**
  * Custom positioning reference element.
@@ -2044,48 +2044,48 @@ function useFloating(reference, floating, options) {
 }
 
 function useDirection(dir) {
-  const context = injectConfigProviderContext({ dir: vueExports$1.ref("ltr") });
-  return vueExports$1.computed(() => dir?.value || context.dir?.value || "ltr");
+  const context = injectConfigProviderContext({ dir: vueExports.ref("ltr") });
+  return vueExports.computed(() => dir?.value || context.dir?.value || "ltr");
 }
 function useFocusGuards() {
-  vueExports$1.watchEffect((cleanupFn) => {
+  vueExports.watchEffect((cleanupFn) => {
     return;
   });
 }
 function useForwardPropsEmits(props, emit) {
   const parsedProps = useForwardProps$1(props);
   const emitsAsProps = emit ? useEmitAsProps(emit) : {};
-  return vueExports$1.computed(() => ({
+  return vueExports.computed(() => ({
     ...parsedProps.value,
     ...emitsAsProps
   }));
 }
 function useSize(element) {
-  const size2 = vueExports$1.ref();
-  const width = vueExports$1.computed(() => size2.value?.width ?? 0);
-  const height = vueExports$1.computed(() => size2.value?.height ?? 0);
+  const size2 = vueExports.ref();
+  const width = vueExports.computed(() => size2.value?.width ?? 0);
+  const height = vueExports.computed(() => size2.value?.height ?? 0);
   return {
     width,
     height
   };
 }
 const [injectPopperRootContext, providePopperRootContext] = /* @__PURE__ */ createContext("PopperRoot");
-var PopperRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports$1.defineComponent({
+var PopperRoot_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "PopperRoot",
   setup(__props) {
-    const anchor = vueExports$1.ref();
+    const anchor = vueExports.ref();
     providePopperRootContext({
       anchor,
       onAnchorChange: (element) => anchor.value = element
     });
     return (_ctx, _cache) => {
-      return vueExports$1.renderSlot(_ctx.$slots, "default");
+      return vueExports.renderSlot(_ctx.$slots, "default");
     };
   }
 });
 var PopperRoot_default = PopperRoot_vue_vue_type_script_setup_true_lang_default;
-var PopperAnchor_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports$1.defineComponent({
+var PopperAnchor_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "PopperAnchor",
   props: {
     reference: {
@@ -2105,16 +2105,16 @@ var PopperAnchor_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ v
     const props = __props;
     const { forwardRef, currentElement } = useForwardExpose();
     const rootContext = injectPopperRootContext();
-    vueExports$1.watchPostEffect(() => {
+    vueExports.watchPostEffect(() => {
       rootContext.onAnchorChange(props.reference ?? currentElement.value);
     });
     return (_ctx, _cache) => {
-      return vueExports$1.openBlock(), vueExports$1.createBlock(vueExports$1.unref(Primitive), {
-        ref: vueExports$1.unref(forwardRef),
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), {
+        ref: vueExports.unref(forwardRef),
         as: _ctx.as,
         "as-child": _ctx.asChild
       }, {
-        default: vueExports$1.withCtx(() => [vueExports$1.renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 8, ["as", "as-child"]);
     };
@@ -2129,7 +2129,7 @@ const _hoisted_2 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
-var Arrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports$1.defineComponent({
+var Arrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   __name: "Arrow",
   props: {
     width: {
@@ -2160,13 +2160,13 @@ var Arrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExpor
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return vueExports$1.openBlock(), vueExports$1.createBlock(vueExports$1.unref(Primitive), vueExports$1.mergeProps(props, {
+      return vueExports.openBlock(), vueExports.createBlock(vueExports.unref(Primitive), vueExports.mergeProps(props, {
         width: _ctx.width,
         height: _ctx.height,
         viewBox: _ctx.asChild ? void 0 : "0 0 12 6",
         preserveAspectRatio: _ctx.asChild ? void 0 : "none"
       }), {
-        default: vueExports$1.withCtx(() => [vueExports$1.renderSlot(_ctx.$slots, "default", {}, () => [!_ctx.rounded ? (vueExports$1.openBlock(), vueExports$1.createElementBlock("path", _hoisted_1)) : (vueExports$1.openBlock(), vueExports$1.createElementBlock("path", _hoisted_2))])]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default", {}, () => [!_ctx.rounded ? (vueExports.openBlock(), vueExports.createElementBlock("path", _hoisted_1)) : (vueExports.openBlock(), vueExports.createElementBlock("path", _hoisted_2))])]),
         _: 3
       }, 16, [
         "width",
@@ -2244,10 +2244,10 @@ const PopperContentPropsDefaultValue = {
   prioritizePosition: false
 };
 const [injectPopperContentContext, providePopperContentContext] = /* @__PURE__ */ createContext("PopperContent");
-var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports$1.defineComponent({
+var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "PopperContent",
-  props: /* @__PURE__ */ vueExports$1.mergeDefaults({
+  props: /* @__PURE__ */ vueExports.mergeDefaults({
     side: {
       type: null,
       required: false
@@ -2335,11 +2335,11 @@ var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
     const emits = __emit;
     const rootContext = injectPopperRootContext();
     const { forwardRef, currentElement: contentElement } = useForwardExpose();
-    const floatingRef = vueExports$1.ref();
-    const arrow$1 = vueExports$1.ref();
+    const floatingRef = vueExports.ref();
+    const arrow$1 = vueExports.ref();
     const { width: arrowWidth, height: arrowHeight } = useSize();
-    const desiredPlacement = vueExports$1.computed(() => props.side + (props.align !== "center" ? `-${props.align}` : ""));
-    const collisionPadding = vueExports$1.computed(() => {
+    const desiredPlacement = vueExports.computed(() => props.side + (props.align !== "center" ? `-${props.align}` : ""));
+    const collisionPadding = vueExports.computed(() => {
       return typeof props.collisionPadding === "number" ? props.collisionPadding : {
         top: 0,
         right: 0,
@@ -2348,17 +2348,17 @@ var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
         ...props.collisionPadding
       };
     });
-    const boundary = vueExports$1.computed(() => {
+    const boundary = vueExports.computed(() => {
       return Array.isArray(props.collisionBoundary) ? props.collisionBoundary : [props.collisionBoundary];
     });
-    const detectOverflowOptions = vueExports$1.computed(() => {
+    const detectOverflowOptions = vueExports.computed(() => {
       return {
         padding: collisionPadding.value,
         boundary: boundary.value.filter(isNotNull),
         altBoundary: boundary.value.length > 0
       };
     });
-    const flipOptions = vueExports$1.computed(() => {
+    const flipOptions = vueExports.computed(() => {
       return {
         mainAxis: props.sideFlip,
         crossAxis: props.alignFlip
@@ -2409,7 +2409,7 @@ var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
         })
       ];
     });
-    const reference = vueExports$1.computed(() => props.reference ?? rootContext.anchor.value);
+    const reference = vueExports.computed(() => props.reference ?? rootContext.anchor.value);
     const { floatingStyles, placement, isPositioned, middlewareData} = useFloating(reference, floatingRef, {
       strategy: props.positionStrategy,
       placement: desiredPlacement,
@@ -2422,21 +2422,21 @@ var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
       },
       middleware: computedMiddleware
     });
-    const placedSide = vueExports$1.computed(() => getSideAndAlignFromPlacement(placement.value)[0]);
-    const placedAlign = vueExports$1.computed(() => getSideAndAlignFromPlacement(placement.value)[1]);
-    vueExports$1.watchPostEffect(() => {
+    const placedSide = vueExports.computed(() => getSideAndAlignFromPlacement(placement.value)[0]);
+    const placedAlign = vueExports.computed(() => getSideAndAlignFromPlacement(placement.value)[1]);
+    vueExports.watchPostEffect(() => {
       if (isPositioned.value) emits("placed");
     });
-    const shouldHideArrow = vueExports$1.computed(() => {
+    const shouldHideArrow = vueExports.computed(() => {
       const cannotCenterArrow = middlewareData.value.arrow?.centerOffset !== 0;
       return props.hideShiftedArrow && cannotCenterArrow;
     });
-    const contentZIndex = vueExports$1.ref("");
-    vueExports$1.watchEffect(() => {
+    const contentZIndex = vueExports.ref("");
+    vueExports.watchEffect(() => {
       if (contentElement.value) contentZIndex.value = (void 0).getComputedStyle(contentElement.value).zIndex;
     });
-    const arrowX = vueExports$1.computed(() => middlewareData.value.arrow?.x ?? 0);
-    const arrowY = vueExports$1.computed(() => middlewareData.value.arrow?.y ?? 0);
+    const arrowX = vueExports.computed(() => middlewareData.value.arrow?.x ?? 0);
+    const arrowY = vueExports.computed(() => middlewareData.value.arrow?.y ?? 0);
     providePopperContentContext({
       placedSide,
       onArrowChange: (element) => arrow$1.value = element,
@@ -2445,29 +2445,29 @@ var PopperContent_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ 
       shouldHideArrow
     });
     return (_ctx, _cache) => {
-      return vueExports$1.openBlock(), vueExports$1.createElementBlock("div", {
+      return vueExports.openBlock(), vueExports.createElementBlock("div", {
         ref_key: "floatingRef",
         ref: floatingRef,
         "data-reka-popper-content-wrapper": "",
-        style: vueExports$1.normalizeStyle({
-          ...vueExports$1.unref(floatingStyles),
-          transform: vueExports$1.unref(isPositioned) ? vueExports$1.unref(floatingStyles).transform : "translate(0, -200%)",
+        style: vueExports.normalizeStyle({
+          ...vueExports.unref(floatingStyles),
+          transform: vueExports.unref(isPositioned) ? vueExports.unref(floatingStyles).transform : "translate(0, -200%)",
           minWidth: "max-content",
           zIndex: contentZIndex.value,
-          ["--reka-popper-transform-origin"]: [vueExports$1.unref(middlewareData).transformOrigin?.x, vueExports$1.unref(middlewareData).transformOrigin?.y].join(" "),
-          ...vueExports$1.unref(middlewareData).hide?.referenceHidden && {
+          ["--reka-popper-transform-origin"]: [vueExports.unref(middlewareData).transformOrigin?.x, vueExports.unref(middlewareData).transformOrigin?.y].join(" "),
+          ...vueExports.unref(middlewareData).hide?.referenceHidden && {
             visibility: "hidden",
             pointerEvents: "none"
           }
         })
-      }, [vueExports$1.createVNode(vueExports$1.unref(Primitive), vueExports$1.mergeProps({ ref: vueExports$1.unref(forwardRef) }, _ctx.$attrs, {
+      }, [vueExports.createVNode(vueExports.unref(Primitive), vueExports.mergeProps({ ref: vueExports.unref(forwardRef) }, _ctx.$attrs, {
         "as-child": props.asChild,
         as: _ctx.as,
         "data-side": placedSide.value,
         "data-align": placedAlign.value,
-        style: { animation: !vueExports$1.unref(isPositioned) ? "none" : void 0 }
+        style: { animation: !vueExports.unref(isPositioned) ? "none" : void 0 }
       }), {
-        default: vueExports$1.withCtx(() => [vueExports$1.renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, [
         "as-child",
@@ -2486,7 +2486,7 @@ const OPPOSITE_SIDE = {
   bottom: "top",
   left: "right"
 };
-var PopperArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports$1.defineComponent({
+var PopperArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vueExports.defineComponent({
   inheritAttrs: false,
   __name: "PopperArrow",
   props: {
@@ -2515,34 +2515,34 @@ var PopperArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vu
   setup(__props) {
     const { forwardRef } = useForwardExpose();
     const contentContext = injectPopperContentContext();
-    const baseSide = vueExports$1.computed(() => OPPOSITE_SIDE[contentContext.placedSide.value]);
+    const baseSide = vueExports.computed(() => OPPOSITE_SIDE[contentContext.placedSide.value]);
     return (_ctx, _cache) => {
-      return vueExports$1.openBlock(), vueExports$1.createElementBlock("span", {
+      return vueExports.openBlock(), vueExports.createElementBlock("span", {
         ref: (el) => {
-          vueExports$1.unref(contentContext).onArrowChange(el ?? void 0);
+          vueExports.unref(contentContext).onArrowChange(el ?? void 0);
           return void 0;
         },
-        style: vueExports$1.normalizeStyle({
+        style: vueExports.normalizeStyle({
           position: "absolute",
-          left: vueExports$1.unref(contentContext).arrowX?.value ? `${vueExports$1.unref(contentContext).arrowX?.value}px` : void 0,
-          top: vueExports$1.unref(contentContext).arrowY?.value ? `${vueExports$1.unref(contentContext).arrowY?.value}px` : void 0,
+          left: vueExports.unref(contentContext).arrowX?.value ? `${vueExports.unref(contentContext).arrowX?.value}px` : void 0,
+          top: vueExports.unref(contentContext).arrowY?.value ? `${vueExports.unref(contentContext).arrowY?.value}px` : void 0,
           [baseSide.value]: 0,
           transformOrigin: {
             top: "",
             right: "0 0",
             bottom: "center 0",
             left: "100% 0"
-          }[vueExports$1.unref(contentContext).placedSide.value],
+          }[vueExports.unref(contentContext).placedSide.value],
           transform: {
             top: "translateY(100%)",
             right: "translateY(50%) rotate(90deg) translateX(-50%)",
             bottom: `rotate(180deg)`,
             left: "translateY(50%) rotate(-90deg) translateX(50%)"
-          }[vueExports$1.unref(contentContext).placedSide.value],
-          visibility: vueExports$1.unref(contentContext).shouldHideArrow.value ? "hidden" : void 0
+          }[vueExports.unref(contentContext).placedSide.value],
+          visibility: vueExports.unref(contentContext).shouldHideArrow.value ? "hidden" : void 0
         })
-      }, [vueExports$1.createVNode(Arrow_default, vueExports$1.mergeProps(_ctx.$attrs, {
-        ref: vueExports$1.unref(forwardRef),
+      }, [vueExports.createVNode(Arrow_default, vueExports.mergeProps(_ctx.$attrs, {
+        ref: vueExports.unref(forwardRef),
         style: { display: "block" },
         as: _ctx.as,
         "as-child": _ctx.asChild,
@@ -2550,7 +2550,7 @@ var PopperArrow_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ vu
         width: _ctx.width,
         height: _ctx.height
       }), {
-        default: vueExports$1.withCtx(() => [vueExports$1.renderSlot(_ctx.$slots, "default")]),
+        default: vueExports.withCtx(() => [vueExports.renderSlot(_ctx.$slots, "default")]),
         _: 3
       }, 16, [
         "as",

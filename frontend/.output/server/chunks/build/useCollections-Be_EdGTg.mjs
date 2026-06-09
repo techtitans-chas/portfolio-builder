@@ -1,5 +1,6 @@
 import { u as useApi } from './useApi-KjbfWxXr.mjs';
-import { aJ as useState, aO as vueExports } from './server.mjs';
+import { ay as useState } from './server.mjs';
+import { o as vueExports } from '../routes/renderer.mjs';
 
 function useCollections() {
   const { fetcher } = useApi();

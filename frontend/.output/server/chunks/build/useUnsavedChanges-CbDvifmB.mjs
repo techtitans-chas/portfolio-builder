@@ -1,4 +1,5 @@
-import { aO as vueExports, W as onBeforeRouteLeave } from './server.mjs';
+import { o as vueExports } from '../routes/renderer.mjs';
+import { W as onBeforeRouteLeave } from './server.mjs';
 
 function useUnsavedChanges(form) {
   const snapshot = vueExports.ref(JSON.stringify(form));

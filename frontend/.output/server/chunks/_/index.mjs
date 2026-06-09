@@ -1,4 +1,4 @@
-import { g as vueExports } from '../routes/renderer.mjs';
+import { o as vueExports } from '../routes/renderer.mjs';
 
 // ::- Persistent data structure representing an ordered mapping from
 // strings to values, with some convenient update methods.

@@ -1,1 +1,1 @@
-{"version":3,"file":"error-500.mjs","sources":["../../../../../node_modules/.pnpm/@nuxt+nitro-server@4.4.6_902afe21f01d4857e320dff325832966/node_modules/@nuxt/nitro-server/dist/runtime/templates/error-500.mjs"],"names":["escapeHtml"],"mappings":"","x_google_ignoreList":[0]}
+{"version":3,"file":"error-500.mjs","sources":["../../../../../node_modules/.pnpm/@nuxt+nitro-server@4.4.6_bb6386b0ea969d55a0107b75eb113743/node_modules/@nuxt/nitro-server/dist/runtime/templates/error-500.mjs"],"names":["escapeHtml"],"mappings":"","x_google_ignoreList":[0]}

@@ -1,4 +1,4 @@
-import { aj as useAppConfig } from './server.mjs';
+import { a8 as useAppConfig } from './server.mjs';
 
 function usePrefix() {
   const appConfig = useAppConfig();
